@@ -28,10 +28,10 @@ export const navGroups = [
     sectionDescription: "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
     items: [
       { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." },
-      { href: "/contexto?tab=identificacion", label: "Contexto", icon: Compass, description: "Identificación, contexto del entorno, FP dual y criterios de evaluación y calificación." },
-      { href: "/curriculo?tab=contribucion-ra-og", label: "Currículo", icon: Grid, description: "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales." },
-      { href: "/metodologia?tab=metodologia", label: "Metodología", icon: Lightbulb, description: "Metodología, recursos, plan de contingencia y elementos transversales." },
-      { href: "/instrumentos?tab=resumen", label: "Instrumento", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." }
+      { href: "/contexto?tab=identificacion", label: "Contexto", icon: Compass, description: "Identificación, entorno, alumnado, evaluación y procedimientos de la programación." },
+      { href: "/curriculo?tab=relacion-ra-ce", label: "Currículo", icon: Grid, description: "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales." },
+      { href: "/metodologia?tab=metodologias", label: "Metodologías", icon: Lightbulb, description: "Metodología, recursos, plan de contingencia y elementos transversales." },
+      { href: "/instrumentos?tab=resumen", label: "Instrumentos", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." }
     ]
   },
   {
@@ -39,10 +39,10 @@ export const navGroups = [
     sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
     items: [
       { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso." },
-      { href: "/alumnado?tab=matricula", label: "Alumnado", icon: Users, description: "Matrícula, orientación profesional, perfil del grupo y plano de aula." },
-      { href: "/calificaciones?tab=trimestral", label: "Calificaciones", icon: CalendarDays, description: "Notas, boletín, valoración en la empresa (FEOE), informe de evidencias e inserción laboral por alumnado, trimestral y reclamaciones." },
-      { href: "/sesiones?tab=lectivas", label: "Sesiones", icon: TrendingUp, description: "Asistencia, abandono y diario de sesiones lectivas." },
-      { href: "/cierre?tab=avance-ud", label: "Cierre", icon: Award, description: "Avance de UD y progreso de RA, y mejora del módulo (EQAVET y PDCA)." },
+      { href: "/alumnado?tab=orientacion", label: "Alumnado", icon: Users, description: "Matrícula, orientación profesional, perfil del grupo y plano de aula." },
+      { href: "/calificaciones?tab=academicas", label: "Calificaciones", icon: CalendarDays, description: "Notas y valoración en la empresa (FEOE) por alumnado, trimestral y reclamaciones." },
+      { href: "/sesiones?tab=asistencia", label: "Sesiones", icon: TrendingUp, description: "Asistencia, abandono y diario de sesiones lectivas." },
+      { href: "/cierre?tab=expediente", label: "Cierre", icon: Award, description: "Expediente por alumnado (boletín, informe de evidencias e inserción laboral), avance de UD y progreso de RA, y mejora del módulo (EQAVET y PDCA)." },
     ]
   }
 ];
@@ -64,18 +64,22 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/contexto": [
     { id: "identificacion", label: "Identificación" },
-    { id: "contextualizacion", label: "Contextualización" },
-    { id: "criterios", label: "Evaluación y calificación" },
+    { id: "entorno", label: "Entorno" },
+    { id: "alumnado", label: "Alumnado" },
+    { id: "evaluacion", label: "Evaluación" },
+    { id: "procedimientos", label: "Procedimientos" },
   ],
   "/curriculo": [
-    { id: "ponderacion-ra-ce", label: "OG<-RA<-CE" },
-    { id: "unidades", label: "Unidades didácticas" },
-    { id: "competenciales", label: "Tareas competenciales" },
-    { id: "contenidos-ud", label: "Contenidos → UD" },
+    { id: "relacion-ra-ce", label: "Relación RA <- CE" },
+    { id: "contribucion-og-ra", label: "Contribución OG <- RA" },
+    { id: "unidades-didacticas", label: "Unidades didácticas" },
+    { id: "secuenciacion-ud", label: "Secuenciación de UD" },
+    { id: "proyectos-retos", label: "Proyectos y retos" },
   ],
   "/metodologia": [
-    { id: "metodologia", label: "Metodología e inclusión" },
-    { id: "recursos", label: "Recursos" },
+    { id: "metodologias", label: "Metodología e innovación" },
+    { id: "instrumentos-recursos", label: "Instrumentos y recursos" },
+    { id: "diversidad", label: "Atención a la diversidad" },
     { id: "contingencia", label: "Plan de contingencia" },
     { id: "transversales", label: "Transversales" },
   ],
@@ -92,23 +96,23 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "agenda", label: "Agenda" },
   ],
   "/alumnado": [
-    { id: "matricula", label: "Matrícula" },
     { id: "orientacion", label: "Orientación" },
-    { id: "perfil", label: "Perfil" },
+    { id: "matricula", label: "Matrícula" },
     { id: "plano", label: "Plano de aula" },
+    { id: "perfil", label: "Perfil" },
   ],
   "/calificaciones": [
-    { id: "trimestral", label: "Trimestral" },
     { id: "academicas", label: "Académicas" },
+    { id: "trimestral", label: "Trimestral" },
     { id: "reclamaciones", label: "Reclamaciones" },
-    { id: "empresa-feoe", label: "Empresa FEOE" },
   ],
   "/sesiones": [
-    { id: "lectivas", label: "Lectivas" },
     { id: "asistencia", label: "Asistencia" },
+    { id: "lectivas", label: "Lectivas" },
     { id: "abandono", label: "Abandono" },
   ],
   "/cierre": [
+    { id: "expediente", label: "Expediente" },
     { id: "avance-ud", label: "Avance de UD" },
     { id: "progreso-ra-ud", label: "Progreso RA-UD" },
     { id: "mejora", label: "Mejora" },

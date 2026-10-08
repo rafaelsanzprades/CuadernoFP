@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Check, Link as LinkIcon } from "lucide-react";
+import { Check } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa, resolveOg, getOgList, loadCatalogForModule } from "@/services/catalogCache";
 import { Card } from "@/components/ui/Card";
@@ -68,10 +68,6 @@ export function RaOgMatrix() {
 
   return (
     <Card className="p-6 border-l-4 border-l-blue-500 overflow-hidden animate-in fade-in duration-500">
-      <h2 className="text-subheading font-bold flex items-center gap-2 text-foreground mb-6">
-        <LinkIcon className="w-5 h-5 text-info" /> Contribución de los RA a los OG del Título
-      </h2>
-      
       <div className="overflow-x-auto pb-4 scrollbar-hide">
         <table className="w-full text-left border-collapse text-body">
           <thead>

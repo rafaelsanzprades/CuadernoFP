@@ -201,7 +201,7 @@ export function VerificacionTab() {
       id: "ud",
       icon: <Layers className="w-5 h-5" />,
       title: t('campos.verificacion.udTitulo', {defaultValue: 'Unidades didácticas (UD)'}),
-      href: "/curriculo?tab=unidades",
+      href: "/curriculo?tab=unidades-didacticas",
       hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: udCount === 0 ? "empty" : horasDiff > 2 ? "warning" : "ok",
       lines: udCount === 0
@@ -211,14 +211,14 @@ export function VerificacionTab() {
           t('campos.verificacion.horasDeclaradas', {udHoras, moduloHoras: moduloHoras || "-", defaultValue: 'Horas declaradas: {{udHoras}} / {{moduloHoras}} h del módulo'}),
           horasDiff > 2 ? t('campos.verificacion.diferenciaHoras', {h: horasDiff, defaultValue: 'Diferencia de {{h}} h'}) : t('campos.verificacion.horasCuadranCorrectamente', {defaultValue: 'Horas cuadran correctamente'}),
         ],
-      actionHref: udCount === 0 ? "/curriculo?tab=unidades" : undefined,
+      actionHref: udCount === 0 ? "/curriculo?tab=unidades-didacticas" : undefined,
       actionLabel: udCount === 0 ? t('botones.verificacion.anadirPrimeraUd', {defaultValue: 'Añadir primera UD'}) : undefined,
     },
     {
       id: "ra",
       icon: <GraduationCap className="w-5 h-5" />,
       title: t('campos.verificacion.raTitulo', {defaultValue: 'Resultados de aprendizaje (RA)'}),
-      href: "/curriculo?tab=ponderacion-ra-ce",
+      href: "/curriculo?tab=relacion-ra-ce",
       hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: raCount === 0 ? "empty" : Math.abs(raPesoSum - 100) > 1 ? "warning" : "ok",
       lines: raCount === 0
@@ -227,14 +227,14 @@ export function VerificacionTab() {
           t('campos.verificacion.raDefinidos', {count: raCount, defaultValue: '{{count}} RA definidos'}),
           t('campos.verificacion.sumaPesos', {pct: raPesoSum.toFixed(1), estado: Math.abs(raPesoSum - 100) > 1 ? "(⚠️ no suman 100%)" : "(✅)", defaultValue: 'Suma de pesos: {{pct}}% {{estado}}'}),
         ],
-      actionHref: raCount === 0 ? "/curriculo?tab=ponderacion-ra-ce" : undefined,
+      actionHref: raCount === 0 ? "/curriculo?tab=relacion-ra-ce" : undefined,
       actionLabel: raCount === 0 ? t('botones.verificacion.anadirPrimerRa', {defaultValue: 'Añadir primer RA'}) : undefined,
     },
     {
       id: "ce",
       icon: <ClipboardList className="w-5 h-5" />,
       title: t('campos.verificacion.ceTitulo', {defaultValue: 'Criterios de evaluación (CE)'}),
-      href: "/curriculo?tab=ponderacion-ra-ce",
+      href: "/curriculo?tab=relacion-ra-ce",
       hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: ceCount === 0 ? "empty" : ceHuerfanos > 0 ? "warning" : "ok",
       lines: ceCount === 0
@@ -243,7 +243,7 @@ export function VerificacionTab() {
           t('campos.verificacion.ceDefinidos', {count: ceCount, defaultValue: '{{count}} CE definidos'}),
           ceHuerfanos > 0 ? t('campos.verificacion.ceSinRa', {count: ceHuerfanos, defaultValue: '{{count}} CE sin RA asignado'}) : t('campos.verificacion.todosLosCeTienenRa', {defaultValue: 'Todos los CE tienen RA'}),
         ],
-      actionHref: ceHuerfanos > 0 ? "/curriculo?tab=ponderacion-ra-ce" : undefined,
+      actionHref: ceHuerfanos > 0 ? "/curriculo?tab=relacion-ra-ce" : undefined,
       actionLabel: ceHuerfanos > 0 ? t('botones.verificacion.revisarAsignaciones', {defaultValue: 'Revisar asignaciones'}) : undefined,
     },
     {
@@ -251,7 +251,7 @@ export function VerificacionTab() {
       icon: <Wrench className="w-5 h-5" />,
       title: t('campos.verificacion.instrumentosIndicadoresTitulo', {defaultValue: 'Instrumentos e Indicadores'}),
       href: "/instrumentos?tab=resumen",
-      hrefLabel: t('nav.instrumentos', {defaultValue: 'Instrumento'}),
+      hrefLabel: t('nav.instrumentos', {defaultValue: 'Instrumentos'}),
       status: (instrCount === 0 || indCount === 0) ? "empty" : indSinCE > 0 ? "warning" : "ok",
       lines: (instrCount === 0 || indCount === 0)
         ? [t('campos.verificacion.sinInstrumentosIndicadores', {defaultValue: 'No hay instrumentos o indicadores'})]
@@ -263,24 +263,24 @@ export function VerificacionTab() {
     {
       id: "tareas",
       icon: <FileText className="w-5 h-5" />,
-      title: t('campos.verificacion.tareasCompetencialesTitulo', {defaultValue: 'Tareas competenciales'}),
-      href: "/curriculo?tab=competenciales",
+      title: t('campos.verificacion.tareasCompetencialesTitulo', {defaultValue: 'Proyectos y retos'}),
+      href: "/curriculo?tab=proyectos-retos",
       hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
-      status: tareasCount === 0 ? "empty" : tareasSinRA > 0 ? "warning" : "ok",
+      status: tareasCount === 0 ? "ok" : tareasSinRA > 0 ? "warning" : "ok",
       lines: tareasCount === 0
-        ? [t('campos.verificacion.sinTareasDefinidas', {defaultValue: 'No hay tareas definidas'})]
+        ? [t('campos.verificacion.sinTareasDefinidas', {defaultValue: 'Ninguno definido (opcional)'})]
         : [
           t('campos.verificacion.tareasDefinidas', {count: tareasCount, defaultValue: '{{count}} tareas definidas'}),
           tareasSinRA > 0 ? t('campos.verificacion.tareasSinRa', {count: tareasSinRA, defaultValue: '{{count}} tareas sin RA asociado'}) : t('campos.verificacion.todasLasTareasTienenRa', {defaultValue: 'Todas las tareas tienen RA'}),
         ],
-      actionHref: tareasCount === 0 ? "/curriculo?tab=competenciales" : undefined,
-      actionLabel: tareasCount === 0 ? t('botones.verificacion.crearPrimeraTarea', {defaultValue: 'Crear primera tarea'}) : undefined,
+      actionHref: undefined,
+      actionLabel: undefined,
     },
     {
       id: "sesiones",
       icon: <CalendarDays className="w-5 h-5" />,
       title: t('campos.verificacion.sesionesClaseTitulo', {defaultValue: 'Sesiones de clase'}),
-      href: "/curriculo?tab=unidades",
+      href: "/curriculo?tab=secuenciacion-ud",
       hrefLabel: t('nav.curriculo', {defaultValue: 'Currículo'}),
       status: sesionesCount === 0 ? "empty" : sesionesSinUD > 0 ? "warning" : "ok",
       lines: sesionesCount === 0
@@ -289,20 +289,20 @@ export function VerificacionTab() {
           t('campos.verificacion.sesionesPlanificadasCount', {count: sesionesCount, defaultValue: '{{count}} sesiones planificadas'}),
           sesionesSinUD > 0 ? t('campos.verificacion.sesionesSinUd', {count: sesionesSinUD, defaultValue: '{{count}} sesiones sin UD asignada'}) : t('campos.verificacion.todasLasSesionesTienenUd', {defaultValue: 'Todas las sesiones tienen UD'}),
         ],
-      actionHref: sesionesCount === 0 ? "/curriculo?tab=unidades" : undefined,
+      actionHref: sesionesCount === 0 ? "/curriculo?tab=secuenciacion-ud" : undefined,
       actionLabel: sesionesCount === 0 ? t('botones.verificacion.planificarSesiones', {defaultValue: 'Planificar sesiones'}) : undefined,
     },
     {
       id: "contexto",
       icon: <BookOpen className="w-5 h-5" />,
       title: t('campos.verificacion.contextoModuloTitulo', {defaultValue: 'Contexto del módulo'}),
-      href: "/contexto?tab=contextualizacion",
+      href: "/contexto?tab=entorno",
       hrefLabel: t('nav.contexto', {defaultValue: 'Contexto'}),
       status: tieneContexto ? "ok" : "empty",
       lines: tieneContexto
         ? [t('campos.verificacion.contextoAulaConfigurado', {defaultValue: 'Contexto del aula configurado'})]
         : [t('campos.verificacion.sinDescripcionContexto', {defaultValue: 'Sin descripción de contexto ni configuración de aula'})],
-      actionHref: !tieneContexto ? "/contexto?tab=contextualizacion" : undefined,
+      actionHref: !tieneContexto ? "/contexto?tab=entorno" : undefined,
       actionLabel: !tieneContexto ? t('botones.verificacion.anadirContexto', {defaultValue: 'Añadir contexto'}) : undefined,
     },
     {
@@ -350,7 +350,7 @@ export function VerificacionTab() {
       id: "narrativos-pd",
       icon: <FileText className="w-5 h-5" />,
       title: t('campos.verificacion.textosNarrativosTitulo', {defaultValue: 'Textos narrativos (PD+/JEG)'}),
-      href: "/contexto?tab=contextualizacion",
+      href: "/contexto?tab=entorno",
       hrefLabel: t('nav.contexto', {defaultValue: 'Contexto'}),
       status: !m ? "empty" : narrativosRellenos === NARRATIVOS_PDPLUS.length ? "ok" : narrativosRellenos > 0 ? "warning" : "empty",
       lines: !m
@@ -359,7 +359,7 @@ export function VerificacionTab() {
           t('campos.verificacion.textosRedactadosCount', {rellenos: narrativosRellenos, total: NARRATIVOS_PDPLUS.length, defaultValue: '{{rellenos}} / {{total}} textos redactados'}),
           narrativosFaltan.length > 0 ? t('campos.verificacion.faltanCampos', {campos: narrativosFaltan.join(", "), defaultValue: 'Faltan: {{campos}}'}) : t('campos.verificacion.todosLosTextosRedactados', {defaultValue: 'Todos los textos narrativos están redactados'}),
         ],
-      actionHref: narrativosFaltan.length > 0 ? "/contexto?tab=contextualizacion" : undefined,
+      actionHref: narrativosFaltan.length > 0 ? "/contexto?tab=entorno" : undefined,
       actionLabel: narrativosFaltan.length > 0 ? t('botones.verificacion.redactarTextos', {defaultValue: 'Redactar textos'}) : undefined,
     }
   ];

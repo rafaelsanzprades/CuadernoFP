@@ -3,7 +3,7 @@
     "cierre": {
         "expediente": {
         "label": "Expediente",
-        "desc": "Inserción laboral post-ciclo e expediente (liña temporal de evidencias) por alumnado."
+        "desc": "Boletín individual, informe de evidencias e inserción laboral por alumnado."
       }
     },
     "bienvenida": "Benvida",
@@ -132,35 +132,51 @@
       "cambiosNota": "Cambios de nota"
     },
     "contexto": {
-      "identificacion": {
-        "label": "Identificación",
-        "desc": "Identificación do módulo e centro, réxime dual, regras de arredondamento, ponderación trimestral, instrumentos de avaliación e escalas cualitativas. Cap. 1.1 do PD+."
+        "identificacion": {
+          "label": "Identificación",
+          "desc": "Centro e docente, módulo didáctico e datos de autoría e publicidade."
+        },
+        "entorno": {
+          "label": "Contorno",
+          "desc": "Contorno xeográfico, socioeconómico e escolar, actividades complementarias e plan FEOE."
+        },
+        "alumnado": {
+          "label": "Alumnado",
+          "desc": "Alumnado con necesidades específicas (ACNEAE), datos e trazos do grupo e avaliación inicial."
+        },
+        "evaluacion": {
+          "label": "Avaliación",
+          "desc": "Regras de redondeo e compensación, ponderación por trimestres e instrumentos de avaliación, e escalas cualitativas."
+        },
+        "procedimientos": {
+          "label": "Procedementos",
+          "desc": "Información e procedementos de avaliación, modelo de recuperación, criterios de cualificación e textos do modelo Simplificado."
+        }
       },
-      "contextualizacion": {
-        "label": "Contextualización",
-        "desc": "Contorno xeográfico, socioeconómico e escolar, Plan FEOE, alumnado ACNEAE, textos do modelo Simplificado e datos de autoría. Cap. 1.3 e 5 do PD+."
-      },
-      "criterios": {
-        "label": "Avaliación e cualificación",
-        "desc": "Procedemento de avaliación e de cualificación: información ao alumnado, perda de avaliación continua, recuperación. Cap. 4 do PD+."
-      }
-    },
     "curriculo": {
       "contribucion-ra-og": {
         "label": "Contribución RA->OG",
         "desc": "Contribución dos RA aos obxectivos xerais do título."
       },
       "ponderacion-ra-ce": {
-        "label": "OG<-RA<-CE",
-        "desc": "Matriz de resultados de aprendizaxe e criterios de avaliación coa súa ponderación, e contribución dos resultados de aprendizaxe aos obxectivos xerais do título."
+        "label": "Relación RA <- CE",
+        "desc": "Matriz de resultados de aprendizaxe e criterios de avaliación coa súa ponderación."
+      },
+      "contribucionOgRa": {
+        "label": "Contribución OG <- RA",
+        "desc": "Contribución dos resultados de aprendizaxe aos obxectivos xerais do título."
       },
       "unidades": {
         "label": "Unidades didácticas",
-        "desc": "Definición de unidades didácticas ou unidades de traballo e secuenciación das súas sesións."
+        "desc": "Definición de unidades didácticas ou unidades de traballo e a súa relación cos RA."
       },
-      "competenciales": {
-        "label": "Tarefas competenciais",
-        "desc": "Deseño e planificación de tarefas e actividades competenciais."
+      "secuenciacionUd": {
+        "label": "Secuenciación de UD",
+        "desc": "Secuenciación das sesións de cada unidade didáctica."
+      },
+      "tareasContenidos": {
+        "label": "Proxectos e retos",
+        "desc": "Proxectos e retos do módulo (opcional; art. 109 do Decreto 91/2024)."
       },
       "contenidosUd": {
         "label": "Contidos → UD",
@@ -168,23 +184,27 @@
       }
     },
     "metodologia": {
-      "metodologia": {
-        "label": "Metodoloxía e inclusión",
-        "desc": "Estratexias metodolóxicas, coordinación docente, atención á diversidade (DUA) e panel de alumnado ACNEAE."
+        "metodologia": {
+          "label": "Metodoloxía e innovación",
+          "desc": "Estratexias metodolóxicas e coordinación docente, e innovación e intermodularidade."
+        },
+        "instrumentosRecursos": {
+          "label": "Instrumentos e recursos",
+          "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios."
+        },
+        "diversidad": {
+          "label": "Atención á diversidade",
+          "desc": "Marco de inclusión, atención á diversidade, plan DUA e panel de alumnado ACNEAE."
+        },
+        "contingencia": {
+          "label": "Plan de continxencia",
+          "desc": "Plans de continxencia e adaptación ante situacións excepcionais."
+        },
+        "transversales": {
+          "label": "Transversais",
+          "desc": "Elementos transversais, competencias clave, competencias dixitais e estándares e obxectivos do currículo."
+        }
       },
-      "recursos": {
-        "label": "Recursos",
-        "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios."
-      },
-      "contingencia": {
-        "label": "Plan de continxencia",
-        "desc": "Plans de continxencia e adaptación ante situacións excepcionais."
-      },
-      "transversales": {
-        "label": "Transversais",
-        "desc": "Elementos transversais, competencias clave, competencias dixitais, estándares e obxectivos do currículo, innovación e intermodularidade, e actividades complementarias e extraescolares."
-      }
-    },
     "instrumentos": {
       "resumen": {
         "desc": "Visión global dos instrumentos de avaliación utilizados (RD 659/2023, Art. 136) e, máis abaixo, o modelo experimental JEG por indicadores."
@@ -379,7 +399,7 @@
     "legal": "Legal",
     "contexto": "Contexto",
     "curriculo": "Currículo",
-    "metodologia": "Metodoloxía",
+    "metodologia": "Metodoloxías",
     "evaluacion": "Avaliación",
     "secuenciacion": "Secuenciación",
     "magia": "Maxia",
@@ -391,7 +411,7 @@
     "cierre": "Peche",
     "informes": "Informes",
     "normativa": "Documentos",
-    "instrumentos": "Instrumento",
+    "instrumentos": "Instrumentos",
     "calidad": "Calidade",
     "mejora": "Mellora",
     "grupos": "Grupos"
@@ -427,13 +447,13 @@
   },
   "pages": {
     "agenda_title": "Clases",
-    "agenda_desc": "Notas, boletín, valoración na empresa (FEOE), informe de evidencias e inserción laboral por alumnado, trimestral e reclamacións.",
+    "agenda_desc": "Notas e valoración na empresa (FEOE) por alumnado, trimestral e reclamacións.",
     "alumnado_title": "Alumnado",
     "alumnado_desc": "Matrícula, orientación profesional, perfil do grupo e plano de aula.",
     "diario_title": "Seguimento Diario",
     "diario_desc": "Diario de aula, continxencias, control de asistencia e alertas.",
     "evaluacion_title": "Cualificación",
-    "evaluacion_desc": "Avance de UD e progreso dos RA, e mellora do módulo (EQAVET e PDCA).",
+    "evaluacion_desc": "Expediente por alumnado (boletín, informe de evidencias e inserción laboral), avance de UD e progreso dos RA, e mellora do módulo (EQAVET e PDCA).",
     "calendario_title": "Calendario",
     "calendario_desc": "Configura festivos, avaliacións e o teu horario semanal.",
     "modulo_title": "Configuración do Módulo",
@@ -455,7 +475,7 @@
     "legal_title": "Aviso Legal",
     "legal_desc": "Aviso legal, privacidade, cookies, licenzas e accesibilidade.",
     "ayuda_desc": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
-    "contexto_desc": "Información xeral, características da contorna, alumnado e módulo.",
+    "contexto_desc": "Identificación, contorno, alumnado, avaliación e procedementos da programación.",
     "magia_desc": "Xeración da programación didáctica e informes.",
     "seguimiento_desc": "Asistencia, abandono e diario de sesións lectivas.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
@@ -500,15 +520,15 @@
     "archivos": "Xestión de arquivos, sincronización na nube, seguridade, IA e verificación de datos.",
     "normativa": "Normativa autonómica, lexislación, bibliografía e estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
-    "contexto": "Identificación, contexto da contorna, FP dual e criterios de avaliación e cualificación.",
+    "contexto": "Identificación, contorno, alumnado, avaliación e procedementos da programación.",
     "curriculo": "Contribución dos RA aos obxectivos, ponderación RA-CE, unidades didácticas e tarefas competenciais.",
     "metodologia": "Metodoloxía, recursos, plan de continxencia e elementos transversais.",
     "instrumentos": "Definición e pesos das ferramentas de avaliación.",
     "calendario": "Horario, trimestres, festivos, período FEOE, vista mensual e as túas clases de hoxe, a semana e a unidade en curso.",
     "alumnado": "Matrícula, orientación profesional, perfil do grupo e plano de aula.",
     "sesiones": "Asistencia, abandono e diario de sesións lectivas.",
-    "calificaciones": "Notas, boletín, valoración na empresa (FEOE), informe de evidencias e inserción laboral por alumnado, trimestral e reclamacións.",
-    "cierre": "Avance de UD e progreso dos RA, e mellora do módulo (EQAVET e PDCA)."
+    "calificaciones": "Notas e valoración na empresa (FEOE) por alumnado, trimestral e reclamacións.",
+    "cierre": "Expediente por alumnado (boletín, informe de evidencias e inserción laboral), avance de UD e progreso dos RA, e mellora do módulo (EQAVET e PDCA)."
   },
   "toasts": {
     "aiSettings": {
@@ -820,7 +840,7 @@
       "resolver": "Resolver"
     },
     "secuenciacion": {
-      "anadirNuevaTareaCompetencial": "Engadir nova tarefa competencial",
+      "anadirNuevaTareaCompetencial": "Engadir proxecto ou reto",
       "anadirSesionA": "Engadir sesión a {{id}}",
       "exportarBriefing": "Exportar briefing (PDF/DOCX)",
       "exportarFicha": "Exportar ficha (PDF/DOCX)"
@@ -1038,10 +1058,10 @@
       "eliminarRegistro": "Eliminar rexistro"
     },
     "secuenciacion": {
-      "configurarTarea": "Configurar tarefa competencial",
+      "configurarTarea": "Configurar proxecto ou reto",
       "configurarUd": "Configurar unidade didáctica",
       "eliminarSesion": "Eliminar sesión",
-      "eliminarTarea": "Eliminar tarefa",
+      "eliminarTarea": "Eliminar proxecto ou reto",
       "pctInstrumento": "% do instrumento de avaliación, se esta sesión puntúa"
     }
   },
@@ -1518,7 +1538,6 @@
       "siglas": "Siglas"
     },
     "curriculo": {
-      "compClave": "Comp. clave",
       "criterioEvaluacion": "Criterio de avaliación",
       "horas": "Horas",
       "objetivosGenerales": "Obxectivos xerais",
@@ -1803,17 +1822,17 @@
       "feoeTextoSimplificadoTitulo": "FEOE (texto específico modelo Simplificado, pd=)",
       "feoeTextoSimplificadoAviso": "Se se deixa baleiro, xérase automaticamente a partir dos RA marcados como dualizables (is_dual).",
       "a1JustificacionDesc": "Base lexislativa que fundamenta esta programación.",
-      "a1JustificacionLabel": "A1. Xustificación da programación",
+      "a1JustificacionLabel": "Xustificación da programación",
       "a2ContextualizacionDesc": "Análise do contexto onde se imparte a formación.",
-      "a2ContextualizacionLabel": "A2. Contextualización",
+      "a2ContextualizacionLabel": "Contextualización",
       "acneaeAdaptacionesTitulo": "Adaptacións de avaliación e acceso",
       "acneaeNombreTitulo": "Nome / Identificador",
       "acneaeTipoNecesidadTitulo": "Tipo de Necesidade",
       "acneaeVacio": "Non hai alumnos ACNEAE rexistrados neste módulo.",
       "actividadesComplementariasDesc": "En horario lectivo, ligadas ao currículo e avaliables — forman parte da programación didáctica.",
-      "actividadesComplementariasLabel": "H1. Actividades complementarias",
+      "actividadesComplementariasLabel": "Actividades complementarias",
       "actividadesExtraescolaresDesc": "Fóra de horario lectivo, voluntarias e nunca avaliables — non forman parte da programación didáctica, van na PGA do centro. Anótanse aquí só como referencia.",
-      "actividadesExtraescolaresLabel": "H2. Actividades extraescolares",
+      "actividadesExtraescolaresLabel": "Actividades extraescolares",
       "adaptacionesNoSignificativasDesc": "Axustes metodolóxicos, organizativos ou de acceso que non alteran os RA nin CE esenciais.",
       "adaptacionesNoSignificativasTitulo": "Adaptacións curriculares non significativas",
       "anotacionesInclusionTitulo": "Anotacións libres sobre inclusión",
@@ -1825,7 +1844,7 @@
       "areasMejoraLabel": "Áreas de mellora e accións para o próximo curso",
       "atencionDiversidadAulaTitulo": "Atención á diversidade (Adaptacións non significativas)",
       "b3VinculacionEmpresaDesc": "Relación entre o módulo e a formación na empresa.",
-      "b3VinculacionEmpresaLabel": "B3. Vinculación coa empresa colaboradora",
+      "b3VinculacionEmpresaLabel": "Vinculación coa empresa colaboradora",
       "campoHistoricoAviso": "(campo histórico)",
       "campoHistoricoFusionAviso": "(campo histórico, próximo a fusionarse co de arriba)",
       "centroEducativo": "Centro educativo",
@@ -1867,7 +1886,7 @@
       "estrategiasMetodologicasEspaciosTitulo": "Estratexias metodolóxicas. Espazos",
       "estrategiasMetodologicasTitulo": "Estratexias metodolóxicas",
       "f1AtencionDiversidadDesc": "Estratexias para adaptar o ensino ás características do alumnado.",
-      "f1AtencionDiversidadTitulo": "F1. Atención á diversidade",
+      "f1AtencionDiversidadTitulo": "Atención á diversidade",
       "familiaProfesional": "Familia profesional",
       "herramientasRecursosDesc": "Infraestruturas, ferramentas e materiais técnicos necesarios para o desenvolvemento curricular. Se non atopas algo, engádeo abaixo como texto libre.",
       "herramientasRecursosLabel": "Ferramentas, recursos e espazos",
@@ -1977,7 +1996,7 @@
       "tituloAutoriaPublicidad": "Datos de autoría e publicidade",
       "cargandoDatos": "Cargando datos do contexto...",
       "cargandoDatosMetodologia": "Cargando datos de metodoloxía...",
-      "tituloActividades": "Complementarias e extraescolares"
+      "tituloActividades": "Actividades complementarias e extraescolares"
     },
     "ai": {
       "analizandoDocumento": "Analizando documento...",
@@ -2294,6 +2313,8 @@
       "avanceRaLabel": "Avance RA",
       "horasLectivasLabel": "Horas lectivas",
       "sinUdsAsignadas": "Sen UD asignadas",
+      "proyectosRetosTitulo": "Proxectos e retos",
+      "proyectosRetosNota": "Opcional: énchea se o módulo participa nun proxecto ou reto (art. 109 do Decreto 91/2024).",
       "sinDocenciaTodavia": "Aínda sen docencia",
       "sinRaDefinidos": "Non hai Resultados de aprendizaxe (RA) definidos.",
       "cargandoMatrices": "Cargando matrices...",
@@ -2463,11 +2484,11 @@
       "instrumentosIndicadoresCount": "{{instr}} instrumentos e {{ind}} indicadores",
       "indicadoresSinCe": "{{count}} indicadores sen CE asociado",
       "todosLosIndicadoresEvaluanCe": "Todos os indicadores avalían algún CE",
-      "tareasCompetencialesTitulo": "Tarefas competenciais",
-      "sinTareasDefinidas": "Non hai tarefas definidas",
-      "tareasDefinidas": "{{count}} tarefas definidas",
-      "tareasSinRa": "{{count}} tarefas sen RA asociado",
-      "todasLasTareasTienenRa": "Todas as tarefas teñen RA",
+      "tareasCompetencialesTitulo": "Proxectos e retos",
+      "sinTareasDefinidas": "Ningún definido (opcional)",
+      "tareasDefinidas": "{{count}} proxectos ou retos definidos",
+      "tareasSinRa": "{{count}} proxectos ou retos sen RA asociado",
+      "todasLasTareasTienenRa": "Todos os proxectos e retos teñen RA",
       "sesionesClaseTitulo": "Sesións de clase",
       "sinSesionesPlanificadas": "Non hai sesións planificadas",
       "sesionesPlanificadasCount": "{{count}} sesións planificadas",
@@ -2543,7 +2564,7 @@
       "desarrolloTareaPasosDesc": "Instrucións secuenciadas que o alumnado debe seguir.",
       "evidenciasAGenerarLabel": "Evidencias a xerar",
       "evidenciasAGenerarDesc": "Que produtos tanxibles ou demostracións se van avaliar.",
-      "tareaLabel": "Tarefa",
+      "tareaLabel": "Proxecto ou reto",
       "configuracionDetalladaUnidadTitulo": "Configuración detallada da unidade",
       "intencionEducativaLabel": "Intención educativa / contextualización",
       "intencionEducativaDesc": "Xustificación pedagóxica desta unidade, vinculación ao perfil profesional e coñecementos previos necesarios.",

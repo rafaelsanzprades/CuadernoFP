@@ -328,7 +328,7 @@ export default function CalendarioPage() {
   // que calendar_notes), no el yyyy-mm-dd ISO interno del cálculo dinámico.
   const { planningLedgerDmy: planningLedger } = useDynamicPlanning();
   const [saving, setSaving] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [saveMessage, setSaveMessage] = useState("");
   const [saveIsError, setSaveIsError] = useState(false);
   const [activeTab, setActiveTab] = useState("fechas");
@@ -375,6 +375,16 @@ export default function CalendarioPage() {
   };
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel;
+
+  // Nombres completos de los días en el idioma de la interfaz (Lunes, Martes...).
+  // El balear y el valenciano comparten los nombres del catalán.
+  const idiomaDias = ({ ba: "ca", va: "ca" } as Record<string, string>)[i18n.language] || i18n.language;
+  const nombreDia = (idx: number) => {
+    const n = new Date(2024, 0, 1 + idx).toLocaleDateString(idiomaDias, { weekday: "long" });
+    return n.charAt(0).toUpperCase() + n.slice(1);
+  };
+  // Separador y franja alterna para distinguir las columnas de los días.
+  const colDia = (idx: number) => `border-l border-[var(--glass-border)] ${idx % 2 === 0 ? "bg-foreground/[0.04]" : ""}`;
 
   useEffect(() => {
     if (activeCursoId && !cursoData) {
@@ -669,9 +679,9 @@ export default function CalendarioPage() {
               </div>
               <Card className="p-6 border-t-4 border-t-purple-500">
                 <div className="grid grid-cols-5 gap-4">
-                  {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
-                    <div key={day}>
-                      <label className="text-body text-foreground mb-1 block text-center font-bold">{day}</label>
+                  {["Lun", "Mar", "Mié", "Jue", "Vie"].map((day, di) => (
+                    <div key={day} className={`rounded-lg border border-[var(--glass-border)] p-3 ${di % 2 === 0 ? "bg-foreground/[0.04]" : ""}`}>
+                      <label className="text-body text-foreground mb-2 block text-center font-bold">{nombreDia(di)}</label>
                       <input 
                         type="number" min="0" max="8"
                         value={Number(horario[day]) || 0}
@@ -695,9 +705,9 @@ export default function CalendarioPage() {
                     <thead>
                       <tr className="bg-foreground/5 text-muted border-b border-[var(--glass-border)]">
                         <th className="p-3 text-left font-semibold">{t('tablas.calendario.trimestre', {defaultValue: 'Trimestre'})}</th>
-                        {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => (
-                          <th key={day} className={`p-3 font-semibold ${!Number(horario[day]) ? 'opacity-40' : ''}`}>
-                            {day}
+                        {["Lun", "Mar", "Mié", "Jue", "Vie"].map((day, di) => (
+                          <th key={day} className={`p-3 font-semibold ${colDia(di)} ${!Number(horario[day]) ? 'opacity-40' : ''}`}>
+                            {nombreDia(di)}
                             {Number(horario[day]) > 0 && <span className="block text-caption text-info font-normal mt-0.5">{horario[day]}h/sem</span>}
                           </th>
                         ))}
@@ -716,11 +726,11 @@ export default function CalendarioPage() {
                         return (
                           <tr key={row.title} className={`${row.bg} border-b border-[var(--glass-border)] last:border-0`}>
                             <td className="p-3 font-bold text-left">{row.title}</td>
-                            {daysArr.map(day => {
+                            {daysArr.map((day, di) => {
                               const dh = Number(horario[day]) || 0;
                               const days = row.wd[day] || 0;
                               return (
-                                <td key={day} className={`p-3 ${!dh ? 'opacity-30' : 'font-mono text-body font-medium'}`}>
+                                <td key={day} className={`p-3 ${colDia(di)} ${!dh ? 'opacity-30' : 'font-mono text-body font-medium'}`}>
                                   {dh > 0 ? (
                                     <div className="flex items-center justify-center gap-2">
                                       <span title={t('tooltips.calendario.dias', {defaultValue: 'Días'})}>{days}d</span>
@@ -743,12 +753,12 @@ export default function CalendarioPage() {
                       })}
                       <tr className="bg-foreground/5 border-t-2 border-[var(--glass-border)] text-body font-bold">
                         <td className="p-3 text-left">{t('common.total', {defaultValue: 'Total'})}</td>
-                        {["Lun", "Mar", "Mié", "Jue", "Vie"].map(day => {
+                        {["Lun", "Mar", "Mié", "Jue", "Vie"].map((day, di) => {
                           const dh = Number(horario[day]) || 0;
                           const daysTotal = (wd1[day as keyof typeof wd1] + wd2[day as keyof typeof wd2] + wd3[day as keyof typeof wd3]);
                           const hoursTotal = daysTotal * dh;
                           return (
-                            <td key={day} className={`p-3 font-mono ${dh === 0 ? 'opacity-30' : ''}`}>
+                            <td key={day} className={`p-3 font-mono ${colDia(di)} ${dh === 0 ? 'opacity-30' : ''}`}>
                               {dh > 0 ? (
                                 <div className="flex items-center justify-center gap-2">
                                   <span title={t('tooltips.calendario.dias', {defaultValue: 'Días'})}>{daysTotal}d</span>

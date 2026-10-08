@@ -183,7 +183,7 @@ export function PanelPorAlumno({
   return (
     <div className="flex gap-6 h-[calc(100vh-280px)] min-h-[500px]">
       <div className="w-80 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden shrink-0">
-        <div className="p-4 border-b border-white/5 bg-foreground/10">
+        <div className="h-14 px-4 border-b border-white/5 bg-foreground/10 flex items-center">
           <div className="text-caption font-medium text-muted tracking-wider">
             {t('campos.orientacion.alumnadoActivoCount', {count: activeStudents.length, defaultValue: 'Alumnado activo ({{count}})'})}
           </div>
@@ -222,16 +222,16 @@ export function PanelPorAlumno({
       <div className="flex-1 bg-foreground/5 border border-white/5 rounded-2xl flex flex-col overflow-hidden">
         {currentStudent ? (
           <>
-            <div className="p-6 border-b border-white/5 bg-foreground/10 flex justify-between items-center shrink-0">
-              <div>
-                <h3 className="text-heading font-black text-foreground">
-                  {currentStudent.Nombre} {currentStudent.Apellidos}
-                </h3>
-                <div className="text-caption text-muted font-mono mt-1">
+            <div className="h-14 px-4 border-b border-white/5 bg-foreground/10 flex justify-between items-center gap-4 shrink-0">
+              <h3 className="text-subheading font-black text-foreground truncate">
+                {currentStudent.Nombre} {currentStudent.Apellidos}
+              </h3>
+              <div className="flex items-center gap-4 shrink-0">
+                <span className="text-caption text-muted font-mono">
                   ID: {currentStudent.ID} · {currentStudent.Edad ? t('campos.orientacion.nAnos', {n: currentStudent.Edad, defaultValue: '{{n}} años'}) : t('campos.orientacion.edadNoRegistrada', {defaultValue: 'Edad no registrada'})}
-                </div>
+                </span>
+                {badge?.(currentStudent)}
               </div>
-              {badge?.(currentStudent)}
             </div>
             <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-hide">
               {children(currentStudent)}

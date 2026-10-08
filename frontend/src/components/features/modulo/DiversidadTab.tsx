@@ -167,7 +167,7 @@ export function DiversidadTab() {
       {/* F1. Atención a la diversidad */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-f1-diversidad" icon={ShieldAlert} scrollMt="260px">
-        {t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'F1. Atención a la diversidad'})}
+        {t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'Atención a la diversidad'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-violet-500">
         <div className="space-y-4">

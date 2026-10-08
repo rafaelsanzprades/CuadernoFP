@@ -45,8 +45,7 @@ const ALLOWED_PROGRAMACION_KEYS = [
   // Medidas e inclusión
   'medidas_inclusion', 'texto_inclusion_libre',
   'instrumentos_seleccionados', 'recursos_espacios', 'metodologias_seleccionadas',
-  'texto_metodologia_libre', 'elementos_transversales', 'actividades_complementarias',
-  'actividades_extraescolares',
+  'texto_metodologia_libre', 'elementos_transversales',
   'medidas_contingencia', 'texto_contingencia_libre',
   'texto_contextualizacion_libre',
   // Textos narrativos PD (16 campos — ESENCIALES)

@@ -3,7 +3,7 @@
     "cierre": {
         "expediente": {
         "label": "Expedient",
-        "desc": "Inserció laboral post-cicle i expedient (línia temporal d'evidències) per alumnat."
+        "desc": "Butlletí individual, informe d'evidències i inserció laboral per alumnat."
       }
     },
     "bienvenida": "Benvinguda",
@@ -132,35 +132,51 @@
       "cambiosNota": "Canvis de nota"
     },
     "contexto": {
-      "identificacion": {
-        "label": "Identificació",
-        "desc": "Identificació del mòdul i el centre, règim dual, regles d'arredoniment, ponderació trimestral, instruments d'avaluació i escales qualitatives. Cap. 1.1 del PD+."
+        "identificacion": {
+          "label": "Identificació",
+          "desc": "Centre i docent, mòdul didàctic i dades d'autoria i publicitat."
+        },
+        "entorno": {
+          "label": "Entorn",
+          "desc": "Entorn geogràfic, socioeconòmic i escolar, activitats complementàries i pla FEOE."
+        },
+        "alumnado": {
+          "label": "Alumnat",
+          "desc": "Alumnat amb necessitats específiques (ACNEAE), dades i trets del grup i avaluació inicial."
+        },
+        "evaluacion": {
+          "label": "Avaluació",
+          "desc": "Regles d'arrodoniment i compensació, ponderació per trimestres i instruments d'avaluació, i escales qualitatives."
+        },
+        "procedimientos": {
+          "label": "Procediments",
+          "desc": "Informació i procediments d'avaluació, model de recuperació, criteris de qualificació i textos del model Simplificat."
+        }
       },
-      "contextualizacion": {
-        "label": "Contextualització",
-        "desc": "Entorn geogràfic, socioeconòmic i escolar, Pla FEOE, alumnat ACNEAE, textos del model Simplificat i dades d'autoria. Cap. 1.3 i 5 del PD+."
-      },
-      "criterios": {
-        "label": "Avaluació i qualificació",
-        "desc": "Procediment d'avaluació i de qualificació: informació a l'alumnat, pèrdua d'avaluació contínua, recuperació. Cap. 4 del PD+."
-      }
-    },
     "curriculo": {
       "contribucion-ra-og": {
         "label": "Contribució RA->OG",
         "desc": "Contribució dels RA als objectius generals del títol."
       },
       "ponderacion-ra-ce": {
-        "label": "OG<-RA<-CE",
-        "desc": "Matriu de resultats d'aprenentatge i criteris d'avaluació amb la seua ponderació, i contribució dels resultats d'aprenentatge als objectius generals del títol."
+        "label": "Relació RA <- CE",
+        "desc": "Matriu de resultats d'aprenentatge i criteris d'avaluació amb la seva ponderació."
+      },
+      "contribucionOgRa": {
+        "label": "Contribució OG <- RA",
+        "desc": "Contribució dels resultats d'aprenentatge als objectius generals del títol."
       },
       "unidades": {
         "label": "Unitats didàctiques",
-        "desc": "Definició d'unitats didàctiques o unitats de treball i seqüenciació de les seues sessions."
+        "desc": "Definició d'unitats didàctiques o unitats de treball i la seva relació amb els RA."
       },
-      "competenciales": {
-        "label": "Tasques competencials",
-        "desc": "Disseny i planificació de tasques i activitats competencials."
+      "secuenciacionUd": {
+        "label": "Seqüenciació d'UD",
+        "desc": "Seqüenciació de les sessions de cada unitat didàctica."
+      },
+      "tareasContenidos": {
+        "label": "Projectes i reptes",
+        "desc": "Projectes i reptes del mòdul (opcional; art. 109 del Decret 91/2024)."
       },
       "contenidosUd": {
         "label": "Continguts → UD",
@@ -168,23 +184,27 @@
       }
     },
     "metodologia": {
-      "metodologia": {
-        "label": "Metodologia i inclusió",
-        "desc": "Estratègies metodològiques, coordinació docent, atenció a la diversitat (DUA) i panell d'alumnat ACNEAE."
+        "metodologia": {
+          "label": "Metodologia i innovació",
+          "desc": "Estratègies metodològiques i coordinació docent, i innovació i intermodularitat."
+        },
+        "instrumentosRecursos": {
+          "label": "Instruments i recursos",
+          "desc": "Instruments d'avaluació seleccionats i recursos i espais necessaris."
+        },
+        "diversidad": {
+          "label": "Atenció a la diversitat",
+          "desc": "Marc d'inclusió, atenció a la diversitat, pla DUA i panell d'alumnat ACNEAE."
+        },
+        "contingencia": {
+          "label": "Pla de contingència",
+          "desc": "Plans de contingència i adaptació davant de situacions excepcionals."
+        },
+        "transversales": {
+          "label": "Transversals",
+          "desc": "Elements transversals, competències clau, competències digitals i estàndards i objectius del currículum."
+        }
       },
-      "recursos": {
-        "label": "Recursos",
-        "desc": "Instruments d'avaluació seleccionats i recursos i espais necessaris."
-      },
-      "contingencia": {
-        "label": "Pla de contingència",
-        "desc": "Plans de contingència i adaptació davant de situacions excepcionals."
-      },
-      "transversales": {
-        "label": "Transversals",
-        "desc": "Elements transversals, competències clau, competències digitals, estàndards i objectius del currículum, innovació i intermodularitat, i activitats complementàries i extraescolars."
-      }
-    },
     "instrumentos": {
       "resumen": {
         "desc": "Visió global dels instruments d'avaluació utilitzats (RD 659/2023, Art. 136) i, més avall, el model experimental JEG per indicadors."
@@ -379,7 +399,7 @@
     "legal": "Legal",
     "contexto": "Context",
     "curriculo": "Currículum",
-    "metodologia": "Metodologia",
+    "metodologia": "Metodologies",
     "evaluacion": "Avaluació",
     "secuenciacion": "Seqüenciació",
     "magia": "Màgia",
@@ -391,7 +411,7 @@
     "cierre": "Tancament",
     "informes": "Informes",
     "normativa": "Documents",
-    "instrumentos": "Instrument",
+    "instrumentos": "Instruments",
     "calidad": "Qualitat",
     "mejora": "Millora",
     "grupos": "Grups"
@@ -427,13 +447,13 @@
   },
   "pages": {
     "agenda_title": "Classes",
-    "agenda_desc": "Notes, butlletí, valoració a l'empresa (FEOE), informe d'evidències i inserció laboral per alumnat, trimestral i reclamacions.",
+    "agenda_desc": "Notes i valoració a l'empresa (FEOE) per alumnat, trimestral i reclamacions.",
     "alumnado_title": "Alumnat",
     "alumnado_desc": "Matrícula, orientació professional, perfil del grup i plànol d'aula.",
     "diario_title": "Seguiment Diari",
     "diario_desc": "Diari d'aula, contingències, control d'assistència i alertes.",
     "evaluacion_title": "Qualificació",
-    "evaluacion_desc": "Avanç d'UD i progrés dels RA, i millora del mòdul (EQAVET i PDCA).",
+    "evaluacion_desc": "Expedient per alumnat (butlletí, informe d'evidències i inserció laboral), avanç d'UD i progrés dels RA, i millora del mòdul (EQAVET i PDCA).",
     "calendario_title": "Calendari",
     "calendario_desc": "Configura festius, avaluacions i el teu horari setmanal.",
     "modulo_title": "Configuració del Mòdul",
@@ -455,7 +475,7 @@
     "legal_title": "Avís Legal",
     "legal_desc": "Avís legal, privacitat, cookies, llicències i accessibilitat.",
     "ayuda_desc": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
-    "contexto_desc": "Informació general, característiques de l'entorn, alumnat i mòdul.",
+    "contexto_desc": "Identificació, entorn, alumnat, avaluació i procediments de la programació.",
     "magia_desc": "Generació de la programació didàctica i informes.",
     "seguimiento_desc": "Assistència, abandonament i diari de sessions lectives.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
@@ -500,15 +520,15 @@
     "archivos": "Gestió d'arxius, sincronització al núvol, seguretat, IA i verificació de dades.",
     "normativa": "Normativa autonòmica, legislació, bibliografia i estàndards INCUAL.",
     "catalogo": "Famílies, títols, mòduls i currículums (RA i CE).",
-    "contexto": "Identificació, context de l'entorn, FP dual i criteris d'avaluació i qualificació.",
+    "contexto": "Identificació, entorn, alumnat, avaluació i procediments de la programació.",
     "curriculo": "Contribució dels RA als objectius, ponderació RA-CE, unitats didàctiques i tasques competencials.",
     "metodologia": "Metodologia, recursos, pla de contingència i elements transversals.",
     "instrumentos": "Definició i pesos de les eines d'avaluació.",
     "calendario": "Horari, trimestres, festius, període FEOE, vista mensual i les teues classes d'hui, la setmana i la unitat en curs.",
     "alumnado": "Matrícula, orientació professional, perfil del grup i plànol d'aula.",
     "sesiones": "Assistència, abandonament i diari de sessions lectives.",
-    "calificaciones": "Notes, butlletí, valoració a l'empresa (FEOE), informe d'evidències i inserció laboral per alumnat, trimestral i reclamacions.",
-    "cierre": "Avanç d'UD i progrés dels RA, i millora del mòdul (EQAVET i PDCA)."
+    "calificaciones": "Notes i valoració a l'empresa (FEOE) per alumnat, trimestral i reclamacions.",
+    "cierre": "Expedient per alumnat (butlletí, informe d'evidències i inserció laboral), avanç d'UD i progrés dels RA, i millora del mòdul (EQAVET i PDCA)."
   },
   "toasts": {
     "aiSettings": {
@@ -820,7 +840,7 @@
       "resolver": "Resoldre"
     },
     "secuenciacion": {
-      "anadirNuevaTareaCompetencial": "Afegir nova tasca competencial",
+      "anadirNuevaTareaCompetencial": "Afegeix un projecte o repte",
       "anadirSesionA": "Afegir sessió a {{id}}",
       "exportarBriefing": "Exportar briefing (PDF/DOCX)",
       "exportarFicha": "Exportar fitxa (PDF/DOCX)"
@@ -1038,10 +1058,10 @@
       "eliminarRegistro": "Eliminar registre"
     },
     "secuenciacion": {
-      "configurarTarea": "Configurar tasca competencial",
+      "configurarTarea": "Configura el projecte o repte",
       "configurarUd": "Configurar unitat didàctica",
       "eliminarSesion": "Eliminar sessió",
-      "eliminarTarea": "Eliminar tasca",
+      "eliminarTarea": "Elimina el projecte o repte",
       "pctInstrumento": "% de l'instrument d'avaluació, si aquesta sessió puntua"
     }
   },
@@ -1518,7 +1538,6 @@
       "siglas": "Sigles"
     },
     "curriculo": {
-      "compClave": "Comp. clau",
       "criterioEvaluacion": "Criteri d'avaluació",
       "horas": "Hores",
       "objetivosGenerales": "Objectius generals",
@@ -1803,17 +1822,17 @@
       "feoeTextoSimplificadoTitulo": "FEOE (text específic model Simplificat, pd=)",
       "feoeTextoSimplificadoAviso": "Si es deixa buit, es genera automàticament a partir dels RA marcats com a dualitzables (is_dual).",
       "a1JustificacionDesc": "Base legislativa que fonamenta aquesta programació.",
-      "a1JustificacionLabel": "A1. Justificació de la programació",
+      "a1JustificacionLabel": "Justificació de la programació",
       "a2ContextualizacionDesc": "Anàlisi del context on s'imparteix la formació.",
-      "a2ContextualizacionLabel": "A2. Contextualització",
+      "a2ContextualizacionLabel": "Contextualització",
       "acneaeAdaptacionesTitulo": "Adaptacions d'avaluació i accés",
       "acneaeNombreTitulo": "Nom / Identificador",
       "acneaeTipoNecesidadTitulo": "Tipus de necessitat",
       "acneaeVacio": "No hi ha alumnes ACNEAE registrats en aquest mòdul.",
       "actividadesComplementariasDesc": "En horari lectiu, lligades al currículum i avaluables — formen part de la programació didàctica.",
-      "actividadesComplementariasLabel": "H1. Activitats complementàries",
+      "actividadesComplementariasLabel": "Activitats complementàries",
       "actividadesExtraescolaresDesc": "Fora de l'horari lectiu, voluntàries i mai avaluables — no formen part de la programació didàctica, van a la PGA del centre. S'anoten aquí només com a referència.",
-      "actividadesExtraescolaresLabel": "H2. Activitats extraescolars",
+      "actividadesExtraescolaresLabel": "Activitats extraescolars",
       "adaptacionesNoSignificativasDesc": "Ajustos metodològics, organitzatius o d'accés que no alteren els RA ni CE essencials.",
       "adaptacionesNoSignificativasTitulo": "Adaptacions curriculars no significatives",
       "anotacionesInclusionTitulo": "Anotacions lliures sobre inclusió",
@@ -1825,7 +1844,7 @@
       "areasMejoraLabel": "Àrees de millora i accions per al proper curs",
       "atencionDiversidadAulaTitulo": "Atenció a la diversitat (Adaptacions no significatives)",
       "b3VinculacionEmpresaDesc": "Relació entre el mòdul i la formació a l'empresa.",
-      "b3VinculacionEmpresaLabel": "B3. Vinculació amb l'empresa col·laboradora",
+      "b3VinculacionEmpresaLabel": "Vinculació amb l'empresa col·laboradora",
       "campoHistoricoAviso": "(camp històric)",
       "campoHistoricoFusionAviso": "(camp històric, proper a fusionar-se amb el d'a dalt)",
       "centroEducativo": "Centre educatiu",
@@ -1867,7 +1886,7 @@
       "estrategiasMetodologicasEspaciosTitulo": "Estratègies metodològiques. Espais",
       "estrategiasMetodologicasTitulo": "Estratègies metodològiques",
       "f1AtencionDiversidadDesc": "Estratègies per adaptar l'ensenyament a les característiques de l'alumnat.",
-      "f1AtencionDiversidadTitulo": "F1. Atenció a la diversitat",
+      "f1AtencionDiversidadTitulo": "Atenció a la diversitat",
       "familiaProfesional": "Família professional",
       "herramientasRecursosDesc": "Infraestructures, eines i materials tècnics necessaris per al desenvolupament curricular. Si no trobes alguna cosa, afegeix-la a sota com a text lliure.",
       "herramientasRecursosLabel": "Eines, recursos i espais",
@@ -1977,7 +1996,7 @@
       "tituloAutoriaPublicidad": "Dades d'autoria i publicitat",
       "cargandoDatos": "Carregant dades del context...",
       "cargandoDatosMetodologia": "Carregant dades de metodologia...",
-      "tituloActividades": "Complementàries i extraescolars"
+      "tituloActividades": "Activitats complementàries i extraescolars"
     },
     "ai": {
       "analizandoDocumento": "Analitzant document...",
@@ -2294,6 +2313,8 @@
       "avanceRaLabel": "Avanç RA",
       "horasLectivasLabel": "Hores lectives",
       "sinUdsAsignadas": "Sense UD assignades",
+      "proyectosRetosTitulo": "Projectes i reptes",
+      "proyectosRetosNota": "Opcional: omple'l si el mòdul participa en un projecte o repte (art. 109 del Decret 91/2024).",
       "sinDocenciaTodavia": "Encara sense docència",
       "sinRaDefinidos": "No hi ha Resultats d'aprenentatge (RA) definits.",
       "cargandoMatrices": "Carregant matrius...",
@@ -2463,11 +2484,11 @@
       "instrumentosIndicadoresCount": "{{instr}} instruments i {{ind}} indicadors",
       "indicadoresSinCe": "{{count}} indicadors sense CE associat",
       "todosLosIndicadoresEvaluanCe": "Tots els indicadors avaluen algun CE",
-      "tareasCompetencialesTitulo": "Tasques competencials",
-      "sinTareasDefinidas": "No hi ha tasques definides",
-      "tareasDefinidas": "{{count}} tasques definides",
-      "tareasSinRa": "{{count}} tasques sense RA associat",
-      "todasLasTareasTienenRa": "Totes les tasques tenen RA",
+      "tareasCompetencialesTitulo": "Projectes i reptes",
+      "sinTareasDefinidas": "Cap definit (opcional)",
+      "tareasDefinidas": "{{count}} projectes o reptes definits",
+      "tareasSinRa": "{{count}} projectes o reptes sense RA associat",
+      "todasLasTareasTienenRa": "Tots els projectes i reptes tenen RA",
       "sesionesClaseTitulo": "Sessions de classe",
       "sinSesionesPlanificadas": "No hi ha sessions planificades",
       "sesionesPlanificadasCount": "{{count}} sessions planificades",
@@ -2543,7 +2564,7 @@
       "desarrolloTareaPasosDesc": "Instruccions seqüenciades que l'alumnat ha de seguir.",
       "evidenciasAGenerarLabel": "Evidències a generar",
       "evidenciasAGenerarDesc": "Quins productes tangibles o demostracions s'avaluaran.",
-      "tareaLabel": "Tasca",
+      "tareaLabel": "Projecte o repte",
       "configuracionDetalladaUnidadTitulo": "Configuració detallada de la unitat",
       "intencionEducativaLabel": "Intenció educativa / contextualització",
       "intencionEducativaDesc": "Justificació pedagògica d'aquesta unitat, vinculació al perfil professional i coneixements previs necessaris.",

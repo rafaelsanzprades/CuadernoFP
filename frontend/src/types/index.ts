@@ -72,8 +72,6 @@ export const ResultadoAprendizajeSchema = z.object({
   desc_ra: z.string().optional().nullable(),
   peso_ra: z.number().optional(),
   is_dual: z.boolean().optional().nullable(),
-  comp_clave: z.string().optional().nullable(),
-  cpe: z.string().optional().nullable(),
 });
 export type ResultadoAprendizaje = z.infer<typeof ResultadoAprendizajeSchema>;
 
@@ -252,8 +250,6 @@ export const ModuleDataSchema = z.object({
   metodologias_seleccionadas: z.array(z.string()).optional(),
   texto_metodologia_libre: z.string().optional(),
   elementos_transversales: z.array(z.string()).optional(),
-  actividades_complementarias: z.array(z.string()).optional(),
-  actividades_extraescolares: z.array(z.string()).optional(),
   medidas_contingencia: z.array(z.string()).optional(),
   texto_contingencia_libre: z.string().optional(),
   

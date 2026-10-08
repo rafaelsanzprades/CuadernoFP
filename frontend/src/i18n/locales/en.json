@@ -3,7 +3,7 @@
     "cierre": {
         "expediente": {
         "label": "Record",
-        "desc": "Job placement after the cycle and record (timeline of evidence) per student."
+        "desc": "Report card, evidence report and job placement per student."
       }
     },
     "bienvenida": "Welcome",
@@ -132,35 +132,51 @@
       "cambiosNota": "Grade changes"
     },
     "contexto": {
-      "identificacion": {
-        "label": "Identification",
-        "desc": "Identification of the module and center, dual system, rounding rules, term weighting, evaluation instruments and qualitative scales. Chapter 1.1 of the PD+."
+        "identificacion": {
+          "label": "Identification",
+          "desc": "Centre and teacher, teaching module, and authorship and publicity data."
+        },
+        "entorno": {
+          "label": "Environment",
+          "desc": "Geographic, socioeconomic and school environment, complementary activities and FEOE plan."
+        },
+        "alumnado": {
+          "label": "Students",
+          "desc": "Students with specific needs (ACNEAE), group data and traits, and initial assessment."
+        },
+        "evaluacion": {
+          "label": "Assessment",
+          "desc": "Rounding and compensation rules, term weighting and assessment instruments, and qualitative scales."
+        },
+        "procedimientos": {
+          "label": "Procedures",
+          "desc": "Assessment information and procedures, recovery model, grading criteria and Simplified model texts."
+        }
       },
-      "contextualizacion": {
-        "label": "Contextualization",
-        "desc": "Geographic, socioeconomic and school environment, FEOE plan, ACNEAE students, texts for the Simplified model, and authorship details. Chapters 1.3 and 5 of the PD+."
-      },
-      "criterios": {
-        "label": "Evaluation and grading",
-        "desc": "Evaluation and grading procedure: information for students, loss of continuous assessment, remediation. Chapter 4 of the PD+."
-      }
-    },
     "curriculo": {
       "contribucion-ra-og": {
         "label": "Contribution RA->OG",
         "desc": "Contribution of the learning outcomes to the general objectives of the qualification."
       },
       "ponderacion-ra-ce": {
-        "label": "OG<-RA<-CE",
-        "desc": "Matrix of learning outcomes and assessment criteria with their weighting, and contribution of learning outcomes to the qualification's general objectives."
+        "label": "Relationship RA <- CE",
+        "desc": "Matrix of learning outcomes and assessment criteria with their weighting."
+      },
+      "contribucionOgRa": {
+        "label": "Contribution OG <- RA",
+        "desc": "Contribution of the learning outcomes to the general objectives of the qualification."
       },
       "unidades": {
         "label": "Teaching units",
-        "desc": "Definition of teaching units or work units and sequencing of their sessions."
+        "desc": "Definition of teaching units or work units and their relationship with the RA."
       },
-      "competenciales": {
-        "label": "Competency-based tasks",
-        "desc": "Design and planning of competency-based tasks and activities."
+      "secuenciacionUd": {
+        "label": "Sequencing of UD",
+        "desc": "Sequencing of the sessions of each teaching unit."
+      },
+      "tareasContenidos": {
+        "label": "Projects and challenges",
+        "desc": "Projects and challenges of the module (optional; art. 109 of Decree 91/2024)."
       },
       "contenidosUd": {
         "label": "Contents → UD",
@@ -168,23 +184,27 @@
       }
     },
     "metodologia": {
-      "metodologia": {
-        "label": "Methodology and inclusion",
-        "desc": "Methodological strategies, teaching coordination, attention to diversity (UDL) and panel of ACNEAE students."
+        "metodologia": {
+          "label": "Methodology and innovation",
+          "desc": "Methodological strategies and teaching coordination, and innovation and cross-module coordination."
+        },
+        "instrumentosRecursos": {
+          "label": "Instruments and resources",
+          "desc": "Selected assessment instruments and the resources and spaces required."
+        },
+        "diversidad": {
+          "label": "Attention to diversity",
+          "desc": "Inclusion framework, attention to diversity, UDL plan and panel of ACNEAE students."
+        },
+        "contingencia": {
+          "label": "Contingency plan",
+          "desc": "Contingency plans and adaptation for exceptional situations."
+        },
+        "transversales": {
+          "label": "Transversal",
+          "desc": "Transversal elements, key competencies, digital competencies, and curriculum standards and objectives."
+        }
       },
-      "recursos": {
-        "label": "Resources",
-        "desc": "Selected evaluation instruments and the resources and spaces required."
-      },
-      "contingencia": {
-        "label": "Contingency plan",
-        "desc": "Contingency plans and adaptation for exceptional situations."
-      },
-      "transversales": {
-        "label": "Transversal",
-        "desc": "Transversal elements, key competencies, digital competencies, curriculum standards and objectives, innovation and cross-module coordination, and complementary and extracurricular activities."
-      }
-    },
     "instrumentos": {
       "resumen": {
         "desc": "Overall view of the evaluation instruments used (RD 659/2023, Art. 136), plus the experimental indicator-based JEG model below."
@@ -379,7 +399,7 @@
     "legal": "Legal",
     "contexto": "Context",
     "curriculo": "Curriculum",
-    "metodologia": "Methodology",
+    "metodologia": "Methodologies",
     "evaluacion": "Evaluation",
     "secuenciacion": "Sequencing",
     "magia": "Magic",
@@ -391,7 +411,7 @@
     "cierre": "Closing",
     "informes": "Reports",
     "normativa": "Documents",
-    "instrumentos": "Instrument",
+    "instrumentos": "Instruments",
     "calidad": "Quality",
     "mejora": "Improvement",
     "grupos": "Groups"
@@ -427,13 +447,13 @@
   },
   "pages": {
     "agenda_title": "Classes",
-    "agenda_desc": "Grades, report card, company assessment (FEOE), evidence report and job placement per student, term summary and appeals.",
+    "agenda_desc": "Grades and company assessment (FEOE) per student, term summary and appeals.",
     "alumnado_title": "Students",
     "alumnado_desc": "Enrollment, career guidance, group profile and classroom layout.",
     "diario_title": "Daily Tracking",
     "diario_desc": "Classroom journal, contingencies, attendance control and alerts.",
     "evaluacion_title": "Grade",
-    "evaluacion_desc": "Teaching unit and RA progress, and module improvement (EQAVET and PDCA).",
+    "evaluacion_desc": "Record per student (report card, evidence report and job placement), teaching unit and RA progress, and module improvement (EQAVET and PDCA).",
     "calendario_title": "Calendar",
     "calendario_desc": "Set holidays, evaluations and your weekly schedule.",
     "modulo_title": "Module Configuration",
@@ -455,7 +475,7 @@
     "legal_title": "Legal Notice",
     "legal_desc": "Legal notice, privacy, cookies, licenses and accessibility.",
     "ayuda_desc": "Getting-started guide, FAQ, acronyms and community contributions.",
-    "contexto_desc": "General information, environment characteristics, students and module.",
+    "contexto_desc": "Identification, environment, students, assessment and procedures of the programme.",
     "magia_desc": "Generation of the teaching plan and reports.",
     "seguimiento_desc": "Attendance, dropout and diary of teaching sessions.",
     "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
@@ -500,15 +520,15 @@
     "archivos": "File management, cloud sync, security, AI and data verification.",
     "normativa": "Regional regulations, legislation, bibliography and INCUAL standards.",
     "catalogo": "Families, qualifications, modules and curricula (RA and CE).",
-    "contexto": "Identification, environment context, FP dual and assessment and grading criteria.",
+    "contexto": "Identification, environment, students, assessment and procedures of the programme.",
     "curriculo": "Contribution of RA to objectives, RA-CE weighting, teaching units and competency-based tasks.",
     "metodologia": "Methodology, resources, contingency plan and cross-curricular elements.",
     "instrumentos": "Definition and weighting of assessment instruments.",
     "calendario": "Schedule, terms, holidays, FEOE period, monthly view and today's classes, the week and the current unit.",
     "alumnado": "Enrollment, career guidance, group profile and classroom layout.",
     "sesiones": "Attendance, dropout and diary of teaching sessions.",
-    "calificaciones": "Grades, report card, company assessment (FEOE), evidence report and job placement per student, term summary and appeals.",
-    "cierre": "Teaching unit and RA progress, and module improvement (EQAVET and PDCA)."
+    "calificaciones": "Grades and company assessment (FEOE) per student, term summary and appeals.",
+    "cierre": "Record per student (report card, evidence report and job placement), teaching unit and RA progress, and module improvement (EQAVET and PDCA)."
   },
   "toasts": {
     "aiSettings": {
@@ -820,7 +840,7 @@
       "resolver": "Resolve"
     },
     "secuenciacion": {
-      "anadirNuevaTareaCompetencial": "Add new competency-based task",
+      "anadirNuevaTareaCompetencial": "Add project or challenge",
       "anadirSesionA": "Add session to {{id}}",
       "exportarBriefing": "Export briefing (PDF/DOCX)",
       "exportarFicha": "Export sheet (PDF/DOCX)"
@@ -1038,10 +1058,10 @@
       "eliminarRegistro": "Remove record"
     },
     "secuenciacion": {
-      "configurarTarea": "Configure competency-based task",
+      "configurarTarea": "Configure project or challenge",
       "configurarUd": "Configure teaching unit",
       "eliminarSesion": "Remove session",
-      "eliminarTarea": "Remove task",
+      "eliminarTarea": "Delete project or challenge",
       "pctInstrumento": "% of the assessment instrument, if this session scores"
     }
   },
@@ -1518,7 +1538,6 @@
       "siglas": "Abbreviation"
     },
     "curriculo": {
-      "compClave": "Key comp.",
       "criterioEvaluacion": "Assessment criterion",
       "horas": "Hours",
       "objetivosGenerales": "General objectives",
@@ -1803,17 +1822,17 @@
       "feoeTextoSimplificadoTitulo": "FEOE (text specific to the Simplified model, pd=)",
       "feoeTextoSimplificadoAviso": "If left blank, it is auto-generated from the LOs marked as dualizable (is_dual).",
       "a1JustificacionDesc": "Legislative basis underpinning this curriculum plan.",
-      "a1JustificacionLabel": "A1. Justification of the curriculum plan",
+      "a1JustificacionLabel": "Justification of the curriculum plan",
       "a2ContextualizacionDesc": "Analysis of the context in which the training is delivered.",
-      "a2ContextualizacionLabel": "A2. Contextualization",
+      "a2ContextualizacionLabel": "Contextualization",
       "acneaeAdaptacionesTitulo": "Assessment and access adaptations",
       "acneaeNombreTitulo": "Name / Identifier",
       "acneaeTipoNecesidadTitulo": "Type of need",
       "acneaeVacio": "There are no ACNEAE students registered in this module.",
       "actividadesComplementariasDesc": "During school hours, linked to the curriculum and assessable — they are part of the curriculum plan.",
-      "actividadesComplementariasLabel": "H1. Complementary activities",
+      "actividadesComplementariasLabel": "Complementary activities",
       "actividadesExtraescolaresDesc": "Outside school hours, voluntary and never assessable — they are not part of the curriculum plan, they go in the center's PGA. Noted here only for reference.",
-      "actividadesExtraescolaresLabel": "H2. Extracurricular activities",
+      "actividadesExtraescolaresLabel": "Extracurricular activities",
       "adaptacionesNoSignificativasDesc": "Methodological, organizational or access adjustments that do not alter the essential RAs or CEs.",
       "adaptacionesNoSignificativasTitulo": "Non-significant curricular adaptations",
       "anotacionesInclusionTitulo": "Free-text notes on inclusion",
@@ -1825,7 +1844,7 @@
       "areasMejoraLabel": "Areas for improvement and actions for next year",
       "atencionDiversidadAulaTitulo": "Attention to diversity (Non-significant adaptations)",
       "b3VinculacionEmpresaDesc": "Relationship between the module and workplace training.",
-      "b3VinculacionEmpresaLabel": "B3. Link with the partner company",
+      "b3VinculacionEmpresaLabel": "Link with the partner company",
       "campoHistoricoAviso": "(legacy field)",
       "campoHistoricoFusionAviso": "(legacy field, soon to be merged with the one above)",
       "centroEducativo": "Educational center",
@@ -1867,7 +1886,7 @@
       "estrategiasMetodologicasEspaciosTitulo": "Methodological strategies. Spaces",
       "estrategiasMetodologicasTitulo": "Methodological strategies",
       "f1AtencionDiversidadDesc": "Strategies for adapting teaching to student characteristics.",
-      "f1AtencionDiversidadTitulo": "F1. Attention to diversity",
+      "f1AtencionDiversidadTitulo": "Attention to diversity",
       "familiaProfesional": "Professional family",
       "herramientasRecursosDesc": "Infrastructure, tools and technical materials needed for curriculum development. If you can't find something, add it below as free text.",
       "herramientasRecursosLabel": "Tools, resources and spaces",
@@ -1977,7 +1996,7 @@
       "tituloAutoriaPublicidad": "Authorship and publication details",
       "cargandoDatos": "Loading context data...",
       "cargandoDatosMetodologia": "Loading methodology data...",
-      "tituloActividades": "Complementary and extracurricular"
+      "tituloActividades": "Complementary and extracurricular activities"
     },
     "ai": {
       "analizandoDocumento": "Analyzing document...",
@@ -2294,6 +2313,8 @@
       "avanceRaLabel": "RA progress",
       "horasLectivasLabel": "Teaching hours",
       "sinUdsAsignadas": "No UDs assigned",
+      "proyectosRetosTitulo": "Projects and challenges",
+      "proyectosRetosNota": "Optional: fill it in if the module takes part in a project or challenge (art. 109 of Decree 91/2024).",
       "sinDocenciaTodavia": "No teaching yet",
       "sinRaDefinidos": "No Learning Outcomes (RA) defined.",
       "cargandoMatrices": "Loading matrices...",
@@ -2463,11 +2484,11 @@
       "instrumentosIndicadoresCount": "{{instr}} instruments and {{ind}} indicators",
       "indicadoresSinCe": "{{count}} indicators without an associated CE",
       "todosLosIndicadoresEvaluanCe": "All indicators assess a CE",
-      "tareasCompetencialesTitulo": "Competency-based tasks",
-      "sinTareasDefinidas": "No tasks defined",
-      "tareasDefinidas": "{{count}} tasks defined",
-      "tareasSinRa": "{{count}} tasks without an associated RA",
-      "todasLasTareasTienenRa": "All tasks have an RA",
+      "tareasCompetencialesTitulo": "Projects and challenges",
+      "sinTareasDefinidas": "None defined (optional)",
+      "tareasDefinidas": "{{count}} projects or challenges defined",
+      "tareasSinRa": "{{count}} projects or challenges without associated RA",
+      "todasLasTareasTienenRa": "All projects and challenges have an RA",
       "sesionesClaseTitulo": "Class sessions",
       "sinSesionesPlanificadas": "No sessions planned",
       "sesionesPlanificadasCount": "{{count}} sessions planned",
@@ -2543,7 +2564,7 @@
       "desarrolloTareaPasosDesc": "Sequenced instructions that students must follow.",
       "evidenciasAGenerarLabel": "Evidence to be generated",
       "evidenciasAGenerarDesc": "What tangible products or demonstrations will be assessed.",
-      "tareaLabel": "Task",
+      "tareaLabel": "Project or challenge",
       "configuracionDetalladaUnidadTitulo": "Detailed unit configuration",
       "intencionEducativaLabel": "Educational intent / contextualization",
       "intencionEducativaDesc": "Pedagogical justification for this unit, link to the professional profile and prior knowledge required.",

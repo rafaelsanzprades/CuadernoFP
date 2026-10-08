@@ -342,7 +342,6 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "medidas_inclusion": module_data.get("medidas_inclusion", []),
                 "medidas_contingencia": module_data.get("medidas_contingencia", []),
                 "recursos_espacios": module_data.get("recursos_espacios", []),
-                "actividades_complementarias": module_data.get("actividades_complementarias") or [],
                 "elementos_transversales": module_data.get("elementos_transversales", []),
                 "texto_contextualizacion_libre": module_data.get("texto_contextualizacion_libre", ""),
                 "texto_metodologia_libre": module_data.get("texto_metodologia_libre", ""),

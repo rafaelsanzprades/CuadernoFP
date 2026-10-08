@@ -1,12 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { BarChart, Target, ClipboardList, FileDown, BookMarked, FileText, Building2, FileClock, TrendingUp } from "lucide-react";
+import { BarChart, Target, ClipboardList, FileDown, BookMarked, Building2 } from "lucide-react";
 import { PanelPorAlumno, SeccionAcordeon } from "@/components/features/alumnado/PanelPorAlumno";
-import { BoletinesTab } from "@/components/features/alumnado/BoletinesTab";
 import { FeoeEmpresaAlumno } from "./FeoeEmpresaTab";
 import { getSimulatedToday } from "@/utils/planningGenerator";
-import { InsercionLaboral } from "@/components/features/alumnado/InsercionLaboral";
-import { ExpedienteTab } from "@/components/features/alumnado/ExpedienteTab";
 import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
@@ -433,7 +430,7 @@ export function DetalleAlumnadoTab() {
                         <h3 className="font-bold text-foreground flex items-center gap-2">
                           <span><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></span> {t('campos.evaluacion.consecucionRaTitulo', {defaultValue: 'Consecución de resultados de aprendizaje (RA)'})}
                         </h3>
-                        <div className="space-y-5">
+                        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
                           {resultados_ra.map((r, idx) => {
                             let bar_color = "#dc3545";
                             if (r.prop >= 90) bar_color = "#198754";
@@ -441,43 +438,39 @@ export function DetalleAlumnadoTab() {
                             else if (r.prop >= 50) bar_color = "#ffc107";
 
                             return (
-                              <div key={r.id || idx} className="flex flex-col md:flex-row gap-4 items-start bg-background/30 p-4 rounded-xl border border-white/5">
-                                <div className="flex-1 w-full">
-                                  <div className="mb-1.5 flex items-center gap-2">
-                                    <span className="font-extrabold text-foreground">{r.id}</span>
-                                    <span className="text-caption text-muted font-semibold">({Math.round(r.pond)}%)</span>
-                                    {r.nota === null && (
-                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-muted/10 text-muted border border-muted/30">{t('campos.evaluacion.sinEvaluarBadge', {defaultValue: 'Sin evaluar'})}</span>
-                                    )}
-                                    {r.topeActivo && (
-                                      <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-danger/10 text-danger border border-danger/30" title={t('tooltips.evaluacion.topeCompensablesActivo', {defaultValue: 'Nº de CE suspensos supera el máximo compensable de este módulo (Datos → Reglas de redondeo)'})}>{t('campos.evaluacion.topeCompensablesBadge', {defaultValue: 'Tope compensables activo'})}</span>
-                                    )}
-                                  </div>
-                                  <div className="text-caption text-muted mb-3 line-clamp-1">{r.desc}</div>
-
-                                  <div className="relative w-full bg-background/50 rounded-full h-4.5 border border-white/5 overflow-hidden">
-                                    <div className="absolute top-0 bottom-0 w-px bg-foreground/40 z-10" style={{ left: "50%" }} title={t('campos.evaluacion.marcaAprobado', {defaultValue: 'Aprobado (50%)'})} />
-                                    <div
-                                      className="h-full rounded-full transition-all duration-500 flex items-center justify-end pr-2 text-caption font-black text-foreground shadow-[inset_0_2px_4px_rgba(255,255,255,0.2)]"
-                                      style={{ width: `${Math.max(r.prop, 5)}%`, backgroundColor: bar_color }}
-                                    >
-                                      {r.prop > 15 ? `${r.prop.toFixed(0)}%` : ''}
-                                    </div>
-                                  </div>
+                              <div key={r.id || idx} className="flex flex-col gap-3 bg-background/30 p-4 rounded-xl border border-white/5" title={r.desc}>
+                                <div className="flex items-baseline justify-between gap-2">
+                                  <span className="font-extrabold text-foreground">{r.id}</span>
+                                  <span className="text-caption text-muted font-semibold">({Math.round(r.pond)}%)</span>
                                 </div>
 
-                                <div className="w-full md:w-60 bg-foreground/5 border border-white/5 rounded-lg p-2.5 text-caption text-foreground/80 space-y-1 self-stretch flex flex-col justify-center">
-                                  <div className="flex justify-between">
+                                <div className="flex flex-col items-center gap-2">
+                                  {r.nota === null ? (
+                                    <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-muted/10 text-muted border border-muted/30">{t('campos.evaluacion.sinEvaluarBadge', {defaultValue: 'Sin evaluar'})}</span>
+                                  ) : (
+                                    <span className="text-heading font-black leading-none" style={{ color: bar_color }}>{r.prop.toFixed(0)}%</span>
+                                  )}
+                                  <div className="relative w-full bg-background/50 rounded-full h-2.5 border border-white/5 overflow-hidden">
+                                    <div className="absolute top-0 bottom-0 w-px bg-foreground/40 z-10" style={{ left: "50%" }} title={t('campos.evaluacion.marcaAprobado', {defaultValue: 'Aprobado (50%)'})} />
+                                    <div className="h-full rounded-full transition-all duration-500" style={{ width: `${r.prop}%`, backgroundColor: bar_color }} />
+                                  </div>
+                                  {r.topeActivo && (
+                                    <span className="text-caption font-semibold px-2 py-0.5 rounded-full bg-danger/10 text-danger border border-danger/30 text-center" title={t('tooltips.evaluacion.topeCompensablesActivo', {defaultValue: 'Nº de CE suspensos supera el máximo compensable de este módulo (Datos → Reglas de redondeo)'})}>{t('campos.evaluacion.topeCompensablesBadge', {defaultValue: 'Tope compensables activo'})}</span>
+                                  )}
+                                </div>
+
+                                <div className="bg-foreground/5 border border-white/5 rounded-lg p-2 text-caption text-foreground/80 space-y-1 mt-auto">
+                                  <div className="flex justify-between gap-2">
                                     <span className="text-info font-semibold">{t('campos.evaluacion.evaluadoEnLabel', {defaultValue: 'Evaluado en:'})}</span>
                                     <span>{r.tris.join(", ") || "-"}</span>
                                   </div>
-                                  <div className="flex justify-between">
+                                  <div className="flex justify-between gap-2">
                                     <span className="text-warning font-semibold">{t('campos.evaluacion.udsLabel', {defaultValue: 'UDs:'})}</span>
-                                    <span className="truncate max-w-[120px]" title={r.uds.join(", ")}>{r.uds.join(", ") || "-"}</span>
+                                    <span className="truncate max-w-[110px]" title={r.uds.join(", ")}>{r.uds.join(", ") || "-"}</span>
                                   </div>
-                                  <div className="flex justify-between">
+                                  <div className="flex justify-between gap-2">
                                     <span className="text-warning font-semibold">{t('campos.evaluacion.practicasLabel', {defaultValue: 'Prácticas:'})}</span>
-                                    <span className="truncate max-w-[120px]" title={r.prs.join(", ")}>{r.prs.join(", ") || "-"}</span>
+                                    <span className="truncate max-w-[110px]" title={r.prs.join(", ")}>{r.prs.join(", ") || "-"}</span>
                                   </div>
                                 </div>
                               </div>
@@ -542,20 +535,11 @@ export function DetalleAlumnadoTab() {
       <PanelPorAlumno badge={badgeSigad}>
         {(al: any) => (
           <>
-            <SeccionAcordeon defaultOpen title={t('campos.evaluacion.detalleAlumnadoTitulo', {defaultValue: 'Notas'})} icon={<BarChart className="w-5 h-5 text-info" />}>
+            <SeccionAcordeon title={t('campos.evaluacion.detalleAlumnadoTitulo', {defaultValue: 'Notas'})} icon={<BarChart className="w-5 h-5 text-info" />}>
               {renderNotas(al)}
-            </SeccionAcordeon>
-            <SeccionAcordeon title={t('campos.orientacion.seccion7Titulo', {defaultValue: 'Boletín individual de calificaciones'})} icon={<FileText className="w-5 h-5 text-accent" />}>
-              <BoletinesTab studentId={al.ID} />
             </SeccionAcordeon>
             <SeccionAcordeon title={t('tabs.seguimiento.empresaFeoe.label', {defaultValue: 'Empresa FEOE'})} icon={<Building2 className="w-5 h-5 text-warning" />}>
               <FeoeEmpresaAlumno studentId={al.ID} />
-            </SeccionAcordeon>
-            <SeccionAcordeon title={t('campos.orientacion.seccion8Titulo', {defaultValue: 'Informe de evidencias'})} icon={<FileClock className="w-5 h-5 text-muted" />}>
-              <ExpedienteTab studentId={al.ID} />
-            </SeccionAcordeon>
-            <SeccionAcordeon title={t('campos.orientacion.seccion5Titulo', {defaultValue: 'Inserción laboral'})} icon={<TrendingUp className="w-5 h-5 text-info" />}>
-              <InsercionLaboral studentId={al.ID} />
             </SeccionAcordeon>
           </>
         )}

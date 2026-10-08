@@ -3,7 +3,7 @@
     "cierre": {
         "expediente": {
         "label": "Espedientea",
-        "desc": "Zikloaren osteko laneratzea eta espedientea (ebidentzien denbora-lerroa) ikasleka."
+        "desc": "Banakako buletina, ebidentzien txostena eta laneratzea ikasleka."
       }
     },
     "bienvenida": "Ongi etorri",
@@ -132,35 +132,51 @@
       "cambiosNota": "Nota-aldaketak"
     },
     "contexto": {
-      "identificacion": {
-        "label": "Identifikazioa",
-        "desc": "Moduluaren eta ikastetxearen identifikazioa, araubide duala, biribiltze-arauak, hiruhileko haztapena, ebaluazio-tresnak eta eskala kualitatiboak. PD+ren 1.1 kap."
+        "identificacion": {
+          "label": "Identifikazioa",
+          "desc": "Ikastetxea eta irakaslea, modulu didaktikoa eta egiletza- eta publizitate-datuak."
+        },
+        "entorno": {
+          "label": "Ingurunea",
+          "desc": "Ingurune geografikoa, sozioekonomikoa eta eskolarra, jarduera osagarriak eta FEOE plana."
+        },
+        "alumnado": {
+          "label": "Ikasleak",
+          "desc": "Behar espezifikoak dituzten ikasleak (ACNEAE), taldearen datuak eta ezaugarriak eta hasierako ebaluazioa."
+        },
+        "evaluacion": {
+          "label": "Ebaluazioa",
+          "desc": "Biribiltze- eta konpentsazio-arauak, hiruhilekoen haztapena eta ebaluazio-tresnak, eta eskala kualitatiboak."
+        },
+        "procedimientos": {
+          "label": "Prozedurak",
+          "desc": "Ebaluazioari buruzko informazioa eta prozedurak, berreskuratze-eredua, kalifikazio-irizpideak eta eredu Sinplifikatuaren testuak."
+        }
       },
-      "contextualizacion": {
-        "label": "Testuinguratzea",
-        "desc": "Ingurune geografiko, sozioekonomiko eta eskolarra, FEOE plana, ACNEAE ikasleak, eredu Sinplifikatuaren testuak eta egiletza-datuak. PD+ren 1.3 eta 5. kap."
-      },
-      "criterios": {
-        "label": "Ebaluazioa eta kalifikazioa",
-        "desc": "Ebaluazio- eta kalifikazio-prozedura: ikasleei emandako informazioa, ebaluazio jarraituaren galera, berreskurapena. PD+ren 4. kap."
-      }
-    },
     "curriculo": {
       "contribucion-ra-og": {
         "label": "RA->OG ekarpena",
         "desc": "RAek tituluaren helburu orokorretan egiten duten ekarpena."
       },
       "ponderacion-ra-ce": {
-        "label": "OG<-RA<-CE",
-        "desc": "Ikaskuntzaren emaitzen eta ebaluazio-irizpideen matrizea eta haien haztapena, eta ikaskuntzaren emaitzek titulazioaren helburu orokorretan duten ekarpena."
+        "label": "RA <- CE erlazioa",
+        "desc": "Ikaskuntza-emaitzen eta ebaluazio-irizpideen matrizea, haien haztapenarekin."
+      },
+      "contribucionOgRa": {
+        "label": "OG <- RA ekarpena",
+        "desc": "Ikaskuntza-emaitzek titulazioaren helburu orokorrei egiten dieten ekarpena."
       },
       "unidades": {
         "label": "Unitate didaktikoak",
-        "desc": "Unitate didaktikoen edo lan-unitateen definizioa eta saioen sekuentziazioa."
+        "desc": "Ikas-unitateen edo lan-unitateen definizioa eta IEekin duten harremana."
       },
-      "competenciales": {
-        "label": "Zeregin konpetentzialak",
-        "desc": "Zeregin eta jarduera konpetentzialen diseinua eta plangintza."
+      "secuenciacionUd": {
+        "label": "IUen sekuentziazioa",
+        "desc": "Ikas-unitate bakoitzaren saioen sekuentziazioa."
+      },
+      "tareasContenidos": {
+        "label": "Proiektuak eta erronkak",
+        "desc": "Moduluaren proiektuak eta erronkak (aukerakoa; 91/2024 Dekretuaren 109. artikulua)."
       },
       "contenidosUd": {
         "label": "Edukiak → UD",
@@ -168,23 +184,27 @@
       }
     },
     "metodologia": {
-      "metodologia": {
-        "label": "Metodologia eta inklusioa",
-        "desc": "Estrategia metodologikoak, irakasle-koordinazioa, aniztasunari arreta (DUA) eta ACNEAE ikasleen panela."
+        "metodologia": {
+          "label": "Metodologia eta berrikuntza",
+          "desc": "Estrategia metodologikoak eta irakasle-koordinazioa, eta berrikuntza eta modulu arteko lana."
+        },
+        "instrumentosRecursos": {
+          "label": "Tresnak eta baliabideak",
+          "desc": "Hautatutako ebaluazio-tresnak eta behar diren baliabideak eta espazioak."
+        },
+        "diversidad": {
+          "label": "Aniztasunari arreta",
+          "desc": "Inklusio-esparrua, aniztasunari arreta, DUA plana eta ACNEAE ikasleen panela."
+        },
+        "contingencia": {
+          "label": "Kontingentzia-plana",
+          "desc": "Kontingentzia-planak eta salbuespenezko egoeretarako egokitzapena."
+        },
+        "transversales": {
+          "label": "Zeharkakoak",
+          "desc": "Elementu zeharkakoak, gako-konpetentziak, konpetentzia digitalak eta curriculumaren estandarrak eta helburuak."
+        }
       },
-      "recursos": {
-        "label": "Baliabideak",
-        "desc": "Hautatutako ebaluazio-tresnak eta behar diren baliabide eta espazioak."
-      },
-      "contingencia": {
-        "label": "Kontingentzia-plana",
-        "desc": "Kontingentzia-planak eta salbuespenezko egoeretarako egokitzapena."
-      },
-      "transversales": {
-        "label": "Zeharkakoak",
-        "desc": "Elementu zeharkakoak, funtsezko konpetentziak, konpetentzia digitalak, curriculumaren estandarrak eta helburuak, berrikuntza eta modulu arteko lotura, eta jarduera osagarriak eta eskolaz kanpokoak."
-      }
-    },
     "instrumentos": {
       "resumen": {
         "desc": "Erabilitako ebaluazio-tresnen ikuspegi orokorra (RD 659/2023, 136. art.) eta, behean, adierazleen araberako JEG eredu esperimentala."
@@ -379,7 +399,7 @@
     "legal": "Legezkoa",
     "contexto": "Testuingurua",
     "curriculo": "Curriculuma",
-    "metodologia": "Metodologia",
+    "metodologia": "Metodologiak",
     "evaluacion": "Ebaluazioa",
     "secuenciacion": "Sekuentziazioa",
     "magia": "MagIA",
@@ -391,7 +411,7 @@
     "cierre": "Itxiera",
     "informes": "Txostenak",
     "normativa": "Dokumentuak",
-    "instrumentos": "Tresna",
+    "instrumentos": "Tresnak",
     "calidad": "Kalitatea",
     "mejora": "Hobekuntza",
     "grupos": "Taldeak"
@@ -427,13 +447,13 @@
   },
   "pages": {
     "agenda_title": "Klaseak",
-    "agenda_desc": "Notak, buletina, enpresako balorazioa (FEOE), ebidentzien txostena eta laneratzea ikasleka, hiruhilekoa eta erreklamazioak.",
+    "agenda_desc": "Notak eta enpresako balorazioa (FEOE) ikasleka, hiruhilekoa eta erreklamazioak.",
     "alumnado_title": "Ikasleak",
     "alumnado_desc": "Matrikula, lanbide-orientazioa, taldearen profila eta gelako plana.",
     "diario_title": "Eguneroko Segimendua",
     "diario_desc": "Ikasgelako egunerokoa, kontingentziak, asistentzia kontrola eta alertak.",
     "evaluacion_title": "Kalifikazioa",
-    "evaluacion_desc": "IUen eta IEen aurrerapena, eta moduluaren hobekuntza (EQAVET eta PDCA).",
+    "evaluacion_desc": "Espedientea ikasleka (buletina, ebidentzien txostena eta laneratzea), IUen eta IEen aurrerapena, eta moduluaren hobekuntza (EQAVET eta PDCA).",
     "calendario_title": "Egutegia",
     "calendario_desc": "Konfiguratu jaiegunak, ebaluazioak eta zure asteko ordutegia.",
     "modulo_title": "Moduluaren konfigurazioa",
@@ -455,7 +475,7 @@
     "legal_title": "Lege Oharra",
     "legal_desc": "Lege oharra, pribatutasuna, cookieak, lizentziak eta irisgarritasuna.",
     "ayuda_desc": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
-    "contexto_desc": "Informazio orokorra, ingurunearen ezaugarriak, ikasleak eta modulua.",
+    "contexto_desc": "Programazioaren identifikazioa, ingurunea, ikasleak, ebaluazioa eta prozedurak.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
     "seguimiento_desc": "Asistentzia, uztea eta saio lektiboen egunkaria.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
@@ -500,15 +520,15 @@
     "archivos": "Fitxategien kudeaketa, hodeiko sinkronizazioa, segurtasuna, AA eta datuen egiaztapena.",
     "normativa": "Erkidego-araudia, legedia, bibliografia eta INCUAL estandarrak.",
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
-    "contexto": "Identifikazioa, inguruaren testuingurua, FP dual eta ebaluazio eta kalifikazio irizpideak.",
+    "contexto": "Programazioaren identifikazioa, ingurunea, ikasleak, ebaluazioa eta prozedurak.",
     "curriculo": "RAk helburuei egiten dien ekarpena, RA-CE haztapena, unitate didaktikoak eta gaitasun-zereginak.",
     "metodologia": "Metodologia, baliabideak, kontingentzia-plana eta zeharkako elementuak.",
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
     "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia, hileko ikuspegia eta gaurko klaseak, astea eta unitate aktiboa.",
     "alumnado": "Matrikula, lanbide-orientazioa, taldearen profila eta gelako plana.",
     "sesiones": "Asistentzia, uztea eta saio lektiboen egunkaria.",
-    "calificaciones": "Notak, buletina, enpresako balorazioa (FEOE), ebidentzien txostena eta laneratzea ikasleka, hiruhilekoa eta erreklamazioak.",
-    "cierre": "IUen eta IEen aurrerapena, eta moduluaren hobekuntza (EQAVET eta PDCA)."
+    "calificaciones": "Notak eta enpresako balorazioa (FEOE) ikasleka, hiruhilekoa eta erreklamazioak.",
+    "cierre": "Espedientea ikasleka (buletina, ebidentzien txostena eta laneratzea), IUen eta IEen aurrerapena, eta moduluaren hobekuntza (EQAVET eta PDCA)."
   },
   "toasts": {
     "aiSettings": {
@@ -820,7 +840,7 @@
       "resolver": "Ebatzi"
     },
     "secuenciacion": {
-      "anadirNuevaTareaCompetencial": "Gaitasun-zeregin berria gehitu",
+      "anadirNuevaTareaCompetencial": "Gehitu proiektu edo erronka",
       "anadirSesionA": "Saioa gehitu {{id}}(e)ra",
       "exportarBriefing": "Briefing-a esportatu (PDF/DOCX)",
       "exportarFicha": "Fitxa esportatu (PDF/DOCX)"
@@ -1038,10 +1058,10 @@
       "eliminarRegistro": "Erregistroa ezabatu"
     },
     "secuenciacion": {
-      "configurarTarea": "Gaitasun-zeregina konfiguratu",
+      "configurarTarea": "Konfiguratu proiektua edo erronka",
       "configurarUd": "Unitate didaktikoa konfiguratu",
       "eliminarSesion": "Saioa ezabatu",
-      "eliminarTarea": "Zeregina ezabatu",
+      "eliminarTarea": "Ezabatu proiektua edo erronka",
       "pctInstrumento": "Ebaluazio-tresnaren %, saio honek puntuatzen badu"
     }
   },
@@ -1518,7 +1538,6 @@
       "siglas": "Siglak"
     },
     "curriculo": {
-      "compClave": "Gaitas. gakoa",
       "criterioEvaluacion": "Ebaluazio-irizpidea",
       "horas": "Orduak",
       "objetivosGenerales": "Helburu orokorrak",
@@ -1803,17 +1822,17 @@
       "feoeTextoSimplificadoTitulo": "FEOE (Eredu Sinplifikatuaren testu berezia, pd=)",
       "feoeTextoSimplificadoAviso": "Hutsik uzten bada, dual gisa markatutako RAetatik (is_dual) abiatuta automatikoki sortuko da.",
       "a1JustificacionDesc": "Programazio hau oinarritzen duen oinarri legegilea.",
-      "a1JustificacionLabel": "A1. Programazioaren justifikazioa",
+      "a1JustificacionLabel": "Programazioaren justifikazioa",
       "a2ContextualizacionDesc": "Prestakuntza ematen den testuinguruaren azterketa.",
-      "a2ContextualizacionLabel": "A2. Testuinguruan kokatzea",
+      "a2ContextualizacionLabel": "Testuinguruan kokatzea",
       "acneaeAdaptacionesTitulo": "Ebaluazio eta sarbide egokitzapenak",
       "acneaeNombreTitulo": "Izena / Identifikatzailea",
       "acneaeTipoNecesidadTitulo": "Behar mota",
       "acneaeVacio": "Ez dago ACNEAE ikaslerik erregistratuta modulu honetan.",
       "actividadesComplementariasDesc": "Eskola-ordutegian, curriculumari lotuak eta ebaluagarriak — programazio didaktikoaren parte dira.",
-      "actividadesComplementariasLabel": "H1. Jarduera osagarriak",
+      "actividadesComplementariasLabel": "Jarduera osagarriak",
       "actividadesExtraescolaresDesc": "Eskola-ordutegitik kanpo, borondatezkoak eta inoiz ez ebaluagarriak — ez dira programazio didaktikoaren parte, ikastetxearen PGAn joaten dira. Hemen erreferentzia gisa bakarrik jasotzen dira.",
-      "actividadesExtraescolaresLabel": "H2. Eskolaz kanpoko jarduerak",
+      "actividadesExtraescolaresLabel": "Eskolaz kanpoko jarduerak",
       "adaptacionesNoSignificativasDesc": "Funtsezko RAak edo CEak aldatzen ez dituzten doikuntza metodologiko, antolakuntza edo sarbidekoak.",
       "adaptacionesNoSignificativasTitulo": "Curriculum-egokitzapen ez esanguratsuak",
       "anotacionesInclusionTitulo": "Inklusioari buruzko ohar askeak",
@@ -1825,7 +1844,7 @@
       "areasMejoraLabel": "Hobetzeko eremuak eta hurrengo ikasturterako ekintzak",
       "atencionDiversidadAulaTitulo": "Aniztasunari arreta (Egokitzapen ez esanguratsuak)",
       "b3VinculacionEmpresaDesc": "Moduluaren eta enpresako prestakuntzaren arteko lotura.",
-      "b3VinculacionEmpresaLabel": "B3. Enpresa laguntzailearekiko lotura",
+      "b3VinculacionEmpresaLabel": "Enpresa laguntzailearekiko lotura",
       "campoHistoricoAviso": "(eremu historikoa)",
       "campoHistoricoFusionAviso": "(eremu historikoa, gainekoarekin batzeko zorian)",
       "centroEducativo": "Ikastetxea",
@@ -1867,7 +1886,7 @@
       "estrategiasMetodologicasEspaciosTitulo": "Estrategia metodologikoak. Espazioak",
       "estrategiasMetodologicasTitulo": "Estrategia metodologikoak",
       "f1AtencionDiversidadDesc": "Irakaskuntza ikasleen ezaugarrietara egokitzeko estrategiak.",
-      "f1AtencionDiversidadTitulo": "F1. Aniztasunari arreta",
+      "f1AtencionDiversidadTitulo": "Aniztasunari arreta",
       "familiaProfesional": "Familia profesionala",
       "herramientasRecursosDesc": "Curriculum-garapenerako beharrezkoak diren azpiegiturak, tresnak eta material teknikoak. Zerbait aurkitzen ez baduzu, gehitu behean testu librean.",
       "herramientasRecursosLabel": "Tresnak, baliabideak eta espazioak",
@@ -1977,7 +1996,7 @@
       "tituloAutoriaPublicidad": "Egiletza- eta publizitate-datuak",
       "cargandoDatos": "Testuinguru-datuak kargatzen...",
       "cargandoDatosMetodologia": "Metodologia-datuak kargatzen...",
-      "tituloActividades": "Osagarriak eta eskolaz kanpokoak"
+      "tituloActividades": "Jarduera osagarriak eta eskolaz kanpokoak"
     },
     "ai": {
       "analizandoDocumento": "Dokumentua analizatzen...",
@@ -2294,6 +2313,8 @@
       "avanceRaLabel": "RA aurrerapena",
       "horasLectivasLabel": "Irakastorduak",
       "sinUdsAsignadas": "Ez dago UDrik esleituta",
+      "proyectosRetosTitulo": "Proiektuak eta erronkak",
+      "proyectosRetosNota": "Aukerakoa: bete modulua proiektu edo erronka batean parte hartzen badu (91/2024 Dekretuaren 109. artikulua).",
       "sinDocenciaTodavia": "Oraindik irakaskuntzarik gabe",
       "sinRaDefinidos": "Ez dago ikaskuntza-emaitzarik (RA) definituta.",
       "cargandoMatrices": "Matrizeak kargatzen...",
@@ -2463,11 +2484,11 @@
       "instrumentosIndicadoresCount": "{{instr}} tresna eta {{ind}} adierazle",
       "indicadoresSinCe": "{{count}} adierazle CErik lotu gabe",
       "todosLosIndicadoresEvaluanCe": "Adierazle guztiek CEren bat ebaluatzen dute",
-      "tareasCompetencialesTitulo": "Konpetentzia-zereginak",
-      "sinTareasDefinidas": "Ez dago zereginik definituta",
-      "tareasDefinidas": "{{count}} zeregin definituta",
-      "tareasSinRa": "{{count}} zeregin RArik lotu gabe",
-      "todasLasTareasTienenRa": "Zeregin guztiek dute RA",
+      "tareasCompetencialesTitulo": "Proiektuak eta erronkak",
+      "sinTareasDefinidas": "Bat ere ez definituta (aukerakoa)",
+      "tareasDefinidas": "{{count}} proiektu edo erronka definituta",
+      "tareasSinRa": "{{count}} proiektu edo erronka IErik gabe",
+      "todasLasTareasTienenRa": "Proiektu eta erronka guztiek dute IE",
       "sesionesClaseTitulo": "Eskola-saioak",
       "sinSesionesPlanificadas": "Ez dago saio planifikaturik",
       "sesionesPlanificadasCount": "{{count}} saio planifikatuta",
@@ -2543,7 +2564,7 @@
       "desarrolloTareaPasosDesc": "Ikasleek jarraitu behar dituzten urratsez urratseko jarraibideak.",
       "evidenciasAGenerarLabel": "Sortu beharreko ebidentziak",
       "evidenciasAGenerarDesc": "Zein produktu ukigarri edo erakustaldi ebaluatuko diren.",
-      "tareaLabel": "Zeregina",
+      "tareaLabel": "Proiektu edo erronka",
       "configuracionDetalladaUnidadTitulo": "Unitatearen konfigurazio zehatza",
       "intencionEducativaLabel": "Asmo hezitzailea / testuinguruan kokatzea",
       "intencionEducativaDesc": "Unitate honen justifikazio pedagogikoa, lanbide-profilarekiko lotura eta beharrezko aurretiko ezagutzak.",

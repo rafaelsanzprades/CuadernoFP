@@ -127,65 +127,47 @@
     {
       "id_ra": "RA1",
       "peso_ra": 10,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA2",
       "peso_ra": 20,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA3",
       "peso_ra": 15,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA4",
       "peso_ra": 10,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA5",
       "peso_ra": 15,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA6",
       "peso_ra": 10,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA7",
       "peso_ra": 10,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA8",
       "peso_ra": 5,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     },
     {
       "id_ra": "RA9",
       "peso_ra": 5,
-      "is_dual": false,
-      "comp_clave": "",
-      "cpe": ""
+      "is_dual": false
     }
   ],
   "df_ce": [
@@ -749,9 +731,6 @@
   ],
   "elementos_transversales": [
     "[TRANS-TIC] Competencia digital y buen uso de internet"
-  ],
-  "actividades_complementarias": [
-    "[EXT-CHARLA] Charlas / Masterclass con expertos"
   ],
   "medidas_contingencia": [
     "[CONT-ASINC] Docencia telemática asíncrona",

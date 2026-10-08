@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { Award, BookOpen, Calculator, Check, ClipboardList, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid, Wand2, Layers } from "lucide-react";
+import { Award, Link2, BookOpen, Calculator, Check, ClipboardList, GraduationCap, Puzzle, Target, Settings , Info, FolderOpen, Grid, Wand2, Layers } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { RaOgMatrix } from "@/components/features/resultados/RaOgMatrix";
-import { ContenidosUdTab } from "@/components/features/curriculo/ContenidosUdTab";
 import { SessionTable } from "@/components/features/secuenciacion/SessionTable";
 import { TaskTable } from "@/components/features/secuenciacion/TaskTable";
 import { CompetenciaCPP } from "@/types/curriculum";
@@ -24,7 +23,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import Link from "next/link";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
+import { getOgList, loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useTranslation } from "react-i18next";
 
@@ -37,12 +36,12 @@ export default function MatricesPage() {
   const [allCeOpen, setAllCeOpen] = useState(false);
   const [allUdsOpen, setAllUdsOpen] = useState(false);
   const [openCEs, setOpenCEs] = useState<Set<string>>(new Set());
-  // "contribucion-ra-og" ya no es una pestaña propia -- se fusionó (2026-09-20)
-  // como bloque dentro de "ponderacion-ra-ce" (ver TABS más abajo). Normaliza
+  // "contribucion-ra-og" es el id antiguo de "contribucion-og-ra" (volvió a ser
+  // pestaña propia el 2026-10-07). Normaliza
   // el id antiguo para que los enlaces/marcadores con ?tab=contribucion-ra-og
   // sigan funcionando, mismo patrón que instrumentos/page.tsx con tri1/2/3.
-  const [activeTabRaw, setActiveTab] = useState("ponderacion-ra-ce");
-  const activeTab = activeTabRaw === "contribucion-ra-og" ? "ponderacion-ra-ce" : activeTabRaw;
+  const [activeTabRaw, setActiveTab] = useState("relacion-ra-ce");
+  const activeTab = activeTabRaw === "contribucion-ra-og" ? "contribucion-og-ra" : activeTabRaw;
   const [catalogLoaded, setCatalogLoaded] = useState(0);
 
   const [isDragging, setIsDragging] = useState(false);
@@ -56,28 +55,26 @@ export default function MatricesPage() {
   }, []);
 
   const TABS = [
-    { id: "ponderacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'OG<-RA<-CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'OG<-RA<-CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "unidades", label: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), cleanLabel: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "competenciales", label: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), cleanLabel: t('tabs.curriculo.competenciales.label', {defaultValue: 'Tareas competenciales'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
-    { id: "contenidos-ud", label: t('tabs.curriculo.contenidosUd.label', {defaultValue: 'Contenidos → UD'}), cleanLabel: t('tabs.curriculo.contenidosUd.label', {defaultValue: 'Contenidos → UD'}), icon: <><span className="inline-flex"><Layers className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "relacion-ra-ce", label: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Relación RA <- CE'}), cleanLabel: t('tabs.curriculo.ponderacion-ra-ce.label', {defaultValue: 'Relación RA <- CE'}), icon: <><span className="inline-flex"><GraduationCap className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "contribucion-og-ra", label: t('tabs.curriculo.contribucionOgRa.label', {defaultValue: 'Contribución OG <- RA'}), cleanLabel: t('tabs.curriculo.contribucionOgRa.label', {defaultValue: 'Contribución OG <- RA'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "unidades-didacticas", label: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), cleanLabel: t('tabs.curriculo.unidades.label', {defaultValue: 'Unidades didácticas'}), icon: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "secuenciacion-ud", label: t('tabs.curriculo.secuenciacionUd.label', {defaultValue: 'Secuenciación de UD'}), cleanLabel: t('tabs.curriculo.secuenciacionUd.label', {defaultValue: 'Secuenciación de UD'}), icon: <><span className="inline-flex"><ClipboardList className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
+    { id: "proyectos-retos", label: t('tabs.curriculo.tareasContenidos.label', {defaultValue: 'Proyectos y retos'}), cleanLabel: t('tabs.curriculo.tareasContenidos.label', {defaultValue: 'Proyectos y retos'}), icon: <><span className="inline-flex"><Target className="w-[1.2em] h-[1.2em] mr-1" /></span></> },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    'ponderacion-ra-ce': t('tabs.curriculo.ponderacion-ra-ce.desc', {defaultValue: 'Matriz de resultados de aprendizaje y criterios de evaluación con su ponderación, y contribución de los RA a los objetivos generales del título.'}),
-    'unidades': t('tabs.curriculo.unidades.desc', {defaultValue: 'Definición de unidades didácticas o unidades de trabajo y secuenciación de sus sesiones.'}),
-    'competenciales': t('tabs.curriculo.competenciales.desc', {defaultValue: 'Diseño y planificación de tareas y actividades competenciales.'}),
-    'contenidos-ud': t('tabs.curriculo.contenidosUd.desc', {defaultValue: 'Tabla de contenidos por unidad didáctica agrupados en bloques, con su relación con RA, objetivos generales, horas e instrumentos de evaluación.'}),
+    'relacion-ra-ce': t('tabs.curriculo.ponderacion-ra-ce.desc', {defaultValue: 'Matriz de resultados de aprendizaje y criterios de evaluación con su ponderación.'}),
+    'contribucion-og-ra': t('tabs.curriculo.contribucionOgRa.desc', {defaultValue: 'Contribución de los resultados de aprendizaje a los objetivos generales del título.'}),
+    'unidades-didacticas': t('tabs.curriculo.unidades.desc', {defaultValue: 'Definición de unidades didácticas o unidades de trabajo y su relación con los RA.'}),
+    'secuenciacion-ud': t('tabs.curriculo.secuenciacionUd.desc', {defaultValue: 'Secuenciación de las sesiones de cada unidad didáctica.'}),
+    'proyectos-retos': t('tabs.curriculo.tareasContenidos.desc', {defaultValue: 'Proyectos y retos del módulo (opcional; art. 109 del Decreto 91/2024).'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    'ponderacion-ra-ce': [
+    'relacion-ra-ce': [
       { id: "curriculo-ra", label: "RA. Resultados de aprendizaje" },
       { id: "curriculo-ce", label: "CE. Criterios de evaluación" },
-    ],
-    unidades: [
-      { id: "curriculo-ud", label: "UD/T. Unidades didácticas o de trabajo" },
-      { id: "curriculo-secuenciacion", label: "Secuenciación de UD" },
     ],
   };
 
@@ -135,6 +132,20 @@ export default function MatricesPage() {
 
   const df_ra = moduleData?.df_ra || [];
   const df_ud = moduleData?.df_ud || [];
+  // OG de cada UD (los de los RA marcados en su fila, vía la matriz OG<-RA) e
+  // instrumentos que la evalúan -- columnas de solo lectura de la tabla de UD
+  // (antes pestaña "Contenidos -> UD", integrada el 2026-10-08).
+  const df_act_ud = moduleData?.df_act || [];
+  const ogList_ud = getOgList(activeModuleId || "");
+  const ogs_ud = ogList_ud.length > 0 ? ogList_ud : (moduleData?.info_modulo?.objetivos_generales || []).map((desc: string, i: number) => ({ id: String.fromCharCode(97 + i), desc }));
+  const ogMapping_ud = moduleData?.info_modulo?.ra_og_mapping || {};
+  const raToOg_ud: Record<string, string[]> = {};
+  ogs_ud.forEach((og: { id: string; desc: string }, idx: number) => {
+    (ogMapping_ud[idx] || []).forEach((raId: string) => {
+      if (!raToOg_ud[raId]) raToOg_ud[raId] = [];
+      raToOg_ud[raId].push(og.id);
+    });
+  });
   const df_ce = moduleData?.df_ce || [];
   const df_sesiones = moduleData?.df_sesiones || [];
   const df_tareas = moduleData?.df_tareas || [];
@@ -340,13 +351,13 @@ export default function MatricesPage() {
 
             {/* Índice de bloques de la pestaña activa -- dentro del header
                 fijo (sticky top-0), así que no se pierde al hacer scroll. */}
-            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare onItemClick={(id) => { const el = document.getElementById(id); if (el instanceof HTMLDetailsElement) el.open = true; }} />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-12">
 
             {/* Resultados de aprendizaje y CE */}
-            {activeTab === "ponderacion-ra-ce" && (
+            {activeTab === "relacion-ra-ce" && (
               <div className="space-y-4 animate-in fade-in duration-500">
                 <div className="space-y-3">
                 <SectionHeading id="curriculo-ra" icon={GraduationCap} scrollMt="260px">
@@ -361,8 +372,6 @@ export default function MatricesPage() {
                           <th className="pb-2 w-24">% RA</th>
                           <th className="pb-2 w-16 text-center">FEOE</th>
                           <th className="pb-2">{t('tablas.curriculo.resultadosAprendizaje', {defaultValue: 'Resultados de aprendizaje'})}</th>
-                          <th className="pb-2 w-32">{t('tablas.curriculo.compClave', {defaultValue: 'Comp. clave'})}</th>
-                          <th className="pb-2 w-32">CPE</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -417,32 +426,6 @@ export default function MatricesPage() {
                                 className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-3 py-1 text-foreground text-body focus:border-[#14a085] focus:outline-none"
                               />
                             </td>
-                            <td className="py-2 pr-2">
-                              <input
-                                type="text"
-                                value={ra.comp_clave || ""}
-                                placeholder="CL, CD..."
-                                onChange={(e) => {
-                                  const newRa = [...df_ra];
-                                  newRa[idx].comp_clave = e.target.value;
-                                  updateDataFrame("df_ra", newRa);
-                                }}
-                                className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-[#14a085] focus:outline-none"
-                              />
-                            </td>
-                            <td className="py-2 pr-2">
-                              <input
-                                type="text"
-                                value={ra.cpe || ""}
-                                placeholder="CPE1..."
-                                onChange={(e) => {
-                                  const newRa = [...df_ra];
-                                  newRa[idx].cpe = e.target.value;
-                                  updateDataFrame("df_ra", newRa);
-                                }}
-                                className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-[#14a085] focus:outline-none"
-                              />
-                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -454,7 +437,7 @@ export default function MatricesPage() {
                       onClick={() => {
                         const newRa = [...df_ra];
                         const newId = `RA${(newRa.length + 1).toString().padStart(2, '0')}`;
-                        newRa.push({ id_ra: newId, peso_ra: 0, is_dual: false, desc_ra: "", comp_clave: "", cpe: "" });
+                        newRa.push({ id_ra: newId, peso_ra: 0, is_dual: false, desc_ra: "" });
                         updateDataFrame("df_ra", newRa);
                       }}
                       className="text-accent hover:text-[#1abc9c]"
@@ -737,21 +720,29 @@ export default function MatricesPage() {
                 </Card>
                 </div>
 
-                {/* Fusionado aquí (2026-09-20) desde la antigua pestaña "Contribución
-                    RA->OG" -- ver nota en el useState de activeTabRaw más arriba. */}
-                <AccordionBlock title={t('tabs.curriculo.contribucion-ra-og.label', {defaultValue: 'Contribución RA->OG'})} icon={<Target className="w-5 h-5" />}>
-                  <RaOgMatrix />
-                </AccordionBlock>
+              </div>
+            )}
+
+            {/* Contribución OG <- RA */}
+            {activeTab === "contribucion-og-ra" && (
+              <div className="animate-in fade-in duration-500 w-full space-y-3">
+                <SectionHeading id="curriculo-contribucion-og-ra" icon={Link2} scrollMt="260px">
+                  {t('campos.curriculo.contribucionRaOgTitulo', {defaultValue: 'Contribución de los RA a los OG del Título'})}
+                </SectionHeading>
+                <RaOgMatrix />
               </div>
             )}
 
             {/* Tareas competenciales */}
-            {activeTab === "competenciales" && (
-              <div className="animate-in fade-in duration-500">
+            {activeTab === "proyectos-retos" && (
+              <div className="animate-in fade-in duration-500 flex flex-col gap-8">
                 <div className="space-y-3">
                 <SectionHeading id="curriculo-tareas-competenciales" icon={Target} scrollMt="260px">
-                  Tareas competenciales
+                  {t('campos.curriculo.proyectosRetosTitulo', {defaultValue: 'Proyectos y retos'})}
                 </SectionHeading>
+                <p className="text-caption text-muted">
+                  {t('campos.curriculo.proyectosRetosNota', {defaultValue: 'Opcional: rellénalo si el módulo participa en un proyecto o reto (art. 109 del Decreto 91/2024).'})}
+                </p>
                 <Card className="p-6 border-t-4 border-t-blue-500">
                   <TaskTable
                     df_ud={df_ud}
@@ -766,7 +757,7 @@ export default function MatricesPage() {
             )}
 
             {/* Unidades didácticas */}
-            {activeTab === "unidades" && (
+            {activeTab === "unidades-didacticas" && (
               <div className="animate-in fade-in duration-500 flex flex-col gap-8">
                 <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -774,6 +765,9 @@ export default function MatricesPage() {
                     UD/T. Unidades didácticas o de trabajo
                   </SectionHeading>
                   <div className="flex items-center gap-3 text-[11px] font-semibold shrink-0">
+                    <Link href="/magia?tab=programacion" className="inline-flex items-center gap-1.5 text-body font-semibold text-info hover:text-info/80 transition-colors whitespace-nowrap">
+                      {t('botones.curriculo.descargarPdfMagia', {defaultValue: 'Descargar PDF/DOCX en MagIA'})}
+                    </Link>
                     <div className="bg-info/10 text-info px-3 py-1.5 rounded-full border border-info/20 shadow-sm" title={t('tooltips.curriculo.sumaHorasUd', {defaultValue: 'Suma de las horas asignadas a cada UD'})}>
                       Horas UDs: {df_ud.reduce((sum: number, ud: any) => sum + (Number(ud.horas_ud) || 0), 0)} h
                     </div>
@@ -799,6 +793,9 @@ export default function MatricesPage() {
                               <div className="text-caption text-info">({ra.peso_ra || 0}%)</div>
                             </th>
                           ))}
+                          <th className="p-3 min-w-[200px]">{t('campos.curriculo.bloqueContenido', {defaultValue: 'Bloque de contenidos'})}</th>
+                          <th className="p-3 text-center min-w-[90px]">{t('tablas.curriculo.objAbrev', {defaultValue: 'Obj'})}</th>
+                          <th className="p-3 min-w-[160px]">{t('tablas.curriculo.evalAbrev', {defaultValue: 'EVAL.'})}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -867,6 +864,39 @@ export default function MatricesPage() {
                                 </td>
                               );
                             })}
+                            <td className="p-2">
+                              <input
+                                type="text"
+                                value={ud.bloque_contenido || ""}
+                                onChange={(e) => {
+                                  const newUd = [...df_ud];
+                                  newUd[idx] = { ...newUd[idx], bloque_contenido: e.target.value };
+                                  updateDataFrame("df_ud", newUd);
+                                }}
+                                placeholder={t('placeholders.curriculo.bloqueContenido', {defaultValue: 'Sin asignar...'})}
+                                className="w-full bg-foreground/15 border border-[var(--glass-border)] rounded px-2 py-1 text-foreground text-body focus:border-info focus:outline-none"
+                              />
+                            </td>
+                            <td className="p-2 text-center">
+                              {(() => {
+                                const ogIds = Array.from(new Set(df_ra.filter((ra: any) => Number(ud[ra.id_ra]) > 0).flatMap((ra: any) => raToOg_ud[ra.id_ra] || [])));
+                                return ogIds.length > 0
+                                  ? ogIds.map((id) => (
+                                      <span key={id} className="inline-block bg-purple-500/10 text-purple-400 border border-purple-500/30 rounded px-1.5 py-0.5 text-caption font-semibold mr-1">{id}</span>
+                                    ))
+                                  : <span className="text-muted">—</span>;
+                              })()}
+                            </td>
+                            <td className="p-2">
+                              {(() => {
+                                const acts = df_act_ud.filter((act: any) => act.id_ud === ud.id_ud);
+                                return acts.length > 0
+                                  ? acts.map((act: any) => (
+                                      <span key={act.id_act} className="inline-block bg-success/10 text-success border border-success/30 rounded px-1.5 py-0.5 text-caption font-semibold mr-1">{act.id_act}</span>
+                                    ))
+                                  : <span className="text-muted">—</span>;
+                              })()}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -945,6 +975,12 @@ export default function MatricesPage() {
                 </Card>
                 </div>
 
+              </div>
+            )}
+
+            {/* Secuenciación de UD */}
+            {activeTab === "secuenciacion-ud" && (
+              <div className="animate-in fade-in duration-500 flex flex-col gap-8">
                 <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <SectionHeading id="curriculo-secuenciacion" icon={ClipboardList} scrollMt="260px" className="flex-1">
@@ -993,8 +1029,6 @@ export default function MatricesPage() {
               </div>
             )}
 
-            {/* ── Contenidos → UD ─────────────────────────────────────────────── */}
-            {activeTab === "contenidos-ud" && <ContenidosUdTab />}
 
 
 

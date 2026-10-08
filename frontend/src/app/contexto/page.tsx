@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { FileEdit, FileText, Settings, Map, FolderOpen, Scale } from "lucide-react";
+import { ClipboardCheck, FileEdit, FileText, Settings, Map, FolderOpen, Scale, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -55,16 +55,20 @@ export default function ContextoConfigPage() {
 
   const TABS = [
     { id: "identificacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'})}</span>, cleanLabel: t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'}) },
-    { id: "contextualizacion", label: <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'})}</span>, cleanLabel: t('tabs.contexto.contextualizacion.label', {defaultValue: 'Contextualización'}) },
-    { id: "criterios", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'})}</span>, cleanLabel: t('tabs.contexto.criterios.label', {defaultValue: 'Evaluación y calificación'}) },
+    { id: "entorno", label: <span className="flex items-center gap-2"><Map className="w-4 h-4 shrink-0" /> {t('tabs.contexto.entorno.label', {defaultValue: 'Entorno'})}</span>, cleanLabel: t('tabs.contexto.entorno.label', {defaultValue: 'Entorno'}) },
+    { id: "alumnado", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.contexto.alumnado.label', {defaultValue: 'Alumnado'})}</span>, cleanLabel: t('tabs.contexto.alumnado.label', {defaultValue: 'Alumnado'}) },
+    { id: "evaluacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.contexto.evaluacion.label', {defaultValue: 'Evaluación'})}</span>, cleanLabel: t('tabs.contexto.evaluacion.label', {defaultValue: 'Evaluación'}) },
+    { id: "procedimientos", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.contexto.procedimientos.label', {defaultValue: 'Procedimientos'})}</span>, cleanLabel: t('tabs.contexto.procedimientos.label', {defaultValue: 'Procedimientos'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
-    identificacion: t('tabs.contexto.identificacion.desc', {defaultValue: 'Identificación del módulo y centro, régimen dual, reglas de redondeo, ponderación trimestral, instrumentos de evaluación y escalas cualitativas. Cap. 1.1 del PD+.'}),
-    contextualizacion: t('tabs.contexto.contextualizacion.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, con rasgos rápidos seleccionables; actividades complementarias y extraescolares, Plan FEOE, alumnado ACNEAE, textos del modelo Simplificado y datos de autoría. Cap. 1.3 y 5 del PD+.'}),
-    criterios: t('tabs.contexto.criterios.desc', {defaultValue: 'Procedimiento de evaluación y de calificación: información al alumnado, pérdida de evaluación continua, recuperación. Cap. 4 del PD+.'}),
+    identificacion: t('tabs.contexto.identificacion.desc', {defaultValue: 'Centro y docente, módulo didáctico y datos de autoría y publicidad de la programación.'}),
+    entorno: t('tabs.contexto.entorno.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, actividades complementarias y plan FEOE.'}),
+    alumnado: t('tabs.contexto.alumnado.desc', {defaultValue: 'Alumnado con necesidades específicas (ACNEAE), datos y rasgos característicos del grupo y evaluación inicial.'}),
+    evaluacion: t('tabs.contexto.evaluacion.desc', {defaultValue: 'Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas.'}),
+    procedimientos: t('tabs.contexto.procedimientos.desc', {defaultValue: 'Información y procedimientos de evaluación, modelo de recuperación, criterios de calificación y textos del modelo Simplificado.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
@@ -72,24 +76,28 @@ export default function ContextoConfigPage() {
     identificacion: [
       { id: "datos-centro-docente", label: t('campos.modulo.tituloCentroDocente', {defaultValue: 'Centro y docente'}) },
       { id: "datos-modulo-didactico", label: t('campos.modulo.tituloModuloDidactico', {defaultValue: 'Módulo didáctico'}) },
+      { id: "contexto-autoria-publicidad", label: t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'}) },
+    ],
+    entorno: [
+      { id: "contexto-escolar", label: t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'}) },
+      { id: "contexto-actividades", label: t('campos.contexto.tituloActividades', {defaultValue: 'Actividades complementarias y extraescolares'}) },
+      { id: "planes-feoe", label: t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'}) },
+    ],
+    alumnado: [
+      { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
+      { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
+      { id: "procedimientos-evaluacion-inicial", label: t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial'}) },
+    ],
+    evaluacion: [
       { id: "datos-reglas-redondeo", label: t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'}) },
       { id: "datos-instrumentos-evaluacion", label: t('campos.modulo.tituloPonderacionInstrumentos', {defaultValue: '% Ponderación e instrumentos de evaluación'}) },
       { id: "datos-escalas-evaluacion", label: t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'}) },
     ],
-    contextualizacion: [
-      { id: "contexto-escolar", label: t('campos.contexto.tituloContextoEscolar', {defaultValue: 'Contexto escolar'}) },
-      { id: "contexto-actividades", label: t('campos.contexto.tituloActividades', {defaultValue: 'Complementarias y extraescolares'}) },
-      { id: "planes-feoe", label: t('campos.modulo.tituloFeoe', {defaultValue: 'FEOE. Formación en Empresa u Organismo Equiparado'}) },
-      { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
-      { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
-      { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'}) },
-      { id: "contexto-autoria-publicidad", label: t('campos.contexto.tituloAutoriaPublicidad', {defaultValue: 'Datos de autoría y publicidad'}) },
-    ],
-    criterios: [
+    procedimientos: [
       { id: "procedimientos-modelo-recuperacion", label: t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'}) },
       { id: "procedimientos-informacion", label: t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'}) },
       { id: "procedimientos-criterios-calificacion", label: t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo Simplificado, pd=)'}) },
-      { id: "procedimientos-evaluacion-inicial", label: t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial (apartado E, modelo Simplificado, pd=)'}) },
+      { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo Simplificado (pd=)'}) },
     ],
   };
 
@@ -146,7 +154,7 @@ export default function ContextoConfigPage() {
           <StickyPageHeader
             icon={FileEdit}
             title={t('nav.contexto', { defaultValue: 'Contexto' })}
-            description={t('pages.contexto_desc', { defaultValue: 'Información general, características del entorno, alumnado y módulo.' })}
+            description={t('pages.contexto_desc', { defaultValue: 'Identificación, entorno, alumnado, evaluación y procedimientos de la programación.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -173,9 +181,26 @@ export default function ContextoConfigPage() {
 
           <MotionWrapper className="px-8 pt-4 pb-12">
 
-            {activeTab === "identificacion" && <DatosTab />}
-            {activeTab === "contextualizacion" && <ContextoTab />}
-            {activeTab === "criterios" && <ProcedimientosTab />}
+            {activeTab === "identificacion" && (
+              <div className="space-y-8">
+                <DatosTab bloques={["datos-centro-docente", "datos-modulo-didactico"]} />
+                <ContextoTab bloques={["contexto-autoria-publicidad"]} />
+              </div>
+            )}
+            {activeTab === "entorno" && <ContextoTab bloques={["contexto-escolar", "contexto-actividades", "planes-feoe"]} />}
+            {activeTab === "alumnado" && (
+              <div className="space-y-8">
+                <ContextoTab bloques={["contexto-alumnado-acneae", "alumnado-rasgos-grupo"]} />
+                <ProcedimientosTab bloques={["procedimientos-evaluacion-inicial"]} />
+              </div>
+            )}
+            {activeTab === "evaluacion" && <DatosTab bloques={["datos-reglas-redondeo", "datos-instrumentos-evaluacion", "datos-escalas-evaluacion"]} />}
+            {activeTab === "procedimientos" && (
+              <div className="space-y-8">
+                <ProcedimientosTab bloques={["procedimientos-modelo-recuperacion", "procedimientos-informacion", "procedimientos-criterios-calificacion"]} />
+                <ContextoTab bloques={["contexto-modelo-simplificado"]} />
+              </div>
+            )}
 
           </MotionWrapper>
         </main>

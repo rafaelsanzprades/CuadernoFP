@@ -161,12 +161,12 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
         <Card className="p-8 text-center border-l-4 border-l-amber-500">
           <p className="text-foreground/80">{t('campos.feoe.marcaAlMenosUnCe', {defaultValue: 'Este módulo no está dualizado: marca al menos un CE como FEOE en Currículo -> OG<-RA<-CE para empezar a registrar valoraciones de empresa.'})}</p>
           <div className="flex items-center justify-center gap-3 mt-4">
-            <Link href="/curriculo?tab=ponderacion-ra-ce">
+            <Link href="/curriculo?tab=relacion-ra-ce">
               <Button variant="secondary" className="gap-2">
                 <GraduationCap className="w-4 h-4" /> {t('botones.feoe.gestionarEnCurriculo', {defaultValue: 'Gestionar en Currículo'})}
               </Button>
             </Link>
-            <Link href="/contexto?tab=contextualizacion">
+            <Link href="/contexto?tab=entorno">
               <Button variant="secondary" className="gap-2">
                 <Building2 className="w-4 h-4" /> {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen en Plan FEOE'})}
               </Button>
