@@ -181,7 +181,7 @@
     },
     "metodologia": {
         "metodologia": {
-          "label": "Metodologia eta berrikuntza",
+          "label": "Estrategiak eta berrikuntza",
           "desc": "Estrategia metodologikoak eta irakasle-koordinazioa, eta berrikuntza eta modulu arteko lana."
         },
         "instrumentosRecursos": {
@@ -518,7 +518,7 @@
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
     "contexto": "Programazioaren identifikazioa, ingurunea, ikasleak, ebaluazioa eta prozedurak.",
     "curriculo": "RAk helburuei egiten dien ekarpena, RA-CE haztapena, unitate didaktikoak eta gaitasun-zereginak.",
-    "metodologias": "Metodologia eta berrikuntza, tresnak eta baliabideak, aniztasunari arreta, kontingentzia-plana eta elementu zeharkakoak.",
+    "metodologias": "Estrategiak eta berrikuntza, tresnak eta baliabideak, aniztasunari arreta, kontingentzia-plana eta elementu zeharkakoak.",
     "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
     "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia, hileko ikuspegia eta gaurko klaseak, astea eta unitate aktiboa.",
     "alumnado": "Matrikula, lanbide-orientazioa, taldearen profila eta gelako plana.",
