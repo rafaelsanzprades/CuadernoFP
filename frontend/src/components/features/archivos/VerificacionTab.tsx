@@ -411,7 +411,7 @@ export function VerificacionTab() {
       icon: <ClipboardList className="w-5 h-5" />,
       title: t('campos.verificacion.diarioAulaTitulo', {defaultValue: 'Diario de aula'}),
       href: "/sesiones?tab=lectivas",
-      hrefLabel: t('campos.verificacion.seguimientoLabel', {defaultValue: 'Seguimiento'}),
+      hrefLabel: t('nav.sesiones', {defaultValue: 'Sesiones'}),
       status: sgmtCount === 0 ? "empty" : "ok",
       lines: sgmtCount === 0
         ? [t('campos.verificacion.sinEntradasDiario', {defaultValue: 'Sin entradas en el diario de aula'})]
@@ -447,7 +447,7 @@ export function VerificacionTab() {
       lines: planoCount === 0
         ? [t('campos.verificacion.sinAlumnosPlano', {defaultValue: 'No hay alumnos ubicados en el plano'})]
         : [t('campos.verificacion.alumnosUbicadosAulaVisual', {count: planoCount, defaultValue: '{{count}} alumnos ubicados en el aula visual'})],
-      actionHref: planoCount === 0 ? "/calificaciones?tab=plano" : undefined,
+      actionHref: planoCount === 0 ? "/alumnado?tab=plano" : undefined,
       actionLabel: planoCount === 0 ? t('botones.verificacion.disenarAula', {defaultValue: 'Diseñar aula'}) : undefined,
     },
   ];
