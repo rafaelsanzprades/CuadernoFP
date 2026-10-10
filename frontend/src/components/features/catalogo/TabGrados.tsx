@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 /**
  * TAB "Grados" en /modulo
- * Muestra los 5 grados formativos (A-E) según la Ley 3/2022 -- vista de
+ * Muestra los 5 grados formativos (A-E) según la Ley Orgánica 3/2022 -- vista de
  * referencia; el resaltado de tarjeta seleccionada es solo visual, no se
  * guarda (no hay ningún otro sitio de la app que use un "grado" del módulo).
  */
@@ -17,7 +17,7 @@ const GRADOS = [
     grado: "A",
     nombre: "Acreditación parcial de competencia",
     descripcion: "Acredita competencias adquiridas por experiencia laboral o vías no formales.",
-    normativa: "Art. 34.1 Ley 3/2022",
+    normativa: "Arts. 29-31 LO 3/2022",
     color: "bg-blue-500/10 border-blue-500/30 text-blue-700 dark:text-blue-300",
     icon: "📋",
   },
@@ -25,7 +25,7 @@ const GRADOS = [
     grado: "B",
     nombre: "Certificado de competencia",
     descripcion: "Certifica competencias profesionales, personales y sociales en un ámbito productivo.",
-    normativa: "Art. 34.2 Ley 3/2022",
+    normativa: "Arts. 32-34 LO 3/2022",
     color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300",
     icon: "🏅",
   },
@@ -33,7 +33,7 @@ const GRADOS = [
     grado: "C",
     nombre: "Certificado profesional",
     descripcion: "Acredita la cualificación profesional completa de un nivel 1 o 2 del Catálogo Nacional.",
-    normativa: "Art. 34.3 Ley 3/2022",
+    normativa: "Arts. 35-38 LO 3/2022",
     color: "bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-300",
     icon: "🎓",
   },
@@ -41,7 +41,7 @@ const GRADOS = [
     grado: "D",
     nombre: "Ciclos formativos (GM/GS)",
     descripcion: "Formación reglada de Grado Medio y Grado Superior. Incluye modalidad dual.",
-    normativa: "Art. 35 Ley 3/2022",
+    normativa: "Arts. 39-50 LO 3/2022",
     color: "bg-violet-500/10 border-violet-500/30 text-violet-700 dark:text-violet-300",
     icon: "📚",
     activo: true,
@@ -49,8 +49,8 @@ const GRADOS = [
   {
     grado: "E",
     nombre: "Cursos de especialización",
-    descripcion: "Formación complementaria para titulados de FP. 1000-2000 horas.",
-    normativa: "Art. 36 Ley 3/2022",
+    descripcion: "Formación complementaria para titulados de FP. Entre 300 y 900 horas (art. 52.1).",
+    normativa: "Arts. 51-54 LO 3/2022",
     color: "bg-rose-500/10 border-rose-500/30 text-rose-700 dark:text-rose-300",
     icon: "⚡",
   },
