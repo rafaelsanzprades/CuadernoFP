@@ -442,7 +442,7 @@ export function VerificacionTab() {
       icon: <Users className="w-5 h-5" />,
       title: t('campos.verificacion.planoClaseTitulo', {defaultValue: 'Plano de clase'}),
       href: "/alumnado?tab=plano",
-      hrefLabel: t(\'nav.alumnado\', {defaultValue: \'Alumnado\'}),
+      hrefLabel: t('nav.alumnado', {defaultValue: 'Alumnado'}),
       status: planoCount === 0 ? "empty" : "ok",
       lines: planoCount === 0
         ? [t('campos.verificacion.sinAlumnosPlano', {defaultValue: 'No hay alumnos ubicados en el plano'})]
