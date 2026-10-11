@@ -2760,6 +2760,10 @@
       "pasoAtencionDiversidadRecursos": "Attention to diversity and resources",
       "grupoTelegramTitulo": "Official Telegram group",
       "grupoTelegramDesc": "Official development and testing group for the free Cuaderno FP web app. Share your suggestions, report bugs, or contribute by providing the official curriculum for your autonomous Community.",
+      "aplicacionEscritorioDesc": "Cuaderno FP as a Windows program: install it, open your files and work, even offline. It is free and open source.",
+      "guiaWebTitulo": "Teaching plans in vocational education (FP)",
+      "guiaWebDesc": "A guide to build your teaching plan and your FP course with the app as the common thread: theory, legal framework and practice, step by step.",
+      "guiaWebBoton": "Open the guide",
       "contribuidoresCcaaTitulo": "Contributors by autonomous Community",
       "contribuidoresCcaaDesc": "Special mention to the teachers who are helping improve and integrate the curricula of the autonomous communities",
       "animateAContribuir": "Get involved and contribute!"

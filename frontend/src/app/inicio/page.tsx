@@ -324,6 +324,7 @@ export default function InicioPage() {
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     bienvenida: [
       { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'}) },
+      { id: "bienvenida-guia-web", label: t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'}) },
       { id: "bienvenida-contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
       { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de formación profesional'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
@@ -415,9 +416,34 @@ export default function InicioPage() {
               <SectionHeading id="bienvenida-descarga-escritorio" icon={Download} scrollMt="260px">
                 {t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'})}
               </SectionHeading>
-              <Card className="p-6">
-                <VersionBar />
-              </Card>
+              <VersionBar />
+            </div>
+
+            {/* Guía en la web -- bloque 2 de 3, mismo formato que la app de
+                escritorio y Telegram (petición de Rafael, 2026-10-11). */}
+            <div className="space-y-3">
+              <SectionHeading id="bienvenida-guia-web" icon={BookOpen} scrollMt="260px">
+                {t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}
+              </SectionHeading>
+              <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
+                <div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
+                  <BookOpen className="w-6 h-6 text-accent" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-body text-muted leading-tight">
+                    {t('campos.inicio.guiaWebDesc', {defaultValue: 'Una guía para hacer tu programación y tu curso de FP con la aplicación como hilo conductor: contenido teórico, marco legal y práctica, paso a paso.'})}
+                  </p>
+                </div>
+                <a
+                  href="https://www.rafaelsanzprades.es/programacion-didactica-fp.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent/80 transition-colors flex items-center gap-2 text-body"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  {t('campos.inicio.guiaWebBoton', {defaultValue: 'Abrir la guía'})}
+                </a>
+              </div>
             </div>
 
             {/* Grupo oficial de Telegram -- traído aquí justo detrás de
