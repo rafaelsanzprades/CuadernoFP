@@ -86,7 +86,6 @@ export default function ContextoConfigPage() {
     alumnado: [
       { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
       { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
-      { id: "procedimientos-evaluacion-inicial", label: t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial'}) },
     ],
     evaluacion: [
       { id: "datos-reglas-redondeo", label: t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'}) },
@@ -94,6 +93,7 @@ export default function ContextoConfigPage() {
       { id: "datos-escalas-evaluacion", label: t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'}) },
     ],
     procedimientos: [
+      { id: "procedimientos-evaluacion-inicial", label: t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial'}) },
       { id: "procedimientos-modelo-recuperacion", label: t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'}) },
       { id: "procedimientos-informacion", label: t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'}) },
       { id: "procedimientos-criterios-calificacion", label: t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo simplificado, pd=)'}) },
@@ -194,13 +194,12 @@ export default function ContextoConfigPage() {
             {activeTab === "alumnado" && (
               <div className="space-y-8">
                 <ContextoTab bloques={["contexto-alumnado-acneae", "alumnado-rasgos-grupo"]} />
-                <ProcedimientosTab bloques={["procedimientos-evaluacion-inicial"]} />
               </div>
             )}
             {activeTab === "evaluacion" && <DatosTab bloques={["datos-reglas-redondeo", "datos-instrumentos-evaluacion", "datos-escalas-evaluacion"]} />}
             {activeTab === "procedimientos" && (
               <div className="space-y-8">
-                <ProcedimientosTab bloques={["procedimientos-modelo-recuperacion", "procedimientos-informacion", "procedimientos-criterios-calificacion"]} />
+                <ProcedimientosTab bloques={["procedimientos-evaluacion-inicial", "procedimientos-modelo-recuperacion", "procedimientos-informacion", "procedimientos-criterios-calificacion"]} />
                 <ContextoTab bloques={["contexto-modelo-simplificado"]} />
               </div>
             )}
