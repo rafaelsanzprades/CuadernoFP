@@ -433,16 +433,16 @@ export default function InicioPage() {
                     <BookOpen className="w-6 h-6 text-accent" />
                   </div>
                   <p className="text-body text-muted leading-tight">
-                    {t('campos.inicio.guiaWebDesc', {defaultValue: 'Una guía para hacer tu programación y tu curso de FP con la aplicación como hilo conductor: contenido teórico, marco legal y práctica, paso a paso.'})}
+                    {t('campos.inicio.guiaWebDesc', {defaultValue: 'Para hacer tu programación y tu curso de FP con la aplicación como hilo conductor: contenido teórico, marco legal y práctica, paso a paso.'})}
                   </p>
                   <a
-                    href="https://www.rafaelsanzprades.es/programacion-didactica-fp.html"
+                    href="https://www.rafaelsanzprades.es/programacion-didactica-fp/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-auto w-full justify-center px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent/80 transition-colors flex items-center gap-2 text-body"
                   >
                     <BookOpen className="w-4 h-4" />
-                    {t('campos.inicio.guiaWebBoton', {defaultValue: 'Abrir la guía'})}
+                    {t('campos.inicio.guiaWebBoton', {defaultValue: 'Abrir la web'})}
                   </a>
                 </div>
               </div>
