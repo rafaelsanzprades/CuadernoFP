@@ -78,7 +78,7 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   ],
   "/metodologias": [
     { id: "estrategias", label: "Estrategias e innovación" },
-    { id: "instrumentos-recursos", label: "Instrumentos y recursos" },
+    { id: "recursos-espacios", label: "Recursos y espacios" },
     { id: "diversidad", label: "Atención a la diversidad" },
     { id: "contingencia", label: "Plan de contingencia" },
     { id: "transversales", label: "Transversales" },

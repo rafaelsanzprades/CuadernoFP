@@ -184,8 +184,8 @@
           "label": "Estratexias e innovación",
           "desc": "Estratexias metodolóxicas e coordinación docente, e innovación e intermodularidade."
         },
-        "instrumentosRecursos": {
-          "label": "Instrumentos e recursos",
+        "recursosEspacios": {
+          "label": "Recursos e espazos",
           "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios."
         },
         "diversidad": {
@@ -1946,7 +1946,7 @@
       "pesoTrimestreTitulo": "Peso do trimestre na nota final do módulo",
       "pctNotaFinalTitulo": "O que vale o instrumento sobre a nota final do módulo (o seu % en cada trimestre polo peso dese trimestre)",
       "colNotaFinal": "% nota final",
-      "tituloInstrumentosRecursos": "Instrumentos e recursos",
+      "tituloInstrumentosRecursos": "Recursos e espazos",
       "tituloMedidasContingencia": "Medidas de continxencia",
       "tituloModuloDidactico": "Módulo didáctico",
       "tituloPlanContingencia": "Plan de continxencia",
