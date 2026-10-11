@@ -184,8 +184,8 @@
           "label": "Strategies and innovation",
           "desc": "Methodological strategies and teaching coordination, and innovation and cross-module coordination."
         },
-        "instrumentosRecursos": {
-          "label": "Instruments and resources",
+        "recursosEspacios": {
+          "label": "Resources and spaces",
           "desc": "Selected assessment instruments and the resources and spaces required."
         },
         "diversidad": {
@@ -1946,7 +1946,7 @@
       "pesoTrimestreTitulo": "Weight of the term in the module's final grade",
       "pctNotaFinalTitulo": "What the instrument is worth in the module's final grade (its % in each term times that term's weight)",
       "colNotaFinal": "% final grade",
-      "tituloInstrumentosRecursos": "Instruments and resources",
+      "tituloInstrumentosRecursos": "Resources and spaces",
       "tituloMedidasContingencia": "Contingency measures",
       "tituloModuloDidactico": "Teaching module",
       "tituloPlanContingencia": "Contingency plan",
