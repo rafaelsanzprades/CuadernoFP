@@ -1,11 +1,12 @@
 "use client";
-import { Download, FolderGit2 } from "lucide-react";
+import { Download, FolderGit2, Globe } from "lucide-react";
 import { isTauri } from "@tauri-apps/api/core";
 import { useMounted } from "@/hooks/useMounted";
 import { useTranslation } from "react-i18next";
 
 const RELEASES_URL = "https://github.com/rafaelsanzprades/CuadernoFP/releases/latest";
 const REPO_URL = "https://github.com/rafaelsanzprades/CuadernoFP";
+const WEB_URL = "https://www.rafaelsanzprades.es/";
 
 // Fila de versión + enlaces, dentro de la sección "Aplicación de escritorio
 // para Windows" de Inicio->Bienvenida (antes vivía suelta, fuera de
@@ -21,7 +22,7 @@ export function VersionBar() {
   const versionLabel = !rawVersion || rawVersion === 'unknown' ? 'Desconocida' : rawVersion;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-2 sm:gap-3 text-body">
+    <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-3 text-body">
       <span suppressHydrationWarning className="justify-self-center sm:justify-self-start text-muted font-mono whitespace-nowrap">
         {t('campos.descargaEscritorio.version', { defaultValue: 'Versión' })}: {isMounted ? versionLabel : '...'}
       </span>
@@ -32,6 +33,14 @@ export function VersionBar() {
         className="justify-self-center flex items-center gap-1.5 text-muted hover:text-foreground transition-colors font-semibold whitespace-nowrap"
       >
         <FolderGit2 className="w-4 h-4 shrink-0" /> {t('campos.descargaEscritorio.repo', { defaultValue: 'Código fuente en GitHub' })}
+      </a>
+      <a
+        href={WEB_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="justify-self-center flex items-center gap-1.5 text-muted hover:text-foreground transition-colors font-semibold whitespace-nowrap"
+      >
+        <Globe className="w-4 h-4 shrink-0" /> www.rafaelsanzprades.es
       </a>
       <div className="justify-self-center sm:justify-self-end">
         {!isTauri() && (
