@@ -49,7 +49,7 @@ export function EvaluacionRecursosTab() {
       <div className="space-y-6 animate-in fade-in duration-500">
       <div className="space-y-3">
       <SectionHeading id="metodologia-recursos-instrumentos" icon={CheckCircle2} scrollMt="260px">
-        {t('campos.modulo.tituloInstrumentosRecursos', {defaultValue: 'Instrumentos y recursos'})}
+        {t('campos.modulo.tituloInstrumentosRecursos', {defaultValue: 'Recursos y espacios'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
         <div className="space-y-6">

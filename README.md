@@ -9,6 +9,14 @@
 
 ---
 
+## Gratis. Siempre.
+
+Cuaderno FP es y será gratuito. Sin versión de pago, sin límites ocultos, sin excepciones. Es un compromiso.
+
+La versión web tiene un coste de procesamiento que asume el autor. Por eso existe la **versión de escritorio**, donde todo se procesa en tu equipo, sin servidores y sin coste: si algún día la web no pudiera sostenerse, la de escritorio seguiría funcionando igual. El compromiso cubre la aplicación (web y escritorio), su código y la guía; los servicios de terceros que conectes (Google Drive, OneDrive, claves de IA) los gestionas y pagas tú. Más información en [www.rafaelsanzprades.es](https://www.rafaelsanzprades.es/).
+
+---
+
 ## 🚀 Funcionalidades Principales
 
 La aplicación se estructura en un menú principal con tres grandes bloques de trabajo, diseñados para abarcar todo el ciclo de vida de la docencia en FP:
