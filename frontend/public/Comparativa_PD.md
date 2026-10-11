@@ -296,12 +296,10 @@ Registro y resolución de reclamaciones de nota (con generación de justificante
 
 ### Pestaña: Expediente
 
-Expediente por alumnado: línea temporal de evidencias (calificaciones, reclamaciones, asistencia, diario de clase), boletín individual (selector de alumnado, radar + barras por RA), informe de evidencias e inserción laboral.
+Expediente por alumnado: línea temporal de evidencias (calificaciones, reclamaciones, asistencia, diario de clase), boletín individual (selector de alumnado, radar + barras por RA), informe de evidencias e inserción laboral. El boletín trimestral y el Excel/CSV de calificaciones (campos 82 y 83) se descargan desde MagIA → Curso.
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 82 | Boletín trimestral (1T, 2T, 3T, Final) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
-| 83 | Excel/CSV de calificaciones | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
 | 84 | Boletín individual (selector de alumnado, radar + barras por RA) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
 
 ### Pestañas: Avance de UD y Progreso RA-UD

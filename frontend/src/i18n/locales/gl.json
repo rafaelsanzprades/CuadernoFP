@@ -419,8 +419,8 @@
     "programacion": "Programación",
     "curso": "Curso",
     "programacion_desc": "Área de deseño e configuración didáctica. Configura o módulo, vincula as matrices de avaliación, define os instrumentos e secuencia as tarefas de aula.",
-    "curso_desc": "Ferramentas de seguimento para a aula viva. Establece o calendario, administra o listado de alumnado, anota o progreso diario e avalía.",
-    "general_desc": "Por onde empezar: o teu panel, os teus ficheiros e a axuda da aplicación — todo independente de ter un grupo aberto."
+    "curso_desc": "Ferramentas de seguimento para a aula viva. Establece o calendario, administra o listado de alumnado, cualifica, anota as sesións e pecha o curso co expediente e a mellora.",
+    "general_desc": "Por onde empezar: o teu panel e os teus ficheiros, a axuda, a normativa, os documentos de MagIA e a información legal. MagIA necesita unha programación e un curso abertos."
   },
   "sidebar": {
     "en_obras": "En obras",
@@ -2714,7 +2714,7 @@
         "grupo7": {
           "titulo": "6. Soporte técnico",
           "q1": "Que pasa se as gráficas do meu panel de control non cargan?",
-          "a1": "Comproba na barra lateral que activaches o 'Modo reais' e tes seleccionado o teu grupo. As gráficas necesitan saber a que alumnado e a que programación apuntan para poder analizar os datos.",
+          "a1": "Comproba na barra lateral que abriches o teu grupo co botón 'Abrir grupo': sen un grupo aberto a aplicación mostra datos de demostración. Os gráficos necesitan saber a que alumnado e a que programación apuntan para poder analizar os datos.",
           "q2": "Pódese usar Cuaderno FP no móbil?",
           "a2": "O deseño é responsivo e adáptase, pero pola densidade de información (táboas masivas de avaliación e matrices curriculares), recomendámosche encarecidamente utilizalo en pantallas de ordenador ou tabletas grandes.",
           "q3": "A app vai moi lenta ou detectei un erro estraño",
@@ -2778,7 +2778,11 @@
       "privacidadAbsolutaTitulo": "Privacidade absoluta por deseño",
       "responsableTratamientoTitulo": "Responsable do tratamento (RXPD)",
       "dondeSeGuardanDatosTitulo": "Onde se gardan os datos?",
-      "derechosArcoTitulo": "Dereitos do alumnado (RGPD)",
+      "derechosTitulo": "Dereitos do alumnado (RGPD)",
+      "derechosP1a": "O alumnado (ou os seus titores legais, no caso de menores) pode exercer os seus dereitos de",
+      "derechosP1b": "acceso, rectificación, supresión, limitación do tratamento, portabilidade e oposición",
+      "derechosP1c": "(arts. 15 a 21 do RGPD) ante o Responsable do tratamento, que é o docente ou o centro educativo.",
+      "derechosP2": "Dado que esta aplicación non almacena datos en servidores externos, o exercicio destes dereitos xestiónase directamente entre o alumnado e o profesorado, sen intermediación do desenvolvedor.",
       "seguridadTitulo": "Seguridade",
       "baseLegalNormativaTitulo": "Base legal e normativa aplicable",
       "politicaCookiesTitulo": "Política de cookies",

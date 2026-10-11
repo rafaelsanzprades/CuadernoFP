@@ -419,8 +419,8 @@
     "programacion": "Programming",
     "curso": "Course",
     "programacion_desc": "Design and didactic configuration area. Configure the module, link the assessment matrices, define the instruments and sequence the classroom tasks.",
-    "curso_desc": "Tracking tools for the living classroom. Set up the calendar, manage the student roster, log daily progress and grade.",
-    "general_desc": "Where to start: your dashboard, your files, and the app's help — all independent of having a group open."
+    "curso_desc": "Tracking tools for the living classroom. Set up the calendar, manage the student roster, grade, log the sessions and close the course with the records and the improvement plan.",
+    "general_desc": "Where to start: your dashboard and files, the help, the regulations, the MagIA documents and the legal information. MagIA needs an open curriculum plan and course."
   },
   "sidebar": {
     "en_obras": "Under construction",
@@ -2714,7 +2714,7 @@
         "grupo7": {
           "titulo": "6. Technical support",
           "q1": "What happens if the charts on my dashboard don't load?",
-          "a1": "Check in the sidebar that you have enabled 'Real mode' and have your group selected. The charts need to know which students and which curriculum plan to point to in order to analyze the data.",
+          "a1": "Check in the sidebar that you have opened your group with the 'Open group' button: without an open group the app shows demo data. The charts need to know which students and which curriculum plan to point to in order to analyze the data.",
           "q2": "Can Cuaderno FP be used on a mobile phone?",
           "a2": "The design is responsive and adapts, but due to the density of information (large assessment tables and curriculum matrices), we strongly recommend using it on computer screens or large tablets.",
           "q3": "The app is very slow, or I've noticed a strange error",
@@ -2778,7 +2778,11 @@
       "privacidadAbsolutaTitulo": "Absolute privacy by design",
       "responsableTratamientoTitulo": "Data controller (GDPR)",
       "dondeSeGuardanDatosTitulo": "Where is the data stored?",
-      "derechosArcoTitulo": "Student rights (GDPR)",
+      "derechosTitulo": "Student rights (GDPR)",
+      "derechosP1a": "The students (or their legal guardians, in the case of minors) may exercise their rights of",
+      "derechosP1b": "access, rectification, erasure, restriction of processing, portability and objection",
+      "derechosP1c": "(arts. 15 to 21 of the GDPR) before the data controller, who is the teacher or the school.",
+      "derechosP2": "Since this application does not store data on external servers, the exercise of these rights is handled directly between students and teachers, without the developer acting as intermediary.",
       "seguridadTitulo": "Security",
       "baseLegalNormativaTitulo": "Legal basis and applicable regulations",
       "politicaCookiesTitulo": "Cookie policy",
