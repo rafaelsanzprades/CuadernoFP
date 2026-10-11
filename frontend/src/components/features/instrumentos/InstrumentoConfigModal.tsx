@@ -97,7 +97,7 @@ export function InstrumentoConfigModal({ isOpen, onClose, instrumentoId, instrum
           </div>
           <div>
             <label className="text-body font-semibold mb-1 block">{t('campos.instrumentos.unidadDidactica', { defaultValue: 'Unidad didáctica' })}</label>
-            <p className="text-caption text-muted mb-2">{t('campos.instrumentos.unidadDidacticaDescripcion', { defaultValue: 'A qué unidad didáctica pertenece este instrumento (para la tabla "Contenidos → UD").' })}</p>
+            <p className="text-caption text-muted mb-2">{t('campos.instrumentos.unidadDidacticaDescripcion', { defaultValue: 'A qué unidad didáctica pertenece este instrumento (alimenta la columna Eval. de Currículo > Unidades didácticas).' })}</p>
             <select
               value={config.id_ud || ''}
               onChange={(e) => onChange('id_ud', e.target.value)}

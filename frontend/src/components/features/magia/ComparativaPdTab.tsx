@@ -16,13 +16,13 @@ import { useTranslation } from "react-i18next";
 // ancla, sin romper nada).
 const COMPARATIVA_SECTION_IDS: Record<string, string> = {
   "📋 Programación: Contexto": "comparativa-contexto",
-  "📋 Programación: Metodología": "comparativa-metodologia",
+  "📋 Programación: Metodologías": "comparativa-metodologia",
   "📋 Programación: Currículo": "comparativa-curriculo",
-  "📋 Programación: Instrumento": "comparativa-instrumento",
+  "📋 Programación: Instrumentos": "comparativa-instrumento",
   "📥 MagIA (Descargas)": "comparativa-magia-descargas",
   "📅 Curso: Calendario": "comparativa-calendario",
   "🎓 Curso: Alumnado": "comparativa-alumnado",
-  "📝 Curso: Seguimiento": "comparativa-seguimiento",
+  "📝 Curso: Sesiones y Calificaciones": "comparativa-seguimiento",
   "📊 Curso: Cierre": "comparativa-calificacion",
   "📊 Resumen de cobertura por nivel": "comparativa-resumen-cobertura",
   "📝 Notas": "comparativa-notas",

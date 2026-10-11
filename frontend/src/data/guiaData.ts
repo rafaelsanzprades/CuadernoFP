@@ -145,7 +145,7 @@ export const GUIA_PASOS: {
             ],
           },
         ],
-        nota: "La atención a la diversidad ya no vive en Contexto: está en Programación › Metodología → Pestaña Metodología e inclusión (ver 1.4).",
+        nota: "La atención a la diversidad ya no vive en Contexto: está en Programación › Metodologías › pestaña Atención a la diversidad (ver 1.4).",
       },
       {
         numero: "1.3",

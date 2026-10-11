@@ -14,15 +14,15 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 
 ### 1.3 Contextualización
 - **1.3.1 Entorno geográfico y sociocultural**
-  - **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización`
+  - **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno`
 - **1.3.2 Entorno socioeconómico y productivo**
-  - **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización`
+  - **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno`
 - **1.3.3 Contexto escolar**
-  - **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización`
+  - **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno`
 - **1.3.4 Características del alumnado**
-  - **Dónde:** `Curso` › `Alumnado` → Pestaña `Matrícula` (bloque "Perfil del grupo", más abajo en la misma pestaña)
+  - **Dónde:** `Programación` › `Contexto` → Pestaña `Alumnado` (bloques "Alumnado (ACNEAE)" y "Rasgos característicos del grupo")
 - **1.3.5 Infraestructura y recursos educativos**
-  - **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización`
+  - **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno`
 
 ---
 
@@ -50,77 +50,77 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (matriz e informe de relación RA-UD, integrados en la misma pestaña)
 
 ### 2.8 Organización temporal: unidades didácticas
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (y pestaña `Tareas competenciales` para la secuenciación de tareas)
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Unidades didácticas` (y pestaña `Proyectos y retos` para la secuenciación de tareas)
 
 ### 2.9 Formación en empresa (FEOE)
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Plan FEOE`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno` (bloque "FEOE")
 
 ---
 
 ## 3. Metodología didáctica
 
 ### 3.1 Principios metodológicos
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
+- **Dónde:** `Programación` › `Metodologías` → Pestaña `Estrategias e innovación`
 
 ### 3.2 Estrategias metodológicas
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
+- **Dónde:** `Programación` › `Metodologías` → Pestaña `Estrategias e innovación`
 
 ### 3.3 Materiales y recursos didácticos
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Recursos`
+- **Dónde:** `Programación` › `Metodologías` → Pestaña `Instrumentos y recursos`
 
 ### 3.4 Agrupamientos
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
+- **Dónde:** `Programación` › `Metodologías` → Pestaña `Estrategias e innovación`
 
 ### 3.5 Plan de aplicación de los desdobles / régimen dual
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Identificación` (selector "Régimen dual LO 3/2022") y `Programación` › `Metodología` → Pestaña `Metodología e inclusión` (desdobles)
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Identificación` (selector "Régimen dual LO 3/2022") y `Programación` › `Metodologías` → Pestaña `Estrategias e innovación` (desdobles)
 
 ### 3.6 Aprendizaje colaborativo (proyectos/retos)
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Transversales`
+- **Dónde:** `Programación` › `Metodologías` → Pestaña `Estrategias e innovación` (aprendizaje colaborativo) y `Programación` › `Currículo` → Pestaña `Proyectos y retos`
 
 ---
 
 ## 4. Procedimiento de evaluación y calificación
 
 ### 4.1 Actividades, técnicas e instrumentos
-- **Dónde:** `Programación` › `Instrumento` → Pestaña `Resumen` y Pestaña `Trimestres` (sub-pestañas 1º/2º/3º)
+- **Dónde:** `Programación` › `Instrumentos` → Pestaña `Resumen` y Pestaña `Trimestres` (sub-pestañas 1º/2º/3º)
 
 ### 4.2 Evaluaciones (inicial, parciales, finales)
-- **Dónde:** `Curso` › `Seguimiento` → Pestaña `Notas` (entrada de notas), complementado con `Curso` › `Calificación` → Pestaña `Resumen` (bloques "Progreso RA-UD", "Estadísticas" y "Análisis" con switcher Grupal/Individual, solo lectura)
+- **Dónde:** `Curso` › `Calificaciones` → Pestaña `Académicas` (entrada de notas), complementado con `Curso` › `Cierre` → Pestañas `Avance de UD` y `Progreso RA-UD` (solo lectura)
 
 ### 4.3 Información al alumnado y familias
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Procedimientos`
 
 ### 4.4 Pérdida del derecho a evaluación continua
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Procedimientos`
 
 ### 4.5 Procedimiento de recuperación
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Procedimientos`
 
 ### 4.6 Evaluación de la fase FEOE
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Plan FEOE`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno` (bloque "FEOE")
 
 ### 4.7 Criterios de calificación y ponderación
-- **Dónde:** `Programación` › `Currículo` → Pestaña `Relación RA <- CE` / `Curso` › `Seguimiento` → Pestaña `Notas`
+- **Dónde:** `Programación` › `Currículo` → Pestaña `Relación RA <- CE` / `Curso` › `Calificaciones` → Pestaña `Académicas`
 
 ### 4.8 Plan de recuperación de módulos pendientes
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Evaluación y calificación`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Procedimientos`
 
 ---
 
 ## 5. Medidas de inclusión
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Metodología e inclusión`
+- **Dónde:** `Programación` › `Metodologías` → Pestaña `Atención a la diversidad`
 
 ---
 
 ## 6. Actividades complementarias y extraescolares
-- **Dónde:** `Curso` › `Calendario` → Pestaña `Complementarias y extraescolares`
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno` (bloque "Actividades complementarias y extraescolares")
 
 ---
 
 ## 7. Plan de contingencia
-- **Dónde:** `Programación` › `Metodología` → Pestaña `Plan de contingencia`
+- **Dónde:** `Programación` › `Metodologías` → Pestaña `Plan de contingencia`
 
 ---
 
 ## 8. Publicidad de la programación
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Contextualización` (bloque "Datos de autoría y publicidad")
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Identificación` (bloque "Datos de autoría y publicidad")

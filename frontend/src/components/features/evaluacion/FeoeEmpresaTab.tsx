@@ -44,7 +44,7 @@ const getScoreOptions = (t: (key: string, opts?: any) => string) => [
 ];
 
 // Valoración del tutor de empresa de UN alumno/a (sección "Empresa FEOE" de
-// Calificaciones -> Académicas, que aporta el selector de alumnado).
+// Calificaciones > Académicas, que aporta el selector de alumnado).
 export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   const { t } = useTranslation();
   const SCORE_OPTIONS = React.useMemo(() => getScoreOptions(t), [t]);
@@ -168,7 +168,7 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
             </Link>
             <Link href="/contexto?tab=entorno">
               <Button variant="secondary" className="gap-2">
-                <Building2 className="w-4 h-4" /> {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen en Plan FEOE'})}
+                <Building2 className="w-4 h-4" /> {t('botones.feoe.configurarEnPlanFeoe', {defaultValue: 'Configurar horas y régimen de la FEOE'})}
               </Button>
             </Link>
           </div>
