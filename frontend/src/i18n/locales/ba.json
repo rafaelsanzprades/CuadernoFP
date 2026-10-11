@@ -184,8 +184,8 @@
           "label": "Estratègies i innovació",
           "desc": "Estratègies metodològiques i coordinació docent, i innovació i intermodularitat."
         },
-        "instrumentosRecursos": {
-          "label": "Instruments i recursos",
+        "recursosEspacios": {
+          "label": "Recursos i espais",
           "desc": "Instruments d'avaluació seleccionats i recursos i espais necessaris."
         },
         "diversidad": {
@@ -843,6 +843,7 @@
     },
     "verificacion": {
       "irA": "Anar a {{destino}}",
+      "verificarTrabajo": "Verificar el meu treball",
       "configurarModulo": "Configurar mòdul",
       "anadirPrimeraUd": "Afegir primera UD",
       "anadirPrimerRa": "Afegir primer RA",
@@ -1946,7 +1947,7 @@
       "pesoTrimestreTitulo": "Pes del trimestre en la nota final del mòdul",
       "pctNotaFinalTitulo": "El que val l'instrument sobre la nota final del mòdul (el seu % en cada trimestre pel pes d'aquest trimestre)",
       "colNotaFinal": "% nota final",
-      "tituloInstrumentosRecursos": "Instruments i recursos",
+      "tituloInstrumentosRecursos": "Recursos i espais",
       "tituloMedidasContingencia": "Mesures de contingència",
       "tituloModuloDidactico": "Mòdul didàctic",
       "tituloPlanContingencia": "Pla de contingència",

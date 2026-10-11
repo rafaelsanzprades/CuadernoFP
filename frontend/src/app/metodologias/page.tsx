@@ -53,7 +53,7 @@ export default function MetodologiaConfigPage() {
 
   const TABS = [
     { id: "estrategias", label: <span className="flex items-center gap-2"><Target className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.metodologia.label', {defaultValue: 'Estrategias e innovación'})}</span>, cleanLabel: t('tabs.metodologia.metodologia.label', {defaultValue: 'Estrategias e innovación'}) },
-    { id: "instrumentos-recursos", label: <span className="flex items-center gap-2"><Wrench className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.instrumentosRecursos.label', {defaultValue: 'Instrumentos y recursos'})}</span>, cleanLabel: t('tabs.metodologia.instrumentosRecursos.label', {defaultValue: 'Instrumentos y recursos'}) },
+    { id: "recursos-espacios", label: <span className="flex items-center gap-2"><Wrench className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.recursosEspacios.label', {defaultValue: 'Recursos y espacios'})}</span>, cleanLabel: t('tabs.metodologia.recursosEspacios.label', {defaultValue: 'Recursos y espacios'}) },
     { id: "diversidad", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.diversidad.label', {defaultValue: 'Atención a la diversidad'})}</span>, cleanLabel: t('tabs.metodologia.diversidad.label', {defaultValue: 'Atención a la diversidad'}) },
     { id: "contingencia", label: <span className="flex items-center gap-2"><Shield className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'})}</span>, cleanLabel: t('tabs.metodologia.contingencia.label', {defaultValue: 'Plan de contingencia'}) },
     { id: "transversales", label: <span className="flex items-center gap-2"><Layers className="w-4 h-4 shrink-0" /> {t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales'})}</span>, cleanLabel: t('tabs.metodologia.transversales.label', {defaultValue: 'Transversales'}) },
@@ -63,7 +63,7 @@ export default function MetodologiaConfigPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     estrategias: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas y coordinación docente, e innovación e intermodularidad.'}),
-    'instrumentos-recursos': t('tabs.metodologia.instrumentosRecursos.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
+    'recursos-espacios': t('tabs.metodologia.recursosEspacios.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
     diversidad: t('tabs.metodologia.diversidad.desc', {defaultValue: 'Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE.'}),
     contingencia: t('tabs.metodologia.contingencia.desc', {defaultValue: 'Planes de contingencia y adaptación ante situaciones excepcionales.'}),
     transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales y estándares y objetivos del currículo.'}),
@@ -163,7 +163,10 @@ export default function MetodologiaConfigPage() {
             {/* Descripción de la pestaña activa -- texto plano, sin cajón,
                 mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
             <p className="text-body text-muted mt-3">
-              {TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'}
+              {TAB_DESCRIPTIONS[activeTab] || 'Configuración de la metodología.'}{" "}
+              <Link href="/inicio?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
+                {t('botones.verificacion.verificarTrabajo', {defaultValue: 'Verificar mi trabajo'})} →
+              </Link>
             </p>
 
             {/* Índice de bloques de la pestaña activa -- dentro del header
@@ -175,7 +178,7 @@ export default function MetodologiaConfigPage() {
 
             <div className="space-y-6">
               {activeTab === 'estrategias' && <><MetodologiaTab /><InnovacionTab /></>}
-              {activeTab === 'instrumentos-recursos' && <EvaluacionRecursosTab />}
+              {activeTab === 'recursos-espacios' && <EvaluacionRecursosTab />}
               {activeTab === 'diversidad' && <DiversidadTab />}
               {activeTab === 'contingencia' && <ContingenciaTab />}
               {activeTab === 'transversales' && <OtrosElementosTab />}

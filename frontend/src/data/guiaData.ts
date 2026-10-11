@@ -137,9 +137,9 @@ export const GUIA_PASOS: {
                 children: [
                   { label: "Pestaña", text: "Identificación", children: [{ label: "Bloque", text: "Centro y docente, módulo didáctico y datos de autoría y publicidad de la programación." }] },
                   { label: "Pestaña", text: "Entorno", children: [{ label: "Bloque", text: "Contexto escolar (entorno geográfico y socioeconómico), actividades complementarias y extraescolares, y plan FEOE (modalidad, seguimiento y régimen dual)." }] },
-                  { label: "Pestaña", text: "Alumnado", children: [{ label: "Bloque", text: "Alumnado con necesidades específicas (ACNEAE) y datos del grupo, rasgos característicos del grupo y evaluación inicial." }] },
+                  { label: "Pestaña", text: "Alumnado", children: [{ label: "Bloque", text: "Alumnado con necesidades específicas (ACNEAE) y datos del grupo, y rasgos característicos del grupo." }] },
                   { label: "Pestaña", text: "Evaluación", children: [{ label: "Bloque", text: "Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas." }] },
-                  { label: "Pestaña", text: "Procedimientos", children: [{ label: "Bloque", text: "Modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua), criterios de calificación y textos del modelo simplificado." }] },
+                  { label: "Pestaña", text: "Procedimientos", children: [{ label: "Bloque", text: "Evaluación inicial, modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua), criterios de calificación y textos del modelo simplificado." }] },
                 ],
               },
             ],
@@ -191,7 +191,7 @@ export const GUIA_PASOS: {
                 label: "Página", text: "Metodologías",
                 children: [
                   { label: "Pestaña", text: "Estrategias e innovación", children: [{ label: "Bloque", text: "Metodologías activas (ABP, retos, etc.) y coordinación docente, e innovación e intermodularidad." }] },
-                  { label: "Pestaña", text: "Instrumentos y recursos", children: [{ label: "Bloque", text: "Catálogo de instrumentos de evaluación y recursos y espacios necesarios (aula, taller, software...)." }] },
+                  { label: "Pestaña", text: "Recursos y espacios", children: [{ label: "Bloque", text: "Catálogo de instrumentos de evaluación y recursos y espacios necesarios (aula, taller, software...)." }] },
                   { label: "Pestaña", text: "Atención a la diversidad", children: [{ label: "Bloque", text: "Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE (nombre, tipo de necesidad y adaptaciones de evaluación y acceso)." }] },
                   { label: "Pestaña", text: "Plan de contingencia", children: [{ label: "Texto", text: "Docencia telemática, tareas autoguiadas." }] },
                   { label: "Pestaña", text: "Transversales", children: [{ label: "Texto", text: "Elementos transversales, competencias clave y digitales, y estándares y objetivos del currículo." }] },

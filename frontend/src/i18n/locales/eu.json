@@ -184,8 +184,8 @@
           "label": "Estrategiak eta berrikuntza",
           "desc": "Estrategia metodologikoak eta irakasle-koordinazioa, eta berrikuntza eta modulu arteko lana."
         },
-        "instrumentosRecursos": {
-          "label": "Tresnak eta baliabideak",
+        "recursosEspacios": {
+          "label": "Baliabideak eta espazioak",
           "desc": "Hautatutako ebaluazio-tresnak eta behar diren baliabideak eta espazioak."
         },
         "diversidad": {
@@ -843,6 +843,7 @@
     },
     "verificacion": {
       "irA": "Joan hona: {{destino}}",
+      "verificarTrabajo": "Nire lana egiaztatu",
       "configurarModulo": "Konfiguratu modulua",
       "anadirPrimeraUd": "Gehitu lehen UDa",
       "anadirPrimerRa": "Gehitu lehen RA",
@@ -1946,7 +1947,7 @@
       "pesoTrimestreTitulo": "Hiruhilekoaren pisua moduluaren azken notan",
       "pctNotaFinalTitulo": "Tresnak moduluaren azken notan duen balioa (hiruhileko bakoitzeko %-a bider hiruhileko horren pisua)",
       "colNotaFinal": "% azken nota",
-      "tituloInstrumentosRecursos": "Tresnak eta baliabideak",
+      "tituloInstrumentosRecursos": "Baliabideak eta espazioak",
       "tituloMedidasContingencia": "Kontingentzia-neurriak",
       "tituloModuloDidactico": "Modulu didaktikoa",
       "tituloPlanContingencia": "Kontingentzia-plana",

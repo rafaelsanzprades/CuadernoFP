@@ -354,7 +354,10 @@ export default function SeguimientoPage() {
             {/* Descripción de la pestaña activa -- texto plano, sin cajón,
                 mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
             <p className="text-body text-muted mt-3">
-              {TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'}
+              {TAB_DESCRIPTIONS[activeTab] || 'Seguimiento del alumnado.'}{" "}
+              <Link href="/inicio?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
+                {t('botones.verificacion.verificarTrabajo', {defaultValue: 'Verificar mi trabajo'})} →
+              </Link>
             </p>
 
             {/* Índice: meses dinámicos en Clases (Diario), bloques en Asistencia. */}

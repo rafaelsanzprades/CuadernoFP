@@ -194,7 +194,10 @@ export default function ProgresoPage() {
             {/* Descripción de la pestaña activa -- texto plano, sin cajón,
                 mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
             <p className="text-body text-muted mt-3">
-              {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
+              {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}{" "}
+              <Link href="/inicio?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
+                {t('botones.verificacion.verificarTrabajo', {defaultValue: 'Verificar mi trabajo'})} →
+              </Link>
             </p>
 
             {/* Índice de bloques de la pestaña activa -- individual resuelve

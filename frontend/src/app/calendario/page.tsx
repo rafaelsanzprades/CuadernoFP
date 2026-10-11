@@ -600,7 +600,10 @@ export default function CalendarioPage() {
             {/* Descripción de la pestaña activa -- texto plano, sin cajón,
                 mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
             <p className="text-body text-muted mt-3">
-              {TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'}
+              {TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'}{" "}
+              <Link href="/inicio?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
+                {t('botones.verificacion.verificarTrabajo', {defaultValue: 'Verificar mi trabajo'})} →
+              </Link>
             </p>
 
             {/* Índice de bloques de la pestaña activa -- dentro del header
