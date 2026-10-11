@@ -1,5 +1,6 @@
 "use client";
 import { AlertOctagon, BarChart, Calendar, FileText, History } from "lucide-react";
+import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { useTranslation } from "react-i18next";
@@ -115,7 +116,10 @@ export default function AgendaPage() {
             </div>
 
             <p className="text-body text-muted mt-3">
-              {TAB_DESCRIPTIONS[activeTab]}
+              {TAB_DESCRIPTIONS[activeTab]}{" "}
+              <Link href="/inicio?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
+                {t('botones.verificacion.verificarTrabajo', {defaultValue: 'Verificar mi trabajo'})} →
+              </Link>
             </p>
 
             {/* Índice de bloques de la pestaña activa -- dentro del header
