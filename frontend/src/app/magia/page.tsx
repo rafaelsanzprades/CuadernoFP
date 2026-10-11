@@ -348,7 +348,7 @@ export default function MagiaPage() {
       { id: "magia-curso-documentos", label: t('campos.magia.documentosApoyoCurriculoTitulo', {defaultValue: 'Plantillas de apoyo al currículo'}) },
       { id: "magia-curso-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
       { id: "magia-curso-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
-      { id: "magia-curso-seguimiento", label: t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'}) },
+      { id: "magia-curso-seguimiento", label: t('nav.sesiones', {defaultValue: 'Sesiones'}) },
       { id: "magia-curso-calificaciones", label: t('nav.cierre', {defaultValue: 'Cierre'}) },
     ],
     // Comparativa PDx, fusionada al final de Análisis APP->PDx (antes
@@ -365,7 +365,7 @@ export default function MagiaPage() {
       { id: "comparativa-magia-descargas", label: 'MagIA (Descargas)' },
       { id: "comparativa-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
       { id: "comparativa-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
-      { id: "comparativa-seguimiento", label: t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'}) },
+      { id: "comparativa-seguimiento", label: `${t('nav.sesiones', {defaultValue: 'Sesiones'})} / ${t('nav.calificaciones', {defaultValue: 'Calificaciones'})}` },
       { id: "comparativa-calificacion", label: t('nav.cierre', {defaultValue: 'Cierre'}) },
       { id: "comparativa-resumen-cobertura", label: 'Resumen de cobertura por nivel' },
       { id: "comparativa-notas", label: 'Notas' },
@@ -580,7 +580,7 @@ export default function MagiaPage() {
 
                 {/* ══════════════════════════ CURSO ══════════════════════════ */}
                 {/* 4 bloques, mismo orden y nombres que el grupo "Curso" del sidebar:
-                    Calendario / Alumnado / Seguimiento / Calificaciones. */}
+                    Calendario / Alumnado / Sesiones / Cierre. */}
                 {activeTab === 'curso' && (
                   <div className="space-y-4 animate-in fade-in duration-500">
                     {/* ── Plantillas de apoyo al currículo (antes primer bloque
@@ -741,9 +741,9 @@ export default function MagiaPage() {
                       </div>
                     </Card>
 
-                    {/* ── Seguimiento ── */}
+                    {/* ── Sesiones ── */}
                     <SectionHeading id="magia-curso-seguimiento" icon={TrendingUp} scrollMt="260px">
-                      {t('campos.magia.seguimientoLabel', {defaultValue: 'Seguimiento'})}
+                      {t('nav.sesiones', {defaultValue: 'Sesiones'})}
                     </SectionHeading>
                     <Card className="p-6 border-t-4 border-t-emerald-500">
                       <p className="text-body text-muted mb-6">{t('campos.magia.seguimientoDesc', {defaultValue: 'Diario de clases, secuenciación por UD y planificación mensual.'})}</p>

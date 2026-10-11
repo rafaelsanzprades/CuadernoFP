@@ -87,7 +87,7 @@ export default function LegalPage() {
       { id: "priv-modelo", label: t('checks.legal.privModelo', {defaultValue: '1. Modelo local-first'}) },
       { id: "priv-responsable", label: t('checks.legal.privResponsable', {defaultValue: '2. Responsable RGPD'}) },
       { id: "priv-datos", label: t('checks.legal.privDatos', {defaultValue: '3. ¿Dónde se guardan los datos?'}) },
-      { id: "priv-derechos", label: t('checks.legal.privDerechos', {defaultValue: '4. Derechos ARCO'}) },
+      { id: "priv-derechos", label: t('checks.legal.privDerechos', {defaultValue: '4. Derechos RGPD'}) },
       { id: "priv-seguridad", label: t('checks.legal.privSeguridad', {defaultValue: '5. Seguridad'}) },
       { id: "priv-base-legal", label: t('checks.legal.privBaseLegal', {defaultValue: '6. Base legal'}) },
       { id: "cookies-politica", label: t('checks.legal.cookiesPolitica', {defaultValue: '7. Política de cookies'}) },
@@ -347,13 +347,13 @@ export default function LegalPage() {
                   </ul>
                 </section>
 
-                {/* 4. Derechos ARCO */}
+                {/* 4. Derechos RGPD */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-derechos" number={4}>
-                    {t('campos.legal.derechosArcoTitulo', {defaultValue: 'Derechos del alumnado (ARCO)'})}
+                    {t('campos.legal.derechosArcoTitulo', {defaultValue: 'Derechos del alumnado (RGPD)'})}
                   </SectionHeading>
                   <p className="text-body text-foreground/80 leading-relaxed">
-                    El alumnado (o sus tutores legales, en caso de menores) pueden ejercer sus derechos de <strong>Acceso, rectificación, cancelación y oposición (ARCO)</strong> ante el Responsable del tratamiento, que es el docente o centro educativo.
+                    El alumnado (o sus tutores legales, en caso de menores) pueden ejercer sus derechos de <strong>acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición</strong> (arts. 15 a 21 del RGPD) ante el Responsable del tratamiento, que es el docente o centro educativo.
                   </p>
                   <p className="text-body text-foreground/80 leading-relaxed">
                     Dado que esta aplicación no almacena datos en servidores externos, el ejercicio de estos derechos se gestiona directamente entre el alumnado y el profesorado, sin intermediación del desarrollador.
