@@ -843,6 +843,7 @@
     },
     "verificacion": {
       "irA": "Joan hona: {{destino}}",
+      "verificarTrabajo": "Nire lana egiaztatu",
       "configurarModulo": "Konfiguratu modulua",
       "anadirPrimeraUd": "Gehitu lehen UDa",
       "anadirPrimerRa": "Gehitu lehen RA",
