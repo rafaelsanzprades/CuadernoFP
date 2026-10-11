@@ -94,7 +94,7 @@ const getFaqs = (t: (key: string, opts?: any) => string) => [
   {
     group: t('campos.ayuda.faq.grupo7.titulo', {defaultValue: '6. Soporte técnico'}),
     items: [
-      { q: t('campos.ayuda.faq.grupo7.q1', {defaultValue: '¿Qué pasa si las gráficas de mi panel de control no cargan?'}), a: t('campos.ayuda.faq.grupo7.a1', {defaultValue: "Comprueba en la barra lateral que has activado el 'Modo Reales' y tienes seleccionado tu Grupo. Las gráficas necesitan saber a qué alumnado y a qué programación apuntan para poder analizar los datos."}) },
+      { q: t('campos.ayuda.faq.grupo7.q1', {defaultValue: '¿Qué pasa si las gráficas de mi panel de control no cargan?'}), a: t('campos.ayuda.faq.grupo7.a1', {defaultValue: "Comprueba en la barra lateral que has abierto tu grupo con el botón 'Abrir grupo': sin un grupo abierto la app muestra datos de demostración. Las gráficas necesitan saber a qué alumnado y a qué programación apuntan para poder analizar los datos."}) },
       { q: t('campos.ayuda.faq.grupo7.q2', {defaultValue: '¿Se puede usar Cuaderno FP en el móvil?'}), a: t('campos.ayuda.faq.grupo7.a2', {defaultValue: 'El diseño es responsivo y se adapta, pero por la densidad de información (tablas masivas de evaluación y matrices curriculares), te recomendamos encarecidamente utilizarlo en pantallas de ordenador o tabletas grandes.'}) },
       { q: t('campos.ayuda.faq.grupo7.q3', {defaultValue: 'La app va muy lenta o he detectado un error extraño'}), a: t('campos.ayuda.faq.grupo7.a3', {defaultValue: 'Intenta recargar la página completamente (F5 o Ctrl+R). Si el error sigue apareciendo, exporta tus datos (.json) inmediatamente para ponerlos a salvo y ponte en contacto con el soporte detallando los pasos para reproducir tu problema.'}) }
     ]

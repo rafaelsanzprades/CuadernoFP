@@ -419,8 +419,8 @@
     "programacion": "Programazioa",
     "curso": "Ikasturtea",
     "programacion_desc": "Diseinu eta konfigurazio didaktikoaren area. Konfiguratu moduloa, lotu ebaluazio-matrizeak, definitu tresnak eta sekuentziatu geletako zereginak.",
-    "curso_desc": "Gela biziaren jarraipenerako tresnak. Ezarri egutegia, kudeatu ikasleen zerrenda, jaso eguneroko aurrerapena eta ebaluatu.",
-    "general_desc": "Nondik hasi: zure panela, zure fitxategiak eta aplikazioaren laguntza — talde bat irekita izan ala ez, berdin."
+    "curso_desc": "Gela biziaren jarraipenerako tresnak. Ezarri egutegia, kudeatu ikasleen zerrenda, kalifikatu, jaso saioak eta itxi ikastaroa espedientearekin eta hobekuntzarekin.",
+    "general_desc": "Nondik hasi: zure panela eta fitxategiak, laguntza, araudia, MagIAren dokumentuak eta informazio legala. MagIAk programazio eta ikastaro irekiak behar ditu."
   },
   "sidebar": {
     "en_obras": "Lanetan",
@@ -2714,7 +2714,7 @@
         "grupo7": {
           "titulo": "6. Laguntza teknikoa",
           "q1": "Zer gertatzen da nire kontrol-panelaren grafikoak kargatzen ez badira?",
-          "a1": "Egiaztatu alboko barran 'Modu errealak' aktibatuta duzula eta zure taldea hautatuta duzula. Grafikoek zein ikaslerengana eta zein programaziotara zuzentzen diren jakin behar dute datuak aztertu ahal izateko.",
+          "a1": "Egiaztatu alboko barran zure taldea 'Ireki taldea' botoiarekin ireki duzula: talde irekirik gabe aplikazioak demo-datuak erakusten ditu. Grafikoek jakin behar dute zein ikasleri eta zein programaziori buruzkoak diren datuak aztertzeko.",
           "q2": "Cuaderno FP mugikorrean erabil daiteke?",
           "a2": "Diseinua erantzunkorra da eta egokitu egiten da, baina informazio-dentsitatea dela eta (ebaluazio-taula masiboak eta curriculum-matrizeak), gogor gomendatzen dizugu ordenagailu-pantailetan edo tableta handietan erabiltzea.",
           "q3": "Aplikazioa oso motel dabil edo errore arraro bat antzeman dut",
@@ -2778,7 +2778,11 @@
       "privacidadAbsolutaTitulo": "Pribatutasun osoa jatorriz",
       "responsableTratamientoTitulo": "Tratamenduaren arduraduna (DBEO)",
       "dondeSeGuardanDatosTitulo": "Non gordetzen dira datuak?",
-      "derechosArcoTitulo": "Ikasleen eskubideak (DBEO)",
+      "derechosTitulo": "Ikasleen eskubideak (DBEO)",
+      "derechosP1a": "Ikasleek (edo haien legezko tutoreek, adingabeen kasuan) honako eskubide hauek erabil ditzakete:",
+      "derechosP1b": "sarbidea, zuzenketa, ezabatzea, tratamenduaren mugaketa, eramangarritasuna eta aurkakotasuna",
+      "derechosP1c": "(DBEOren 15-21 artikuluak) tratamenduaren arduradunaren aurrean, hau da, irakaslea edo ikastetxea.",
+      "derechosP2": "Aplikazio honek ez dituenez datuak kanpoko zerbitzarietan gordetzen, eskubide horien erabilera ikasleen eta irakasleen artean zuzenean kudeatzen da, garatzailea tartekari izan gabe.",
       "seguridadTitulo": "Segurtasuna",
       "baseLegalNormativaTitulo": "Oinarri legala eta aplikagarri den araudia",
       "politicaCookiesTitulo": "Cookie-en politika",

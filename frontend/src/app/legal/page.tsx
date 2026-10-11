@@ -350,13 +350,13 @@ export default function LegalPage() {
                 {/* 4. Derechos RGPD */}
                 <section className="space-y-3">
                   <SectionHeading id="priv-derechos" number={4}>
-                    {t('campos.legal.derechosArcoTitulo', {defaultValue: 'Derechos del alumnado (RGPD)'})}
+                    {t('campos.legal.derechosTitulo', {defaultValue: 'Derechos del alumnado (RGPD)'})}
                   </SectionHeading>
                   <p className="text-body text-foreground/80 leading-relaxed">
-                    El alumnado (o sus tutores legales, en caso de menores) pueden ejercer sus derechos de <strong>acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición</strong> (arts. 15 a 21 del RGPD) ante el Responsable del tratamiento, que es el docente o centro educativo.
+                    {t('campos.legal.derechosP1a', {defaultValue: 'El alumnado (o sus tutores legales, en caso de menores) pueden ejercer sus derechos de'})} <strong>{t('campos.legal.derechosP1b', {defaultValue: 'acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición'})}</strong> {t('campos.legal.derechosP1c', {defaultValue: '(arts. 15 a 21 del RGPD) ante el Responsable del tratamiento, que es el docente o centro educativo.'})}
                   </p>
                   <p className="text-body text-foreground/80 leading-relaxed">
-                    Dado que esta aplicación no almacena datos en servidores externos, el ejercicio de estos derechos se gestiona directamente entre el alumnado y el profesorado, sin intermediación del desarrollador.
+                    {t('campos.legal.derechosP2', {defaultValue: 'Dado que esta aplicación no almacena datos en servidores externos, el ejercicio de estos derechos se gestiona directamente entre el alumnado y el profesorado, sin intermediación del desarrollador.'})}
                   </p>
                 </section>
 

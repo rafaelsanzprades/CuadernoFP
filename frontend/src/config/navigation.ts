@@ -7,14 +7,12 @@ import { Activity, Award, Calendar, CalendarDays, Compass, FileText, GraduationC
 // Verificación pasaron a Inicio) y Ayuda vuelve a existir en su hueco, con
 // Guía/FAQ/Acrónimos/Contribuciones -- el bloque se mantiene en 5 páginas.
 // Legal, que antes vivía aparte en footerPages, ocupa su propio hueco desde
-// ese mismo cambio. Pendiente de revisar: sectionDescription de General
-// todavía dice "todo independiente de tener un grupo abierto", pero
-// Normativa (contenido por módulo) y sobre todo MagIA (necesita programación
-// + curso activos) no cumplen eso.
+// ese mismo cambio. La sectionDescription
+// de General y la de Curso se actualizaron el 2026-10-11 (7 locales).
 export const navGroups = [
   {
     title: "General",
-    sectionDescription: "Por dónde empezar: tu panel, tus ficheros y la ayuda de la aplicación — todo independiente de tener un grupo abierto.",
+    sectionDescription: "Por dónde empezar: tu panel y tus ficheros, la ayuda, la normativa, los documentos de MagIA y la información legal. MagIA necesita una programación y un curso abiertos.",
     items: [
       { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, gestión de archivos, IA y verificación de datos." },
       { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, FAQ, acrónimos y contribuciones de la comunidad." },
@@ -36,7 +34,7 @@ export const navGroups = [
   },
   {
     title: "Curso [Año]",
-    sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota el progreso diario y evalúa.",
+    sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, califica, anota las sesiones y cierra el curso con el expediente y la mejora.",
     items: [
       { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso." },
       { href: "/alumnado?tab=orientacion", label: "Alumnado", icon: Users, description: "Matrícula, orientación profesional, perfil del grupo y plano de aula." },
