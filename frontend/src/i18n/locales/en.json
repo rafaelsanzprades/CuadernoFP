@@ -843,6 +843,7 @@
     },
     "verificacion": {
       "irA": "Go to {{destino}}",
+      "verificarTrabajo": "Check my work",
       "configurarModulo": "Configure module",
       "anadirPrimeraUd": "Add first UD",
       "anadirPrimerRa": "Add first RA",
