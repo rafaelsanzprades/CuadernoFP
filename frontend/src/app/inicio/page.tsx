@@ -1,5 +1,5 @@
 "use client";
-import { Activity, ArrowRight, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, Download, FolderOpen, GraduationCap, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap } from "lucide-react";
+import { Activity, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, Download, FolderOpen, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -323,10 +323,9 @@ export default function InicioPage() {
   // solo en las pestañas con 2+ bloques reales que merezca la pena enlazar.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     bienvenida: [
-      { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'}) },
+      { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación para Windows'}) },
       { id: "bienvenida-guia-web", label: t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'}) },
       { id: "bienvenida-contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
-      { id: "bienvenida-metodologia", label: t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de formación profesional'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
       { id: "bienvenida-contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por comunidad autónoma'}) },
     ],
@@ -408,113 +407,72 @@ export default function InicioPage() {
 
           <div className="w-full space-y-12 pb-12">
 
-            {/* Descarga de escritorio -- primer subtítulo de la página
-                (petición de Rafael, 2026-09-29), antes vivía en <VersionBar/>
-                como fila delgada fuera de la pestaña, encima de la barra de
-                pestañas. */}
-            <div className="space-y-3">
-              <SectionHeading id="bienvenida-descarga-escritorio" icon={Download} scrollMt="260px">
-                {t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación de escritorio para Windows'})}
-              </SectionHeading>
-              <VersionBar />
-            </div>
+            {/* Tres bloques en columnas (prueba de Rafael, 2026-10-11): app de
+                escritorio, guía en la web y Telegram. En pantallas estrechas
+                se apilan. Dentro de Tauri, UpdateChecker (autoactualización)
+                va en la primera columna en lugar del botón de descarga. */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-end [&>*]:w-full"><SectionHeading id="bienvenida-descarga-escritorio" icon={Download} scrollMt="260px">
+                  {t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación para Windows'})}
+                </SectionHeading></div>
+                <VersionBar />
+                {isTauri() && (
+                  <div className="p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
+                    <UpdateChecker />
+                  </div>
+                )}
+              </div>
 
-            {/* Guía en la web -- bloque 2 de 3, mismo formato que la app de
-                escritorio y Telegram (petición de Rafael, 2026-10-11). */}
-            <div className="space-y-3">
-              <SectionHeading id="bienvenida-guia-web" icon={BookOpen} scrollMt="260px">
-                {t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}
-              </SectionHeading>
-              <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                <div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-accent" />
-                </div>
-                <div className="flex-1 text-center md:text-left">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-end [&>*]:w-full"><SectionHeading id="bienvenida-guia-web" icon={BookOpen} scrollMt="260px">
+                  {t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}
+                </SectionHeading></div>
+                <div className="flex flex-1 flex-col items-center md:items-start gap-4 p-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-accent" />
+                  </div>
                   <p className="text-body text-muted leading-tight">
                     {t('campos.inicio.guiaWebDesc', {defaultValue: 'Una guía para hacer tu programación y tu curso de FP con la aplicación como hilo conductor: contenido teórico, marco legal y práctica, paso a paso.'})}
                   </p>
+                  <a
+                    href="https://www.rafaelsanzprades.es/programacion-didactica-fp.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto w-full justify-center px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent/80 transition-colors flex items-center gap-2 text-body"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    {t('campos.inicio.guiaWebBoton', {defaultValue: 'Abrir la guía'})}
+                  </a>
                 </div>
-                <a
-                  href="https://www.rafaelsanzprades.es/programacion-didactica-fp.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent/80 transition-colors flex items-center gap-2 text-body"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  {t('campos.inicio.guiaWebBoton', {defaultValue: 'Abrir la guía'})}
-                </a>
               </div>
-            </div>
 
-            {/* Grupo oficial de Telegram -- traído aquí justo detrás de
-                Aplicación de escritorio (antes al final, tras el Mapa del
-                web; petición de Rafael, 2026-09-30). */}
-            <div className="space-y-3">
-              <SectionHeading id="bienvenida-contrib-telegram" icon={MessageCircle} scrollMt="260px">
-                {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
-              </SectionHeading>
-              <div className="flex flex-col md:flex-row items-center gap-5 p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
-                  <MessageCircle className="w-6 h-6 text-[#229ED9]" />
-                </div>
-                <div className="flex-1 text-center md:text-left">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-end [&>*]:w-full"><SectionHeading id="bienvenida-contrib-telegram" icon={MessageCircle} scrollMt="260px">
+                  {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
+                </SectionHeading></div>
+                <div className="flex flex-1 flex-col items-center md:items-start gap-4 p-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                    <MessageCircle className="w-6 h-6 text-[#229ED9]" />
+                  </div>
                   <p className="text-body text-muted leading-tight">
                     {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad autónoma.'})}
                   </p>
+                  <a
+                    href="https://t.me/cuadernofp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto w-full justify-center px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
+                  >
+                    <Send className="w-4 h-4" />
+                    {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
+                  </a>
                 </div>
-                <a
-                  href="https://t.me/cuadernofp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
-                >
-                  <Send className="w-4 h-4" />
-                  {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
-                </a>
               </div>
             </div>
 
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}
             <RecentModulesPanel />
-
-            {/* Posicionamiento: metodología experta detrás de la app. La
-                autoactualización se queda aquí, y solo dentro de Tauri --
-                fuera de Tauri no hay nada que revisar. */}
-            <div className="space-y-3">
-              <SectionHeading id="bienvenida-metodologia" icon={GraduationCap} scrollMt="260px">
-                {t('campos.inicio.metodologiaEspecificaTitulo', {defaultValue: 'Metodología específica de formación profesional'})}
-              </SectionHeading>
-              <Card className="p-6 border border-accent/20 bg-accent/5">
-              <p className="text-body text-muted">
-                {t('campos.inicio.metodologiaEspecificaDesc', {defaultValue: 'Cuaderno FP sigue las referencias bibliográficas actualizadas a la nueva ley de FP, las orientaciones de la Inspección Educativa, los principales autores de referencia y las guías oficiales de las administraciones educativas: los Resultados de aprendizaje (RA) son el eje causal del que se considera debe derivar todo lo demás en una programación didáctica.'})}
-              </p>
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-body font-semibold text-muted border-t border-[var(--glass-border)] pt-4 mt-4">
-                {[
-                  t('campos.inicio.pasoIdentificacion', {defaultValue: 'Identificación'}),
-                  t('campos.inicio.pasoIntroduccionJustificacionNormativa', {defaultValue: 'Introducción, justificación y normativa'}),
-                  t('campos.inicio.pasoContextualizacion', {defaultValue: 'Contextualización'}),
-                  t('campos.inicio.pasoObjetivosCompetencias', {defaultValue: 'Objetivos y competencias'}),
-                  t('campos.inicio.pasoCaracterIntermodularDual', {defaultValue: 'Carácter intermodular y dual'}),
-                  t('campos.inicio.pasoContenidosCentradosRa', {defaultValue: 'Contenidos teórico-prácticos'}),
-                  t('campos.inicio.pasoSituacionesAprendizaje', {defaultValue: 'Resultados de aprendizaje'}),
-                  t('campos.inicio.pasoMetodologiaInclusion', {defaultValue: 'Metodología e inclusión'}),
-                  t('campos.inicio.pasoEvaluacion', {defaultValue: 'Evaluación (aprendizaje / prácticas / excepciones)'}),
-                  t('campos.inicio.pasoActividadesComplementarias', {defaultValue: 'Actividades complementarias'}),
-                  t('campos.inicio.pasoAtencionDiversidadRecursos', {defaultValue: 'Atención a la diversidad y recursos'}),
-                ].map((step, i, arr) => (
-                  <span key={step} className="flex items-center gap-2">
-                    <span className="px-3 py-1.5 rounded-full bg-foreground/5 border border-[var(--glass-border)] text-foreground/80">{step}</span>
-                    {i < arr.length - 1 && <ArrowRight className="w-4 h-4 text-muted/50 shrink-0" />}
-                  </span>
-                ))}
-              </div>
-              {isTauri() && (
-                <div className="border-t border-[var(--glass-border)] pt-4 mt-4">
-                  <UpdateChecker />
-                </div>
-              )}
-              </Card>
-            </div>
 
             {/* Mapa del web: los 3 bloques (Inicio, Programación, Curso), cada
                 baldosín lista también las pestañas que contiene esa página. */}
