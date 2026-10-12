@@ -45,7 +45,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDdCRUZBOUE0QTZCN0MwREMKUldUY3dMZW1wS252ZTUzS3IxM1prcDhKTlJFK1ZlU3NsTUNMeVVnWVY4cU5vdVNGOVh3b2pZZWoK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDkxQkI1NzU5MTlGNjhFNjUKUldSbGp2WVpXVmU3a1RJNGl0Z0ZjcnkyODhqUDBuU3VPVGVtWWhlSGVwY2xRdkQxZUl6My81V00K",
       "endpoints": [
         "https://github.com/rafaelsanzprades/CuadernoFP/releases/latest/download/latest.json"
       ]
