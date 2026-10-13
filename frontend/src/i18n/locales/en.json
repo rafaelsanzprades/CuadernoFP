@@ -1845,6 +1845,8 @@
       "campoHistoricoAviso": "(legacy field)",
       "campoHistoricoFusionAviso": "(legacy field, soon to be merged with the one above)",
       "centroEducativo": "Educational center",
+      "localidad": "Locality",
+      "provincia": "Province",
       "chipTrim1": "1st term",
       "chipTrim2": "2nd term",
       "chipTrim3": "3rd term",

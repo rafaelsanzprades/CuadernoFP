@@ -683,6 +683,8 @@
     "criterio_tareas": 10,
     "h_sem": 6,
     "centro": "CPIFP CIFPA",
+    "municipio": "Zaragoza",
+    "provincia": "Zaragoza",
     "profesorado": "Javier Edo Gual",
     "ccaa": "aragon"
   },
