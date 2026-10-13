@@ -333,9 +333,11 @@ Calidad EQAVET (indicadores de calidad) y propuestas de mejora del módulo (cicl
 
 | Nivel | Páginas aprox. | Campos incluidos | Uso principal |
 |-------|---------------|------------------|---------------|
-| **PD- (Resumen)** | 1-2 | 38 (Datos + RA/CE + UD) | Entregar a alumnado el primer día |
-| **PD= (Simplificada)** | 15-20 | 72 (14 apartados normativos A-N, con subapartados C1-C3/E1/G1) | Jefatura de estudios, inspección |
-| **PD+ (Detallada JEG)** | >60 | 84 (todo + narrativa expandida) | Oposiciones, TFM, memoria completa |
+| **PD- (Resumen)** | 1-2 | 31 (Datos + RA/CE + UD) | Entregar a alumnado el primer día |
+| **PD= (Simplificada)** | 15-20 | 51 (14 apartados normativos A-N, con subapartados C1-C3/E1/G1) | Jefatura de estudios, inspección |
+| **PD+ (Detallada JEG)** | >60 | 78 (casi todo + narrativa expandida) | Oposiciones, TFM, memoria completa |
+
+_Recuento del 2026-10-13: campos únicos con contenido en cada columna (el campo 84 se cuenta una vez; se excluyen los botones «Genera este documento»). La tabla tiene 81 campos numerados del 1 al 84 (los números 47, 71 y 75 no se usan)._
 
 ---
 
