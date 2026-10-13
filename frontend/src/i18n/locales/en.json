@@ -2755,6 +2755,7 @@
       "cargandoDatosProgreso": "Loading academic progress data..."
     },
     "inicio": {
+      "empiezaAquiTitulo": "Start here",
       "grupoTelegramTitulo": "Official Telegram group",
       "grupoTelegramDesc": "Official development and testing group for the free Cuaderno FP web app. Share your suggestions, report bugs, or contribute by providing the official curriculum for your autonomous Community.",
       "aplicacionEscritorioDesc": "Cuaderno FP as a Windows program: install it, open your files and work, even offline. It is free and open source.",

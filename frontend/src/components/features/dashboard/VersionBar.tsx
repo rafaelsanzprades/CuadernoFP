@@ -21,8 +21,11 @@ export function VersionBar() {
 
   return (
     <div className="flex flex-1 flex-col items-center md:items-start gap-4 p-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-      <div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
-        <Monitor className="w-6 h-6 text-accent" />
+      <div className="flex items-center gap-3 w-full">
+        <div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
+          <Monitor className="w-6 h-6 text-accent" />
+        </div>
+        <h3 className="text-subheading font-bold">{t('campos.inicio.aplicacionEscritorioTitulo', { defaultValue: 'Aplicación para Windows' })}</h3>
       </div>
       <p className="text-body text-muted leading-tight">
         {t('campos.inicio.aplicacionEscritorioDesc', { defaultValue: 'Cuaderno FP como programa de Windows: instalas, abres tus archivos y trabajas, también sin conexión. Es gratuito y de código abierto.' })}

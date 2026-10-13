@@ -1,5 +1,5 @@
 "use client";
-import { Activity, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, Download, FolderOpen, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap } from "lucide-react";
+import { Activity, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, Download, FolderOpen, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap, Rocket } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -323,9 +323,7 @@ export default function InicioPage() {
   // solo en las pestañas con 2+ bloques reales que merezca la pena enlazar.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     bienvenida: [
-      { id: "bienvenida-descarga-escritorio", label: t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación para Windows'}) },
-      { id: "bienvenida-guia-web", label: t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'}) },
-      { id: "bienvenida-contrib-telegram", label: t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'}) },
+      { id: "bienvenida-empieza", label: t('campos.inicio.empiezaAquiTitulo', {defaultValue: 'Empieza aquí'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
       { id: "bienvenida-contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por comunidad autónoma'}) },
     ],
@@ -411,11 +409,12 @@ export default function InicioPage() {
                 escritorio, guía en la web y Telegram. En pantallas estrechas
                 se apilan. Dentro de Tauri, UpdateChecker (autoactualización)
                 va en la primera columna en lugar del botón de descarga. */}
+            <div className="space-y-3">
+              <SectionHeading id="bienvenida-empieza" icon={Rocket} scrollMt="260px">
+                {t('campos.inicio.empiezaAquiTitulo', {defaultValue: 'Empieza aquí'})}
+              </SectionHeading>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
               <div className="flex flex-col gap-3">
-                <div className="flex items-end [&>*]:w-full"><SectionHeading id="bienvenida-descarga-escritorio" icon={Download} scrollMt="260px">
-                  {t('campos.inicio.aplicacionEscritorioTitulo', {defaultValue: 'Aplicación para Windows'})}
-                </SectionHeading></div>
                 <VersionBar />
                 {isTauri() && (
                   <div className="p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
@@ -425,13 +424,10 @@ export default function InicioPage() {
               </div>
 
               <div className="flex flex-col gap-3">
-                <div className="flex items-end [&>*]:w-full"><SectionHeading id="bienvenida-guia-web" icon={BookOpen} scrollMt="260px">
-                  {t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}
-                </SectionHeading></div>
                 <div className="flex flex-1 flex-col items-center md:items-start gap-4 p-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
+                  <div className="flex items-center gap-3 w-full"><div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
                     <BookOpen className="w-6 h-6 text-accent" />
-                  </div>
+                  </div><h3 className="text-subheading font-bold">{t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}</h3></div>
                   <p className="text-body text-muted leading-tight">
                     {t('campos.inicio.guiaWebDesc', {defaultValue: 'Para hacer tu programación y tu curso de FP con la aplicación como hilo conductor: contenido teórico, marco legal y práctica, paso a paso.'})}
                   </p>
@@ -448,13 +444,10 @@ export default function InicioPage() {
               </div>
 
               <div className="flex flex-col gap-3">
-                <div className="flex items-end [&>*]:w-full"><SectionHeading id="bienvenida-contrib-telegram" icon={MessageCircle} scrollMt="260px">
-                  {t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}
-                </SectionHeading></div>
                 <div className="flex flex-1 flex-col items-center md:items-start gap-4 p-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
+                  <div className="flex items-center gap-3 w-full"><div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
                     <MessageCircle className="w-6 h-6 text-[#229ED9]" />
-                  </div>
+                  </div><h3 className="text-subheading font-bold">{t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}</h3></div>
                   <p className="text-body text-muted leading-tight">
                     {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad autónoma.'})}
                   </p>
@@ -469,6 +462,7 @@ export default function InicioPage() {
                   </a>
                 </div>
               </div>
+            </div>
             </div>
 
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}

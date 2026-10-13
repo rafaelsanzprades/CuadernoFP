@@ -2755,6 +2755,7 @@
       "cargandoDatosProgreso": "Aurrerapen akademikoaren datuak kargatzen..."
     },
     "inicio": {
+      "empiezaAquiTitulo": "Hasi hemen",
       "grupoTelegramTitulo": "Telegrameko talde ofiziala",
       "grupoTelegramDesc": "Cuaderno FP doako web-aplikazioaren garapen eta probaketarako talde ofiziala. Bidali zure iradokizunak, jakinarazi akatsak edo lagundu zure autonomia erkidegoko curriculum ofiziala emanez.",
       "aplicacionEscritorioDesc": "Cuaderno FP Windows programa gisa: instalatu, ireki zure fitxategiak eta lan egin, konexiorik gabe ere. Doakoa eta kode irekikoa da.",
