@@ -52,7 +52,7 @@ export function InstallPwaButton({ isSidebarOpen }: { isSidebarOpen: boolean }) 
       <button
         onClick={handleInstallClick}
         className="flex items-center justify-center p-2 rounded-lg text-info hover:bg-info/10 transition-colors"
-        title={t('botones.comun.instalarApp', {defaultValue: 'Instalar app'})}
+        title={t('botones.comun.instalarApp', {defaultValue: 'Instalar web como app'})}
       >
         <Download className="w-5 h-5" />
       </button>
@@ -62,10 +62,11 @@ export function InstallPwaButton({ isSidebarOpen }: { isSidebarOpen: boolean }) 
   return (
     <Button
       onClick={handleInstallClick}
+      title={t('botones.comun.instalarAppAyuda', {defaultValue: 'Crea un acceso directo que abre esta web en su propia ventana, sin barra del navegador. No es el programa de Windows.'})}
       className="w-full flex items-center justify-center gap-2 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-body py-2 mb-2"
     >
       <Download className="w-4 h-4" />
-      <span>{t('botones.comun.instalarApp', {defaultValue: 'Instalar app'})}</span>
+      <span>{t('botones.comun.instalarApp', {defaultValue: 'Instalar web como app'})}</span>
     </Button>
   );
 }

@@ -746,7 +746,7 @@
       "deshacer": "Undo",
       "hoy": "Today",
       "ignorar": "Dismiss",
-      "instalarApp": "Install app"
+      "instalarApp": "Install web as app"
     },
     "curriculo": {
       "anadirCeA": "Add CE to {{id}}",
