@@ -1525,6 +1525,8 @@
     "h_sem": 5,
     "curso": "1º",
     "centro": "IES Andalán",
+    "municipio": "Zaragoza",
+    "provincia": "Zaragoza",
     "profesorado": "Rafael Sanz Prades",
     "ccaa": "aragon",
     "pond_1t": 30,

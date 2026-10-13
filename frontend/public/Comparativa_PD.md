@@ -11,7 +11,7 @@
 > - PD=: `124-PD-suficiente-RSP-CFGM-ICTVE.md`, `125-PD-suficiente-RSP-CFGS-SIRL.md` (14 apartados A-N, verificados contra los PDF reales) — **no** `43-PD-BOA-10p.md` / `44-PD-Aragon-16p.md`, ambos marcados obsoletos: documentaban el Art. 100.2 del Decreto 91/2024 en su redacción **original** de junio 2024 (17 puntos sueltos a)-q), sin agrupar), antes de que el **BOA nº 181, de 18 de septiembre de 2025** ("título Treinta") reescribiera ese mismo artículo en la estructura de 14 apartados que usan los documentos reales. Grado D (al que aplica el Art. 100) incluye tanto Grado Medio como Grado Superior — no hay distinción entre ambos, confirmado comparando los índices de 124 y 125 letra por letra.
 > - PD+: `36-PD-completa.md` (83 páginas, 15 secciones)
 >
-> **Nota de mantenimiento:** las columnas PD-/PD=/PD+ reflejan la estructura oficial de cada documento (cambia solo cuando cambia la normativa que las define — ver corrección de 2026-09-12 más arriba). La columna "dónde" (agrupada en los encabezados de sección) sí cambia cuando se reorganiza la navegación de la app — revisada por última vez el 2026-10-13 contra el código de cada pestaña, fila a fila (campos 1-84). Los campos marcados «sin campo en la app» (2, 3, 14, 21) no existen todavía.
+> **Nota de mantenimiento:** las columnas PD-/PD=/PD+ reflejan la estructura oficial de cada documento (cambia solo cuando cambia la normativa que las define — ver corrección de 2026-09-12 más arriba). La columna "dónde" (agrupada en los encabezados de sección) sí cambia cuando se reorganiza la navegación de la app — revisada por última vez el 2026-10-13 contra el código de cada pestaña, fila a fila (campos 1-84). Localidad y Provincia (campo 3) se añadieron a la app el 2026-10-13; los campos 2, 14 y 21 se quitaron del documento.
 
 ---
 
@@ -19,11 +19,12 @@
 
 ### Pestaña: Identificación
 
+Notas: el **departamento / área** no es un campo: los generadores lo derivan de la **familia profesional**. El **código del centro** y la **conexión con empresas locales** (esta última la cubre «Entorno socioeconómico y productivo», campo 17) se quitaron del documento porque ningún generador los usa.
+
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 1 | Centro educativo | §Portada | Encabezado del documento | §2.1 · Centro educativo |
-| 2 | Código del Centro *(sin campo en la app)* | §Portada | — | §2.1 · Centro educativo |
-| 3 | Localidad / Provincia *(sin campo en la app)* | §Portada | — | §2.1 · Centro educativo |
+| 3 | Localidad y Provincia (campos «Localidad» y «Provincia») | §Portada | — | §2.1 · Centro educativo |
 | 4 | Comunidad / Territorio (Comunidad Autónoma) | §Portada | — | §2.1 · Centro educativo |
 | 5 | Módulo didáctico (nombre) | §Encabezado (resumen) | §A · Introducción | §1 · Introducción — §3.4 · RA |
 | 6 | Módulo didáctico (código, del desplegable) | §Encabezado (resumen) | Encabezado del documento | §1 · Introducción — §3.4 · RA |
@@ -33,7 +34,6 @@
 | 11 | Carga lectiva anual / Horas BOA | §Encabezado (resumen) | §A · Introducción | §1 · Introducción — §4.3 · Temporalización |
 | 12 | Horas FEOE del curso (si hay régimen dual) | §Encabezado (resumen) | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE | §1 · Introducción |
 | 13 | Profesorado | §Portada | — | §1 · Introducción |
-| 14 | Departamento / Área *(sin campo en la app)* | §Portada | — | §2.1 · Centro educativo |
 | 15 | Régimen dual LO 3/2022 (Ninguno / Dual general / Dual intensivo) | §Encabezado (resumen) | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE | §1 · Introducción |
 
 ### Pestaña: Entorno
@@ -44,7 +44,6 @@
 | 17 | Contexto socioeconómico y productivo del entorno | — | §A · Introducción | §2.1 · Centro educativo — Entorno socioeconómico |
 | 18 | Contexto escolar del centro | — | §A · Introducción | §2.1 · Centro educativo — Equipo docente |
 | 20 | Infraestructura y recursos disponibles | — | §J · Materiales y recursos didácticos | §2.1 · Centro educativo |
-| 21 | Conexión con empresas locales *(sin campo en la app)* | — | — | §2.1 · Centro educativo — Entorno socioeconómico |
 | 28 | Actividades complementarias y extraescolares (texto, bloque propio de `Contexto` › `Entorno`) | — | §K · Actividades complementarias y extraescolares | §14 · Actividades complementarias y extraescolares |
 | 10 | Modalidad (rasgos rápidos del contexto escolar: Presencial / Semipresencial / Distancia) y turno (Diurno / Vespertino / Mixto) | §Encabezado (resumen) | §A · Introducción | §1 · Introducción |
 | 19 | Características del alumnado (texto y rasgos rápidos, dentro de «Contexto escolar») | — | §E1 · Atención a las diferencias individuales | §2.2 · Alumnado — ACNEAE |

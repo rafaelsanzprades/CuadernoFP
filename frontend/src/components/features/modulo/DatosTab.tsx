@@ -233,6 +233,18 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             value={data.profesorado || data.profesor || ""}
             onChange={e => updateInfoModulo('profesorado', e.target.value)}
           />
+          <Input
+            label={t('campos.modulo.localidad', {defaultValue: 'Localidad'})}
+            type="text"
+            value={data.municipio || ""}
+            onChange={e => updateInfoModulo('municipio', e.target.value)}
+          />
+          <Input
+            label={t('campos.modulo.provincia', {defaultValue: 'Provincia'})}
+            type="text"
+            value={data.provincia || ""}
+            onChange={e => updateInfoModulo('provincia', e.target.value)}
+          />
           <Select
             label={t('campos.modulo.comunidadTerritorio', {defaultValue: 'Comunidad / Territorio'})}
             value={data.ccaa || ""}

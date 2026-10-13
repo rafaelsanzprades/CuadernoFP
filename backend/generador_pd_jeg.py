@@ -133,8 +133,8 @@ def _build_context(data: dict) -> dict:
     # --- Contextualizacion ---
     context.update({
         "nombre_centro": config.get("nombre_centro", data.get("centro", "")),
-        "municipio": config.get("municipio", ""),
-        "provincia": config.get("provincia", "Teruel"),
+        "municipio": data.get("municipio", ""),
+        "provincia": data.get("provincia", ""),
         "comunidad_autonoma": config.get("comunidad_autonoma", "Aragon"),
         "tipo_centro": config.get("tipo_centro", "publico"),
         "tamanno_poblacion": config.get("tamano_poblacion", ""),
