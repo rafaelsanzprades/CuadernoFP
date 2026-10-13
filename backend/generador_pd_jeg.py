@@ -38,6 +38,11 @@ DEFAULT_RECURSOS_DOCUMENTALES_CONTINGENCIA = "los apuntes y la documentación t�
 DEFAULT_RECURSOS_DIGITALES_CONTINGENCIA = "la plataforma educativa y el aula virtual del centro"
 
 
+def _marca(etiqueta: str) -> str:
+    """Dato que la app todavía no tiene: se deja la marca [[ ... ]] de la plantilla para completarlo a mano en el .docx."""
+    return f"[[ {etiqueta} ]]"
+
+
 def _ra_id_full(ra: dict) -> str:
     id_str = str(ra.get('id_ra', '')).strip().rstrip('.')
     prefix = "" if id_str.upper().startswith("RA") else "RA"
@@ -99,7 +104,6 @@ def _build_context(data: dict) -> dict:
     # --- Contexto base (variables de portada e identificacion) ---
     context = {
         # Portada
-        "tipo_centro": config.get("tipo_centro", "Tipo de Centro Educativo"),
         "nombre_centro": config.get("nombre_centro", "Nombre del Centro"),
         "curso_academico": curso,
         "tipo_elemento": tipo_elemento,
@@ -136,18 +140,12 @@ def _build_context(data: dict) -> dict:
         "municipio": data.get("municipio", ""),
         "provincia": data.get("provincia", ""),
         "comunidad_autonoma": config.get("comunidad_autonoma", "Aragon"),
-        "tipo_centro": config.get("tipo_centro", "publico"),
-        "tamanno_poblacion": config.get("tamano_poblacion", ""),
-        "num_alumnado": str(config.get("num_alumnado", "")),
-        "oferta_formativa": config.get("oferta_formativa", "ciclos formativos"),
-        "programas_innovacion": config.get("programas_innovacion", ""),
-        "procedencia_alumnado": config.get("procedencia_alumnado", ""),
-        "franja_edad": config.get("franja_edad", "18-25"),
-        "nivel_madurez": config.get("nivel_madurez", "homogeneo"),
-        "vias_acceso": config.get("vias_acceso", ""),
+        # Portada y «Características del alumnado»: datos reales de la app (Identificación y Contexto › Alumnado); si faltan, marca [[ ... ]]
+        "tipo_centro": data.get("tipo_centro") or _marca("tipo de centro"),
+        "procedencia_alumnado": config.get("procedencia_alumnado") or _marca("procedencia geográfica principal"),
         "nivel_competencial": config.get("nivel_competencial", ""),
-        "grado_implicacion": config.get("grado_implicacion", "medio"),
-        "expectativas": config.get("expectativas", "insercion laboral"),
+        "grado_implicacion": config.get("grado_implicacion") or _marca("alto, medio o bajo"),
+        "expectativas": config.get("expectativas") or _marca("expectativas del grupo"),
         "grado_autonomia": config.get("grado_autonomia", ""),
         "habitos_estudio": config.get("habitos_estudio", ""),
         "capacidad_trabajo_equipo": config.get("capacidad_trabajo_equipo", ""),
@@ -159,8 +157,7 @@ def _build_context(data: dict) -> dict:
         "sectores_productivos": config.get("sectores_productivos",
             data.get("familia", "")),
         "perfiles_profesionales": config.get("perfiles_profesionales", ""),
-        "caracteristicas_alumnado_extra": config.get("caracteristicas_alumnado_extra",
-            config.get("F1_diversidad", "")),
+        "caracteristicas_alumnado_extra": data.get("textos_pd_caracteristicas_alumnado") or _marca("otros rasgos del grupo a destacar"),
     })
 
     # --- Espacios y equipamiento (contextualizacion) ---
@@ -183,7 +180,6 @@ def _build_context(data: dict) -> dict:
         "horas_fct": str(config.get("horas_fct", "")),
         "horas_empresa": str(config.get("horas_empresa", "")),
         "curso_escolar": curso,
-        "semanas_totales": str(config.get("semanas_totales", "36")),
     })
 
     # --- ECP, CPE, OG (textos libres) ---

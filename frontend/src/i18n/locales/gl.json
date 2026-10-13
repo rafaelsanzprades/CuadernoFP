@@ -1083,6 +1083,9 @@
       "proveedorOpenai": "OpenAI ChatGPT (require saldo na conta)"
     },
     "alumnado": {
+      "implicacionAlto": "Alto",
+      "implicacionMedio": "Medio",
+      "implicacionBajo": "Baixo",
       "ambitoAlumno": "Alumno/a",
       "ambitoEquipoDocente": "Equipo docente",
       "ambitoFamilia": "Familia",
@@ -1601,7 +1604,11 @@
   },
   "campos": {
     "alumnado": {
-      "caracteristicasDesc": "Procedencia xeográfica principal, franxa de idade, nivel competencial inicial, expectativas e implicación, etc.",
+      "caracteristicasDesc": "Outros trazos do grupo que queiras destacar (o PD+ imprímeos despois de «Asimismo, cabe destacar…»).",
+      "perfilPdTitulo": "Procedencia, implicación e expectativas",
+      "procedenciaLabel": "Procedencia xeográfica principal",
+      "implicacionLabel": "Grao de implicación",
+      "expectativasLabel": "Expectativas do grupo",
       "caracteristicasTitulo": "Características do alumnado",
       "alumnoLabel": "Alumno/a",
       "asientoLibre": "Libre",
@@ -1846,6 +1853,7 @@
       "campoHistoricoFusionAviso": "(campo histórico, próximo a fusionarse co de arriba)",
       "centroEducativo": "Centro educativo",
       "localidad": "Localidade",
+      "tipoCentro": "Tipo de centro",
       "provincia": "Provincia",
       "chipTrim1": "1º Trim.",
       "chipTrim2": "2º Trim.",

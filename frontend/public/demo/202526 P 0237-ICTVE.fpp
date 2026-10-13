@@ -1525,6 +1525,7 @@
     "h_sem": 5,
     "curso": "1º",
     "centro": "IES Andalán",
+    "tipo_centro": "Centro público",
     "municipio": "Zaragoza",
     "provincia": "Zaragoza",
     "profesorado": "Rafael Sanz Prades",
@@ -1606,7 +1607,11 @@
       "22": []
     }
   },
+  "textos_pd_caracteristicas_alumnado": "un grupo de entre 16 y 20 años con perfiles diversos de acceso (ESO, FP Básica y prueba de acceso) y un pequeño grupo de alumnado repetidor. Se aprecia buena cohesión de grupo, y parte del alumnado compagina el estudio con trabajos de temporada",
   "config_contexto": {
+    "procedencia_alumnado": "los distritos zaragozanos de La Almozara y Delicias norte, con una parte del alumnado procedente de otros barrios y de municipios cercanos del área metropolitana",
+    "grado_implicacion": "alto",
+    "expectativas": "la inserción laboral en el sector de las telecomunicaciones y la continuidad de estudios en el ciclo de grado superior",
     "texto_feoe_trabajos_alternativos": "Para el alumnado sin RA/CE dualizados, se solicitan tareas competenciales y entregas del cuaderno de tareas equivalentes a las del resto del grupo durante ese periodo, revisadas por el profesor del módulo.",
     "A1_justificacion": "El presente módulo profesional se imparte dentro del ciclo formativo y aporta al alumnado los conocimientos, procedimientos y actitudes necesarios para el ejercicio profesional en el sector correspondiente, en coherencia con los Resultados de aprendizaje establecidos en el currículo oficial y en el marco de la normativa vigente de Formación Profesional.",
     "A2_contextualizacion": "El IES Andalán es un centro de titularidad pública situado en el barrio de La Almozara, en Zaragoza. La oferta académica del instituto es amplia y diversa, abarcando diferentes niveles de Educación Secundaria Obligatoria, Bachillerato y Formación Profesional (Familias de Administración y Gestión, y Electricidad y Electrónica). \\nUn rasgo distintivo de la identidad del centro es su compromiso con la inclusión, siendo un centro preferente para la escolarización de alumnado con Trastorno del Espectro Autista (TEA) y alumnado con discapacidad motora.",

@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { NarrativeField } from "@/components/ui/NarrativeField";
+import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Users, Activity, BarChart2, Sparkles } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
@@ -89,6 +91,9 @@ export function ContextoGrupoTab() {
   const [generandoIA, setGenerandoIA] = useState(false);
 
   const rasgos_grupo = cursoData?.rasgos_grupo || [];
+  // Datos que imprime el PD+ en «Características del alumnado» (los lee generador_pd_jeg.py de config_contexto)
+  const config_contexto = moduleData?.config_contexto || {};
+  const setConfig = (campo: string, valor: string) => updateModuleData("config_contexto", { ...config_contexto, [campo]: valor });
 
   const toggleRasgo = (id: string) => {
     const updated = rasgos_grupo.includes(id)
@@ -175,11 +180,43 @@ export function ContextoGrupoTab() {
         </div>
         </div>
 
+        <div className="space-y-3">
+        <SectionHeading id="alumnado-perfil-pd" icon={Users} scrollMt="260px">
+          {t('campos.alumnado.perfilPdTitulo', {defaultValue: 'Procedencia, implicación y expectativas'})}
+        </SectionHeading>
+        <div className="glass-card p-6 border-t-4 border-t-cyan-500">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Input
+              label={t('campos.alumnado.procedenciaLabel', {defaultValue: 'Procedencia geográfica principal'})}
+              type="text"
+              value={config_contexto.procedencia_alumnado || ""}
+              onChange={e => setConfig("procedencia_alumnado", e.target.value)}
+            />
+            <Select
+              label={t('campos.alumnado.implicacionLabel', {defaultValue: 'Grado de implicación'})}
+              value={config_contexto.grado_implicacion || ""}
+              onChange={e => setConfig("grado_implicacion", e.target.value)}
+            >
+              <option value="">{t('campos.modulo.placeholderSelecciona', {defaultValue: '-- Selecciona --'})}</option>
+              <option value="alto">{t('checks.alumnado.implicacionAlto', {defaultValue: 'Alto'})}</option>
+              <option value="medio">{t('checks.alumnado.implicacionMedio', {defaultValue: 'Medio'})}</option>
+              <option value="bajo">{t('checks.alumnado.implicacionBajo', {defaultValue: 'Bajo'})}</option>
+            </Select>
+            <Input
+              label={t('campos.alumnado.expectativasLabel', {defaultValue: 'Expectativas del grupo'})}
+              type="text"
+              value={config_contexto.expectativas || ""}
+              onChange={e => setConfig("expectativas", e.target.value)}
+            />
+          </div>
+        </div>
+        </div>
+
         <div className="relative">
           <NarrativeField
             id="textos_pd_caracteristicas_alumnado"
             title={t('campos.alumnado.caracteristicasTitulo', {defaultValue: 'Características del alumnado'})}
-            description={t('campos.alumnado.caracteristicasDesc', {defaultValue: 'Procedencia geográfica principal, franja de edad, nivel competencial inicial, expectativas e implicación, etc.'})}
+            description={t('campos.alumnado.caracteristicasDesc', {defaultValue: 'Otros rasgos del grupo que quieras destacar (el PD+ los imprime tras «Asimismo, cabe destacar…»).'})}
           />
           <button
             type="button"

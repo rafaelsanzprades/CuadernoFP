@@ -11,7 +11,7 @@
 > - PD=: `124-PD-suficiente-RSP-CFGM-ICTVE.md`, `125-PD-suficiente-RSP-CFGS-SIRL.md` (14 apartados A-N, verificados contra los PDF reales) — **no** `43-PD-BOA-10p.md` / `44-PD-Aragon-16p.md`, ambos marcados obsoletos: documentaban el Art. 100.2 del Decreto 91/2024 en su redacción **original** de junio 2024 (17 puntos sueltos a)-q), sin agrupar), antes de que el **BOA nº 181, de 18 de septiembre de 2025** ("título Treinta") reescribiera ese mismo artículo en la estructura de 14 apartados que usan los documentos reales. Grado D (al que aplica el Art. 100) incluye tanto Grado Medio como Grado Superior — no hay distinción entre ambos, confirmado comparando los índices de 124 y 125 letra por letra.
 > - PD+: `36-PD-completa.md` (83 páginas, 15 secciones)
 >
-> **Nota de mantenimiento:** las columnas PD-/PD=/PD+ reflejan la estructura oficial de cada documento (cambia solo cuando cambia la normativa que las define — ver corrección de 2026-09-12 más arriba). La columna "dónde" (agrupada en los encabezados de sección) sí cambia cuando se reorganiza la navegación de la app — revisada por última vez el 2026-10-13 contra el código de cada pestaña, fila a fila (campos 1-84). Localidad y Provincia (campo 3) se añadieron a la app el 2026-10-13; los campos 2, 14 y 21 se quitaron del documento.
+> **Nota de mantenimiento:** las columnas PD-/PD=/PD+ reflejan la estructura oficial de cada documento (cambia solo cuando cambia la normativa que las define — ver corrección de 2026-09-12 más arriba). La columna "dónde" (agrupada en los encabezados de sección) sí cambia cuando se reorganiza la navegación de la app — revisada por última vez el 2026-10-13 contra el código de cada pestaña, fila a fila (campos 1-84). El 2026-10-13 se añadieron a la app Localidad y Provincia (campo 3), Tipo de centro (2) y, en Contexto › Alumnado, procedencia, implicación, expectativas y otros rasgos (14, 21, 24, 39); el código del centro, el departamento y las empresas locales se quitaron del documento.
 
 ---
 
@@ -24,6 +24,7 @@ Notas: el **departamento / área** no es un campo: los generadores lo derivan de
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 1 | Centro educativo | §Portada | Encabezado del documento | §2.1 · Centro educativo |
+| 2 | Tipo de centro (p. ej. «Centro público») | — | — | §Portada · Identificación — Centro educativo y organización |
 | 3 | Localidad y Provincia (campos «Localidad» y «Provincia») | §Portada | — | §2.1 · Centro educativo |
 | 4 | Comunidad / Territorio (Comunidad Autónoma) | §Portada | — | §2.1 · Centro educativo |
 | 5 | Módulo didáctico (nombre) | §Encabezado (resumen) | §A · Introducción | §1 · Introducción — §3.4 · RA |
@@ -52,7 +53,14 @@ Esta misma pestaña incluye el bloque «FEOE. Formación en empresa u organismo 
 
 ### Pestaña: Alumnado
 
-Alumnado (ACNEAE), rasgos característicos del grupo y evaluación inicial — ver también «Programación: Metodologías — Pestaña: Atención a la diversidad» para las medidas de atención a la diversidad.
+Bloques «Alumnado (ACNEAE)» (datos del grupo calculados desde Matrícula, ratio hombres/mujeres, pendientes del módulo, elenco de situaciones, circunstancias ocultas), «Rasgos característicos del grupo» y «Procedencia, implicación y expectativas» (los tres datos que imprime el PD+ en «Características del alumnado»; si faltan, el PD+ deja una marca `[[ … ]]` para completarla en el `.docx`). Debajo, el texto libre «Características del alumnado» (otros rasgos a destacar). La **evaluación inicial** pasó a la pestaña Procedimientos (primer bloque). Ver también «Programación: Metodologías — Pestaña: Atención a la diversidad».
+
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
+|---|-------|-------------|-----------------|-----------|
+| 14 | Procedencia geográfica principal del grupo | — | — | §1.3.4 · Características del alumnado |
+| 21 | Grado de implicación (Alto / Medio / Bajo) | — | — | §1.3.4 · Características del alumnado |
+| 24 | Expectativas del grupo | — | — | §1.3.4 · Características del alumnado |
+| 39 | Otros rasgos del grupo a destacar (texto libre «Características del alumnado»; el PD+ lo imprime tras «Asimismo, cabe destacar…») | — | — | §1.3.4 · Características del alumnado |
 
 ### Pestañas: Evaluación y Procedimientos
 

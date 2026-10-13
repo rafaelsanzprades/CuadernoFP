@@ -1083,6 +1083,9 @@
       "proveedorOpenai": "OpenAI ChatGPT (requires account balance)"
     },
     "alumnado": {
+      "implicacionAlto": "High",
+      "implicacionMedio": "Medium",
+      "implicacionBajo": "Low",
       "ambitoAlumno": "Student",
       "ambitoEquipoDocente": "Teaching staff",
       "ambitoFamilia": "Family",
@@ -1601,7 +1604,11 @@
   },
   "campos": {
     "alumnado": {
-      "caracteristicasDesc": "Main geographic origin, age range, initial competency level, expectations and involvement, etc.",
+      "caracteristicasDesc": "Other traits of the group you want to highlight (the PD+ prints them after “Asimismo, cabe destacar…”).",
+      "perfilPdTitulo": "Origin, involvement and expectations",
+      "procedenciaLabel": "Main geographic origin",
+      "implicacionLabel": "Level of involvement",
+      "expectativasLabel": "Group's expectations",
       "caracteristicasTitulo": "Student characteristics",
       "alumnoLabel": "Student",
       "asientoLibre": "Free",
@@ -1846,6 +1853,7 @@
       "campoHistoricoFusionAviso": "(legacy field, soon to be merged with the one above)",
       "centroEducativo": "Educational center",
       "localidad": "Locality",
+      "tipoCentro": "School type",
       "provincia": "Province",
       "chipTrim1": "1st term",
       "chipTrim2": "2nd term",

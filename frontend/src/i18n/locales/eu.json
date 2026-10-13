@@ -1083,6 +1083,9 @@
       "proveedorOpenai": "OpenAI ChatGPT (kontuan saldoa behar du)"
     },
     "alumnado": {
+      "implicacionAlto": "Altua",
+      "implicacionMedio": "Ertaina",
+      "implicacionBajo": "Baxua",
       "ambitoAlumno": "Ikaslea",
       "ambitoEquipoDocente": "Irakasle-taldea",
       "ambitoFamilia": "Familia",
@@ -1601,7 +1604,11 @@
   },
   "campos": {
     "alumnado": {
-      "caracteristicasDesc": "Jatorri geografiko nagusia, adin-tartea, hasierako gaitasun-maila, itxaropenak eta inplikazioa, etab.",
+      "caracteristicasDesc": "Nabarmendu nahi dituzun taldearen beste ezaugarri batzuk (PD+-n «Asimismo, cabe destacar…» ondoren inprimatzen dira).",
+      "perfilPdTitulo": "Jatorria, inplikazioa eta itxaropenak",
+      "procedenciaLabel": "Jatorri geografiko nagusia",
+      "implicacionLabel": "Inplikazio-maila",
+      "expectativasLabel": "Taldearen itxaropenak",
       "caracteristicasTitulo": "Ikasleen ezaugarriak",
       "alumnoLabel": "Ikaslea",
       "asientoLibre": "Hutsik",
@@ -1846,6 +1853,7 @@
       "campoHistoricoFusionAviso": "(eremu historikoa, gainekoarekin batzeko zorian)",
       "centroEducativo": "Ikastetxea",
       "localidad": "Udalerria",
+      "tipoCentro": "Ikastetxe mota",
       "provincia": "Probintzia",
       "chipTrim1": "1. hiruhil.",
       "chipTrim2": "2. hiruhil.",

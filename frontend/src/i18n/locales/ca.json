@@ -1085,6 +1085,9 @@
       "proveedorOpenai": "OpenAI ChatGPT (requereix saldo al compte)"
     },
     "alumnado": {
+      "implicacionAlto": "Alt",
+      "implicacionMedio": "Mitjà",
+      "implicacionBajo": "Baix",
       "ambitoAlumno": "Alumne/a",
       "ambitoEquipoDocente": "Equip docent",
       "ambitoFamilia": "Família",
@@ -1603,7 +1606,11 @@
   },
   "campos": {
     "alumnado": {
-      "caracteristicasDesc": "Procedència geogràfica principal, franja d'edat, nivell competencial inicial, expectatives i implicació, etc.",
+      "caracteristicasDesc": "Altres trets del grup que vulguis destacar (el PD+ els imprimeix després de «Asimismo, cabe destacar…»).",
+      "perfilPdTitulo": "Procedència, implicació i expectatives",
+      "procedenciaLabel": "Procedència geogràfica principal",
+      "implicacionLabel": "Grau d'implicació",
+      "expectativasLabel": "Expectatives del grup",
       "caracteristicasTitulo": "Característiques de l'alumnat",
       "alumnoLabel": "Alumne/a",
       "asientoLibre": "Lliure",
@@ -1848,6 +1855,7 @@
       "campoHistoricoFusionAviso": "(camp històric, proper a fusionar-se amb el d'a dalt)",
       "centroEducativo": "Centre educatiu",
       "localidad": "Localitat",
+      "tipoCentro": "Tipus de centre",
       "provincia": "Província",
       "chipTrim1": "1r Trim.",
       "chipTrim2": "2n Trim.",
