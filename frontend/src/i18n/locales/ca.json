@@ -2701,7 +2701,7 @@
           "q2": "Com es calcula la previsió de 'Planificació mensual'?",
           "a2": "Es calcula dia a dia amb el calendari de festius i l'horari setmanal que ja tens registrats a l'app — no és una estimació proporcional, és un càlcul exacte amb aquestes dades. Canviarà si el calendari oficial del curs o la distribució definitiva de l'horari encara no estan complets.",
           "q3": "Com passo llista o registro faltes d'assistència?",
-          "a3": "A Sessions tens la pestanya 'Assistència'. Veuràs tot el teu alumnat i amb un sol clic a la seva graella pots alternar entre Falta, Retard o Falta justificada.",
+          "a3": "A Sessions tens la pestanya 'Assistència'. Veuràs tot el teu alumnat i amb un sol clic a la seva graella pots alternar entre Present, Falta i Retard.",
           "q4": "Com avaluo una tasca o examen concret?",
           "a4": "Vés a Qualificacions > pestanya 'Acadèmiques' per introduir la nota de cada activitat, per alumne/a. La nota final es recalcula automàticament a partir dels pesos de RA i CE.",
           "q5": "Com es calcula exactament la nota final del trimestre?",

@@ -2699,7 +2699,7 @@
           "q2": "Nola kalkulatzen da 'Hilabeteko plangintza' aurreikuspena?",
           "a2": "Egunez egun kalkulatzen da, aplikazioan jadanik erregistratuta dituzun jaiegunen egutegiarekin eta asteko ordutegiarekin — ez da kalkulu proportzional bat, datu horiekin egindako kalkulu zehatza da. Aldatu egingo da ikasturteko egutegi ofiziala edo ordutegiaren azken banaketa oraindik osatu gabe badaude.",
           "q3": "Nola pasatzen dut lista edo erregistratzen ditut asistentzia-hutsegiteak?",
-          "a3": "Saioak atalean 'Asistentzia' fitxa duzu. Zure ikasle guztiak ikusiko dituzu eta beren laukian klik bakar batekin hutsegitea, Berandutza edo hutsegite justifikatua artean txandaka aldatu ahal izango duzu.",
+          "a3": "Saioak atalean 'Asistentzia' fitxa duzu. Zure ikasle guztiak ikusiko dituzu eta beren laukian klik bakar batekin Bertan, Hutsegitea eta Berandutza artean txandaka aldatu ahal izango duzu.",
           "q4": "Nola ebaluatzen dut zeregin edo azterketa jakin bat?",
           "a4": "Joan Kalifikazioak > 'Akademikoak' fitxara jarduera bakoitzaren nota sartzeko, ikasle bakoitzeko. Azken nota automatikoki berkalkulatzen da RA eta CEen pisuen arabera.",
           "q5": "Nola kalkulatzen da zehazki hiruhilekoko azken nota?",

@@ -38,7 +38,7 @@ Metodologías activas, principios pedagógicos, estrategias y aprendizaje colabo
 
 ## E. Evaluación inicial
 Instrumento diagnóstico, contenidos evaluados y medidas derivadas.
-- **Dónde:** `Programación` › `Contexto` → Pestaña `Alumnado` (bloque "Evaluación inicial")
+- **Dónde:** `Programación` › `Contexto` → Pestaña `Procedimientos` (primer bloque, "Evaluación inicial")
 
 ### E1. Atención a las diferencias individuales
 Medidas de inclusión, adaptaciones no significativas/flexibilización, Plan DUA, panel ACNEAE.

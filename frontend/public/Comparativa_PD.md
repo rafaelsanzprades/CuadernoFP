@@ -11,7 +11,7 @@
 > - PD=: `124-PD-suficiente-RSP-CFGM-ICTVE.md`, `125-PD-suficiente-RSP-CFGS-SIRL.md` (14 apartados A-N, verificados contra los PDF reales) — **no** `43-PD-BOA-10p.md` / `44-PD-Aragon-16p.md`, ambos marcados obsoletos: documentaban el Art. 100.2 del Decreto 91/2024 en su redacción **original** de junio 2024 (17 puntos sueltos a)-q), sin agrupar), antes de que el **BOA nº 181, de 18 de septiembre de 2025** ("título Treinta") reescribiera ese mismo artículo en la estructura de 14 apartados que usan los documentos reales. Grado D (al que aplica el Art. 100) incluye tanto Grado Medio como Grado Superior — no hay distinción entre ambos, confirmado comparando los índices de 124 y 125 letra por letra.
 > - PD+: `36-PD-completa.md` (83 páginas, 15 secciones)
 >
-> **Nota de mantenimiento:** las columnas PD-/PD=/PD+ reflejan la estructura oficial de cada documento (cambia solo cuando cambia la normativa que las define — ver corrección de 2026-09-12 más arriba). La columna "dónde" (agrupada en los encabezados de sección) sí cambia cuando se reorganiza la navegación de la app — revisada por última vez el 2026-10-11 contra el mapa real de `config/navigation.ts` y las pestañas de cada página (la ubicación campo a campo dentro de cada pestaña está inferida, no comprobada una por una).
+> **Nota de mantenimiento:** las columnas PD-/PD=/PD+ reflejan la estructura oficial de cada documento (cambia solo cuando cambia la normativa que las define — ver corrección de 2026-09-12 más arriba). La columna "dónde" (agrupada en los encabezados de sección) sí cambia cuando se reorganiza la navegación de la app — revisada por última vez el 2026-10-13 contra el código de cada pestaña, fila a fila (campos 1-84). Los campos marcados «sin campo en la app» (2, 3, 14, 21) no existen todavía.
 
 ---
 
@@ -21,21 +21,20 @@
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 1 | Nombre del Centro | §Portada | Encabezado del documento | §2.1 · Centro educativo |
-| 2 | Código del Centro | §Portada | — | §2.1 · Centro educativo |
-| 3 | Localidad / Provincia | §Portada | — | §2.1 · Centro educativo |
-| 4 | Comunidad Autónoma | §Portada | — | §2.1 · Centro educativo |
-| 5 | Nombre del Módulo | §Encabezado (resumen) | §A · Introducción | §1 · Introducción — §3.4 · RA |
-| 6 | Código del Módulo | §Encabezado (resumen) | Encabezado del documento | §1 · Introducción — §3.4 · RA |
-| 7 | Familia Profesional | §Encabezado (resumen) | — | §1 · Introducción — §3.1 · Competencia general |
-| 8 | Título / Grado | §Encabezado (resumen) | Encabezado del documento | §1 · Introducción — §3.1 · Competencia general |
-| 9 | Curso Académico | §Encabezado (resumen) | Encabezado del documento | §1 · Introducción |
-| 10 | Modalidad (Presencial/Semipresencial) | §Encabezado (resumen) | §A · Introducción | §1 · Introducción |
-| 11 | Horas Totales del Módulo | §Encabezado (resumen) | §A · Introducción | §1 · Introducción — §4.3 · Temporalización |
-| 12 | Horas FEOE (si Dual) | §Encabezado (resumen) | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE | §1 · Introducción |
-| 13 | Nombre del Profesorado | §Portada | — | §1 · Introducción |
-| 14 | Departamento / Área | §Portada | — | §2.1 · Centro educativo |
-| 15 | Módulo Dualizado (Sí/No) | §Encabezado (resumen) | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE | §1 · Introducción |
+| 1 | Centro educativo | §Portada | Encabezado del documento | §2.1 · Centro educativo |
+| 2 | Código del Centro *(sin campo en la app)* | §Portada | — | §2.1 · Centro educativo |
+| 3 | Localidad / Provincia *(sin campo en la app)* | §Portada | — | §2.1 · Centro educativo |
+| 4 | Comunidad / Territorio (Comunidad Autónoma) | §Portada | — | §2.1 · Centro educativo |
+| 5 | Módulo didáctico (nombre) | §Encabezado (resumen) | §A · Introducción | §1 · Introducción — §3.4 · RA |
+| 6 | Módulo didáctico (código, del desplegable) | §Encabezado (resumen) | Encabezado del documento | §1 · Introducción — §3.4 · RA |
+| 7 | Familia profesional | §Encabezado (resumen) | — | §1 · Introducción — §3.1 · Competencia general |
+| 8 | Título de FP (grado D) | §Encabezado (resumen) | Encabezado del documento | §1 · Introducción — §3.1 · Competencia general |
+| 9 | Curso del ciclo (1º / 2º / Ambos). *El año académico no es un campo de esta pestaña: se fija al crear el curso, en `General` › `Inicio` → Pestaña `Datos`* | §Encabezado (resumen) | Encabezado del documento | §1 · Introducción |
+| 11 | Carga lectiva anual / Horas BOA | §Encabezado (resumen) | §A · Introducción | §1 · Introducción — §4.3 · Temporalización |
+| 12 | Horas FEOE del curso (si hay régimen dual) | §Encabezado (resumen) | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE | §1 · Introducción |
+| 13 | Profesorado | §Portada | — | §1 · Introducción |
+| 14 | Departamento / Área *(sin campo en la app)* | §Portada | — | §2.1 · Centro educativo |
+| 15 | Régimen dual LO 3/2022 (Ninguno / Dual general / Dual intensivo) | §Encabezado (resumen) | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE | §1 · Introducción |
 
 ### Pestaña: Entorno
 
@@ -45,8 +44,10 @@
 | 17 | Contexto socioeconómico y productivo del entorno | — | §A · Introducción | §2.1 · Centro educativo — Entorno socioeconómico |
 | 18 | Contexto escolar del centro | — | §A · Introducción | §2.1 · Centro educativo — Equipo docente |
 | 20 | Infraestructura y recursos disponibles | — | §J · Materiales y recursos didácticos | §2.1 · Centro educativo |
-| 21 | Conexión con empresas locales | — | — | §2.1 · Centro educativo — Entorno socioeconómico |
-| 28 | Actividades complementarias y extraescolares (texto, bloque propio de esta pestaña) | — | §K · Actividades complementarias y extraescolares | §14 · Actividades complementarias y extraescolares |
+| 21 | Conexión con empresas locales *(sin campo en la app)* | — | — | §2.1 · Centro educativo — Entorno socioeconómico |
+| 28 | Actividades complementarias y extraescolares (texto, bloque propio de `Contexto` › `Entorno`) | — | §K · Actividades complementarias y extraescolares | §14 · Actividades complementarias y extraescolares |
+| 10 | Modalidad (rasgos rápidos del contexto escolar: Presencial / Semipresencial / Distancia) y turno (Diurno / Vespertino / Mixto) | §Encabezado (resumen) | §A · Introducción | §1 · Introducción |
+| 19 | Características del alumnado (texto y rasgos rápidos, dentro de «Contexto escolar») | — | §E1 · Atención a las diferencias individuales | §2.2 · Alumnado — ACNEAE |
 
 Esta misma pestaña incluye el bloque «FEOE. Formación en empresa u organismo equiparado» (antes pestaña «Plan FEOE»): ver «Curso: Calendario — Pestaña: Fechas y horario» más abajo para los campos de fechas/horas del periodo FEOE; este bloque de Contexto recoge la parte normativa (modalidad, régimen dual, organización y seguimiento).
 
@@ -56,7 +57,7 @@ Alumnado (ACNEAE), rasgos característicos del grupo y evaluación inicial — v
 
 ### Pestañas: Evaluación y Procedimientos
 
-`Evaluación`: reglas de redondeo y compensación, ponderación e instrumentos de evaluación y escalas cualitativas. `Procedimientos`: modelo de recuperación, información al alumnado, pérdida de evaluación continua y criterios de calificación (texto específico del modelo simplificado, pd=)., con la que comparte apartado PD=/PD+ en algunos campos (§E1 / §2.2).
+`Evaluación`: reglas de redondeo y compensación, ponderación e instrumentos de evaluación (por trimestre) y escalas cualitativas. `Procedimientos`: evaluación inicial, modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua, recuperación, módulos pendientes), criterios de calificación y textos del modelo simplificado (pd=).
 
 ---
 
@@ -68,30 +69,22 @@ Alumnado (ACNEAE), rasgos característicos del grupo y evaluación inicial — v
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 22 | Metodologías Activas (Multiselect: ABP, ABR, FLIP, COLAB, SIM, CASOS, GAMIF, ApS, DEMO, MAGIS) | — | §D · Principios metodológicos | §6.2 · Metodologías activas |
-| 23 | Detalles adicionales de metodología (texto libre) | — | §D · Principios metodológicos | §6.1 · Proceso de enseñanza-aprendizaje |
+| 22 | Metodologías activas (selección múltiple: ABP, ABR, FLIP, COLAB, SIM, CASOS, GAMIF, ApS, DEMO, MAGIS, ETHAZI, AGIL, CONTR, DEBATE, PARES, ESTAC) | — | §D · Principios metodológicos | §6.2 · Metodologías activas |
+| 23 | Anotaciones libres de metodología (texto libre) | — | §D · Principios metodológicos | §6.1 · Proceso de enseñanza-aprendizaje |
 
 ### Pestaña: Atención a la diversidad
 
 Marco de inclusión, medidas de atención a la diversidad, plan DUA y desdobles (§E1 en PD=).
 
-| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
-|---|-------|-------------|-----------------|-----------|
-| 19 | Características del alumnado (ACNEAE) | — | §E1 · Atención a las diferencias individuales | §2.2 · Alumnado — ACNEAE |
+Marco de inclusión, medidas de atención a la diversidad (incluido el agrupamiento flexible), plan DUA y «Panel de ACNEAE» (alumnado con necesidades, tipo de necesidad y adaptaciones de evaluación y acceso). La descripción general de las características del alumnado (campo 19) está en `Contexto` › `Entorno`.
 
 ### Pestaña: Instrumentos y recursos
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 25 | Materiales y recursos didácticos (texto) | — | §J · Materiales y recursos didácticos | §10 · Materiales y recursos didácticos |
-| 26 | Recursos Multiselect (AULA, TALLER, INFO, SOFT, EVA, BIBLIO, EPI) | — | §J · Materiales y recursos didácticos | §10 · Materiales y recursos didácticos |
-| 40 | Lista de Instrumentos/Actividades | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
-| 41 | Botón "Añadir Instrumento/Actividad" | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
-| 42 | Tipo (Teoría/Práctica) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
-| 43 | Instrumento Codificado (Multiselect: PRU-OBJ, PRU-EJEC, RUBR, COTEJO, ESCALA, PORTF, DIARIO, DEF-ORAL, AUTOEVAL, COEVAL) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
-| 44 | Nombre del Instrumento / Actividad (texto) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
-| 45 | % Ponderación del instrumento | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
-| 46 | CE que evalúa cada instrumento (casillas) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
+| 25 | Herramientas, recursos y espacios (catálogo por categorías + recursos añadidos a mano; no hay campo de texto libre) | — | §J · Materiales y recursos didácticos | §10 · Materiales y recursos didácticos |
+| 26 | Recursos y espacios (selección múltiple por categoría: Comunicación, Documentación, Equipamiento de aula, Espacios, Herramientas de taller, Seguridad y PRL, Software y TIC) | — | §J · Materiales y recursos didácticos | §10 · Materiales y recursos didácticos |
+| 43 | Catálogo de instrumentos de evaluación (PRU-OBJ, PRU-EJEC, PORTF, DIARIO, DEF-ORAL, AUTOEVAL, COEVAL) y de calificación (RUBR, COTEJO, ESCALA) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
 
 ### Pestaña: Plan de contingencia
 
@@ -101,7 +94,7 @@ Planes de adaptación ante situaciones excepcionales — mapea a §N · Plan de 
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 27 | Elementos transversales (Multiselect: ODS, IGUALDAD, PRL, TIC, EMP) | — | §D · Principios metodológicos — §G · Actividades de recuperación y refuerzo | §4.2 · Formación transversal — §6.3 · ABP y TIC |
+| 27 | Elementos transversales (selección múltiple: digital, sostenibilidad, igualdad, PRL, cultura emprendedora) y competencias clave; además DigComp, ECP, CPE y OG | — | §D · Principios metodológicos — §G · Actividades de recuperación y refuerzo | §4.2 · Formación transversal — §6.3 · ABP y TIC |
 
 ---
 
@@ -123,25 +116,30 @@ interna de coherencia curricular.
 
 ### Pestaña: Unidades didácticas
 
-Incluye la antigua pestaña "Secuenciación → Sesiones": la tabla de sesiones por UD vive dentro de cada unidad didáctica, no en una página aparte.
+La pestaña tiene la matriz de UD × RA, las horas, el bloque de contenidos, los objetivos y la evaluación de cada UD. Las sesiones de cada UD están en la pestaña «Secuenciación de UD» (más abajo).
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 34 | Lista de Unidades Didácticas (nombre) | §Tabla UD | §C1 · Contenidos — §H · Resultados de aprendizaje | §5.1–§5.13 · UD (una por UD) |
 | 35 | Duración estimada de cada UD (horas) | §Tabla UD | §C1 · Contenidos — §H · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
-| 36 | Botón "Añadir nueva UD" | §Tabla UD | §C1 · Contenidos — §H · Resultados de aprendizaje | §5.x · cada UD |
+| 36 | Botón «Añadir nueva UD» | §Tabla UD | §C1 · Contenidos — §H · Resultados de aprendizaje | §5.x · cada UD |
 | 37 | Matriz RA × UD (porcentaje de contribución) | §Tabla UD | §C2 · Criterios de evaluación — §H · Resultados de aprendizaje | §4.3 · Temporalización — Relación UD-RA |
-| 38 | Tabla resumen de relaciones RA-UD (verificación) | §Tabla UD | §C2 · Criterios de evaluación — §H · Resultados de aprendizaje | §4.3 · Temporalización — Relación UD-RA |
-| 48 | Tabla de Sesiones (por UD) | — | §C1 · Contenidos — §H · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
-| 49 | Botón "+" para añadir sesiones | — | §C1 · Contenidos — §H · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
-| 50 | Contenidos y Recursos de cada sesión (texto) | — | §C1 · Contenidos — §J · Materiales y recursos didácticos | §4.1 · Contenidos del módulo — §5.x · cada UD |
+| 38 | Tabla resumen de relaciones RA-UD (verificación) *(no existe como tabla en Currículo; el estado de cada RA según sus UD está en `Curso` › `Cierre` → Pestaña `Progreso RA-UD`)* | §Tabla UD | §C2 · Criterios de evaluación — §H · Resultados de aprendizaje | §4.3 · Temporalización — Relación UD-RA |
+
+### Pestaña: Secuenciación de UD
+
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
+|---|-------|-------------|-----------------|-----------|
+| 48 | Tabla de sesiones de cada UD (Nº, Horas, Tipo, RA/CE, IE %) | — | §C1 · Contenidos — §H · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
+| 49 | Botón «Añadir sesión a [UD]» | — | §C1 · Contenidos — §H · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
+| 50 | Contenidos, aspectos clave y recursos de cada sesión | — | §C1 · Contenidos — §J · Materiales y recursos didácticos | §4.1 · Contenidos del módulo — §5.x · cada UD |
 
 ### Pestaña: Proyectos y retos
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 51 | Botón "Añadir tarea competencial" (tabla de tareas) | — | — | §4.3 · Temporalización — §5.x · cada UD |
-| 52 | Diseño de tareas integradoras (reto/proyecto) | — | — | §6.3 · ABP y actividades TIC |
+| 51 | Botón «Añadir proyecto o reto» (tabla de tareas competenciales) | — | — | §4.3 · Temporalización — §5.x · cada UD |
+| 52 | Diseño de la tarea competencial (modal «Configurar proyecto o reto») | — | — | §6.3 · ABP y actividades TIC |
 
 ---
 
@@ -151,6 +149,18 @@ Seguimiento trimestral del peso real de cada instrumento de evaluación — pest
 global), `Trimestres` (1º/2º/3º), `Rúbricas` y `Modelo JEG` (reparto avanzado Instrumento→Indicador→CE,
 normalmente no hace falta tocarlo) — es el "cuaderno de bitácora" de lo definido en Metodologías →
 Instrumentos y recursos; no genera un apartado propio en PD-/PD=/PD+, alimenta los porcentajes de §F / §9.
+
+
+### Pestaña: Trimestres
+
+| # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
+|---|-------|-------------|-----------------|-----------|
+| 40 | Lista de instrumentos y actividades (Cód., Tipo, Instrumento y actividad, % Pond., casillas de CE, Config) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
+| 41 | Botón «Añadir instrumento/actividad en [trimestre]» | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
+| 42 | Tipo (Teoría / Práctica / Proyecto / Ejercicios / Tareas / Recuperaciones) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
+| 44 | Instrumento y actividad (texto) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
+| 45 | % Ponderación del instrumento | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
+| 46 | CE que evalúa cada instrumento (casillas por CE) | — | §F · Procedimientos e instrumentos de evaluación | §9 · Procedimientos e instrumentos de evaluación |
 
 ---
 
@@ -165,20 +175,20 @@ Instrumentos y recursos; no genera un apartado propio en PD-/PD=/PD+, alimenta l
 | 53 | Botón PD- Resumen (1-2 folios, RA+UD+Criterios) | *Genera este documento* | — | — |
 | 54 | Botón PD= Simplificada (~15-20p, 14 apartados A-N) | — | *Genera este documento* | — |
 | 55 | Botón PD+ Detallada JEG (>60p, narrativa completa) | — | — | *Genera este documento* |
-| 56 | PDF Matrices (cuadro resumen RA × UD) | §Tabla UD | §C2 · Criterios de evaluación — §H · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
-| 57 | PDF Planificación (cronograma horas/mes) | — | §C1 · Contenidos — §H · Resultados de aprendizaje | §4.3 · Temporalización |
 
 ### Pestaña: Curso
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 78 | PDF Calendario | — | — | §4.3 · Temporalización |
-| 79 | PDF Alumnado Ubicación (plano de clase) | — | — | §2.1 · Centro educativo — Infraestructura |
-| 80 | PDF Seguimiento (diario de lo dado) | — | — | §11 · Mecanismos de seguimiento y valoración |
+| 79 | Alumnado. Ubicación en el aula (plano de aula) | — | — | §2.1 · Centro educativo — Infraestructura |
+| 80 | Seguimiento diario (registro de la planificación del día a día) | — | — | §11 · Mecanismos de seguimiento y valoración |
 | 81 | PDF Clases por UD | — | — | §4.3 · Temporalización — §5.x · cada UD |
-| 82 | PDF Boletín trimestral (1T, 2T, 3T, Final) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
-| 83 | Excel/CSV de calificaciones | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
-| 84 | PDF Boletín individual (selector de alumnado) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+| 82 | Boletín del trimestre (1T, 2T, 3T) y evaluación final ordinaria/extraordinaria | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+| 83 | Exportar Excel completo | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+| 84 | Progreso del alumnado: informe individual (selector de alumnado) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+| 56 | Matriz RA ↔ UD (PDF/DOCX, «Plantillas de apoyo al currículo») | §Tabla UD | §C2 · Criterios de evaluación — §H · Resultados de aprendizaje | §4.3 · Temporalización — §5.x · cada UD |
+| 57 | Planificación (previsto/impartido por UD y mes; bloque «Seguimiento») | — | §C1 · Contenidos — §H · Resultados de aprendizaje | §4.3 · Temporalización |
 
 ---
 
@@ -226,7 +236,7 @@ Ya no son una pestaña de Calendario: se anotan en `Programación` › `Contexto
 |---|-------|-------------|-----------------|-----------|
 | 67 | Importar CSV (Excel con lista de clase) | — | — | §2.2 · Alumnado — ACNEAE |
 | 68 | Añadir Alumnado manualmente | — | — | §2.2 · Alumnado — ACNEAE |
-| 69 | Tabla: Estado, Apellidos, Nombre, Edad, Nacimiento, Repite, Email, Móvil | — | — | §2.2 · Alumnado — ACNEAE |
+| 69 | Tarjeta por alumno/a: Apellidos, Nombre, Estado, Edad y fechas calculadas desde el nacimiento, Repite, Email, Teléfono, Grupo de evaluación | — | — | §2.2 · Alumnado — ACNEAE |
 
 Los rasgos y características generales de la clase se editan en `Programación` › `Contexto` → Pestaña `Alumnado` (bloque «Rasgos característicos del grupo»; complementa §E1 / §2.2 con una vista agregada del grupo en vez de individuo a individuo).
 
@@ -263,7 +273,7 @@ alumnado como segundo bloque (más abajo, en la misma pestaña) — sin apartado
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 74 | Tabla de asistencia (Falta, Retraso, Justificado) | — | — | §11 · Mecanismos de seguimiento y valoración |
+| 74 | Control de asistencia (Presente, Falta, Retraso; sin estado «Justificado») | — | — | §11 · Mecanismos de seguimiento y valoración |
 
 ### Sesiones → Pestaña: Abandono
 
@@ -275,8 +285,8 @@ Entrada de calificaciones numéricas por alumnado y tarea — es el único punto
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 76 | Tabla de calificaciones (alumnado × tarea) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
-| 77 | % de RA al vuelo (cálculo automático) | — | — | §7.1 · Criterios de evaluación — §3.4 · RA |
+| 76 | Detalle de calificaciones por instrumento (por alumno/a; Académicas › Notas) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+| 77 | Consecución de resultados de aprendizaje (RA), cálculo automático | — | — | §7.1 · Criterios de evaluación — §3.4 · RA |
 
 Incluye la sección «Empresa FEOE»: transcripción de la valoración del tutor de empresa (escala 1-4, Anexo XI b) para los CE marcados FEOE en `Currículo` › `Relación RA <- CE` — sin apartado propio en PD-/PD=/PD+; la nota entra en el motor JEG como un instrumento más.
 
@@ -300,7 +310,7 @@ Expediente por alumnado: línea temporal de evidencias (calificaciones, reclamac
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
-| 84 | Boletín individual (selector de alumnado, radar + barras por RA) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
+| 84 | Boletín individual (sección «Boletín individual de calificaciones»: radar + barras por RA) | — | — | §9 · Procedimientos e instrumentos — §7.2 · Criterios de calificación |
 
 ### Pestañas: Avance de UD y Progreso RA-UD
 

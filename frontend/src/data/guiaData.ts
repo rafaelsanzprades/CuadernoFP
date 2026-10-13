@@ -169,7 +169,7 @@ export const GUIA_PASOS: {
                     { label: "Columnas", text: "A la derecha de los RA: \"Bloque de contenidos\" (texto libre para agrupar UD), y, de solo lectura, los objetivos generales (OG) y los instrumentos de evaluación de cada UD. Con ellas la tabla cubre la relación UD ↔ contenidos ↔ RA ↔ OG del Art. 100 del Decreto 91/2024; el PDF/DOCX de MagIA se descarga desde esta misma pestaña." },
                   ] },
                   { label: "Pestaña", text: "Secuenciación de UD", children: [
-                    { label: "Bloque", text: "Secuenciación de las sesiones de cada UD (arrastra para reordenar sesiones) y tabla resumen de relaciones RA-UD para verificar de un vistazo qué UD cubre cada RA." },
+                    { label: "Bloque", text: "Secuenciación de las sesiones de cada UD (arrastra para reordenar sesiones)." },
                   ] },
                   { label: "Pestaña", text: "Proyectos y retos", children: [
                     { label: "Bloque", text: '"Proyectos y retos" (opcional; art. 109 del Decreto 91/2024 si el módulo participa en un proyecto o reto): botón "Añadir proyecto o reto" y selector del instrumento (codificado) con el que se evalúa.' },

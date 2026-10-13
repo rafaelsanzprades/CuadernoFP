@@ -2699,7 +2699,7 @@
           "q2": "Como se calcula a previsión de 'Planificación mensual'?",
           "a2": "Calcúlase día a día co calendario de festivos e o horario semanal que xa tes rexistrados na app — non é unha estimación proporcional, é un cálculo exacto con eses datos. Cambiará se o calendario oficial do curso ou a distribución definitiva do horario aínda non están completos.",
           "q3": "Como paso lista ou rexistro faltas de asistencia?",
-          "a3": "En Sesións tes a pestana 'Asistencia'. Verás a todo o teu alumnado e cun só clic na súa cuadrícula podes alternar entre Falta, Atraso ou Falta xustificada.",
+          "a3": "En Sesións tes a pestana 'Asistencia'. Verás a todo o teu alumnado e cun só clic na súa cuadrícula podes alternar entre Presente, Falta e Atraso.",
           "q4": "Como avalío unha tarefa ou exame concreto?",
           "a4": "Vai a Cualificacións > pestana 'Académicas' para introducir a nota de cada actividade, por alumno/a. A nota final recalcúlase automaticamente a partir dos pesos de RA e CE.",
           "q5": "Como se calcula exactamente a nota final do trimestre?",

@@ -2699,7 +2699,7 @@
           "q2": "How is the 'Monthly planning' forecast calculated?",
           "a2": "It's calculated day by day using the holiday calendar and the weekly timetable you already have registered in the app — it's not a proportional estimate, it's an exact calculation from that data. It will change if the official school-year calendar or the final timetable distribution are not yet complete.",
           "q3": "How do I take attendance or record absences?",
-          "a3": "In Sessions you have the 'Attendance' tab. You'll see all your students, and with a single click on their grid cell you can toggle between absence, Late, or justified absence.",
+          "a3": "In Sessions you have the 'Attendance' tab. You'll see all your students, and with a single click on their grid cell you can toggle between Present, Absent and Late.",
           "q4": "How do I grade a specific task or exam?",
           "a4": "Go to Grades > 'Academic' tab to enter the grade for each activity, per student. The final grade is automatically recalculated from the RA and CE weights.",
           "q5": "How exactly is the term's final grade calculated?",
