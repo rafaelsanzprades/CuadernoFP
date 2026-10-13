@@ -20,7 +20,7 @@ A continuación, se detalla el índice oficial de la Programación Didáctica se
 - **1.3.3 Contexto escolar**
   - **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno`
 - **1.3.4 Características del alumnado**
-  - **Dónde:** `Programación` › `Contexto` → Pestaña `Alumnado` (bloques "Alumnado (ACNEAE)" y "Rasgos característicos del grupo")
+  - **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno` (bloque "Contexto escolar", campo "Características del alumnado") y Pestaña `Alumnado` (bloques "Alumnado (ACNEAE)" y "Rasgos característicos del grupo")
 - **1.3.5 Infraestructura y recursos educativos**
   - **Dónde:** `Programación` › `Contexto` → Pestaña `Entorno`
 

@@ -66,11 +66,11 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
     - **Pestaña:** Entorno
       - **Bloque:** Contexto escolar (entorno geográfico y socioeconómico), actividades complementarias y extraescolares, y plan FEOE (modalidad, seguimiento y régimen dual).
     - **Pestaña:** Alumnado
-      - **Bloque:** Alumnado con necesidades específicas (ACNEAE) y datos del grupo, rasgos característicos del grupo y evaluación inicial.
+      - **Bloque:** Alumnado con necesidades específicas (ACNEAE) y datos del grupo, y rasgos característicos del grupo.
     - **Pestaña:** Evaluación
       - **Bloque:** Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas.
     - **Pestaña:** Procedimientos
-      - **Bloque:** Modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua), criterios de calificación y textos del modelo simplificado.
+      - **Bloque:** Evaluación inicial, modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua), criterios de calificación y textos del modelo simplificado.
 
 > La atención a la diversidad ya no vive en Contexto: está en Programación › Metodologías › pestaña Atención a la diversidad (ver 1.4).
 
@@ -86,7 +86,7 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
       - **Tabla:** Haz clic en la intersección de la UD con el RA al que contribuye.
       - **Columnas:** A la derecha de los RA: "Bloque de contenidos" (texto libre para agrupar UD), y, de solo lectura, los objetivos generales (OG) y los instrumentos de evaluación de cada UD. Con ellas la tabla cubre la relación UD ↔ contenidos ↔ RA ↔ OG del Art. 100 del Decreto 91/2024; el PDF/DOCX de MagIA se descarga desde esta misma pestaña.
     - **Pestaña:** Secuenciación de UD
-      - **Bloque:** Secuenciación de las sesiones de cada UD (arrastra para reordenar sesiones) y tabla resumen de relaciones RA-UD para verificar de un vistazo qué UD cubre cada RA.
+      - **Bloque:** Secuenciación de las sesiones de cada UD (arrastra para reordenar sesiones).
     - **Pestaña:** Proyectos y retos
       - **Bloque:** "Proyectos y retos" (opcional; art. 109 del Decreto 91/2024 si el módulo participa en un proyecto o reto): botón "Añadir proyecto o reto" y selector del instrumento (codificado) con el que se evalúa.
 
@@ -95,7 +95,7 @@ Vamos a pedirle al sistema que nos cree el archivo base de la programación carg
   - **Página:** Metodologías
     - **Pestaña:** Estrategias e innovación
       - **Bloque:** Metodologías activas (ABP, retos, etc.) y coordinación docente, e innovación e intermodularidad.
-    - **Pestaña:** Instrumentos y recursos
+    - **Pestaña:** Recursos y espacios
       - **Bloque:** Catálogo de instrumentos de evaluación y recursos y espacios necesarios (aula, taller, software...).
     - **Pestaña:** Atención a la diversidad
       - **Bloque:** Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE (nombre, tipo de necesidad y adaptaciones de evaluación y acceso).
