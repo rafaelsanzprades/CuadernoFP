@@ -2757,6 +2757,7 @@
       "cargandoDatosProgreso": "Carregant dades de progrés acadèmic..."
     },
     "inicio": {
+      "empiezaAquiTitulo": "Comença aquí",
       "grupoTelegramTitulo": "Grup oficial de Telegram",
       "grupoTelegramDesc": "Grup oficial de desenvolupament i proves de l'App web gratuïta de Cuaderno FP. Puja els teus suggeriments, reporta errors o col·labora aportant el currículum oficial de la teva comunitat autònoma.",
       "aplicacionEscritorioDesc": "Cuaderno FP com a programa de Windows: l'instal·les, obres els teus arxius i treballes, també sense connexió. És gratuït i de codi obert.",
