@@ -228,6 +228,12 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             onChange={e => updateInfoModulo('centro', e.target.value)}
           />
           <Input
+            label={t('campos.modulo.tipoCentro', {defaultValue: 'Tipo de centro'})}
+            type="text"
+            value={data.tipo_centro || ""}
+            onChange={e => updateInfoModulo('tipo_centro', e.target.value)}
+          />
+          <Input
             label={t('campos.modulo.profesorado', {defaultValue: 'Profesorado'})}
             type="text"
             value={data.profesorado || data.profesor || ""}

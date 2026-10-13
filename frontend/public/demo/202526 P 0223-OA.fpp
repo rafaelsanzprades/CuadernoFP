@@ -683,12 +683,16 @@
     "criterio_tareas": 10,
     "h_sem": 6,
     "centro": "CPIFP CIFPA",
+    "tipo_centro": "Centro público integrado de Formación Profesional",
     "municipio": "Zaragoza",
     "provincia": "Zaragoza",
     "profesorado": "Javier Edo Gual",
     "ccaa": "aragon"
   },
   "config_contexto": {
+    "procedencia_alumnado": "Zaragoza y su área metropolitana",
+    "grado_implicacion": "medio",
+    "expectativas": "la inserción laboral y la continuidad de estudios en grado superior",
     "entorno_geografico": "El centro educativo es de titularidad pública situado en el barrio de La Almozara, en Zaragoza.",
     "entorno_socioeconomico": "El módulo mantiene una relación directa con el tejido empresarial y tecnológico de nuestro entorno. Las orientaciones metodológicas y las tareas competenciales diseñadas persiguen acercar al alumnado a la realidad del sector productivo.",
     "contexto_escolar": "La oferta académica del instituto es amplia y diversa. Un rasgo distintivo de la identidad del centro es su compromiso con la inclusión, siendo un centro preferente para la escolarización de alumnado con necesidades especiales.",

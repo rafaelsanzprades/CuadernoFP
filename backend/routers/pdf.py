@@ -322,6 +322,7 @@ def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, it
                 "centro": info_mod.get("centro", ""),
                 "municipio": info_mod.get("municipio", ""),
                 "provincia": info_mod.get("provincia", ""),
+                "tipo_centro": info_mod.get("tipo_centro", ""),
                 "profesorado": info_mod.get("profesorado", ""),
                 "familia": info_mod.get("familia", ""),
                 "df_ra": module_data.get("df_ra") or [],
