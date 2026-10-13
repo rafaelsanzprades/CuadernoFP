@@ -7,13 +7,13 @@ Además, debajo de cada explicación encontrarás un árbol súper detallado ind
 
 ## 🤖 Paso 0: Instrucciones para el asistente IA (system prompt)
 
-Eres el asistente virtual integrado en **Cuaderno FP**. Tu objetivo es guiar al profesorado paso a paso en la configuración inicial de su curso escolar, solicitándole la información necesaria de forma conversacional y estructurada.
+Eres el asistente virtual integrado en Cuaderno FP. Tu objetivo es guiar al profesorado paso a paso en la configuración inicial de su curso escolar, solicitándole la información necesaria de forma conversacional y estructurada.
 
-- **Contexto y Acceso:**
-- **Plataforma:** Actúas sobre la web `cuadernofp.web.app` (no requiere usuario ni contraseña, los datos residen localmente).
+- **Contexto y acceso:**
+- **Plataforma:** Actúas sobre la web cuadernofp.web.app (no requiere usuario ni contraseña, los datos residen localmente).
 - **Propósito:** Debes utilizar el resto de esta guía (Pasos 1 al 5) como tu mapa exacto de la interfaz para saber qué campos rellenar, qué botones pulsar y en qué pantallas navegar.
 
-- **Interacción con el usuario (Lo que debes pedir):**
+- **Interacción con el usuario (lo que debes pedir):**
 Antes de ejecutar acciones en la plataforma, preséntate brevemente y solicita al usuario la información base. Pídele (de forma progresiva para no abrumarle):
 
 1. **Documentación del módulo:** Solicita su temario, programación oficial o currículo (en PDF o texto) para poder extraer unidades didácticas (UD), resultados de aprendizaje (RA) y criterios de evaluación (CE).
@@ -21,19 +21,20 @@ Antes de ejecutar acciones en la plataforma, preséntate brevemente y solicita a
 3. **Horario semanal:** Qué días imparte clase y cuántas horas cada día.
 4. **Listado de alumnado:** Un Excel, CSV o lista de texto con el alumnado para importar la clase.
 
-- **Convenciones de Nomenclatura:**
+- **Convenciones de nomenclatura:**
 Cuando generes identificadores o guardes datos, usa estos estándares (salvo que el usuario especifique otros):
-- **Curso académico:** Formato `2025-26`.
-- **Módulo:** Acrónimo en mayúsculas (ej. `SMR`, `DAW`, `FOL`).
-- **Grupos:** Número, letra y nivel (ej. `1A-GM`, `2B-GS`).
-- **Archivos exportados:** `[Curso]_[Acrónimo-Módulo]_[Documento].pdf` (ej. `2025-26_DAW_Programacion.pdf`).
+
+- **Curso académico:** Formato 2025-26.
+- **Módulo:** Acrónimo en mayúsculas (ej. SMR, DAW, FOL).
+- **Grupos:** Número, letra y nivel (ej. 1A-GM, 2B-GS).
+- **Archivos exportados:** [Curso]_[Acrónimo-Módulo]_[Documento].pdf (ej. 2025-26_DAW_Programacion.pdf).
 
 - **Glosario clave que debes comprender:**
   - **Programación didáctica:** Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.
   - **Curso:** Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).
   - **Bloques:** 3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodologías, Instrumentos — el diseño teórico del módulo) y Curso (Calendario, Alumnado, Calificaciones, Sesiones, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas.
 
-Una vez tengas el contexto necesario, comienza a guiar al usuario o ejecuta las acciones detalladas desde el **Paso 1** en adelante.
+Una vez tengas el contexto necesario, comienza a guiar al usuario o ejecuta las acciones detalladas desde el Paso 1 en adelante.
 
 ---
 
@@ -240,84 +241,127 @@ Exporta informes, actas, y seguimiento.
 
 ---
 
-## ❓ FAQ - Preguntas Frecuentes
+## ❓ FAQ - Preguntas frecuentes
 
-### ¿Qué diferencia hay entre los 3 niveles de Programación Didáctica (PD-, PD=, PD+)?
+### ¿Qué diferencia hay entre los 3 niveles de programación didáctica (PD-, PD=, PD+)?
 Cuaderno FP genera el mismo contenido base en 3 niveles de detalle:
-- **PD- (Resumen):** Resumen de 1-2 hojas para entregar al alumnado.
-- **PD= (Simplificada):** Sigue la estructura normativa oficial (14 apartados A-N, formato BOA/Aragón vigente desde sept. 2025), unas 15-20 páginas, ideal para jefatura.
-- **PD+ (Detallada JEG):** Programación completa (TFM/Oposiciones) de más de 60 páginas con metodologías expandidas.
+- **PD- (resumen):** resumen de 1-2 hojas para entregar al alumnado.
+- **PD= (simplificada):** sigue la estructura normativa oficial (14 apartados A-N, formato BOA/Aragón vigente desde sept. 2025), unas 15-20 páginas, ideal para jefatura de estudios o inspección.
+- **PD+ (detallada JEG):** programación completa (TFM/oposiciones) de más de 60 páginas con metodologías expandidas.
 
-Consulta `MagIA` → Pestaña `Análisis APP->PDx` para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.
+Consulta MagIA → pestaña Análisis APP->PDx para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.
 
-### ¿Qué son los campos "codificados"?
-En lugar de escribir texto genérico, seleccionas opciones de una lista. El sistema redactará automáticamente párrafos enteros, coherentes y normativos en tu PD final.
+### ¿Qué son los campos «codificados»?
+En lugar de escribir texto genérico, seleccionas opciones de una lista (los códigos del anexo). El sistema redactará automáticamente párrafos enteros, coherentes y normativos en tu PD final.
 
-### ¿Cómo sabe el sistema el nombre de mi Centro Educativo?
-Lo tecleas en **Programación › Contexto › Identificación**. El sistema lo usará en todo el documento.
+### ¿Cómo sabe el sistema el nombre de mi centro educativo?
+Lo tecleas en **Programación › Contexto › Identificación**, junto con el tipo de centro, la localidad y la provincia. El sistema los usa en todo el documento.
 
-### ¿Cómo indico si mi módulo es Dual?
-En **Curso › Calendario › Periodo FEOE**. Podrás ajustar el tipo de dual, la docencia y las fechas.
+### ¿Cómo indico si mi módulo es dual?
+En **Programación › Contexto › Identificación** eliges el régimen dual (ninguno, dual general o dual intensivo) y las horas FEOE; las fechas, el tipo de docencia y las horas por día del periodo FEOE están en **Curso › Calendario › Fechas y horario** (bloque «Periodo FEOE»), y los RA que se desarrollan en la empresa se marcan en **Programación › Currículo › Relación RA <- CE** (columna FEOE).
 
 ---
 
-## 📚 Anexo: Catálogo de Elementos a Codificar
+## 📚 Anexo: Catálogo de elementos a codificar
 
-### A.1 Metodologías Activas
-- **[ABP]** Aprendizaje Basado en Proyectos
-- **[ABR]** Aprendizaje Basado en Retos
-- **[FLIP]** Flipped Classroom (Aula Invertida)
-- **[COLAB]** Aprendizaje Cooperativo / Colaborativo
-- **[SIM]** Simulación de Entornos Profesionales (Role-playing)
-- **[CASOS]** Método del Caso
-- **[GAMIF]** Gamificación / Aprendizaje Basado en Juegos
+### A.1 Metodologías activas
+- **[ABP]** Aprendizaje basado en proyectos
+- **[ABR]** Aprendizaje basado en retos
+- **[FLIP]** Flipped classroom (aula invertida)
+- **[COLAB]** Aprendizaje cooperativo / colaborativo
+- **[SIM]** Simulación de entornos profesionales
+- **[CASOS]** Método del caso
+- **[GAMIF]** Gamificación / Aprendizaje basado en juegos
 - **[ApS]** Aprendizaje-Servicio
-- **[DEMO]** Demostración Práctica
-- **[MAGIS]** Exposición Didáctica Interactiva apoyada en TIC
+- **[DEMO]** Demostración práctica
+- **[MAGIS]** Exposición didáctica interactiva apoyada en TIC
+- **[ETHAZI]** Ethazi / Aprendizaje colaborativo basado en retos (ACbR)
+- **[AGIL]** Metodologías ágiles (Design thinking, Lean startup, Scrum)
+- **[CONTR]** Contrato de aprendizaje (Learning contract)
+- **[DEBATE]** Debates y diálogo educativo
+- **[PARES]** Aprendizaje entre pares (Peer teaching)
+- **[ESTAC]** Estaciones de aprendizaje
 
-### A.2 Procedimientos e Instrumentos de Evaluación
-- **[PRU-OBJ]** Prueba objetiva escrita (Test, preguntas cortas)
-- **[PRU-EJEC]** Prueba de ejecución / Desempeño práctico
+### A.2 Instrumentos de evaluación y de calificación
+- **[PRU-OBJ]** Prueba objetiva escrita
+- **[PRU-EJEC]** Prueba de ejecución práctica
+- **[PORTF]** Portfolio / Cuaderno
+- **[DIARIO]** Diario de aprendizaje
+- **[DEF-ORAL]** Exposición oral
+- **[AUTOEVAL]** Autoevaluación
+- **[COEVAL]** Coevaluación
 - **[RUBR]** Rúbrica de evaluación
 - **[COTEJO]** Lista de control / Cotejo
 - **[ESCALA]** Escala de valoración (Likert)
-- **[PORTF]** Portfolio / Cuaderno del alumno
-- **[DIARIO]** Diario de aprendizaje
-- **[DEF-ORAL]** Exposición y defensa oral
-- **[AUTOEVAL]** Autoevaluación del alumnado
-- **[COEVAL]** Coevaluación entre pares
 
-### A.3 Medidas de Respuesta Educativa para la Inclusión
+### A.3 Medidas de respuesta educativa para la inclusión
 - **[NIVEL]** Actividades multinivel
-- **[AGRUP]** Agrupamientos flexibles y tutoría entre iguales
-- **[TIEMPO]** Flexibilización en tiempos de ejecución
+- **[AGRUP]** Agrupamientos flexibles y tutoría
+- **[TIEMPO]** Flexibilización en tiempos
 - **[MATERIAL]** Adaptación de materiales
-- **[ACNS]** Adaptaciones Curriculares No Significativas
-- **[AMPLIA]** Actividades de ampliación para Altas Capacidades
+- **[ACNS]** ACNS (no significativas)
+- **[AMPLIA]** Ampliación (altas capacidades)
 
-### A.4 Plan de Contingencia
-- **[CONT-ASINC]** Docencia telemática asíncrona (Aula Virtual)
-- **[CONT-SINC]** Docencia telemática síncrona (Videoconferencia)
+### A.4 Plan de contingencia
+- **[CONT-ASINC]** Docencia telemática asíncrona
+- **[CONT-SINC]** Docencia telemática síncrona
 - **[CONT-AUT]** Dosier de tareas autoguiadas
 
-### A.5 Recursos y Espacios
-- **[REC-AULA]** Aula polivalente / Aula técnica
-- **[REC-TALLER]** Taller específico / Laboratorio
+### A.5.1 Recursos: espacios
+- **[REC-AULA]** Aula técnica / polivalente
+- **[REC-TALLER]** Taller específico
+- **[REC-LAB]** Laboratorio
 - **[REC-INFO]** Aula de informática
-- **[REC-SOFT]** Software y simuladores específicos
-- **[REC-EVA]** Entorno Virtual de Aprendizaje (Aules, Moodle)
-- **[REC-BIBLIO]** Manuales y documentación técnica
-- **[REC-EPI]** Equipos de Protección Individual (EPIs)
+- **[REC-ALMACEN]** Almacén / pañol de herramientas
+- **[REC-EXTERIOR]** Espacio exterior / patio de prácticas
 
-### A.6 Actividades Complementarias y Extraescolares
-- **[EXT-VISITA]** Visitas técnicas a empresas del sector
-- **[EXT-CHARLA]** Charlas / Masterclass con expertos profesionales
-- **[EXT-FERIA]** Asistencia a ferias tecnológicas o sectoriales
-- **[EXT-SKILLS]** Participación en competiciones de FP (Skills)
+### A.5.2 Recursos: equipamiento de aula
+- **[REC-PIZARRA]** Pizarra y proyector / pantalla
+- **[REC-PDI]** Pizarra digital interactiva (PDI)
+- **[REC-ORDENADORES]** Ordenadores e impresora
+- **[REC-TABLETS]** Tablets / dispositivos móviles
+- **[REC-MOBILIARIO]** Mobiliario adaptable (mesas de trabajo en grupo)
 
-### A.7 Elementos Transversales
-- **[TRANS-ODS]** Objetivos de Desarrollo Sostenible (Agenda 2030)
-- **[TRANS-IGUALDAD]** Igualdad de género y corresponsabilidad
-- **[TRANS-PRL]** Cultura de Prevención de Riesgos Laborales
-- **[TRANS-TIC]** Fomento de la competencia digital y buen uso de internet
-- **[TRANS-EMP]** Emprendimiento e iniciativa emprendedora
+### A.5.3 Recursos: software y TIC
+- **[REC-SOFT-OFIMATICA]** Software ofimático (procesador, hoja de cálculo, presentaciones)
+- **[REC-SOFT-ESPECIFICO]** Software específico del módulo / sector
+- **[REC-EVA]** Entorno virtual de aprendizaje (Aules / Moodle / Classroom)
+- **[REC-CLASSROOM]** Google Classroom / Google Workspace for Education
+- **[REC-TEAMS]** Microsoft Teams para educación / Microsoft 365 Educación
+- **[REC-FORMS]** Formularios y cuestionarios online (Forms, Kahoot, Quizizz)
+- **[REC-CAD]** Software de diseño asistido por ordenador (CAD/CAM)
+- **[REC-SIMULADOR]** Software de simulación / entorno virtual de prácticas
+- **[REC-GESTION-TALLER]** Software de gestión y control de taller
+- **[REC-REPOSITORIO]** Repositorio documental compartido (Drive / OneDrive)
+
+### A.5.4 Recursos: documentación
+- **[REC-MANUALES]** Manuales técnicos y libros de texto
+- **[REC-NORMATIVA]** Normativa técnica y reglamentos del sector
+- **[REC-FICHAS-TECNICAS]** Fichas técnicas y catálogos de fabricantes
+- **[REC-APUNTES]** Apuntes y material elaborado por el profesorado
+- **[REC-VIDEOTECA]** Videoteca / recursos audiovisuales técnicos
+
+### A.5.5 Recursos: herramientas de taller
+- **[REC-HERR-MANUALES]** Herramientas manuales
+- **[REC-HERR-ELECTRICAS]** Herramientas eléctricas / motorizadas
+- **[REC-INSTR-MEDIDA]** Instrumentos y equipos de medida
+- **[REC-MAQUINARIA]** Maquinaria y equipos específicos del sector
+- **[REC-CONSUMIBLES]** Materiales consumibles y fungibles de prácticas
+- **[REC-MAQUETAS]** Maquetas y bancos de prácticas / simulación de instalaciones
+
+### A.5.6 Recursos: seguridad y PRL
+- **[REC-EPI]** Equipos de protección individual (EPI)
+- **[REC-EPC]** Equipos de protección colectiva
+- **[REC-SENALIZACION]** Señalización de seguridad del taller
+- **[REC-BOTIQUIN]** Botiquín y material de primeros auxilios
+
+### A.5.7 Recursos: comunicación
+- **[REC-EMAIL]** Correo electrónico institucional
+- **[REC-APP-COMUNICACION]** App de comunicación con familias/alumnado (Séneca, Educamos, etc.)
+
+### A.6 Elementos transversales
+- **[TRANS-DIG]** Competencia digital / tecnologías
+- **[TRANS-SOST]** Sostenibilidad y transición ecológica
+- **[TRANS-IGUAL]** Igualdad de género
+- **[TRANS-PRL]** Prevención de riesgos laborales
+- **[TRANS-EMPRE]** Cultura emprendedora

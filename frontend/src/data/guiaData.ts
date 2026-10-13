@@ -469,92 +469,184 @@ export const GUIA_PASOS: {
   },
 ];
 
+export interface GuiaFaq {
+  q: string;
+  /** Respuesta en texto con marcado ligero (negrita con **, listas con «- »). */
+  a: string;
+}
+
+// Preguntas frecuentes de la guía. Solo las usa `public/Guia.md` (copia para el asistente IA,
+// generada por `scripts/generar-guia-md.mjs`); la FAQ visible en la app vive en `app/ayuda/page.tsx`.
+export const GUIA_FAQ: GuiaFaq[] = [
+  {
+    q: "¿Qué diferencia hay entre los 3 niveles de programación didáctica (PD-, PD=, PD+)?",
+    a: "Cuaderno FP genera el mismo contenido base en 3 niveles de detalle:\n- **PD- (resumen):** resumen de 1-2 hojas para entregar al alumnado.\n- **PD= (simplificada):** sigue la estructura normativa oficial (14 apartados A-N, formato BOA/Aragón vigente desde sept. 2025), unas 15-20 páginas, ideal para jefatura de estudios o inspección.\n- **PD+ (detallada JEG):** programación completa (TFM/oposiciones) de más de 60 páginas con metodologías expandidas.\n\nConsulta MagIA → pestaña Análisis APP->PDx para ver el mapa completo campo a campo entre la app y cada uno de los tres niveles.",
+  },
+  {
+    q: "¿Qué son los campos «codificados»?",
+    a: "En lugar de escribir texto genérico, seleccionas opciones de una lista (los códigos del anexo). El sistema redactará automáticamente párrafos enteros, coherentes y normativos en tu PD final.",
+  },
+  {
+    q: "¿Cómo sabe el sistema el nombre de mi centro educativo?",
+    a: "Lo tecleas en **Programación › Contexto › Identificación**, junto con el tipo de centro, la localidad y la provincia. El sistema los usa en todo el documento.",
+  },
+  {
+    q: "¿Cómo indico si mi módulo es dual?",
+    a: "En **Programación › Contexto › Identificación** eliges el régimen dual (ninguno, dual general o dual intensivo) y las horas FEOE; las fechas, el tipo de docencia y las horas por día del periodo FEOE están en **Curso › Calendario › Fechas y horario** (bloque «Periodo FEOE»), y los RA que se desarrollan en la empresa se marcan en **Programación › Currículo › Relación RA <- CE** (columna FEOE).",
+  },
+];
+
+// <GUIA_CATALOGO> bloque GENERADO por scripts/generar-guia-md.mjs desde los catálogos reales de la app: no editar a mano.
 export const GUIA_CATALOGO: GuiaCatalogoGrupo[] = [
   {
     numero: "A.1",
-    titulo: "Metodologías Activas",
+    titulo: "Metodologías activas",
     items: [
       { code: "ABP", label: "Aprendizaje basado en proyectos" },
       { code: "ABR", label: "Aprendizaje basado en retos" },
       { code: "FLIP", label: "Flipped classroom (aula invertida)" },
       { code: "COLAB", label: "Aprendizaje cooperativo / colaborativo" },
-      { code: "SIM", label: "Simulación de entornos profesionales (Role-playing)" },
+      { code: "SIM", label: "Simulación de entornos profesionales" },
       { code: "CASOS", label: "Método del caso" },
       { code: "GAMIF", label: "Gamificación / Aprendizaje basado en juegos" },
       { code: "ApS", label: "Aprendizaje-Servicio" },
       { code: "DEMO", label: "Demostración práctica" },
       { code: "MAGIS", label: "Exposición didáctica interactiva apoyada en TIC" },
+      { code: "ETHAZI", label: "Ethazi / Aprendizaje colaborativo basado en retos (ACbR)" },
+      { code: "AGIL", label: "Metodologías ágiles (Design thinking, Lean startup, Scrum)" },
+      { code: "CONTR", label: "Contrato de aprendizaje (Learning contract)" },
+      { code: "DEBATE", label: "Debates y diálogo educativo" },
+      { code: "PARES", label: "Aprendizaje entre pares (Peer teaching)" },
+      { code: "ESTAC", label: "Estaciones de aprendizaje" },
     ],
   },
   {
     numero: "A.2",
-    titulo: "Procedimientos e Instrumentos de Evaluación",
+    titulo: "Instrumentos de evaluación y de calificación",
     items: [
-      { code: "PRU-OBJ", label: "Prueba objetiva escrita (Test, preguntas cortas)" },
-      { code: "PRU-EJEC", label: "Prueba de ejecución / Desempeño práctico" },
+      { code: "PRU-OBJ", label: "Prueba objetiva escrita" },
+      { code: "PRU-EJEC", label: "Prueba de ejecución práctica" },
+      { code: "PORTF", label: "Portfolio / Cuaderno" },
+      { code: "DIARIO", label: "Diario de aprendizaje" },
+      { code: "DEF-ORAL", label: "Exposición oral" },
+      { code: "AUTOEVAL", label: "Autoevaluación" },
+      { code: "COEVAL", label: "Coevaluación" },
       { code: "RUBR", label: "Rúbrica de evaluación" },
       { code: "COTEJO", label: "Lista de control / Cotejo" },
       { code: "ESCALA", label: "Escala de valoración (Likert)" },
-      { code: "PORTF", label: "Portfolio / Cuaderno del alumno" },
-      { code: "DIARIO", label: "Diario de aprendizaje" },
-      { code: "DEF-ORAL", label: "Exposición y defensa oral" },
-      { code: "AUTOEVAL", label: "Autoevaluación del alumnado" },
-      { code: "COEVAL", label: "Coevaluación entre pares" },
     ],
   },
   {
     numero: "A.3",
-    titulo: "Medidas de Respuesta Educativa para la Inclusión",
+    titulo: "Medidas de respuesta educativa para la inclusión",
     items: [
       { code: "NIVEL", label: "Actividades multinivel" },
-      { code: "AGRUP", label: "Agrupamientos flexibles y tutoría entre iguales" },
-      { code: "TIEMPO", label: "Flexibilización en tiempos de ejecución" },
+      { code: "AGRUP", label: "Agrupamientos flexibles y tutoría" },
+      { code: "TIEMPO", label: "Flexibilización en tiempos" },
       { code: "MATERIAL", label: "Adaptación de materiales" },
-      { code: "ACNS", label: "Adaptaciones curriculares no significativas" },
-      { code: "AMPLIA", label: "Actividades de ampliación para altas capacidades" },
+      { code: "ACNS", label: "ACNS (no significativas)" },
+      { code: "AMPLIA", label: "Ampliación (altas capacidades)" },
     ],
   },
   {
     numero: "A.4",
     titulo: "Plan de contingencia",
     items: [
-      { code: "CONT-ASINC", label: "Docencia telemática asíncrona (aula virtual)" },
-      { code: "CONT-SINC", label: "Docencia telemática síncrona (Videoconferencia)" },
+      { code: "CONT-ASINC", label: "Docencia telemática asíncrona" },
+      { code: "CONT-SINC", label: "Docencia telemática síncrona" },
       { code: "CONT-AUT", label: "Dosier de tareas autoguiadas" },
     ],
   },
   {
-    numero: "A.5",
-    titulo: "Recursos y Espacios",
+    numero: "A.5.1",
+    titulo: "Recursos: espacios",
     items: [
-      { code: "REC-AULA", label: "Aula polivalente / Aula técnica" },
-      { code: "REC-TALLER", label: "Taller específico / Laboratorio" },
+      { code: "REC-AULA", label: "Aula técnica / polivalente" },
+      { code: "REC-TALLER", label: "Taller específico" },
+      { code: "REC-LAB", label: "Laboratorio" },
       { code: "REC-INFO", label: "Aula de informática" },
-      { code: "REC-SOFT", label: "Software y simuladores específicos" },
-      { code: "REC-EVA", label: "Entorno virtual de aprendizaje (Aules, Moodle)" },
-      { code: "REC-BIBLIO", label: "Manuales y documentación técnica" },
-      { code: "REC-EPI", label: "Equipos de protección individual (EPIs)" },
+      { code: "REC-ALMACEN", label: "Almacén / pañol de herramientas" },
+      { code: "REC-EXTERIOR", label: "Espacio exterior / patio de prácticas" },
+    ],
+  },
+  {
+    numero: "A.5.2",
+    titulo: "Recursos: equipamiento de aula",
+    items: [
+      { code: "REC-PIZARRA", label: "Pizarra y proyector / pantalla" },
+      { code: "REC-PDI", label: "Pizarra digital interactiva (PDI)" },
+      { code: "REC-ORDENADORES", label: "Ordenadores e impresora" },
+      { code: "REC-TABLETS", label: "Tablets / dispositivos móviles" },
+      { code: "REC-MOBILIARIO", label: "Mobiliario adaptable (mesas de trabajo en grupo)" },
+    ],
+  },
+  {
+    numero: "A.5.3",
+    titulo: "Recursos: software y TIC",
+    items: [
+      { code: "REC-SOFT-OFIMATICA", label: "Software ofimático (procesador, hoja de cálculo, presentaciones)" },
+      { code: "REC-SOFT-ESPECIFICO", label: "Software específico del módulo / sector" },
+      { code: "REC-EVA", label: "Entorno virtual de aprendizaje (Aules / Moodle / Classroom)" },
+      { code: "REC-CLASSROOM", label: "Google Classroom / Google Workspace for Education" },
+      { code: "REC-TEAMS", label: "Microsoft Teams para educación / Microsoft 365 Educación" },
+      { code: "REC-FORMS", label: "Formularios y cuestionarios online (Forms, Kahoot, Quizizz)" },
+      { code: "REC-CAD", label: "Software de diseño asistido por ordenador (CAD/CAM)" },
+      { code: "REC-SIMULADOR", label: "Software de simulación / entorno virtual de prácticas" },
+      { code: "REC-GESTION-TALLER", label: "Software de gestión y control de taller" },
+      { code: "REC-REPOSITORIO", label: "Repositorio documental compartido (Drive / OneDrive)" },
+    ],
+  },
+  {
+    numero: "A.5.4",
+    titulo: "Recursos: documentación",
+    items: [
+      { code: "REC-MANUALES", label: "Manuales técnicos y libros de texto" },
+      { code: "REC-NORMATIVA", label: "Normativa técnica y reglamentos del sector" },
+      { code: "REC-FICHAS-TECNICAS", label: "Fichas técnicas y catálogos de fabricantes" },
+      { code: "REC-APUNTES", label: "Apuntes y material elaborado por el profesorado" },
+      { code: "REC-VIDEOTECA", label: "Videoteca / recursos audiovisuales técnicos" },
+    ],
+  },
+  {
+    numero: "A.5.5",
+    titulo: "Recursos: herramientas de taller",
+    items: [
+      { code: "REC-HERR-MANUALES", label: "Herramientas manuales" },
+      { code: "REC-HERR-ELECTRICAS", label: "Herramientas eléctricas / motorizadas" },
+      { code: "REC-INSTR-MEDIDA", label: "Instrumentos y equipos de medida" },
+      { code: "REC-MAQUINARIA", label: "Maquinaria y equipos específicos del sector" },
+      { code: "REC-CONSUMIBLES", label: "Materiales consumibles y fungibles de prácticas" },
+      { code: "REC-MAQUETAS", label: "Maquetas y bancos de prácticas / simulación de instalaciones" },
+    ],
+  },
+  {
+    numero: "A.5.6",
+    titulo: "Recursos: seguridad y PRL",
+    items: [
+      { code: "REC-EPI", label: "Equipos de protección individual (EPI)" },
+      { code: "REC-EPC", label: "Equipos de protección colectiva" },
+      { code: "REC-SENALIZACION", label: "Señalización de seguridad del taller" },
+      { code: "REC-BOTIQUIN", label: "Botiquín y material de primeros auxilios" },
+    ],
+  },
+  {
+    numero: "A.5.7",
+    titulo: "Recursos: comunicación",
+    items: [
+      { code: "REC-EMAIL", label: "Correo electrónico institucional" },
+      { code: "REC-APP-COMUNICACION", label: "App de comunicación con familias/alumnado (Séneca, Educamos, etc.)" },
     ],
   },
   {
     numero: "A.6",
-    titulo: "Actividades Complementarias y Extraescolares",
+    titulo: "Elementos transversales",
     items: [
-      { code: "EXT-VISITA", label: "Visitas técnicas a empresas del sector" },
-      { code: "EXT-CHARLA", label: "Charlas / Masterclass con expertos profesionales" },
-      { code: "EXT-FERIA", label: "Asistencia a ferias tecnológicas o sectoriales" },
-      { code: "EXT-SKILLS", label: "Participación en competiciones de FP (Skills)" },
-    ],
-  },
-  {
-    numero: "A.7",
-    titulo: "Elementos Transversales",
-    items: [
-      { code: "TRANS-ODS", label: "Objetivos de desarrollo sostenible (Agenda 2030)" },
-      { code: "TRANS-IGUALDAD", label: "Igualdad de género y corresponsabilidad" },
-      { code: "TRANS-PRL", label: "Cultura de prevención de riesgos laborales" },
-      { code: "TRANS-TIC", label: "Fomento de la competencia digital y buen uso de internet" },
-      { code: "TRANS-EMP", label: "Emprendimiento e iniciativa emprendedora" },
+      { code: "TRANS-DIG", label: "Competencia digital / tecnologías" },
+      { code: "TRANS-SOST", label: "Sostenibilidad y transición ecológica" },
+      { code: "TRANS-IGUAL", label: "Igualdad de género" },
+      { code: "TRANS-PRL", label: "Prevención de riesgos laborales" },
+      { code: "TRANS-EMPRE", label: "Cultura emprendedora" },
     ],
   },
 ];
+// </GUIA_CATALOGO>
