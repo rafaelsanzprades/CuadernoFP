@@ -40,7 +40,8 @@
      "nombre": "Sevilla",
      "slug": "202627-calendario-andalucia-sevilla"
     }
-   ]
+   ],
+   "metodo": "Cómo se ha hecho: cada Delegación Territorial publica un PDF gráfico. Las fechas (inicio y fin, Navidad, Semana Santa, días no lectivos provinciales) se han leído de su leyenda y de los colores de las celdas, y los festivos vienen de los anexos del BOE de 2026 y 2027. Sevilla y Granada se contrastaron con una lectura automática de los colores y Almería también con el texto de su leyenda; el de Málaga es una imagen y se leyó a ojo. Los enlaces son copias auténticas con verificación electrónica alojadas por una asociación, no por la Junta."
   },
   {
    "comunidad": "Aragón",
@@ -56,7 +57,8 @@
      "url": "https://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VEROBJ&MLKOB=1392479120808"
     }
    ],
-   "calendario": "202627-calendario-aragon"
+   "calendario": "202627-calendario-aragon",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. Comprobación cruzada: los festivos que salen del BOE coinciden con los del calendario escolar oficial."
   },
   {
    "comunidad": "Asturias",
@@ -68,7 +70,8 @@
      "url": "https://www.asturias.es/bopa/2026/06/01/2026-04361.pdf"
     }
    ],
-   "calendario": "202627-calendario-asturias"
+   "calendario": "202627-calendario-asturias",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027."
   },
   {
    "comunidad": "Illes Balears",
@@ -84,7 +87,8 @@
      "url": "https://intranet.caib.es/eboibfront/pdf/ca/2026/82/1222865"
     }
    ],
-   "calendario": "202627-calendario-illes-balears"
+   "calendario": "202627-calendario-illes-balears",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. La resolución original (BOIB núm. 41) está enlazada desde la web del Govern; su modificación (BOIB núm. 82) no cambia fechas."
   },
   {
    "comunidad": "Canarias",
@@ -96,7 +100,8 @@
      "url": "https://www.gobiernodecanarias.org/boc/2026/061/1025.html"
     }
    ],
-   "calendario": "202627-calendario-canarias"
+   "calendario": "202627-calendario-canarias",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. Las fiestas patronales de cada isla no están incluidas."
   },
   {
    "comunidad": "Cantabria",
@@ -108,7 +113,8 @@
      "url": "https://www.laboral-social.com/sites/laboral-social.com/files/calendario-escolar-cantabria-2026-2027.pdf"
     }
    ],
-   "calendario": "202627-calendario-cantabria"
+   "calendario": "202627-calendario-cantabria",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. El enlace es una copia del BOC (CVE-2026-3151) alojada fuera del boletín."
   },
   {
    "comunidad": "Castilla y León",
@@ -124,7 +130,8 @@
      "url": "https://www.educa.jcyl.es/es/calendario-escolar"
     }
    ],
-   "calendario": "202627-calendario-castilla-y-leon"
+   "calendario": "202627-calendario-castilla-y-leon",
+   "metodo": "Cómo se ha hecho: las fechas salen del calendario escolar publicado por la Consejería (PDF oficial), que resume la Orden EDU/478/2026; no se pudo abrir el texto del BOCYL. Los festivos se completan con los anexos del BOE de 2026 y 2027."
   },
   {
    "comunidad": "Castilla-La Mancha",
@@ -152,7 +159,8 @@
      "url": "https://educacion.castillalamancha.es/sites/default/files/2026-06/TOLEDO%20-%20RESOLUCION%20CALENDARIO%20ESCOLAR%20PROVINCIAL%202026-2027%20TOLEDO.pdf"
     }
    ],
-   "calendario": "202627-calendario-castilla-la-mancha"
+   "calendario": "202627-calendario-castilla-la-mancha",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. Las fechas generales son las de la Orden 79/2026, tal como las repiten las resoluciones provinciales, que coinciden entre sí."
   },
   {
    "comunidad": "Cataluña",
@@ -165,7 +173,8 @@
     }
    ],
    "calendario": "202627-calendario-cataluna",
-   "nota": "La orden fija el inicio de la FP; el final lo decide cada centro."
+   "nota": "La orden fija el inicio de la FP; el final lo decide cada centro.",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. La orden fija solo el inicio de la FP (como máximo, el 14 de septiembre); el final lo decide cada centro, por eso este calendario no trae fin de curso. El enlace es una copia del DOGC alojada en una web municipal."
   },
   {
    "comunidad": "Comunitat Valenciana",
@@ -177,7 +186,8 @@
      "url": "https://dogv.gva.es/datos/2026/06/18/pdf/2026_20810_es.pdf"
     }
    ],
-   "calendario": "202627-calendario-comunitat-valenciana"
+   "calendario": "202627-calendario-comunitat-valenciana",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027."
   },
   {
    "comunidad": "Extremadura",
@@ -189,7 +199,8 @@
      "url": "https://doe.juntaex.es/pdfs/doe/2026/1160o/26061567.pdf"
     }
    ],
-   "calendario": "202627-calendario-extremadura"
+   "calendario": "202627-calendario-extremadura",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027."
   },
   {
    "comunidad": "Galicia",
@@ -201,7 +212,8 @@
      "url": "https://www.edu.xunta.gal/centros/cpicovaterrena/system/files/OrdeCalendario2627.pdf"
     }
    ],
-   "calendario": "202627-calendario-galicia"
+   "calendario": "202627-calendario-galicia",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. El enlace es una copia del DOG alojada en la web de un centro."
   },
   {
    "comunidad": "Comunidad de Madrid",
@@ -213,7 +225,8 @@
      "url": "https://www.bocm.es/boletin/CM_Orden_BOCM/2026/06/04/BOCM-20260604-13.PDF"
     }
    ],
-   "calendario": "202627-calendario-comunidad-de-madrid"
+   "calendario": "202627-calendario-comunidad-de-madrid",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027."
   },
   {
    "comunidad": "Región de Murcia",
@@ -225,14 +238,16 @@
      "url": "https://www.borm.es/services/anuncio/ano/2026/numero/2748/pdf?id=843430"
     }
    ],
-   "calendario": "202627-calendario-region-de-murcia"
+   "calendario": "202627-calendario-region-de-murcia",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. Los días no lectivos locales de cada municipio están en el anexo V de la resolución."
   },
   {
    "comunidad": "Navarra",
    "norma": "Instrucciones del Departamento de Educación para elaborar el calendario escolar 2026-27",
    "boletin": "",
    "enlaces": [],
-   "nota": "No se ha localizado la resolución oficial del calendario escolar 2026-27."
+   "nota": "No se ha localizado la resolución oficial del calendario escolar 2026-27.",
+   "metodo": "Todavía sin datos: falta localizar la resolución oficial en el Boletín Oficial de Navarra."
   },
   {
    "comunidad": "País Vasco",
@@ -244,7 +259,8 @@
      "url": "https://www.euskadi.eus/contenidos/informacion/cee_organizacioncentros_calend/es_def/adjuntos/2026_2027/Resolucion-calendario-Primaria-2026_27-cast-.pdf"
     }
    ],
-   "nota": "El calendario de FP lo fija cada centro dentro de las resoluciones del Departamento; consulta el de tu centro."
+   "nota": "El calendario de FP lo fija cada centro dentro de las resoluciones del Departamento; consulta el de tu centro.",
+   "metodo": "Todavía sin datos: el calendario de FP lo concreta cada centro dentro de las resoluciones del Departamento, así que no hay un calendario común de comunidad."
   },
   {
    "comunidad": "La Rioja",
@@ -260,7 +276,8 @@
      "url": "https://www.larioja.org/edu-orden-academica/en/accesos-directos/calendario-escolar"
     }
    ],
-   "calendario": "202627-calendario-la-rioja"
+   "calendario": "202627-calendario-la-rioja",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027. La resolución se aprobó antes de publicarse las fiestas de 2027; aquí se usan las del BOE de octubre de 2026."
   },
   {
    "comunidad": "Ceuta",
@@ -272,7 +289,8 @@
      "url": "https://www.educacionfpydeportes.gob.es/dam/jcr:a9cf685a-32f4-480f-8878-c06cae54fc37/26-070-01-calendario-escolar-26-27-v1.pdf"
     }
    ],
-   "calendario": "202627-calendario-ceuta"
+   "calendario": "202627-calendario-ceuta",
+   "metodo": "Cómo se ha hecho: el calendario oficial es un dibujo en color; sus fechas se han leído de la leyenda (inicio de clases, días de fiesta, días de libre disposición, vacaciones y fin de actividades) y se han completado con los festivos del BOE de 2026 y 2027."
   },
   {
    "comunidad": "Melilla",
@@ -288,7 +306,8 @@
      "url": "https://www.educacionfpydeportes.gob.es/dam/jcr:8ad09335-8919-42a7-8bbe-8d4ff54cb6e0/calendario-escolar-26-27.pdf"
     }
    ],
-   "calendario": "202627-calendario-melilla"
+   "calendario": "202627-calendario-melilla",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los días no lectivos propios están copiados del texto de la norma enlazada; los festivos nacionales y autonómicos, de los anexos del BOE de fiestas laborales de 2026 y de 2027."
   }
  ]
 }
