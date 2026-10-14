@@ -527,6 +527,9 @@
     "cierre": "Expediente por alumnado (boletín, informe de evidencias e inserción laboral), avance de UD e progreso dos RA, e mellora do módulo (EQAVET e PDCA)."
   },
   "toasts": {
+    "calendario": {
+      "importado": "Calendario importado: {{n}} días engadidos."
+    },
     "aiSettings": {
       "guardadaLocal": "Configuración de IA gardada localmente."
     },
@@ -729,6 +732,8 @@
       "validarWorkspace": "Validar workspace"
     },
     "calendario": {
+      "importarOficial": "Importar calendario oficial",
+      "importar": "Importar",
       "anadirActividadComplementaria": "Engadir actividade complementaria",
       "autodetectar": "Autodetectar"
     },
@@ -742,6 +747,7 @@
       "desconectar": "Desconectar"
     },
     "comun": {
+      "cerrar": "Pechar",
       "borrar": "Borrar",
       "deshacer": "Desfacer",
       "hoy": "Hoxe",
@@ -2557,6 +2563,15 @@
       "transversalidadInnovacionDesc": "Como se traballan a dixitalización, a sustentabilidade, a equidade ou o DUA nesta unidade."
     },
     "calendario": {
+      "importarOficialTitulo": "Importar calendario oficial",
+      "importarOficialAyuda": "Copia ao curso os festivos e as vacacións oficiais. Os festivos locais da túa localidade engádesos ti. O que xa escribiras non se sobrescribe.",
+      "importarOficialError": "Non se puido cargar o calendario.",
+      "importarOficialCalendario": "Calendario",
+      "importarOficialProvincia": "Provincia (vacacións provinciais)",
+      "importarOficialSinProvincia": "Non engadir",
+      "importarOficialFechas": "Pon tamén o inicio e o fin de curso",
+      "importarOficialFuente": "Fonte",
+      "importarOficialConsultado": "consultado",
       "mesEnero": "Xaneiro",
       "mesFebrero": "Febreiro",
       "mesMarzo": "Marzo",

@@ -527,6 +527,9 @@
     "cierre": "Record per student (report card, evidence report and job placement), teaching unit and RA progress, and module improvement (EQAVET and PDCA)."
   },
   "toasts": {
+    "calendario": {
+      "importado": "Calendar imported: {{n}} days added."
+    },
     "aiSettings": {
       "guardadaLocal": "AI settings saved locally."
     },
@@ -729,6 +732,8 @@
       "validarWorkspace": "Validate workspace"
     },
     "calendario": {
+      "importarOficial": "Import official calendar",
+      "importar": "Import",
       "anadirActividadComplementaria": "Add complementary activity",
       "autodetectar": "Auto-detect"
     },
@@ -742,6 +747,7 @@
       "desconectar": "Disconnect"
     },
     "comun": {
+      "cerrar": "Close",
       "borrar": "Clear",
       "deshacer": "Undo",
       "hoy": "Today",
@@ -2557,6 +2563,15 @@
       "transversalidadInnovacionDesc": "How digitalization, sustainability, equity or UDL are addressed in this unit."
     },
     "calendario": {
+      "importarOficialTitulo": "Import official calendar",
+      "importarOficialAyuda": "Copies the official public holidays and school breaks into the course. Local holidays for your town are added by you. Anything you already wrote is not overwritten.",
+      "importarOficialError": "The calendar could not be loaded.",
+      "importarOficialCalendario": "Calendar",
+      "importarOficialProvincia": "Province (provincial breaks)",
+      "importarOficialSinProvincia": "Do not add",
+      "importarOficialFechas": "Also set course start and end",
+      "importarOficialFuente": "Source",
+      "importarOficialConsultado": "consulted",
       "mesEnero": "January",
       "mesFebrero": "February",
       "mesMarzo": "March",

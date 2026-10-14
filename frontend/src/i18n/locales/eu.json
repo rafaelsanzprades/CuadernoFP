@@ -527,6 +527,9 @@
     "cierre": "Espedientea ikasleka (buletina, ebidentzien txostena eta laneratzea), IUen eta IEen aurrerapena, eta moduluaren hobekuntza (EQAVET eta PDCA)."
   },
   "toasts": {
+    "calendario": {
+      "importado": "Egutegia inportatu da: {{n}} egun gehitu dira."
+    },
     "aiSettings": {
       "guardadaLocal": "AA konfigurazioa lokalki gordeta."
     },
@@ -729,6 +732,8 @@
       "validarWorkspace": "Workspace balioztatu"
     },
     "calendario": {
+      "importarOficial": "Egutegi ofiziala inportatu",
+      "importar": "Inportatu",
       "anadirActividadComplementaria": "Jarduera osagarria gehitu",
       "autodetectar": "Automatikoki detektatu"
     },
@@ -742,6 +747,7 @@
       "desconectar": "Deskonektatu"
     },
     "comun": {
+      "cerrar": "Itxi",
       "borrar": "Ezabatu",
       "deshacer": "Desegin",
       "hoy": "Gaur",
@@ -2557,6 +2563,15 @@
       "transversalidadInnovacionDesc": "Unitate honetan digitalizazioa, iraunkortasuna, ekitatea edo DUA nola lantzen diren."
     },
     "calendario": {
+      "importarOficialTitulo": "Egutegi ofiziala inportatu",
+      "importarOficialAyuda": "Ikasturtera jai ofizialak eta oporrak kopiatzen ditu. Zure herriko jai lokalak zuk gehitzen dituzu. Lehendik idatzitakoa ez da gainidazten.",
+      "importarOficialError": "Ezin izan da egutegia kargatu.",
+      "importarOficialCalendario": "Egutegia",
+      "importarOficialProvincia": "Probintzia (probintziako oporrak)",
+      "importarOficialSinProvincia": "Ez gehitu",
+      "importarOficialFechas": "Ikasturtearen hasiera eta amaiera ere jarri",
+      "importarOficialFuente": "Iturria",
+      "importarOficialConsultado": "kontsultatua",
       "mesEnero": "Urtarrila",
       "mesFebrero": "Otsaila",
       "mesMarzo": "Martxoa",
