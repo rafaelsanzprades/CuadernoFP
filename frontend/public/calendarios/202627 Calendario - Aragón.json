@@ -1,0 +1,102 @@
+{
+  "id": "202627-aragon",
+  "nombre": "202627 Calendario - Aragón",
+  "curso": "2026-27",
+  "comunidad": "Aragón",
+  "ambito": "Grados D y E de Formación Profesional, modalidad presencial",
+  "fuente": {
+    "titulo": "Resolución de 29 de abril de 2025, del Director General de Planificación, Centros y Formación Profesional, por la que se aprueban los calendarios escolares de los cursos 2025-2026 y 2026-2027 (BOA núm. 88, de 12 de mayo de 2025), apartados decimotercero, decimosexto, decimoséptimo y decimoctavo",
+    "url": "https://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VEROBJ&MLKOB=1392479120808",
+    "consultado": "2026-10-14"
+  },
+  "info_fechas": {
+    "ini_curso": "2026-09-10",
+    "fin_curso": "2027-06-18"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta nacional"
+    },
+    {
+      "fecha": "2026-11-02",
+      "nombre": "Festivo (en sustitución de Todos los Santos)"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Festivo (en sustitución del Día de la Constitución)"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-04-23",
+      "nombre": "Día de Aragón"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-23",
+      "hasta": "2027-01-06",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-03-25",
+      "hasta": "2027-04-02",
+      "nombre": "Semana Santa"
+    }
+  ],
+  "provinciales": {
+    "Huesca": [
+      {
+        "fecha": "2027-02-18",
+        "nombre": "Vacaciones provinciales (Huesca)"
+      },
+      {
+        "fecha": "2027-02-19",
+        "nombre": "Vacaciones provinciales (Huesca)"
+      },
+      {
+        "fecha": "2027-05-03",
+        "nombre": "Vacaciones provinciales (Huesca)"
+      }
+    ],
+    "Teruel": [
+      {
+        "fecha": "2027-02-18",
+        "nombre": "Vacaciones provinciales (Teruel)"
+      },
+      {
+        "fecha": "2027-02-19",
+        "nombre": "Vacaciones provinciales (Teruel)"
+      },
+      {
+        "fecha": "2027-04-26",
+        "nombre": "Vacaciones provinciales (Teruel)"
+      }
+    ],
+    "Zaragoza": [
+      {
+        "fecha": "2026-10-13",
+        "nombre": "Vacaciones provinciales (Zaragoza)"
+      },
+      {
+        "fecha": "2026-10-14",
+        "nombre": "Vacaciones provinciales (Zaragoza)"
+      },
+      {
+        "fecha": "2027-05-03",
+        "nombre": "Vacaciones provinciales (Zaragoza)"
+      }
+    ]
+  },
+  "notas": [
+    "El 22 de diciembre de 2026 es lectivo solo por la mañana: las vacaciones de Navidad empiezan al terminar las actividades lectivas de esa mañana y llegan hasta el 6 de enero de 2027, inclusive.",
+    "El 24 de marzo de 2027 es el Día de la Educación en Aragón y es lectivo.",
+    "La modalidad semipresencial y virtual empieza el 1 de octubre de 2026.",
+    "El curso tiene 173 días lectivos en Grados D y E de FP presencial.",
+    "La finalización de las actividades lectivas del Grado D puede ser posterior si el Servicio Provincial autoriza la formación en empresa fuera de los periodos del Decreto 91/2024.",
+    "Los dos festivos locales de cada localidad no están incluidos: los comunica el Ayuntamiento y los añade cada docente."
+  ]
+}

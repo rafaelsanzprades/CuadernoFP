@@ -527,6 +527,9 @@
     "cierre": "Expedient per alumnat (butlletí, informe d'evidències i inserció laboral), avanç d'UD i progrés dels RA, i millora del mòdul (EQAVET i PDCA)."
   },
   "toasts": {
+    "calendario": {
+      "importado": "Calendari importat: {{n}} dies afegits."
+    },
     "aiSettings": {
       "guardadaLocal": "Configuració d'IA desada localment."
     },
@@ -729,6 +732,8 @@
       "validarWorkspace": "Validar workspace"
     },
     "calendario": {
+      "importarOficial": "Importar calendari oficial",
+      "importar": "Importar",
       "anadirActividadComplementaria": "Afegir activitat complementària",
       "autodetectar": "Autodetectar"
     },
@@ -742,6 +747,7 @@
       "desconectar": "Desconnectar"
     },
     "comun": {
+      "cerrar": "Tancar",
       "borrar": "Esborrar",
       "deshacer": "Desfer",
       "hoy": "Avui",
@@ -2557,6 +2563,15 @@
       "transversalidadInnovacionDesc": "Com es treballen la digitalització, la sostenibilitat, l'equitat o el DUA en aquesta unitat."
     },
     "calendario": {
+      "importarOficialTitulo": "Importar calendari oficial",
+      "importarOficialAyuda": "Copia al curs els festius i les vacances oficials. Els festius locals de la teua localitat els afegixes tu. El que ja hages escrit no se sobreescriu.",
+      "importarOficialError": "No s'ha pogut carregar el calendari.",
+      "importarOficialCalendario": "Calendari",
+      "importarOficialProvincia": "Província (vacances provincials)",
+      "importarOficialSinProvincia": "No afegir",
+      "importarOficialFechas": "Posa també l'inici i el final de curs",
+      "importarOficialFuente": "Font",
+      "importarOficialConsultado": "consultat",
       "mesEnero": "Gener",
       "mesFebrero": "Febrer",
       "mesMarzo": "Març",

@@ -22,6 +22,7 @@ import { ContextoAgenda } from "@/components/features/dashboard/ContextoAgenda";
 import { DesarrolloUdActual } from "@/components/features/dashboard/DesarrolloUdActual";
 import { InteractiveCalendar } from "@/components/features/dashboard/InteractiveCalendar";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
+import { ImportarCalendarioOficial } from "@/components/features/calendario/ImportarCalendarioOficial";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import Link from "next/link";
 import { getApiBase } from "@/services/apiBase";
@@ -907,6 +908,15 @@ export default function CalendarioPage() {
                     <Lock className="w-[1em] h-[1em] inline-block mx-1" />
                     {t('campos.calendario.festivosEventosInstruccionesPost', {defaultValue: '(Inicio/Fin de curso y de trimestre, FEOE) vienen de Fechas generales / Periodo FEOE — se editan ahí, no aquí.'})}
                   </p>
+                  <ImportarCalendarioOficial
+                    calendarNotes={calendar_notes}
+                    infoFechas={info_fechas}
+                    provinciaInicial={moduleData?.info_modulo?.provincia}
+                    onImport={(notes, fechas) => {
+                      updateCursoData("calendar_notes", notes);
+                      if (fechas) updateCursoData("info_fechas", { ...info_fechas, ...fechas });
+                    }}
+                  />
                   <NotesTable
                     currentMonthKey={currentMonthKey}
                     calendar_notes={calendar_notes}
