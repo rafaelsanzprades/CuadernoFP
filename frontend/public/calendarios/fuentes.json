@@ -243,11 +243,24 @@
   },
   {
    "comunidad": "Navarra",
-   "norma": "Instrucciones del Departamento de Educación para elaborar el calendario escolar 2026-27",
-   "boletin": "",
-   "enlaces": [],
-   "nota": "No se ha localizado la resolución oficial del calendario escolar 2026-27.",
-   "metodo": "Todavía sin datos: falta localizar la resolución oficial en el Boletín Oficial de Navarra."
+   "norma": "Resolución 225/2026, de 27 de abril, del director general de Educación y Formación Profesional, por la que se aprueban las instrucciones para el calendario escolar y horario general de los Grados D de FP y los ciclos de artes plásticas y diseño, curso 2026-2027",
+   "boletin": "BON núm. 100, de 2026; modificada en el BON núm. 118",
+   "enlaces": [
+    {
+     "texto": "Resolución 225/2026 (BON núm. 100)",
+     "url": "https://bon.navarra.es/es/anuncio/-/texto/2026/100/5"
+    },
+    {
+     "texto": "Resolución 351/2026, que la modifica (BON núm. 118)",
+     "url": "https://bon.navarra.es/es/anuncio/-/texto/2026/118/18"
+    },
+    {
+     "texto": "Calendario escolar en la web del Departamento de Educación",
+     "url": "https://www.educacion.navarra.es/web/dpto/calendario-escolar"
+    }
+   ],
+   "calendario": "202627-calendario-navarra",
+   "metodo": "Cómo se ha hecho: las fechas de inicio y fin de FP, las vacaciones y los festivos de la norma están copiados del texto de la resolución en el BON, con los cambios de la Resolución 351/2026, que adelanta el fin de las clases al 21 de junio y añade el 19 de marzo como festivo. Los festivos nacionales y autonómicos vienen de los anexos del BOE de fiestas laborales de 2026 y de 2027; el 3 de diciembre, que figura en la resolución y no en el BOE, se ha añadido a mano. El inicio de clases varía según el ciclo (4, 11 o 16 de septiembre) y aquí se propone el 11."
   },
   {
    "comunidad": "País Vasco",
