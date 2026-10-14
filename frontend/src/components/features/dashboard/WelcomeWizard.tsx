@@ -7,6 +7,8 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { useAppStore } from "@/store/useAppStore";
+import { ImportarDeBiblioteca } from "@/components/features/inicio/ImportarDeBiblioteca";
 
 interface WelcomeWizardProps {
   onComplete: () => void;
@@ -105,6 +107,13 @@ export function WelcomeWizard({ onComplete, fetchModules }: WelcomeWizardProps) 
                   {t('campos.dashboard.crearDescripcion', {defaultValue: 'Empieza desde cero creando tu propia programación y curso vacíos para trabajar con tus datos reales.'})}
                 </p>
               </button>
+              <div className="md:col-span-2">
+                <p className="text-caption text-muted mb-2">{t('campos.dashboard.bibliotecaDescripcion', {defaultValue: 'O parte de una programación compartida por otros docentes, sin datos de centro ni de alumnado:'})}</p>
+                <ImportarDeBiblioteca
+                  hayProgramacion={false}
+                  onImported={() => { useAppStore.getState().setDataSource('local'); onComplete(); }}
+                />
+              </div>
             </div>
           )}
 
