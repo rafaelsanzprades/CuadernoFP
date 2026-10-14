@@ -1,0 +1,744 @@
+{
+  "df_ud": [
+    {
+      "id_ud": "UD1",
+      "desc_ud": "Instalación, actualización y configuración de suites ofimáticas y gestión de licencias.",
+      "horas_ud": 10,
+      "titulo": "Fundamentos de la ofimática",
+      "ra": "RA1",
+      "temporizacion": "1.er trimestre",
+      "pct_ra1": 100,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
+    },
+    {
+      "id_ud": "UD2",
+      "desc_ud": "Gestión de correo electrónico y agenda electrónica: configuración de cuentas, contactos y sincronización.",
+      "horas_ud": 10,
+      "titulo": "Comunicación digital: correo y agenda",
+      "ra": "RA8",
+      "temporizacion": "1.er trimestre",
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
+    },
+    {
+      "id_ud": "UD3",
+      "desc_ud": "Elaboración de documentos y plantillas con opciones avanzadas del procesador de textos.",
+      "horas_ud": 30,
+      "titulo": "Procesadores de texto",
+      "ra": "RA2",
+      "temporizacion": "1.er trimestre",
+      "pct_ra1": 0,
+      "pct_ra2": 100,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
+    },
+    {
+      "id_ud": "UD4",
+      "desc_ud": "Elaboración de documentos y plantillas de cálculo con fórmulas, funciones y gráficos.",
+      "horas_ud": 41,
+      "titulo": "Hojas de cálculo",
+      "ra": "RA3",
+      "temporizacion": "1.er / 2.º trimestre",
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 100,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
+    },
+    {
+      "id_ud": "UD5",
+      "desc_ud": "Técnicas de soporte, resolución de incidencias y elaboración de guías de uso de aplicaciones.",
+      "horas_ud": 10,
+      "titulo": "Soporte técnico ofimático",
+      "ra": "RA9",
+      "temporizacion": "2.º trimestre",
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
+    },
+    {
+      "id_ud": "UD6",
+      "desc_ud": "Diseño y elaboración de presentaciones multimedia aplicando normas de composición.",
+      "horas_ud": 17,
+      "titulo": "Presentaciones multimedia",
+      "ra": "RA7",
+      "temporizacion": "2.º trimestre",
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 100
+    },
+    {
+      "id_ud": "UD7",
+      "desc_ud": "Elaboración de documentos con bases de datos ofimáticas: tablas, consultas, formularios e informes.",
+      "horas_ud": 24,
+      "titulo": "Bases de datos",
+      "ra": "RA4",
+      "temporizacion": "2.º trimestre",
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 100,
+      "pct_ra5": 0,
+      "pct_ra6": 0,
+      "pct_ra7": 0
+    },
+    {
+      "id_ud": "UD8",
+      "desc_ud": "Captura y edición básica de imágenes digitales y secuencias de vídeo.",
+      "horas_ud": 33,
+      "titulo": "Imagen y vídeo digital",
+      "ra": "RA5, RA6",
+      "temporizacion": "3.er trimestre",
+      "pct_ra1": 0,
+      "pct_ra2": 0,
+      "pct_ra3": 0,
+      "pct_ra4": 0,
+      "pct_ra5": 50,
+      "pct_ra6": 50,
+      "pct_ra7": 0
+    }
+  ],
+  "df_ra": [
+    {
+      "id_ra": "RA1",
+      "peso_ra": 10,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA2",
+      "peso_ra": 20,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA3",
+      "peso_ra": 15,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA4",
+      "peso_ra": 10,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA5",
+      "peso_ra": 15,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA6",
+      "peso_ra": 10,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA7",
+      "peso_ra": 10,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA8",
+      "peso_ra": 5,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA9",
+      "peso_ra": 5,
+      "is_dual": false
+    }
+  ],
+  "df_ce": [
+    {
+      "id_ce": "CE1.a",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.b",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.c",
+      "id_ra": "RA1",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.d",
+      "id_ra": "RA1",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.e",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.f",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.g",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.h",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE1.i",
+      "id_ra": "RA1",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD1"
+    },
+    {
+      "id_ce": "CE2.a",
+      "id_ra": "RA2",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD3"
+    },
+    {
+      "id_ce": "CE2.b",
+      "id_ra": "RA2",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD3"
+    },
+    {
+      "id_ce": "CE2.c",
+      "id_ra": "RA2",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD3"
+    },
+    {
+      "id_ce": "CE2.d",
+      "id_ra": "RA2",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD3"
+    },
+    {
+      "id_ce": "CE2.e",
+      "id_ra": "RA2",
+      "peso_ce": 30,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD3"
+    },
+    {
+      "id_ce": "CE2.f",
+      "id_ra": "RA2",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD3"
+    },
+    {
+      "id_ce": "CE3.a",
+      "id_ra": "RA3",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE3.b",
+      "id_ra": "RA3",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE3.c",
+      "id_ra": "RA3",
+      "peso_ce": 25,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE3.d",
+      "id_ra": "RA3",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE3.e",
+      "id_ra": "RA3",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE3.f",
+      "id_ra": "RA3",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE3.g",
+      "id_ra": "RA3",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE3.h",
+      "id_ra": "RA3",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD4"
+    },
+    {
+      "id_ce": "CE4.a",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE4.b",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE4.c",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE4.d",
+      "id_ra": "RA4",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE4.e",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE4.f",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE4.g",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE4.h",
+      "id_ra": "RA4",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD7"
+    },
+    {
+      "id_ce": "CE5.a",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE5.b",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE5.c",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE5.d",
+      "id_ra": "RA5",
+      "peso_ce": 40,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE5.e",
+      "id_ra": "RA5",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE6.a",
+      "id_ra": "RA6",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE6.b",
+      "id_ra": "RA6",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE6.c",
+      "id_ra": "RA6",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE6.d",
+      "id_ra": "RA6",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE6.e",
+      "id_ra": "RA6",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD8"
+    },
+    {
+      "id_ce": "CE7.a",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD6"
+    },
+    {
+      "id_ce": "CE7.b",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD6"
+    },
+    {
+      "id_ce": "CE7.c",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD6"
+    },
+    {
+      "id_ce": "CE7.d",
+      "id_ra": "RA7",
+      "peso_ce": 30,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD6"
+    },
+    {
+      "id_ce": "CE7.e",
+      "id_ra": "RA7",
+      "peso_ce": 30,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD6"
+    },
+    {
+      "id_ce": "CE7.f",
+      "id_ra": "RA7",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD6"
+    },
+    {
+      "id_ce": "CE8.a",
+      "id_ra": "RA8",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD2"
+    },
+    {
+      "id_ce": "CE8.b",
+      "id_ra": "RA8",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD2"
+    },
+    {
+      "id_ce": "CE8.c",
+      "id_ra": "RA8",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD2"
+    },
+    {
+      "id_ce": "CE8.d",
+      "id_ra": "RA8",
+      "peso_ce": 25,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD2"
+    },
+    {
+      "id_ce": "CE8.e",
+      "id_ra": "RA8",
+      "peso_ce": 25,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD2"
+    },
+    {
+      "id_ce": "CE8.f",
+      "id_ra": "RA8",
+      "peso_ce": 15,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD2"
+    },
+    {
+      "id_ce": "CE8.g",
+      "id_ra": "RA8",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD2"
+    },
+    {
+      "id_ce": "CE9.a",
+      "id_ra": "RA9",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.b",
+      "id_ra": "RA9",
+      "peso_ce": 10,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.c",
+      "id_ra": "RA9",
+      "peso_ce": 5,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.d",
+      "id_ra": "RA9",
+      "peso_ce": 20,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.e",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.f",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.g",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    },
+    {
+      "id_ce": "CE9.h",
+      "id_ra": "RA9",
+      "peso_ce": 0,
+      "FEOE": false,
+      "UD": "",
+      "id_ud": "UD5"
+    }
+  ],
+  "info_modulo": {
+    "codigo": "0223",
+    "acronimo": "AO",
+    "curso": "1",
+    "ciclo": "Sistemas microinformáticos y redes (SMR)",
+    "grado": "D",
+    "pond_1t": 30,
+    "pond_2t": 30,
+    "pond_3t": 40,
+    "criterio_conocimiento": 40,
+    "criterio_procedimiento_practicas": 30,
+    "criterio_procedimiento_ejercicios": 20,
+    "criterio_tareas": 10,
+    "h_sem": 6,
+    "ccaa": "aragon"
+  },
+  "config_contexto": {},
+  "medidas_inclusion": [
+    "[NIVEL-DUA] Medidas DUA a nivel de grupo — Representación: diagramas de flujo, infografías, esquemas, vídeos tutoriales. Calendarios visuales de la UD.",
+    "[ACCION-DUA] Medidas DUA a nivel de grupo — Acción y expresión: Flexibilidad en demostración de competencias. Plantillas y andamiajes.",
+    "[IMPLIC-DUA] Medidas DUA a nivel de grupo — Implicación: Conexión con intereses reales. Rutinas predecibles y clima seguro.",
+    "[TEA-REP] TEA — Representación: Instrucciones claras y explícitas en pasos numerados. Apoyos visuales.",
+    "[TEA-ACCION] TEA — Acción y expresión: Ampliación de tiempos. Sistemas alternativos de comunicación.",
+    "[TEA-IMPLIC] TEA — Implicación: Intereses específicos del alumno como punto de entrada. Rutinas claras.",
+    "[TDAH-REP] TDAH — Representación: Instrucciones cortas y segmentadas. Códigos de color.",
+    "[TDAH-ACCION] TDAH — Acción y expresión: Fragmentación de tareas. Micro-pausas activas.",
+    "[TDAH-IMPLIC] TDAH — Implicación: Feedback inmediato. Gamificación parcial.",
+    "[DESF-REP] Desfase curricular — Representación: Recursos audiovisuales y manipulativos. Textos adaptados.",
+    "[DESF-ACCION] Desfase curricular — Acción y expresión: Respuestas orales, visuales o prácticas. Plantillas con frases modelo.",
+    "[DESF-IMPLIC] Desfase curricular — Implicación: Metas realistas a corto plazo. Actividades funcionales.",
+    "[AUD-REP] Discapacidad auditiva — Representación: Ubicación preferente. Subtítulos en vídeos.",
+    "[AUD-ACCION] Discapacidad auditiva — Acción y expresión: Respuestas escritas o visuales.",
+    "[AUD-IMPLIC] Discapacidad auditiva — Implicación: Evitar tareas exclusivamente auditivas."
+  ],
+  "instrumentos_seleccionados": [
+    "[PRU-OBJ] Prueba objetiva",
+    "[PRU-EJEC] Prueba de ejecución",
+    "[RUBR] Rúbrica",
+    "[LIST-CTRL] Lista de control"
+  ],
+  "recursos_espacios": [
+    "[REC-AULA] Aula polivalente",
+    "Salón de Actos"
+  ],
+  "metodologias_seleccionadas": [
+    "[ABP] Aprendizaje Basado en Proyectos",
+    "[COLAB] Aprendizaje Cooperativo"
+  ],
+  "elementos_transversales": [
+    "[TRANS-TIC] Competencia digital y buen uso de internet"
+  ],
+  "medidas_contingencia": [
+    "[CONT-ASINC] Docencia telemática asíncrona",
+    "[CONT-AUT] Dosier de tareas autoguiadas"
+  ],
+  "textos_pd_contexto_geografico": "",
+  "textos_pd_contexto_socioeconomico": "",
+  "textos_pd_contexto_escolar": "",
+  "textos_pd_caracteristicas_alumnado": "",
+  "textos_pd_feoe_organizacion": "El alumnado que no realice la FEOE permanecerá en el centro educativo y realizará tareas de refuerzo, ampliación y desarrollo de competencias orientadas a su futura incorporación a la formación en empresa.",
+  "textos_pd_feoe_seguimiento": "Se celebrarán reuniones de seguimiento quincenales en el centro educativo, coordinadas por la persona tutora dual del grupo.",
+  "textos_pd_eval_informacion": "Se informará al alumnado y a sus familias al inicio del curso sobre los resultados de aprendizaje, criterios de evaluación, e instrumentos de calificación.",
+  "textos_pd_eval_perdida_continua": "La pérdida del derecho a evaluación continua se determinará de acuerdo con la normativa vigente sobre asistencia obligatoria.",
+  "textos_pd_eval_recuperacion": "Los procedimientos de recuperación se basarán en pruebas teórico-prácticas para superar los resultados de aprendizaje no alcanzados.",
+  "textos_pd_eval_pendientes": "Para el alumnado con el módulo pendiente, se establecerá un plan de seguimiento individualizado.",
+  "textos_pd_metodologia_labor_coordinada": "El equipo docente mantendrá reuniones periódicas de coordinación para asegurar un enfoque globalizador e interdisciplinar.",
+  "textos_pd_inclusion": "Se aplicarán medidas multinivel, adaptación de materiales, agrupamientos flexibles y actividades de refuerzo de comprensión lectora.",
+  "textos_pd_contingencia_profesor": "El centro garantizará la continuidad pedagógica en caso de contingencia mediante el uso de Aeducar y el aula virtual.",
+  "textos_pd_contingencia_alumnado": "El alumnado contará con seguimiento en Aeducar en caso de ausencia justificada prolongada.",
+  "textos_pd_bibliografia": "LibreOffice Guide, Microsoft Support & Learning, GIMP Tutorials, Pixabay, Wikimedia Commons.",
+  "textos_pd_publicidad": "",
+  "__version__": 24,
+  "tipo": "pd",
+  "df_dua": [],
+  "plantilla": true
+}
