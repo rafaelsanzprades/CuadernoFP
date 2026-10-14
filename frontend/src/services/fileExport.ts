@@ -119,6 +119,29 @@ export function prepareProgramacionForExport(data: any): any {
   return exportData;
 }
 
+/** Programación lista para COMPARTIR como plantilla (biblioteca de la web).
+ * Parte de la exportación normal y quita lo que identifica a una persona, un
+ * centro o un grupo concreto. El alumnado y sus calificaciones nunca están aquí:
+ * viven en el .fpc (Curso), no en el .fpp. Lo que se borra:
+ *  - centro, tipo de centro, localidad, provincia y profesorado (info_modulo);
+ *  - contexto del grupo y textos sobre el alumnado o el centro;
+ *  - medidas DUA por alumno (df_dua), que describen barreras de personas reales;
+ *  - fechas, horario, festivos y planificación por día (eso es el calendario,
+ *    que se comparte aparte como «calendario oficial»). */
+export function prepareProgramacionAsTemplate(data: any): any {
+  const t = prepareProgramacionForExport(data);
+  if (t.info_modulo) {
+    for (const k of ["centro", "tipo_centro", "municipio", "provincia", "profesorado"]) delete t.info_modulo[k];
+  }
+  t.config_contexto = {};
+  t.textos_pd_caracteristicas_alumnado = "";
+  t.texto_contextualizacion_libre = "";
+  t.df_dua = [];
+  for (const k of ["info_fechas", "horario", "calendar_notes", "planning_ledger"]) delete t[k];
+  t.plantilla = true;
+  return t;
+}
+
 /** Prepare Curso data for export: strict key filtering */
 export function prepareCursoForExport(data: any): any {
   const exportData: any = {};

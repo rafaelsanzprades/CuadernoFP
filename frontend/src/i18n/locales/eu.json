@@ -542,6 +542,7 @@
       "importados": "{{count}} ikasle inportatu dira."
     },
     "archivos": {
+      "plantillaExportada": "Txantiloia deskargatu da, ikastetxe, irakasle eta talde daturik gabe.",
       "abrirCursoViaGrupo": "Ikasturte bat modu seguruan irekitzeko, egin klik bikoitza lehen zutabeko elkartutako taldean.",
       "cambiadoDemo": "Demo datuetara aldatuta.",
       "cambiadoReal": "Datu errealetara aldatuta lokalean. Fitxategiak sortu edo ireki ditzakezu.",
@@ -718,6 +719,7 @@
       "perfilProfesionalTendencias": "Joerak"
     },
     "archivos": {
+      "exportarPlantilla": "Txantiloi gisa esportatu",
       "cambiarCarpetaLocal": "Karpeta lokala aldatu",
       "cargarDatosDemo": "Demo datuak kargatu",
       "conectarCarpetaLocal": "Karpeta lokala konektatu",
@@ -1003,6 +1005,7 @@
       "grupoEvaluacionGev": "Ebaluazio-taldea (GEv)"
     },
     "archivos": {
+      "exportarPlantilla": "Partekatzeko kopia bat deskargatzen du: zure izenik, ikastetxerik, herririk eta taldearen testuingururik gabe. Ikasleak eta notak ez dira inoiz programazioan sartzen.",
       "creaCursoGrupo": "Ikasturte bat eta lotutako talde-fitxategia sortzen ditu",
       "guardarComo": "Gorde honela...",
       "importarCursoHuerfano": "Kurtso zurtza inportatu"

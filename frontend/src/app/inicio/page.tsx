@@ -1,5 +1,5 @@
 "use client";
-import { Activity, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, Download, FolderOpen, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap, Rocket } from "lucide-react";
+import { Activity, AlertTriangle, BookOpen, Building2, CheckCircle, Cloud, Copy, Database, Download, FolderOpen, HardDrive, Info, ListChecks, Lock, Map, MessageCircle, Plus, Save, Send, Shield, ShieldAlert, Users, Zap, Rocket, Share2 } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -819,6 +819,15 @@ export default function InicioPage() {
                                   <Copy className="w-3 h-3" />
                                 </Button>
                               </div>
+                            )}
+                            {hasPdFile && moduleData && (
+                              <Button
+                                onClick={() => { fileManager.downloadPlantilla(); toast.success(t('toasts.archivos.plantillaExportada', {defaultValue: "Plantilla descargada, sin centro, profesorado ni datos del grupo."})); }}
+                                title={t('tooltips.archivos.exportarPlantilla', {defaultValue: "Descarga una copia para compartir: sin tu nombre, el centro, la localidad ni el contexto del grupo. El alumnado y las notas nunca van en la programación."})}
+                                className="w-full bg-foreground/5 hover:bg-foreground/10 text-muted border border-[var(--glass-border)] transition-all text-caption h-9"
+                              >
+                                <Share2 className="w-3 h-3 mr-1" /> {t('botones.archivos.exportarPlantilla', {defaultValue: 'Exportar como plantilla'})}
+                              </Button>
                             )}
                           </>
                         )}
