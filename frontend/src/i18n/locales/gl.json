@@ -542,6 +542,7 @@
       "importados": "Importáronse {{count}} estudantes."
     },
     "archivos": {
+      "plantillaExportada": "Modelo descargado, sen centro, profesorado nin datos do grupo.",
       "abrirCursoViaGrupo": "Para abrir un curso de forma segura, fai dobre clic no seu grupo asociado na primeira columna.",
       "cambiadoDemo": "Cambiado a datos demo.",
       "cambiadoReal": "Cambiado a datos reais en local. Podes crear ou abrir arquivos.",
@@ -718,6 +719,7 @@
       "perfilProfesionalTendencias": "Tendencias"
     },
     "archivos": {
+      "exportarPlantilla": "Exportar como modelo",
       "cambiarCarpetaLocal": "Cambiar cartafol local",
       "cargarDatosDemo": "Cargar datos demo",
       "conectarCarpetaLocal": "Conectar cartafol local",
@@ -1003,6 +1005,7 @@
       "grupoEvaluacionGev": "Grupo de avaliación (GEv)"
     },
     "archivos": {
+      "exportarPlantilla": "Descarga unha copia para compartir: sen o teu nome, o centro, a localidade nin o contexto do grupo. O alumnado e as notas nunca van na programación.",
       "creaCursoGrupo": "Crea un curso e o seu arquivo de grupo asociado",
       "guardarComo": "Gardar como...",
       "importarCursoHuerfano": "Importar curso orfo"

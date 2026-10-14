@@ -544,6 +544,7 @@
       "importados": "S'han importat {{count}} estudiants."
     },
     "archivos": {
+      "plantillaExportada": "Plantilla descarregada, sense centre, professorat ni dades del grup.",
       "abrirCursoViaGrupo": "Per obrir un curs de manera segura, fes doble clic en el seu grup associat a la primera columna.",
       "cambiadoDemo": "Canviat a dades demo.",
       "cambiadoReal": "Canviat a dades reals en local. Pots crear o obrir arxius.",
@@ -720,6 +721,7 @@
       "perfilProfesionalTendencias": "Tendències"
     },
     "archivos": {
+      "exportarPlantilla": "Exportar com a plantilla",
       "cambiarCarpetaLocal": "Canviar carpeta local",
       "cargarDatosDemo": "Carregar dades demo",
       "conectarCarpetaLocal": "Connectar carpeta local",
@@ -1005,6 +1007,7 @@
       "grupoEvaluacionGev": "Grup d'avaluació (GEv)"
     },
     "archivos": {
+      "exportarPlantilla": "Descarrega una còpia per compartir: sense el teu nom, el centre, la localitat ni el context del grup. L'alumnat i les notes mai no van a la programació.",
       "creaCursoGrupo": "Crea un curs i el seu arxiu de grup associat",
       "guardarComo": "Desar com a...",
       "importarCursoHuerfano": "Importar curs orfe"

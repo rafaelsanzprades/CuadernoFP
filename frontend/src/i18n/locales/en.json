@@ -542,6 +542,7 @@
       "importados": "{{count}} students imported."
     },
     "archivos": {
+      "plantillaExportada": "Template downloaded, without school, teacher or group data.",
       "abrirCursoViaGrupo": "To open a course safely, double-click its associated group in the first column.",
       "cambiadoDemo": "Switched to demo data.",
       "cambiadoReal": "Switched to real local data. You can create or open files.",
@@ -718,6 +719,7 @@
       "perfilProfesionalTendencias": "Trends"
     },
     "archivos": {
+      "exportarPlantilla": "Export as template",
       "cambiarCarpetaLocal": "Change local folder",
       "cargarDatosDemo": "Load demo data",
       "conectarCarpetaLocal": "Connect local folder",
@@ -1003,6 +1005,7 @@
       "grupoEvaluacionGev": "Assessment group (GEv)"
     },
     "archivos": {
+      "exportarPlantilla": "Downloads a copy to share: without your name, school, town or group context. Students and grades are never in the plan.",
       "creaCursoGrupo": "Creates a course and its associated group file",
       "guardarComo": "Save as...",
       "importarCursoHuerfano": "Import orphaned course"

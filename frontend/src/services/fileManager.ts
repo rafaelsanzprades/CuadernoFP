@@ -5,7 +5,7 @@ import {
   pickOpenFile, pickSaveFile, pickDirectory, writeFile, readFile,
   listDirFileNames, readFileInDir, writeFileInDir,
 } from "@/services/fileBackend";
-import { prepareProgramacionForExport, prepareCursoForExport, serializeData as serializeDataWithKey } from "@/services/fileExport";
+import { prepareProgramacionForExport, prepareProgramacionAsTemplate, prepareCursoForExport, serializeData as serializeDataWithKey } from "@/services/fileExport";
 export type DataSourceType = 'demo' | 'local';
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -704,6 +704,15 @@ export const fileManager = {
     if (!moduleData) return;
     const exportData = prepareProgramacionForExport(moduleData);
     downloadJson(serializeData(exportData), `${activeModuleId || 'programacion'}.fpp`);
+  },
+
+  /** Descarga la programación como PLANTILLA para compartir: sin centro, profesorado,
+   * contexto del grupo ni medidas por alumno (ver prepareProgramacionAsTemplate). */
+  downloadPlantilla() {
+    const { activeModuleId, moduleData } = useAppStore.getState();
+    if (!moduleData) return;
+    const exportData = prepareProgramacionAsTemplate(moduleData);
+    downloadJson(JSON.stringify(exportData, null, 2), `${activeModuleId || 'programacion'}-plantilla.fpp`);
   },
 
   /** Download a copy of curso (legacy export) */
