@@ -11,6 +11,7 @@ interface Dia { fecha: string; nombre: string }
 interface Calendario {
   nombre: string;
   fuente: { titulo: string; url: string; consultado: string };
+  fuente_festivos?: { titulo: string; url: string }[];
   info_fechas?: { ini_curso?: string; fin_curso?: string };
   festivos: Dia[];
   periodos: { desde: string; hasta: string; nombre: string }[];
@@ -25,10 +26,12 @@ const dmy = (iso: string) => { const [y, m, d] = iso.split("-"); return `${d}/${
 // los festivos se COPIAN a `calendar_notes` (claves `f_dd/mm/aaaa`) y, si se pide,
 // el inicio y el fin de curso a `info_fechas`. No se guarda ninguna referencia al
 // fichero: el .fpc sigue siendo autosuficiente. Lo ya escrito por el docente no se pisa.
-export function ImportarCalendarioOficial({ calendarNotes, infoFechas, provinciaInicial, onImport }: {
+export function ImportarCalendarioOficial({ calendarNotes, infoFechas, provinciaInicial, ccaaInicial, onImport }: {
   calendarNotes: Record<string, string>;
   infoFechas: Record<string, any>;
   provinciaInicial?: string;
+  /** Comunidad del módulo (p. ej. "aragon"): se preselecciona su calendario. */
+  ccaaInicial?: string;
   onImport: (notes: Record<string, string>, fechas?: { ini_curso?: string; fin_curso?: string }) => void;
 }) {
   const { t } = useTranslation();
@@ -44,9 +47,12 @@ export function ImportarCalendarioOficial({ calendarNotes, infoFechas, provincia
     if (!abierto || lista.length) return;
     fetch(BASE + "index.json").then(r => r.json()).then(j => {
       setLista(j.calendarios || []);
-      if (j.calendarios?.length === 1) setElegido(j.calendarios[0].archivo);
+      const norm = (x: string) => x.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
+      const propia = (j.calendarios || []).find((c: Entrada) => ccaaInicial && norm(c.comunidad) === norm(ccaaInicial));
+      if (propia) setElegido(propia.archivo);
+      else if (j.calendarios?.length === 1) setElegido(j.calendarios[0].archivo);
     }).catch(() => setError(true));
-  }, [abierto, lista.length]);
+  }, [abierto, lista.length, ccaaInicial]);
 
   useEffect(() => {
     if (!elegido) { setCal(null); return; }
@@ -120,7 +126,7 @@ export function ImportarCalendarioOficial({ calendarNotes, infoFechas, provincia
         <label className="flex items-center gap-2 text-body">
           <input type="checkbox" checked={conFechas} onChange={e => setConFechas(e.target.checked)} />
           {t('campos.calendario.importarOficialFechas', { defaultValue: 'Poner también inicio y fin de curso' })}
-          <span className="text-caption text-muted">({cal.info_fechas.ini_curso && dmy(cal.info_fechas.ini_curso)} – {cal.info_fechas.fin_curso && dmy(cal.info_fechas.fin_curso)})</span>
+          <span className="text-caption text-muted">({cal.info_fechas.ini_curso && dmy(cal.info_fechas.ini_curso)}{cal.info_fechas.fin_curso ? ` – ${dmy(cal.info_fechas.fin_curso)}` : ''})</span>
         </label>
       )}
       {cal && (
@@ -130,6 +136,7 @@ export function ImportarCalendarioOficial({ calendarNotes, infoFechas, provincia
           )}
           <p className="text-caption text-muted">
             {t('campos.calendario.importarOficialFuente', { defaultValue: 'Fuente' })}: <a href={cal.fuente.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{cal.fuente.titulo}</a> ({t('campos.calendario.importarOficialConsultado', { defaultValue: 'consultado' })} {dmy(cal.fuente.consultado)})
+            {cal.fuente_festivos?.map((x, i) => <span key={i}> · <a href={x.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{t('campos.calendario.importarOficialFestivos', { defaultValue: 'Fiestas laborales (BOE)' })}</a></span>)}
           </p>
           <Button onClick={importar} className="gap-2"><CalendarCheck className="w-4 h-4" />{t('botones.calendario.importar', { defaultValue: 'Importar' })}</Button>
         </>

@@ -1,0 +1,61 @@
+{
+  "id": "202627-illes-balears",
+  "nombre": "202627 Calendario - Illes Balears",
+  "curso": "2026-27",
+  "comunidad": "Illes Balears",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Resolución del conseller de Educación y Universidades de 27 de marzo de 2026, por la que se establece el calendario escolar del curso 2026-2027 (BOIB núm. 41, de 31 de marzo de 2026), modificada por la Resolución publicada en el BOIB núm. 82, de 30 de junio de 2026",
+    "url": "https://apps.caib.es/sites/planificacioicentres/f/549995",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-21",
+    "fin_curso": "2027-06-18"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-02-26",
+      "nombre": "Festa escolar unificada"
+    },
+    {
+      "fecha": "2027-03-01",
+      "nombre": "Día de les Illes Balears"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-23",
+      "hasta": "2027-01-06",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-03-25",
+      "hasta": "2027-04-04",
+      "nombre": "Semana Santa"
+    }
+  ],
+  "notas": [
+    "Las actividades lectivas de la FP empiezan el 21 de septiembre de 2026 y acaban el 18 de junio de 2027.",
+    "Cada centro puede fijar dos días festivos de libre disposición, y puede sustituir los festivos locales que caigan en día no lectivo.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

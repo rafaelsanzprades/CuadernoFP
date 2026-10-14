@@ -5,6 +5,90 @@
       "nombre": "202627 Calendario - Aragón",
       "curso": "2026-27",
       "comunidad": "Aragón"
+    },
+    {
+      "archivo": "202627 Calendario - Asturias.json",
+      "nombre": "202627 Calendario - Asturias",
+      "curso": "2026-27",
+      "comunidad": "Asturias"
+    },
+    {
+      "archivo": "202627 Calendario - Illes Balears.json",
+      "nombre": "202627 Calendario - Illes Balears",
+      "curso": "2026-27",
+      "comunidad": "Illes Balears"
+    },
+    {
+      "archivo": "202627 Calendario - Canarias.json",
+      "nombre": "202627 Calendario - Canarias",
+      "curso": "2026-27",
+      "comunidad": "Canarias"
+    },
+    {
+      "archivo": "202627 Calendario - Cantabria.json",
+      "nombre": "202627 Calendario - Cantabria",
+      "curso": "2026-27",
+      "comunidad": "Cantabria"
+    },
+    {
+      "archivo": "202627 Calendario - Castilla y León.json",
+      "nombre": "202627 Calendario - Castilla y León",
+      "curso": "2026-27",
+      "comunidad": "Castilla y León"
+    },
+    {
+      "archivo": "202627 Calendario - Castilla-La Mancha.json",
+      "nombre": "202627 Calendario - Castilla-La Mancha",
+      "curso": "2026-27",
+      "comunidad": "Castilla-La Mancha"
+    },
+    {
+      "archivo": "202627 Calendario - Cataluña.json",
+      "nombre": "202627 Calendario - Cataluña",
+      "curso": "2026-27",
+      "comunidad": "Cataluña"
+    },
+    {
+      "archivo": "202627 Calendario - Comunitat Valenciana.json",
+      "nombre": "202627 Calendario - Comunitat Valenciana",
+      "curso": "2026-27",
+      "comunidad": "Comunitat Valenciana"
+    },
+    {
+      "archivo": "202627 Calendario - Extremadura.json",
+      "nombre": "202627 Calendario - Extremadura",
+      "curso": "2026-27",
+      "comunidad": "Extremadura"
+    },
+    {
+      "archivo": "202627 Calendario - Galicia.json",
+      "nombre": "202627 Calendario - Galicia",
+      "curso": "2026-27",
+      "comunidad": "Galicia"
+    },
+    {
+      "archivo": "202627 Calendario - Comunidad de Madrid.json",
+      "nombre": "202627 Calendario - Comunidad de Madrid",
+      "curso": "2026-27",
+      "comunidad": "Comunidad de Madrid"
+    },
+    {
+      "archivo": "202627 Calendario - Región de Murcia.json",
+      "nombre": "202627 Calendario - Región de Murcia",
+      "curso": "2026-27",
+      "comunidad": "Región de Murcia"
+    },
+    {
+      "archivo": "202627 Calendario - La Rioja.json",
+      "nombre": "202627 Calendario - La Rioja",
+      "curso": "2026-27",
+      "comunidad": "La Rioja"
+    },
+    {
+      "archivo": "202627 Calendario - Melilla.json",
+      "nombre": "202627 Calendario - Melilla",
+      "curso": "2026-27",
+      "comunidad": "Melilla"
     }
   ]
 }

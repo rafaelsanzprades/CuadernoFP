@@ -1,0 +1,89 @@
+{
+  "id": "202627-melilla",
+  "nombre": "202627 Calendario - Melilla",
+  "curso": "2026-27",
+  "comunidad": "Melilla",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Resolución del Director General de Planificación y Gestión Educativa por la que se establece el calendario escolar para el curso 2026-2027 en los centros docentes no universitarios de la ciudad de Melilla (Ministerio de Educación, Formación Profesional y Deportes)",
+    "url": "https://www.educacionfpydeportes.gob.es/gl/dam/jcr:97a96fff-bae7-4388-a5ec-bb6b7e564abc/resolucion-calendario-escolar-26-27.pdf",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-14",
+    "fin_curso": "2027-06-23"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-09-17",
+      "nombre": "Día de Melilla"
+    },
+    {
+      "fecha": "2026-09-21",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-11-02",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Lunes siguiente al Día de la Constitución"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-01-08",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2027-03-09",
+      "nombre": "Final del Ramadán"
+    },
+    {
+      "fecha": "2027-03-10",
+      "nombre": "Fiesta del Eid Fitr"
+    },
+    {
+      "fecha": "2027-05-17",
+      "nombre": "Fiesta Sacrificio-Aid Al Adha"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-23",
+      "hasta": "2027-01-07",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-03-22",
+      "hasta": "2027-03-26",
+      "nombre": "Semana Santa"
+    },
+    {
+      "desde": "2027-03-29",
+      "hasta": "2027-04-02",
+      "nombre": "Días de libre disposición"
+    }
+  ],
+  "notas": [
+    "Las actividades escolares acaban el 30 de junio de 2027; las lectivas, el 23 de junio.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

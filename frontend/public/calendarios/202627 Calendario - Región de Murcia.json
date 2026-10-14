@@ -1,0 +1,72 @@
+{
+  "id": "202627-region-de-murcia",
+  "nombre": "202627 Calendario - Región de Murcia",
+  "curso": "2026-27",
+  "comunidad": "Región de Murcia",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Resolución de 8 de junio de 2026, de la Dirección General de Centros Educativos e Infraestructuras, por la que se establece el período lectivo del curso escolar 2026-2027 (BORM núm. 132, de 11 de junio de 2026), anexo I",
+    "url": "https://www.borm.es/services/anuncio/ano/2026/numero/2748/pdf?id=843430",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-14",
+    "fin_curso": "2027-06-21"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Lunes siguiente al Día de la Constitución"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2026-12-23",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-02-01",
+      "nombre": "Festividad del patrón de la FP"
+    },
+    {
+      "fecha": "2027-03-19",
+      "nombre": "San José"
+    },
+    {
+      "fecha": "2027-06-09",
+      "nombre": "Día de la Región de Murcia"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-24",
+      "hasta": "2027-01-06",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-03-22",
+      "hasta": "2027-03-29",
+      "nombre": "Semana Santa"
+    }
+  ],
+  "notas": [
+    "Cada municipio tiene tres días no lectivos propuestos por su Consejo Escolar Municipal (anexo V de la resolución).",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

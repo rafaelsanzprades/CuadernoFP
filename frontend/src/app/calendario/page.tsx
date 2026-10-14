@@ -912,6 +912,7 @@ export default function CalendarioPage() {
                     calendarNotes={calendar_notes}
                     infoFechas={info_fechas}
                     provinciaInicial={moduleData?.info_modulo?.provincia}
+                    ccaaInicial={moduleData?.info_modulo?.ccaa}
                     onImport={(notes, fechas) => {
                       updateCursoData("calendar_notes", notes);
                       if (fechas) updateCursoData("info_fechas", { ...info_fechas, ...fechas });
