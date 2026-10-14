@@ -1,0 +1,90 @@
+{
+  "id": "202627-ceuta",
+  "nombre": "202627 Calendario - Ceuta",
+  "curso": "2026-27",
+  "comunidad": "Ceuta",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Calendario escolar 2026-2027 de la Dirección Provincial de Ceuta (Ministerio de Educación, Formación Profesional y Deportes), leído de su leyenda de colores",
+    "url": "https://www.educacionfpydeportes.gob.es/dam/jcr:a9cf685a-32f4-480f-8878-c06cae54fc37/26-070-01-calendario-escolar-26-27-v1.pdf",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-10",
+    "fin_curso": "2027-06-23"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-11-02",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2026-11-03",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-01-08",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2027-02-12",
+      "nombre": "Día de libre disposición"
+    },
+    {
+      "fecha": "2027-03-09",
+      "nombre": "Día de fiesta"
+    },
+    {
+      "fecha": "2027-05-17",
+      "nombre": "Eidul Adha-Fiesta Sacrificio"
+    },
+    {
+      "fecha": "2027-05-18",
+      "nombre": "Día de libre disposición"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-23",
+      "hasta": "2027-01-07",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-03-22",
+      "hasta": "2027-03-26",
+      "nombre": "Semana Santa"
+    },
+    {
+      "desde": "2027-03-29",
+      "hasta": "2027-04-02",
+      "nombre": "Días de libre disposición"
+    }
+  ],
+  "notas": [
+    "Las clases de FP empiezan el 10 de septiembre de 2026 y las actividades lectivas terminan el 23 de junio de 2027; las académicas, el 30 de junio.",
+    "El calendario oficial es un dibujo en color: las fechas se han leído de su leyenda (inicio de clases, días de fiesta, días de libre disposición, vacaciones y fin de actividades).",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}
