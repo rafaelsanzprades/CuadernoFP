@@ -53,6 +53,9 @@ export function useAccessibility() {
   }, []);
 
   useEffect(() => {
+    // La lectura en voz alta no existe en todos los navegadores (p. ej. WebKit sin voces):
+    // sin esta guarda la app entera se caía al cargar.
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
     if (!ttsEnabled) {
       window.speechSynthesis.cancel();
       return;
