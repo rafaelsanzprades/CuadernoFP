@@ -121,11 +121,14 @@ export function prepareProgramacionForExport(data: any): any {
 
 /** Programación lista para COMPARTIR como plantilla (biblioteca de la web).
  * Parte de la exportación normal y quita lo que identifica a una persona, un
- * centro o un grupo concreto. El alumnado y sus calificaciones nunca están aquí:
- * viven en el .fpc (Curso), no en el .fpp. Lo que se borra:
+ * centro, una empresa o un grupo concreto. El alumnado y sus calificaciones nunca
+ * están aquí: viven en el .fpc (Curso), que no se comparte jamás. Lo que se borra:
  *  - centro, tipo de centro, localidad, provincia y profesorado (info_modulo);
- *  - contexto del grupo y textos sobre el alumnado o el centro;
+ *  - contexto del grupo y textos sobre el centro, el entorno o el alumnado
+ *    (contexto geográfico, socioeconómico y escolar; características del alumnado;
+ *    publicidad de la programación);
  *  - medidas DUA por alumno (df_dua), que describen barreras de personas reales;
+ *  - empresas colaboradoras y entidades de las actividades complementarias;
  *  - fechas, horario, festivos y planificación por día (eso es el calendario,
  *    que se comparte aparte como «calendario oficial»). */
 export function prepareProgramacionAsTemplate(data: any): any {
@@ -134,9 +137,15 @@ export function prepareProgramacionAsTemplate(data: any): any {
     for (const k of ["centro", "tipo_centro", "municipio", "provincia", "profesorado"]) delete t.info_modulo[k];
   }
   t.config_contexto = {};
-  t.textos_pd_caracteristicas_alumnado = "";
-  t.texto_contextualizacion_libre = "";
+  for (const k of [
+    "textos_pd_caracteristicas_alumnado", "textos_pd_contexto_geografico", "textos_pd_contexto_socioeconomico",
+    "textos_pd_contexto_escolar", "textos_pd_publicidad", "texto_contextualizacion_libre",
+  ]) {
+    if (t[k] !== undefined) t[k] = "";
+  }
   t.df_dua = [];
+  delete t.df_empresas;
+  if (Array.isArray(t.df_ace)) t.df_ace.forEach((a: any) => { if (a && "Entidad" in a) a.Entidad = ""; });
   for (const k of ["info_fechas", "horario", "calendar_notes", "planning_ledger"]) delete t[k];
   t.plantilla = true;
   return t;
