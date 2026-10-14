@@ -1,14 +1,15 @@
 import { test, expect } from '@playwright/test';
+import { abrirConDemo } from './helpers';
 
 test.describe('Accesibilidad básica', () => {
   test('la página tiene un landmark main', async ({ page }) => {
-    await page.goto('/');
+    await abrirConDemo(page, '/inicio');
     const main = page.locator('main');
     await expect(main).toBeVisible();
   });
 
   test('los enlaces de navegación son accesibles por teclado', async ({ page }) => {
-    await page.goto('/');
+    await abrirConDemo(page, '/inicio');
     // Tab hasta el primer enlace de navegación
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
@@ -18,7 +19,7 @@ test.describe('Accesibilidad básica', () => {
   });
 
   test('toggle del sidebar tiene aria-label', async ({ page }) => {
-    await page.goto('/');
+    await abrirConDemo(page, '/inicio');
     const sidebarToggle = page.locator('[aria-label*="sidebar"], [aria-label*="menú"], [aria-label*="navegación"]').first();
     if (await sidebarToggle.isVisible()) {
       await expect(sidebarToggle).toHaveAttribute('aria-label');
@@ -26,7 +27,7 @@ test.describe('Accesibilidad básica', () => {
   });
 
   test('las imágenes tienen alt text o son decorativas', async ({ page }) => {
-    await page.goto('/');
+    await abrirConDemo(page, '/inicio');
     const images = page.locator('img');
     const count = await images.count();
     for (let i = 0; i < count; i++) {
