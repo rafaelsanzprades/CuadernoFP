@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button";
 
-interface Entrada { archivo: string; nombre: string; curso: string; comunidad: string }
+interface Entrada { archivo: string; nombre: string; curso: string; comunidad: string; provincia?: string }
 interface Dia { fecha: string; nombre: string }
 interface Calendario {
   nombre: string;
@@ -48,11 +48,14 @@ export function ImportarCalendarioOficial({ calendarNotes, infoFechas, provincia
     fetch(BASE + "index.json").then(r => r.json()).then(j => {
       setLista(j.calendarios || []);
       const norm = (x: string) => x.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
-      const propia = (j.calendarios || []).find((c: Entrada) => ccaaInicial && norm(c.comunidad) === norm(ccaaInicial));
+      const deLaComunidad = (j.calendarios || []).filter((c: Entrada) => ccaaInicial && norm(c.comunidad) === norm(ccaaInicial));
+      // si la comunidad tiene un calendario por provincia (Andalucía), se elige el de la provincia del módulo
+      const propia = deLaComunidad.find((c: Entrada) => c.provincia && provinciaInicial && norm(c.provincia) === norm(provinciaInicial))
+        || (deLaComunidad.length === 1 ? deLaComunidad[0] : undefined);
       if (propia) setElegido(propia.archivo);
       else if (j.calendarios?.length === 1) setElegido(j.calendarios[0].archivo);
     }).catch(() => setError(true));
-  }, [abierto, lista.length, ccaaInicial]);
+  }, [abierto, lista.length, ccaaInicial, provinciaInicial]);
 
   useEffect(() => {
     if (!elegido) { setCal(null); return; }

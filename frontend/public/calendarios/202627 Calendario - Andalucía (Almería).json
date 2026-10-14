@@ -1,0 +1,89 @@
+{
+  "id": "202627-andalucia-almeria",
+  "nombre": "202627 Calendario - Andalucía (Almería)",
+  "curso": "2026-27",
+  "comunidad": "Andalucía",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "provincia": "Almería",
+  "fuente": {
+    "titulo": "Calendario escolar del curso 2026-2027 de la Delegación Territorial de Desarrollo Educativo y Formación Profesional en Almería (copia auténtica con verificación electrónica), leído de su leyenda de colores",
+    "url": "https://aces-andalucia.es/wp-content/uploads/2026/06/AL-Calendario_Escolar_26_27_Almeria.pdf",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-15",
+    "fin_curso": "2027-06-22"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-09",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-10-30",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-11-02",
+      "nombre": "Día siguiente a Todos los Santos"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Lunes siguiente al Día de la Constitución"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2026-12-23",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-02-26",
+      "nombre": "Día de la Comunidad Educativa"
+    },
+    {
+      "fecha": "2027-03-01",
+      "nombre": "Día de Andalucía"
+    },
+    {
+      "fecha": "2027-03-29",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-04-30",
+      "nombre": "Día no lectivo"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-24",
+      "hasta": "2027-01-06",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-03-21",
+      "hasta": "2027-03-28",
+      "nombre": "Semana Santa"
+    }
+  ],
+  "notas": [
+    "Cada provincia andaluza publica su propio calendario: elige el de tu provincia.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

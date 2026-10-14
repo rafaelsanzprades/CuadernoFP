@@ -1,6 +1,62 @@
 {
   "calendarios": [
     {
+      "archivo": "202627 Calendario - Andalucía (Almería).json",
+      "nombre": "202627 Calendario - Andalucía (Almería)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Almería"
+    },
+    {
+      "archivo": "202627 Calendario - Andalucía (Cádiz).json",
+      "nombre": "202627 Calendario - Andalucía (Cádiz)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Cádiz"
+    },
+    {
+      "archivo": "202627 Calendario - Andalucía (Córdoba).json",
+      "nombre": "202627 Calendario - Andalucía (Córdoba)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Córdoba"
+    },
+    {
+      "archivo": "202627 Calendario - Andalucía (Granada).json",
+      "nombre": "202627 Calendario - Andalucía (Granada)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Granada"
+    },
+    {
+      "archivo": "202627 Calendario - Andalucía (Huelva).json",
+      "nombre": "202627 Calendario - Andalucía (Huelva)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Huelva"
+    },
+    {
+      "archivo": "202627 Calendario - Andalucía (Jaén).json",
+      "nombre": "202627 Calendario - Andalucía (Jaén)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Jaén"
+    },
+    {
+      "archivo": "202627 Calendario - Andalucía (Málaga).json",
+      "nombre": "202627 Calendario - Andalucía (Málaga)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Málaga"
+    },
+    {
+      "archivo": "202627 Calendario - Andalucía (Sevilla).json",
+      "nombre": "202627 Calendario - Andalucía (Sevilla)",
+      "curso": "2026-27",
+      "comunidad": "Andalucía",
+      "provincia": "Sevilla"
+    },
+    {
       "archivo": "202627 Calendario - Aragón.json",
       "nombre": "202627 Calendario - Aragón",
       "curso": "2026-27",
@@ -83,6 +139,12 @@
       "nombre": "202627 Calendario - La Rioja",
       "curso": "2026-27",
       "comunidad": "La Rioja"
+    },
+    {
+      "archivo": "202627 Calendario - Ceuta.json",
+      "nombre": "202627 Calendario - Ceuta",
+      "curso": "2026-27",
+      "comunidad": "Ceuta"
     },
     {
       "archivo": "202627 Calendario - Melilla.json",

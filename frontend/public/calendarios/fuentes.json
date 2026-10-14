@@ -4,10 +4,43 @@
  "comunidades": [
   {
    "comunidad": "Andalucía",
-   "norma": "Resoluciones de cada Delegación Territorial (el calendario se fija por provincia)",
-   "boletin": "BOJA provincial",
+   "norma": "Resoluciones de cada Delegación Territorial de Desarrollo Educativo y Formación Profesional: el calendario se fija por provincia",
+   "boletin": "Calendarios provinciales (copias auténticas)",
    "enlaces": [],
-   "nota": "Cada Delegación Territorial publica su calendario (8 provincias) y las fechas de las vacaciones solo figuran en un dibujo: falta leerlas con cuidado."
+   "calendarios": [
+    {
+     "nombre": "Almería",
+     "slug": "202627-calendario-andalucia-almeria"
+    },
+    {
+     "nombre": "Cádiz",
+     "slug": "202627-calendario-andalucia-cadiz"
+    },
+    {
+     "nombre": "Córdoba",
+     "slug": "202627-calendario-andalucia-cordoba"
+    },
+    {
+     "nombre": "Granada",
+     "slug": "202627-calendario-andalucia-granada"
+    },
+    {
+     "nombre": "Huelva",
+     "slug": "202627-calendario-andalucia-huelva"
+    },
+    {
+     "nombre": "Jaén",
+     "slug": "202627-calendario-andalucia-jaen"
+    },
+    {
+     "nombre": "Málaga",
+     "slug": "202627-calendario-andalucia-malaga"
+    },
+    {
+     "nombre": "Sevilla",
+     "slug": "202627-calendario-andalucia-sevilla"
+    }
+   ]
   },
   {
    "comunidad": "Aragón",
@@ -131,7 +164,8 @@
      "url": "https://educacio.paeria.cat/ca/escolaritzacio/copy_of_calendari-escolar/ordre-edf662026-de-22-dabril-per-la-qual-sestableix-el-calendari-escolar-dels-cursos-2026-2027-2027-2028-2028-2029.pdf"
     }
    ],
-   "calendario": "202627-calendario-cataluna"
+   "calendario": "202627-calendario-cataluna",
+   "nota": "La orden fija el inicio de la FP; el final lo decide cada centro."
   },
   {
    "comunidad": "Comunitat Valenciana",
@@ -230,7 +264,7 @@
   },
   {
    "comunidad": "Ceuta",
-   "norma": "Calendario escolar 2026-27 de la Dirección Provincial de Ceuta (Ministerio de Educación, FP y Deportes)",
+   "norma": "Calendario escolar 2026-27 de la Dirección Provincial de Ceuta (Ministerio de Educación, FP y Deportes), leído de su leyenda de colores",
    "boletin": "",
    "enlaces": [
     {
@@ -238,7 +272,7 @@
      "url": "https://www.educacionfpydeportes.gob.es/dam/jcr:a9cf685a-32f4-480f-8878-c06cae54fc37/26-070-01-calendario-escolar-26-27-v1.pdf"
     }
    ],
-   "nota": "El calendario oficial está en un PDF gráfico y falta leer sus fechas con cuidado."
+   "calendario": "202627-calendario-ceuta"
   },
   {
    "comunidad": "Melilla",
