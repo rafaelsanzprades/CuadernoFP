@@ -1,28 +1,29 @@
 import { test, expect } from '@playwright/test';
+import { abrirConDemo } from './helpers';
 
 test.describe('Páginas principales', () => {
-  test('catálogo muestra ciclos formativos', async ({ page }) => {
-    await page.goto('/catalogo');
-    await expect(page.locator('main').getByText(/ciclo|formativo|grado/i).first()).toBeVisible();
+  test('catálogo muestra el selector de familia profesional', async ({ page }) => {
+    await abrirConDemo(page, '/catalogo');
+    await expect(page.locator('main').getByText(/familia|ciclo|formativo/i).first()).toBeVisible();
   });
 
   test('calendario carga correctamente', async ({ page }) => {
-    await page.goto('/calendario');
-    await expect(page.locator('main').getByText(/calendario|académico/i).first()).toBeVisible();
+    await abrirConDemo(page, '/calendario');
+    await expect(page.getByRole('heading', { name: 'Calendario' })).toBeVisible();
   });
 
   test('alumnado carga correctamente', async ({ page }) => {
-    await page.goto('/alumnado');
-    await expect(page.locator('main').getByText(/alumnado|estudiante/i).first()).toBeVisible();
+    await abrirConDemo(page, '/alumnado');
+    await expect(page.getByRole('heading', { name: 'Alumnado' })).toBeVisible();
   });
 
-  test('matrices carga correctamente', async ({ page }) => {
-    await page.goto('/matrices');
-    await expect(page.locator('main').getByText(/matriz|RA|CE/i).first()).toBeVisible();
+  test('currículo carga correctamente', async ({ page }) => {
+    await abrirConDemo(page, '/curriculo');
+    await expect(page.getByRole('heading', { name: 'Currículo' })).toBeVisible();
   });
 
-  test('seguimiento carga correctamente', async ({ page }) => {
-    await page.goto('/sesiones');
-    await expect(page.locator('main').getByText(/sesiones|diario/i).first()).toBeVisible();
+  test('sesiones carga correctamente', async ({ page }) => {
+    await abrirConDemo(page, '/sesiones');
+    await expect(page.getByRole('heading', { name: 'Sesiones' })).toBeVisible();
   });
 });

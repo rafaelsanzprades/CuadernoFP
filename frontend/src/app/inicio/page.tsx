@@ -359,7 +359,7 @@ export default function InicioPage() {
       />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header breadcrumbSuffix={activeTabCleanLabel} />
-        <div className="flex-1 overflow-y-auto scrollbar-hide">
+        <main id="main-content" tabIndex={-1} className="flex-1 overflow-y-auto scrollbar-hide">
           <StickyPageHeader icon={Activity} title={t('inicio.title')} description={t('inicio.subtitle')}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -992,7 +992,7 @@ export default function InicioPage() {
             {activeTab === "verificacion" && <VerificacionTab />}
 
             </MotionWrapper>
-        </div>
+        </main>
       </div>
 
       {/* New File Wizard */}
