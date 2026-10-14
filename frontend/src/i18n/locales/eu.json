@@ -542,6 +542,8 @@
       "importados": "{{count}} ikasle inportatu dira."
     },
     "archivos": {
+      "bibliotecaImportada": "Programazioa inportatu da. Egokitu zure ikastetxera eta gorde zure izenarekin.",
+      "bibliotecaError": "Ezin izan da programazioa inportatu.",
       "plantillaExportada": "Txantiloia deskargatu da, ikastetxe, irakasle eta talde daturik gabe.",
       "abrirCursoViaGrupo": "Ikasturte bat modu seguruan irekitzeko, egin klik bikoitza lehen zutabeko elkartutako taldean.",
       "cambiadoDemo": "Demo datuetara aldatuta.",
@@ -719,6 +721,8 @@
       "perfilProfesionalTendencias": "Joerak"
     },
     "archivos": {
+      "bibliotecaImportar": "Liburutegitik inportatu",
+      "bibliotecaUsar": "Erabili",
       "exportarPlantilla": "Txantiloi gisa esportatu",
       "cambiarCarpetaLocal": "Karpeta lokala aldatu",
       "cargarDatosDemo": "Demo datuak kargatu",
@@ -1005,6 +1009,7 @@
       "grupoEvaluacionGev": "Ebaluazio-taldea (GEv)"
     },
     "archivos": {
+      "bibliotecaImportar": "Beste irakasleek partekatutako programazioak, abiapuntu gisa. Ikastetxeko eta ikasleen daturik gabe.",
       "exportarPlantilla": "Partekatzeko kopia bat deskargatzen du: zure izenik, ikastetxerik, herririk eta taldearen testuingururik gabe. Ikasleak eta notak ez dira inoiz programazioan sartzen.",
       "creaCursoGrupo": "Ikasturte bat eta lotutako talde-fitxategia sortzen ditu",
       "guardarComo": "Gorde honela...",
@@ -2774,6 +2779,11 @@
       "cargandoDatosProgreso": "Aurrerapen akademikoaren datuak kargatzen..."
     },
     "inicio": {
+      "bibliotecaTitulo": "Programazioen liburutegia",
+      "bibliotecaConfirmar": "Irekita dagoen programazioa ordezkatuko da. Gorde gabeko aldaketak galduko dira. Jarraitu?",
+      "bibliotecaSinConexion": "Ezin izan da liburutegia kargatu.",
+      "bibliotecaVacia": "Oraindik ez dago programaziorik argitaratuta.",
+      "bibliotecaAutoria": "Egilea",
       "empiezaAquiTitulo": "Hasi hemen",
       "grupoTelegramTitulo": "Telegrameko talde ofiziala",
       "grupoTelegramDesc": "Cuaderno FP doako web-aplikazioaren garapen eta probaketarako talde ofiziala. Bidali zure iradokizunak, jakinarazi akatsak edo lagundu zure autonomia erkidegoko curriculum ofiziala emanez.",

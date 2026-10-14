@@ -15,6 +15,7 @@ import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
+import { ImportarDeBiblioteca } from "@/components/features/inicio/ImportarDeBiblioteca";
 import { AISettingsPanel } from "@/components/features/ai/AISettingsPanel";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
 import { UpdateChecker } from "@/components/features/dashboard/UpdateChecker";
@@ -810,6 +811,10 @@ export default function InicioPage() {
                                 <FolderOpen className="w-3 h-3 mr-1" /> {t('common.importar', {defaultValue: 'Importar'})}
                               </Button>
                             </div>
+                            <ImportarDeBiblioteca
+                              hayProgramacion={hasPdFile}
+                              onImported={() => setDataSource('local')}
+                            />
                             {hasPdFile && (
                               <div className="flex gap-2">
                                 <Button onClick={handleSavePd} className="flex-1 bg-info/10 hover:bg-info/20 text-info border border-info/30 transition-all text-caption h-9">

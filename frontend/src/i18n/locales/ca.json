@@ -544,6 +544,8 @@
       "importados": "S'han importat {{count}} estudiants."
     },
     "archivos": {
+      "bibliotecaImportada": "Programació importada. Adapta-la al teu centre i desa-la amb el teu nom.",
+      "bibliotecaError": "No s'ha pogut importar la programació.",
       "plantillaExportada": "Plantilla descarregada, sense centre, professorat ni dades del grup.",
       "abrirCursoViaGrupo": "Per obrir un curs de manera segura, fes doble clic en el seu grup associat a la primera columna.",
       "cambiadoDemo": "Canviat a dades demo.",
@@ -721,6 +723,8 @@
       "perfilProfesionalTendencias": "Tendències"
     },
     "archivos": {
+      "bibliotecaImportar": "Importar de la biblioteca",
+      "bibliotecaUsar": "Usar",
       "exportarPlantilla": "Exportar com a plantilla",
       "cambiarCarpetaLocal": "Canviar carpeta local",
       "cargarDatosDemo": "Carregar dades demo",
@@ -1007,6 +1011,7 @@
       "grupoEvaluacionGev": "Grup d'avaluació (GEv)"
     },
     "archivos": {
+      "bibliotecaImportar": "Programacions compartides per altres docents, com a punt de partida. Sense dades de centre ni d'alumnat.",
       "exportarPlantilla": "Descarrega una còpia per compartir: sense el teu nom, el centre, la localitat ni el context del grup. L'alumnat i les notes mai no van a la programació.",
       "creaCursoGrupo": "Crea un curs i el seu arxiu de grup associat",
       "guardarComo": "Desar com a...",
@@ -2776,6 +2781,11 @@
       "cargandoDatosProgreso": "Carregant dades de progrés acadèmic..."
     },
     "inicio": {
+      "bibliotecaTitulo": "Biblioteca de programacions",
+      "bibliotecaConfirmar": "Substituirà la programació oberta. Si tens canvis sense desar, es perdran. Vols continuar?",
+      "bibliotecaSinConexion": "No s'ha pogut carregar la biblioteca.",
+      "bibliotecaVacia": "Encara no hi ha programacions publicades.",
+      "bibliotecaAutoria": "Autoria",
       "empiezaAquiTitulo": "Comença aquí",
       "grupoTelegramTitulo": "Grup oficial de Telegram",
       "grupoTelegramDesc": "Grup oficial de desenvolupament i proves de l'App web gratuïta de Cuaderno FP. Puja els teus suggeriments, reporta errors o col·labora aportant el currículum oficial de la teva comunitat autònoma.",

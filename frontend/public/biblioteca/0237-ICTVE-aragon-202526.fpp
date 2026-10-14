@@ -1,0 +1,2748 @@
+{
+  "df_ud": [
+    {
+      "id_ud": "UD01",
+      "horas_ud": 22,
+      "ra_mappings": {
+        "RA1": "RA1"
+      },
+      "RA1": 15,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Introducción a las ICT y normativa"
+    },
+    {
+      "id_ud": "UD02",
+      "horas_ud": 27,
+      "ra_mappings": {
+        "RA1": "RA1"
+      },
+      "RA1": 15,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Elementos de captación de señales de radiodifusión"
+    },
+    {
+      "id_ud": "UD03",
+      "horas_ud": 14,
+      "ra_mappings": {
+        "RA1": "RA1"
+      },
+      "RA1": 10,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Sistemas y equipos de cabecera"
+    },
+    {
+      "id_ud": "UD04",
+      "horas_ud": 10,
+      "ra_mappings": {
+        "RA1": "RA1"
+      },
+      "RA1": 5,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Redes de distribución y dispersión"
+    },
+    {
+      "id_ud": "UD05",
+      "horas_ud": 15,
+      "ra_mappings": {
+        "RA2": "RA2"
+      },
+      "RA1": 0,
+      "RA2": 10,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Sistemas de telefonía básica en edificios"
+    },
+    {
+      "id_ud": "UD06",
+      "horas_ud": 10,
+      "ra_mappings": {
+        "RA2": "RA2"
+      },
+      "RA1": 0,
+      "RA2": 5,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Redes de banda ancha y cable coaxial"
+    },
+    {
+      "id_ud": "UD07",
+      "horas_ud": 10,
+      "ra_mappings": {
+        "RA3": "RA3"
+      },
+      "RA1": 0,
+      "RA2": 0,
+      "RA3": 5,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Sistemas de control de accesos y videoporteros"
+    },
+    {
+      "id_ud": "UD08",
+      "horas_ud": 10,
+      "ra_mappings": {
+        "RA4": "RA4"
+      },
+      "RA1": 0,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 5,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Instalación y configuración de infraestructuras"
+    },
+    {
+      "id_ud": "UD09",
+      "horas_ud": 15,
+      "ra_mappings": {
+        "RA1": "RA1"
+      },
+      "RA1": 10,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Mantenimiento y resolución de averías en ICT"
+    },
+    {
+      "id_ud": "UD10",
+      "horas_ud": 10,
+      "ra_mappings": {
+        "RA1": "RA1"
+      },
+      "RA1": 5,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 0,
+      "RA6": 0,
+      "RA7": 0,
+      "desc_ud": "Prevención de riesgos laborales en telecomunicaciones"
+    },
+    {
+      "id_ud": "UD11",
+      "horas_ud": 7,
+      "ra_mappings": {
+        "RA5": "RA5",
+        "RA6": "RA6",
+        "RA7": "RA7"
+      },
+      "RA1": 0,
+      "RA2": 0,
+      "RA3": 0,
+      "RA4": 0,
+      "RA5": 5,
+      "RA6": 5,
+      "RA7": 5,
+      "desc_ud": "Proyecto de ICT y documentación técnica"
+    }
+  ],
+  "df_sesiones": [
+    {
+      "ID": "S001",
+      "id_ud": "UD01",
+      "Num_Orden": 1,
+      "Horas": 2,
+      "Tipo_Actividad": "Teoría",
+      "RA_CE": "RA1 / CE01-CE02",
+      "Contenidos": "Introducción a las ICT. Elementos básicos de una instalación.",
+      "Aspectos_Clave": "Identificar los componentes principales",
+      "Recursos": "Presentación digital, muestras físicas de materiales"
+    },
+    {
+      "ID": "S002",
+      "id_ud": "UD01",
+      "Num_Orden": 2,
+      "Horas": 2,
+      "Tipo_Actividad": "Práctica",
+      "RA_CE": "RA1 / CE03",
+      "Contenidos": "Reconocimiento de materiales y equipos en maqueta didáctica.",
+      "Aspectos_Clave": "Manipulación correcta de materiales",
+      "Recursos": "Maqueta didáctica, catálogos técnicos"
+    },
+    {
+      "ID": "S003",
+      "id_ud": "UD01",
+      "Num_Orden": 3,
+      "Horas": 2,
+      "Tipo_Actividad": "Teoría",
+      "RA_CE": "RA1 / CE04",
+      "Contenidos": "Normativa ICT: Real Decreto 346/2011, UNE 133100.",
+      "Aspectos_Clave": "Interpretación de normativa",
+      "Recursos": "Documentación normativa, esquemas"
+    },
+    {
+      "ID": "S004",
+      "id_ud": "UD02",
+      "Num_Orden": 4,
+      "Horas": 2,
+      "Tipo_Actividad": "Teoría",
+      "RA_CE": "RA1 / CE01-CE02",
+      "Contenidos": "Instalaciones de antenas: tipos, elementos, características.",
+      "Aspectos_Clave": "Comprensión del sistema de antenas",
+      "Recursos": "Esquemas, vídeos demostrativos"
+    },
+    {
+      "ID": "S005",
+      "id_ud": "UD02",
+      "Num_Orden": 5,
+      "Horas": 2,
+      "Tipo_Actividad": "Práctica",
+      "RA_CE": "RA2 / CE05-CE06",
+      "Contenidos": "Cálculo de instalaciones de antenas: niveles de señal, pérdidas.",
+      "Aspectos_Clave": "Realizar cálculos correctamente",
+      "Recursos": "Calculadora, tablas de datos, software de simulación"
+    },
+    {
+      "ID": "S006",
+      "id_ud": "UD02",
+      "Num_Orden": 6,
+      "Horas": 2,
+      "Tipo_Actividad": "Taller",
+      "RA_CE": "RA2 / CE07",
+      "Contenidos": "Montaje de antena parabólica y soporte.",
+      "Aspectos_Clave": "Orientación y fijación correcta",
+      "Recursos": "Antena parabólica, soporte, herramientas"
+    },
+    {
+      "ID": "S007",
+      "id_ud": "UD03",
+      "Num_Orden": 7,
+      "Horas": 2,
+      "Tipo_Actividad": "Teoría",
+      "RA_CE": "RA2 / CE05",
+      "Contenidos": "Infraestructuras de banda ancha: fibra óptica, cable coaxial, par trenzado.",
+      "Aspectos_Clave": "Diferencias entre medios de transmisión",
+      "Recursos": "Muestras de cables, presentación"
+    },
+    {
+      "ID": "S008",
+      "id_ud": "UD03",
+      "Num_Orden": 8,
+      "Horas": 2,
+      "Tipo_Actividad": "Práctica",
+      "RA_CE": "RA2 / CE06-CE07",
+      "Contenidos": "Elaboración de esquemas de instalación de banda ancha.",
+      "Aspectos_Clave": "Cumplir simbología normalizada",
+      "Recursos": "Software de diseño, plantillas"
+    },
+    {
+      "ID": "S009",
+      "id_ud": "UD03",
+      "Num_Orden": 9,
+      "Horas": 2,
+      "Tipo_Actividad": "Taller",
+      "RA_CE": "Ra03 / CE08-CE09",
+      "Contenidos": "Montaje de toma de fibra óptica y cableado interior.",
+      "Aspectos_Clave": "Técnicas de conexión y fijación",
+      "Recursos": "Fibra óptica, conectorizadora, herramientas"
+    },
+    {
+      "ID": "S010",
+      "id_ud": "UD04",
+      "Num_Orden": 10,
+      "Horas": 2,
+      "Tipo_Actividad": "Teoría",
+      "RA_CE": "Ra03 / CE10",
+      "Contenidos": "Instalaciones de telefonía: centralización, distribución, puntos de acceso.",
+      "Aspectos_Clave": "Arquitectura de la red telefónica",
+      "Recursos": "Planos, esquemas"
+    },
+    {
+      "ID": "S011",
+      "id_ud": "UD04",
+      "Num_Orden": 11,
+      "Horas": 2,
+      "Tipo_Actividad": "Taller",
+      "RA_CE": "Ra03 / CE10-CE11",
+      "Contenidos": "Montaje de rosetas telefónicas y conexionado de red de datos.",
+      "Aspectos_Clave": "Conexionado correcto según norma",
+      "Recursos": "Rosetas, cable FTP, crimpadora, comprobador"
+    },
+    {
+      "ID": "S012",
+      "id_ud": "UD05",
+      "Num_Orden": 12,
+      "Horas": 2,
+      "Tipo_Actividad": "Práctica",
+      "RA_CE": "Ra04 / CE12-CE13",
+      "Contenidos": "Mediciones en instalaciones: nivel de señal, impedancia, continuidad.",
+      "Aspectos_Clave": "Uso correcto de instrumentos de medida",
+      "Recursos": "Medidor de campo, polímetro, analizador"
+    },
+    {
+      "ID": "S013",
+      "id_ud": "UD05",
+      "Num_Orden": 13,
+      "Horas": 2,
+      "Tipo_Actividad": "Teoría",
+      "RA_CE": "Ra04 / CE14",
+      "Contenidos": "Verificación reglamentaria de instalaciones. Certificados.",
+      "Aspectos_Clave": "Cumplimiento de normativa",
+      "Recursos": "Modelos de certificados, checklist"
+    },
+    {
+      "ID": "S014",
+      "id_ud": "UD06",
+      "Num_Orden": 14,
+      "Horas": 2,
+      "Tipo_Actividad": "Práctica",
+      "RA_CE": "Ra05 / CE15-CE16",
+      "Contenidos": "Diagnóstico de averías típicas en ICT.",
+      "Aspectos_Clave": "Método sistemático de diagnóstico",
+      "Recursos": "Maqueta con averías simuladas, documentación técnica"
+    },
+    {
+      "ID": "S015",
+      "id_ud": "UD06",
+      "Num_Orden": 15,
+      "Horas": 2,
+      "Tipo_Actividad": "Taller",
+      "RA_CE": "Ra05 / CE17",
+      "Contenidos": "Reparación de averías: sustitución de elementos, ajustes.",
+      "Aspectos_Clave": "Técnicas de reparación",
+      "Recursos": "Herramientas, repuestos, maqueta"
+    }
+  ],
+  "df_ra": [
+    {
+      "id_ra": "RA1",
+      "peso_ra": 60,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA2",
+      "peso_ra": 15,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA3",
+      "peso_ra": 5,
+      "is_dual": true
+    },
+    {
+      "id_ra": "RA4",
+      "peso_ra": 5,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA5",
+      "peso_ra": 5,
+      "is_dual": true
+    },
+    {
+      "id_ra": "RA6",
+      "peso_ra": 5,
+      "is_dual": false
+    },
+    {
+      "id_ra": "RA7",
+      "peso_ra": 5,
+      "is_dual": false
+    }
+  ],
+  "df_ce": [
+    {
+      "id_ce": "CE1.a",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE1.b",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE1.c",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE1.d",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE1.e",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE1.f",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE1.g",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE1.h",
+      "id_ra": "RA1",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE2.a",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE2.b",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE2.c",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE2.d",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE2.e",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE2.f",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE2.g",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE2.h",
+      "id_ra": "RA2",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE3.a",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 13,
+      "is_dual": true
+    },
+    {
+      "id_ce": "CE3.b",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 13,
+      "is_dual": true
+    },
+    {
+      "id_ce": "CE3.c",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 13,
+      "is_dual": true
+    },
+    {
+      "id_ce": "CE3.d",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 13
+    },
+    {
+      "id_ce": "CE3.e",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE3.f",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE3.g",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE3.h",
+      "id_ra": "RA3",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE4.a",
+      "id_ra": "RA4",
+      "id_ud": "UD01",
+      "peso_ce": 17
+    },
+    {
+      "id_ce": "CE4.b",
+      "id_ra": "RA4",
+      "id_ud": "UD01",
+      "peso_ce": 17
+    },
+    {
+      "id_ce": "CE4.c",
+      "id_ra": "RA4",
+      "id_ud": "UD01",
+      "peso_ce": 17
+    },
+    {
+      "id_ce": "CE4.d",
+      "id_ra": "RA4",
+      "id_ud": "UD01",
+      "peso_ce": 17
+    },
+    {
+      "id_ce": "CE4.e",
+      "id_ra": "RA4",
+      "id_ud": "UD01",
+      "peso_ce": 16
+    },
+    {
+      "id_ce": "CE4.f",
+      "id_ra": "RA4",
+      "id_ud": "UD01",
+      "peso_ce": 16
+    },
+    {
+      "id_ce": "CE5.a",
+      "id_ra": "RA5",
+      "id_ud": "UD01",
+      "peso_ce": 17,
+      "is_dual": true
+    },
+    {
+      "id_ce": "CE5.b",
+      "id_ra": "RA5",
+      "id_ud": "UD01",
+      "peso_ce": 17,
+      "is_dual": true
+    },
+    {
+      "id_ce": "CE5.c",
+      "id_ra": "RA5",
+      "id_ud": "UD01",
+      "peso_ce": 17
+    },
+    {
+      "id_ce": "CE5.d",
+      "id_ra": "RA5",
+      "id_ud": "UD01",
+      "peso_ce": 17
+    },
+    {
+      "id_ce": "CE5.e",
+      "id_ra": "RA5",
+      "id_ud": "UD01",
+      "peso_ce": 16
+    },
+    {
+      "id_ce": "CE5.f",
+      "id_ra": "RA5",
+      "id_ud": "UD01",
+      "peso_ce": 16
+    },
+    {
+      "id_ce": "CE6.a",
+      "id_ra": "RA6",
+      "id_ud": "UD01",
+      "peso_ce": 15
+    },
+    {
+      "id_ce": "CE6.b",
+      "id_ra": "RA6",
+      "id_ud": "UD01",
+      "peso_ce": 15
+    },
+    {
+      "id_ce": "CE6.c",
+      "id_ra": "RA6",
+      "id_ud": "UD01",
+      "peso_ce": 14
+    },
+    {
+      "id_ce": "CE6.d",
+      "id_ra": "RA6",
+      "id_ud": "UD01",
+      "peso_ce": 14
+    },
+    {
+      "id_ce": "CE6.e",
+      "id_ra": "RA6",
+      "id_ud": "UD01",
+      "peso_ce": 14
+    },
+    {
+      "id_ce": "CE6.f",
+      "id_ra": "RA6",
+      "id_ud": "UD01",
+      "peso_ce": 14
+    },
+    {
+      "id_ce": "CE6.g",
+      "id_ra": "RA6",
+      "id_ud": "UD01",
+      "peso_ce": 14
+    },
+    {
+      "id_ce": "CE7.a",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 12
+    },
+    {
+      "id_ce": "CE7.b",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    },
+    {
+      "id_ce": "CE7.c",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    },
+    {
+      "id_ce": "CE7.d",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    },
+    {
+      "id_ce": "CE7.e",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    },
+    {
+      "id_ce": "CE7.f",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    },
+    {
+      "id_ce": "CE7.g",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    },
+    {
+      "id_ce": "CE7.h",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    },
+    {
+      "id_ce": "CE7.i",
+      "id_ra": "RA7",
+      "id_ud": "UD01",
+      "peso_ce": 11
+    }
+  ],
+  "df_tareas": [
+    {
+      "ID": "T01",
+      "id_act": "ACT01",
+      "Nombre_Tarea": "Diseño de ICT para vivienda unifamiliar",
+      "Reto": "Diseñar y presupuestar la instalación completa de ICT para una vivienda de 100m²",
+      "RA_Asociados": "RA1, RA02",
+      "Instrumento": "Rúbrica de proyecto",
+      "desc_act": "Los alumnado deberán diseñar la ICT completa de una vivienda unifamiliar, incluyendo antenas, telefonía y banda ancha, elaborando planos, lista de materiales y presupuesto."
+    },
+    {
+      "ID": "T02",
+      "id_act": "ACT02",
+      "Nombre_Tarea": "Montaje de instalación de antena colectiva",
+      "Reto": "Montar y poner en marcha una instalación de antena colectiva para 4 viviendas",
+      "RA_Asociados": "RA3",
+      "Instrumento": "Lista de verificación",
+      "desc_act": "Montaje de una instalación de antena colectiva con amplificador, derivadores y tomas, siguiendo el esquema proporcionado."
+    },
+    {
+      "ID": "T03",
+      "id_act": "ACT03",
+      "Nombre_Tarea": "Verificación y medidas de instalación ICT",
+      "Reto": "Realizar el informe de verificación de una instalación ICT existente",
+      "RA_Asociados": "RA4",
+      "Instrumento": "Informe técnico",
+      "desc_act": "Los alumnado realizarán mediciones de nivel de señal, pérdidas y continuidad en una instalación existente, elaborando el informe técnico correspondiente."
+    },
+    {
+      "ID": "T04",
+      "id_act": "ACT04",
+      "Nombre_Tarea": "Diagnóstico y reparación de averías en ICT",
+      "Reto": "Diagnosticar y reparar 3 averías simuladas en una instalación ICT",
+      "RA_Asociados": "RA5",
+      "Instrumento": "Rúbrica de práctica",
+      "desc_act": "Los alumnado deberán identificar y reparar averías en una maqueta de ICT, documentando el proceso seguido."
+    },
+    {
+      "ID": "T05",
+      "id_act": "ACT05",
+      "Nombre_Tarea": "Evaluación de riesgos en instalaciones ICT",
+      "Reto": "Elaborar un plan de prevención para el montaje de una ICT",
+      "RA_Asociados": "RA6",
+      "Instrumento": "Checklist de PRL",
+      "desc_act": "Identificar los riesgos laborales asociados al montaje de ICT y proponer medidas preventivas."
+    }
+  ],
+  "df_act": [
+    {
+      "id_act": "ACT01",
+      "tri_act": "1T",
+      "Tipo": "Teoria",
+      "desc_act": "Examen teórico 1T",
+      "peso_act": 40,
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
+    },
+    {
+      "id_act": "ACT02",
+      "tri_act": "1T",
+      "Tipo": "Practica",
+      "desc_act": "Examen práctico 1T",
+      "peso_act": 30,
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
+    },
+    {
+      "id_act": "ACT03",
+      "tri_act": "1T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr11",
+      "peso_act": 5,
+      "is_active": true,
+      "rubrica_id": "RUB-INFORME",
+      "CE2.a": true,
+      "CE2.b": true
+    },
+    {
+      "id_act": "ACT04",
+      "tri_act": "1T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr12",
+      "peso_act": 5,
+      "is_active": true,
+      "CE2.c": true,
+      "CE2.d": true
+    },
+    {
+      "id_act": "ACT05",
+      "tri_act": "1T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr13",
+      "peso_act": 5,
+      "is_active": true,
+      "CE2.e": true,
+      "CE2.f": true
+    },
+    {
+      "id_act": "ACT06",
+      "tri_act": "1T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr14",
+      "peso_act": 5,
+      "is_active": true,
+      "CE2.g": true,
+      "CE2.h": true
+    },
+    {
+      "id_act": "ACT07",
+      "tri_act": "1T",
+      "Tipo": "Tareas",
+      "desc_act": "Cuaderno de tareas 1T",
+      "peso_act": 10,
+      "is_active": true,
+      "rubrica_id": "RUB-TAREAS",
+      "CE2.a": true,
+      "CE2.b": true,
+      "CE2.c": true,
+      "CE2.d": true,
+      "CE2.e": true,
+      "CE2.f": true,
+      "CE2.g": true,
+      "CE2.h": true
+    },
+    {
+      "id_act": "ACT08",
+      "tri_act": "2T",
+      "Tipo": "Teoria",
+      "desc_act": "Examen teórico 2T",
+      "peso_act": 40,
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
+    },
+    {
+      "id_act": "ACT09",
+      "tri_act": "2T",
+      "Tipo": "Practica",
+      "desc_act": "Examen práctico 2T",
+      "peso_act": 30,
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
+    },
+    {
+      "id_act": "ACT10",
+      "tri_act": "2T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr21",
+      "peso_act": 5,
+      "is_active": true,
+      "rubrica_id": "RUB-INFORME",
+      "CE3.a": true,
+      "CE3.b": true,
+      "CE3.c": true,
+      "CE3.d": true
+    },
+    {
+      "id_act": "ACT11",
+      "tri_act": "2T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr22",
+      "peso_act": 5,
+      "is_active": true,
+      "CE3.e": true,
+      "CE3.f": true,
+      "CE3.g": true,
+      "CE3.h": true
+    },
+    {
+      "id_act": "ACT12",
+      "tri_act": "2T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr23",
+      "peso_act": 5,
+      "is_active": true,
+      "CE4.a": true,
+      "CE4.b": true,
+      "CE4.c": true,
+      "CE4.d": true
+    },
+    {
+      "id_act": "ACT13",
+      "tri_act": "2T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr24",
+      "peso_act": 5,
+      "is_active": true,
+      "CE4.e": true,
+      "CE4.f": true
+    },
+    {
+      "id_act": "ACT14",
+      "tri_act": "2T",
+      "Tipo": "Tareas",
+      "desc_act": "Cuaderno de tareas 2T",
+      "peso_act": 10,
+      "is_active": true,
+      "rubrica_id": "RUB-TAREAS",
+      "CE3.a": true,
+      "CE3.b": true,
+      "CE3.c": true,
+      "CE3.d": true,
+      "CE3.e": true,
+      "CE3.f": true,
+      "CE3.g": true,
+      "CE3.h": true,
+      "CE4.a": true,
+      "CE4.b": true,
+      "CE4.c": true,
+      "CE4.d": true,
+      "CE4.e": true,
+      "CE4.f": true
+    },
+    {
+      "id_act": "ACT15",
+      "tri_act": "3T",
+      "Tipo": "Teoria",
+      "desc_act": "Examen teórico 3T",
+      "peso_act": 40,
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
+    },
+    {
+      "id_act": "ACT16",
+      "tri_act": "3T",
+      "Tipo": "Practica",
+      "desc_act": "Examen práctico 3T",
+      "peso_act": 30,
+      "is_active": true,
+      "CE1.a": true,
+      "CE1.b": true,
+      "CE1.c": true,
+      "CE1.d": true,
+      "CE1.e": true,
+      "CE1.f": true,
+      "CE1.g": true,
+      "CE1.h": true
+    },
+    {
+      "id_act": "ACT17",
+      "tri_act": "3T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr31",
+      "peso_act": 5,
+      "is_active": true,
+      "rubrica_id": "RUB-INFORME",
+      "CE5.a": true,
+      "CE5.b": true,
+      "CE5.c": true,
+      "CE5.d": true,
+      "CE5.e": true,
+      "CE5.f": true
+    },
+    {
+      "id_act": "ACT18",
+      "tri_act": "3T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr32",
+      "peso_act": 5,
+      "is_active": true,
+      "CE6.a": true,
+      "CE6.b": true,
+      "CE6.c": true,
+      "CE6.d": true,
+      "CE6.e": true,
+      "CE6.f": true
+    },
+    {
+      "id_act": "ACT19",
+      "tri_act": "3T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr33",
+      "peso_act": 5,
+      "is_active": true,
+      "CE6.g": true,
+      "CE7.a": true,
+      "CE7.b": true,
+      "CE7.c": true,
+      "CE7.d": true,
+      "CE7.e": true
+    },
+    {
+      "id_act": "ACT20",
+      "tri_act": "3T",
+      "Tipo": "Informes",
+      "desc_act": "Informe de prácticas Pr34",
+      "peso_act": 5,
+      "is_active": true,
+      "CE7.f": true,
+      "CE7.g": true,
+      "CE7.h": true,
+      "CE7.i": true
+    },
+    {
+      "id_act": "ACT21",
+      "tri_act": "3T",
+      "Tipo": "Tareas",
+      "desc_act": "Cuaderno de tareas 3T",
+      "peso_act": 10,
+      "is_active": true,
+      "rubrica_id": "RUB-TAREAS",
+      "CE5.a": true,
+      "CE5.b": true,
+      "CE5.c": true,
+      "CE5.d": true,
+      "CE5.e": true,
+      "CE5.f": true,
+      "CE6.a": true,
+      "CE6.b": true,
+      "CE6.c": true,
+      "CE6.d": true,
+      "CE6.e": true,
+      "CE6.f": true,
+      "CE6.g": true,
+      "CE7.a": true,
+      "CE7.b": true,
+      "CE7.c": true,
+      "CE7.d": true,
+      "CE7.e": true,
+      "CE7.f": true,
+      "CE7.g": true,
+      "CE7.h": true,
+      "CE7.i": true
+    }
+  ],
+  "df_instr": [
+    {
+      "id_instrumento": "ACT01",
+      "titulo": "Examen teórico 1T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev1",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT01-CE1.a",
+        "ACT01-CE1.b",
+        "ACT01-CE1.c",
+        "ACT01-CE1.d",
+        "ACT01-CE1.e",
+        "ACT01-CE1.f",
+        "ACT01-CE1.g",
+        "ACT01-CE1.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT02",
+      "titulo": "Examen práctico 1T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev1",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT02-CE1.a",
+        "ACT02-CE1.b",
+        "ACT02-CE1.c",
+        "ACT02-CE1.d",
+        "ACT02-CE1.e",
+        "ACT02-CE1.f",
+        "ACT02-CE1.g",
+        "ACT02-CE1.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT03",
+      "titulo": "Informe de prácticas Pr11",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev1",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT03-CE2.a",
+        "ACT03-CE2.b"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT04",
+      "titulo": "Informe de prácticas Pr12",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev1",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT04-CE2.c",
+        "ACT04-CE2.d"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT05",
+      "titulo": "Informe de prácticas Pr13",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev1",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT05-CE2.e",
+        "ACT05-CE2.f"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT06",
+      "titulo": "Informe de prácticas Pr14",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev1",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT06-CE2.g",
+        "ACT06-CE2.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT07",
+      "titulo": "Cuaderno de tareas 1T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev1",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT07-CE2.a",
+        "ACT07-CE2.b",
+        "ACT07-CE2.c",
+        "ACT07-CE2.d",
+        "ACT07-CE2.e",
+        "ACT07-CE2.f",
+        "ACT07-CE2.g",
+        "ACT07-CE2.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT08",
+      "titulo": "Examen teórico 2T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev2",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT08-CE1.a",
+        "ACT08-CE1.b",
+        "ACT08-CE1.c",
+        "ACT08-CE1.d",
+        "ACT08-CE1.e",
+        "ACT08-CE1.f",
+        "ACT08-CE1.g",
+        "ACT08-CE1.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT09",
+      "titulo": "Examen práctico 2T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev2",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT09-CE1.a",
+        "ACT09-CE1.b",
+        "ACT09-CE1.c",
+        "ACT09-CE1.d",
+        "ACT09-CE1.e",
+        "ACT09-CE1.f",
+        "ACT09-CE1.g",
+        "ACT09-CE1.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT10",
+      "titulo": "Informe de prácticas Pr21",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev2",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT10-CE3.a",
+        "ACT10-CE3.b",
+        "ACT10-CE3.c",
+        "ACT10-CE3.d"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT11",
+      "titulo": "Informe de prácticas Pr22",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev2",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT11-CE3.e",
+        "ACT11-CE3.f",
+        "ACT11-CE3.g",
+        "ACT11-CE3.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT12",
+      "titulo": "Informe de prácticas Pr23",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev2",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT12-CE4.a",
+        "ACT12-CE4.b",
+        "ACT12-CE4.c",
+        "ACT12-CE4.d"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT13",
+      "titulo": "Informe de prácticas Pr24",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev2",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT13-CE4.e",
+        "ACT13-CE4.f"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT14",
+      "titulo": "Cuaderno de tareas 2T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev2",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT14-CE3.a",
+        "ACT14-CE3.b",
+        "ACT14-CE3.c",
+        "ACT14-CE3.d",
+        "ACT14-CE3.e",
+        "ACT14-CE3.f",
+        "ACT14-CE3.g",
+        "ACT14-CE3.h",
+        "ACT14-CE4.a",
+        "ACT14-CE4.b",
+        "ACT14-CE4.c",
+        "ACT14-CE4.d",
+        "ACT14-CE4.e",
+        "ACT14-CE4.f"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT15",
+      "titulo": "Examen teórico 3T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev3",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT15-CE1.a",
+        "ACT15-CE1.b",
+        "ACT15-CE1.c",
+        "ACT15-CE1.d",
+        "ACT15-CE1.e",
+        "ACT15-CE1.f",
+        "ACT15-CE1.g",
+        "ACT15-CE1.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT16",
+      "titulo": "Examen práctico 3T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev3",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT16-CE1.a",
+        "ACT16-CE1.b",
+        "ACT16-CE1.c",
+        "ACT16-CE1.d",
+        "ACT16-CE1.e",
+        "ACT16-CE1.f",
+        "ACT16-CE1.g",
+        "ACT16-CE1.h"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT17",
+      "titulo": "Informe de prácticas Pr31",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev3",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT17-CE5.a",
+        "ACT17-CE5.b",
+        "ACT17-CE5.c",
+        "ACT17-CE5.d",
+        "ACT17-CE5.e",
+        "ACT17-CE5.f"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT18",
+      "titulo": "Informe de prácticas Pr32",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev3",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT18-CE6.a",
+        "ACT18-CE6.b",
+        "ACT18-CE6.c",
+        "ACT18-CE6.d",
+        "ACT18-CE6.e",
+        "ACT18-CE6.f"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT19",
+      "titulo": "Informe de prácticas Pr33",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev3",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT19-CE6.g",
+        "ACT19-CE7.a",
+        "ACT19-CE7.b",
+        "ACT19-CE7.c",
+        "ACT19-CE7.d",
+        "ACT19-CE7.e"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT20",
+      "titulo": "Informe de prácticas Pr34",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev3",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT20-CE7.f",
+        "ACT20-CE7.g",
+        "ACT20-CE7.h",
+        "ACT20-CE7.i"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    },
+    {
+      "id_instrumento": "ACT21",
+      "titulo": "Cuaderno de tareas 3T",
+      "tipo": "rubrica",
+      "escala": "continua_10",
+      "evaluacion": "Ev3",
+      "agente": "heteroevaluacion",
+      "peso_global": 1,
+      "indicadores_vinculados": [
+        "ACT21-CE5.a",
+        "ACT21-CE5.b",
+        "ACT21-CE5.c",
+        "ACT21-CE5.d",
+        "ACT21-CE5.e",
+        "ACT21-CE5.f",
+        "ACT21-CE6.a",
+        "ACT21-CE6.b",
+        "ACT21-CE6.c",
+        "ACT21-CE6.d",
+        "ACT21-CE6.e",
+        "ACT21-CE6.f",
+        "ACT21-CE6.g",
+        "ACT21-CE7.a",
+        "ACT21-CE7.b",
+        "ACT21-CE7.c",
+        "ACT21-CE7.d",
+        "ACT21-CE7.e",
+        "ACT21-CE7.f",
+        "ACT21-CE7.g",
+        "ACT21-CE7.h",
+        "ACT21-CE7.i"
+      ],
+      "origen": "centro",
+      "procedimiento": "ordinario"
+    }
+  ],
+  "df_pr": [],
+  "df_dua": [],
+  "df_contingencia": [
+    {
+      "ID": "PC01",
+      "Escenario": "Ausencia de Profesorado",
+      "Organizacion": "Profesor de guardia con material preparado",
+      "Actividades": "Realización de ejercicios de cálculo en aula de informática",
+      "Seguimiento": "Entrega al final de la sesión vía Moodle"
+    },
+    {
+      "ID": "PC02",
+      "Escenario": "Interrupción Generalizada",
+      "Organizacion": "Paso a docencia online síncrona",
+      "Actividades": "Simulación de circuitos con software especializado",
+      "Seguimiento": "Revisión de proyectos simulados compartidos en la nube"
+    }
+  ],
+  "df_ace": [
+    {
+      "ID": "ACE01",
+      "Tipo": "Complementaria",
+      "RA_Vinculados": "RA1",
+      "Actividad": "Visita a central telefónica",
+      "Trimestre": "1T",
+      "Entidad": "",
+      "Evaluacion": "Cuestionario post-visita"
+    },
+    {
+      "ID": "ACE02",
+      "Tipo": "Extraescolar",
+      "RA_Vinculados": "RA6",
+      "Actividad": "Asistencia a feria de telecomunicaciones",
+      "Trimestre": "2T",
+      "Entidad": "",
+      "Evaluacion": "Memoria resumen de tecnologías vistas"
+    }
+  ],
+  "info_modulo": {
+    "codigo": "0237",
+    "p_ev": 15,
+    "h_boa": 167,
+    "h_sem": 5,
+    "curso": "1º",
+    "ccaa": "aragon",
+    "pond_1t": 30,
+    "pond_2t": 30,
+    "pond_3t": 40,
+    "criterio_conocimiento": 40,
+    "criterio_procedimiento_practicas": 30,
+    "criterio_procedimiento_ejercicios": 20,
+    "criterio_tareas": 10,
+    "ra_og_mapping": {
+      "0": [
+        "RA1"
+      ],
+      "1": [
+        "RA2"
+      ],
+      "2": [
+        "RA2"
+      ],
+      "3": [
+        "RA2"
+      ],
+      "4": [
+        "RA2",
+        "RA3"
+      ],
+      "5": [
+        "RA1",
+        "RA3"
+      ],
+      "6": [
+        "RA3"
+      ],
+      "7": [],
+      "8": [
+        "RA3"
+      ],
+      "9": [
+        "RA3"
+      ],
+      "10": [
+        "RA3"
+      ],
+      "11": [],
+      "12": [
+        "RA5"
+      ],
+      "13": [
+        "RA4",
+        "RA5"
+      ],
+      "14": [
+        "RA5",
+        "RA6"
+      ],
+      "15": [
+        "RA4",
+        "RA6"
+      ],
+      "16": [
+        "RA4",
+        "RA6"
+      ],
+      "17": [
+        "RA7"
+      ],
+      "18": [
+        "RA2",
+        "RA3",
+        "RA6"
+      ],
+      "19": [
+        "RA7"
+      ],
+      "20": [],
+      "21": [],
+      "22": []
+    }
+  },
+  "config_contexto": {},
+  "config_aula": {
+    "Metodología": "Trabajo cooperativo en pequeños grupos (2-3 personas). Uso de maquetas de simulación de viviendas.",
+    "Atención a la diversidad": "Ampliación de prácticas para alumnado de ritmo rápido. Refuerzo personalizado en horas de desdoble."
+  },
+  "df_indicadores": [
+    {
+      "id_indicador": "ACT01-CE1.a",
+      "id_ce": "CE1.a",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT01-CE1.b",
+      "id_ce": "CE1.b",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT01-CE1.c",
+      "id_ce": "CE1.c",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT01-CE1.d",
+      "id_ce": "CE1.d",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT01-CE1.e",
+      "id_ce": "CE1.e",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT01-CE1.f",
+      "id_ce": "CE1.f",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT01-CE1.g",
+      "id_ce": "CE1.g",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT01-CE1.h",
+      "id_ce": "CE1.h",
+      "descripcion": "Examen teórico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.a",
+      "id_ce": "CE1.a",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.b",
+      "id_ce": "CE1.b",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.c",
+      "id_ce": "CE1.c",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.d",
+      "id_ce": "CE1.d",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.e",
+      "id_ce": "CE1.e",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.f",
+      "id_ce": "CE1.f",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.g",
+      "id_ce": "CE1.g",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT02-CE1.h",
+      "id_ce": "CE1.h",
+      "descripcion": "Examen práctico 1T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT03-CE2.a",
+      "id_ce": "CE2.a",
+      "descripcion": "Informe de prácticas Pr11",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT03-CE2.b",
+      "id_ce": "CE2.b",
+      "descripcion": "Informe de prácticas Pr11",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT04-CE2.c",
+      "id_ce": "CE2.c",
+      "descripcion": "Informe de prácticas Pr12",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT04-CE2.d",
+      "id_ce": "CE2.d",
+      "descripcion": "Informe de prácticas Pr12",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT05-CE2.e",
+      "id_ce": "CE2.e",
+      "descripcion": "Informe de prácticas Pr13",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT05-CE2.f",
+      "id_ce": "CE2.f",
+      "descripcion": "Informe de prácticas Pr13",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT06-CE2.g",
+      "id_ce": "CE2.g",
+      "descripcion": "Informe de prácticas Pr14",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT06-CE2.h",
+      "id_ce": "CE2.h",
+      "descripcion": "Informe de prácticas Pr14",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.a",
+      "id_ce": "CE2.a",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.b",
+      "id_ce": "CE2.b",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.c",
+      "id_ce": "CE2.c",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.d",
+      "id_ce": "CE2.d",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.e",
+      "id_ce": "CE2.e",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.f",
+      "id_ce": "CE2.f",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.g",
+      "id_ce": "CE2.g",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT07-CE2.h",
+      "id_ce": "CE2.h",
+      "descripcion": "Cuaderno de tareas 1T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.a",
+      "id_ce": "CE1.a",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.b",
+      "id_ce": "CE1.b",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.c",
+      "id_ce": "CE1.c",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.d",
+      "id_ce": "CE1.d",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.e",
+      "id_ce": "CE1.e",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.f",
+      "id_ce": "CE1.f",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.g",
+      "id_ce": "CE1.g",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT08-CE1.h",
+      "id_ce": "CE1.h",
+      "descripcion": "Examen teórico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.a",
+      "id_ce": "CE1.a",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.b",
+      "id_ce": "CE1.b",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.c",
+      "id_ce": "CE1.c",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.d",
+      "id_ce": "CE1.d",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.e",
+      "id_ce": "CE1.e",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.f",
+      "id_ce": "CE1.f",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.g",
+      "id_ce": "CE1.g",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT09-CE1.h",
+      "id_ce": "CE1.h",
+      "descripcion": "Examen práctico 2T",
+      "peso": 17,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT10-CE3.a",
+      "id_ce": "CE3.a",
+      "descripcion": "Informe de prácticas Pr21",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT10-CE3.b",
+      "id_ce": "CE3.b",
+      "descripcion": "Informe de prácticas Pr21",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT10-CE3.c",
+      "id_ce": "CE3.c",
+      "descripcion": "Informe de prácticas Pr21",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT10-CE3.d",
+      "id_ce": "CE3.d",
+      "descripcion": "Informe de prácticas Pr21",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT11-CE3.e",
+      "id_ce": "CE3.e",
+      "descripcion": "Informe de prácticas Pr22",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT11-CE3.f",
+      "id_ce": "CE3.f",
+      "descripcion": "Informe de prácticas Pr22",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT11-CE3.g",
+      "id_ce": "CE3.g",
+      "descripcion": "Informe de prácticas Pr22",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT11-CE3.h",
+      "id_ce": "CE3.h",
+      "descripcion": "Informe de prácticas Pr22",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT12-CE4.a",
+      "id_ce": "CE4.a",
+      "descripcion": "Informe de prácticas Pr23",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT12-CE4.b",
+      "id_ce": "CE4.b",
+      "descripcion": "Informe de prácticas Pr23",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT12-CE4.c",
+      "id_ce": "CE4.c",
+      "descripcion": "Informe de prácticas Pr23",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT12-CE4.d",
+      "id_ce": "CE4.d",
+      "descripcion": "Informe de prácticas Pr23",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT13-CE4.e",
+      "id_ce": "CE4.e",
+      "descripcion": "Informe de prácticas Pr24",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT13-CE4.f",
+      "id_ce": "CE4.f",
+      "descripcion": "Informe de prácticas Pr24",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.a",
+      "id_ce": "CE3.a",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.b",
+      "id_ce": "CE3.b",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.c",
+      "id_ce": "CE3.c",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.d",
+      "id_ce": "CE3.d",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.e",
+      "id_ce": "CE3.e",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.f",
+      "id_ce": "CE3.f",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.g",
+      "id_ce": "CE3.g",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE3.h",
+      "id_ce": "CE3.h",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE4.a",
+      "id_ce": "CE4.a",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE4.b",
+      "id_ce": "CE4.b",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE4.c",
+      "id_ce": "CE4.c",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE4.d",
+      "id_ce": "CE4.d",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE4.e",
+      "id_ce": "CE4.e",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT14-CE4.f",
+      "id_ce": "CE4.f",
+      "descripcion": "Cuaderno de tareas 2T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.a",
+      "id_ce": "CE1.a",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.b",
+      "id_ce": "CE1.b",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.c",
+      "id_ce": "CE1.c",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.d",
+      "id_ce": "CE1.d",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.e",
+      "id_ce": "CE1.e",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.f",
+      "id_ce": "CE1.f",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.g",
+      "id_ce": "CE1.g",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT15-CE1.h",
+      "id_ce": "CE1.h",
+      "descripcion": "Examen teórico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.a",
+      "id_ce": "CE1.a",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.b",
+      "id_ce": "CE1.b",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.c",
+      "id_ce": "CE1.c",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.d",
+      "id_ce": "CE1.d",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.e",
+      "id_ce": "CE1.e",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.f",
+      "id_ce": "CE1.f",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.g",
+      "id_ce": "CE1.g",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT16-CE1.h",
+      "id_ce": "CE1.h",
+      "descripcion": "Examen práctico 3T",
+      "peso": 16,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT17-CE5.a",
+      "id_ce": "CE5.a",
+      "descripcion": "Informe de prácticas Pr31",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT17-CE5.b",
+      "id_ce": "CE5.b",
+      "descripcion": "Informe de prácticas Pr31",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT17-CE5.c",
+      "id_ce": "CE5.c",
+      "descripcion": "Informe de prácticas Pr31",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT17-CE5.d",
+      "id_ce": "CE5.d",
+      "descripcion": "Informe de prácticas Pr31",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT17-CE5.e",
+      "id_ce": "CE5.e",
+      "descripcion": "Informe de prácticas Pr31",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT17-CE5.f",
+      "id_ce": "CE5.f",
+      "descripcion": "Informe de prácticas Pr31",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT18-CE6.a",
+      "id_ce": "CE6.a",
+      "descripcion": "Informe de prácticas Pr32",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT18-CE6.b",
+      "id_ce": "CE6.b",
+      "descripcion": "Informe de prácticas Pr32",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT18-CE6.c",
+      "id_ce": "CE6.c",
+      "descripcion": "Informe de prácticas Pr32",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT18-CE6.d",
+      "id_ce": "CE6.d",
+      "descripcion": "Informe de prácticas Pr32",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT18-CE6.e",
+      "id_ce": "CE6.e",
+      "descripcion": "Informe de prácticas Pr32",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT18-CE6.f",
+      "id_ce": "CE6.f",
+      "descripcion": "Informe de prácticas Pr32",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT19-CE6.g",
+      "id_ce": "CE6.g",
+      "descripcion": "Informe de prácticas Pr33",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT19-CE7.a",
+      "id_ce": "CE7.a",
+      "descripcion": "Informe de prácticas Pr33",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT19-CE7.b",
+      "id_ce": "CE7.b",
+      "descripcion": "Informe de prácticas Pr33",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT19-CE7.c",
+      "id_ce": "CE7.c",
+      "descripcion": "Informe de prácticas Pr33",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT19-CE7.d",
+      "id_ce": "CE7.d",
+      "descripcion": "Informe de prácticas Pr33",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT19-CE7.e",
+      "id_ce": "CE7.e",
+      "descripcion": "Informe de prácticas Pr33",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT20-CE7.f",
+      "id_ce": "CE7.f",
+      "descripcion": "Informe de prácticas Pr34",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT20-CE7.g",
+      "id_ce": "CE7.g",
+      "descripcion": "Informe de prácticas Pr34",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT20-CE7.h",
+      "id_ce": "CE7.h",
+      "descripcion": "Informe de prácticas Pr34",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT20-CE7.i",
+      "id_ce": "CE7.i",
+      "descripcion": "Informe de prácticas Pr34",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE5.a",
+      "id_ce": "CE5.a",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE5.b",
+      "id_ce": "CE5.b",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE5.c",
+      "id_ce": "CE5.c",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE5.d",
+      "id_ce": "CE5.d",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE5.e",
+      "id_ce": "CE5.e",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE5.f",
+      "id_ce": "CE5.f",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE6.a",
+      "id_ce": "CE6.a",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE6.b",
+      "id_ce": "CE6.b",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE6.c",
+      "id_ce": "CE6.c",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE6.d",
+      "id_ce": "CE6.d",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE6.e",
+      "id_ce": "CE6.e",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE6.f",
+      "id_ce": "CE6.f",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE6.g",
+      "id_ce": "CE6.g",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.a",
+      "id_ce": "CE7.a",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.b",
+      "id_ce": "CE7.b",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.c",
+      "id_ce": "CE7.c",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.d",
+      "id_ce": "CE7.d",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.e",
+      "id_ce": "CE7.e",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.f",
+      "id_ce": "CE7.f",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.g",
+      "id_ce": "CE7.g",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.h",
+      "id_ce": "CE7.h",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    },
+    {
+      "id_indicador": "ACT21-CE7.i",
+      "id_ce": "CE7.i",
+      "descripcion": "Cuaderno de tareas 3T",
+      "peso": 50,
+      "is_basico": false
+    }
+  ],
+  "df_rubricas": [
+    {
+      "id_rubrica": "RUB-INFORME",
+      "nombre": "Informe de prácticas",
+      "descripcion": "Para calificar los informes de prácticas de laboratorio/taller.",
+      "criterios": [
+        {
+          "id_criterio": "CRIT1",
+          "descripcion": "Contenido técnico y precisión de las medidas",
+          "puntuacion_maxima": 4,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Todas las medidas y cálculos son correctos, con justificación técnica clara",
+              "puntos": 4
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "La mayoría de medidas y cálculos son correctos, con alguna imprecisión menor",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Contiene errores relevantes en medidas o cálculos",
+              "puntos": 1.5
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "El contenido técnico es incorrecto o está ausente",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT2",
+          "descripcion": "Estructura, redacción y uso del vocabulario técnico",
+          "puntuacion_maxima": 3,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Informe bien estructurado, redacción clara y vocabulario técnico correcto",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Estructura y redacción adecuadas con algún fallo puntual",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Estructura confusa o vocabulario técnico impreciso",
+              "puntos": 1
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "Informe desordenado o incompleto",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT3",
+          "descripcion": "Cumplimiento de normativa y prevención de riesgos laborales",
+          "puntuacion_maxima": 3,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Aplica correctamente la normativa (REBT/ICT) y las medidas de PRL en todo el informe",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Aplica la normativa y PRL con alguna omisión menor",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Omite referencias relevantes a normativa o PRL",
+              "puntos": 1
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "No hace referencia a normativa ni a PRL",
+              "puntos": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id_rubrica": "RUB-TAREAS",
+      "nombre": "Cuaderno de tareas",
+      "descripcion": "Para calificar el cuaderno de tareas y ejercicios entregado por trimestre.",
+      "criterios": [
+        {
+          "id_criterio": "CRIT1",
+          "descripcion": "Completitud de las tareas entregadas",
+          "puntuacion_maxima": 4,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Entrega el 100% de las tareas propuestas",
+              "puntos": 4
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Entrega al menos el 75% de las tareas",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Entrega al menos el 50% de las tareas",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "Entrega menos del 50% de las tareas",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT2",
+          "descripcion": "Corrección de las respuestas",
+          "puntuacion_maxima": 4,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Respuestas correctas y bien justificadas en todos los casos",
+              "puntos": 4
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Respuestas mayoritariamente correctas, con algún error puntual",
+              "puntos": 3
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Respuestas con errores frecuentes o poco justificadas",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV4",
+              "descripcion": "Respuestas mayoritariamente incorrectas",
+              "puntos": 0
+            }
+          ]
+        },
+        {
+          "id_criterio": "CRIT3",
+          "descripcion": "Orden, presentación y puntualidad en la entrega",
+          "puntuacion_maxima": 2,
+          "niveles": [
+            {
+              "id_nivel": "NIV1",
+              "descripcion": "Cuaderno ordenado, limpio y entregado en plazo",
+              "puntos": 2
+            },
+            {
+              "id_nivel": "NIV2",
+              "descripcion": "Cuaderno con alguna carencia de orden o entregado con retraso justificado",
+              "puntos": 1
+            },
+            {
+              "id_nivel": "NIV3",
+              "descripcion": "Cuaderno desordenado o entregado fuera de plazo sin justificar",
+              "puntos": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "medidas_inclusion": [
+    "NIVEL",
+    "AGRUP",
+    "TIEMPO",
+    "MATERIAL"
+  ],
+  "texto_inclusion_libre": "Se prestará especial atención a las necesidades individuales, adaptando los recursos y los tiempos a los ACNEAE identificados en el grupo. Las actividades estarán diseñadas con múltiples niveles de dificultad para permitir el éxito de todo el alumnado.",
+  "instrumentos_seleccionados": [
+    "PRU-OBJ",
+    "PRU-EJEC",
+    "RUBR",
+    "COTEJO"
+  ],
+  "metodologias_seleccionadas": [
+    "ABP",
+    "FLIP",
+    "SIM",
+    "COLAB"
+  ],
+  "texto_metodologia_libre": "La metodología didáctica se basará en el aprendizaje significativo, partiendo de los conocimientos previos del alumnado y promoviendo su participación activa. Se emplearán recursos digitales, herramientas colaborativas y simuladores para acercar el aprendizaje al entorno profesional real.",
+  "medidas_contingencia": [
+    "CONT-ASINC",
+    "CONT-AUT"
+  ],
+  "texto_contingencia_libre": "En caso de suspensión de las clases presenciales, la docencia continuará de forma telemática a través del entorno virtual de aprendizaje, con sesiones de resolución de dudas mediante videoconferencia y entrega de tareas asíncronas.",
+  "texto_contextualizacion_libre": "",
+  "textos_pd_caracteristicas_alumnado": "",
+  "__version__": 24,
+  "tipo": "pd",
+  "plantilla": true
+}
