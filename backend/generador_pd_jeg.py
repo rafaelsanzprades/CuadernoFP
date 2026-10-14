@@ -415,7 +415,7 @@ def _build_context(data: dict) -> dict:
     context["medio_evaluacion"] = config.get("medio_evaluacion",
         ", ".join(inst_list) if isinstance(inst_list, list) else "")
     context["tipo_actividad"] = config.get("tipo_actividad",
-        ", ".join(set(a.get("Tipo", "") for a in data.get("df_act", []) if a.get("Tipo"))) if data.get("df_act") else "")
+        ", ".join(dict.fromkeys(a.get("Tipo", "") for a in data.get("df_act", []) if a.get("Tipo"))) if data.get("df_act") else "")
     context["actividad_evaluacion"] = config.get("actividad_evaluacion",
         config.get("D2_actividades_ea", ""))
     context["actividad_temporizacion"] = config.get("actividad_temporizacion",
