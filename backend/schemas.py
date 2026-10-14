@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Optional, Dict, Any, List
 
 class Sesion(BaseModel):
@@ -118,4 +118,13 @@ class ChatMessage(BaseModel):
     parts: str | list
 
 class ChatRequest(BaseModel):
-    messages: List[ChatMessage]
+    # tope de tamaño: el chat usa la clave de Gemini del servidor
+    messages: List[ChatMessage] = Field(max_length=30)
+
+    @field_validator("messages")
+    @classmethod
+    def _limitar_tamano(cls, v):
+        total = sum(len(m.parts) if isinstance(m.parts, str) else len(str(m.parts)) for m in v)
+        if total > 5_000_000:
+            raise ValueError("Mensaje demasiado grande")
+        return v

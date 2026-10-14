@@ -1,11 +1,17 @@
 import logging
-from fastapi import APIRouter, UploadFile, Form, HTTPException, Body
+from fastapi import APIRouter, UploadFile, Form, HTTPException, Body, Request
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from services.pdf_extractor import extract_text_from_pdf
 from services.llm_parser import parse_curriculum
 from services.chatbot import get_chatbot_response
 from schemas import ChatRequest
 
 logger = logging.getLogger("cdd-pro.ai_assistant")
+
+# El chat usa la clave de Gemini del servidor: límite estricto por IP para que no se
+# pueda gastar la cuota desde fuera (el límite general es de 100 por minuto).
+limiter = Limiter(key_func=get_remote_address)
 
 router = APIRouter(
     prefix="/api/ai",
@@ -43,9 +49,10 @@ async def parse_curriculum_endpoint(
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/chat")
-async def chat_endpoint(request: ChatRequest = Body(...)):
+@limiter.limit("10/minute")
+async def chat_endpoint(request: Request, chat: ChatRequest = Body(...)):
     try:
-        messages = [msg.model_dump() for msg in request.messages]
+        messages = [msg.model_dump() for msg in chat.messages]
         reply = get_chatbot_response(messages)
         return {
             "status": "success",

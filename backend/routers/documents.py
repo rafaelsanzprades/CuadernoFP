@@ -24,7 +24,7 @@ def get_safe_path(requested_path: str) -> str:
     clean_path = requested_path.strip("/")
     target_path = os.path.abspath(os.path.join(BASE_DOCS_DIR, clean_path))
     
-    if not target_path.startswith(BASE_DOCS_DIR):
+    if os.path.commonpath([BASE_DOCS_DIR, target_path]) != BASE_DOCS_DIR:
         raise HTTPException(status_code=403, detail="Acceso denegado: Path traversal detectado.")
     return target_path
 
