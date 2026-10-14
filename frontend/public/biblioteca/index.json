@@ -1,3 +1,16 @@
 {
-  "programaciones": []
+  "programaciones": [
+    {
+      "id": "0237-ICTVE-aragon-202526",
+      "archivo": "0237-ICTVE-aragon-202526.fpp",
+      "familia": "Electricidad y Electrónica",
+      "titulo": "ELE203 - Instalaciones de Telecomunicaciones",
+      "modulo": "0237 - Infraestructuras comunes de telecomunicación en viviendas y edificios",
+      "comunidad": "Aragón",
+      "curso": "2025-26",
+      "autoria": "Rafael Sanz Prades",
+      "licencia": "CC BY-NC-SA 4.0",
+      "estado": "disponible"
+    }
+  ]
 }

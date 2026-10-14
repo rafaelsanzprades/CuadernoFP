@@ -542,6 +542,8 @@
       "importados": "Importáronse {{count}} estudantes."
     },
     "archivos": {
+      "bibliotecaImportada": "Programación importada. Adáptaa ao teu centro e gárdaa co teu nome.",
+      "bibliotecaError": "Non se puido importar a programación.",
       "plantillaExportada": "Modelo descargado, sen centro, profesorado nin datos do grupo.",
       "abrirCursoViaGrupo": "Para abrir un curso de forma segura, fai dobre clic no seu grupo asociado na primeira columna.",
       "cambiadoDemo": "Cambiado a datos demo.",
@@ -719,6 +721,8 @@
       "perfilProfesionalTendencias": "Tendencias"
     },
     "archivos": {
+      "bibliotecaImportar": "Importar da biblioteca",
+      "bibliotecaUsar": "Usar",
       "exportarPlantilla": "Exportar como modelo",
       "cambiarCarpetaLocal": "Cambiar cartafol local",
       "cargarDatosDemo": "Cargar datos demo",
@@ -1005,6 +1009,7 @@
       "grupoEvaluacionGev": "Grupo de avaliación (GEv)"
     },
     "archivos": {
+      "bibliotecaImportar": "Programacións compartidas por outros docentes, como punto de partida. Sen datos do centro nin do alumnado.",
       "exportarPlantilla": "Descarga unha copia para compartir: sen o teu nome, o centro, a localidade nin o contexto do grupo. O alumnado e as notas nunca van na programación.",
       "creaCursoGrupo": "Crea un curso e o seu arquivo de grupo asociado",
       "guardarComo": "Gardar como...",
@@ -2774,6 +2779,11 @@
       "cargandoDatosProgreso": "Cargando datos de progreso académico..."
     },
     "inicio": {
+      "bibliotecaTitulo": "Biblioteca de programacións",
+      "bibliotecaConfirmar": "Substituirá a programación aberta. Se tes cambios sen gardar, perderanse. Continuar?",
+      "bibliotecaSinConexion": "Non se puido cargar a biblioteca.",
+      "bibliotecaVacia": "Aínda non hai programacións publicadas.",
+      "bibliotecaAutoria": "Autoría",
       "empiezaAquiTitulo": "Comeza aquí",
       "grupoTelegramTitulo": "Grupo oficial de Telegram",
       "grupoTelegramDesc": "Grupo oficial de desenvolvemento e probas da app web gratuíta de Cuaderno FP. Envía as túas suxestións, informa de erros ou colabora achegando o currículo oficial da túa comunidade autónoma.",
