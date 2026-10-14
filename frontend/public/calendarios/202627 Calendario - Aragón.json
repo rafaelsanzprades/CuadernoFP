@@ -3,12 +3,22 @@
   "nombre": "202627 Calendario - Aragón",
   "curso": "2026-27",
   "comunidad": "Aragón",
-  "ambito": "Grados D y E de Formación Profesional, modalidad presencial",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
   "fuente": {
     "titulo": "Resolución de 29 de abril de 2025, del Director General de Planificación, Centros y Formación Profesional, por la que se aprueban los calendarios escolares de los cursos 2025-2026 y 2026-2027 (BOA núm. 88, de 12 de mayo de 2025), apartados decimotercero, decimosexto, decimoséptimo y decimoctavo",
     "url": "https://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VEROBJ&MLKOB=1392479120808",
     "consultado": "2026-10-14"
   },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
   "info_fechas": {
     "ini_curso": "2026-09-10",
     "fin_curso": "2027-06-18"
@@ -16,15 +26,15 @@
   "festivos": [
     {
       "fecha": "2026-10-12",
-      "nombre": "Fiesta nacional"
+      "nombre": "Fiesta Nacional de España"
     },
     {
       "fecha": "2026-11-02",
-      "nombre": "Festivo (en sustitución de Todos los Santos)"
+      "nombre": "Día siguiente a Todos los Santos"
     },
     {
       "fecha": "2026-12-07",
-      "nombre": "Festivo (en sustitución del Día de la Constitución)"
+      "nombre": "Lunes siguiente al Día de la Constitución"
     },
     {
       "fecha": "2026-12-08",
@@ -32,7 +42,7 @@
     },
     {
       "fecha": "2027-04-23",
-      "nombre": "Día de Aragón"
+      "nombre": "San Jorge/Día de Aragón"
     }
   ],
   "periodos": [
@@ -97,6 +107,6 @@
     "La modalidad semipresencial y virtual empieza el 1 de octubre de 2026.",
     "El curso tiene 173 días lectivos en Grados D y E de FP presencial.",
     "La finalización de las actividades lectivas del Grado D puede ser posterior si el Servicio Provincial autoriza la formación en empresa fuera de los periodos del Decreto 91/2024.",
-    "Los dos festivos locales de cada localidad no están incluidos: los comunica el Ayuntamiento y los añade cada docente."
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
   ]
 }

@@ -1,0 +1,56 @@
+{
+  "id": "202627-cataluna",
+  "nombre": "202627 Calendario - Cataluña",
+  "curso": "2026-27",
+  "comunidad": "Cataluña",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Ordre EDF/66/2026, de 22 d'abril, per la qual s'estableix el calendari escolar dels cursos 2026-2027, 2027-2028 i 2028-2029 (DOGC núm. 9653, de 27-04-2026), artículo 8",
+    "url": "https://educacio.paeria.cat/ca/escolaritzacio/copy_of_calendari-escolar/ordre-edf662026-de-22-dabril-per-la-qual-sestableix-el-calendari-escolar-dels-cursos-2026-2027-2027-2028-2028-2029.pdf",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-14"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-06-24",
+      "nombre": "Día de San Juan"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-22",
+      "hasta": "2027-01-07",
+      "nombre": "Nadal"
+    },
+    {
+      "desde": "2027-03-20",
+      "hasta": "2027-03-29",
+      "nombre": "Setmana Santa"
+    }
+  ],
+  "notas": [
+    "La orden fija que el curso de FP empieza, como máximo, el 14 de septiembre de 2026; el final lo fija cada centro según su programación y la estancia en empresa.",
+    "Cada centro puede establecer cuatro días festivos de libre disposición, repartidos entre los tres trimestres.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

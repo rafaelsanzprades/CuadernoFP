@@ -1,0 +1,85 @@
+{
+  "id": "202627-castilla-la-mancha",
+  "nombre": "202627 Calendario - Castilla-La Mancha",
+  "curso": "2026-27",
+  "comunidad": "Castilla-La Mancha",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Orden 79/2026, de 26 de mayo, por la que se establece el calendario escolar para el curso 2026/2027 (DOCM núm. 104, de 3 de junio de 2026), aplicada en la resolución de cada Delegación Provincial",
+    "url": "https://educacion.castillalamancha.es/sites/default/files/2026-06/TOLEDO%20-%20RESOLUCION%20CALENDARIO%20ESCOLAR%20PROVINCIAL%202026-2027%20TOLEDO.pdf",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-08",
+    "fin_curso": "2027-06-22"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-11-02",
+      "nombre": "Día siguiente a Todos los Santos"
+    },
+    {
+      "fecha": "2026-11-20",
+      "nombre": "Día de la Enseñanza"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-02-08",
+      "nombre": "Día de libre disposición (Carnaval)"
+    },
+    {
+      "fecha": "2027-02-09",
+      "nombre": "Día de libre disposición (Carnaval)"
+    },
+    {
+      "fecha": "2027-05-27",
+      "nombre": "Corpus Christi"
+    },
+    {
+      "fecha": "2027-05-28",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-05-31",
+      "nombre": "Día de Castilla-La Mancha"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-23",
+      "hasta": "2027-01-08",
+      "nombre": "Descanso entre el primer y el segundo trimestre"
+    },
+    {
+      "desde": "2027-03-22",
+      "hasta": "2027-03-29",
+      "nombre": "Descanso entre el segundo y el tercer trimestre"
+    }
+  ],
+  "notas": [
+    "Los cursos de especialización de FP empiezan el 28 de septiembre de 2026, y la FP virtual el 13 de octubre de 2026.",
+    "Las cinco Delegaciones Provinciales publican su resolución con las mismas fechas generales; consulta la tuya para las localidades.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

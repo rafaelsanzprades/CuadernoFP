@@ -1,0 +1,69 @@
+{
+  "id": "202627-galicia",
+  "nombre": "202627 Calendario - Galicia",
+  "curso": "2026-27",
+  "comunidad": "Galicia",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Orde do 4 de xuño de 2026 pola que se aproba o calendario escolar para o curso 2026/27 (DOG núm. 110, do 15-06-2026)",
+    "url": "https://www.edu.xunta.gal/centros/cpicovaterrena/system/files/OrdeCalendario2627.pdf",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-09",
+    "fin_curso": "2027-06-21"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Día do Ensino"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-03-19",
+      "nombre": "San José"
+    },
+    {
+      "fecha": "2027-05-17",
+      "nombre": "Día de las Letras Gallegas"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-22",
+      "hasta": "2027-01-07",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-02-08",
+      "hasta": "2027-02-10",
+      "nombre": "Entroido"
+    },
+    {
+      "desde": "2027-03-22",
+      "hasta": "2027-03-29",
+      "nombre": "Semana Santa"
+    }
+  ],
+  "notas": [
+    "En el segundo curso de los ciclos de FP las clases terminan el 15 de junio de 2027.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

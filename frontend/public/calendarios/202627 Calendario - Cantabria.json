@@ -1,0 +1,163 @@
+{
+  "id": "202627-cantabria",
+  "nombre": "202627 Calendario - Cantabria",
+  "curso": "2026-27",
+  "comunidad": "Cantabria",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Orden EDU/10/2026, de 24 de marzo, por la que se establece el calendario escolar para el curso 2026-2027 (BOC núm. 75, de 21 de abril de 2026, CVE-2026-3151)",
+    "url": "https://www.laboral-social.com/sites/laboral-social.com/files/calendario-escolar-cantabria-2026-2027.pdf",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-09",
+    "fin_curso": "2027-06-24"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-09-15",
+      "nombre": "La Bien Aparecida"
+    },
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-11-02",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-11-03",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-11-04",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-11-05",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-11-06",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Lunes siguiente al Día de la Constitución"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2026-12-23",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-12-24",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-12-25",
+      "nombre": "Natividad del Señor"
+    },
+    {
+      "fecha": "2026-12-28",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-12-29",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-12-30",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2026-12-31",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-01-01",
+      "nombre": "Año Nuevo"
+    },
+    {
+      "fecha": "2027-01-04",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-01-05",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-01-06",
+      "nombre": "Epifanía del Señor"
+    },
+    {
+      "fecha": "2027-01-07",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-01-08",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-02-10",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-02-11",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-02-12",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-03-22",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-03-23",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-03-24",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-03-25",
+      "nombre": "Jueves Santo"
+    },
+    {
+      "fecha": "2027-03-26",
+      "nombre": "Viernes Santo"
+    },
+    {
+      "fecha": "2027-05-03",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-05-04",
+      "nombre": "Día no lectivo"
+    }
+  ],
+  "periodos": [],
+  "notas": [
+    "La orden no fija vacaciones como periodos, sino una lista de días no lectivos; juntos con los festivos forman las vacaciones de Navidad y de Semana Santa.",
+    "El 30 de enero de 2027 se conmemora el Día del Docente.",
+    "El calendario de la FP se ajusta a las horas de cada ciclo: no se garantiza con un número fijo de días lectivos.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}

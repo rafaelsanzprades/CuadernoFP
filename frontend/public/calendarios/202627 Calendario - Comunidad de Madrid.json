@@ -1,0 +1,84 @@
+{
+  "id": "202627-comunidad-de-madrid",
+  "nombre": "202627 Calendario - Comunidad de Madrid",
+  "curso": "2026-27",
+  "comunidad": "Comunidad de Madrid",
+  "ambito": "Formación Profesional (ciclos de grado medio y superior), modalidad presencial",
+  "fuente": {
+    "titulo": "Orden 2034/2026, de 25 de mayo, de la Consejería de Educación, Ciencia y Universidades, por la que se aprueba el calendario escolar del curso 2026-2027 (BOCM núm. 131, de 4 de junio de 2026)",
+    "url": "https://www.bocm.es/boletin/CM_Orden_BOCM/2026/06/04/BOCM-20260604-13.PDF",
+    "consultado": "2026-10-14"
+  },
+  "fuente_festivos": [
+    {
+      "titulo": "Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2026 (BOE núm. 259, de 28-10-2025)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-21667"
+    },
+    {
+      "titulo": "Resolución de 8 de octubre de 2026, de la Dirección General de Trabajo, por la que se publica la relación de fiestas laborales para el año 2027 (BOE núm. 254, de 13-10-2026)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-21254"
+    }
+  ],
+  "info_fechas": {
+    "ini_curso": "2026-09-08",
+    "fin_curso": "2027-06-18"
+  },
+  "festivos": [
+    {
+      "fecha": "2026-10-12",
+      "nombre": "Fiesta Nacional de España"
+    },
+    {
+      "fecha": "2026-11-02",
+      "nombre": "Día siguiente a Todos los Santos"
+    },
+    {
+      "fecha": "2026-12-07",
+      "nombre": "Lunes siguiente al Día de la Constitución"
+    },
+    {
+      "fecha": "2026-12-08",
+      "nombre": "Inmaculada Concepción"
+    },
+    {
+      "fecha": "2027-01-07",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-01-08",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-02-12",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-02-15",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-03-19",
+      "nombre": "Día no lectivo"
+    },
+    {
+      "fecha": "2027-03-29",
+      "nombre": "Día no lectivo"
+    }
+  ],
+  "periodos": [
+    {
+      "desde": "2026-12-23",
+      "hasta": "2027-01-06",
+      "nombre": "Navidad"
+    },
+    {
+      "desde": "2027-03-20",
+      "hasta": "2027-03-28",
+      "nombre": "Semana Santa"
+    }
+  ],
+  "notas": [
+    "Las festividades locales de cada municipio se publican en el BOCM.",
+    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+  ]
+}
