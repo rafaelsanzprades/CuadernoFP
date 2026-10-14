@@ -72,9 +72,10 @@ def test_put_module_disabled():
     assert "Local-First Architecture" in data["detail"]
 
 
-def test_backup_endpoint():
-    """Test backup endpoint"""
-    response = client.post("/admin/backup")
+def test_backup_endpoint(monkeypatch):
+    """Test backup endpoint (exige el token de administración)"""
+    monkeypatch.setenv("CDD_ADMIN_TOKEN", "token-de-prueba")
+    response = client.post("/admin/backup", headers={"X-Admin-Token": "token-de-prueba"})
     assert response.status_code in [200, 500]
     data = response.json()
     assert "status" in data

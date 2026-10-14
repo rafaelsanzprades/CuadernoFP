@@ -1,5 +1,6 @@
 import sys
 import os
+import secrets
 import logging
 
 # MUST be first: add backend/ to path before ANY other imports.
@@ -47,11 +48,17 @@ async def lifespan(app: FastAPI):
     yield
     task.cancel()
 
+# /docs, /redoc y /openapi.json describen todas las rutas del servidor: solo se
+# publican si se pide expresamente (CDD_ENABLE_DOCS=1), no en producción.
+_docs = os.environ.get("CDD_ENABLE_DOCS") == "1"
 app = FastAPI(
     title="Cuaderno FP API",
     description="Backend for the Cuaderno FP Next.js app",
     version="1.0.0",
     lifespan=lifespan,
+    docs_url="/docs" if _docs else None,
+    redoc_url="/redoc" if _docs else None,
+    openapi_url="/openapi.json" if _docs else None,
 )
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/minute"])
@@ -97,7 +104,15 @@ def health_check():
     return {"status": "healthy"}
 
 @app.post("/admin/backup")
-def trigger_backup():
+def trigger_backup(request: Request):
+    # Solo con el token de administración (CDD_ADMIN_TOKEN) en la cabecera
+    # X-Admin-Token. Sin token configurado la ruta no existe (404), para que
+    # en producción no la pueda lanzar cualquiera.
+    token = os.environ.get("CDD_ADMIN_TOKEN", "")
+    if not token:
+        return JSONResponse(status_code=404, content={"detail": "Not Found"})
+    if not secrets.compare_digest(request.headers.get("x-admin-token", ""), token):
+        return JSONResponse(status_code=403, content={"detail": "Forbidden"})
     success = perform_backup()
     if success:
         return {"status": "ok", "message": "Backup created successfully"}
