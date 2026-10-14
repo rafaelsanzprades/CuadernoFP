@@ -19,24 +19,25 @@
 //   casos es ruido, en el peor cachea agresivamente por encima de cómo
 //   Tauri sirve sus propios assets empaquetados.
 import withPWAInit from "@ducanh2912/next-pwa";
-import { execSync } from "child_process";
+import { readFileSync } from "fs";
 
 const withPWA = withPWAInit({
   dest: "public",
   disable: true,
 });
 
-let commitDate = "";
+// Versión visible: la misma del instalador (src-tauri/tauri.conf.json, p. ej.
+// 26.10.11 -> 2026.10.11), para que coincida con el nombre del release en GitHub.
+let appVersion = "unknown";
 try {
-  commitDate = execSync('git log -1 --format=%cd --date=format:"%Y%m%d"').toString().trim();
-} catch (e) {
-  commitDate = "unknown";
-}
+  const v = JSON.parse(readFileSync(new URL("../src-tauri/tauri.conf.json", import.meta.url), "utf8")).version;
+  appVersion = /^\d{2}\./.test(v) ? "20" + v : v;
+} catch (e) {}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    NEXT_PUBLIC_APP_VERSION: commitDate,
+    NEXT_PUBLIC_APP_VERSION: appVersion,
   },
   output: "export",
   turbopack: {},
