@@ -1,0 +1,222 @@
+{
+ "curso": "2026-27",
+ "consultado": "2026-10-14",
+ "comunidades": [
+  {
+   "comunidad": "Andalucía",
+   "norma": "Resoluciones de cada Delegación Territorial (el calendario se fija por provincia)",
+   "boletin": "BOJA provincial",
+   "enlaces": [],
+   "nota": "Cada provincia publica su propia resolución: hay que importar la de tu provincia."
+  },
+  {
+   "comunidad": "Aragón",
+   "norma": "Resolución de 29 de abril de 2025, del Director General de Planificación, Centros y Formación Profesional (cursos 2025-26 y 2026-27)",
+   "boletin": "BOA núm. 88, de 12-05-2025",
+   "enlaces": [
+    {
+     "texto": "Portal de Educaragón",
+     "url": "https://educa.aragon.es/calendario-escolar"
+    },
+    {
+     "texto": "Texto en el BOA",
+     "url": "https://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VEROBJ&MLKOB=1392479120808"
+    }
+   ],
+   "calendario": "202627-calendario-aragon"
+  },
+  {
+   "comunidad": "Asturias",
+   "norma": "Resolución de 13 de mayo de 2026, de la Consejería de Educación",
+   "boletin": "BOPA núm. 103, de 01-06-2026",
+   "enlaces": [
+    {
+     "texto": "Texto en el BOPA",
+     "url": "https://www.asturias.es/bopa/2026/06/01/2026-04361.pdf"
+    }
+   ]
+  },
+  {
+   "comunidad": "Illes Balears",
+   "norma": "Resolución del conseller de 27 de marzo de 2026 (BOIB núm. 41, de 31-03-2026), modificada por la Resolución de 19 de junio de 2026",
+   "boletin": "BOIB núm. 82, de 30-06-2026 (modificación)",
+   "enlaces": [
+    {
+     "texto": "Modificación en el BOIB",
+     "url": "https://intranet.caib.es/eboibfront/pdf/ca/2026/82/1222865"
+    }
+   ]
+  },
+  {
+   "comunidad": "Canarias",
+   "norma": "Resolución n.º 73/2026, de 28 de mayo, conjunta de las Viceconsejerías de Educación y de FP (calendario escolar e instrucciones generales)",
+   "boletin": "",
+   "enlaces": [],
+   "nota": "Pendiente de localizar el texto oficial."
+  },
+  {
+   "comunidad": "Cantabria",
+   "norma": "Orden EDU/10/2026, de 24 de marzo, de la Consejería de Educación, Formación Profesional y Universidades",
+   "boletin": "BOC núm. 75, de 21-04-2026 (CVE-2026-3151)",
+   "enlaces": [],
+   "nota": "Pendiente de enlazar el texto oficial."
+  },
+  {
+   "comunidad": "Castilla y León",
+   "norma": "Orden EDU/478/2026, de 25 de mayo, de la Consejería de Educación",
+   "boletin": "BOCYL de 28-05-2026",
+   "enlaces": [
+    {
+     "texto": "Portal de Educación de Castilla y León",
+     "url": "https://www.educa.jcyl.es/es/calendario-escolar"
+    }
+   ]
+  },
+  {
+   "comunidad": "Castilla-La Mancha",
+   "norma": "Orden 79/2026, de 26 de mayo, de la Consejería de Educación, Cultura y Deportes, y una resolución de cada provincia",
+   "boletin": "DOCM núm. 104, de 03-06-2026",
+   "enlaces": [
+    {
+     "texto": "Albacete",
+     "url": "https://educacion.castillalamancha.es/sites/default/files/2026-06/ALBACETE%20-%20RESOLUCION%20CALENDARIO%20ESCOLAR%20PROVINCIAL%202026-2027%20ALBACETE.pdf"
+    },
+    {
+     "texto": "Ciudad Real",
+     "url": "https://educacion.castillalamancha.es/sites/default/files/2026-06/RESOLUCI%C3%93N%20CALENDARIO%20ESCOLAR%20PROVINCIAL%20CIUDAD%20REAL%2026-27.pdf"
+    },
+    {
+     "texto": "Cuenca",
+     "url": "https://educacion.castillalamancha.es/sites/default/files/2026-06/CUENCA%20-%20RESOLUCION%20CALENDARIO%20ESCOLAR%20PROVINCIAL%202026-2027%20CUENCA.pdf"
+    },
+    {
+     "texto": "Guadalajara",
+     "url": "https://educacion.castillalamancha.es/sites/default/files/2026-06/GUADALAJARA%20-%20RESOLUCION%20CALENDARIO%20ESCOLAR%20PROVINCIAL%202026-2027%20GUADALAJARA.pdf"
+    },
+    {
+     "texto": "Toledo",
+     "url": "https://educacion.castillalamancha.es/sites/default/files/2026-06/TOLEDO%20-%20RESOLUCION%20CALENDARIO%20ESCOLAR%20PROVINCIAL%202026-2027%20TOLEDO.pdf"
+    }
+   ],
+   "nota": "Resoluciones provinciales publicadas por la Consejería."
+  },
+  {
+   "comunidad": "Cataluña",
+   "norma": "Ordre EDF/66/2026, de 22 d'abril (calendario de los cursos 2026-27, 2027-28 y 2028-29)",
+   "boletin": "DOGC núm. 9653, de 27-04-2026 (CVE-DOGC-A-26113047-2026)",
+   "enlaces": [
+    {
+     "texto": "Texto del DOGC (copia)",
+     "url": "https://educacio.paeria.cat/ca/escolaritzacio/copy_of_calendari-escolar/ordre-edf662026-de-22-dabril-per-la-qual-sestableix-el-calendari-escolar-dels-cursos-2026-2027-2027-2028-2028-2029.pdf"
+    }
+   ]
+  },
+  {
+   "comunidad": "Comunitat Valenciana",
+   "norma": "Resolución de 15 de junio de 2026, de la Dirección General de Centros Docentes",
+   "boletin": "DOGV núm. 10387, de 18-06-2026 (CVE DOGV-C-2026-20810)",
+   "enlaces": [
+    {
+     "texto": "Texto en el DOGV",
+     "url": "https://dogv.gva.es/datos/2026/06/18/pdf/2026_20810_es.pdf"
+    }
+   ]
+  },
+  {
+   "comunidad": "Extremadura",
+   "norma": "Resolución de 15 de junio de 2026, de la Secretaría General de Educación",
+   "boletin": "DOE núm. 116, de 18-06-2026",
+   "enlaces": [
+    {
+     "texto": "Texto en el DOE",
+     "url": "https://doe.juntaex.es/pdfs/doe/2026/1160o/26061567.pdf"
+    }
+   ]
+  },
+  {
+   "comunidad": "Galicia",
+   "norma": "Orde do 4 de xuño de 2026, da Consellería de Educación, Formación Profesional, Ciencia e Universidades",
+   "boletin": "DOG núm. 110, do 15-06-2026",
+   "enlaces": [
+    {
+     "texto": "Texto del DOG (copia)",
+     "url": "https://www.edu.xunta.gal/centros/cpicovaterrena/system/files/OrdeCalendario2627.pdf"
+    }
+   ]
+  },
+  {
+   "comunidad": "Comunidad de Madrid",
+   "norma": "Orden 2034/2026, de 25 de mayo, de la Consejería de Educación, Ciencia y Universidades",
+   "boletin": "BOCM núm. 131, de 04-06-2026",
+   "enlaces": [
+    {
+     "texto": "Texto en el BOCM",
+     "url": "https://www.bocm.es/boletin/CM_Orden_BOCM/2026/06/04/BOCM-20260604-13.PDF"
+    }
+   ]
+  },
+  {
+   "comunidad": "Región de Murcia",
+   "norma": "Resolución de 8 de junio de 2026, de la Dirección General de Centros Educativos e Infraestructuras (modificada el 12 de julio de 2026)",
+   "boletin": "BORM de 11-06-2026",
+   "enlaces": [],
+   "nota": "Pendiente de enlazar el texto oficial."
+  },
+  {
+   "comunidad": "Navarra",
+   "norma": "Instrucciones del Departamento de Educación para elaborar el calendario escolar 2026-27",
+   "boletin": "",
+   "enlaces": [],
+   "nota": "No se ha localizado la resolución en el BON."
+  },
+  {
+   "comunidad": "País Vasco",
+   "norma": "Resoluciones del Departamento de Educación, una por tipo de centro (cada centro concreta sus días)",
+   "boletin": "Euskadi.eus",
+   "enlaces": [
+    {
+     "texto": "Resolución de Infantil y Primaria",
+     "url": "https://www.euskadi.eus/contenidos/informacion/cee_organizacioncentros_calend/es_def/adjuntos/2026_2027/Resolucion-calendario-Primaria-2026_27-cast-.pdf"
+    }
+   ],
+   "nota": "Para FP consulta el calendario de tu centro."
+  },
+  {
+   "comunidad": "La Rioja",
+   "norma": "Resolución 34/2026, de 14 de abril, de la Consejería de Educación",
+   "boletin": "BOR",
+   "enlaces": [
+    {
+     "texto": "Portal de Educación de La Rioja",
+     "url": "https://www.larioja.org/edu-orden-academica/en/accesos-directos/calendario-escolar"
+    }
+   ]
+  },
+  {
+   "comunidad": "Ceuta",
+   "norma": "Calendario escolar 2026-27 de la Dirección Provincial de Ceuta (Ministerio de Educación, FP y Deportes)",
+   "boletin": "",
+   "enlaces": [
+    {
+     "texto": "Calendario de Ceuta",
+     "url": "https://www.educacionfpydeportes.gob.es/dam/jcr:a9cf685a-32f4-480f-8878-c06cae54fc37/26-070-01-calendario-escolar-26-27-v1.pdf"
+    }
+   ]
+  },
+  {
+   "comunidad": "Melilla",
+   "norma": "Resolución de la Dirección General de Planificación y Gestión Educativa por la que se establece el calendario escolar 2026-27 (Ministerio de Educación, FP y Deportes)",
+   "boletin": "",
+   "enlaces": [
+    {
+     "texto": "Resolución",
+     "url": "https://www.educacionfpydeportes.gob.es/gl/dam/jcr:97a96fff-bae7-4388-a5ec-bb6b7e564abc/resolucion-calendario-escolar-26-27.pdf"
+    },
+    {
+     "texto": "Calendario de Melilla",
+     "url": "https://www.educacionfpydeportes.gob.es/dam/jcr:8ad09335-8919-42a7-8bbe-8d4ff54cb6e0/calendario-escolar-26-27.pdf"
+    }
+   ]
+  }
+ ]
+}
