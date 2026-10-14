@@ -2097,6 +2097,7 @@
       "azureClientIdTauriHint": "In the desktop app (Tauri) you need a Client ID registered as \"Mobile and desktop applications\" in Azure, different from the one you use in the browser."
     },
     "dashboard": {
+      "bibliotecaDescripcion": "Or start from a programme shared by other teachers, with no school or student data:",
       "altaBajaAlumnado": "Student enrollment and withdrawal",
       "alumnadoCsvAyuda": "Import a CSV with name/Surname columns (and optionally email) to start with the roster already populated, or skip it and add it later in Students.",
       "alumnadoOpcional": "Students (optional)",

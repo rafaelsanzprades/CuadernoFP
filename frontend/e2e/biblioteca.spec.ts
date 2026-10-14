@@ -9,7 +9,7 @@ test.describe('Biblioteca de programaciones', () => {
     await page.getByRole('button', { name: 'Importar de la biblioteca' }).click();
     await expect(page.getByText('Rafael Sanz Prades').first()).toBeVisible();
     page.on('dialog', d => { d.accept(); });
-    await page.getByRole('button', { name: 'Usar' }).click();
+    await page.getByRole('button', { name: 'Usar' }).first().click();
     await expect(page.getByText(/Programación importada/)).toBeVisible();
     // el contenido importado no trae ni centro ni profesorado
     const datos = await page.evaluate(async () => {

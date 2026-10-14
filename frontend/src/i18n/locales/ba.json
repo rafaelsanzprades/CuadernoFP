@@ -2097,6 +2097,7 @@
       "azureClientIdTauriHint": "A l'app d'escriptori (Tauri) necessites un Client ID registrat com a \"Mobile and desktop applications\" a Azure, diferent del que fas servir al navegador."
     },
     "dashboard": {
+      "bibliotecaDescripcion": "O parteix d'una programació compartida per altres docents, sense dades de centre ni d'alumnat:",
       "altaBajaAlumnado": "Alta i baixa d'alumnat",
       "alumnadoCsvAyuda": "Importa un CSV amb columnes nom/Cognoms (i opcionalment correu) per començar amb la matrícula ja emplenada, o salta't aquest pas i afegeix-ho després a alumnat.",
       "alumnadoOpcional": "Alumnat (opcional)",

@@ -2097,6 +2097,7 @@
       "azureClientIdTauriHint": "Mahaigaineko aplikazioan (Tauri) Azuren \"Mobile and desktop applications\" gisa erregistratutako Client ID bat behar duzu, nabigatzailekoaz bestelakoa."
     },
     "dashboard": {
+      "bibliotecaDescripcion": "Edo hasi beste irakasleek partekatutako programazio batetik, ikastetxeko eta ikasleen daturik gabe:",
       "altaBajaAlumnado": "Ikasleen alta eta baja",
       "alumnadoCsvAyuda": "Inportatu izena/Abizenak zutabeak dituen CSV bat (eta, aukeran, posta elektronikoa) matrikula jada beteta abiarazteko, edo saltatu eta gero ikasleak atalean gehitu.",
       "alumnadoOpcional": "Ikasleak (aukerakoa)",
