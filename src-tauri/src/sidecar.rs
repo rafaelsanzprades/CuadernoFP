@@ -47,11 +47,14 @@ pub fn spawn_backend(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> 
     // de abajo deja la URL de sqlite con cuatro barras iniciales y rota
     // (`sqlite:////?/C:/...`). db_path ya es absoluta tal cual se construyó.
     log::info!("[backend] DATABASE_URL apunta a: {}", db_path.display());
+    // En la app instalada, `resolve(.., Resource)` devuelve la ruta con el prefijo
+    // verbatim `\\?\` (p. ej. `\\?\C:\Users\..\cdd_pro.db`) y sqlite no abre una
+    // URL construida con él ("unable to open database file", comprobado con el
+    // instalador 26.10.11). Se quita antes de montar la URL.
+    let db_str = db_path.to_string_lossy().into_owned();
+    let db_str = db_str.strip_prefix(r"\\?\").unwrap_or(&db_str);
     // sqlite necesita '/' incluso en Windows dentro de la URL de conexión.
-    let db_url = format!(
-        "sqlite:///{}",
-        db_path.to_string_lossy().replace('\\', "/")
-    );
+    let db_url = format!("sqlite:///{}", db_str.replace('\\', "/"));
     log::info!("[backend] DATABASE_URL = {db_url}");
 
     let sidecar = app
@@ -101,10 +104,23 @@ pub fn spawn_backend(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> 
 }
 
 /// Mata el proceso del backend si sigue vivo -- se llama al cerrar la app
-/// para no dejar `cuadernofp-backend.exe` huérfano.
+/// para no dejar `cuadernofp-backend.exe` huérfano. El .exe es un PyInstaller
+/// en modo onefile: un proceso lanzador y otro hijo con el servidor, y
+/// `child.kill()` solo mata al lanzador, así que en Windows se mata todo el
+/// árbol con `taskkill /T` (si no, queda un servidor de ~150 MB por cada
+/// cierre, con la base de datos abierta, y el instalador no puede
+/// sobrescribir el .exe al actualizar).
 pub fn kill_backend(app: &AppHandle) {
     if let Some(state) = app.try_state::<BackendProcess>() {
         if let Some(child) = state.0.lock().unwrap().take() {
+            #[cfg(windows)]
+            {
+                use std::os::windows::process::CommandExt;
+                let _ = std::process::Command::new("taskkill")
+                    .args(["/PID", &child.pid().to_string(), "/T", "/F"])
+                    .creation_flags(0x0800_0000) // CREATE_NO_WINDOW
+                    .status();
+            }
             let _ = child.kill();
         }
     }
