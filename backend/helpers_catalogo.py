@@ -312,7 +312,15 @@ def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list
                 continue
             suma += n_ra * peso_ra.get(r_id, 0)
             peso_usado += peso_ra.get(r_id, 0)
-        return redondear(suma / peso_usado) if peso_usado > 0 else None
+        if peso_usado <= 0:
+            return None
+        nota = redondear(suma / peso_usado)
+        # Mínimo por RA para compensar (art. 99.4.g del Decreto 91/2024 de Aragón): un RA por debajo no se compensa y el
+        # módulo queda suspenso. Igual que notaFinalPonderada en frontend/src/utils/calificaciones.ts.
+        minimo = config.get("nota_minima_ra")
+        if minimo is not None and any(n is not None and n < minimo for n in notas_ra.values()):
+            return min(nota, config["nota_aprobado"] - 0.1)
+        return nota
 
     instr_by_id = {i["id_instrumento"]: i for i in df_instr if i.get("id_instrumento")}
     cal_alumno = [c for c in df_calificaciones if c.get("id_alumno") == al_id and c.get("valor") is not None]

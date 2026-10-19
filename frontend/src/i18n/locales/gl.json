@@ -922,6 +922,7 @@
       "entornoSocioeconomico": "Ex: O tecido empresarial da zona destaca por...",
       "infraestructura": "Ex: Aula-obradoiro informatizada con 30 postos...",
       "textoIntroduccion": "Parágrafo introdutorio do documento. Se se deixa baleiro, xérase un automaticamente co nome do módulo, ciclo, réxime e duración.",
+      "marcoNormativo": "Normas que se citan na introdución. Se se deixa baleiro, escríbese o marco de Aragón: LO 3/2022, RD 659/2023, Decreto 91/2024 (modificado polo Decreto 107/2025) e a orde de currículo do ciclo.",
       "textoUdsModulo": "Descrición de como se organizan as unidades didácticas. Se se deixa baleiro, xérase automaticamente a partir de df_ud."
     },
     "curriculo": {
@@ -1956,6 +1957,8 @@
       "notaLabel": "Nota:",
       "notaMinimaAprobar": "Nota mínima para aprobar",
       "notaMinimaAprobarDesc": "Nota a partir da cal un RA ou módulo se considera superado (tipicamente 5.0).",
+      "notaMinimaRa": "Cualificación mínima por RA para compensar",
+      "notaMinimaRaDesc": "Se a fixas, un RA con nota por debaixo deste valor non pode compensarse cos demais e o módulo queda suspenso (aplícase ao calcular a nota e recóllese na programación). En Aragón fíxaa o proxecto curricular, entre 3 e 5. Déixaa baleira se a túa comunidade non a esixe.",
       "numTrimestres": "Nº de trimestres",
       "ogTitulo": "Obxectivos xerais (OG)",
       "panelAcneaeDesc": "Rexistro de alumnado con necesidade específica de apoio educativo e as súas adaptacións asociadas.",
@@ -2029,7 +2032,8 @@
       "elencoSituaciones": "Elenco de situacións",
       "circunstanciasOcultas": "Circunstancias ocultas",
       "tituloModeloSimplificado": "Textos do modelo simplificado (pd=)",
-      "avisoModeloSimplificado": "Estes 2 campos son específicos do documento \"Programación suficiente\" (modelo oficial simplificado). Se se deixan baleiros, xérase automaticamente un texto por defecto razoable a partir do resto de datos do módulo.",
+      "avisoModeloSimplificado": "Estes 3 campos son específicos do documento \"Programación suficiente\" (modelo oficial simplificado). Se se deixan baleiros, xérase automaticamente un texto por defecto razoable a partir do resto de datos do módulo.",
+      "marcoNormativo": "Marco normativo",
       "introduccion": "Introdución",
       "udsModulo": "Unidades didácticas do módulo",
       "tituloAutoriaPublicidad": "Datos de autoría e publicidade",

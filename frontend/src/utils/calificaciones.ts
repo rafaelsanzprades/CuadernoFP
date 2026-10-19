@@ -17,6 +17,10 @@ export interface ConfigRedondeo {
   nota_aprobado: number;
   umbral_redondeo: number;
   max_compensables: number;
+  /** Calificación mínima que debe alcanzar cada RA para poder compensarse con los demás (en Aragón, entre 3 y 5, la fija el
+   *  proyecto curricular: art. 99.4.g y 100.2.h del Decreto 91/2024). Vacío = sin mínimo. Si algún RA queda por debajo, el módulo
+   *  no puede superarse. Mismo cálculo en backend/helpers_catalogo.py::calcular_notas_jeg. */
+  nota_minima_ra?: number | null;
 }
 
 export const DEFAULT_CONFIG_REDONDEO: ConfigRedondeo = {
@@ -79,7 +83,11 @@ function notaFinalPonderada(notas_ra: Record<string, number | null>, peso_ra: Re
     pesoUsado += peso_ra[r_id] || 0;
   });
   if (pesoUsado <= 0) return null;
-  return redondear(suma / pesoUsado, config);
+  const nota = redondear(suma / pesoUsado, config);
+  // Mínimo por RA para compensar: un RA por debajo no se compensa con los demás y el módulo queda suspenso
+  const min = config.nota_minima_ra;
+  if (min != null && Object.values(notas_ra).some((n) => n !== null && n < min)) return Math.min(nota, config.nota_aprobado - 0.1);
+  return nota;
 }
 
 /**

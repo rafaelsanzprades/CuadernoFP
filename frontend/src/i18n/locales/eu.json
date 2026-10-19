@@ -922,6 +922,7 @@
       "entornoSocioeconomico": "Adib: Eremuko enpresa-sarea honengatik nabarmentzen da...",
       "infraestructura": "Adib: Informatikoki hornitutako gela-tailerra, 30 postuko...",
       "textoIntroduccion": "Dokumentuaren sarrera-paragrafoa. Hutsik uzten bada, automatikoki sortzen da moduluaren izena, zikloa, araubidea eta iraupena erabiliz.",
+      "marcoNormativo": "Sarreran aipatzen diren arauak. Hutsik uzten bada, Aragoiko esparrua idazten da: 3/2022 LO, 659/2023 EDa, 91/2024 Dekretua (107/2025 Dekretuak aldatua) eta zikloaren curriculum-agindua.",
       "textoUdsModulo": "Unitate didaktikoak nola antolatzen diren azaltzen du. Hutsik uzten bada, automatikoki sortzen da df_ud-tik abiatuta."
     },
     "curriculo": {
@@ -1956,6 +1957,8 @@
       "notaLabel": "Nota:",
       "notaMinimaAprobar": "Gainditzeko gutxieneko nota",
       "notaMinimaAprobarDesc": "RA edo modulu bat gainditutzat jotzen den gutxieneko nota (normalean 5,0).",
+      "notaMinimaRa": "RAko gutxieneko kalifikazioa konpentsatzeko",
+      "notaMinimaRaDesc": "Ezartzen baduzu, balio hau baino azpiko nota duen RA ezin da gainerakoekin konpentsatu eta modulua gaindituta gabe geratzen da (nota kalkulatzean aplikatzen da eta programazioan jasotzen da). Aragoin, curriculum-proiektuak ezartzen du, 3 eta 5 artean. Utzi hutsik zure erkidegoak eskatzen ez badu.",
       "numTrimestres": "Hiruhileko kop.",
       "ogTitulo": "Helburu orokorrak (OG)",
       "panelAcneaeDesc": "Hezkuntza laguntza berariazko beharra duten ikasleen erregistroa eta lotutako egokitzapenak.",
@@ -2029,7 +2032,8 @@
       "elencoSituaciones": "Egoeren zerrenda",
       "circunstanciasOcultas": "Ezkutuko egoerak",
       "tituloModeloSimplificado": "Eredu sinplifikatuaren testuak (pd=)",
-      "avisoModeloSimplificado": "2 eremu hauek \"Programazio nahikoa\" dokumentuari (Eredu sinplifikatu ofiziala) dagozkio berariaz. Hutsik uzten badira, moduluaren gainerako datuetatik abiatuta testu lehenetsi zentzuzko bat automatikoki sortuko da.",
+      "avisoModeloSimplificado": "3 eremu hauek \"Programazio nahikoa\" dokumentuari (Eredu sinplifikatu ofiziala) dagozkio berariaz. Hutsik uzten badira, moduluaren gainerako datuetatik abiatuta testu lehenetsi zentzuzko bat automatikoki sortuko da.",
+      "marcoNormativo": "Arau-esparrua",
       "introduccion": "Sarrera",
       "udsModulo": "Moduluaren unitate didaktikoak",
       "tituloAutoriaPublicidad": "Egiletza- eta publizitate-datuak",

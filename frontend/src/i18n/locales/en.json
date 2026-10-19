@@ -922,6 +922,7 @@
       "entornoSocioeconomico": "E.g.: The business fabric of the area stands out for...",
       "infraestructura": "E.g.: Computerized classroom-workshop with 30 workstations...",
       "textoIntroduccion": "Introductory paragraph of the document. If left empty, one is generated automatically with the module name, cycle, arrangement and duration.",
+      "marcoNormativo": "Regulations cited in the introduction. If left blank, the Aragón framework is written: LO 3/2022, RD 659/2023, Decree 91/2024 (amended by Decree 107/2025) and the cycle's curriculum order.",
       "textoUdsModulo": "Description of how the teaching units are organized. If left empty, it is generated automatically from df_ud."
     },
     "curriculo": {
@@ -1956,6 +1957,8 @@
       "notaLabel": "Grade:",
       "notaMinimaAprobar": "Minimum passing grade",
       "notaMinimaAprobarDesc": "Grade from which an RA or module is considered passed (typically 5.0).",
+      "notaMinimaRa": "Minimum grade per RA to compensate",
+      "notaMinimaRaDesc": "If you set it, an RA graded below this value cannot be offset by the others and the module is failed (it is applied when grades are calculated and is stated in the programming). In Aragón the curricular project sets it, between 3 and 5. Leave it empty if your region does not require it.",
       "numTrimestres": "No. of terms",
       "ogTitulo": "General objectives (OG)",
       "panelAcneaeDesc": "Register of students with specific educational support needs (ACNEAE) and their associated adaptations.",
@@ -2029,7 +2032,8 @@
       "elencoSituaciones": "List of situations",
       "circunstanciasOcultas": "Hidden circumstances",
       "tituloModeloSimplificado": "Simplified model texts (pd=)",
-      "avisoModeloSimplificado": "These 2 fields are specific to the \"Sufficient programming\" document (official simplified model). If left blank, a reasonable default text is auto-generated from the rest of the module's data.",
+      "avisoModeloSimplificado": "These 3 fields are specific to the \"Sufficient programming\" document (official simplified model). If left blank, a reasonable default text is auto-generated from the rest of the module's data.",
+      "marcoNormativo": "Regulatory framework",
       "introduccion": "Introduction",
       "udsModulo": "Teaching units of the module",
       "tituloAutoriaPublicidad": "Authorship and publication details",

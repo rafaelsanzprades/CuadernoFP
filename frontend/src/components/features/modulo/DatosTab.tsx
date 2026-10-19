@@ -427,7 +427,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             max_compensables: 0
           };
           return (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
               <div className="space-y-2">
                 <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
                   {t('campos.modulo.notaMinimaAprobar', {defaultValue: 'Nota mínima para aprobar'})}
@@ -466,6 +466,22 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                   step="1"
                   value={config.max_compensables ?? 0}
                   onChange={(e) => updateModuleData("config_redondeo", { ...config, max_compensables: parseInt(e.target.value) })}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
+                  {t('campos.modulo.notaMinimaRa', {defaultValue: 'Calificación mínima por RA para compensar'})}
+                  <InfoTip align="right">{t('campos.modulo.notaMinimaRaDesc', {defaultValue: 'Si la fijas, un RA con nota por debajo de este valor no puede compensarse con los demás y el módulo queda suspenso (se aplica al calcular la nota y se recoge en la programación). En Aragón la fija el proyecto curricular, entre 3 y 5. Déjala vacía si tu comunidad no la exige.'})}</InfoTip>
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  min={0}
+                  max={10}
+                  value={config.nota_minima_ra ?? ""}
+                  onChange={(e) => updateModuleData("config_redondeo", { ...config, nota_minima_ra: e.target.value === "" ? null : parseFloat(e.target.value) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
               </div>

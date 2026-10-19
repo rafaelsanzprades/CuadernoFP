@@ -924,6 +924,7 @@
       "entornoSocioeconomico": "Ex: El teixit empresarial de la zona destaca per...",
       "infraestructura": "Ex: Aula-taller informatitzada amb 30 llocs...",
       "textoIntroduccion": "Paràgraf introductori del document. Si es deixa buit, es genera un automàticament amb el nom del mòdul, cicle, règim i durada.",
+      "marcoNormativo": "Normes que es citen a la introducció. Si es deixa buit, s'escriu el marc d'Aragó: LO 3/2022, RD 659/2023, Decret 91/2024 (modificat pel Decret 107/2025) i l'ordre de currículum del cicle.",
       "textoUdsModulo": "Descripció de com s'organitzen les unitats didàctiques. Si es deixa buit, es genera automàticament a partir de df_ud."
     },
     "curriculo": {
@@ -1958,6 +1959,8 @@
       "notaLabel": "Nota:",
       "notaMinimaAprobar": "Nota mínima per aprovar",
       "notaMinimaAprobarDesc": "Nota a partir de la qual un RA o mòdul es considera superat (normalment 5.0).",
+      "notaMinimaRa": "Qualificació mínima per RA per compensar",
+      "notaMinimaRaDesc": "Si la fixes, un RA amb nota per sota d'aquest valor no es pot compensar amb la resta i el mòdul queda suspès (s'aplica en calcular la nota i es recull a la programació). A Aragó la fixa el projecte curricular, entre 3 i 5. Deixa-la buida si la teva comunitat no l'exigeix.",
       "numTrimestres": "Núm. de trimestres",
       "ogTitulo": "Objectius generals (OG)",
       "panelAcneaeDesc": "Registre d'alumnat amb necessitat específica de suport educatiu i les seves adaptacions associades.",
@@ -2031,7 +2034,8 @@
       "elencoSituaciones": "Elenc de situacions",
       "circunstanciasOcultas": "Circumstàncies ocultes",
       "tituloModeloSimplificado": "Textos del model simplificat (pd=)",
-      "avisoModeloSimplificado": "Aquests 2 camps són específics del document \"Programació suficient\" (model oficial simplificat). Si es deixen buits, es genera automàticament un text per defecte raonable a partir de la resta de dades del mòdul.",
+      "avisoModeloSimplificado": "Aquests 3 camps són específics del document \"Programació suficient\" (model oficial simplificat). Si es deixen buits, es genera automàticament un text per defecte raonable a partir de la resta de dades del mòdul.",
+      "marcoNormativo": "Marc normatiu",
       "introduccion": "Introducció",
       "udsModulo": "Unitats didàctiques del mòdul",
       "tituloAutoriaPublicidad": "Dades d'autoria i publicitat",
