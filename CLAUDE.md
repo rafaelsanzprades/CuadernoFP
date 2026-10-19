@@ -78,8 +78,18 @@ defensively unwrap with `Array.isArray(...) ? arr[0] : arr` — replicate that g
 `frontend/src/store/useAppStore.ts` composes slices (`authSlice`, `uiSlice`, `moduleSlice`,
 `groupsSlice`, `globalSlice`). Two middlewares wrap the store:
 - `persist` — persists to IndexedDB via `idb-keyval` (not localStorage), key `cdd-store-cache-v3`.
-  Bump the `version` there when changing state shape in a breaking way (there is no real migration,
-  `migrate` just casts).
+  Bump the `version` there when changing state shape in a breaking way (there is no real migration;
+  `migrate` just casts, apart from dropping `encryptionKey` in v4).
+- **Encryption is optional and the key is memory-only.** `encryptionKey` is excluded from `partialize`
+  and must never be persisted. What persists is `cifradoActivo` (this workspace saves encrypted) and
+  `verificadorClave` (a fixed text encrypted with the key, to check a retyped key). All file reads/writes
+  go through `services/cifradoEspacio.ts` (`serializarParaGuardar` / `leerFichero`): if encryption is on
+  and the key is missing it asks via `PedirClaveModal` and **never writes plaintext by accident**;
+  the same text is what goes to Google Drive. Format `CFP2.` + base64 (PBKDF2-SHA256 600k + AES-256-GCM,
+  `services/cifrado.ts`); no support for the old CryptoJS format. The web version's IndexedDB working
+  copy of `moduleData`/`cursoData` is deliberately NOT encrypted (documented for teachers in the Manual
+  1.4.4 / 14.2.4 on rafaelsanzprades.es — keep both in sync when this changes). OneDrive can sign in but
+  nothing uploads to it yet; only Google Drive syncs.
 - `zundo` (`temporal`) — undo/redo, scoped only to `moduleData` / `cursoData` / `globalData`, 1s
   debounce, 20-step history. Use `useTemporalStore` to read undo/redo state.
 
@@ -108,6 +118,27 @@ top-level `pdf_*.py` / `generador_pd_*.py` scripts using ReportLab and docx temp
 anywhere (the app has no external users yet, so there's no legacy data to stay compatible with —
 don't reintroduce a "handle both formats" helper for these; fix the schema/data at the source instead,
 the way `backend/alembic/versions/a1f3c7b9e2d4_*.py` and `b7e2d5f1a9c3_*.py` did).
+
+### Document generation runs on the teacher's machine — never send student data to the server
+`.fpc`/`.fpp` data (names, grades, attendance, ACNEAE notes) must never reach a server we run. Every
+PDF/.docx therefore goes through `frontend/src/services/generarDocumento.ts` (`fetchDocumento`), a
+drop-in for the old `fetch(.../api/pdf?...)`. In the browser it runs the real backend generators with
+**Pyodide** (Python in WebAssembly) inside a Worker (`frontend/public/generadores-worker.js`); under
+Tauri it keeps calling the local sidecar on 127.0.0.1. The generation logic lives in
+`backend/pdf_dispatch.py` (`generar_documento`, no FastAPI/SQLAlchemy imports — keep it that way, it is
+what Pyodide imports); `routers/pdf.py` is a thin HTTP wrapper and `pdf_local.py` is the browser entry
+point. `POST /api/pdf` answers 410 unless `CUADERNOFP_PDF_LOCAL=1`, which only `run_sidecar.py` (the
+desktop app's internal server) and `tests/conftest.py` set: on a public server it must stay closed. Programaciones need the official RA/CE text and title data: the browser asks
+`GET /api/catalog/pd-context/{module_code}` (module code only) and passes the result in.
+`frontend/scripts/preparar-generadores.mjs` (hooks `predev`/`prebuild`, and an explicit step in
+`firebase-deploy.yml` because that workflow runs `next build` directly) downloads Pyodide + wheels and
+copies the backend generator files into `public/pyodide` and `public/generadores` (gitignored, ~30 MB,
+excluded from the PWA precache and cached on first use). **Adding a generator module to `backend/`
+means checking the `FICHERO_BACKEND` regex in that script**, and `backend/tests/test_pdf_dispatch.py`
+covers every document type. Don't add a new `fetch` of `curso_data`/`module_data` to the API. The floating AI chat was removed on
+purpose (free text can carry student names; teachers should use their own AI tool). `/api/ai/chat` remains
+only for the "generate text" buttons (Contexto, Alumnado > rasgos del grupo), which send checked traits
+and aggregate statistics, never names; PDF curriculum import uses the teacher's own API key. Keep it that way.
 
 ### PD (programación didáctica) generation — 3 tiers
 Three docx-template generators, internally called **pd-** (`generador_pd_minima_tpl.py`, template
