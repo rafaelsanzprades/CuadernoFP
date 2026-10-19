@@ -108,3 +108,12 @@ def test_contexto_del_catalogo_para_programaciones(client):
     assert r.status_code == 200
     datos = r.json()["data"]
     assert set(datos) == {"curriculo_data", "grado_info"}
+
+
+def test_endpoint_cerrado_fuera_del_servidor_interno(client, monkeypatch):
+    """En un servidor público /api/pdf no acepta datos: la web genera los documentos en el navegador."""
+    monkeypatch.delenv("CUADERNOFP_PDF_LOCAL", raising=False)
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    r = client.post("/api/pdf?type=matrices", json={"module_data": modulo, "curso_data": curso})
+    assert r.status_code == 410
+    assert "%PDF" not in r.text

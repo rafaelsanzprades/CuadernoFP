@@ -31,6 +31,9 @@ def run_server() -> None:
         db_path = os.path.join(_backend_dir, "cdd_pro.db")
         os.environ["DATABASE_URL"] = f"sqlite:///{db_path}"
 
+    # Servidor interno de la app de escritorio (127.0.0.1): único sitio donde /api/pdf está abierto
+    os.environ["CUADERNOFP_PDF_LOCAL"] = "1"
+
     if "CORS_ORIGINS" not in os.environ:
         # tauri://localhost es el origen del webview empaquetado;
         # http://localhost:1420 es el puerto por defecto de `tauri dev`.

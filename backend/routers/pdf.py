@@ -1,4 +1,5 @@
 import logging
+import os
 from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from database import get_db
@@ -29,7 +30,13 @@ router = APIRouter(prefix="/api/pdf", tags=["PDF Generation"])
 def generate_pdf(type: str, request: PdfRequest, al_id: Optional[str] = None, item_id: Optional[str] = None,
                   file_format: Optional[str] = "pdf", db: Session = Depends(get_db)):
     """Capa HTTP fina: la lógica vive en pdf_dispatch.py (que también se ejecuta en el
-    navegador con Pyodide). No se registran datos personales (ni al_id ni curso_data)."""
+    navegador con Pyodide). No se registran datos personales (ni al_id ni curso_data).
+
+    Este endpoint recibe datos del alumnado, así que solo se sirve en el servidor interno de
+    la aplicación de escritorio (127.0.0.1), que activa CUADERNOFP_PDF_LOCAL. En un servidor
+    público está cerrado: la web genera los documentos en el propio navegador."""
+    if os.environ.get("CUADERNOFP_PDF_LOCAL") != "1":
+        raise HTTPException(status_code=410, detail="La generación de documentos se hace en el equipo del docente; este servidor no la ofrece.")
     logger.info(f"generate_pdf called: type={type} format={file_format}")
     try:
         contenido, mime, cabeceras = generar_documento(
