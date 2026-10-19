@@ -140,6 +140,14 @@ purpose (free text can carry student names; teachers should use their own AI too
 only for the "generate text" buttons (Contexto, Alumnado > rasgos del grupo), which send checked traits
 and aggregate statistics, never names; PDF curriculum import uses the teacher's own API key. Keep it that way.
 
+### Desktop (Tauri) security
+`src-tauri/tauri.conf.json` has a real CSP (it was `null`); keep `connect-src` limited to the sidecar
+(`http://127.0.0.1:*`), Google/Microsoft auth and Cloud Run (catalogs, reachable before the sidecar port is
+resolved). Filesystem access has **no** `**` scope: the user's open/save/folder dialogs grant paths and
+`tauri-plugin-persisted-scope` remembers them between sessions (recent files). If a file opened earlier
+stops opening, re-pick it. `shell:allow-execute` is scoped to the backend sidecar only.
+`scripts/build-tauri.mjs` strips `pyodide`/`generadores` from `out/` (browser-only, ~30 MB).
+
 ### PD (programación didáctica) generation — 3 tiers
 Three docx-template generators, internally called **pd-** (`generador_pd_minima_tpl.py`, template
 `modelo_pd_fp-.docx`), **pd=** (`generador_pd_suficiente_tpl.py`, `modelo_pd_fp=.docx`, the official

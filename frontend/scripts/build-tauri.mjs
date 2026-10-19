@@ -137,6 +137,11 @@ try {
     // en vez de arriesgarse a que `next build` falle o sirva algo mezclado.
     rmSync(path.join(frontendDir, ".next"), { recursive: true, force: true });
     execSync("npx next build", { cwd: frontendDir, stdio: "inherit" });
+    // La app de escritorio genera los documentos con el servidor interno: Pyodide y los generadores del
+    // navegador (public/pyodide, public/generadores, ~30 MB) no deben entrar en el instalador.
+    for (const f of ["pyodide", "generadores", "generadores-worker.js"]) {
+      rmSync(path.join(frontendDir, "out", f), { recursive: true, force: true });
+    }
   } finally {
     swapOut();
   }

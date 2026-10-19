@@ -10,6 +10,9 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
+        // Debe ir después de fs: recuerda entre sesiones los ficheros y carpetas que el usuario eligió en los
+        // diálogos (recientes), en vez de dar acceso a todo el disco con un ámbito `**`.
+        .plugin(tauri_plugin_persisted_scope::init())
         .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(tauri_plugin_oauth::init())
         .plugin(tauri_plugin_http::init())
