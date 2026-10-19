@@ -66,8 +66,10 @@ const nextConfig = {
         source: "/(.*)",
         headers: [
           {
-            key: "Content-Security-Policy",
-            value: `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com; connect-src 'self' https://accounts.google.com https://www.googleapis.com https://login.microsoftonline.com https://graph.microsoft.com ${apiUrl}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' blob: https://accounts.google.com;`
+            key: "Content-Security-Policy-Report-Only",
+            // Misma política que frontend/firebase.json (solo informa, no bloquea); en desarrollo se añade lo que necesita
+            // el recargado en caliente. 'wasm-unsafe-eval' es para Pyodide (generación local de documentos).
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://accounts.google.com https://apis.google.com${process.env.NODE_ENV === "production" ? "" : " 'unsafe-eval'"}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' ${apiUrl} https://*.googleapis.com https://accounts.google.com https://login.microsoftonline.com https://graph.microsoft.com https://github.com https://*.githubusercontent.com${process.env.NODE_ENV === "production" ? "" : " ws: wss:"}; frame-src https://accounts.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'`
           }
         ]
       }

@@ -5,6 +5,9 @@ import mimetypes
 import tempfile
 import sys
 
+import logging as _logging
+logger = _logging.getLogger(__name__)
+
 if sys.platform == "win32":
     try:
         import pythoncom
@@ -59,7 +62,8 @@ def list_documents(path: str = ""):
                     "path": os.path.relpath(entry.path, BASE_DOCS_DIR).replace("\\", "/")
                 })
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
         
     # Ordenar: primero carpetas, luego archivos (y alfabéticamente)
     items.sort(key=lambda x: (not x["is_dir"], x["name"].lower()))

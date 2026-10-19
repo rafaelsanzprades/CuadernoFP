@@ -33,3 +33,15 @@ def test_un_fichero_que_no_es_pdf_da_error_claro():
         assert False, "debería haber fallado"
     except ValueError as e:
         assert "PDF" in str(e)
+
+
+def test_pdf_demasiado_grande_se_rechaza_con_400(client):
+    import services.pdf_extractor as ex
+    original = ex.MAX_PDF_BYTES
+    ex.MAX_PDF_BYTES = 10
+    try:
+        r = client.post("/api/ai/parse-curriculum", files={"file": ("a.pdf", b"%PDF-" + b"0" * 100, "application/pdf")},
+                        data={"api_key": "x"})
+    finally:
+        ex.MAX_PDF_BYTES = original
+    assert r.status_code == 400 and "tamaño máximo" in r.json()["detail"]

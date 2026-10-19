@@ -19,7 +19,9 @@ router = APIRouter(
 )
 
 @router.post("/parse-curriculum")
+@limiter.limit("5/minute")
 async def parse_curriculum_endpoint(
+    request: Request,
     file: UploadFile,
     api_key: str = Form(...),
     provider: str = Form("gemini")
@@ -44,9 +46,15 @@ async def parse_curriculum_endpoint(
             "status": "success",
             "data": structured_data
         }
+    except HTTPException:
+        raise
+    except ValueError as e:
+        # PDF ilegible, con contraseña o demasiado grande: error del usuario, no del servidor
+        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         logger.error(f"Error en AI parser: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 @router.post("/chat")
 @limiter.limit("10/minute")
@@ -60,4 +68,5 @@ async def chat_endpoint(request: Request, chat: ChatRequest = Body(...)):
         }
     except Exception as e:
         logger.error(f"Error en endpoint chat: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")

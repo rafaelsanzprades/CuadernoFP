@@ -7,6 +7,9 @@ router = APIRouter(prefix="/api/module", tags=["Modules"])
 
 from schemas import ModuleUpdateBody
 
+import logging as _logging
+logger = _logging.getLogger(__name__)
+
 
 @router.get("/{module_id}")
 def get_module(module_id: str, db: Session = Depends(get_db)):
@@ -16,7 +19,8 @@ def get_module(module_id: str, db: Session = Depends(get_db)):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 
 @router.put("/{module_id}")

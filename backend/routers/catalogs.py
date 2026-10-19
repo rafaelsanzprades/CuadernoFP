@@ -21,7 +21,8 @@ def list_admin_modules(db: Session = Depends(get_db)):
             "data": [{"id": m.id, "code": m.code, "name": m.name} for m in modules]
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 
 class FamilyResponse(BaseModel):
@@ -83,7 +84,8 @@ def list_families(region_id: int = Query(1), db: Session = Depends(get_db)):
         
         return {"status": "success", "data": result}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 @router.get("/families/{family_id}/incual")
 def get_incual_data(family_id: int, db: Session = Depends(get_db)):
@@ -109,7 +111,8 @@ def get_incual_data(family_id: int, db: Session = Depends(get_db)):
             }
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 
 @router.get("/modules")
@@ -131,7 +134,8 @@ def list_modules(db: Session = Depends(get_db)):
             }
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 
 @router.get("/centers")
@@ -143,7 +147,8 @@ def list_centers(db: Session = Depends(get_db)):
             "data": [{"id": c.id, "name": c.name, "titularity": c.titularity.value if hasattr(c.titularity, 'value') else c.titularity, "code": c.code} for c in centers]
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 
 @router.get("/learning_outcomes")
@@ -157,9 +162,13 @@ def list_learning_outcomes(db: Session = Depends(get_db)):
                 result[m.code] = [{"raNumber": r.ra_number, "description": r.description} for r in ras]
         return {"status": "success", "data": result}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 from models import EvaluationCriterion
+
+import logging as _logging
+logger = _logging.getLogger(__name__)
 
 @router.get("/catalog/curriculum/{degree_code}")
 def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = Depends(get_db)):
@@ -227,7 +236,8 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 
 @router.get("/catalog/pd-context/{module_code}")
@@ -318,4 +328,5 @@ def get_module_curriculum(module_code: str, degree_code: str | None = Query(None
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Error en la petición")
+        raise HTTPException(status_code=500, detail="Error interno del servidor")
