@@ -1858,6 +1858,8 @@
       "moduloNoDualizadoDesc": "Modulu hau ez dago oraindik dualizatuta: ez dago CErik FEOE gisa markatuta.",
       "feoeTextoSimplificadoTitulo": "FEOE (Eredu sinplifikatuaren testu berezia, pd=)",
       "feoeTextoSimplificadoAviso": "Hutsik uzten bada, dual gisa markatutako RAetatik (is_dual) abiatuta automatikoki sortuko da.",
+      "feoeJustificacionTitulo": "Dualizatzearen arrazoiak",
+      "feoeJustificacionDesc": "Zergatik dualizatzen diren ikaskuntza-emaitza hauek (91/2024 Dekretuaren 100.2.b artikuluak eskatzen du). RA dualizatuak badaude eta hutsik uzten bada, dokumentuak osatzeko marka bat izango du.",
       "a1JustificacionDesc": "Programazio hau oinarritzen duen oinarri legegilea.",
       "a1JustificacionLabel": "Programazioaren justifikazioa",
       "a2ContextualizacionDesc": "Prestakuntza ematen den testuinguruaren azterketa.",

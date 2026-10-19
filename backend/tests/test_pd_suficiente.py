@@ -97,3 +97,14 @@ def test_sin_minimo_por_ra_la_media_compensa():
 def test_un_ra_por_debajo_del_minimo_no_se_compensa():
     assert _nota({"nota_minima_ra": 4}) < 5          # RA2 = 3,5 < 4: el módulo queda suspenso
     assert _nota({"nota_minima_ra": 3}) == 6.25      # RA2 = 3,5 >= 3: se compensa con RA1
+
+
+def test_dualizacion_sin_justificar_deja_una_marca_visible():
+    t = _generar()
+    assert "[[ Indica aquí los motivos por los que se dualizan" in t
+
+
+def test_dualizacion_justificada_se_imprime():
+    t = _generar({"config_contexto.texto_feoe_justificacion": "El sector exige práctica con equipos reales."})
+    assert "Motivos por los que se dualizan: El sector exige práctica con equipos reales." in t
+    assert "[[ Indica aquí los motivos por los que se dualizan" not in t

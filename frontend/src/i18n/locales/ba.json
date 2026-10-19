@@ -1858,6 +1858,8 @@
       "moduloNoDualizadoDesc": "Aquest mòdul encara no està dualitzat: no hi ha cap CE marcat com a FEOE.",
       "feoeTextoSimplificadoTitulo": "FEOE (text específic model simplificat, pd=)",
       "feoeTextoSimplificadoAviso": "Si es deixa buit, es genera automàticament a partir dels RA marcats com a dualitzables (is_dual).",
+      "feoeJustificacionTitulo": "Motius de la dualització",
+      "feoeJustificacionDesc": "Per què es dualitzen aquests resultats d'aprenentatge (l'article 100.2.b del Decret 91/2024 ho exigeix). Si hi ha RA dualitzats i es deixa buit, el document porta una marca per completar.",
       "a1JustificacionDesc": "Base legislativa que fonamenta aquesta programació.",
       "a1JustificacionLabel": "Justificació de la programació",
       "a2ContextualizacionDesc": "Anàlisi del context on s'imparteix la formació.",

@@ -317,6 +317,12 @@ def _build_context(data: dict) -> dict:
     b3_vinculacion = config.get("B3_vinculacion_empresa", "")
     if b3_vinculacion:
         texto_feoe = texto_feoe + " " + b3_vinculacion
+    # Letra b) del art. 100.2: los RA de la formación en empresa se acompañan de los motivos por los que se dualizan.
+    # Si hay algo dualizado y el profesorado no lo ha justificado, se deja una marca [[ ]] visible.
+    if resolve_feoe_dual(data)["dualizado"]:
+        justificacion = (config.get("texto_feoe_justificacion") or "").strip()
+        texto_feoe += " Motivos por los que se dualizan: " + (
+            justificacion or "[[ Indica aquí los motivos por los que se dualizan estos resultados de aprendizaje. ]]")
     context["texto_feoe"] = texto_feoe
 
     # ── SECCIÓN C: SECUENCIACIÓN — Tabla RA×UD (construida con python-docx

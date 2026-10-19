@@ -169,6 +169,16 @@ export function PlanesTab() {
           </div>
 
           <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.feoeJustificacionTitulo', {defaultValue: 'Motivos de la dualización'})}</label>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.feoeJustificacionDesc', {defaultValue: 'Por qué se dualizan estos resultados de aprendizaje (lo exige el artículo 100.2.b del Decreto 91/2024). Si hay RA dualizados y se deja vacío, el documento lleva una marca para completar.'})}</p>
+            <textarea
+              value={config_contexto.texto_feoe_justificacion || ""}
+              onChange={e => handleChange("texto_feoe_justificacion", e.target.value)}
+              className="w-full h-24 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+
+          <div>
             <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.trabajosAlternativosTitulo', {defaultValue: 'Trabajos alternativos para módulos no dualizados FEOE'})}</label>
             <p className="text-caption text-muted mb-2">{t('campos.modulo.trabajosAlternativosDesc', {defaultValue: 'Qué se le pide al alumnado en tu módulo durante el periodo FEOE cuando no tiene horas imputadas directamente (trabajos, cuaderno, entregas...).'})}</p>
             <textarea

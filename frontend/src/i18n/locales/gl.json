@@ -1858,6 +1858,8 @@
       "moduloNoDualizadoDesc": "Este módulo aínda non está dualizado: non hai ningún CE marcado como FEOE.",
       "feoeTextoSimplificadoTitulo": "FEOE (texto específico modelo simplificado, pd=)",
       "feoeTextoSimplificadoAviso": "Se se deixa baleiro, xérase automaticamente a partir dos RA marcados como dualizables (is_dual).",
+      "feoeJustificacionTitulo": "Motivos da dualización",
+      "feoeJustificacionDesc": "Por que se dualizan estes resultados de aprendizaxe (esíxeo o artigo 100.2.b do Decreto 91/2024). Se hai RA dualizados e se deixa en branco, o documento leva unha marca para completar.",
       "a1JustificacionDesc": "Base lexislativa que fundamenta esta programación.",
       "a1JustificacionLabel": "Xustificación da programación",
       "a2ContextualizacionDesc": "Análise do contexto onde se imparte a formación.",
