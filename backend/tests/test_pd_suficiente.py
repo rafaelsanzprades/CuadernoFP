@@ -108,3 +108,11 @@ def test_dualizacion_justificada_se_imprime():
     t = _generar({"config_contexto.texto_feoe_justificacion": "El sector exige práctica con equipos reales."})
     assert "Motivos por los que se dualizan: El sector exige práctica con equipos reales." in t
     assert "[[ Indica aquí los motivos por los que se dualizan" not in t
+
+
+def test_cada_ud_lleva_sus_objetivos_generales_y_las_competencias():
+    t = _generar()
+    assert "UD 1. Objetivos generales: a), f)." in t
+    assert "[[ Indica aquí las competencias profesionales" in t
+    t = _generar({"config_contexto.cpe": "Competencia digital y trabajo en equipo."})
+    assert "contribuye el módulo: Competencia digital y trabajo en equipo." in t

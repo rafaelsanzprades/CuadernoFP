@@ -348,6 +348,23 @@ def _build_context(data: dict) -> dict:
         ],
     }
 
+    # Letra c) del art. 100.2: cada UD asociada también a objetivos generales y competencias. Los OG se derivan de
+    # UD -> RA (columnas de la matriz) -> OG (info_modulo.ra_og_mapping, indexado por posición del OG). La aplicación
+    # no relaciona competencias con UD, así que se citan las del módulo (Contexto > Otros elementos) o, si no hay, una marca [[ ]].
+    ra_to_og = {}
+    for idx, ras in (info_mod.get("ra_og_mapping") or {}).items():
+        for ra_id in ras or []:
+            ra_to_og.setdefault(ra_id, []).append(chr(97 + int(idx)))
+    list_og_ud = []
+    for i, ud in enumerate(df_ud, 1):
+        og_ud = sorted({og for ra in df_ra if ud.get(_ra_id_full(ra), 0)
+                        for og in ra_to_og.get(str(ra.get("id_ra", "")), [])})
+        list_og_ud.append(f"UD {i}. Objetivos generales: " + (", ".join(f"{o})" for o in og_ud) if og_ud else "sin asignar") + ".")
+    cpe_txt = (config.get("cpe") or "").strip()
+    list_og_ud.append("Competencias profesionales y para la empleabilidad a las que contribuye el módulo: " + (
+        cpe_txt or "[[ Indica aquí las competencias profesionales y para la empleabilidad asociadas a las unidades didácticas. ]]"))
+    context["list_og_ud"] = list_og_ud
+
     # ── SECCIÓN C1: CONTENIDOS — reutiliza el mismo bucle dinámico
     # {%p for ud in list_uds %} que ya trae la plantilla, con el formato
     # "UD n. descripción" que espera esta sección ────────────────────────
