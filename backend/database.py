@@ -15,9 +15,16 @@ connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite")
 
 # Configure connection pool
 if DATABASE_URL.startswith("sqlite"):
-    # SQLite: Use StaticPool for single-threaded access
-    poolclass = StaticPool
-    pool_args = {}
+    if ":memory:" in DATABASE_URL or DATABASE_URL.rstrip("/") == "sqlite:":
+        # SQLite en memoria: la base de datos vive en una única conexión, que hay que compartir
+        poolclass = StaticPool
+        pool_args = {}
+    else:
+        # SQLite en fichero: una conexión por petición. Con StaticPool, una única conexión compartida
+        # por todos los hilos de FastAPI daba errores 500 ("bad parameter or other API misuse") en cuanto
+        # coincidían dos peticiones, y devolvía la consulta SQL al cliente.
+        poolclass = QueuePool
+        pool_args = {"pool_size": 5, "max_overflow": 10}
 else:
     # PostgreSQL/Other: Use QueuePool with configurable size
     poolclass = QueuePool
