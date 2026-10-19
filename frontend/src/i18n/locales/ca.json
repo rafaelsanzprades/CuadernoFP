@@ -603,10 +603,6 @@
       "errorCrearProgramacion": "Error en crear la programació.",
       "programacionCreada": "Programació de {{name}} creada correctament."
     },
-    "chatbot": {
-      "archivoDemasiadoGrande": "L'arxiu és massa gran. Màxim 5 MB.",
-      "errorComunicacion": "Error en comunicar-se amb l'assistent: {{message}}"
-    },
     "contextoGrupo": {
       "errorGenerarIA": "Error en generar el text amb IA.",
       "sinAlumnado": "No hi ha alumnat registrat en aquest curs encara.",
@@ -915,9 +911,6 @@
     "catalogo": {
       "buscarTerminoDescripcion": "Cerca terme o descripció..."
     },
-    "chatbot": {
-      "escribeMensaje": "Escriu el teu missatge..."
-    },
     "cloud": {
       "ejemploClientId": "Ex: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     },
@@ -1022,10 +1015,6 @@
       "derivadoFechasGenerales2": "Derivat de dates generals",
       "dias": "Dies",
       "horas": "Hores"
-    },
-    "chatbot": {
-      "adjuntarPdfImagen": "Adjuntar PDF o imatge",
-      "archivoAdjuntoEnviado": "Arxiu adjunt enviat a la IA"
     },
     "comun": {
       "vistaPreviaPdf": "Vista prèvia PDF"
@@ -2049,14 +2038,6 @@
       "riesgoMuyAlto": "Molt alt",
       "seguimientoRiesgo": "Control de rendiment acadèmic",
       "controlFaltasAsistencia": "Control de faltes d'assistència"
-    },
-    "chatbot": {
-      "adjuntoEnviado": "Adjunt enviat",
-      "bienvenidaLinea1": "Hola! Sóc el teu assistent virtual.",
-      "bienvenidaLinea2": "Pregunta'm sobre l'aplicació o dubtes de programació didàctica.",
-      "escribiendo": "Escrivint...",
-      "subtituloIa": "Respostes generades per IA",
-      "tituloAsistente": "Assistent Cuaderno FP"
     },
     "cloud": {
       "anioAcademico": "Any acadèmic",

@@ -601,10 +601,6 @@
       "errorCrearProgramacion": "Errorea programazioa sortzean.",
       "programacionCreada": "{{name}} moduluaren programazioa ondo sortu da."
     },
-    "chatbot": {
-      "archivoDemasiadoGrande": "Fitxategia handiegia da. Gehienez 5 MB.",
-      "errorComunicacion": "Errorea laguntzailearekin komunikatzean: {{message}}"
-    },
     "contextoGrupo": {
       "errorGenerarIA": "Errorea testua AArekin sortzean.",
       "sinAlumnado": "Ikastura honetan ez dago ikaslerik erregistratuta oraindik.",
@@ -913,9 +909,6 @@
     "catalogo": {
       "buscarTerminoDescripcion": "Bilatu terminoa edo deskribapena..."
     },
-    "chatbot": {
-      "escribeMensaje": "Idatzi zure mezua..."
-    },
     "cloud": {
       "ejemploClientId": "Adib: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     },
@@ -1020,10 +1013,6 @@
       "derivadoFechasGenerales2": "Data orokorretatik eratorria",
       "dias": "Egunak",
       "horas": "Orduak"
-    },
-    "chatbot": {
-      "adjuntarPdfImagen": "Erantsi PDFa edo irudia",
-      "archivoAdjuntoEnviado": "AAri bidalitako fitxategi erantsia"
     },
     "comun": {
       "vistaPreviaPdf": "PDF aurrebista"
@@ -2047,14 +2036,6 @@
       "riesgoMuyAlto": "Oso handia",
       "seguimientoRiesgo": "Errendimendu akademikoaren kontrola",
       "controlFaltasAsistencia": "Asistentzia-hutsegiteen kontrola"
-    },
-    "chatbot": {
-      "adjuntoEnviado": "Erantsitakoa bidalita",
-      "bienvenidaLinea1": "Kaixo! Zure laguntzaile birtuala naiz.",
-      "bienvenidaLinea2": "Galdetu aplikazioari buruz edo programazio didaktikoari buruzko zalantzez.",
-      "escribiendo": "Idazten...",
-      "subtituloIa": "AAk sortutako erantzunak",
-      "tituloAsistente": "Cuaderno FP laguntzailea"
     },
     "cloud": {
       "anioAcademico": "Ikasturtea",

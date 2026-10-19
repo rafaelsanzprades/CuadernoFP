@@ -601,10 +601,6 @@
       "errorCrearProgramacion": "Erro ao crear a programación.",
       "programacionCreada": "Programación de {{name}} creada correctamente."
     },
-    "chatbot": {
-      "archivoDemasiadoGrande": "O arquivo é demasiado grande. Máximo 5 MB.",
-      "errorComunicacion": "Erro ao comunicarse co asistente: {{message}}"
-    },
     "contextoGrupo": {
       "errorGenerarIA": "Erro ao xerar o texto con IA.",
       "sinAlumnado": "Non hai alumnado rexistrado neste curso aínda.",
@@ -913,9 +909,6 @@
     "catalogo": {
       "buscarTerminoDescripcion": "Buscar termo ou descrición..."
     },
-    "chatbot": {
-      "escribeMensaje": "Escribe a túa mensaxe..."
-    },
     "cloud": {
       "ejemploClientId": "Ex: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     },
@@ -1020,10 +1013,6 @@
       "derivadoFechasGenerales2": "Derivado de datas xerais",
       "dias": "Días",
       "horas": "Horas"
-    },
-    "chatbot": {
-      "adjuntarPdfImagen": "Adxuntar PDF ou imaxe",
-      "archivoAdjuntoEnviado": "Arquivo anexo enviado á IA"
     },
     "comun": {
       "vistaPreviaPdf": "Vista previa PDF"
@@ -2047,14 +2036,6 @@
       "riesgoMuyAlto": "Moi alto",
       "seguimientoRiesgo": "Control de rendemento académico",
       "controlFaltasAsistencia": "Control de faltas de asistencia"
-    },
-    "chatbot": {
-      "adjuntoEnviado": "Anexo enviado",
-      "bienvenidaLinea1": "Ola! Son o teu asistente virtual.",
-      "bienvenidaLinea2": "Pregúntame sobre a aplicación ou dúbidas de programación didáctica.",
-      "escribiendo": "Escribindo...",
-      "subtituloIa": "Respostas xeradas por IA",
-      "tituloAsistente": "Asistente Cuaderno FP"
     },
     "cloud": {
       "anioAcademico": "Ano académico",

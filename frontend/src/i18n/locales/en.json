@@ -601,10 +601,6 @@
       "errorCrearProgramacion": "Error creating the programming.",
       "programacionCreada": "Programming for {{name}} created successfully."
     },
-    "chatbot": {
-      "archivoDemasiadoGrande": "The file is too large. Maximum 5 MB.",
-      "errorComunicacion": "Error communicating with the assistant: {{message}}"
-    },
     "contextoGrupo": {
       "errorGenerarIA": "Error generating the text with AI.",
       "sinAlumnado": "No students are registered in this course yet.",
@@ -913,9 +909,6 @@
     "catalogo": {
       "buscarTerminoDescripcion": "Search term or description..."
     },
-    "chatbot": {
-      "escribeMensaje": "Type your message..."
-    },
     "cloud": {
       "ejemploClientId": "E.g.: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     },
@@ -1020,10 +1013,6 @@
       "derivadoFechasGenerales2": "Derived from general dates",
       "dias": "Days",
       "horas": "Hours"
-    },
-    "chatbot": {
-      "adjuntarPdfImagen": "Attach PDF or image",
-      "archivoAdjuntoEnviado": "Attachment sent to the AI"
     },
     "comun": {
       "vistaPreviaPdf": "PDF preview"
@@ -2047,14 +2036,6 @@
       "riesgoMuyAlto": "Very high",
       "seguimientoRiesgo": "Academic performance control",
       "controlFaltasAsistencia": "Absence control"
-    },
-    "chatbot": {
-      "adjuntoEnviado": "Attachment sent",
-      "bienvenidaLinea1": "Hi! I'm your virtual assistant.",
-      "bienvenidaLinea2": "Ask me about the app or questions about your curriculum plan.",
-      "escribiendo": "Typing...",
-      "subtituloIa": "AI-generated responses",
-      "tituloAsistente": "Cuaderno FP assistant"
     },
     "cloud": {
       "anioAcademico": "Academic year",
