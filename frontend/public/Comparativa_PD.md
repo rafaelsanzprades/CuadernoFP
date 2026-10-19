@@ -44,7 +44,8 @@ Notas: el **departamento / área** no es un campo: los generadores lo derivan de
 | 16 | Descripción del entorno geográfico y sociocultural | — | §A · Introducción | §2.1 · Centro educativo — Entorno socioeconómico |
 | 17 | Contexto socioeconómico y productivo del entorno | — | §A · Introducción | §2.1 · Centro educativo — Entorno socioeconómico |
 | 18 | Contexto escolar del centro | — | §A · Introducción | §2.1 · Centro educativo — Equipo docente |
-| 20 | Infraestructura y recursos disponibles | — | §J · Materiales y recursos didácticos | §2.1 · Centro educativo |
+| 85 | Marco normativo (normas que cita la introducción; si se deja vacío, PD= escribe el de Aragón según el grado) | — | §A · Introducción | — |
+| 20 | Infraestructura y recursos disponibles | — | §J · Materiales y recursos didácticos | §2.1 · Centro educativo — Infraestructura y recursos educativos |
 | 28 | Actividades complementarias y extraescolares (texto, bloque propio de `Contexto` › `Entorno`) | — | §K · Actividades complementarias y extraescolares | §14 · Actividades complementarias y extraescolares |
 | 10 | Modalidad (rasgos rápidos del contexto escolar: Presencial / Semipresencial / Distancia) y turno (Diurno / Vespertino / Mixto) | §Encabezado (resumen) | §A · Introducción | §1 · Introducción |
 | 19 | Características del alumnado (texto y rasgos rápidos, dentro de «Contexto escolar») | — | §E1 · Atención a las diferencias individuales | §2.2 · Alumnado — ACNEAE |
@@ -64,7 +65,7 @@ Bloques «Alumnado (ACNEAE)» (datos del grupo calculados desde Matrícula, rati
 
 ### Pestañas: Evaluación y Procedimientos
 
-`Evaluación`: reglas de redondeo y compensación, ponderación e instrumentos de evaluación (por trimestre) y escalas cualitativas. `Procedimientos`: evaluación inicial, modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua, recuperación, módulos pendientes), criterios de calificación y textos del modelo simplificado (pd=).
+`Evaluación`: reglas de redondeo y compensación (incluida la **calificación mínima por RA para compensar**, entre 3 y 5: PD= la imprime en §H y el motor de notas la aplica), ponderación e instrumentos de evaluación (por trimestre) y escalas cualitativas. `Procedimientos`: evaluación inicial, modelo de recuperación, información al alumnado y procedimientos (pérdida de evaluación continua, recuperación, módulos pendientes), criterios de calificación y textos del modelo simplificado (pd=).
 
 ---
 
@@ -110,14 +111,14 @@ Planes de adaptación ante situaciones excepcionales — mapea a §N · Plan de 
 ### Pestañas: Relación RA <- CE y Contribución OG <- RA
 
 "Contribución OG <- RA" (pestaña propia de Currículo) contiene la matriz de contribución de cada RA a los
-Objetivos Generales (OG) del título — no tiene apartado propio en PD-/PD=/PD+, se usa como herramienta
-interna de coherencia curricular.
+Objetivos Generales (OG) del título. PD= la usa en §C: bajo la tabla de secuenciación lista los OG de cada UD (UD → RA → OG). Las competencias profesionales y para la empleabilidad no se relacionan con cada UD en la app: PD= cita las del módulo (`Contexto` › `Otros elementos`) o deja una marca `[[ ]]`.
 
 | # | Campo | PD- (Resumen) | PD= (Simplificada) | PD+ (Detallada JEG) |
 |---|-------|-------------|-----------------|-----------|
 | 29 | RA. Resultados de aprendizaje (listado oficial) | §Resumen — Tabla RA | §H · Resultados de aprendizaje | §3.4 · Resultados de aprendizaje |
 | 30 | Ponderación % de cada RA (suma = 100%) | §Resumen — Tabla RA | §H · Resultados de aprendizaje | §3.4 · Resultados de aprendizaje |
 | 31 | RA desarrollados en FEOE (marcados) | §Resumen — Tabla RA | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE | §3.4 · Resultados de aprendizaje |
+| 86 | Motivos de la dualización (`Contexto` › `Planes`) | — | §B · Resultados de aprendizaje susceptibles de ser adquiridos en FEOE (marca `[[ ]]` si hay RA dualizados y falta) | — |
 | 32 | CE. Criterios de evaluación (listado oficial) | §Resumen — Tabla CE | §C2 · Criterios de evaluación | §7.1 · Criterios de evaluación |
 | 33 | Ponderación % media de cada CE dentro de su RA (suma = 100%) | §Resumen — Tabla CE | §C2 · Criterios de evaluación | §7.1 · Criterios de evaluación |
 
@@ -334,10 +335,10 @@ Calidad EQAVET (indicadores de calidad) y propuestas de mejora del módulo (cicl
 | Nivel | Páginas aprox. | Campos incluidos | Uso principal |
 |-------|---------------|------------------|---------------|
 | **PD- (Resumen)** | 1-2 | 31 (Datos + RA/CE + UD) | Entregar a alumnado el primer día |
-| **PD= (Simplificada)** | 15-20 | 51 (14 apartados normativos A-N, con subapartados C1-C3/E1/G1) | Jefatura de estudios, inspección |
+| **PD= (Simplificada)** | 15-20 | 53 (14 apartados normativos A-N, con subapartados C1-C3/E1/G1) | Jefatura de estudios, inspección |
 | **PD+ (Detallada JEG)** | >60 | 78 (casi todo + narrativa expandida) | Oposiciones, TFM, memoria completa |
 
-_Recuento del 2026-10-13: campos únicos con contenido en cada columna (el campo 84 se cuenta una vez; se excluyen los botones «Genera este documento»). La tabla tiene 81 campos numerados del 1 al 84 (los números 47, 71 y 75 no se usan)._
+_Recuento del 2026-10-13: campos únicos con contenido en cada columna (el campo 84 se cuenta una vez; se excluyen los botones «Genera este documento»). La tabla tiene 83 campos numerados del 1 al 86 (los números 47, 71 y 75 no se usan; el 85 y el 86 se añadieron el 2026-10-19, sin renumerar)._
 
 ---
 
