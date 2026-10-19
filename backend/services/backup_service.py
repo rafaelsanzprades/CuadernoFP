@@ -66,6 +66,11 @@ def cleanup_old_backups(db_prefix):
         logger.error(f"Backup service: Error cleaning up backups: {e}")
 
 async def backup_task():
+    # La base de datos del servidor público es solo catálogo (sin datos de usuarios): duplicarla cada día llena el disco
+    # para nada. La copia periódica es opcional (CDD_ENABLE_BACKUP=1); /admin/backup sigue disponible a mano.
+    if os.environ.get("CDD_ENABLE_BACKUP") != "1":
+        logger.info("Backup service: copia periódica desactivada (CDD_ENABLE_BACKUP=1 para activarla).")
+        return
     logger.info("Backup service: Starting rotative backup task.")
     
     # Initial wait (e.g., 5 minutes) before the first backup after startup
