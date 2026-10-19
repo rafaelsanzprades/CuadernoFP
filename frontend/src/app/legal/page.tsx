@@ -603,7 +603,7 @@ export default function LegalPage() {
                   <div className="text-body text-muted space-y-1 mt-2">
                     <p><strong>Email:</strong> <a href="mailto:cuadernofp@gmail.com" className="text-info hover:underline">cuadernofp@gmail.com</a></p>
                     <p><strong>GitHub:</strong>{" "}
-                      <a href="https://github.com/CuadernoFP/issues" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">
+                      <a href="https://github.com/rafaelsanzprades/CuadernoFP/issues" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">
                         Abrir incidencia de accesibilidad
                         <ExternalLink className="inline ml-1 w-3.5 h-3.5" />
                       </a>
