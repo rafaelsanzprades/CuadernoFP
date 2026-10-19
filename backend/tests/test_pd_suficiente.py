@@ -121,3 +121,11 @@ def test_cada_ud_lleva_sus_objetivos_generales_y_las_competencias():
 def test_la_infraestructura_de_contexto_llega_a_herramientas():
     t = _generar({"config_contexto.infraestructura": "Aula con 20 puestos y servidor propio."})
     assert "Aula con 20 puestos y servidor propio." in t
+
+
+def test_pd_plus_cubre_los_ra_en_la_tabla_de_ud():
+    modulo = _cargar("202526 P 0237-ICTVE.fpp")
+    curso = _cargar("202526 C 1A-GM 0237-ICTVE.fpc")
+    contenido, _, _ = generar_documento("programacion_jeg", modulo, curso)
+    t = _texto(contenido)
+    assert "UD1" in t and re.search(r"UD1[^\n]*RA1|RA1[^\n]*UD1", t)

@@ -261,15 +261,8 @@ def _build_context(data: dict) -> dict:
     # traia la plantilla (nunca escalaban a mas ni a menos de 10 UD). CE/C/CPE/OG
     # quedan en blanco: no hay ningun dato de la app que los alimente.
     ev_map = {str(row.get("id_ud", "")): row.get("ev") for row in df_sgmt}
-    # df_ud guarda el porcentaje de cada RA en la clave "pct_ra{n}" (n = solo
-    # el numero, sin el prefijo "RA") -- no en una clave con el id completo
-    # del RA como "RA1"/"RA1.", que es lo que _ra_id_full devuelve.
-    ra_pairs = []
-    for ra in df_ra:
-        rid_full = _ra_id_full(ra)
-        m = re.search(r"\d+", rid_full)
-        if m:
-            ra_pairs.append((rid_full, f"pct_ra{m.group()}"))
+    # df_ud guarda el porcentaje de cada RA en la clave con el id del RA ("RA1"), igual que lee PD=.
+    ra_pairs = [(_ra_id_full(ra), _ra_id_full(ra)) for ra in df_ra]
     context["tabla_organizacion_ud"] = {
         "filas": [
             {
@@ -289,7 +282,7 @@ def _build_context(data: dict) -> dict:
     # --- Tabla "Relacion entre los elementos curriculares" (RA | CE | C |
     # CPE | OG): filas dinamicas, una por RA -- CPE/OG quedan en blanco (sin
     # fuente de datos real); C muestra las UD que cubren ese RA, reutilizando
-    # el mismo mapa pct_ra{n} de la tabla de organizacion, invertido.
+    # el mismo mapa de la tabla de organizacion, invertido.
     pct_key_by_ra = dict(ra_pairs)
     context["tabla_relacion_curricular"] = [
         {
