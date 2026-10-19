@@ -5,7 +5,8 @@ import {
   pickOpenFile, pickSaveFile, pickDirectory, writeFile, readFile,
   listDirFileNames, readFileInDir, writeFileInDir,
 } from "@/services/fileBackend";
-import { prepareProgramacionForExport, prepareProgramacionAsTemplate, prepareCursoForExport, serializeData as serializeDataWithKey } from "@/services/fileExport";
+import { prepareProgramacionForExport, prepareProgramacionAsTemplate, prepareCursoForExport } from "@/services/fileExport";
+import { serializarParaGuardar, leerFichero, type AlmacenCifrado } from "@/services/cifradoEspacio";
 export type DataSourceType = 'demo' | 'local';
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -23,10 +24,13 @@ function downloadJson(dataStr: string, filename: string) {
   URL.revokeObjectURL(url);
 }
 
-/** Serialize data to JSON string for export, encrypt if the user has set a security key */
-function serializeData(data: any): string {
-  return serializeDataWithKey(data, useAppStore.getState().encryptionKey);
-}
+const almacenCifrado: AlmacenCifrado = {
+  getState: () => useAppStore.getState(),
+  setState: (parcial) => useAppStore.setState(parcial),
+};
+
+/** Texto que se guarda, cifrado si el cifrado está activo. null = el usuario canceló al pedirle la clave. */
+const serializeData = (data: any) => serializarParaGuardar(data, almacenCifrado);
 
 // ─── DEMO prefetch cache ────────────────────────────────────
 // Descarga los 3 JSON de la DEMO (fpg/fpp/fpc) en segundo plano tan pronto
@@ -589,7 +593,8 @@ export const fileManager = {
     if (!activeModuleId || !moduleData) return false;
 
     const exportData = prepareProgramacionForExport(moduleData);
-    const jsonStr = serializeData(exportData);
+    const jsonStr = await serializeData(exportData);
+    if (jsonStr === null) return false;
 
     // 1. Overwrite original file
     if (pdFileSource.type === 'local' && pdFileSource.fileRef) {
@@ -605,7 +610,7 @@ export const fileManager = {
     if (isDriveConnected && autoSyncDrive) {
       try {
         const { driveService } = await import('@/services/driveService');
-        await driveService.saveFile(`${activeModuleId}.fpp`, exportData);
+        await driveService.saveFile(`${activeModuleId}.fpp`, jsonStr);
       } catch (e) {
         console.error("Error syncing to Drive", e);
       }
@@ -623,7 +628,8 @@ export const fileManager = {
     if (!activeCursoId || !cursoData) return false;
 
     const exportData = prepareCursoForExport(cursoData);
-    const jsonStr = serializeData(exportData);
+    const jsonStr = await serializeData(exportData);
+    if (jsonStr === null) return false;
 
     // 1. Overwrite original file
     if (cursoFileSource.type === 'local' && cursoFileSource.fileRef) {
@@ -639,7 +645,7 @@ export const fileManager = {
     if (isDriveConnected && autoSyncDrive) {
       try {
         const { driveService } = await import('@/services/driveService');
-        await driveService.saveFile(`${activeCursoId}.fpc`, exportData);
+        await driveService.saveFile(`${activeCursoId}.fpc`, jsonStr);
       } catch (e) {
         console.error("Error syncing curso to Drive", e);
       }
@@ -658,12 +664,13 @@ export const fileManager = {
     const { activeModuleId, moduleData } = store;
     if (!activeModuleId || !moduleData) return false;
 
+    const jsonStr = await serializeData(prepareProgramacionForExport(moduleData));
+    if (jsonStr === null) return false;
+
     const picked = await pickSaveFile(`${activeModuleId}.fpp`, { description: 'Programación Cuaderno FP', extensions: ['fpp'] });
     if (!picked) return false;
 
     try {
-      const exportData = prepareProgramacionForExport(moduleData);
-      const jsonStr = serializeData(exportData);
       await writeFile(picked.ref, jsonStr);
       store.setPdFileSource({ type: 'local', fileRef: picked.ref, fileName: picked.name });
       return true;
@@ -680,12 +687,13 @@ export const fileManager = {
     const { activeCursoId, cursoData } = store;
     if (!activeCursoId || !cursoData) return false;
 
+    const jsonStr = await serializeData(prepareCursoForExport(cursoData));
+    if (jsonStr === null) return false;
+
     const picked = await pickSaveFile(`${activeCursoId}.fpc`, { description: 'Curso Cuaderno FP', extensions: ['fpc'] });
     if (!picked) return false;
 
     try {
-      const exportData = prepareCursoForExport(cursoData);
-      const jsonStr = serializeData(exportData);
       await writeFile(picked.ref, jsonStr);
       store.setCursoFileSource({ type: 'local', fileRef: picked.ref, fileName: picked.name });
       return true;
@@ -699,11 +707,12 @@ export const fileManager = {
   // ── DOWNLOAD COPY (always downloads, doesn't change source) ──
 
   /** Download a copy of programación (legacy export) */
-  downloadProgramacion() {
+  async downloadProgramacion() {
     const { activeModuleId, moduleData } = useAppStore.getState();
     if (!moduleData) return;
     const exportData = prepareProgramacionForExport(moduleData);
-    downloadJson(serializeData(exportData), `${activeModuleId || 'programacion'}.fpp`);
+    const jsonStr = await serializeData(exportData);
+    if (jsonStr !== null) downloadJson(jsonStr, `${activeModuleId || 'programacion'}.fpp`);
   },
 
   /** Descarga la programación como PLANTILLA para compartir: sin centro, profesorado,
@@ -716,38 +725,20 @@ export const fileManager = {
   },
 
   /** Download a copy of curso (legacy export) */
-  downloadCurso() {
+  async downloadCurso() {
     const { activeCursoId, cursoData } = useAppStore.getState();
     if (!cursoData) return;
     const exportData = prepareCursoForExport(cursoData);
-    downloadJson(serializeData(exportData), `${activeCursoId || 'curso'}.fpc`);
+    const jsonStr = await serializeData(exportData);
+    if (jsonStr !== null) downloadJson(jsonStr, `${activeCursoId || 'curso'}.fpc`);
   },
 
   // ── IMPORT (from text, used by open + drag & drop) ──────
 
   async importProgramacion(jsonStr: string, filename: string): Promise<boolean> {
     try {
-      let parsed;
-      const key = useAppStore.getState().encryptionKey;
-      try {
-        parsed = JSON.parse(jsonStr);
-      } catch (e) {
-        // Might be encrypted
-        if (key) {
-          try {
-            const bytes = CryptoJS.AES.decrypt(jsonStr, key);
-            const decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
-            if (!decryptedStr) throw new Error("Clave incorrecta");
-            parsed = JSON.parse(decryptedStr);
-          } catch (decErr) {
-            console.error("Decryption failed", decErr);
-            throw new Error("Clave incorrecta o archivo dañado.");
-          }
-        } else {
-          console.error("Looks encrypted but no key provided");
-          throw new Error("Archivo cifrado. Debes introducir la clave de seguridad.");
-        }
-      }
+      let parsed = await leerFichero(jsonStr, almacenCifrado);
+      if (parsed === null) return false;
 
       parsed = Array.isArray(parsed) ? parsed[0] : parsed;
       if (!parsed || !parsed.df_ud) return false;
@@ -839,27 +830,8 @@ export const fileManager = {
 
   async importCurso(jsonStr: string, filename: string): Promise<boolean> {
     try {
-      let parsed;
-      const key = useAppStore.getState().encryptionKey;
-      try {
-        parsed = JSON.parse(jsonStr);
-      } catch (e) {
-        // Might be encrypted
-        if (key) {
-          try {
-            const bytes = CryptoJS.AES.decrypt(jsonStr, key);
-            const decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
-            if (!decryptedStr) throw new Error("Clave incorrecta");
-            parsed = JSON.parse(decryptedStr);
-          } catch (decErr) {
-            console.error("Decryption failed", decErr);
-            throw new Error("Clave incorrecta o archivo dañado.");
-          }
-        } else {
-          console.error("Looks encrypted but no key provided");
-          throw new Error("Archivo cifrado. Debes introducir la clave de seguridad.");
-        }
-      }
+      let parsed = await leerFichero(jsonStr, almacenCifrado);
+      if (parsed === null) return false;
 
       parsed = Array.isArray(parsed) ? parsed[0] : parsed;
       if (!parsed || !parsed.df_al) return false;

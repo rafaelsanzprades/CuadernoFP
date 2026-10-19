@@ -28,6 +28,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import { GlobalErrorBoundary } from "@/components/GlobalErrorBoundary";
 import { PageTransition } from "@/components/layout/PageTransition";
+import { PedirClaveModal } from "@/components/features/cifrado/PedirClaveModal";
 import { DataSourceTheme } from "@/components/layout/DataSourceTheme";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { SkipToContentLink } from "@/components/layout/SkipToContentLink";
@@ -50,6 +51,7 @@ export default function RootLayout({
                   {children}
                 </PageTransition>
               </GlobalErrorBoundary>
+              <PedirClaveModal />
               <Toaster position="bottom-right" toastOptions={{
                 style: { background: 'var(--glass-bg)', color: 'var(--foreground)', backdropFilter: 'blur(12px)', border: '1px solid var(--glass-border)' },
                 success: { iconTheme: { primary: '#14a085', secondary: '#fff' } },

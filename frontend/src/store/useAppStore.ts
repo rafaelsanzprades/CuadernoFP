@@ -43,12 +43,14 @@ export const useAppStore = create<AppState>()(
       {
         name: 'cdd-store-cache-v3',
         storage: createJSONStorage(() => idbStorage),
-        version: 3, // Bump version to force cache clearing of old corrupted state
+        version: 4, // v4: la clave de cifrado deja de persistirse (las versiones anteriores la guardaban en claro)
         migrate: (persistedState: any, version: number) => {
-          return persistedState as AppState;
+          const { encryptionKey, ...resto } = persistedState || {};
+          return resto as AppState;
         },
         partialize: (state) => {
-          const { workspaceHandle, ...rest } = state;
+          // encryptionKey NUNCA se persiste: solo vive en memoria (ver services/cifrado.ts)
+          const { workspaceHandle, encryptionKey, ...rest } = state;
           // Bajo Tauri, moduleData/cursoData/*FileSource NUNCA se cachean en el
           // storage propio del webview -- Rafael ha sido explícito en que los
           // datos del profesor viven SIEMPRE y SOLO en los ficheros .fpg/.fpp/

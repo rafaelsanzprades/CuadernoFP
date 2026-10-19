@@ -1,3 +1,5 @@
+import { estaCifrado } from "@/services/cifrado";
+
 let tokenClient: any;
 let accessToken: string | null = null;
 let scriptLoaded = false;
@@ -71,7 +73,8 @@ export const driveService = {
     accessToken = null;
   },
 
-  async saveFile(filename: string, content: any): Promise<boolean> {
+  /** `content` es el texto tal como se guarda en disco: cifrado si el usuario tiene una clave, JSON en claro si no. */
+  async saveFile(filename: string, content: string): Promise<boolean> {
     if (!accessToken) return false;
 
     try {
@@ -82,15 +85,15 @@ export const driveService = {
       const searchData = await searchRes.json();
       const existingFile = searchData.files && searchData.files.length > 0 ? searchData.files[0] : null;
 
-      const fileContent = JSON.stringify(content, null, 2);
+      const mimeType = estaCifrado(content) ? 'text/plain' : 'application/json';
       const metadata = {
         name: filename,
-        mimeType: 'application/json'
+        mimeType
       };
 
       const form = new FormData();
       form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-      form.append('file', new Blob([fileContent], { type: 'application/json' }));
+      form.append('file', new Blob([content], { type: mimeType }));
 
       if (existingFile) {
         // Update existing file

@@ -23,6 +23,7 @@ import { VersionBar } from "@/components/features/dashboard/VersionBar";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { GoogleDriveSyncPanel } from "@/components/features/cloud/GoogleDriveSyncPanel";
 import { OneDriveSyncPanel } from "@/components/features/cloud/OneDriveSyncPanel";
+import { CifradoPanel } from "@/components/features/cifrado/CifradoPanel";
 import { NewFileWizard } from "@/components/features/cloud/NewFileWizard";
 import { VerificacionTab } from "@/components/features/archivos/VerificacionTab";
 import { Button } from "@/components/ui/Button";
@@ -973,18 +974,8 @@ export default function InicioPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado local avanzado AES-256'})}</h4>
-                    <p className="text-muted leading-relaxed text-body">{t('campos.archivos.cifradoLocalDesc', {defaultValue: 'Puedes activar la encriptación local. Antes de que cualquier archivo se guarde en tu disco duro o nube, se cifra usando tu clave maestra dentro de tu navegador.'})}</p>
-
-                    <label className="block text-body font-medium text-foreground mt-3 mb-2">{t('campos.archivos.establecerClaveLabel', {defaultValue: 'Establecer clave de seguridad (no se guarda en ningún sitio)'})}</label>
-                    <input
-                      type="password"
-                      className="w-full bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent text-body"
-                      placeholder={t('placeholders.archivos.claveMaestra', {defaultValue: 'Introduce tu clave maestra...'})}
-                      value={useAppStore.getState().encryptionKey || ""}
-                      onChange={(e) => useAppStore.getState().setEncryptionKey(e.target.value || null)}
-                    />
-                    <p className="text-caption text-muted mt-2"><AlertTriangle className="w-3 h-3 inline mr-1 text-warning"/> {t('campos.archivos.avisoOlvidoClave', {defaultValue: 'Si olvidas esta clave y guardas un archivo, no podremos ayudarte a recuperarlo.'})}</p>
+                    <h4 className="font-semibold text-foreground flex items-center gap-2"><Lock className="w-5 h-5 text-accent"/> {t('campos.archivos.cifradoLocalTitulo', {defaultValue: '2. Cifrado opcional de tus ficheros'})}</h4>
+                    <CifradoPanel />
                   </div>
 
                   <div className="space-y-2">

@@ -445,6 +445,11 @@ export interface AppState {
   syncStatus: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error';
   setSyncStatus: (status: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error') => void;
 
+  /** Solo en memoria: nunca se guarda en el navegador ni en disco */
   encryptionKey: string | null;
   setEncryptionKey: (key: string | null) => void;
+  /** El espacio de trabajo se guarda cifrado (se persiste; la clave, no) */
+  cifradoActivo: boolean;
+  /** Texto fijo cifrado con la clave: permite comprobar que la clave escrita es la de siempre */
+  verificadorClave: string | null;
 }

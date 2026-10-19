@@ -1,7 +1,8 @@
 import { StateCreator } from 'zustand';
 import { AppState, ModuleData, CursoData } from '@/types';
 import { writeFile } from '@/services/fileBackend';
-import { prepareProgramacionForExport, prepareCursoForExport, serializeData } from '@/services/fileExport';
+import { prepareProgramacionForExport, prepareCursoForExport } from '@/services/fileExport';
+import { serializarParaGuardar } from '@/services/cifradoEspacio';
 
 type ModuleSlice = Pick<AppState,
   | 'activeModuleId' | 'setActiveModuleId'
@@ -77,7 +78,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
   }),
 
   saveModuleData: async () => {
-    const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive, pdFileSource, encryptionKey, setSyncStatus } = get();
+    const { activeModuleId, moduleData, isDriveConnected, autoSyncDrive, pdFileSource, setSyncStatus } = get();
     if (!activeModuleId || !moduleData) return false;
 
     setSyncStatus('saving');
@@ -89,7 +90,15 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // pasar por ninguna de las dos, así que el .fpp real en disco casi
     // siempre acababa sin depurar y sin cifrar pese a tener clave puesta.
     const exportData = prepareProgramacionForExport(moduleData);
-    const jsonStr = serializeData(exportData, encryptionKey);
+    // Solo se serializa (y, si hace falta, se pide la clave) si hay dónde escribir: sin fichero ni nube
+    // (p. ej. el modo Demo) no se guarda nada y no tiene sentido pedir la clave.
+    const hayDestino = (pdFileSource.type === 'local' && !!pdFileSource.fileRef) || (isDriveConnected && autoSyncDrive);
+    // Cifrado activo y clave sin escribir (aplicación recién abierta): se pide la clave; nunca se guarda en claro por descuido
+    const jsonStr = hayDestino ? await serializarParaGuardar(exportData, { getState: get, setState: set }) : '';
+    if (jsonStr === null) {
+      setSyncStatus('error');
+      return false;
+    }
 
     let localSaved = false;
 
@@ -108,7 +117,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeModuleId}.fpp`, exportData);
+        driveService.saveFile(`${activeModuleId}.fpp`, jsonStr);
       });
     }
 
@@ -121,7 +130,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
   },
 
   saveCursoData: async () => {
-    const { activeCursoId, cursoData, isDriveConnected, autoSyncDrive, cursoFileSource, encryptionKey, setSyncStatus } = get();
+    const { activeCursoId, cursoData, isDriveConnected, autoSyncDrive, cursoFileSource, setSyncStatus } = get();
     if (!activeCursoId || !cursoData) return false;
 
     setSyncStatus('saving');
@@ -129,7 +138,15 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Ver nota en saveModuleData() -- misma preparación que
     // fileManager.ts::saveCurso().
     const exportData = prepareCursoForExport(cursoData);
-    const jsonStr = serializeData(exportData, encryptionKey);
+    // Solo se serializa (y, si hace falta, se pide la clave) si hay dónde escribir: sin fichero ni nube
+    // (p. ej. el modo Demo) no se guarda nada y no tiene sentido pedir la clave.
+    const hayDestino = (cursoFileSource.type === 'local' && !!cursoFileSource.fileRef) || (isDriveConnected && autoSyncDrive);
+    // Cifrado activo y clave sin escribir (aplicación recién abierta): se pide la clave; nunca se guarda en claro por descuido
+    const jsonStr = hayDestino ? await serializarParaGuardar(exportData, { getState: get, setState: set }) : '';
+    if (jsonStr === null) {
+      setSyncStatus('error');
+      return false;
+    }
 
     let localSaved = false;
 
@@ -148,7 +165,7 @@ export const createModuleSlice: StateCreator<AppState, [], [], ModuleSlice> = (s
     // Save to Google Drive if connected
     if (isDriveConnected && autoSyncDrive) {
       import('@/services/driveService').then(({ driveService }) => {
-        driveService.saveFile(`${activeCursoId}.fpc`, exportData);
+        driveService.saveFile(`${activeCursoId}.fpc`, jsonStr);
       });
     }
 

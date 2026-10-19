@@ -1,6 +1,6 @@
 /**
  * Preparación de datos para guardar a fichero/nube -- lista blanca de claves
- * + borrado de texto catalog-duplicado, y cifrado opcional. Vive en su
+ * + borrado de texto catalog-duplicado. (El cifrado opcional vive en cifradoEspacio.ts.) Vive en su
  * propio módulo (no en fileManager.ts, de donde salió) para que
  * moduleSlice.ts pueda usarlo también sin crear un ciclo de imports
  * (fileManager.ts importa useAppStore.ts, que a su vez importa
@@ -17,7 +17,6 @@
  * real en disco casi siempre acababa con la versión sin depurar y sin cifrar
  * pese a que el profesor hubiera puesto una clave de seguridad.
  */
-import CryptoJS from "crypto-js";
 
 const ALLOWED_PROGRAMACION_KEYS = [
   // Core curriculares
@@ -160,13 +159,4 @@ export function prepareCursoForExport(data: any): any {
     }
   }
   return exportData;
-}
-
-/** Serialize data to JSON string for export, encrypt if a key is provided */
-export function serializeData(data: any, encryptionKey?: string | null): string {
-  const jsonStr = JSON.stringify(data, null, 2);
-  if (encryptionKey) {
-    return CryptoJS.AES.encrypt(jsonStr, encryptionKey).toString();
-  }
-  return jsonStr;
 }
