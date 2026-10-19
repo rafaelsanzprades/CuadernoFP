@@ -128,6 +128,4 @@ def test_pd_plus_cubre_los_ra_en_la_tabla_de_ud():
     curso = _cargar("202526 C 1A-GM 0237-ICTVE.fpc")
     contenido, _, _ = generar_documento("programacion_jeg", modulo, curso)
     t = _texto(contenido)
-    assert "Introducción a las ICT y normativa
-RA1
-22" in t
+    assert "Introducción a las ICT y normativa\nRA1\n22" in t
