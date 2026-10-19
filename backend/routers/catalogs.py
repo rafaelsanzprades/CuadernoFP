@@ -230,6 +230,22 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.get("/catalog/pd-context/{module_code}")
+def get_pd_context(module_code: str, db: Session = Depends(get_db)):
+    """Catálogo oficial que necesitan las programaciones (RA/CE con su texto y datos del título).
+
+    Solo recibe el código de módulo: es lo único que el navegador envía al servidor al
+    generar una programación, que se compone después en el propio equipo del docente."""
+    from helpers_catalogo import fetch_curriculo_from_db, resolve_grado_info
+    return {
+        "status": "success",
+        "data": {
+            "curriculo_data": fetch_curriculo_from_db(module_code, db),
+            "grado_info": resolve_grado_info(module_code, db),
+        },
+    }
+
+
 @router.get("/catalog/module/{module_code}")
 def get_module_curriculum(module_code: str, degree_code: str | None = Query(None), db: Session = Depends(get_db)):
     try:

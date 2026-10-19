@@ -2,7 +2,6 @@ import os
 from docx import Document
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx2pdf import convert
 
 def generate_ud(ud_data, info_modulo, out_docx, out_pdf):
     doc = Document()
@@ -54,6 +53,7 @@ def generate_tarea(tarea_data, info_modulo, out_docx, out_pdf):
 
     doc.save(out_docx)
     try:
+        from docx2pdf import convert  # solo existe en Windows: en el navegador y en Linux se omite
         convert(os.path.abspath(out_docx), os.path.abspath(out_pdf))
     except Exception as e:
         print(f"Error converting to PDF: {e}")

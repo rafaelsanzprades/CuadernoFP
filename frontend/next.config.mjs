@@ -1,10 +1,35 @@
 import withPWAInit from "@ducanh2912/next-pwa";
 import { readFileSync } from "fs";
 
+// Python (Pyodide) y los generadores de documentos se ejecutan en el navegador (ver
+// src/services/generarDocumento.ts). Son ~30 MB: no se precargan con la app, se guardan en
+// caché la primera vez que se genera un documento y después funcionan sin conexión.
+let pyodideVersion = "0";
+try {
+  pyodideVersion = JSON.parse(readFileSync(new URL("./node_modules/pyodide/package.json", import.meta.url), "utf8")).version;
+} catch (e) {}
+
 const withPWA = withPWAInit({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
   register: true,
+  publicExcludes: ["!noprecache/**/*", "!pyodide/**/*", "!generadores/**/*"],
+  extendDefaultRuntimeCaching: true,
+  workboxOptions: {
+    runtimeCaching: [
+      {
+        urlPattern: ({ url }) => url.pathname.startsWith("/pyodide/"),
+        handler: "CacheFirst",
+        options: { cacheName: `pyodide-${pyodideVersion}`, expiration: { maxEntries: 40 } },
+      },
+      {
+        // Los generadores sí cambian con la app: se sirve lo guardado y se actualiza en segundo plano
+        urlPattern: ({ url }) => url.pathname.startsWith("/generadores/") || url.pathname === "/generadores-worker.js",
+        handler: "StaleWhileRevalidate",
+        options: { cacheName: "generadores-locales", expiration: { maxEntries: 60 } },
+      },
+    ],
+  },
 });
 
 // Versión visible: la misma del instalador (src-tauri/tauri.conf.json, p. ej.

@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
+import { fetchDocumento } from "@/services/generarDocumento";
 
 interface UdConfigModalProps {
   ud: any;
@@ -35,7 +36,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
       setIsExporting(true);
       let url = `${getApiBase()}/api/pdf?type=ud&item_id=${ud.id_ud}`;
       
-      const response = await fetch(url, {
+      const response = await fetchDocumento(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/preparar-generadores.mjs",
     "dev": "next dev --turbo",
+    "prebuild": "node scripts/preparar-generadores.mjs",
     "build": "next build",
+    "preparar:generadores": "node scripts/preparar-generadores.mjs",
     "build:tauri": "node scripts/build-tauri.mjs",
     "start": "next start",
     "lint": "next lint",
@@ -68,6 +71,7 @@
     "@types/react-dom": "^19",
     "eslint": "^10.6.0",
     "eslint-config-next": "^16.4.1",
+    "pyodide": "314.0.7",
     "tailwindcss": "^4.3.1",
     "typescript": "^6"
   }

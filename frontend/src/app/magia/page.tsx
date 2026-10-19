@@ -26,6 +26,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { loadCatalogForModule, enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
+import { fetchDocumento, precalentarGeneradores } from "@/services/generarDocumento";
 
 type DownloadOpts = {
   al_id?: string;
@@ -97,6 +98,9 @@ export default function MagiaPage() {
     if (activeModuleId) loadCatalogForModule(activeModuleId, moduleData?.info_modulo?.titulo_codigo);
   }, [activeModuleId]);
 
+  // Prepara el generador local de documentos (la primera vez descarga Python y los generadores; luego queda en caché)
+  useEffect(() => { precalentarGeneradores(); }, []);
+
   const buildEnrichedModuleData = () => {
     if (!moduleData) return moduleData;
     return { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) };
@@ -147,7 +151,7 @@ export default function MagiaPage() {
       if (al_id) url += `&al_id=${al_id}`;
       if (item_id) url += `&item_id=${item_id}`;
 
-      const response = await fetch(url, {
+      const response = await fetchDocumento(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

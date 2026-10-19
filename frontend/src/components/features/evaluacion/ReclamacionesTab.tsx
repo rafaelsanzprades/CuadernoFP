@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
+import { fetchDocumento } from "@/services/generarDocumento";
 
 const REFERENCIAS_FIJAS = [
   { id: "Nota_Final_FO", label: "Nota final (evaluación ordinaria)" },
@@ -75,7 +76,7 @@ export function ReclamacionesTab() {
     setGenerando(reclamacion.id);
     try {
       const url = `${getApiBase()}/api/pdf?type=reclamacion_notas&al_id=${reclamacion.alumno_id}&item_id=${reclamacion.id}&file_format=docx`;
-      const response = await fetch(url, {
+      const response = await fetchDocumento(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ curso_data: cursoData || {}, module_data: moduleData ? { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) } : {} }),

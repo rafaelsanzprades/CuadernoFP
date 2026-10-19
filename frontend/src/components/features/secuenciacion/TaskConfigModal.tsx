@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
+import { fetchDocumento } from "@/services/generarDocumento";
 
 interface TaskConfigModalProps {
   task: any;
@@ -36,7 +37,7 @@ export function TaskConfigModal({ task, onClose, onSave }: TaskConfigModalProps)
       const taskId = task.ID || task.id_act;
       let url = `${getApiBase()}/api/pdf?type=tarea&item_id=${taskId}`;
       
-      const response = await fetch(url, {
+      const response = await fetchDocumento(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

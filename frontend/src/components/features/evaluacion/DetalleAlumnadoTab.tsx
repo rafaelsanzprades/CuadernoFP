@@ -17,6 +17,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
+import { fetchDocumento } from "@/services/generarDocumento";
 
 export function DetalleAlumnadoTab() {
   const { activeModuleId, moduleData, cursoData, updateCursoData, dataSource } = useAppStore();
@@ -172,7 +173,7 @@ export function DetalleAlumnadoTab() {
     setGenerandoInforme(al_id);
     try {
       const url = `${getApiBase()}/api/pdf?type=refuerzo_alumno&al_id=${al_id}&file_format=docx`;
-      const response = await fetch(url, {
+      const response = await fetchDocumento(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ curso_data: cursoData || {}, module_data: moduleData ? { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) } : {} }),
