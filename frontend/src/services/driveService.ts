@@ -1,3 +1,4 @@
+import { isTauri } from "@tauri-apps/api/core";
 import { estaCifrado } from "@/services/cifrado";
 
 let tokenClient: any;
@@ -74,13 +75,25 @@ export const driveService = {
   },
 
   /** `content` es el texto tal como se guarda en disco: cifrado si el usuario tiene una clave, JSON en claro si no. */
+  /** Token de acceso: el del flujo web (Google Identity Services) o, en la app de escritorio, el del inicio de sesión nativo. */
+  async tokenDeAcceso(): Promise<string | null> {
+    if (accessToken) return accessToken;
+    if (!isTauri()) return null;
+    const { useAppStore } = await import("@/store/useAppStore");
+    const clientId = useAppStore.getState().googleClientId;
+    if (!clientId) return null;
+    const { getValidGoogleAccessToken } = await import("@/services/nativeOAuth");
+    return getValidGoogleAccessToken(clientId);
+  },
+
   async saveFile(filename: string, content: string): Promise<boolean> {
-    if (!accessToken) return false;
+    const token = await this.tokenDeAcceso();
+    if (!token) return false;
 
     try {
       // 1. Search if file exists
       const searchRes = await fetch(`https://www.googleapis.com/drive/v3/files?q=name='${filename}' and trashed=false`, {
-        headers: { Authorization: `Bearer ${accessToken}` }
+        headers: { Authorization: `Bearer ${token}` }
       });
       const searchData = await searchRes.json();
       const existingFile = searchData.files && searchData.files.length > 0 ? searchData.files[0] : null;
@@ -99,7 +112,7 @@ export const driveService = {
         // Update existing file
         const updateRes = await fetch(`https://www.googleapis.com/upload/drive/v3/files/${existingFile.id}?uploadType=multipart`, {
           method: 'PATCH',
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: { Authorization: `Bearer ${token}` },
           body: form
         });
         return updateRes.ok;
@@ -107,7 +120,7 @@ export const driveService = {
         // Create new file
         const createRes = await fetch(`https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart`, {
           method: 'POST',
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: { Authorization: `Bearer ${token}` },
           body: form
         });
         return createRes.ok;

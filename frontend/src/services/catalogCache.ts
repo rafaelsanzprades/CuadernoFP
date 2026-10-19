@@ -5,6 +5,8 @@
  * Used as fallback when module data doesn't include descriptive text (e.g., .fpp files).
  */
 
+import { getApiBase } from "@/services/apiBase";
+
 interface ModuloInfo {
   nombre: string;
   horas: number | null;
@@ -78,8 +80,8 @@ export async function loadCatalogForModule(moduleId: string, degreeCodeHint?: st
 async function fetchCatalogForModule(moduleCode: string, degreeCodeHint?: string | null): Promise<void> {
   try {
     const url = degreeCodeHint
-      ? `/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCodeHint)}`
-      : `/api/catalog/module/${moduleCode}`;
+      ? `${getApiBase()}/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCodeHint)}`
+      : `${getApiBase()}/api/catalog/module/${moduleCode}`;
     const res = await fetch(url);
     if (!res.ok) return;
     const json = await res.json();
@@ -106,7 +108,7 @@ async function fetchCatalogForModule(moduleCode: string, degreeCodeHint?: string
     let nivel = '';
     try {
       const degreeCode = json.data.degree_code || moduleCode;
-      const curRes = await fetch(`/api/catalog/curriculum/${degreeCode}`);
+      const curRes = await fetch(`${getApiBase()}/api/catalog/curriculum/${degreeCode}`);
       if (curRes.ok) {
         const curJson = await curRes.json();
         if (curJson.status === 'success' && curJson.data) {

@@ -148,7 +148,7 @@ export default function InicioPage() {
   // ── NEW ─────────────────────────────────────────────────
 
   const handleNewPd = () => {
-    router.push("/catalogo?tab=cursos");
+    router.push("/catalogo?tab=familias");
   };
 
   const handleNewCurso = () => {
@@ -303,9 +303,11 @@ export default function InicioPage() {
   // activeModuleId todavía es null aunque haya datos guardados, así que si
   // solo abriéramos el wizard se quedaría abierto para siempre una vez que
   // la rehidratación completase y activeModuleId pasara a tener valor.
+  // En modo «Reales» el docente ya ha elegido trabajar con sus ficheros (conectar carpeta, abrir, importar):
+  // el asistente no debe taparle la pantalla de Datos, que además no tiene botón de cierre.
   useEffect(() => {
-    setWizardOpen(!activeModuleId && !activeCursoId);
-  }, [activeModuleId, activeCursoId, setWizardOpen]);
+    setWizardOpen(!activeModuleId && !activeCursoId && dataSource !== 'local');
+  }, [activeModuleId, activeCursoId, dataSource, setWizardOpen]);
 
   const TABS = [
     { id: "bienvenida", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.bienvenida')}</>, cleanLabel: t('tabs.bienvenida') },

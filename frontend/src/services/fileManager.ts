@@ -7,6 +7,7 @@ import {
 } from "@/services/fileBackend";
 import { prepareProgramacionForExport, prepareProgramacionAsTemplate, prepareCursoForExport } from "@/services/fileExport";
 import { serializarParaGuardar, leerFichero, type AlmacenCifrado } from "@/services/cifradoEspacio";
+import { getApiBase } from "@/services/apiBase";
 export type DataSourceType = 'demo' | 'local';
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -171,8 +172,8 @@ export const fileManager = {
       try {
         const degreeCode = extras?.titulo_codigo;
         const url = degreeCode
-          ? `/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCode)}`
-          : `/api/catalog/module/${moduleCode}`;
+          ? `${getApiBase()}/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCode)}`
+          : `${getApiBase()}/api/catalog/module/${moduleCode}`;
         const res = await fetch(url);
         if (res.ok) {
           const json = await res.json();
@@ -519,16 +520,18 @@ export const fileManager = {
       const { content: groupText, ref: groupRef } = await readFileInDir(dir, groupFileName);
       const groupData = JSON.parse(groupText);
 
-      if (groupData.tipo !== 'grupo' || !groupData.programacion || !groupData.curso) {
+      // Formato real del .fpg: { tipo: "GRUPO", archivos: { programacion, curso } } (ver createGroup y los .fpg de demo)
+      const archivosGrupo = groupData.archivos;
+      if (groupData.tipo !== 'GRUPO' || !archivosGrupo?.programacion || !archivosGrupo?.curso) {
         throw new Error("Invalid group file format");
       }
 
       // Read Programacion
-      const pdFileName = groupData.programacion.endsWith('.fpp') || groupData.programacion.endsWith('.json') ? groupData.programacion : `${groupData.programacion}.fpp`;
+      const pdFileName = archivosGrupo.programacion.endsWith('.fpp') || archivosGrupo.programacion.endsWith('.json') ? archivosGrupo.programacion : `${archivosGrupo.programacion}.fpp`;
       const { content: pdText, ref: pdRef } = await readFileInDir(dir, pdFileName);
 
       // Read Curso
-      const cursoFileName = groupData.curso.endsWith('.fpc') || groupData.curso.endsWith('.json') ? groupData.curso : `${groupData.curso}.fpc`;
+      const cursoFileName = archivosGrupo.curso.endsWith('.fpc') || archivosGrupo.curso.endsWith('.json') ? archivosGrupo.curso : `${archivosGrupo.curso}.fpc`;
       const { content: cursoText, ref: cursoRef } = await readFileInDir(dir, cursoFileName);
 
       // Set Source explicitly to local to break away from demo
@@ -750,8 +753,8 @@ export const fileManager = {
       try {
         const degreeCode = parsed.info_modulo?.titulo_codigo;
         const url = degreeCode
-          ? `/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCode)}`
-          : `/api/catalog/module/${moduleCode}`;
+          ? `${getApiBase()}/api/catalog/module/${moduleCode}?degree_code=${encodeURIComponent(degreeCode)}`
+          : `${getApiBase()}/api/catalog/module/${moduleCode}`;
         const res = await fetch(url);
         if (res.ok) {
           const catalogData = await res.json();

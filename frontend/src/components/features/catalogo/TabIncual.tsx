@@ -1,3 +1,4 @@
+import { getApiBase } from "@/services/apiBase";
 import React, { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/Card";
 import { Award, BookOpen, ChevronDown, ChevronUp, ExternalLink, MapPin, Loader2, Bookmark } from "lucide-react";
@@ -18,7 +19,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
   const [expandedLevel, setExpandedLevel] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/families')
+    fetch(`${getApiBase()}/api/families`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
@@ -46,7 +47,7 @@ export function TabIncual({ globalSelection, updateGlobalSelection }: TabIncualP
 
   const fetchIncualData = (id: number) => {
     setLoading(true);
-    fetch(`/api/families/${id}/incual`)
+    fetch(`${getApiBase()}/api/families/${id}/incual`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {
