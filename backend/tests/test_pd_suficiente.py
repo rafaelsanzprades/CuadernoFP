@@ -116,3 +116,8 @@ def test_cada_ud_lleva_sus_objetivos_generales_y_las_competencias():
     assert "[[ Indica aquí las competencias profesionales" in t
     t = _generar({"config_contexto.cpe": "Competencia digital y trabajo en equipo."})
     assert "contribuye el módulo: Competencia digital y trabajo en equipo." in t
+
+
+def test_la_infraestructura_de_contexto_llega_a_herramientas():
+    t = _generar({"config_contexto.infraestructura": "Aula con 20 puestos y servidor propio."})
+    assert "Aula con 20 puestos y servidor propio." in t

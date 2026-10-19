@@ -567,11 +567,11 @@ def _build_context(data: dict) -> dict:
 
     # ── SECCIÓN J: HERRAMIENTAS — resuelve recursos_espacios (catálogo
     # codificado en helpers_catalogo.RECURSOS_LABELS + añadidos libres del
-    # profesorado), más G1_infraestructuras/G2_herramientas_tic (nombres
+    # profesorado), más infraestructura/G2_herramientas_tic (nombres
     # heredados, texto libre real) si existen ──────────────────────────
     recursos = data.get("recursos_espacios") or []
     list_herramientas = resolve_recursos(recursos) if recursos else list(DEFAULT_HERRAMIENTAS)
-    g1_infra = config.get("G1_infraestructuras", "")
+    g1_infra = config.get("infraestructura", "")
     if g1_infra:
         list_herramientas.append(g1_infra)
     g2_tic = config.get("G2_herramientas_tic", "")

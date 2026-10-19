@@ -388,7 +388,7 @@ def _build_context(data: dict) -> dict:
         config.get("G2_herramientas", ""))
     context["plataforma_educativa"] = config.get("plataforma_educativa", "Moodle")
     context["ubicacion_recursos"] = config.get("ubicacion_recursos",
-        config.get("G1_infraestructuras", ""))
+        config.get("infraestructura", ""))
 
     # --- Agrupamientos ---
     context["agrupamiento_individual"] = config.get("agrupamiento_individual", "")
@@ -399,7 +399,7 @@ def _build_context(data: dict) -> dict:
     context["tipo_aula"] = config.get("tipo_aula",
         config.get("D3_agrupamientos", ""))
     context["tipo_equipos"] = config.get("tipo_equipos",
-        config.get("G1_infraestructuras", ""))
+        config.get("infraestructura", ""))
 
     # --- Evaluacion ---
     inst_list = data.get("instrumentos_seleccionados", [])
