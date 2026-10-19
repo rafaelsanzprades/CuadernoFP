@@ -354,7 +354,8 @@ def generar_documento(
             "df_ace": module_data.get("df_ace") or [],
             "config_contexto": config_contexto_pd,
             "config_aula": module_data.get("config_aula") or curso_data.get("config_aula") or {},
-            "config_redondeo": curso_data.get("config_redondeo") or {"nota_aprobado": 5.0, "umbral_redondeo": 4.5},
+            # config_redondeo vive en moduleData (ALLOWED_PROGRAMACION_KEYS), no en cursoData
+            "config_redondeo": module_data.get("config_redondeo") or {"nota_aprobado": 5.0, "umbral_redondeo": 5.0},
             "info_modulo": info_mod,
             "curriculo_data": curriculo_pd,
             "is_dual": module_data.get("is_dual", False),

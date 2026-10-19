@@ -549,7 +549,7 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-teal-500">
         <p className="text-caption text-muted mb-4">
-          {t('campos.contexto.avisoModeloSimplificado', {defaultValue: 'Estos 2 campos son específicos del documento "Programación suficiente" (modelo oficial Simplificado). Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.'})}
+          {t('campos.contexto.avisoModeloSimplificado', {defaultValue: 'Estos 3 campos son específicos del documento "Programación suficiente" (modelo oficial Simplificado). Si se dejan vacíos, se autogenera un texto por defecto razonable a partir del resto de datos del módulo.'})}
         </p>
         <div className="space-y-4">
           <div>
@@ -558,6 +558,15 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
               value={config_contexto.texto_introduccion || ""}
               onChange={e => handleContextoChange("texto_introduccion", e.target.value)}
               placeholder={t('placeholders.contexto.textoIntroduccion', {defaultValue: 'Párrafo introductorio del documento. Si se deja vacío, se genera uno automáticamente con el nombre del módulo, ciclo, régimen y duración.'})}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.contexto.marcoNormativo', {defaultValue: 'Marco normativo'})}</label>
+            <textarea
+              value={config_contexto.marco_normativo || ""}
+              onChange={e => handleContextoChange("marco_normativo", e.target.value)}
+              placeholder={t('placeholders.contexto.marcoNormativo', {defaultValue: 'Normas que se citan en la introducción. Si se deja vacío, se escribe el marco de Aragón: LO 3/2022, RD 659/2023, Decreto 91/2024 (modificado por el Decreto 107/2025) y la orden de currículo del ciclo.'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>

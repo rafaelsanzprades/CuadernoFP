@@ -179,11 +179,17 @@ single-line ones with a real corresponding data field are bugs. Full trace of th
 JEG-template investigation lives in the local, gitignored `RF Ideas/00 IDEAS.md` (2026-08-02 entry)
 — not committed, so it won't be present on a fresh clone or after a machine reset.
 
-`generador_pd_suficiente_tpl.py` (pd=) already ships as a complete, correctly-tagged docxtpl template
-(no prep script needed) — confirmed by rendering it with real data and finding zero unrendered tags.
-Its 4 free-text fields (`texto_introduccion`, `texto_uds_modulo`, `texto_feoe`,
-`texto_criterios_calificacion`, all under `moduleData.config_contexto`) now have UI inputs in
-`ContextoTab.tsx`; leaving them blank still falls back to the auto-generated defaults.
+`generador_pd_suficiente_tpl.py` (pd=) ships as a correctly-tagged docxtpl template (zero unrendered tags when
+rendered with real data). Four passes of one-shot fixes live in `backend/scripts/arreglar_plantilla_pd_suficiente*.py`
+(the 4th, after reviewing against Decreto 107/2025, removed the hard-coded «85%» / «se media a partir de un 4», made
+the introduction a `list_intro` loop with marco normativo + Contexto > Entorno texts, and added the apartado H
+`texto_calificacion_minima`); it is idempotent and overwrites `templates/modelo_pd_fp=.docx`.
+Its 5 free-text fields (`texto_introduccion`, `marco_normativo`, `texto_uds_modulo`, `texto_feoe`,
+`texto_criterios_calificacion`, all under `moduleData.config_contexto`) have UI inputs in `ContextoTab.tsx`;
+leaving them blank falls back to the auto-generated defaults (marco normativo: Aragón's norms).
+`config_redondeo.nota_minima_ra` (Contexto > Evaluación) is the per-RA minimum to compensate that Aragón requires
+(3–5, art. 99.4.g / 100.2.h): the grade engine applies it (TS `notaFinalPonderada` and Python `calcular_notas_jeg`,
+keep both in sync) and pd= prints it; if empty, pd= leaves a visible `[[ ]]` mark instead of omitting it.
 
 To inspect what a `.docx` template actually expects: unzip it (`.docx` is a zip), read
 `word/document.xml`, **strip XML tags before regexing for `{{ }}`** — Word splits text across multiple

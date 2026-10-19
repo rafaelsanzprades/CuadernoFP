@@ -132,6 +132,34 @@ def _ra_id_full(ra: dict) -> str:
     return f"{prefix}{id_str}"
 
 
+def _fmt_nota(n):
+    """4 -> '4'; 4.5 -> '4,5'."""
+    n = float(n)
+    return str(int(n)) if n.is_integer() else str(n).replace(".", ",")
+
+
+def _marco_normativo_aragon(nivel):
+    """Normas que se citan por defecto en la introducción (letra a del art. 100.2 del Decreto 91/2024, tras el Decreto 107/2025).
+
+    La orden de currículo depende del grado: ECD/842/2024 (grado medio) o ECD/843/2024 (grado superior); en otro caso se omite.
+    El profesorado puede sustituir todo este texto en Contexto > Marco normativo (config_contexto.marco_normativo)."""
+    normas = [
+        "la Ley Orgánica 3/2022, de 31 de marzo, de ordenación e integración de la Formación Profesional",
+        "el Real Decreto 659/2023, de 18 de julio, por el que se desarrolla la ordenación del Sistema de Formación Profesional",
+        "el Decreto 91/2024, de 5 de junio, del Gobierno de Aragón, por el que se establece la ordenación de la Formación Profesional "
+        "del Grado D y del Grado E, modificado por el Decreto 107/2025, de 10 de septiembre",
+    ]
+    n = (nivel or "").lower()
+    if "medio" in n:
+        normas.append("la Orden ECD/842/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen "
+                      "los currículos de determinados ciclos formativos de grado medio")
+    elif "superior" in n:
+        normas.append("la Orden ECD/843/2024, de 25 de julio, por la que se regulan aspectos organizativos del currículo y se establecen "
+                      "los currículos de determinados ciclos formativos de grado superior")
+    normas.append("el real decreto que establece el título y sus enseñanzas mínimas")
+    return "Esta programación se ajusta a " + "; ".join(normas) + "."
+
+
 def _build_context(data: dict) -> dict:
     """
     Construye el contexto Jinja2 para la PD= (Suficiente/BOA).
@@ -180,6 +208,8 @@ def _build_context(data: dict) -> dict:
     df_ce = data.get("df_ce", [])
     df_sgmt = data.get("df_sgmt", [])
     config = data.get("config_contexto", {})
+    grado_txt = (nivel or "Grado Medio").strip().lower()
+    p_ev = info_mod.get("p_ev") or 15  # % de faltas que hace perder la evaluación continua (campo de Programación > Módulo > Datos)
 
     # Mapa id_ud -> evaluación (1/2/3) calculado en Planificación mensual
     # (frontend/src/utils/planningGenerator.ts) a partir de la fecha en la
@@ -205,8 +235,8 @@ def _build_context(data: dict) -> dict:
     if not texto_intro:
         texto_intro = (
             f"Programación didáctica del módulo profesional {modulo}, "
-            f"perteneciente al {curso_ciclo} curso del ciclo formativo de grado "
-            f"medio {ciclo}, que se imparte en régimen {regimen}, con una duración "
+            f"perteneciente al {curso_ciclo} curso del ciclo formativo de "
+            f"{grado_txt} {ciclo}, que se imparte en régimen {regimen}, con una duración "
             f"de {horas_totales} periodos lectivos a lo largo del curso académico, "
             f"a razón de {horas_semanales} períodos lectivos semanales."
         )
@@ -219,6 +249,16 @@ def _build_context(data: dict) -> dict:
         if extra_intro:
             texto_intro = texto_intro + " " + extra_intro
     context["texto_introduccion"] = texto_intro
+    # Letra a) del art. 100.2: la introducción incluye el marco normativo y su contextualización con el entorno del centro.
+    # Un párrafo por elemento: la plantilla los recorre con un bucle ({%p for x in list_intro %}).
+    list_intro = [texto_intro, "Marco normativo. " + (config.get("marco_normativo") or _marco_normativo_aragon(nivel))]
+    for etiqueta, clave in (("Entorno geográfico y sociocultural", "entorno_geografico"),
+                            ("Entorno socioeconómico y productivo", "entorno_socioeconomico"),
+                            ("Contexto escolar", "contexto_escolar")):
+        if config.get(clave):
+            list_intro.append(f"{etiqueta}. {config[clave]}")
+    context["list_intro"] = list_intro
+    context["p_ev"] = p_ev
 
     texto_uds = config.get("texto_uds_modulo", "")
     if not texto_uds:
@@ -479,6 +519,21 @@ def _build_context(data: dict) -> dict:
     )
 
     # ── SECCIÓN H: RESULTADOS DE APRENDIZAJE — número variable de RA ────
+    # Letra h) del art. 100.2: calificación mínima por RA para poder compensar (Programación > Módulo > Datos).
+    # Si no está fijada, el documento deja una marca [[ ]] visible para completarla a mano en lugar de omitirla.
+    nota_min = (data.get("config_redondeo") or {}).get("nota_minima_ra")
+    if nota_min in (None, ""):
+        context["texto_media_minima"] = ""
+        context["texto_calificacion_minima"] = (
+            "[[ Indica aquí la calificación mínima que debe alcanzar cada resultado de aprendizaje para poder compensarse "
+            "(en Aragón, entre 3 y 5), fijada en el Proyecto curricular. ]]"
+        )
+    else:
+        context["texto_media_minima"] = f" (se media a partir de un {_fmt_nota(nota_min)})"
+        context["texto_calificacion_minima"] = (
+            f"Calificación mínima fijada en el Proyecto curricular: {_fmt_nota(nota_min)} sobre 10. "
+            "Un resultado de aprendizaje con una calificación inferior no puede compensarse con los demás."
+        )
     context["n_ra"] = len(df_ra)
     context["list_ras_h"] = [f"RA {i}. {resolve_ra_desc(ra, ra_desc_map)}" for i, ra in enumerate(df_ra, 1)]
 
