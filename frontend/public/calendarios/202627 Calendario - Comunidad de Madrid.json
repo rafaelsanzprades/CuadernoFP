@@ -34,7 +34,7 @@
     },
     {
       "fecha": "2026-12-07",
-      "nombre": "Lunes siguiente al Día de la Constitución"
+      "nombre": "Lunes siguiente al Día de la Constitución Española"
     },
     {
       "fecha": "2026-12-08",
@@ -58,7 +58,7 @@
     },
     {
       "fecha": "2027-03-19",
-      "nombre": "Día no lectivo"
+      "nombre": "San José"
     },
     {
       "fecha": "2027-03-29",
@@ -79,6 +79,7 @@
   ],
   "notas": [
     "Las festividades locales de cada municipio se publican en el BOCM.",
+    "En Bachillerato y FP, con carácter general, la evaluación final ordinaria se hace hasta el 10 de junio de 2027 (Orden 2034/2026, apartado 3); el periodo hasta el 18 de junio se dedica a apoyo, refuerzo y pruebas extraordinarias.",
     "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
   ]
 }

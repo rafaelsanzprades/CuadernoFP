@@ -2552,7 +2552,7 @@
       "importarOficialError": "The calendar could not be loaded.",
       "importarOficialCalendario": "Calendar",
       "importarOficialProvincia": "Province (provincial breaks)",
-      "importarOficialSinProvincia": "Do not add",
+      "importarOficialSinProvincia": "Choose your province (otherwise none are added)",
       "importarOficialFechas": "Also set course start and end",
       "importarOficialFuente": "Source",
       "importarOficialConsultado": "consulted",

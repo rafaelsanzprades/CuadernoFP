@@ -42,7 +42,7 @@
     },
     {
       "fecha": "2026-12-07",
-      "nombre": "Lunes siguiente al Día de la Constitución"
+      "nombre": "Lunes siguiente al Día de la Constitución Española"
     },
     {
       "fecha": "2026-12-08",
@@ -84,6 +84,7 @@
   ],
   "notas": [
     "Las actividades escolares acaban el 30 de junio de 2027; las lectivas, el 23 de junio.",
-    "Los festivos de ámbito nacional y autonómico vienen del BOE; los dos festivos locales de tu localidad no están incluidos: los añades tú."
+    "La FP de grado básico empieza el 9 de septiembre de 2026, antes que los ciclos formativos de FP presencial (14 de septiembre).",
+    "Los festivos de ámbito nacional vienen del BOE; los propios de la ciudad ya figuran en las fechas del calendario oficial."
   ]
 }

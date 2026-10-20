@@ -915,7 +915,8 @@ export default function CalendarioPage() {
                     ccaaInicial={moduleData?.info_modulo?.ccaa}
                     onImport={(notes, fechas) => {
                       updateCursoData("calendar_notes", notes);
-                      if (fechas) updateCursoData("info_fechas", { ...info_fechas, ...fechas });
+                      // Si el calendario no fija el fin de curso (Cataluña, País Vasco), no se arrastra el de otro calendario importado antes.
+                      if (fechas) updateCursoData("info_fechas", { ...info_fechas, ini_curso: fechas.ini_curso ?? info_fechas.ini_curso, fin_curso: fechas.fin_curso ?? "" });
                     }}
                   />
                   <NotesTable

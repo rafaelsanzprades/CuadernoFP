@@ -119,7 +119,7 @@ export function ImportarCalendarioOficial({ calendarNotes, infoFechas, provincia
           <label className="text-caption text-muted flex flex-col gap-1">
             {t('campos.calendario.importarOficialProvincia', { defaultValue: 'Provincia (vacaciones provinciales)' })}
             <select value={provincia} onChange={e => setProvincia(e.target.value)} className="bg-background border border-[var(--glass-border)] rounded-lg px-3 py-2 text-body text-foreground">
-              <option value="">{t('campos.calendario.importarOficialSinProvincia', { defaultValue: 'No añadir' })}</option>
+              <option value="">{t('campos.calendario.importarOficialSinProvincia', { defaultValue: 'Elige tu provincia (si no, no se añaden)' })}</option>
               {provs.map(p => <option key={p} value={p}>{p}</option>)}
             </select>
           </label>
