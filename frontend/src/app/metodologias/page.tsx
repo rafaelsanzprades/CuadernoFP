@@ -63,7 +63,7 @@ export default function MetodologiaConfigPage() {
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
     estrategias: t('tabs.metodologia.metodologia.desc', {defaultValue: 'Estrategias metodológicas y coordinación docente, e innovación e intermodularidad.'}),
-    'recursos-espacios': t('tabs.metodologia.recursosEspacios.desc', {defaultValue: 'Instrumentos de evaluación seleccionados y recursos y espacios necesarios.'}),
+    'recursos-espacios': t('tabs.metodologia.recursosEspacios.desc', {defaultValue: 'Herramientas, recursos y espacios necesarios para el desarrollo curricular.'}),
     diversidad: t('tabs.metodologia.diversidad.desc', {defaultValue: 'Marco de inclusión, atención a la diversidad, plan DUA y panel de alumnado ACNEAE.'}),
     contingencia: t('tabs.metodologia.contingencia.desc', {defaultValue: 'Planes de contingencia y adaptación ante situaciones excepcionales.'}),
     transversales: t('tabs.metodologia.transversales.desc', {defaultValue: 'Elementos transversales, competencias clave, competencias digitales y estándares y objetivos del currículo.'}),

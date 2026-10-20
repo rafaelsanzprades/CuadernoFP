@@ -20,6 +20,7 @@ import { Settings2 } from "lucide-react";
 import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
 import { JegModeloTab } from "@/components/features/instrumentos/JegModeloTab";
 import { GestionRubricasTab } from "@/components/features/instrumentos/GestionRubricasTab";
+import { CatalogoInstrumentos } from "@/components/features/instrumentos/CatalogoInstrumentos";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
 import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
@@ -63,7 +64,7 @@ export default function InstrumentosPage() {
     resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados (RD 659/2023, Art. 136).'}),
     trimestres: t('tabs.instrumentos.trimestres.desc', {defaultValue: 'Instrumentos de evaluación planificados para cada trimestre.'}),
     rubricas: t('tabs.instrumentos.rubricas.desc', {defaultValue: 'Rúbricas reutilizables: define criterios (que deben sumar 10 puntos entre todos) y niveles de desempeño, y asígnalas a cualquier instrumento desde su Configuración avanzada.'}),
-    evaluacion: t('tabs.instrumentos.evaluacion.desc', {defaultValue: 'Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas.'}),
+    evaluacion: t('tabs.instrumentos.evaluacion.desc', {defaultValue: 'Catálogo de instrumentos, reglas de redondeo y compensación, ponderación por trimestres y escalas cualitativas.'}),
     procedimientos: t('tabs.instrumentos.procedimientos.desc', {defaultValue: 'Información y procedimientos de evaluación, modelo de recuperación, criterios de calificación y textos del modelo simplificado.'}),
     jeg: t('tabs.instrumentos.jeg.desc', {defaultValue: 'Modelo JEG por indicadores: configuración del motor de calificación real de la app.'}),
   };
@@ -71,6 +72,7 @@ export default function InstrumentosPage() {
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
     evaluacion: [
+      { id: "instrumentos-catalogo", label: t('campos.instrumentos.catalogoTitulo', {defaultValue: 'Catálogo de instrumentos de evaluación y de calificación'}) },
       { id: "datos-reglas-redondeo", label: t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'}) },
       { id: "datos-instrumentos-evaluacion", label: t('campos.modulo.tituloPonderacionInstrumentos', {defaultValue: '% Ponderación e instrumentos de evaluación'}) },
       { id: "datos-escalas-evaluacion", label: t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'}) },
@@ -624,7 +626,12 @@ export default function InstrumentosPage() {
           )}
           {activeTab === "rubricas" && <GestionRubricasTab />}
           {activeTab === "jeg" && <JegModeloTab />}
-          {activeTab === "evaluacion" && <DatosTab bloques={["datos-reglas-redondeo", "datos-instrumentos-evaluacion", "datos-escalas-evaluacion"]} />}
+          {activeTab === "evaluacion" && (
+            <div className="space-y-8">
+              <CatalogoInstrumentos />
+              <DatosTab bloques={["datos-reglas-redondeo", "datos-instrumentos-evaluacion", "datos-escalas-evaluacion"]} />
+            </div>
+          )}
           {activeTab === "procedimientos" && (
             <div className="space-y-8">
               <ProcedimientosTab bloques={["procedimientos-evaluacion-inicial", "procedimientos-modelo-recuperacion", "procedimientos-informacion", "procedimientos-criterios-calificacion"]} />

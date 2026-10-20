@@ -92,7 +92,7 @@
     "instrumentos": {
       "evaluacion": {
         "label": "Evaluación",
-        "desc": "Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas."
+        "desc": "Catálogo de instrumentos, reglas de redondeo y compensación, ponderación por trimestres y escalas cualitativas."
       },
       "procedimientos": {
         "label": "Procedimientos",
@@ -510,6 +510,9 @@
           "boton": "Abrir la web"
         }
       }
+    },
+    "instrumentos": {
+      "catalogoTitulo": "Catálogo de instrumentos de evaluación y de calificación"
     }
   },
   "archivos": {

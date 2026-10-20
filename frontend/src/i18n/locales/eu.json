@@ -186,7 +186,7 @@
       },
       "recursosEspacios": {
         "label": "Baliabideak eta espazioak",
-        "desc": "Hautatutako ebaluazio-tresnak eta behar diren baliabideak eta espazioak."
+        "desc": "Curriculuma garatzeko behar diren tresnak, baliabideak eta espazioak."
       },
       "diversidad": {
         "label": "Aniztasunari arreta",
@@ -219,7 +219,7 @@
       },
       "evaluacion": {
         "label": "Ebaluazioa",
-        "desc": "Biribiltze- eta konpentsazio-arauak, hiruhilekoen araberako haztapena eta ebaluazio-tresnak, eta eskala kualitatiboak."
+        "desc": "Tresnen katalogoa, biribiltze- eta konpentsazio-arauak, hiruhilekoen araberako haztapena eta eskala kualitatiboak."
       },
       "procedimientos": {
         "label": "Prozedurak",
@@ -2207,7 +2207,8 @@
       "evaluacionOrdinariaRecuperacion": "Ohiko ebaluazioa + berreskurapena (R1-RF) — {{apellidos}}",
       "nInstrumentos": "{{count}} tresna",
       "sumaPesos": "Batura: %{{pct}}",
-      "resumenPorTrimestresTitulo": "Ebaluazio-tresnen laburpena hiruhilekoka"
+      "resumenPorTrimestresTitulo": "Ebaluazio-tresnen laburpena hiruhilekoka",
+      "catalogoTitulo": "Ebaluazio- eta kalifikazio-tresnen katalogoa"
     },
     "catalogo": {
       "tituloAcronimosGlosario": "Akronimoak eta glosarioa",

@@ -186,7 +186,7 @@
       },
       "recursosEspacios": {
         "label": "Recursos e espazos",
-        "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios."
+        "desc": "Ferramentas, recursos e espazos necesarios para o desenvolvemento curricular."
       },
       "diversidad": {
         "label": "Atención á diversidade",
@@ -219,7 +219,7 @@
       },
       "evaluacion": {
         "label": "Avaliación",
-        "desc": "Regras de redondeo e compensación, ponderación por trimestres e instrumentos de avaliación, e escalas cualitativas."
+        "desc": "Catálogo de instrumentos, regras de redondeo e compensación, ponderación por trimestres e escalas cualitativas."
       },
       "procedimientos": {
         "label": "Procedementos",
@@ -2207,7 +2207,8 @@
       "evaluacionOrdinariaRecuperacion": "Avaliación ordinaria + recuperación (R1-RF) — {{apellidos}}",
       "nInstrumentos": "{{count}} instr.",
       "sumaPesos": "Suma: {{pct}}%",
-      "resumenPorTrimestresTitulo": "Resumo de instrumentos de avaliación por trimestres"
+      "resumenPorTrimestresTitulo": "Resumo de instrumentos de avaliación por trimestres",
+      "catalogoTitulo": "Catálogo de instrumentos de avaliación e de cualificación"
     },
     "catalogo": {
       "tituloAcronimosGlosario": "Acrónimos e glosario",

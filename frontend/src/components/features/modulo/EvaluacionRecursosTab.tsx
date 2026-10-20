@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { CheckCircle2, Plus, X } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
-import { INSTRUMENTOS_EVALUACION, INSTRUMENTOS_CALIFICACION } from "@/data/instrumentosEvaluacion";
 import { RECURSOS_DIDACTICOS } from "@/data/herramientasRecursos";
 import { useTranslation } from "react-i18next";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -16,17 +15,11 @@ export function EvaluacionRecursosTab() {
   const recursosCatalogoIds = new Set(RECURSOS_DIDACTICOS.map((r) => r.id));
   const categorias = Array.from(new Set(RECURSOS_DIDACTICOS.map((r) => r.categoria)));
 
-  const inst_seleccionados = moduleData?.instrumentos_seleccionados || [];
   const rec_seleccionados: string[] = moduleData?.recursos_espacios || [];
   // Recursos añadidos a mano por el profesorado: cualquier entrada de
   // recursos_espacios que no sea un id del catálogo se trata como texto
   // libre (sin tocar el esquema, recursos_espacios ya es string[]).
   const rec_personalizados = rec_seleccionados.filter((r) => !recursosCatalogoIds.has(r));
-
-  const toggleInst = (id: string) => {
-    const updated = inst_seleccionados.includes(id) ? inst_seleccionados.filter((i: string) => i !== id) : [...inst_seleccionados, id];
-    updateModuleData("instrumentos_seleccionados", updated);
-  };
 
   const toggleRec = (id: string) => {
     const updated = rec_seleccionados.includes(id) ? rec_seleccionados.filter((i: string) => i !== id) : [...rec_seleccionados, id];
@@ -53,48 +46,6 @@ export function EvaluacionRecursosTab() {
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-amber-500">
         <div className="space-y-6">
-
-          <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.instrumentosEvaluacionLabel', {defaultValue: 'Instrumentos de evaluación'})}</label>
-            <p className="text-caption text-muted mb-3">{t('campos.modulo.instrumentosEvaluacionDesc', {defaultValue: 'La actividad que genera la evidencia: qué hace el alumnado.'})}</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {INSTRUMENTOS_EVALUACION.map((inst) => {
-                const isSelected = inst_seleccionados.includes(inst.id);
-                return (
-                  <label key={inst.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-amber-500/10 border-amber-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      onChange={() => toggleInst(inst.id)}
-                      className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
-                    />
-                    <span className="text-caption"><strong>{inst.id}</strong> - {t(`checks.modulo.instEval_${inst.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: inst.label})}</span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.instrumentosCalificacionLabel', {defaultValue: 'Instrumentos de calificación'})}</label>
-            <p className="text-caption text-muted mb-3">{t('campos.modulo.instrumentosCalificacionDesc', {defaultValue: 'Lo que puntúa esa evidencia: la rúbrica o escala aplicada.'})}</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {INSTRUMENTOS_CALIFICACION.map((inst) => {
-                const isSelected = inst_seleccionados.includes(inst.id);
-                return (
-                  <label key={inst.id} className={`flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors ${isSelected ? 'bg-amber-500/10 border-amber-500/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      onChange={() => toggleInst(inst.id)}
-                      className="rounded border-white/20 bg-transparent text-amber-500 focus:ring-amber-500"
-                    />
-                    <span className="text-caption"><strong>{inst.id}</strong> - {t(`checks.modulo.instCalif_${inst.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: inst.label})}</span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
 
           <div>
             <label className="text-body font-semibold text-foreground mb-2 block">{t('campos.modulo.herramientasRecursosLabel', {defaultValue: 'Herramientas, recursos y espacios'})}</label>

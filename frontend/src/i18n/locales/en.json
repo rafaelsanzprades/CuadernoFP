@@ -186,7 +186,7 @@
       },
       "recursosEspacios": {
         "label": "Resources and spaces",
-        "desc": "Selected assessment instruments and the resources and spaces required."
+        "desc": "Tools, resources and spaces needed for the curriculum."
       },
       "diversidad": {
         "label": "Attention to diversity",
@@ -219,7 +219,7 @@
       },
       "evaluacion": {
         "label": "Assessment",
-        "desc": "Rounding and compensation rules, weighting by term and assessment instruments, and qualitative scales."
+        "desc": "Instrument catalogue, rounding and compensation rules, weighting by term and qualitative scales."
       },
       "procedimientos": {
         "label": "Procedures",
@@ -2207,7 +2207,8 @@
       "evaluacionOrdinariaRecuperacion": "Ordinary assessment + recovery (R1-RF) — {{apellidos}}",
       "nInstrumentos": "{{count}} instr.",
       "sumaPesos": "Sum: {{pct}}%",
-      "resumenPorTrimestresTitulo": "Summary of assessment instruments by term"
+      "resumenPorTrimestresTitulo": "Summary of assessment instruments by term",
+      "catalogoTitulo": "Catalogue of assessment and grading instruments"
     },
     "catalogo": {
       "tituloAcronimosGlosario": "Acronyms and glossary",
