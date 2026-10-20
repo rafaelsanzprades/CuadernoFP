@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-        "expediente": {
+      "expediente": {
         "label": "Expedient",
         "desc": "Butlletí individual, informe d'evidències i inserció laboral per alumnat."
       }
@@ -90,10 +90,10 @@
       }
     },
     "seguimiento": {
-        "abandono": {
-          "label": "Abandonament",
-          "desc": "Resum de risc d'abandonament a partir de l'assistència i les notes."
-        },
+      "abandono": {
+        "label": "Abandonament",
+        "desc": "Resum de risc d'abandonament a partir de l'assistència i les notes."
+      },
       "clases": {
         "label": "Lectives",
         "desc": "Diari de classes, sessions lectives i registre de contingències."
@@ -132,27 +132,27 @@
       "cambiosNota": "Canvis de nota"
     },
     "contexto": {
-        "identificacion": {
-          "label": "Identificació",
-          "desc": "Centre i docent, mòdul didàctic i dades d'autoria i publicitat."
-        },
-        "entorno": {
-          "label": "Entorn",
-          "desc": "Entorn geogràfic, socioeconòmic i escolar, activitats complementàries i pla FEOE."
-        },
-        "alumnado": {
-          "label": "Alumnat",
-          "desc": "Alumnat amb necessitats específiques (ACNEAE), dades i trets del grup i avaluació inicial."
-        },
-        "evaluacion": {
-          "label": "Avaluació",
-          "desc": "Regles d'arrodoniment i compensació, ponderació per trimestres i instruments d'avaluació, i escales qualitatives."
-        },
-        "procedimientos": {
-          "label": "Procediments",
-          "desc": "Informació i procediments d'avaluació, model de recuperació, criteris de qualificació i textos del model simplificat."
-        }
+      "identificacion": {
+        "label": "Identificació",
+        "desc": "Centre i docent, mòdul didàctic i dades d'autoria i publicitat."
       },
+      "entorno": {
+        "label": "Entorn",
+        "desc": "Entorn geogràfic, socioeconòmic i escolar, activitats complementàries i pla FEOE."
+      },
+      "alumnado": {
+        "label": "Alumnat",
+        "desc": "Alumnat amb necessitats específiques (ACNEAE), dades i trets del grup i avaluació inicial."
+      },
+      "evaluacion": {
+        "label": "Avaluació",
+        "desc": "Regles d'arrodoniment i compensació, ponderació per trimestres i instruments d'avaluació, i escales qualitatives."
+      },
+      "procedimientos": {
+        "label": "Procediments",
+        "desc": "Informació i procediments d'avaluació, model de recuperació, criteris de qualificació i textos del model simplificat."
+      }
+    },
     "curriculo": {
       "ponderacion-ra-ce": {
         "label": "Relació RA <- CE",
@@ -180,27 +180,27 @@
       }
     },
     "metodologia": {
-        "metodologia": {
-          "label": "Estratègies i innovació",
-          "desc": "Estratègies metodològiques i coordinació docent, i innovació i intermodularitat."
-        },
-        "recursosEspacios": {
-          "label": "Recursos i espais",
-          "desc": "Instruments d'avaluació seleccionats i recursos i espais necessaris."
-        },
-        "diversidad": {
-          "label": "Atenció a la diversitat",
-          "desc": "Marc d'inclusió, atenció a la diversitat, pla DUA i panell d'alumnat ACNEAE."
-        },
-        "contingencia": {
-          "label": "Pla de contingència",
-          "desc": "Plans de contingència i adaptació davant situacions excepcionals."
-        },
-        "transversales": {
-          "label": "Transversals",
-          "desc": "Elements transversals, competències clau, competències digitals i estàndards i objectius del currículum."
-        }
+      "metodologia": {
+        "label": "Estratègies i innovació",
+        "desc": "Estratègies metodològiques i coordinació docent, i innovació i intermodularitat."
       },
+      "recursosEspacios": {
+        "label": "Recursos i espais",
+        "desc": "Instruments d'avaluació seleccionats i recursos i espais necessaris."
+      },
+      "diversidad": {
+        "label": "Atenció a la diversitat",
+        "desc": "Marc d'inclusió, atenció a la diversitat, pla DUA i panell d'alumnat ACNEAE."
+      },
+      "contingencia": {
+        "label": "Pla de contingència",
+        "desc": "Plans de contingència i adaptació davant situacions excepcionals."
+      },
+      "transversales": {
+        "label": "Transversals",
+        "desc": "Elements transversals, competències clau, competències digitals i estàndards i objectius del currículum."
+      }
+    },
     "instrumentos": {
       "resumen": {
         "desc": "Visió global dels instruments d'avaluació utilitzats (RD 659/2023, Art. 136) i, més avall, el model experimental JEG per indicadors."
@@ -249,15 +249,7 @@
     },
     "normativa": {
       "autonomias": {
-        "label": "Comunitats autònomes",
-        "desc": "Documents i plantilles descarregables de la teva comunitat autònoma, organitzats per grau."
-      },
-      "bibliografia": {
-        "label": "Bibliografia",
-        "desc": "Índex de lleis, decrets i ordres estatals i autonòmiques de FP, amb enllaç al butlletí oficial."
-      },
-      "legislacion": {
-        "desc": "Legislació autonòmica i normativa específica."
+        "label": "Comunitats autònomes"
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -281,10 +273,6 @@
         "label": "Curs",
         "desc": "Calendari, seguiment, plànol d'aula, butlletins i actes d'avaluació del curs."
       },
-      "analisisPdx": {
-        "label": "Anàlisi APP->PDx",
-        "desc": "De l'app a on apareix cada camp en cada model de programació didàctica (PD-, PD=, PD+)."
-      },
       "documentosPdx": {
         "label": "Documents PDx",
         "desc": "Genera i descarrega les programacions didàctiques PD-, PD= i PD+ en format editable, per comunitat autònoma."
@@ -294,18 +282,6 @@
       "comparativa": {
         "label": "Comparativa",
         "desc": "Comparativa dels diferents nivells de programació i on s'emplena cada apartat."
-      },
-      "pdminus": {
-        "label": "APP → PD- (Resum)",
-        "desc": "De l'app a on apareix cada bloc en el resum d'1-2 fulls per a l'alumnat (PD-)."
-      },
-      "pdigual": {
-        "label": "APP → PD= (Simplificada)",
-        "desc": "De l'app a on apareix cada camp en el model oficial simplificat, 14 apartats A-N (PD=)."
-      },
-      "pdplus": {
-        "label": "APP → PD+ (Detallada JEG)",
-        "desc": "De l'app a on apareix cada camp en la programació detallada tipus JEG (PD+), capítol a capítol."
       }
     },
     "ayuda": {
@@ -361,7 +337,6 @@
         "desc": "Panell de control d'accés ràpid a totes les eines."
       }
     },
-    "legislacion": "Legislació",
     "agenda": {
       "agenda": {
         "label": "Agenda",
@@ -406,7 +381,6 @@
     "calificaciones": "Qualificacions",
     "cierre": "Tancament",
     "informes": "Informes",
-    "normativa": "Documents",
     "instrumentos": "Instruments",
     "calidad": "Qualitat",
     "mejora": "Millora",
@@ -463,7 +437,6 @@
     "archivos_title": "Gestor d'Arxius",
     "archivos_desc": "Sincronitza i gestiona les programacions i cursos locals.",
     "normativa_title": "Documents oficials",
-    "documentos_desc": "Explorador de legislació, normatives i docs oficials.",
     "descargas_title": "Descàrregues i reports",
     "descargas_desc": "Generació d'actes, informes i butlletins en PDF/Excel.",
     "catalogo_title": "Catàleg FP",
@@ -484,7 +457,6 @@
     "cerrar": "Tancar",
     "colapsar_todas": "Col·lapsar totes",
     "colapsar_todos": "Col·lapsar tots",
-    "descargar": "Descarregar",
     "descargar_pdf": "Descarregar PDF",
     "descripcion": "Descripció",
     "estado": "Estat",
@@ -514,7 +486,6 @@
     "magia": "Comparativa i correspondència APP-PD, i documents de suport de la programació i del curs.",
     "legal": "Avís legal, privacitat, cookies i accessibilitat.",
     "archivos": "Gestió d'arxius, sincronització al núvol, seguretat, IA i verificació de dades.",
-    "normativa": "Normativa autonòmica, legislació, bibliografia i estàndards INCUAL.",
     "catalogo": "Famílies, títols, mòduls i currículums (RA i CE).",
     "contexto": "Identificació, entorn, alumnat, avaluació i procediments de la programació.",
     "curriculo": "Contribució dels RA als objectius, ponderació RA-CE, unitats didàctiques i tasques competencials.",
@@ -615,9 +586,6 @@
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Error en generar l'informe de reforç."
     },
-    "documentos": {
-      "errorPrevisualizacion": "Error en carregar la previsualització del document."
-    },
     "googleDrive": {
       "autoguardadoActivado": "Desat automàtic al núvol activat.",
       "autoguardadoDesactivado": "Desat automàtic al núvol desactivat.",
@@ -653,10 +621,6 @@
       "errorCrearCursoDemo": "Error en crear el curs demo.",
       "errorCrearProgramacion": "Error en crear la programació.",
       "programacionCreada": "Programació de {{name}} creada correctament."
-    },
-    "normativa": {
-      "errorGenerarPdf": "Error en generar el PDF. Comprova que el backend està configurat correctament.",
-      "errorPrevisualizacion": "Error en carregar la previsualització del document. Verifica la connexió amb el backend."
     },
     "nuevoCurso": {
       "creado": "Curs \"{{nombreGrupo}}\" ({{cursoAcademico}}) creat a partir de la programació.",
@@ -903,9 +867,6 @@
       "ejCursoAcademico2": "Ex: 2026-27",
       "ejNombreGrupo": "ex: 1A-GM"
     },
-    "ayuda": {
-      "buscarDocumento": "Cerca document..."
-    },
     "catalogo": {
       "buscarTerminoDescripcion": "Cerca terme o descripció..."
     },
@@ -1105,8 +1066,6 @@
       "todaAptitud": "Qualsevol aptitud"
     },
     "catalogo": {
-      "grado": "Grau",
-      "gradosDelAAlE": "Graus de l'A a l'E",
       "seleccionaFamilia": "-- Selecciona família --",
       "seleccionaTitulo": "-- Selecciona títol --",
       "seleccionaModulo": "-- Selecciona mòdul --"
@@ -1361,9 +1320,6 @@
       "pond1erTrimestre": "1r trimestre (%)",
       "pond2doTrimestre": "2n trimestre (%)",
       "pond3erTrimestre": "3r trimestre (%)"
-    },
-    "normativa": {
-      "raiz": "Arrel"
     },
     "secuenciacion": {
       "tipoEjercicios": "Exercicis",
@@ -2011,10 +1967,6 @@
       "legislacionEstatal": "Legislació estatal",
       "normativaAutonomica": "Normativa autonòmica ({{comunidad}})",
       "normativaEstatal": "Normativa estatal",
-      "sinDocumentosAutonomicos": "No hi ha documents normatius en aquesta comunitat per ara.",
-      "sinDocumentosEstatales": "No hi ha documents normatius estatals per ara.",
-      "enPreparacion": "En preparació",
-      "cargandoNormativa": "Carregant normativa...",
       "legislacionDocumentalTitulo": "Legislació documental"
     },
     "contexto": {
@@ -2240,7 +2192,6 @@
       "sumaPesos": "Suma: {{pct}}%",
       "resumenPorTrimestresTitulo": "Resum d'instruments d'avaluació per trimestres"
     },
-    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Acrònims i glossari",
       "sinResultadosParaBusqueda": "No s'han trobat resultats per a \"{{termino}}\"",
@@ -2452,8 +2403,6 @@
     },
     "comun": {
       "ningunAlumnadoSeleccionado": "Cap alumne/a seleccionat/da",
-      "cargandoDocumentos": "Carregant documents...",
-      "directorioVacio": "El directori és buit.",
       "sinCursoCargadoTitulo": "No hi ha cap curs carregat",
       "sinCursoCargadoDesc": "Has d'obrir o crear un arxiu de curs a arxius.",
       "gestionDe": "Gestió de {{activeTab}}",
@@ -2781,7 +2730,6 @@
       "programacionLabel": "Programació",
       "agrupamientoProgramacionDesc": ": Catàleg/Context/Currículum/Metodologia/Instrument) i el dia a dia del curs real (",
       "agrupamientoCursoDesc": ": Agenda/Calendari/Alumnat/Seguiment/Qualificació).",
-      "errorCargandoContenido": "Error en carregar el contingut.",
       "iniciarRecorrido": "Inicia el recorregut guiat",
       "mapaAplicacionDescMid": "). Les pestanyes de cada pàgina es mantenen a mà en aquest mateix fitxer (",
       "agrupamientoLegalDesc": "Legal viu a part, com un enllaç al peu del sidebar: és contingut de compliment normatiu, no una eina de treball.",
@@ -2804,10 +2752,7 @@
       "aplicacionEscritorioDesc": "Cuaderno FP com a programa de Windows: l'instal·les, obres els teus arxius i treballes, també sense connexió. És gratuït i de codi obert.",
       "guiaWebTitulo": "Programació didàctica en FP",
       "guiaWebDesc": "Per fer la teva programació i el teu curs de FP amb l'aplicació com a fil conductor: contingut teòric, marc legal i pràctica, pas a pas.",
-      "guiaWebBoton": "Obrir la web",
-      "contribuidoresCcaaTitulo": "Col·laboradors per comunitat autònoma",
-      "contribuidoresCcaaDesc": "Menció especial al professorat que està ajudant a millorar i a integrar els currículums de les comunitats autònomes",
-      "animateAContribuir": "Anima't a contribuir!"
+      "guiaWebBoton": "Obrir la web"
     },
     "legal": {
       "datosTitular": "Dades del titular",

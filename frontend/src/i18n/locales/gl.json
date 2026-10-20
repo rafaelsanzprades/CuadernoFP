@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-        "expediente": {
+      "expediente": {
         "label": "Expediente",
         "desc": "Boletín individual, informe de evidencias e inserción laboral por alumnado."
       }
@@ -90,10 +90,10 @@
       }
     },
     "seguimiento": {
-        "abandono": {
-          "label": "Abandono",
-          "desc": "Resumo do risco de abandono a partir da asistencia e das notas."
-        },
+      "abandono": {
+        "label": "Abandono",
+        "desc": "Resumo do risco de abandono a partir da asistencia e das notas."
+      },
       "clases": {
         "label": "Lectivas",
         "desc": "Diario de clases, sesións lectivas e rexistro de continxencias."
@@ -132,27 +132,27 @@
       "cambiosNota": "Cambios de nota"
     },
     "contexto": {
-        "identificacion": {
-          "label": "Identificación",
-          "desc": "Centro e docente, módulo didáctico e datos de autoría e publicidade."
-        },
-        "entorno": {
-          "label": "Contorno",
-          "desc": "Contorno xeográfico, socioeconómico e escolar, actividades complementarias e plan FEOE."
-        },
-        "alumnado": {
-          "label": "Alumnado",
-          "desc": "Alumnado con necesidades específicas (ACNEAE), datos e trazos do grupo e avaliación inicial."
-        },
-        "evaluacion": {
-          "label": "Avaliación",
-          "desc": "Regras de redondeo e compensación, ponderación por trimestres e instrumentos de avaliación, e escalas cualitativas."
-        },
-        "procedimientos": {
-          "label": "Procedementos",
-          "desc": "Información e procedementos de avaliación, modelo de recuperación, criterios de cualificación e textos do modelo simplificado."
-        }
+      "identificacion": {
+        "label": "Identificación",
+        "desc": "Centro e docente, módulo didáctico e datos de autoría e publicidade."
       },
+      "entorno": {
+        "label": "Contorno",
+        "desc": "Contorno xeográfico, socioeconómico e escolar, actividades complementarias e plan FEOE."
+      },
+      "alumnado": {
+        "label": "Alumnado",
+        "desc": "Alumnado con necesidades específicas (ACNEAE), datos e trazos do grupo e avaliación inicial."
+      },
+      "evaluacion": {
+        "label": "Avaliación",
+        "desc": "Regras de redondeo e compensación, ponderación por trimestres e instrumentos de avaliación, e escalas cualitativas."
+      },
+      "procedimientos": {
+        "label": "Procedementos",
+        "desc": "Información e procedementos de avaliación, modelo de recuperación, criterios de cualificación e textos do modelo simplificado."
+      }
+    },
     "curriculo": {
       "ponderacion-ra-ce": {
         "label": "Relación RA <- CE",
@@ -180,27 +180,27 @@
       }
     },
     "metodologia": {
-        "metodologia": {
-          "label": "Estratexias e innovación",
-          "desc": "Estratexias metodolóxicas e coordinación docente, e innovación e intermodularidade."
-        },
-        "recursosEspacios": {
-          "label": "Recursos e espazos",
-          "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios."
-        },
-        "diversidad": {
-          "label": "Atención á diversidade",
-          "desc": "Marco de inclusión, atención á diversidade, plan DUA e panel de alumnado ACNEAE."
-        },
-        "contingencia": {
-          "label": "Plan de continxencia",
-          "desc": "Plans de continxencia e adaptación ante situacións excepcionais."
-        },
-        "transversales": {
-          "label": "Transversais",
-          "desc": "Elementos transversais, competencias clave, competencias dixitais e estándares e obxectivos do currículo."
-        }
+      "metodologia": {
+        "label": "Estratexias e innovación",
+        "desc": "Estratexias metodolóxicas e coordinación docente, e innovación e intermodularidade."
       },
+      "recursosEspacios": {
+        "label": "Recursos e espazos",
+        "desc": "Instrumentos de avaliación seleccionados e recursos e espazos necesarios."
+      },
+      "diversidad": {
+        "label": "Atención á diversidade",
+        "desc": "Marco de inclusión, atención á diversidade, plan DUA e panel de alumnado ACNEAE."
+      },
+      "contingencia": {
+        "label": "Plan de continxencia",
+        "desc": "Plans de continxencia e adaptación ante situacións excepcionais."
+      },
+      "transversales": {
+        "label": "Transversais",
+        "desc": "Elementos transversais, competencias clave, competencias dixitais e estándares e obxectivos do currículo."
+      }
+    },
     "instrumentos": {
       "resumen": {
         "desc": "Visión global dos instrumentos de avaliación utilizados (RD 659/2023, Art. 136) e, máis abaixo, o modelo experimental JEG por indicadores."
@@ -249,15 +249,7 @@
     },
     "normativa": {
       "autonomias": {
-        "label": "Autonomías",
-        "desc": "Documentos e modelos descargables da túa comunidade autónoma, organizados por grao."
-      },
-      "bibliografia": {
-        "label": "Bibliografía",
-        "desc": "Índice de leis, decretos e ordes estatais e autonómicas de FP, con ligazón ao boletín oficial."
-      },
-      "legislacion": {
-        "desc": "Lexislación autonómica e normativa específica."
+        "label": "Autonomías"
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -281,10 +273,6 @@
         "label": "Curso",
         "desc": "Calendario, seguimento, plano de aula, boletíns e actas de avaliación do curso."
       },
-      "analisisPdx": {
-        "label": "Análise APP->PDx",
-        "desc": "Da app a onde aparece cada campo en cada modelo de programación didáctica (PD-, PD=, PD+)."
-      },
       "documentosPdx": {
         "label": "Documentos PDx",
         "desc": "Xera e descarga as programacións didácticas PD-, PD= e PD+ en formato editable, por comunidade autónoma."
@@ -294,18 +282,6 @@
       "comparativa": {
         "label": "Comparativa",
         "desc": "Comparativa dos distintos niveis de programación e onde se cobre cada apartado."
-      },
-      "pdminus": {
-        "label": "APP → PD- (Resumo)",
-        "desc": "Da app a onde aparece cada bloque no resumo de 1-2 follas para o alumnado (PD-)."
-      },
-      "pdigual": {
-        "label": "APP → PD= (Simplificada)",
-        "desc": "Da app a onde aparece cada campo no modelo oficial simplificado, 14 apartados A-N (PD=)."
-      },
-      "pdplus": {
-        "label": "APP → PD+ (Detallada JEG)",
-        "desc": "Da app a onde aparece cada campo na programación detallada tipo JEG (PD+), capítulo a capítulo."
       }
     },
     "ayuda": {
@@ -361,7 +337,6 @@
         "desc": "Panel de control de acceso rápido a todas as ferramentas."
       }
     },
-    "legislacion": "Lexislación",
     "agenda": {
       "agenda": {
         "label": "Agenda",
@@ -406,7 +381,6 @@
     "calificaciones": "Cualificacións",
     "cierre": "Peche",
     "informes": "Informes",
-    "normativa": "Documentos",
     "instrumentos": "Instrumentos",
     "calidad": "Calidade",
     "mejora": "Mellora",
@@ -463,7 +437,6 @@
     "archivos_title": "Xestor de arquivos",
     "archivos_desc": "Sincroniza e xestiona as programacións e cursos locais.",
     "normativa_title": "Documentos oficiais",
-    "documentos_desc": "Explorador de lexislación, normativas e docs oficiais.",
     "descargas_title": "Descargas e informes",
     "descargas_desc": "Xeración de actas, informes e boletíns en PDF/Excel.",
     "catalogo_title": "Catálogo FP",
@@ -484,7 +457,6 @@
     "cerrar": "Pechar",
     "colapsar_todas": "Contraer todas",
     "colapsar_todos": "Contraer todos",
-    "descargar": "Descargar",
     "descargar_pdf": "Descargar PDF",
     "descripcion": "Descrición",
     "estado": "Estado",
@@ -514,7 +486,6 @@
     "magia": "Comparativa e correspondencia APP-PD, e documentos de apoio da programación e do curso.",
     "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
     "archivos": "Xestión de arquivos, sincronización na nube, seguridade, IA e verificación de datos.",
-    "normativa": "Normativa autonómica, lexislación, bibliografía e estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
     "contexto": "Identificación, contorno, alumnado, avaliación e procedementos da programación.",
     "curriculo": "Contribución dos RA aos obxectivos, ponderación RA-CE, unidades didácticas e tarefas competenciais.",
@@ -615,9 +586,6 @@
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Erro ao xerar o informe de reforzo."
     },
-    "documentos": {
-      "errorPrevisualizacion": "Erro ao cargar a previsualización do documento."
-    },
     "googleDrive": {
       "autoguardadoActivado": "Gardado automático na nube activado.",
       "autoguardadoDesactivado": "Gardado automático na nube desactivado.",
@@ -653,10 +621,6 @@
       "errorCrearCursoDemo": "Erro ao crear o curso demo.",
       "errorCrearProgramacion": "Erro ao crear a programación.",
       "programacionCreada": "Programación de {{name}} creada correctamente."
-    },
-    "normativa": {
-      "errorGenerarPdf": "Erro ao xerar o PDF. Comproba que o backend está configurado correctamente.",
-      "errorPrevisualizacion": "Erro ao cargar a previsualización do documento. Verifica a conexión co backend."
     },
     "nuevoCurso": {
       "creado": "Curso \"{{nombreGrupo}}\" ({{cursoAcademico}}) creado a partir da programación.",
@@ -903,9 +867,6 @@
       "ejCursoAcademico2": "Ex: 2026-27",
       "ejNombreGrupo": "ex: 1A-GM"
     },
-    "ayuda": {
-      "buscarDocumento": "Buscar documento..."
-    },
     "catalogo": {
       "buscarTerminoDescripcion": "Buscar termo ou descrición..."
     },
@@ -1105,8 +1066,6 @@
       "todaAptitud": "Calquera aptitude"
     },
     "catalogo": {
-      "grado": "Grao",
-      "gradosDelAAlE": "Graos do A ao E",
       "seleccionaFamilia": "-- Selecciona familia --",
       "seleccionaTitulo": "-- Selecciona título --",
       "seleccionaModulo": "-- Selecciona módulo --"
@@ -1361,9 +1320,6 @@
       "pond1erTrimestre": "1º trimestre (%)",
       "pond2doTrimestre": "2º trimestre (%)",
       "pond3erTrimestre": "3º trimestre (%)"
-    },
-    "normativa": {
-      "raiz": "Raíz"
     },
     "secuenciacion": {
       "tipoEjercicios": "Exercicios",
@@ -2011,10 +1967,6 @@
       "legislacionEstatal": "Lexislación estatal",
       "normativaAutonomica": "Normativa autonómica ({{comunidad}})",
       "normativaEstatal": "Normativa estatal",
-      "sinDocumentosAutonomicos": "Non hai documentos normativos nesta comunidade polo momento.",
-      "sinDocumentosEstatales": "Non hai documentos normativos estatais polo momento.",
-      "enPreparacion": "En preparación",
-      "cargandoNormativa": "Cargando normativa...",
       "legislacionDocumentalTitulo": "Lexislación documental"
     },
     "contexto": {
@@ -2240,7 +2192,6 @@
       "sumaPesos": "Suma: {{pct}}%",
       "resumenPorTrimestresTitulo": "Resumo de instrumentos de avaliación por trimestres"
     },
-    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Acrónimos e glosario",
       "sinResultadosParaBusqueda": "Non se atoparon resultados para \"{{termino}}\"",
@@ -2452,8 +2403,6 @@
     },
     "comun": {
       "ningunAlumnadoSeleccionado": "Ningún alumno/a seleccionado/a",
-      "cargandoDocumentos": "Cargando documentos...",
-      "directorioVacio": "O directorio está baleiro.",
       "sinCursoCargadoTitulo": "Non hai curso cargado",
       "sinCursoCargadoDesc": "Debes abrir ou crear un ficheiro de curso en ficheiros.",
       "gestionDe": "Xestión de {{activeTab}}",
@@ -2781,7 +2730,6 @@
       "programacionLabel": "Programación",
       "agrupamientoProgramacionDesc": ": Catálogo/Contexto/Currículo/Metodoloxía/Instrumento) e o día a día do curso real (",
       "agrupamientoCursoDesc": ": Axenda/Calendario/Alumnado/Seguimento/Cualificación).",
-      "errorCargandoContenido": "Erro cargando o contido.",
       "iniciarRecorrido": "Iniciar o percorrido guiado",
       "mapaAplicacionDescMid": "). As pestanas de cada páxina mantéñense a man neste mesmo ficheiro (",
       "agrupamientoLegalDesc": "Legal vive á parte, como ligazón ao pé do sidebar: é contido de cumprimento normativo, non unha ferramenta de traballo.",
@@ -2804,10 +2752,7 @@
       "aplicacionEscritorioDesc": "Cuaderno FP como programa de Windows: instálalo, abre os teus ficheiros e traballa, tamén sen conexión. É gratuíto e de código aberto.",
       "guiaWebTitulo": "Programación didáctica en FP",
       "guiaWebDesc": "Para facer a túa programación e o teu curso de FP coa aplicación como fío condutor: contido teórico, marco legal e práctica, paso a paso.",
-      "guiaWebBoton": "Abrir a web",
-      "contribuidoresCcaaTitulo": "Colaboradores por comunidade autónoma",
-      "contribuidoresCcaaDesc": "Mención especial ao profesorado que está a axudar a mellorar e a integrar os currículos das comunidades autónomas",
-      "animateAContribuir": "Anímate a contribuír!"
+      "guiaWebBoton": "Abrir a web"
     },
     "legal": {
       "datosTitular": "Datos do titular",

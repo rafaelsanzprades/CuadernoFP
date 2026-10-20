@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-        "expediente": {
+      "expediente": {
         "label": "Record",
         "desc": "Report card, evidence report and job placement per student."
       }
@@ -90,10 +90,10 @@
       }
     },
     "seguimiento": {
-        "abandono": {
-          "label": "Dropout",
-          "desc": "Dropout risk summary based on attendance and grades."
-        },
+      "abandono": {
+        "label": "Dropout",
+        "desc": "Dropout risk summary based on attendance and grades."
+      },
       "clases": {
         "label": "Teaching days",
         "desc": "Class journal, teaching sessions and record of contingencies."
@@ -132,27 +132,27 @@
       "cambiosNota": "Grade changes"
     },
     "contexto": {
-        "identificacion": {
-          "label": "Identification",
-          "desc": "Centre and teacher, teaching module, and authorship and publicity data."
-        },
-        "entorno": {
-          "label": "Environment",
-          "desc": "Geographic, socioeconomic and school environment, complementary activities and FEOE plan."
-        },
-        "alumnado": {
-          "label": "Students",
-          "desc": "Students with specific needs (ACNEAE), group data and traits, and initial assessment."
-        },
-        "evaluacion": {
-          "label": "Assessment",
-          "desc": "Rounding and compensation rules, term weighting and assessment instruments, and qualitative scales."
-        },
-        "procedimientos": {
-          "label": "Procedures",
-          "desc": "Assessment information and procedures, recovery model, grading criteria and simplified model texts."
-        }
+      "identificacion": {
+        "label": "Identification",
+        "desc": "Centre and teacher, teaching module, and authorship and publicity data."
       },
+      "entorno": {
+        "label": "Environment",
+        "desc": "Geographic, socioeconomic and school environment, complementary activities and FEOE plan."
+      },
+      "alumnado": {
+        "label": "Students",
+        "desc": "Students with specific needs (ACNEAE), group data and traits, and initial assessment."
+      },
+      "evaluacion": {
+        "label": "Assessment",
+        "desc": "Rounding and compensation rules, term weighting and assessment instruments, and qualitative scales."
+      },
+      "procedimientos": {
+        "label": "Procedures",
+        "desc": "Assessment information and procedures, recovery model, grading criteria and simplified model texts."
+      }
+    },
     "curriculo": {
       "ponderacion-ra-ce": {
         "label": "Relationship RA <- CE",
@@ -180,27 +180,27 @@
       }
     },
     "metodologia": {
-        "metodologia": {
-          "label": "Strategies and innovation",
-          "desc": "Methodological strategies and teaching coordination, and innovation and cross-module coordination."
-        },
-        "recursosEspacios": {
-          "label": "Resources and spaces",
-          "desc": "Selected assessment instruments and the resources and spaces required."
-        },
-        "diversidad": {
-          "label": "Attention to diversity",
-          "desc": "Inclusion framework, attention to diversity, UDL plan and panel of ACNEAE students."
-        },
-        "contingencia": {
-          "label": "Contingency plan",
-          "desc": "Contingency plans and adaptation for exceptional situations."
-        },
-        "transversales": {
-          "label": "Transversal",
-          "desc": "Transversal elements, key competencies, digital competencies, and curriculum standards and objectives."
-        }
+      "metodologia": {
+        "label": "Strategies and innovation",
+        "desc": "Methodological strategies and teaching coordination, and innovation and cross-module coordination."
       },
+      "recursosEspacios": {
+        "label": "Resources and spaces",
+        "desc": "Selected assessment instruments and the resources and spaces required."
+      },
+      "diversidad": {
+        "label": "Attention to diversity",
+        "desc": "Inclusion framework, attention to diversity, UDL plan and panel of ACNEAE students."
+      },
+      "contingencia": {
+        "label": "Contingency plan",
+        "desc": "Contingency plans and adaptation for exceptional situations."
+      },
+      "transversales": {
+        "label": "Transversal",
+        "desc": "Transversal elements, key competencies, digital competencies, and curriculum standards and objectives."
+      }
+    },
     "instrumentos": {
       "resumen": {
         "desc": "Overall view of the evaluation instruments used (RD 659/2023, Art. 136), plus the experimental indicator-based JEG model below."
@@ -249,15 +249,7 @@
     },
     "normativa": {
       "autonomias": {
-        "label": "Autonomous communities",
-        "desc": "Downloadable documents and templates for your autonomous community, organized by level."
-      },
-      "bibliografia": {
-        "label": "Bibliography",
-        "desc": "Index of state and regional VET laws, decrees and orders, with a link to the official gazette."
-      },
-      "legislacion": {
-        "desc": "Regional legislation and specific regulations."
+        "label": "Autonomous communities"
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -281,10 +273,6 @@
         "label": "Course",
         "desc": "Calendar, tracking, classroom map, report cards and evaluation records for the course."
       },
-      "analisisPdx": {
-        "label": "APP->PDx analysis",
-        "desc": "From the app to where each field appears in each programación didáctica model (PD-, PD=, PD+)."
-      },
       "documentosPdx": {
         "label": "PDx documents",
         "desc": "Generate and download the PD-, PD= and PD+ programming documents in editable format, by autonomous community."
@@ -294,18 +282,6 @@
       "comparativa": {
         "label": "Comparison",
         "desc": "Comparison of the different programming levels and where each section is filled in."
-      },
-      "pdminus": {
-        "label": "APP → PD- (Summary)",
-        "desc": "From the app to where each block appears in the 1-2 page summary for students (PD-)."
-      },
-      "pdigual": {
-        "label": "APP → PD= (Simplified)",
-        "desc": "From the app to where each field appears in the official simplified model, 14 sections A-N (PD=)."
-      },
-      "pdplus": {
-        "label": "APP → PD+ (Detailed JEG)",
-        "desc": "From the app to where each field appears in the detailed JEG-style programming (PD+), chapter by chapter."
       }
     },
     "ayuda": {
@@ -361,7 +337,6 @@
         "desc": "Quick-access control panel for all the tools."
       }
     },
-    "legislacion": "Legislation",
     "agenda": {
       "agenda": {
         "label": "Agenda",
@@ -406,7 +381,6 @@
     "calificaciones": "Grades",
     "cierre": "Closing",
     "informes": "Reports",
-    "normativa": "Documents",
     "instrumentos": "Instruments",
     "calidad": "Quality",
     "mejora": "Improvement",
@@ -463,7 +437,6 @@
     "archivos_title": "File manager",
     "archivos_desc": "Synchronize and manage local programming and courses.",
     "normativa_title": "Official documents",
-    "documentos_desc": "Explorer of legislation, regulations and official docs.",
     "descargas_title": "Downloads and reports",
     "descargas_desc": "Generation of records, reports and bulletins in PDF/Excel.",
     "catalogo_title": "VET catalog",
@@ -484,7 +457,6 @@
     "cerrar": "Close",
     "colapsar_todas": "Collapse all",
     "colapsar_todos": "Collapse all",
-    "descargar": "Download",
     "descargar_pdf": "Download PDF",
     "descripcion": "Description",
     "estado": "Status",
@@ -514,7 +486,6 @@
     "magia": "APP-PD comparison and mapping, plus supporting documents for the programme and the course.",
     "legal": "Legal notice, privacy, cookies and accessibility.",
     "archivos": "File management, cloud sync, security, AI and data verification.",
-    "normativa": "Regional regulations, legislation, bibliography and INCUAL standards.",
     "catalogo": "Families, qualifications, modules and curricula (RA and CE).",
     "contexto": "Identification, environment, students, assessment and procedures of the programme.",
     "curriculo": "Contribution of RA to objectives, RA-CE weighting, teaching units and competency-based tasks.",
@@ -615,9 +586,6 @@
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Error generating the reinforcement report."
     },
-    "documentos": {
-      "errorPrevisualizacion": "Error loading the document preview."
-    },
     "googleDrive": {
       "autoguardadoActivado": "Cloud autosave enabled.",
       "autoguardadoDesactivado": "Cloud autosave disabled.",
@@ -653,10 +621,6 @@
       "errorCrearCursoDemo": "Error creating the demo course.",
       "errorCrearProgramacion": "Error creating the programming.",
       "programacionCreada": "Programming for {{name}} created successfully."
-    },
-    "normativa": {
-      "errorGenerarPdf": "Error generating the PDF. Check that the backend is configured correctly.",
-      "errorPrevisualizacion": "Error loading the document preview. Check the connection with the backend."
     },
     "nuevoCurso": {
       "creado": "Course \"{{nombreGrupo}}\" ({{cursoAcademico}}) created from the programming.",
@@ -903,9 +867,6 @@
       "ejCursoAcademico2": "E.g.: 2026-27",
       "ejNombreGrupo": "e.g.: 1A-GM"
     },
-    "ayuda": {
-      "buscarDocumento": "Search document..."
-    },
     "catalogo": {
       "buscarTerminoDescripcion": "Search term or description..."
     },
@@ -1105,8 +1066,6 @@
       "todaAptitud": "Any aptitude"
     },
     "catalogo": {
-      "grado": "Level",
-      "gradosDelAAlE": "Levels A to E",
       "seleccionaFamilia": "-- Select family --",
       "seleccionaTitulo": "-- Select qualification --",
       "seleccionaModulo": "-- Select module --"
@@ -1361,9 +1320,6 @@
       "pond1erTrimestre": "1st term (%)",
       "pond2doTrimestre": "2nd term (%)",
       "pond3erTrimestre": "3rd term (%)"
-    },
-    "normativa": {
-      "raiz": "Root"
     },
     "secuenciacion": {
       "tipoEjercicios": "Exercises",
@@ -2011,10 +1967,6 @@
       "legislacionEstatal": "State legislation",
       "normativaAutonomica": "Regional regulations ({{comunidad}})",
       "normativaEstatal": "State regulations",
-      "sinDocumentosAutonomicos": "There are no regulatory documents for this community yet.",
-      "sinDocumentosEstatales": "There are no state regulatory documents yet.",
-      "enPreparacion": "In preparation",
-      "cargandoNormativa": "Loading regulations...",
       "legislacionDocumentalTitulo": "Documentary legislation"
     },
     "contexto": {
@@ -2240,7 +2192,6 @@
       "sumaPesos": "Sum: {{pct}}%",
       "resumenPorTrimestresTitulo": "Summary of assessment instruments by term"
     },
-    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Acronyms and glossary",
       "sinResultadosParaBusqueda": "No results found for \"{{termino}}\"",
@@ -2452,8 +2403,6 @@
     },
     "comun": {
       "ningunAlumnadoSeleccionado": "No student selected",
-      "cargandoDocumentos": "Loading documents...",
-      "directorioVacio": "The directory is empty.",
       "sinCursoCargadoTitulo": "No course loaded",
       "sinCursoCargadoDesc": "You must open or create a course file in your files.",
       "gestionDe": "{{activeTab}} management",
@@ -2781,7 +2730,6 @@
       "programacionLabel": "Curriculum Plan",
       "agrupamientoProgramacionDesc": ": Catalog/Context/Curriculum/Methodology/Instruments) and the day-to-day of a real course (",
       "agrupamientoCursoDesc": ": Agenda/Calendar/Students/Tracking/Grades).",
-      "errorCargandoContenido": "Error loading the content.",
       "iniciarRecorrido": "Start guided tour",
       "mapaAplicacionDescMid": "). Each page's tabs are maintained by hand in this same file (",
       "agrupamientoLegalDesc": "Legal lives apart, as a link at the bottom of the sidebar: it's compliance content, not a work tool.",
@@ -2804,10 +2752,7 @@
       "aplicacionEscritorioDesc": "Cuaderno FP as a Windows program: install it, open your files and work, even offline. It is free and open source.",
       "guiaWebTitulo": "Teaching plans in vocational education (FP)",
       "guiaWebDesc": "To build your teaching plan and your FP course with the app as the common thread: theory, legal framework and practice, step by step.",
-      "guiaWebBoton": "Open the website",
-      "contribuidoresCcaaTitulo": "Contributors by autonomous Community",
-      "contribuidoresCcaaDesc": "Special mention to the teachers who are helping improve and integrate the curricula of the autonomous communities",
-      "animateAContribuir": "Get involved and contribute!"
+      "guiaWebBoton": "Open the website"
     },
     "legal": {
       "datosTitular": "Owner details",

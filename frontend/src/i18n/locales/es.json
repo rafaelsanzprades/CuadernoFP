@@ -49,13 +49,6 @@
     "modulos": "Módulos",
     "dual": "FP Dual",
     "eqavet": "EQAVET",
-    "magia": {
-      "analisisPdx": {
-        "label": "Análisis APP->PDx",
-        "desc": "De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+)."
-      }
-    },
-    "seguimiento": {},
     "calendario": {
       "mensual": {
         "label": "Mensual",
@@ -107,7 +100,6 @@
     "calificaciones": "Calificaciones",
     "cierre": "Cierre",
     "informes": "Informes",
-    "normativa": "Normativa",
     "calidad": "Calidad",
     "mejora": "Mejora"
   },
@@ -127,7 +119,6 @@
     "magia": "Comparativa y correspondencia APP-PD, y documentos de apoyo de la programación y del curso.",
     "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
     "archivos": "Gestión de archivos, sincronización en la nube, seguridad, IA y verificación de datos.",
-    "normativa": "Normativa autonómica, legislación, bibliografía y estándares INCUAL.",
     "catalogo": "Familias, títulos, módulos y currículos (RA y CE).",
     "contexto": "Identificación, entorno, alumnado, evaluación y procedimientos de la programación.",
     "curriculo": "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales.",
@@ -181,7 +172,6 @@
     "archivos_title": "Gestor de archivos",
     "archivos_desc": "Gestión de archivos de programación y curso.",
     "normativa_title": "Normativa",
-    "documentos_desc": "Legislación, normativa y plantillas descargables.",
     "descargas_title": "Descargas",
     "descargas_desc": "Generación de actas, informes y boletines en PDF/Excel.",
     "legal_title": "Legal",
@@ -269,7 +259,6 @@
     "ordenar": "Ordenar",
     "ascendente": "Ascendente",
     "descendente": "Descendente",
-    "descargar": "Descargar",
     "subir": "Subir",
     "importar": "Importar",
     "exportar": "Exportar",
@@ -455,8 +444,6 @@
     "espaciado_celda": "Espaciado de celda"
   },
   "campos": {
-    "dashboard": {},
-    "seguimiento": {},
     "agenda": {
       "planificacionSeguimientoMensualTitulo": "Planificación y seguimiento mensual",
       "planoAulaTitulo": "Plano de aula"

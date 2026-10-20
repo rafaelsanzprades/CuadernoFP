@@ -1,7 +1,7 @@
 {
   "tabs": {
     "cierre": {
-        "expediente": {
+      "expediente": {
         "label": "Espedientea",
         "desc": "Banakako buletina, ebidentzien txostena eta laneratzea ikasleka."
       }
@@ -90,10 +90,10 @@
       }
     },
     "seguimiento": {
-        "abandono": {
-          "label": "Uztea",
-          "desc": "Uzte-arriskuaren laburpena asistentzia eta notetan oinarrituta."
-        },
+      "abandono": {
+        "label": "Uztea",
+        "desc": "Uzte-arriskuaren laburpena asistentzia eta notetan oinarrituta."
+      },
       "clases": {
         "label": "Lektiboak",
         "desc": "Eskolen egunerokoa, saio lektiboak eta gorabeheren erregistroa."
@@ -132,27 +132,27 @@
       "cambiosNota": "Nota-aldaketak"
     },
     "contexto": {
-        "identificacion": {
-          "label": "Identifikazioa",
-          "desc": "Ikastetxea eta irakaslea, modulu didaktikoa eta egiletza- eta publizitate-datuak."
-        },
-        "entorno": {
-          "label": "Ingurunea",
-          "desc": "Ingurune geografikoa, sozioekonomikoa eta eskolarra, jarduera osagarriak eta FEOE plana."
-        },
-        "alumnado": {
-          "label": "Ikasleak",
-          "desc": "Behar espezifikoak dituzten ikasleak (ACNEAE), taldearen datuak eta ezaugarriak eta hasierako ebaluazioa."
-        },
-        "evaluacion": {
-          "label": "Ebaluazioa",
-          "desc": "Biribiltze- eta konpentsazio-arauak, hiruhilekoen haztapena eta ebaluazio-tresnak, eta eskala kualitatiboak."
-        },
-        "procedimientos": {
-          "label": "Prozedurak",
-          "desc": "Ebaluazioari buruzko informazioa eta prozedurak, berreskuratze-eredua, kalifikazio-irizpideak eta eredu sinplifikatuaren testuak."
-        }
+      "identificacion": {
+        "label": "Identifikazioa",
+        "desc": "Ikastetxea eta irakaslea, modulu didaktikoa eta egiletza- eta publizitate-datuak."
       },
+      "entorno": {
+        "label": "Ingurunea",
+        "desc": "Ingurune geografikoa, sozioekonomikoa eta eskolarra, jarduera osagarriak eta FEOE plana."
+      },
+      "alumnado": {
+        "label": "Ikasleak",
+        "desc": "Behar espezifikoak dituzten ikasleak (ACNEAE), taldearen datuak eta ezaugarriak eta hasierako ebaluazioa."
+      },
+      "evaluacion": {
+        "label": "Ebaluazioa",
+        "desc": "Biribiltze- eta konpentsazio-arauak, hiruhilekoen haztapena eta ebaluazio-tresnak, eta eskala kualitatiboak."
+      },
+      "procedimientos": {
+        "label": "Prozedurak",
+        "desc": "Ebaluazioari buruzko informazioa eta prozedurak, berreskuratze-eredua, kalifikazio-irizpideak eta eredu sinplifikatuaren testuak."
+      }
+    },
     "curriculo": {
       "ponderacion-ra-ce": {
         "label": "RA <- CE erlazioa",
@@ -180,27 +180,27 @@
       }
     },
     "metodologia": {
-        "metodologia": {
-          "label": "Estrategiak eta berrikuntza",
-          "desc": "Estrategia metodologikoak eta irakasle-koordinazioa, eta berrikuntza eta modulu arteko lana."
-        },
-        "recursosEspacios": {
-          "label": "Baliabideak eta espazioak",
-          "desc": "Hautatutako ebaluazio-tresnak eta behar diren baliabideak eta espazioak."
-        },
-        "diversidad": {
-          "label": "Aniztasunari arreta",
-          "desc": "Inklusio-esparrua, aniztasunari arreta, DUA plana eta ACNEAE ikasleen panela."
-        },
-        "contingencia": {
-          "label": "Kontingentzia-plana",
-          "desc": "Kontingentzia-planak eta salbuespenezko egoeretarako egokitzapena."
-        },
-        "transversales": {
-          "label": "Zeharkakoak",
-          "desc": "Elementu zeharkakoak, gako-konpetentziak, konpetentzia digitalak eta curriculumaren estandarrak eta helburuak."
-        }
+      "metodologia": {
+        "label": "Estrategiak eta berrikuntza",
+        "desc": "Estrategia metodologikoak eta irakasle-koordinazioa, eta berrikuntza eta modulu arteko lana."
       },
+      "recursosEspacios": {
+        "label": "Baliabideak eta espazioak",
+        "desc": "Hautatutako ebaluazio-tresnak eta behar diren baliabideak eta espazioak."
+      },
+      "diversidad": {
+        "label": "Aniztasunari arreta",
+        "desc": "Inklusio-esparrua, aniztasunari arreta, DUA plana eta ACNEAE ikasleen panela."
+      },
+      "contingencia": {
+        "label": "Kontingentzia-plana",
+        "desc": "Kontingentzia-planak eta salbuespenezko egoeretarako egokitzapena."
+      },
+      "transversales": {
+        "label": "Zeharkakoak",
+        "desc": "Elementu zeharkakoak, gako-konpetentziak, konpetentzia digitalak eta curriculumaren estandarrak eta helburuak."
+      }
+    },
     "instrumentos": {
       "resumen": {
         "desc": "Erabilitako ebaluazio-tresnen ikuspegi orokorra (RD 659/2023, 136. art.) eta, behean, adierazleen araberako JEG eredu esperimentala."
@@ -249,15 +249,7 @@
     },
     "normativa": {
       "autonomias": {
-        "label": "Autonomiak",
-        "desc": "Zure erkidegoko dokumentu eta txantiloi deskargagarriak, mailaka antolatuta."
-      },
-      "bibliografia": {
-        "label": "Bibliografia",
-        "desc": "LHri buruzko estatuko eta erkidegoko lege, dekretu eta aginduen aurkibidea, aldizkari ofizialerako estekarekin."
-      },
-      "legislacion": {
-        "desc": "Erkidegoko legedia eta araudi berezia."
+        "label": "Autonomiak"
       },
       "ecp-incual": {
         "label": "ECP INCUAL",
@@ -281,10 +273,6 @@
         "label": "Ikasturtea",
         "desc": "Ikasturteko egutegia, jarraipena, ikasgelaren planoa, buletinak eta ebaluazio-aktak."
       },
-      "analisisPdx": {
-        "label": "APP->PDx analisia",
-        "desc": "Appetik, Programazio didaktikoaren eredu bakoitzean (PD-, PD=, PD+) eremu bakoitza non agertzen den."
-      },
       "documentosPdx": {
         "label": "PDx dokumentuak",
         "desc": "Sortu eta deskargatu PD-, PD= eta PD+ programazio didaktikoak formatu editagarrian, autonomia erkidegoka."
@@ -294,18 +282,6 @@
       "comparativa": {
         "label": "Konparaketa",
         "desc": "Programazio-maila desberdinen konparaketa, eta atal bakoitza non betetzen den."
-      },
-      "pdminus": {
-        "label": "APP → PD- (Laburpena)",
-        "desc": "Appatik, ikasleentzako 1-2 orriko laburpenean (PD-) bloke bakoitza non agertzen den."
-      },
-      "pdigual": {
-        "label": "APP → PD= (Sinplifikatua)",
-        "desc": "Appetik eredu ofizial soildu bakoitzeko eremua non agertzen den, 14 atal A-N (PD=)."
-      },
-      "pdplus": {
-        "label": "APP → PD+ (JEG xehea)",
-        "desc": "Appatik, JEG motako programazio xehean (PD+) eremu bakoitza non agertzen den, kapituluz kapitulu."
       }
     },
     "ayuda": {
@@ -361,7 +337,6 @@
         "desc": "Erreminta guztietarako sarbide azkarreko kontrol-panela."
       }
     },
-    "legislacion": "Legedia",
     "agenda": {
       "agenda": {
         "label": "Agenda",
@@ -406,7 +381,6 @@
     "calificaciones": "Kalifikazioak",
     "cierre": "Itxiera",
     "informes": "Txostenak",
-    "normativa": "Dokumentuak",
     "instrumentos": "Tresnak",
     "calidad": "Kalitatea",
     "mejora": "Hobekuntza",
@@ -463,7 +437,6 @@
     "archivos_title": "Fitxategi kudeatzailea",
     "archivos_desc": "Sinkronizatu eta kudeatu tokiko programazioak eta ikastaroak.",
     "normativa_title": "Dokumentu ofizialak",
-    "documentos_desc": "Legediaren, araudien eta dokumentu ofizialen esploratzailea.",
     "descargas_title": "Deskargak eta txostenak",
     "descargas_desc": "Aktak, txostenak eta buletinak sortzea PDF/Excel formatuan.",
     "catalogo_title": "LH katalogoa",
@@ -484,7 +457,6 @@
     "cerrar": "Itxi",
     "colapsar_todas": "Denak tolestu",
     "colapsar_todos": "Denak tolestu",
-    "descargar": "Deskargatu",
     "descargar_pdf": "PDFa deskargatu",
     "descripcion": "Deskribapena",
     "estado": "Egoera",
@@ -514,7 +486,6 @@
     "magia": "APP-PD konparaketa eta korrespondentzia, eta programazioaren eta ikasturtearen laguntza-dokumentuak.",
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",
     "archivos": "Fitxategien kudeaketa, hodeiko sinkronizazioa, segurtasuna, AA eta datuen egiaztapena.",
-    "normativa": "Erkidego-araudia, legedia, bibliografia eta INCUAL estandarrak.",
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
     "contexto": "Programazioaren identifikazioa, ingurunea, ikasleak, ebaluazioa eta prozedurak.",
     "curriculo": "RAk helburuei egiten dien ekarpena, RA-CE haztapena, unitate didaktikoak eta gaitasun-zereginak.",
@@ -615,9 +586,6 @@
     "detalleAlumnado": {
       "errorInformeRefuerzo": "Errorea errefortzu-txostena sortzean."
     },
-    "documentos": {
-      "errorPrevisualizacion": "Errorea dokumentuaren aurrebista kargatzean."
-    },
     "googleDrive": {
       "autoguardadoActivado": "Hodeiko gordetze automatikoa aktibatuta.",
       "autoguardadoDesactivado": "Hodeiko gordetze automatikoa desaktibatuta.",
@@ -653,10 +621,6 @@
       "errorCrearCursoDemo": "Errorea demo ikasturtea sortzean.",
       "errorCrearProgramacion": "Errorea programazioa sortzean.",
       "programacionCreada": "{{name}} moduluaren programazioa ondo sortu da."
-    },
-    "normativa": {
-      "errorGenerarPdf": "Errorea PDFa sortzean. Egiaztatu backend-a ondo konfiguratuta dagoela.",
-      "errorPrevisualizacion": "Errorea dokumentuaren aurrebista kargatzean. Egiaztatu backend-arekiko konexioa."
     },
     "nuevoCurso": {
       "creado": "\"{{nombreGrupo}}\" ikasturtea ({{cursoAcademico}}) programaziotik abiatuta sortu da.",
@@ -903,9 +867,6 @@
       "ejCursoAcademico2": "Adib: 2026-27",
       "ejNombreGrupo": "adib: 1A-GM"
     },
-    "ayuda": {
-      "buscarDocumento": "Bilatu dokumentua..."
-    },
     "catalogo": {
       "buscarTerminoDescripcion": "Bilatu terminoa edo deskribapena..."
     },
@@ -1105,8 +1066,6 @@
       "todaAptitud": "Edozein gaitasun"
     },
     "catalogo": {
-      "grado": "Maila",
-      "gradosDelAAlE": "A-tik E-ra bitarteko mailak",
       "seleccionaFamilia": "-- Hautatu familia --",
       "seleccionaTitulo": "-- Aukeratu titulua --",
       "seleccionaModulo": "-- Aukeratu modulua --"
@@ -1361,9 +1320,6 @@
       "pond1erTrimestre": "1. hiruhilekoa (%)",
       "pond2doTrimestre": "2. hiruhilekoa (%)",
       "pond3erTrimestre": "3. hiruhilekoa (%)"
-    },
-    "normativa": {
-      "raiz": "Errogaina"
     },
     "secuenciacion": {
       "tipoEjercicios": "Ariketak",
@@ -2011,10 +1967,6 @@
       "legislacionEstatal": "Estatuko legedia",
       "normativaAutonomica": "Erkidegoko araudia ({{comunidad}})",
       "normativaEstatal": "Estatuko araudia",
-      "sinDocumentosAutonomicos": "Une honetan ez dago araudi-dokumenturik erkidego honetan.",
-      "sinDocumentosEstatales": "Une honetan ez dago estatuko araudi-dokumenturik.",
-      "enPreparacion": "Prestatzen",
-      "cargandoNormativa": "Araudia kargatzen...",
       "legislacionDocumentalTitulo": "Legislazio dokumentala"
     },
     "contexto": {
@@ -2240,7 +2192,6 @@
       "sumaPesos": "Batura: %{{pct}}",
       "resumenPorTrimestresTitulo": "Ebaluazio-tresnen laburpena hiruhilekoka"
     },
-    "matrices": {},
     "catalogo": {
       "tituloAcronimosGlosario": "Akronimoak eta glosarioa",
       "sinResultadosParaBusqueda": "\"{{termino}}\" bilaketarako ez da emaitzarik aurkitu",
@@ -2452,8 +2403,6 @@
     },
     "comun": {
       "ningunAlumnadoSeleccionado": "Ez da ikaslerik hautatu",
-      "cargandoDocumentos": "Dokumentuak kargatzen...",
-      "directorioVacio": "Direktorioa hutsik dago.",
       "sinCursoCargadoTitulo": "Ez dago ikastarorik kargatuta",
       "sinCursoCargadoDesc": "Ikastaro-fitxategi bat ireki edo sortu behar duzu fitxategiak atalean.",
       "gestionDe": "{{activeTab}} kudeaketa",
@@ -2781,7 +2730,6 @@
       "programacionLabel": "Programazioa",
       "agrupamientoProgramacionDesc": ": Katalogoa/Testuingurua/Curriculuma/Metodologia/Tresna) eta benetako ikasturtearen eguneroko lana (",
       "agrupamientoCursoDesc": ": Agenda/Egutegia/Ikasleak/Jarraipena/Kalifikazioa).",
-      "errorCargandoContenido": "Errorea edukia kargatzean.",
       "iniciarRecorrido": "Hasi gidatutako ibilbidea",
       "mapaAplicacionDescMid": "). Orrialde bakoitzaren fitxak eskuz mantentzen dira fitxategi honetan bertan (",
       "agrupamientoLegalDesc": "Legal bereiz bizi da, sidebarraren oinean esteka gisa: betetze-eduki da, ez lan-tresna.",
@@ -2804,10 +2752,7 @@
       "aplicacionEscritorioDesc": "Cuaderno FP Windows programa gisa: instalatu, ireki zure fitxategiak eta lan egin, konexiorik gabe ere. Doakoa eta kode irekikoa da.",
       "guiaWebTitulo": "Programazio didaktikoa LHn",
       "guiaWebDesc": "Zure programazioa eta LHko ikastaroa egiteko, aplikazioa hari gidari gisa: eduki teorikoa, lege-esparrua eta praktika, urratsez urrats.",
-      "guiaWebBoton": "Ireki webgunea",
-      "contribuidoresCcaaTitulo": "Laguntzaileak autonomia erkidegoka",
-      "contribuidoresCcaaDesc": "Aipamen berezia autonomia erkidegoen curriculumak hobetzen eta integratzen laguntzen ari den irakasleriari",
-      "animateAContribuir": "Anima zaitez laguntzera!"
+      "guiaWebBoton": "Ireki webgunea"
     },
     "legal": {
       "datosTitular": "Titularraren datuak",
