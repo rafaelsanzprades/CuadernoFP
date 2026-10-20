@@ -161,10 +161,9 @@ def _build_context(data: dict) -> dict:
         "sectores_productivos": config.get("sectores_productivos",
             data.get("familia", "")),
         "perfiles_profesionales": config.get("perfiles_profesionales", ""),
-        # «Características del alumnado»: el campo de Contexto › Alumnado y el de Contexto › Entorno (los dos existen hoy, ver CFP-5)
-        "caracteristicas_alumnado_extra": " ".join(
-            x.strip() for x in (config.get("caracteristicas_alumnado"), data.get("textos_pd_caracteristicas_alumnado")) if x and x.strip()
-        ) or _marca("otros rasgos del grupo a destacar"),
+        # «Características del alumnado»: campo único de Contexto › Alumnado (textos_pd_caracteristicas_alumnado)
+        "caracteristicas_alumnado_extra": (data.get("textos_pd_caracteristicas_alumnado") or "").strip()
+        or _marca("otros rasgos del grupo a destacar"),
     })
 
     # --- Espacios y equipamiento (contextualizacion) ---

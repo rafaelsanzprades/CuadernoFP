@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { countField, countBoolean } from "@/components/features/alumnado/TendenciasProfesionalTab";
 import { loadCatalogForModule, resolveModuloNivel } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
+import { RASGOS_ALUMNADO } from "@/data/rasgosAlumnado";
 import { PlanesTab } from "@/components/features/modulo/PlanesTab";
 import { ActividadesComplementariasTab } from "@/components/features/modulo/ActividadesComplementariasTab";
 
@@ -98,33 +99,6 @@ const RASGOS_CONTEXTO_ESCOLAR = [
   },
 ];
 
-const RASGOS_ALUMNADO = [
-  {
-    grupo: "Procedencia mayoritaria", items: [
-      { id: "AL-PROC-LOCAL", label: "Local" },
-      { id: "AL-PROC-COMARCAL", label: "Comarcal" },
-      { id: "AL-PROC-OTRAS-PROV", label: "Otras provincias" },
-      { id: "AL-PROC-INTERNACIONAL", label: "Internacional" },
-    ]
-  },
-  {
-    grupo: "Vía de acceso predominante", items: [
-      { id: "AL-VIA-ESO", label: "ESO" },
-      { id: "AL-VIA-PRUEBA", label: "Prueba de acceso" },
-      { id: "AL-VIA-OTRO-CICLO", label: "Otro ciclo" },
-      { id: "AL-VIA-BACHILLERATO", label: "Bachillerato" },
-    ]
-  },
-  {
-    grupo: "Perfil del grupo", items: [
-      { id: "AL-MOTIVACION-ALTA", label: "Motivación alta" },
-      { id: "AL-MOTIVACION-BAJA", label: "Motivación baja/irregular" },
-      { id: "AL-DIVERSIDAD-ALTA", label: "Alta diversidad de perfiles" },
-      { id: "AL-REPETIDORES", label: "Presencia significativa de repetidores" },
-    ]
-  },
-];
-
 const RASGOS_INFRAESTRUCTURA = [
   {
     grupo: "Tipo de aula", items: [
@@ -151,7 +125,7 @@ const RASGOS_INFRAESTRUCTURA = [
 interface SugerenciaGrupo { grupo: string; id: string; label: string; motivo: string }
 
 interface RasgosRapidosProps {
-  titulo: string;
+  titulo?: string;
   grupos: { grupo: string; items: { id: string; label: string }[] }[];
   seleccionados: string[];
   onToggle: (id: string) => void;
@@ -164,7 +138,7 @@ function RasgosRapidos({ titulo, grupos, seleccionados, onToggle, sugerencia }: 
   const { t } = useTranslation();
   return (
     <div>
-      <label className="text-body font-semibold text-foreground mb-2 block">{titulo}</label>
+      {titulo && <label className="text-body font-semibold text-foreground mb-2 block">{titulo}</label>}
       <p className="text-caption text-muted mb-3">
         {t('checks.contexto.seleccionOrientativa', {defaultValue: 'Selección orientativa para apoyar la redacción del texto de abajo (primera versión, se irá ampliando).'})}
       </p>
@@ -306,26 +280,6 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
   // agregados de profesional_ledger (orientación profesional), si hay curso
   // cargado — degrada con gracia a solo Rasgos rápidos si no lo hay.
   const profesionalLedger = cursoData?.profesional_ledger || {};
-  const datosAlumnadoExtra = (() => {
-    if (Object.keys(profesionalLedger).length === 0) return [];
-    const total = Object.keys(profesionalLedger).length;
-    const topMotivo = countField(profesionalLedger, "motivo_eleccion")[0];
-    const topAptitud = countField(profesionalLedger, "aptitud_principal")[0];
-    const nConExperiencia = Object.values(profesionalLedger).filter(
-      (d: any) => d.experiencia_previa && d.experiencia_previa !== "Sin experiencia"
-    ).length;
-    const nErasmus = countBoolean(profesionalLedger, "interes_erasmus");
-    return [
-      `Datos agregados de orientación profesional (${total} fichas registradas): ` +
-      [
-        topMotivo ? `motivo de elección más frecuente "${topMotivo[0]}"` : null,
-        topAptitud ? `aptitud principal más frecuente "${topAptitud[0]}"` : null,
-        `${nConExperiencia} de ${total} con experiencia laboral previa`,
-        `${nErasmus} con interés en movilidad Erasmus+`,
-      ].filter(Boolean).join(", ") + ".",
-    ];
-  })();
-
   // Sugerencia (no forzada) de "Vía de acceso predominante" según el Grado
   // del módulo (moduleData.info_modulo.nivel, ya poblado por el catálogo al
   // elegir el título) — pedido por Rafael, 2026-09-10. Solo se sugiere donde
@@ -521,32 +475,16 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
       {show("alumnado-rasgos-rapidos") && (
       <div className="space-y-3">
       <SectionHeading id="alumnado-rasgos-rapidos" icon={Users} scrollMt="260px">
-        {t('campos.alumnado.rasgosRapidosTitulo', {defaultValue: 'Rasgos rápidos y características del alumnado'})}
+        {t('campos.alumnado.rasgosRapidosTitulo', {defaultValue: 'Rasgos rápidos del alumnado'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-indigo-500">
         <div className="space-y-6">
           <RasgosRapidos
-            titulo={t('checks.contexto.tituloAlumnado', {defaultValue: 'Rasgos rápidos del alumnado'})}
             grupos={RASGOS_ALUMNADO}
             seleccionados={rasgos_alumnado}
             onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
             sugerencia={sugerenciaViaAcceso}
           />
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.caracteristicasAlumnadoLabel', {defaultValue: 'Características del alumnado'})}</label>
-              <IaButton
-                loading={!!generandoIA.caracteristicas_alumnado}
-                onClick={() => handleGenerarIA("caracteristicas_alumnado", "Características del alumnado", RASGOS_ALUMNADO, rasgos_alumnado, datosAlumnadoExtra)}
-              />
-            </div>
-            <textarea
-              value={config_contexto.caracteristicas_alumnado || ""}
-              onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
-              placeholder={t('placeholders.contexto.caracteristicasAlumnado', {defaultValue: 'Ej: Grupo diverso en edades y perfiles de ingreso...'})}
-              className="w-full h-96 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
         </div>
       </div>
       </div>

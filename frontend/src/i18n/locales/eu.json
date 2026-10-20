@@ -894,7 +894,6 @@
       "escribeSobre": "Idatzi hemen honi buruz: {{tema}}..."
     },
     "contexto": {
-      "caracteristicasAlumnado": "Adib: Adin eta sarrera-profil anitzeko taldea...",
       "contextoEscolar": "Adib: Lanbide heziketako erreferentziazko zentroa...",
       "entornoGeografico": "Adib: Andalán institutua Zaragozako X auzoan dago...",
       "entornoSocioeconomico": "Adib: Eremuko enpresa-sarea honengatik nabarmentzen da...",
@@ -1610,7 +1609,7 @@
       "guardarSinCifrar": "Gorde zifratu gabe"
     },
     "alumnado": {
-      "caracteristicasDesc": "Nabarmendu nahi dituzun taldearen beste ezaugarri batzuk (PD+-n «Asimismo, cabe destacar…» ondoren inprimatzen dira).",
+      "caracteristicasDesc": "«Ikasleen ezaugarriak» atalaren testua (PD= eta PD+). IA botoiak goian markatutako ezaugarriak, taldearen ezaugarriak eta ikasleen benetako datuak erabiltzen ditu.",
       "perfilPdTitulo": "Jatorria, inplikazioa eta itxaropenak",
       "procedenciaLabel": "Jatorri geografiko nagusia",
       "implicacionLabel": "Inplikazio-maila",
@@ -1739,7 +1738,7 @@
       "menorEdadBadge": "Adingabea",
       "perfilGrupoLabel": "Taldearen profila",
       "anosSeparador": "urte ·",
-      "rasgosRapidosTitulo": "Ikasleen ezaugarri azkarrak eta ezaugarriak"
+      "rasgosRapidosTitulo": "Ikasleen ezaugarri azkarrak"
     },
     "evaluacion": {
       "informacionDesc": "Ebaluazio- eta kalifikazio-irizpideak nola ezagutarazten diren.",
@@ -1992,7 +1991,6 @@
       "entornoGeograficoLabel": "Ingurune geografikoa eta soziokulturala",
       "entornoSocioeconomicoLabel": "Ingurune sozioekonomikoa eta produktiboa",
       "contextoEscolarLabel": "Eskola-testuingurua",
-      "caracteristicasAlumnadoLabel": "Ikasleen ezaugarriak",
       "infraestructuraLabel": "Azpiegitura eta baliabide pedagogikoak",
       "tituloAlumnadoAcneae": "Ikasleak (ACNEAE)",
       "datosContextualizacionGrupo": "Taldearen testuinguru-datuak",

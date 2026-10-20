@@ -178,7 +178,7 @@ def test_actividades_de_evaluacion_salen_en_pd_igual_y_pd_mas():
         assert "Segundo trimestre: ZZActividadZZ (práctica, 33 %)." in t
 
 
-def test_caracteristicas_del_alumnado_de_entorno_salen_en_pd_igual_y_pd_mas():
-    cambios = {"config_contexto.caracteristicas_alumnado": "ZZCaractEntornoZZ"}
-    assert "Características del alumnado. ZZCaractEntornoZZ" in _generar(cambios, TRES[1])
-    assert "ZZCaractEntornoZZ" in _generar(cambios, TRES[2])
+def test_caracteristicas_del_alumnado_salen_en_pd_igual_y_pd_mas():
+    cambios = {"textos_pd_caracteristicas_alumnado": "ZZCaractAlumnadoZZ"}
+    assert "Características del alumnado. ZZCaractAlumnadoZZ" in _generar(cambios, TRES[1])
+    assert "ZZCaractAlumnadoZZ" in _generar(cambios, TRES[2])

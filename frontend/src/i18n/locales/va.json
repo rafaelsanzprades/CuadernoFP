@@ -894,7 +894,6 @@
       "escribeSobre": "Escriu aquí sobre: {{tema}}..."
     },
     "contexto": {
-      "caracteristicasAlumnado": "Ex: Grup divers en edats i perfils d'ingrés...",
       "contextoEscolar": "Ex: Centre de referència en formació professional...",
       "entornoGeografico": "Ex: L'IES Andalán se situa al barri X de Saragossa...",
       "entornoSocioeconomico": "Ex: El teixit empresarial de la zona destaca per...",
@@ -1610,7 +1609,7 @@
       "guardarSinCifrar": "Guarda sense xifrar"
     },
     "alumnado": {
-      "caracteristicasDesc": "Altres trets del grup que vulguis destacar (el PD+ els imprimeix després de «Asimismo, cabe destacar…»).",
+      "caracteristicasDesc": "Text de l'apartat «Característiques de l'alumnat» (PD= i PD+). El botó d'IA utilitza els trets marcats a dalt, els trets del grup i les dades reals de l'alumnat.",
       "perfilPdTitulo": "Procedència, implicació i expectatives",
       "procedenciaLabel": "Procedència geogràfica principal",
       "implicacionLabel": "Grau d'implicació",
@@ -1739,7 +1738,7 @@
       "menorEdadBadge": "Menor d'edat",
       "perfilGrupoLabel": "Perfil del grup",
       "anosSeparador": "anys ·",
-      "rasgosRapidosTitulo": "Trets ràpids i característiques de l'alumnat"
+      "rasgosRapidosTitulo": "Trets ràpids de l'alumnat"
     },
     "evaluacion": {
       "informacionDesc": "Com es donen a conèixer els criteris d'avaluació i qualificació.",
@@ -1992,7 +1991,6 @@
       "entornoGeograficoLabel": "Entorn geogràfic i sociocultural",
       "entornoSocioeconomicoLabel": "Entorn socioeconòmic i productiu",
       "contextoEscolarLabel": "Context escolar",
-      "caracteristicasAlumnadoLabel": "Característiques de l'alumnat",
       "infraestructuraLabel": "Infraestructura i recursos educatius",
       "tituloAlumnadoAcneae": "Alumnat (ACNEAE)",
       "datosContextualizacionGrupo": "Dades de contextualització del grup",

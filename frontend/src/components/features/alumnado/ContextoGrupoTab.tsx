@@ -10,6 +10,7 @@ import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
+import { RASGOS_ALUMNADO } from "@/data/rasgosAlumnado";
 
 const RASGOS_GRUPO = [
   { id: "GRUPO-HETEROG", label: "Grupo heterogéneo en edad y procedencia" },
@@ -91,8 +92,7 @@ export function ContextoGrupoTab() {
   const [generandoIA, setGenerandoIA] = useState(false);
 
   const rasgos_grupo = cursoData?.rasgos_grupo || [];
-  // Datos que imprime el PD+ en «Características del alumnado» (los lee generador_pd_jeg.py de config_contexto)
-  const config_contexto = moduleData?.config_contexto || {};
+    const config_contexto = moduleData?.config_contexto || {};
   const setConfig = (campo: string, valor: string) => updateModuleData("config_contexto", { ...config_contexto, [campo]: valor });
 
   const toggleRasgo = (id: string) => {
@@ -111,6 +111,10 @@ export function ContextoGrupoTab() {
   const repetidores = df_al.filter((a: any) => a.Repite === true).length;
   const tramosEdad = EDAD_TRAMOS.map((tramo) => ({ label: tramo.label, count: conEdad.filter((a: any) => tramo.test(a.Edad)).length }));
   const rasgosSeleccionados = RASGOS_GRUPO.filter((r) => rasgos_grupo.includes(r.id)).map((r) => t(`checks.alumnado.rasgoGrupo_${r.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: r.label}));
+
+  const rasgosRapidos = RASGOS_ALUMNADO.flatMap((g) => g.items)
+    .filter((i) => (config_contexto.rasgos_alumnado || []).includes(i.id))
+    .map((i) => t(`checks.contexto.item_${i.id.toLowerCase().replace(/-/g, '_')}`, {defaultValue: i.label}));
 
   const handleGenerarIA = async () => {
     if (total === 0) {
@@ -132,6 +136,9 @@ export function ContextoGrupoTab() {
         rasgosSeleccionados.length > 0
           ? `Rasgos característicos marcados por el profesor: ${rasgosSeleccionados.join("; ")}.`
           : "Sin rasgos característicos marcados por el profesor.",
+        rasgosRapidos.length > 0
+          ? `Rasgos rápidos del alumnado marcados por el profesor: ${rasgosRapidos.join("; ")}.`
+          : "Sin rasgos rápidos del alumnado marcados por el profesor.",
       ].join("\n");
 
       const res = await fetch(`${getApiBase()}/api/ai/chat`, {
@@ -216,7 +223,7 @@ export function ContextoGrupoTab() {
           <NarrativeField
             id="textos_pd_caracteristicas_alumnado"
             title={t('campos.alumnado.caracteristicasTitulo', {defaultValue: 'Características del alumnado'})}
-            description={t('campos.alumnado.caracteristicasDesc', {defaultValue: 'Otros rasgos del grupo que quieras destacar (el PD+ los imprime tras «Asimismo, cabe destacar…»).'})}
+            description={t('campos.alumnado.caracteristicasDesc', {defaultValue: 'Texto del apartado «Características del alumnado» (PD= y PD+). El botón de IA usa los rasgos marcados arriba, los rasgos del grupo y los datos reales del alumnado.'})}
           />
           <button
             type="button"

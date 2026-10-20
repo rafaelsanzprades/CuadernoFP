@@ -894,7 +894,6 @@
       "escribeSobre": "Escribe aquí sobre: {{tema}}..."
     },
     "contexto": {
-      "caracteristicasAlumnado": "Ex: Grupo diverso en idades e perfís de ingreso...",
       "contextoEscolar": "Ex: Centro de referencia en formación profesional...",
       "entornoGeografico": "Ex: O IES Andalán sitúase no barrio X de Zaragoza...",
       "entornoSocioeconomico": "Ex: O tecido empresarial da zona destaca por...",
@@ -1610,7 +1609,7 @@
       "guardarSinCifrar": "Gardar sen cifrar"
     },
     "alumnado": {
-      "caracteristicasDesc": "Outros trazos do grupo que queiras destacar (o PD+ imprímeos despois de «Asimismo, cabe destacar…»).",
+      "caracteristicasDesc": "Texto do apartado «Características do alumnado» (PD= e PD+). O botón de IA usa os trazos marcados arriba, os trazos do grupo e os datos reais do alumnado.",
       "perfilPdTitulo": "Procedencia, implicación e expectativas",
       "procedenciaLabel": "Procedencia xeográfica principal",
       "implicacionLabel": "Grao de implicación",
@@ -1739,7 +1738,7 @@
       "menorEdadBadge": "Menor de idade",
       "perfilGrupoLabel": "Perfil do grupo",
       "anosSeparador": "anos ·",
-      "rasgosRapidosTitulo": "Trazos rápidos e características do alumnado"
+      "rasgosRapidosTitulo": "Trazos rápidos do alumnado"
     },
     "evaluacion": {
       "informacionDesc": "Como se dan a coñecer os criterios de avaliación e cualificación.",
@@ -1992,7 +1991,6 @@
       "entornoGeograficoLabel": "Contorna xeográfica e sociocultural",
       "entornoSocioeconomicoLabel": "Contorna socioeconómica e produtiva",
       "contextoEscolarLabel": "Contexto escolar",
-      "caracteristicasAlumnadoLabel": "Características do alumnado",
       "infraestructuraLabel": "Infraestrutura e recursos educativos",
       "tituloAlumnadoAcneae": "Alumnado (ACNEAE)",
       "datosContextualizacionGrupo": "Datos de contextualización do grupo",

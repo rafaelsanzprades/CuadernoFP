@@ -194,7 +194,7 @@ keep both in sync) and pd= prints it; if empty, pd= leaves a visible `[[ ]]` mar
 Data that used to reach no document is now wired into all three tiers through helpers in `helpers_pd_tablas.py`
 (`nombre_ccaa`, `ubicacion_centro`, `contenidos_por_ud`, `lineas_actividades_evaluacion`, `proyectos_retos`, `regimen_dual_texto`):
 centro/localidad/provincia/comunidad, dual regime, session contents (`df_sesiones.Contenidos`), projects and challenges
-(`df_tareas`), evaluation activities (`df_act`) and the Entorno «características del alumnado». pd- and pd+ got template edits
+(`df_tareas`), evaluation activities (`df_act`) and the single «características del alumnado» field (Contexto › Alumnado, `textos_pd_caracteristicas_alumnado`). pd- and pd+ got template edits
 (`backend/scripts/ampliar_plantilla_pd_minima_centro.py`, `ampliar_plantilla_jeg_campos.py`, both idempotent); pd= only needed Python
 because its sections are lists. A field is only really «in» a document if a generated-text diff proves it: see
 `APP-www_rsp_es/articulos/12-3-analisis-app-pdx.md` (the comparison table was rebuilt that way on 2026-10-20).

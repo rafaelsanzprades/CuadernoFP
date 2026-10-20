@@ -266,8 +266,8 @@ def _build_context(data: dict) -> dict:
                             ("Contexto escolar", "contexto_escolar")):
         if config.get(clave):
             list_intro.append(f"{etiqueta}. {config[clave]}")
-    # «Características del alumnado»: el campo de Contexto › Entorno y el de Contexto › Alumnado (los dos existen hoy, ver CFP-5)
-    caract = " ".join(x.strip() for x in (config.get("caracteristicas_alumnado"), data.get("textos_pd_caracteristicas_alumnado")) if x and x.strip())
+    # «Características del alumnado»: campo único de Contexto › Alumnado (textos_pd_caracteristicas_alumnado)
+    caract = (data.get("textos_pd_caracteristicas_alumnado") or "").strip()
     if caract:
         list_intro.append(f"Características del alumnado. {caract}")
     context["list_intro"] = list_intro

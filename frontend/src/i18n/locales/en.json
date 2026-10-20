@@ -894,7 +894,6 @@
       "escribeSobre": "Write here about: {{tema}}..."
     },
     "contexto": {
-      "caracteristicasAlumnado": "E.g.: Group diverse in ages and entry profiles...",
       "contextoEscolar": "E.g.: Reference center in vocational training...",
       "entornoGeografico": "E.g.: IES Andalán is located in district X of Zaragoza...",
       "entornoSocioeconomico": "E.g.: The business fabric of the area stands out for...",
@@ -1610,7 +1609,7 @@
       "guardarSinCifrar": "Save unencrypted"
     },
     "alumnado": {
-      "caracteristicasDesc": "Other traits of the group you want to highlight (the PD+ prints them after “Asimismo, cabe destacar…”).",
+      "caracteristicasDesc": "Text for the «Characteristics of the students» section (PD= and PD+). The AI button uses the traits ticked above, the group traits and the real student data.",
       "perfilPdTitulo": "Origin, involvement and expectations",
       "procedenciaLabel": "Main geographic origin",
       "implicacionLabel": "Level of involvement",
@@ -1739,7 +1738,7 @@
       "menorEdadBadge": "Minor",
       "perfilGrupoLabel": "Group profile",
       "anosSeparador": "years old ·",
-      "rasgosRapidosTitulo": "Quick traits and characteristics of the students"
+      "rasgosRapidosTitulo": "Quick traits of the students"
     },
     "evaluacion": {
       "informacionDesc": "How assessment and grading criteria are communicated.",
@@ -1992,7 +1991,6 @@
       "entornoGeograficoLabel": "Geographic and sociocultural environment",
       "entornoSocioeconomicoLabel": "Socioeconomic and productive environment",
       "contextoEscolarLabel": "School context",
-      "caracteristicasAlumnadoLabel": "Student characteristics",
       "infraestructuraLabel": "Infrastructure and educational resources",
       "tituloAlumnadoAcneae": "Students (ACNEAE)",
       "datosContextualizacionGrupo": "Group contextualization data",

@@ -515,7 +515,8 @@
       "catalogoTitulo": "Catálogo de instrumentos de evaluación y de calificación"
     },
     "alumnado": {
-      "rasgosRapidosTitulo": "Rasgos rápidos y características del alumnado"
+      "rasgosRapidosTitulo": "Rasgos rápidos del alumnado",
+      "caracteristicasDesc": "Texto del apartado «Características del alumnado» (PD= y PD+). El botón de IA usa los rasgos marcados arriba, los rasgos del grupo y los datos reales del alumnado."
     },
     "modulo": {
       "f1AtencionDiversidadTitulo": "Atención a la diversidad. Adaptaciones no significativas",
