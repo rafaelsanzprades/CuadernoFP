@@ -72,16 +72,32 @@
         "label": "Plano de aula",
         "desc": "Distribución y plano visual del aula."
       }
+    },
+    "inicio": {
+      "mapa": {
+        "label": "Mapa",
+        "desc": "Todas las páginas de la aplicación y las pestañas que contiene cada una."
+      },
+      "privacidad": {
+        "label": "Tu privacidad",
+        "desc": "Dónde van tus datos, el cifrado opcional y la seguridad de la aplicación."
+      }
+    },
+    "archivos": {
+      "nube": {
+        "label": "Nube",
+        "desc": "Conecta Google Drive u OneDrive y, si quieres importar un currículo en PDF, tu propia clave de IA."
+      }
     }
   },
   "inicio": {
     "title": "Inicio",
-    "subtitle": "Panel principal, gestión de archivos, IA y verificación de datos."
+    "subtitle": "Bienvenida, mapa de la aplicación y tu privacidad."
   },
   "nav": {
     "inicio": "Inicio",
     "perfil": "Perfil",
-    "archivos": "Archivo",
+    "archivos": "Archivos",
     "catalogo": "Catálogo",
     "documentos": "Normativa",
     "ayuda": "Ayuda",
@@ -114,11 +130,11 @@
     "general_desc": "Por dónde empezar: tu panel y tus ficheros, la ayuda, los documentos de MagIA y la información legal. MagIA necesita una programación y un curso abiertos."
   },
   "navDesc": {
-    "inicio": "Panel principal, gestión de archivos, IA y verificación de datos.",
-    "ayuda": "Guía de inicio, FAQ, acrónimos y contribuciones de la comunidad.",
-    "magia": "Comparativa y correspondencia APP-PD, y documentos de apoyo de la programación y del curso.",
+    "inicio": "Bienvenida, mapa de la aplicación y cómo se protege tu privacidad.",
+    "ayuda": "Guía de inicio, preguntas frecuentes y acrónimos.",
+    "magia": "Generación de programaciones PD-/PD=/PD+ y documentos de apoyo de la programación y del curso.",
     "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
-    "archivos": "Gestión de archivos, sincronización en la nube, seguridad, IA y verificación de datos.",
+    "archivos": "Tus archivos de grupo, programación y curso, la nube y la verificación de datos.",
     "catalogo": "Familias, títulos, módulos y currículos (RA y CE).",
     "contexto": "Identificación, entorno, alumnado, evaluación y procedimientos de la programación.",
     "curriculo": "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales.",
@@ -447,6 +463,13 @@
     "agenda": {
       "planificacionSeguimientoMensualTitulo": "Planificación y seguimiento mensual",
       "planoAulaTitulo": "Plano de aula"
+    },
+    "archivos": {
+      "nubeTitulo": "Nube y clave de IA"
     }
+  },
+  "archivos": {
+    "title": "Archivos",
+    "subtitle": "Tus grupos, programaciones y cursos: dónde están, cuáles tienes abiertos y si están completos."
   }
 }

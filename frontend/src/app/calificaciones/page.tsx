@@ -117,7 +117,7 @@ export default function AgendaPage() {
 
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab]}{" "}
-              <Link href="/inicio?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
+              <Link href="/archivos?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
                 {t('botones.verificacion.verificarTrabajo', {defaultValue: 'Verificar mi trabajo'})} →
               </Link>
             </p>

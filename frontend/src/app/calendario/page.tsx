@@ -430,7 +430,7 @@ export default function CalendarioPage() {
                 <Calendar className="w-16 h-16 text-muted-foreground opacity-50" />
                 <h2 className="text-heading font-bold">{t('campos.comun.sinCursoCargadoTitulo', {defaultValue: 'No hay curso cargado'})}</h2>
                 <p className="text-muted mb-4">{t('campos.comun.sinCursoCargadoDesc', {defaultValue: 'Debes abrir o crear un archivo de curso en tu Archivos.'})}</p>
-                <Link href="/inicio?tab=datos">
+                <Link href="/archivos?tab=datos">
                   <Button variant="primary" className="gap-2">
                     <FolderOpen className="w-4 h-4" /> {t('common.ir_a_mis_archivos', {defaultValue: 'Ir a mis archivos'})}
                   </Button>
@@ -602,7 +602,7 @@ export default function CalendarioPage() {
                 mismo patrón que Inicio/Ayuda/MagIA/Normativa/Legal */}
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión del calendario académico.'}{" "}
-              <Link href="/inicio?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
+              <Link href="/archivos?tab=verificacion" className="text-accent hover:underline whitespace-nowrap">
                 {t('botones.verificacion.verificarTrabajo', {defaultValue: 'Verificar mi trabajo'})} →
               </Link>
             </p>

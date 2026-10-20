@@ -230,6 +230,10 @@
       "asistente-ia": {
         "label": "Asistente",
         "desc": "Configuración de intelixencia artificial."
+      },
+      "nube": {
+        "label": "Nube",
+        "desc": "Conecta Google Drive ou OneDrive e, se queres importar un currículo en PDF, a túa propia clave de IA."
       }
     },
     "catalogo": {
@@ -335,6 +339,14 @@
       },
       "bienvenida": {
         "desc": "Panel de control de acceso rápido a todas as ferramentas."
+      },
+      "mapa": {
+        "label": "Mapa",
+        "desc": "Todas as páxinas da aplicación e as lapelas de cada unha."
+      },
+      "privacidad": {
+        "label": "A túa privacidade",
+        "desc": "Onde van os teus datos, o cifrado opcional e a seguridade da aplicación."
       }
     },
     "agenda": {
@@ -358,12 +370,12 @@
   },
   "inicio": {
     "title": "Inicio",
-    "subtitle": "Panel principal, xestión de arquivos, IA e verificación de datos."
+    "subtitle": "Benvida, mapa da aplicación e a túa privacidade."
   },
   "nav": {
     "inicio": "Inicio",
     "perfil": "Perfil",
-    "archivos": "Arquivos",
+    "archivos": "Ficheiros",
     "catalogo": "Catálogo",
     "documentos": "Documentos",
     "ayuda": "Axuda",
@@ -481,11 +493,11 @@
     "cargando": "Cargando..."
   },
   "navDesc": {
-    "inicio": "Panel principal, xestión de arquivos, IA e verificación de datos.",
-    "ayuda": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
-    "magia": "Comparativa e correspondencia APP-PD, e documentos de apoio da programación e do curso.",
+    "inicio": "Benvida, mapa da aplicación e como se protexe a túa privacidade.",
+    "ayuda": "Guía de inicio, preguntas frecuentes e acrónimos.",
+    "magia": "Xeración de programacións PD-/PD=/PD+ e documentos de apoio da programación e do curso.",
     "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
-    "archivos": "Xestión de arquivos, sincronización na nube, seguridade, IA e verificación de datos.",
+    "archivos": "Os teus ficheiros de grupo, programación e curso, a nube e a verificación de datos.",
     "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
     "contexto": "Identificación, contorno, alumnado, avaliación e procedementos da programación.",
     "curriculo": "Contribución dos RA aos obxectivos, ponderación RA-CE, unidades didácticas e tarefas competenciais.",
@@ -2339,7 +2351,8 @@
       "sinEnlacesRotos": "Non se detectaron ligazóns rotas nos grupos do teu cartafol local.",
       "enlacesRotosDetectados": "Detectáronse as seguintes ligazóns rotas nos ficheiros grupo. Isto sucede cando renomeas ou eliminas unha programación ou un curso directamente en Windows.",
       "programacionNoEncontrada": "Programación non atopada:",
-      "cursoNoEncontrado": "Curso non atopado:"
+      "cursoNoEncontrado": "Curso non atopado:",
+      "nubeTitulo": "Nube e clave de IA"
     },
     "expediente": {
       "tipoCalificacion": "Cualificación",
@@ -2867,5 +2880,9 @@
   },
   "fecha": "Data",
   "hasta_opc": "Ata (opcional)",
-  "sin_eventos": "Aínda non hai festivos nin eventos. Engade un embaixo."
+  "sin_eventos": "Aínda non hai festivos nin eventos. Engade un embaixo.",
+  "archivos": {
+    "title": "Ficheiros",
+    "subtitle": "Os teus grupos, programacións e cursos: onde están, cales tes abertos e se están completos."
+  }
 }

@@ -230,6 +230,10 @@
       "asistente-ia": {
         "label": "Assistant",
         "desc": "Artificial intelligence configuration."
+      },
+      "nube": {
+        "label": "Cloud",
+        "desc": "Connect Google Drive or OneDrive and, to import a curriculum PDF, your own AI key."
       }
     },
     "catalogo": {
@@ -335,6 +339,14 @@
       },
       "bienvenida": {
         "desc": "Quick-access control panel for all the tools."
+      },
+      "mapa": {
+        "label": "Map",
+        "desc": "All the pages of the app and the tabs each one contains."
+      },
+      "privacidad": {
+        "label": "Your privacy",
+        "desc": "Where your data goes, optional encryption and the security of the app."
       }
     },
     "agenda": {
@@ -358,7 +370,7 @@
   },
   "inicio": {
     "title": "Home",
-    "subtitle": "Main dashboard, file management, AI and data verification."
+    "subtitle": "Welcome, map of the app and your privacy."
   },
   "nav": {
     "inicio": "Home",
@@ -481,11 +493,11 @@
     "cargando": "Loading..."
   },
   "navDesc": {
-    "inicio": "Main dashboard, file management, AI and data verification.",
-    "ayuda": "Getting-started guide, FAQ, acronyms and community contributions.",
-    "magia": "APP-PD comparison and mapping, plus supporting documents for the programme and the course.",
+    "inicio": "Welcome, map of the app and how your privacy is protected.",
+    "ayuda": "Getting-started guide, FAQ and acronyms.",
+    "magia": "Generation of PD-/PD=/PD+ plans and support documents for the plan and the course.",
     "legal": "Legal notice, privacy, cookies and accessibility.",
-    "archivos": "File management, cloud sync, security, AI and data verification.",
+    "archivos": "Your group, plan and course files, the cloud and data verification.",
     "catalogo": "Families, qualifications, modules and curricula (RA and CE).",
     "contexto": "Identification, environment, students, assessment and procedures of the programme.",
     "curriculo": "Contribution of RA to objectives, RA-CE weighting, teaching units and competency-based tasks.",
@@ -2339,7 +2351,8 @@
       "sinEnlacesRotos": "No broken links have been detected in the groups in your local folder.",
       "enlacesRotosDetectados": "The following broken links have been detected in the group files. This happens when you rename or delete a Curriculum Plan or a course directly in Windows.",
       "programacionNoEncontrada": "Curriculum plan not found:",
-      "cursoNoEncontrado": "Course not found:"
+      "cursoNoEncontrado": "Course not found:",
+      "nubeTitulo": "Cloud and AI key"
     },
     "expediente": {
       "tipoCalificacion": "Grading",
@@ -2867,5 +2880,9 @@
   },
   "fecha": "Date",
   "hasta_opc": "Until (optional)",
-  "sin_eventos": "No holidays or events yet. Add one below."
+  "sin_eventos": "No holidays or events yet. Add one below.",
+  "archivos": {
+    "title": "Files",
+    "subtitle": "Your groups, plans and courses: where they are, which ones are open and whether they are complete."
+  }
 }

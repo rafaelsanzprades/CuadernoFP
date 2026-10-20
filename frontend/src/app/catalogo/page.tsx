@@ -691,7 +691,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
       const ok = await fileManager.createNewProgramacion(code, name, extras);
       if (ok) {
         toast.success(t('toasts.catalogo.programacionCreada', {name, defaultValue: 'Programación de {{name}} creada correctamente.'}));
-        router.push("/inicio?tab=datos");
+        router.push("/archivos?tab=datos");
       } else {
         toast.error(t('toasts.catalogo.errorCrearProgramacion', {defaultValue: "Error al crear la programación."}));
       }
@@ -897,7 +897,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
       const ok = await fileManager.createNewProgramacion(code, name, extras);
       if (ok) {
         toast.success(t('toasts.catalogo.programacionCreada', {name, defaultValue: 'Programación de {{name}} creada correctamente.'}));
-        router.push("/inicio?tab=datos");
+        router.push("/archivos?tab=datos");
       } else {
         toast.error(t('toasts.catalogo.errorCrearProgramacion', {defaultValue: "Error al crear la programación."}));
       }

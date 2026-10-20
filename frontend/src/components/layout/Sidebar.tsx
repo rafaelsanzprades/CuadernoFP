@@ -186,7 +186,7 @@ export default function Sidebar() {
               </Link>
               <div className="flex flex-col items-start mt-1 w-full gap-1">
                 <Link
-                  href="/inicio?tab=datos"
+                  href="/archivos?tab=datos"
                   onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
                   className="text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity ml-0.5"
                   style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
@@ -257,7 +257,7 @@ export default function Sidebar() {
           )}
           {isSidebarOpen && (
             <Link
-              href="/inicio?tab=datos"
+              href="/archivos?tab=datos"
               onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
               className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
               style={{ color: dataSource === 'demo' ? 'var(--warning)' : 'var(--success)' }}
@@ -323,7 +323,7 @@ export default function Sidebar() {
                   </div>
                   {infoValue && infoValue !== 'CÓDIGO' && infoValue !== 'AÑO' && (
                     <Link
-                      href="/inicio?tab=datos"
+                      href="/archivos?tab=datos"
                       onClick={() => { if (window.innerWidth < 1024) toggleSidebar(); }}
                       className="mx-1 text-caption font-semibold tracking-wide flex items-center gap-1.5 hover:opacity-80 transition-opacity"
                       style={{

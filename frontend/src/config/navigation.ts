@@ -1,4 +1,4 @@
-import { Activity, Award, Calendar, CalendarDays, Compass, GraduationCap, Grid, Info, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
+import { Activity, Award, FolderOpen, Calendar, CalendarDays, Compass, GraduationCap, Grid, Info, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
 
 // PRUEBA 2026-09-23 (a petición de Rafael, ver 00 IDEAS.md): reequilibrado
 // de 3+6+6 a 3 bloques de 5 páginas cada uno (15 en total) -- Normativa sale
@@ -14,9 +14,10 @@ export const navGroups = [
     title: "General",
     sectionDescription: "Por dónde empezar: tu panel y tus ficheros, la ayuda, los documentos de MagIA y la información legal. MagIA necesita una programación y un curso abiertos.",
     items: [
-      { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, gestión de archivos, IA y verificación de datos." },
-      { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, FAQ, acrónimos y contribuciones de la comunidad." },
-      { href: "/magia?tab=programacion", label: "MagIA", icon: Sparkles, description: "Generación de programaciones PD-/PD=/PD+, correspondencia APP-PD y documentos de apoyo de la programación y del curso." },
+      { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Bienvenida, mapa de la aplicación y cómo se protege tu privacidad." },
+      { href: "/archivos?tab=datos", label: "Archivos", icon: FolderOpen, description: "Tus archivos de grupo, programación y curso, la nube y la verificación de datos." },
+      { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, preguntas frecuentes y acrónimos." },
+      { href: "/magia?tab=programacion", label: "MagIA", icon: Sparkles, description: "Generación de programaciones PD-/PD=/PD+ y documentos de apoyo de la programación y del curso." },
       { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." },
     ]
   },
@@ -51,7 +52,12 @@ export const navGroups = [
 export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
   "/inicio": [
     { id: "bienvenida", label: "Bienvenida" },
+    { id: "mapa", label: "Mapa" },
+    { id: "privacidad", label: "Tu privacidad" },
+  ],
+  "/archivos": [
     { id: "datos", label: "Datos" },
+    { id: "nube", label: "Nube" },
     { id: "verificacion", label: "Verificación" },
   ],
   "/ayuda": [

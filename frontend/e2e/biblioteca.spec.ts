@@ -3,7 +3,7 @@ import { abrirConDemo } from './helpers';
 
 test.describe('Biblioteca de programaciones', () => {
   test('importa una programación sin datos del centro ni del profesorado', async ({ page }) => {
-    await abrirConDemo(page, '/inicio?tab=datos');
+    await abrirConDemo(page, '/archivos?tab=datos');
     // la demo oculta la botonera de archivos: se pasa a datos reales y se acepta la confirmación de sustituir la programación abierta
     await page.getByRole('button', { name: /Reales|reales/ }).first().click();
     await page.getByRole('button', { name: 'Importar de la biblioteca' }).click();

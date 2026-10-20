@@ -13,6 +13,7 @@ const PAGINAS = [
   { href: '/calificaciones', titulo: 'Calificaciones' },
   { href: '/sesiones', titulo: 'Sesiones' },
   { href: '/cierre', titulo: 'Cierre' },
+  { href: '/archivos', titulo: 'Archivos' },
 ];
 
 test.describe('Navegación principal', () => {

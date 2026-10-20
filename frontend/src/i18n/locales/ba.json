@@ -230,6 +230,10 @@
       "asistente-ia": {
         "label": "Assistent",
         "desc": "Configuració d'intel·ligència artificial."
+      },
+      "nube": {
+        "label": "Núvol",
+        "desc": "Connecta Google Drive o OneDrive i, si vols importar un currículum en PDF, la teva pròpia clau d'IA."
       }
     },
     "catalogo": {
@@ -335,6 +339,14 @@
       },
       "bienvenida": {
         "desc": "Panell de control d'accés ràpid a totes les eines."
+      },
+      "mapa": {
+        "label": "Mapa",
+        "desc": "Totes les pàgines de l'aplicació i les pestanyes de cadascuna."
+      },
+      "privacidad": {
+        "label": "La teva privadesa",
+        "desc": "On van les teves dades, el xifratge opcional i la seguretat de l'aplicació."
       }
     },
     "agenda": {
@@ -358,12 +370,12 @@
   },
   "inicio": {
     "title": "Inici",
-    "subtitle": "Panell principal, gestió d'arxius, IA i verificació de dades."
+    "subtitle": "Benvinguda, mapa de l'aplicació i la teva privadesa."
   },
   "nav": {
     "inicio": "Inici",
     "perfil": "Perfil",
-    "archivos": "Arxius",
+    "archivos": "Fitxers",
     "catalogo": "Catàleg",
     "documentos": "Documents",
     "ayuda": "Ajuda",
@@ -481,11 +493,11 @@
     "cargando": "Carregant..."
   },
   "navDesc": {
-    "inicio": "Panell principal, gestió d'arxius, IA i verificació de dades.",
-    "ayuda": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
-    "magia": "Comparativa i correspondència APP-PD, i documents de suport de la programació i del curs.",
+    "inicio": "Benvinguda, mapa de l'aplicació i com es protegeix la teva privadesa.",
+    "ayuda": "Guia d'inici, preguntes freqüents i acrònims.",
+    "magia": "Generació de programacions PD-/PD=/PD+ i documents de suport de la programació i del curs.",
     "legal": "Avís legal, privacitat, cookies i accessibilitat.",
-    "archivos": "Gestió d'arxius, sincronització al núvol, seguretat, IA i verificació de dades.",
+    "archivos": "Els teus fitxers de grup, programació i curs, el núvol i la verificació de dades.",
     "catalogo": "Famílies, títols, mòduls i currículums (RA i CE).",
     "contexto": "Identificació, entorn, alumnat, avaluació i procediments de la programació.",
     "curriculo": "Contribució dels RA als objectius, ponderació RA-CE, unitats didàctiques i tasques competencials.",
@@ -2339,7 +2351,8 @@
       "sinEnlacesRotos": "No s'han detectat enllaços trencats als grups de la teva carpeta local.",
       "enlacesRotosDetectados": "S'han detectat els següents enllaços trencats als arxius grup. Això passa quan renombres o elimines una programació o un curs directament a Windows.",
       "programacionNoEncontrada": "Programació no trobada:",
-      "cursoNoEncontrado": "Curs no trobat:"
+      "cursoNoEncontrado": "Curs no trobat:",
+      "nubeTitulo": "Núvol i clau d'IA"
     },
     "expediente": {
       "tipoCalificacion": "Qualificació",
@@ -2867,5 +2880,9 @@
   },
   "fecha": "Data",
   "hasta_opc": "Fins a (opcional)",
-  "sin_eventos": "Encara no hi ha festius ni esdeveniments. Afegeix-ne un a baix."
+  "sin_eventos": "Encara no hi ha festius ni esdeveniments. Afegeix-ne un a baix.",
+  "archivos": {
+    "title": "Fitxers",
+    "subtitle": "Els teus grups, programacions i cursos: on són, quins tens oberts i si estan complets."
+  }
 }

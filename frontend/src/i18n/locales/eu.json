@@ -230,6 +230,10 @@
       "asistente-ia": {
         "label": "Laguntzailea",
         "desc": "Adimen artifizialaren konfigurazioa."
+      },
+      "nube": {
+        "label": "Hodeia",
+        "desc": "Konektatu Google Drive edo OneDrive eta, currikulum bat PDFan inportatu nahi baduzu, zure IA gakoa."
       }
     },
     "catalogo": {
@@ -335,6 +339,14 @@
       },
       "bienvenida": {
         "desc": "Erreminta guztietarako sarbide azkarreko kontrol-panela."
+      },
+      "mapa": {
+        "label": "Mapa",
+        "desc": "Aplikazioko orri guztiak eta bakoitzak dituen fitxak."
+      },
+      "privacidad": {
+        "label": "Zure pribatutasuna",
+        "desc": "Zure datuak nora doazen, aukerako zifratzea eta aplikazioaren segurtasuna."
       }
     },
     "agenda": {
@@ -358,7 +370,7 @@
   },
   "inicio": {
     "title": "Hasiera",
-    "subtitle": "Panel nagusia, fitxategien kudeaketa, IA eta datuen egiaztapena."
+    "subtitle": "Ongietorria, aplikazioaren mapa eta zure pribatutasuna."
   },
   "nav": {
     "inicio": "Hasiera",
@@ -481,11 +493,11 @@
     "cargando": "Kargatzen..."
   },
   "navDesc": {
-    "inicio": "Panel nagusia, fitxategien kudeaketa, IA eta datuen egiaztapena.",
-    "ayuda": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
-    "magia": "APP-PD konparaketa eta korrespondentzia, eta programazioaren eta ikasturtearen laguntza-dokumentuak.",
+    "inicio": "Ongietorria, aplikazioaren mapa eta zure pribatutasuna nola babesten den.",
+    "ayuda": "Hasierako gida, maiz egiten diren galderak eta akronimoak.",
+    "magia": "PD-/PD=/PD+ programazioen sorrera eta programazioaren eta ikastaroaren laguntza-dokumentuak.",
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",
-    "archivos": "Fitxategien kudeaketa, hodeiko sinkronizazioa, segurtasuna, AA eta datuen egiaztapena.",
+    "archivos": "Zure talde-, programazio- eta ikastaro-fitxategiak, hodeia eta datuen egiaztapena.",
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
     "contexto": "Programazioaren identifikazioa, ingurunea, ikasleak, ebaluazioa eta prozedurak.",
     "curriculo": "RAk helburuei egiten dien ekarpena, RA-CE haztapena, unitate didaktikoak eta gaitasun-zereginak.",
@@ -2339,7 +2351,8 @@
       "sinEnlacesRotos": "Ez da esteka hondaturik detektatu zure karpeta lokaleko taldeetan.",
       "enlacesRotosDetectados": "Honako esteka hondatuak detektatu dira talde fitxategietan. Hori gertatzen da Windowsen zuzenean programazio bat edo ikastaro bat berrizendatu edo ezabatzen duzunean.",
       "programacionNoEncontrada": "Programazioa ez da aurkitu:",
-      "cursoNoEncontrado": "Ikastaroa ez da aurkitu:"
+      "cursoNoEncontrado": "Ikastaroa ez da aurkitu:",
+      "nubeTitulo": "Hodeia eta IA gakoa"
     },
     "expediente": {
       "tipoCalificacion": "Kalifikazioa",
@@ -2867,5 +2880,9 @@
   },
   "fecha": "Data",
   "hasta_opc": "Arte (aukerakoa)",
-  "sin_eventos": "Oraindik ez dago jaiegun edo ekitaldirik. Gehitu bat azpian."
+  "sin_eventos": "Oraindik ez dago jaiegun edo ekitaldirik. Gehitu bat azpian.",
+  "archivos": {
+    "title": "Fitxategiak",
+    "subtitle": "Zure taldeak, programazioak eta ikastaroak: non dauden, zein dituzun irekita eta osatuta dauden."
+  }
 }
