@@ -216,6 +216,14 @@
       "jeg": {
         "nav": "JEG model",
         "desc": "JEG indicator-based model: configuration of the app's actual grading engine."
+      },
+      "evaluacion": {
+        "label": "Assessment",
+        "desc": "Rounding and compensation rules, weighting by term and assessment instruments, and qualitative scales."
+      },
+      "procedimientos": {
+        "label": "Procedures",
+        "desc": "Assessment information and procedures, recovery model, grading criteria and texts of the simplified model."
       }
     },
     "archivos": {
@@ -443,7 +451,7 @@
     "matrices_title": "Relationship matrices",
     "matrices_desc": "Relationship and weighting: OG, RA, CE and UD/T.",
     "instrumentos_title": "Evaluation instrument",
-    "instrumentos_desc": "Definition and weighting of CE, RA and instruments.",
+    "instrumentos_desc": "Assessment instruments, rubrics, grading rules and assessment procedures.",
     "programacion_title": "Sequencing and tasks",
     "programacion_desc": "Temporal sequencing of UD and competence tasks.",
     "archivos_title": "File manager",
@@ -456,7 +464,7 @@
     "legal_title": "Legal notice",
     "legal_desc": "Legal notice, privacy, cookies, licenses and accessibility.",
     "ayuda_desc": "Getting-started guide, FAQ, acronyms and community contributions.",
-    "contexto_desc": "Identification, environment, students, assessment and procedures of the programme.",
+    "contexto_desc": "Identification, environment and students of the programme.",
     "magia_desc": "Generation of the teaching plan and reports.",
     "seguimiento_desc": "Attendance, dropout and diary of teaching sessions.",
     "metodologia_desc": "Methodological strategies, resources, spaces and attention to diversity."
@@ -499,10 +507,10 @@
     "legal": "Legal notice, privacy, cookies and accessibility.",
     "archivos": "Your group, plan and course files, the cloud and data verification.",
     "catalogo": "Families, qualifications, modules and curricula (RA and CE).",
-    "contexto": "Identification, environment, students, assessment and procedures of the programme.",
+    "contexto": "Identification, environment and students of the programme.",
     "curriculo": "Contribution of RA to objectives, RA-CE weighting, teaching units and competency-based tasks.",
     "metodologias": "Strategies and innovation, instruments and resources, attention to diversity, contingency plan and transversal elements.",
-    "instrumentos": "Definition and weighting of assessment instruments.",
+    "instrumentos": "Assessment instruments, rubrics, grading rules and assessment procedures.",
     "calendario": "Schedule, terms, holidays, FEOE period, monthly view and today's classes, the week and the current unit.",
     "alumnado": "Enrollment, career guidance, group profile and classroom layout.",
     "sesiones": "Attendance, dropout and diary of teaching sessions.",

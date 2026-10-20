@@ -216,6 +216,14 @@
       "jeg": {
         "nav": "Modelo JEG",
         "desc": "Modelo JEG por indicadores: configuración do motor de cualificación real da app."
+      },
+      "evaluacion": {
+        "label": "Avaliación",
+        "desc": "Regras de redondeo e compensación, ponderación por trimestres e instrumentos de avaliación, e escalas cualitativas."
+      },
+      "procedimientos": {
+        "label": "Procedementos",
+        "desc": "Información e procedementos de avaliación, modelo de recuperación, criterios de cualificación e textos do modelo simplificado."
       }
     },
     "archivos": {
@@ -443,7 +451,7 @@
     "matrices_title": "Matrices de relación",
     "matrices_desc": "Relación e ponderación: OG, RA, CE e UD/T.",
     "instrumentos_title": "Instrumento de avaliación",
-    "instrumentos_desc": "Definición e ponderación de CE, RA e instrumentos.",
+    "instrumentos_desc": "Instrumentos de avaliación, rúbricas, regras de cualificación e procedementos de avaliación.",
     "programacion_title": "Secuenciación e tarefas",
     "programacion_desc": "Secuenciación temporal de UD e tarefas competenciais.",
     "archivos_title": "Xestor de arquivos",
@@ -456,7 +464,7 @@
     "legal_title": "Aviso Legal",
     "legal_desc": "Aviso legal, privacidade, cookies, licenzas e accesibilidade.",
     "ayuda_desc": "Guía de inicio, FAQ, acrónimos e contribucións da comunidade.",
-    "contexto_desc": "Identificación, contorno, alumnado, avaliación e procedementos da programación.",
+    "contexto_desc": "Identificación, contorno e alumnado da programación.",
     "magia_desc": "Xeración da programación didáctica e informes.",
     "seguimiento_desc": "Asistencia, abandono e diario de sesións lectivas.",
     "metodologia_desc": "Estratexias metodolóxicas, recursos, espazos e atención á diversidade."
@@ -499,10 +507,10 @@
     "legal": "Aviso legal, privacidade, cookies e accesibilidade.",
     "archivos": "Os teus ficheiros de grupo, programación e curso, a nube e a verificación de datos.",
     "catalogo": "Familias, títulos, módulos e currículos (RA e CE).",
-    "contexto": "Identificación, contorno, alumnado, avaliación e procedementos da programación.",
+    "contexto": "Identificación, contorno e alumnado da programación.",
     "curriculo": "Contribución dos RA aos obxectivos, ponderación RA-CE, unidades didácticas e tarefas competenciais.",
     "metodologias": "Estratexias e innovación, instrumentos e recursos, atención á diversidade, plan de continxencia e elementos transversais.",
-    "instrumentos": "Definición e pesos das ferramentas de avaliación.",
+    "instrumentos": "Instrumentos de avaliación, rúbricas, regras de cualificación e procedementos de avaliación.",
     "calendario": "Horario, trimestres, festivos, período FEOE, vista mensual e as túas clases de hoxe, a semana e a unidade en curso.",
     "alumnado": "Matrícula, orientación profesional, perfil do grupo e plano de aula.",
     "sesiones": "Asistencia, abandono e diario de sesións lectivas.",

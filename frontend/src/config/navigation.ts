@@ -26,10 +26,10 @@ export const navGroups = [
     sectionDescription: "Área de diseño y configuración didáctica. Configura el módulo, enlaza las matrices de evaluación, define los instrumentos y secuencia las tareas de aula.",
     items: [
       { href: "/catalogo?tab=familias", label: "Catálogo", icon: GraduationCap, description: "Familias, títulos, módulos y currículos (RA y CE)." },
-      { href: "/contexto?tab=identificacion", label: "Contexto", icon: Compass, description: "Identificación, entorno, alumnado, evaluación y procedimientos de la programación." },
+      { href: "/contexto?tab=identificacion", label: "Contexto", icon: Compass, description: "Identificación, entorno y alumnado de la programación." },
       { href: "/curriculo?tab=relacion-ra-ce", label: "Currículo", icon: Grid, description: "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales." },
       { href: "/metodologias?tab=estrategias", label: "Metodologías", icon: Lightbulb, description: "Metodología, recursos, plan de contingencia y elementos transversales." },
-      { href: "/instrumentos?tab=resumen", label: "Instrumentos", icon: Wrench, description: "Definición y pesos de las herramientas de evaluación." }
+      { href: "/instrumentos?tab=resumen", label: "Instrumentos", icon: Wrench, description: "Instrumentos de evaluación, rúbricas, reglas de calificación y procedimientos de evaluación." }
     ]
   },
   {
@@ -69,8 +69,6 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "identificacion", label: "Identificación" },
     { id: "entorno", label: "Entorno" },
     { id: "alumnado", label: "Alumnado" },
-    { id: "evaluacion", label: "Evaluación" },
-    { id: "procedimientos", label: "Procedimientos" },
   ],
   "/curriculo": [
     { id: "relacion-ra-ce", label: "Relación RA <- CE" },
@@ -91,6 +89,8 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "trimestres", label: "Trimestres" },
     { id: "rubricas", label: "Rúbricas" },
     { id: "jeg", label: "Modelo JEG" },
+    { id: "evaluacion", label: "Evaluación" },
+    { id: "procedimientos", label: "Procedimientos" },
   ],
   "/calendario": [
     { id: "fechas", label: "Fechas y horario" },

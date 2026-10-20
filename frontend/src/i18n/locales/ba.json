@@ -216,6 +216,14 @@
       "jeg": {
         "nav": "Model JEG",
         "desc": "Model JEG per indicadors: configuració del motor de qualificació real de l'app."
+      },
+      "evaluacion": {
+        "label": "Avaluació",
+        "desc": "Regles d'arrodoniment i compensació, ponderació per trimestres i instruments d'avaluació, i escales qualitatives."
+      },
+      "procedimientos": {
+        "label": "Procediments",
+        "desc": "Informació i procediments d'avaluació, model de recuperació, criteris de qualificació i textos del model simplificat."
       }
     },
     "archivos": {
@@ -443,7 +451,7 @@
     "matrices_title": "Matrius de relació",
     "matrices_desc": "Relació i ponderació: OG, RA, CE i UD/T.",
     "instrumentos_title": "Instrument d'Avaluació",
-    "instrumentos_desc": "Definició i ponderació de CE, RA i instruments.",
+    "instrumentos_desc": "Instruments d'avaluació, rúbriques, regles de qualificació i procediments d'avaluació.",
     "programacion_title": "Seqüenciació i tasques",
     "programacion_desc": "Seqüenciació temporal d'UD i tasques competencials.",
     "archivos_title": "Gestor d'Arxius",
@@ -456,7 +464,7 @@
     "legal_title": "Avís Legal",
     "legal_desc": "Avís legal, privacitat, cookies, llicències i accessibilitat.",
     "ayuda_desc": "Guia d'inici, FAQ, acrònims i contribucions de la comunitat.",
-    "contexto_desc": "Identificació, entorn, alumnat, avaluació i procediments de la programació.",
+    "contexto_desc": "Identificació, entorn i alumnat de la programació.",
     "magia_desc": "Generació de la programació didàctica i informes.",
     "seguimiento_desc": "Assistència, abandonament i diari de sessions lectives.",
     "metodologia_desc": "Estratègies metodològiques, recursos, espais i atenció a la diversitat."
@@ -499,10 +507,10 @@
     "legal": "Avís legal, privacitat, cookies i accessibilitat.",
     "archivos": "Els teus fitxers de grup, programació i curs, el núvol i la verificació de dades.",
     "catalogo": "Famílies, títols, mòduls i currículums (RA i CE).",
-    "contexto": "Identificació, entorn, alumnat, avaluació i procediments de la programació.",
+    "contexto": "Identificació, entorn i alumnat de la programació.",
     "curriculo": "Contribució dels RA als objectius, ponderació RA-CE, unitats didàctiques i tasques competencials.",
     "metodologias": "Estratègies i innovació, instruments i recursos, atenció a la diversitat, pla de contingència i elements transversals.",
-    "instrumentos": "Definició i pesos de les eines d'avaluació.",
+    "instrumentos": "Instruments d'avaluació, rúbriques, regles de qualificació i procediments d'avaluació.",
     "calendario": "Horari, trimestres, festius, període FEOE, vista mensual i les teves classes d'avui, la setmana i la unitat en curs.",
     "alumnado": "Matrícula, orientació professional, perfil del grup i plànol d'aula.",
     "sesiones": "Assistència, abandonament i diari de sessions lectives.",

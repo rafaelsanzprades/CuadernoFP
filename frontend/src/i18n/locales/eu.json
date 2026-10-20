@@ -216,6 +216,14 @@
       "jeg": {
         "nav": "JEG eredua",
         "desc": "Adierazleen araberako JEG eredua: aplikazioaren benetako kalifikazio-motorraren konfigurazioa."
+      },
+      "evaluacion": {
+        "label": "Ebaluazioa",
+        "desc": "Biribiltze- eta konpentsazio-arauak, hiruhilekoen araberako haztapena eta ebaluazio-tresnak, eta eskala kualitatiboak."
+      },
+      "procedimientos": {
+        "label": "Prozedurak",
+        "desc": "Ebaluazio-informazioa eta -prozedurak, berreskuratze-eredua, kalifikazio-irizpideak eta eredu sinplifikatuaren testuak."
       }
     },
     "archivos": {
@@ -443,7 +451,7 @@
     "matrices_title": "Erlazio matrizeak",
     "matrices_desc": "Erlazioa eta haztapena: OG, RA, CE eta UD/T.",
     "instrumentos_title": "Ebaluazio tresna",
-    "instrumentos_desc": "CE, RA eta tresnen definizioa eta haztapena.",
+    "instrumentos_desc": "Ebaluazio-tresnak, errubrikak, kalifikazio-arauak eta ebaluazio-prozedurak.",
     "programacion_title": "Sekuentziazioa eta zereginak",
     "programacion_desc": "UDen eta gaitasun-zereginen denbora-sekuentziazioa.",
     "archivos_title": "Fitxategi kudeatzailea",
@@ -456,7 +464,7 @@
     "legal_title": "Lege oharra",
     "legal_desc": "Lege oharra, pribatutasuna, cookieak, lizentziak eta irisgarritasuna.",
     "ayuda_desc": "Hasierako gida, FAQ, akronimoak eta komunitatearen ekarpenak.",
-    "contexto_desc": "Programazioaren identifikazioa, ingurunea, ikasleak, ebaluazioa eta prozedurak.",
+    "contexto_desc": "Programazioaren identifikazioa, ingurunea eta ikasleak.",
     "magia_desc": "Programazio didaktikoaren eta txostenen sorrera.",
     "seguimiento_desc": "Asistentzia, uztea eta saio lektiboen egunkaria.",
     "metodologia_desc": "Metodologia-estrategiak, baliabideak, espazioak eta aniztasunari arreta."
@@ -499,10 +507,10 @@
     "legal": "Lege-oharra, pribatutasuna, cookieak eta irisgarritasuna.",
     "archivos": "Zure talde-, programazio- eta ikastaro-fitxategiak, hodeia eta datuen egiaztapena.",
     "catalogo": "Familiak, tituluak, moduluak eta curriculumak (RA eta CE).",
-    "contexto": "Programazioaren identifikazioa, ingurunea, ikasleak, ebaluazioa eta prozedurak.",
+    "contexto": "Programazioaren identifikazioa, ingurunea eta ikasleak.",
     "curriculo": "RAk helburuei egiten dien ekarpena, RA-CE haztapena, unitate didaktikoak eta gaitasun-zereginak.",
     "metodologias": "Estrategiak eta berrikuntza, tresnak eta baliabideak, aniztasunari arreta, kontingentzia-plana eta elementu zeharkakoak.",
-    "instrumentos": "Ebaluazio-tresnen definizioa eta pisuak.",
+    "instrumentos": "Ebaluazio-tresnak, errubrikak, kalifikazio-arauak eta ebaluazio-prozedurak.",
     "calendario": "Ordutegia, hiruhilekoak, jaiegunak, FEOE aldia, hileko ikuspegia eta gaurko klaseak, astea eta unitate aktiboa.",
     "alumnado": "Matrikula, lanbide-orientazioa, taldearen profila eta gelako plana.",
     "sesiones": "Asistentzia, uztea eta saio lektiboen egunkaria.",

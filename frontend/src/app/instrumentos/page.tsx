@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { BarChart, Check, FileEdit, FolderOpen, Wrench, CheckSquare, Square, X, BookMarked } from "lucide-react";
+import { BarChart, Check, ClipboardCheck, FileEdit, FolderOpen, Scale, Wrench, CheckSquare, Square, X, BookMarked } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -20,6 +20,9 @@ import { Settings2 } from "lucide-react";
 import { InstrumentoConfigModal } from "@/components/features/instrumentos/InstrumentoConfigModal";
 import { JegModeloTab } from "@/components/features/instrumentos/JegModeloTab";
 import { GestionRubricasTab } from "@/components/features/instrumentos/GestionRubricasTab";
+import { DatosTab } from "@/components/features/modulo/DatosTab";
+import { ContextoTab } from "@/components/features/modulo/ContextoTab";
+import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { sincronizarIndicadorAuto } from "@/utils/calificaciones";
 import { getApiBase } from "@/services/apiBase";
@@ -46,6 +49,8 @@ export default function InstrumentosPage() {
     { id: "trimestres", label:  <span className="flex items-center gap-2"><FileEdit className="w-4 h-4 shrink-0" /> {t('tabs.trimestres', {defaultValue: 'Trimestres'})}</span>, cleanLabel: t('tabs.trimestres', {defaultValue: 'Trimestres'}) },
     { id: "rubricas", label:  <span className="flex items-center gap-2"><BookMarked className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'})}</span>, cleanLabel: t('tabs.instrumentos.rubricas.nav', {defaultValue: 'Rúbricas'}) },
     { id: "jeg", label:  <span className="flex items-center gap-2"><Settings2 className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.jeg.nav', {defaultValue: 'Modelo JEG'})}</span>, cleanLabel: t('tabs.instrumentos.jeg.nav', {defaultValue: 'Modelo JEG'}) },
+    { id: "evaluacion", label:  <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.evaluacion.label', {defaultValue: 'Evaluación'})}</span>, cleanLabel: t('tabs.instrumentos.evaluacion.label', {defaultValue: 'Evaluación'}) },
+    { id: "procedimientos", label:  <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.instrumentos.procedimientos.label', {defaultValue: 'Procedimientos'})}</span>, cleanLabel: t('tabs.instrumentos.procedimientos.label', {defaultValue: 'Procedimientos'}) },
   ];
   const [activeTabRaw, setActiveTab] = useState("resumen");
   // Compat con enlaces antiguos a ?tab=tri1/tri2/tri3, fusionadas ahora en
@@ -58,11 +63,25 @@ export default function InstrumentosPage() {
     resumen: t('tabs.instrumentos.resumen.desc', {defaultValue: 'Visión global de los instrumentos de evaluación utilizados (RD 659/2023, Art. 136).'}),
     trimestres: t('tabs.instrumentos.trimestres.desc', {defaultValue: 'Instrumentos de evaluación planificados para cada trimestre.'}),
     rubricas: t('tabs.instrumentos.rubricas.desc', {defaultValue: 'Rúbricas reutilizables: define criterios (que deben sumar 10 puntos entre todos) y niveles de desempeño, y asígnalas a cualquier instrumento desde su Configuración avanzada.'}),
+    evaluacion: t('tabs.instrumentos.evaluacion.desc', {defaultValue: 'Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas.'}),
+    procedimientos: t('tabs.instrumentos.procedimientos.desc', {defaultValue: 'Información y procedimientos de evaluación, modelo de recuperación, criterios de calificación y textos del modelo simplificado.'}),
     jeg: t('tabs.instrumentos.jeg.desc', {defaultValue: 'Modelo JEG por indicadores: configuración del motor de calificación real de la app.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    evaluacion: [
+      { id: "datos-reglas-redondeo", label: t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'}) },
+      { id: "datos-instrumentos-evaluacion", label: t('campos.modulo.tituloPonderacionInstrumentos', {defaultValue: '% Ponderación e instrumentos de evaluación'}) },
+      { id: "datos-escalas-evaluacion", label: t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'}) },
+    ],
+    procedimientos: [
+      { id: "procedimientos-evaluacion-inicial", label: t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial'}) },
+      { id: "procedimientos-modelo-recuperacion", label: t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'}) },
+      { id: "procedimientos-informacion", label: t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'}) },
+      { id: "procedimientos-criterios-calificacion", label: t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo simplificado, pd=)'}) },
+      { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo simplificado (pd=)'}) },
+    ],
     jeg: [
       { id: "instrumentos-indicadores-ce", label: t('campos.instrumentos.indicadoresPorCeTitulo', {defaultValue: 'Indicadores por criterio de evaluación'}) },
       { id: "instrumentos-grupos-evaluacion", label: t('campos.instrumentos.gruposEvaluacionTitulo', {defaultValue: 'Grupos de evaluación (GEv)'}) },
@@ -605,6 +624,13 @@ export default function InstrumentosPage() {
           )}
           {activeTab === "rubricas" && <GestionRubricasTab />}
           {activeTab === "jeg" && <JegModeloTab />}
+          {activeTab === "evaluacion" && <DatosTab bloques={["datos-reglas-redondeo", "datos-instrumentos-evaluacion", "datos-escalas-evaluacion"]} />}
+          {activeTab === "procedimientos" && (
+            <div className="space-y-8">
+              <ProcedimientosTab bloques={["procedimientos-evaluacion-inicial", "procedimientos-modelo-recuperacion", "procedimientos-informacion", "procedimientos-criterios-calificacion"]} />
+              <ContextoTab bloques={["contexto-modelo-simplificado"]} />
+            </div>
+          )}
 
         {activeConfigActIdx !== null && df_act[activeConfigActIdx] && (
           <InstrumentoConfigModal

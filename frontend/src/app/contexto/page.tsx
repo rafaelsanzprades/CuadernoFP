@@ -1,6 +1,6 @@
 "use client";
 import { TabSync } from "@/components/ui/TabSync";
-import { ClipboardCheck, FileEdit, FileText, Settings, Map, FolderOpen, Scale, Users } from "lucide-react";
+import { FileEdit, FileText, Settings, Map, FolderOpen, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -9,7 +9,6 @@ import type { ModuleData } from "@/types";
 import { useTranslation } from "react-i18next";
 import { DatosTab } from "@/components/features/modulo/DatosTab";
 import { ContextoTab } from "@/components/features/modulo/ContextoTab";
-import { ProcedimientosTab } from "@/components/features/evaluacion/ProcedimientosTab";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
@@ -23,6 +22,11 @@ export default function ContextoConfigPage() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("identificacion");
+
+  // Enlaces antiguos: Evaluación y Procedimientos pasaron a la página Instrumentos
+  useEffect(() => {
+    if (activeTab === "evaluacion" || activeTab === "procedimientos") window.location.replace(`/instrumentos?tab=${activeTab}`);
+  }, [activeTab]);
 
   useEffect(() => {
     if (dataSource === 'demo' && moduleData) {
@@ -57,8 +61,6 @@ export default function ContextoConfigPage() {
     { id: "identificacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'})}</span>, cleanLabel: t('tabs.contexto.identificacion.label', {defaultValue: 'Identificación'}) },
     { id: "entorno", label: <span className="flex items-center gap-2"><Map className="w-4 h-4 shrink-0" /> {t('tabs.contexto.entorno.label', {defaultValue: 'Entorno'})}</span>, cleanLabel: t('tabs.contexto.entorno.label', {defaultValue: 'Entorno'}) },
     { id: "alumnado", label: <span className="flex items-center gap-2"><Users className="w-4 h-4 shrink-0" /> {t('tabs.contexto.alumnado.label', {defaultValue: 'Alumnado'})}</span>, cleanLabel: t('tabs.contexto.alumnado.label', {defaultValue: 'Alumnado'}) },
-    { id: "evaluacion", label: <span className="flex items-center gap-2"><Scale className="w-4 h-4 shrink-0" /> {t('tabs.contexto.evaluacion.label', {defaultValue: 'Evaluación'})}</span>, cleanLabel: t('tabs.contexto.evaluacion.label', {defaultValue: 'Evaluación'}) },
-    { id: "procedimientos", label: <span className="flex items-center gap-2"><ClipboardCheck className="w-4 h-4 shrink-0" /> {t('tabs.contexto.procedimientos.label', {defaultValue: 'Procedimientos'})}</span>, cleanLabel: t('tabs.contexto.procedimientos.label', {defaultValue: 'Procedimientos'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
@@ -67,8 +69,6 @@ export default function ContextoConfigPage() {
     identificacion: t('tabs.contexto.identificacion.desc', {defaultValue: 'Centro y docente, módulo didáctico y datos de autoría y publicidad de la programación.'}),
     entorno: t('tabs.contexto.entorno.desc', {defaultValue: 'Entorno geográfico, socioeconómico, escolar e infraestructura, actividades complementarias y plan FEOE.'}),
     alumnado: t('tabs.contexto.alumnado.desc', {defaultValue: 'Alumnado con necesidades específicas (ACNEAE), datos y rasgos característicos del grupo y evaluación inicial.'}),
-    evaluacion: t('tabs.contexto.evaluacion.desc', {defaultValue: 'Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas.'}),
-    procedimientos: t('tabs.contexto.procedimientos.desc', {defaultValue: 'Información y procedimientos de evaluación, modelo de recuperación, criterios de calificación y textos del modelo simplificado.'}),
   };
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
@@ -87,18 +87,6 @@ export default function ContextoConfigPage() {
       { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
       { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
       { id: "alumnado-perfil-pd", label: t('campos.alumnado.perfilPdTitulo', {defaultValue: 'Procedencia, implicación y expectativas'}) },
-    ],
-    evaluacion: [
-      { id: "datos-reglas-redondeo", label: t('campos.modulo.tituloReglasRedondeo', {defaultValue: 'Reglas de redondeo y compensación'}) },
-      { id: "datos-instrumentos-evaluacion", label: t('campos.modulo.tituloPonderacionInstrumentos', {defaultValue: '% Ponderación e instrumentos de evaluación'}) },
-      { id: "datos-escalas-evaluacion", label: t('campos.modulo.tituloEscalasEvaluacion', {defaultValue: 'Escalas de evaluación cualitativas'}) },
-    ],
-    procedimientos: [
-      { id: "procedimientos-evaluacion-inicial", label: t('campos.evaluacion.tituloEvaluacionInicial', {defaultValue: 'Evaluación inicial'}) },
-      { id: "procedimientos-modelo-recuperacion", label: t('campos.evaluacion.tituloModeloRecuperacion', {defaultValue: 'Modelo de recuperación'}) },
-      { id: "procedimientos-informacion", label: t('campos.evaluacion.tituloInformacionProcedimientos', {defaultValue: 'Información y procedimientos'}) },
-      { id: "procedimientos-criterios-calificacion", label: t('campos.evaluacion.tituloCriteriosCalificacionSimplificado', {defaultValue: 'Criterios de calificación (texto específico modelo simplificado, pd=)'}) },
-      { id: "contexto-modelo-simplificado", label: t('campos.contexto.tituloModeloSimplificado', {defaultValue: 'Textos del modelo simplificado (pd=)'}) },
     ],
   };
 
@@ -155,7 +143,7 @@ export default function ContextoConfigPage() {
           <StickyPageHeader
             icon={FileEdit}
             title={t('nav.contexto', { defaultValue: 'Contexto' })}
-            description={t('pages.contexto_desc', { defaultValue: 'Identificación, entorno, alumnado, evaluación y procedimientos de la programación.' })}
+            description={t('pages.contexto_desc', { defaultValue: 'Identificación, entorno y alumnado de la programación.' })}
           >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -195,13 +183,6 @@ export default function ContextoConfigPage() {
             {activeTab === "alumnado" && (
               <div className="space-y-8">
                 <ContextoTab bloques={["contexto-alumnado-acneae", "alumnado-rasgos-grupo"]} />
-              </div>
-            )}
-            {activeTab === "evaluacion" && <DatosTab bloques={["datos-reglas-redondeo", "datos-instrumentos-evaluacion", "datos-escalas-evaluacion"]} />}
-            {activeTab === "procedimientos" && (
-              <div className="space-y-8">
-                <ProcedimientosTab bloques={["procedimientos-evaluacion-inicial", "procedimientos-modelo-recuperacion", "procedimientos-informacion", "procedimientos-criterios-calificacion"]} />
-                <ContextoTab bloques={["contexto-modelo-simplificado"]} />
               </div>
             )}
 

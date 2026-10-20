@@ -88,6 +88,16 @@
         "label": "Nube",
         "desc": "Conecta Google Drive u OneDrive y, si quieres importar un currículo en PDF, tu propia clave de IA."
       }
+    },
+    "instrumentos": {
+      "evaluacion": {
+        "label": "Evaluación",
+        "desc": "Reglas de redondeo y compensación, ponderación por trimestres e instrumentos de evaluación, y escalas cualitativas."
+      },
+      "procedimientos": {
+        "label": "Procedimientos",
+        "desc": "Información y procedimientos de evaluación, modelo de recuperación, criterios de calificación y textos del modelo simplificado."
+      }
     }
   },
   "inicio": {
@@ -136,10 +146,10 @@
     "legal": "Aviso legal, privacidad, cookies y accesibilidad.",
     "archivos": "Tus archivos de grupo, programación y curso, la nube y la verificación de datos.",
     "catalogo": "Familias, títulos, módulos y currículos (RA y CE).",
-    "contexto": "Identificación, entorno, alumnado, evaluación y procedimientos de la programación.",
+    "contexto": "Identificación, entorno y alumnado de la programación.",
     "curriculo": "Contribución de los RA a los objetivos, ponderación RA-CE, unidades didácticas y tareas competenciales.",
     "metodologias": "Estrategias e innovación, instrumentos y recursos, atención a la diversidad, plan de contingencia y elementos transversales.",
-    "instrumentos": "Definición y pesos de las herramientas de evaluación.",
+    "instrumentos": "Instrumentos de evaluación, rúbricas, reglas de calificación y procedimientos de evaluación.",
     "calendario": "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso.",
     "alumnado": "Matrícula, orientación profesional, perfil del grupo y plano de aula.",
     "sesiones": "Asistencia, abandono y diario de sesiones lectivas.",
@@ -182,7 +192,7 @@
     "matrices_title": "Matrices de relación",
     "matrices_desc": "Ponderación RA-CE, contribución a OG y relación con unidades didácticas.",
     "instrumentos_title": "Instrumento",
-    "instrumentos_desc": "Rúbricas, listas de control y escalas de evaluación.",
+    "instrumentos_desc": "Instrumentos de evaluación, rúbricas, reglas de calificación y procedimientos de evaluación.",
     "catalogo_title": "Catálogo",
     "catalogo_desc": "Familias, títulos, módulos, resultados de aprendizaje y criterios de evaluación.",
     "archivos_title": "Gestor de archivos",
@@ -206,7 +216,8 @@
     "documentos": "Normativa",
     "descargas": "Descargas",
     "legal": "Legal",
-    "normativa": "Normativa"
+    "normativa": "Normativa",
+    "contexto_desc": "Identificación, entorno y alumnado de la programación."
   },
   "catalogo": {
     "familia": "Familia profesional",
