@@ -57,7 +57,9 @@ const ALLOWED_PROGRAMACION_KEYS = [
   'textos_pd_contingencia_profesor', 'textos_pd_contingencia_alumnado',
   'textos_pd_bibliografia', 'textos_pd_publicidad',
   // Metadatos
-  '__version__', 'tipo', 'id'
+  '__version__', 'tipo', 'id',
+  // Autoría y licencia de la programación ({ autor, licencia, fuente }): viaja dentro del fichero para no perder la atribución
+  'autoria'
 ];
 
 const ALLOWED_CURSO_KEYS = [
@@ -146,6 +148,8 @@ export function prepareProgramacionAsTemplate(data: any): any {
   delete t.df_empresas;
   if (Array.isArray(t.df_ace)) t.df_ace.forEach((a: any) => { if (a && "Entidad" in a) a.Entidad = ""; });
   for (const k of ["info_fechas", "horario", "calendar_notes", "planning_ledger"]) delete t[k];
+  // Las plantillas se publican con la licencia de la biblioteca; el nombre de quien las comparte no se añade solo (lo pone quien la envía)
+  t.autoria = { ...(t.autoria || {}), licencia: t.autoria?.licencia || 'CC BY-NC-SA 4.0' };
   t.plantilla = true;
   return t;
 }

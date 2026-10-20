@@ -1,10 +1,10 @@
 [package]
 name = "app"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+description = "Cuaderno FP: programación didáctica, seguimiento de clase y calificación para el profesorado de Formación Profesional"
+authors = ["Rafael Sanz Prades"]
+license = "GPL-3.0-only"
+repository = "https://github.com/rafaelsanzprades/CuadernoFP"
 edition = "2021"
 rust-version = "1.77.2"
 

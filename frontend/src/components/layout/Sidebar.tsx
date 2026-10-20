@@ -82,7 +82,7 @@ export default function Sidebar() {
       if (isDemo) {
         day = 2;
         monthStr = "mayo";
-        year = currentYearVal;
+        year = 2026; // fecha fija de la demo (curso 2025-26), no depende del reloj; coincide con el Manual 1.2
       } else {
         day = realNow.getDate();
         const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];

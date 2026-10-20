@@ -740,5 +740,10 @@
   "__version__": 24,
   "tipo": "pd",
   "df_dua": [],
-  "plantilla": true
+  "plantilla": true,
+  "autoria": {
+    "autor": "Javier Edo Gual (CPIFP CIFPA); publicada en la biblioteca por Rafael Sanz Prades",
+    "licencia": "CC BY-NC-SA 4.0",
+    "fuente": "Biblioteca de Cuaderno FP (https://www.rafaelsanzprades.es/recursos-fp/)"
+  }
 }

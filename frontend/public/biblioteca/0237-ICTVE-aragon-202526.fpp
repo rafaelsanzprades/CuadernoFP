@@ -2744,5 +2744,10 @@
   "textos_pd_caracteristicas_alumnado": "",
   "__version__": 24,
   "tipo": "pd",
-  "plantilla": true
+  "plantilla": true,
+  "autoria": {
+    "autor": "Rafael Sanz Prades",
+    "licencia": "CC BY-NC-SA 4.0",
+    "fuente": "Biblioteca de Cuaderno FP (https://www.rafaelsanzprades.es/recursos-fp/)"
+  }
 }
