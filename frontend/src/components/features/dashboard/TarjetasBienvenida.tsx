@@ -44,7 +44,7 @@ export function TarjetasBienvenida() {
   const k = (clave: string, def: string) => t(`campos.inicio.tarjetas.${clave}`, { defaultValue: def });
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-10 gap-y-12 items-stretch">
+    <div className="flex flex-col gap-12 max-w-5xl">
       {bloque(
         "bienvenida-escritorio",
         Monitor,
