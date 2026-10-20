@@ -110,7 +110,7 @@ URL (via `history.replaceState`, no navigation) on every tab change — this is 
 lives in `services/` (`module_service.py` is the read/write layer for module & curso documents,
 `backup_service.py` runs a periodic backup task from `lifespan`). PDF generation is a family of
 top-level `pdf_*.py` / `generador_pd_*.py` scripts using ReportLab and docx templates
-(`templates/`, `documentos/`). Rate limiting via `slowapi` (100/min default, per-route overrides).
+(`templates/`, `documentos/`; only `documentos/TodoFP` remains, read by the chatbot — the normativa and curriculum copies live in rsp_es under `www/doc/`). Rate limiting via `slowapi` (100/min default, per-route overrides).
 
 `Repite`/`Edad` (student), `is_dual` (RA), and `peso_ra`/`peso_ce` (RA/CE weights) are real
 `bool`/`int`/`bool`/`int` end-to-end — SQLAlchemy column, Pydantic schema, TS type, and demo
