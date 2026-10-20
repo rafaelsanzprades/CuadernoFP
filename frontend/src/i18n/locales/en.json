@@ -2768,13 +2768,14 @@
         },
         "telegram": {
           "titulo": "Telegram community",
-          "intro": "Cuaderno FP is made by one teacher, but it gets better with everyone. The Telegram group is where the app and its website are corrected, completed and decided.",
-          "b1": "Suggest improvements or report bugs: that is how what gets fixed first is decided.",
-          "b2": "Contribute your region's official curriculum and school calendar: every region that joins helps all teachers.",
-          "b3": "Share your teaching plans as a template (.fpp): they are published under your name and the CC BY-NC-SA 4.0 licence.",
-          "b4": "Point out the rules and links missing from the bibliography.",
-          "importa": "Taking part matters: the catalogue, the calendars and the templates are collaborative and only grow with contributions from teachers in other regions.",
-          "boton": "Join the Telegram group"
+          "intro": "Official development and testing group for the free web app cuadernofp.web.app. Send your suggestions, report bugs or help by contributing the official curriculum of your autonomous community.",
+          "b1": "Propose ideas and new features for the app.",
+          "b2": "Help integrate the curricula and regulations of other autonomous communities.",
+          "b3": "Report bugs or questions about using the tool.",
+          "b4": "Share agile methodologies, assessment tricks and classroom experiences.",
+          "importa": "Taking part matters: the catalogue, the calendars and the templates are collaborative and only grow with contributions from teachers in each community. Introduce yourself and tell us your professional family and community: feel at home in the staff room.",
+          "boton": "Join the Telegram group",
+          "queHacemos": "What do we do here?"
         },
         "web": {
           "titulo": "Website with all the content",

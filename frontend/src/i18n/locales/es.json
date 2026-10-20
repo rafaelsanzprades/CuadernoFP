@@ -480,13 +480,14 @@
         },
         "telegram": {
           "titulo": "Comunidad en Telegram",
-          "intro": "Cuaderno FP lo hace un docente, pero mejora con todos. El grupo de Telegram es donde la aplicación y su web se corrigen, se completan y se deciden.",
-          "b1": "Sugiere mejoras o avisa de fallos: así se decide qué se arregla primero.",
-          "b2": "Aporta el currículo oficial y el calendario escolar de tu comunidad: cada comunidad que se suma ayuda a todo el profesorado.",
-          "b3": "Comparte tus programaciones como plantilla (.fpp): se publican con tu nombre y la licencia CC BY-NC-SA 4.0.",
-          "b4": "Señala las normas y los enlaces que faltan en la bibliografía.",
-          "importa": "Participar importa: el catálogo, los calendarios y las plantillas son colaborativos y solo crecen con aportaciones de docentes de otras comunidades.",
-          "boton": "Unirme al grupo de Telegram"
+          "intro": "Grupo oficial de desarrollo y testeo de la aplicación web gratuita cuadernofp.web.app. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu comunidad autónoma.",
+          "b1": "Proponer ideas y nuevas funciones para la aplicación.",
+          "b2": "Ayudar a integrar los currículos y normativas de otras comunidades autónomas.",
+          "b3": "Reportar fallos o dudas sobre el uso de la herramienta.",
+          "b4": "Compartir metodologías ágiles, trucos de evaluación y experiencias de clase.",
+          "importa": "Participar importa: el catálogo, los calendarios y las plantillas son colaborativos y solo crecen con aportaciones del profesorado de cada comunidad. Preséntate y dinos tu familia profesional y tu comunidad: siéntete como en la sala de profesorado.",
+          "boton": "Unirme al grupo de Telegram",
+          "queHacemos": "¿Qué hacemos aquí?"
         },
         "web": {
           "titulo": "Web con todos los contenidos",

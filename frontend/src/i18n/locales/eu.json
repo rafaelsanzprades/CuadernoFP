@@ -2768,13 +2768,14 @@
         },
         "telegram": {
           "titulo": "Telegram komunitatea",
-          "intro": "Cuaderno FP irakasle batek egiten du, baina guztion artean hobetzen da. Telegram taldea aplikazioa eta bere webgunea zuzentzen, osatzen eta erabakitzen diren lekua da.",
-          "b1": "Iradoki hobekuntzak edo jakinarazi akatsak: horrela erabakitzen da zer konpontzen den lehenengo.",
-          "b2": "Eman zure autonomia-erkidegoko curriculum ofiziala eta eskola-egutegia: batzen den erkidego bakoitzak irakasle guztiei laguntzen die.",
-          "b3": "Partekatu zure programazioak txantiloi gisa (.fpp): zure izenarekin eta CC BY-NC-SA 4.0 lizentziarekin argitaratzen dira.",
-          "b4": "Adierazi bibliografian falta diren arauak eta estekak.",
-          "importa": "Parte hartzea garrantzitsua da: katalogoa, egutegiak eta txantiloiak kolaboratiboak dira eta beste erkidego batzuetako irakasleen ekarpenekin bakarrik hazten dira.",
-          "boton": "Sartu Telegram taldean"
+          "intro": "cuadernofp.web.app doako web aplikazioaren garapen eta proba talde ofiziala. Bidali iradokizunak, jakinarazi akatsak edo lagundu zure autonomia-erkidegoko curriculum ofiziala emanez.",
+          "b1": "Aplikaziorako ideiak eta funtzio berriak proposatu.",
+          "b2": "Beste autonomia-erkidego batzuetako curriculumak eta araudiak integratzen lagundu.",
+          "b3": "Akatsak edo tresnaren erabilerari buruzko zalantzak jakinarazi.",
+          "b4": "Metodologia arinak, ebaluazio-trikimailuak eta gelako esperientziak partekatu.",
+          "importa": "Parte hartzea garrantzitsua da: katalogoa, egutegiak eta txantiloiak kolaboratiboak dira eta erkidego bakoitzeko irakasleen ekarpenekin bakarrik hazten dira. Aurkez zaitez eta esan iezaguzu zein den zure lanbide-familia eta erkidegoa: sentitu zaitez irakasleen gelan bezala.",
+          "boton": "Sartu Telegram taldean",
+          "queHacemos": "Zer egiten dugu hemen?"
         },
         "web": {
           "titulo": "Eduki guztiak dituen webgunea",

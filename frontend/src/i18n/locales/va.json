@@ -2768,13 +2768,14 @@
         },
         "telegram": {
           "titulo": "Comunitat a Telegram",
-          "intro": "Cuaderno FP el fa un docent, però millora amb tots. El grup de Telegram és on l'aplicació i el seu web es corregeixen, es completen i es decideixen.",
-          "b1": "Suggereix millores o avisa d'errors: així es decideix què s'arregla primer.",
-          "b2": "Aporta el currículum oficial i el calendari escolar de la teua comunitat: cada comunitat que s'hi suma ajuda tot el professorat.",
-          "b3": "Comparteix les teues programacions com a plantilla (.fpp): es publiquen amb el teu nom i la llicència CC BY-NC-SA 4.0.",
-          "b4": "Assenyala les normes i els enllaços que falten a la bibliografia.",
-          "importa": "Participar importa: el catàleg, els calendaris i les plantilles són col·laboratius i només creixen amb aportacions de docents d'altres comunitats.",
-          "boton": "Unir-me al grup de Telegram"
+          "intro": "Grup oficial de desenvolupament i prova de l'aplicació web gratuïta cuadernofp.web.app. Puja els teus suggeriments, informa d'errors o col·labora aportant el currículum oficial de la teua comunitat autònoma.",
+          "b1": "Proposar idees i noves funcions per a l'aplicació.",
+          "b2": "Ajudar a integrar els currículums i les normatives d'altres comunitats autònomes.",
+          "b3": "Informar d'errors o dubtes sobre l'ús de l'eina.",
+          "b4": "Compartir metodologies àgils, trucs d'avaluació i experiències de classe.",
+          "importa": "Participar importa: el catàleg, els calendaris i les plantilles són col·laboratius i només creixen amb aportacions del professorat de cada comunitat. Presenta't i digues-nos la teua família professional i la teua comunitat: sent-te com a la sala de professorat.",
+          "boton": "Unir-me al grup de Telegram",
+          "queHacemos": "Què fem ací?"
         },
         "web": {
           "titulo": "Web amb tots els continguts",
