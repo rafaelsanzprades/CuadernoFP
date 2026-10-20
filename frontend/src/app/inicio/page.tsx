@@ -1,26 +1,23 @@
 "use client";
-import { Activity, BookOpen, Building2, CheckCircle, Info, Lock, Map, MessageCircle, Rocket, Send, Shield } from "lucide-react";
+import { Activity, Building2, CheckCircle, Info, Lock, Map, Shield } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { navGroups, PAGE_TABS } from "@/config/navigation";
 import { Card } from "@/components/ui/Card";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { useEffect, useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { SectionIndex } from "@/components/ui/SectionIndex";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
-import { UpdateChecker } from "@/components/features/dashboard/UpdateChecker";
-import { VersionBar } from "@/components/features/dashboard/VersionBar";
+import { TarjetasBienvenida } from "@/components/features/dashboard/TarjetasBienvenida";
 import { WelcomeWizard } from "@/components/features/dashboard/WelcomeWizard";
 import { CifradoPanel } from "@/components/features/cifrado/CifradoPanel";
 import { useTranslation } from "react-i18next";
 import { fileManager } from "@/services/fileManager";
-import { isTauri } from "@tauri-apps/api/core";
 
 // ── Página principal: bienvenida, mapa de la aplicación y privacidad ───────
 export default function InicioPage() {
@@ -57,14 +54,6 @@ export default function InicioPage() {
     privacidad: t('tabs.inicio.privacidad.desc', {defaultValue: 'Dónde van tus datos, el cifrado opcional y la seguridad de la aplicación.'}),
   };
 
-  // Índice de bloques de la pestaña activa (solo donde hay 2 o más).
-  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    bienvenida: [
-      { id: "bienvenida-escritorio", label: t('campos.inicio.escritorioTitulo', {defaultValue: 'Aplicación de escritorio'}) },
-      { id: "bienvenida-guia", label: t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'}) },
-    ],
-  };
-
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -96,7 +85,6 @@ export default function InicioPage() {
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
 
-            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-[280px]">
@@ -105,57 +93,7 @@ export default function InicioPage() {
               <div className="animate-in fade-in duration-500 w-full">
                 <div className="w-full space-y-12 pb-12">
 
-            {/* Dos bloques con su explicación (y un índice arriba): la aplicación de escritorio y la guía en la web.
-                Dentro de Tauri, UpdateChecker (autoactualización) sustituye al botón de descarga. */}
-            <div className="space-y-3">
-              <SectionHeading id="bienvenida-escritorio" icon={Rocket} scrollMt="260px">
-                {t('campos.inicio.escritorioTitulo', {defaultValue: 'Aplicación de escritorio'})}
-              </SectionHeading>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                <div className="lg:col-span-2 space-y-3 text-body text-muted leading-relaxed">
-                  <p>{t('campos.inicio.escritorioP1', {defaultValue: 'Cuaderno FP funciona en el navegador y también como programa para Windows. En las dos versiones tu trabajo se queda en tu equipo: no hay cuenta ni servidor que guarde tus ficheros.'})}</p>
-                  <p>{t('campos.inicio.escritorioP2', {defaultValue: 'La versión de escritorio abre y guarda tus ficheros con los diálogos de Windows, recuerda los recientes, genera los documentos en tu ordenador y se actualiza desde la propia aplicación cuando hay una versión nueva.'})}</p>
-                  <p>{t('campos.inicio.escritorioP3', {defaultValue: 'Si trabajas en el instituto con ordenadores que no son tuyos, el navegador te basta; para tu portátil, el programa es más cómodo.'})}</p>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <VersionBar />
-                  {isTauri() && (
-                    <div className="p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                      <UpdateChecker />
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <SectionHeading id="bienvenida-guia" icon={BookOpen} scrollMt="260px">
-                {t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}
-              </SectionHeading>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                <div className="lg:col-span-2 space-y-3 text-body text-muted leading-relaxed">
-                  <p>{t('campos.inicio.guiaWebP1', {defaultValue: 'La web que acompaña a la aplicación reúne un libro sobre programación didáctica en FP, con la norma explicada, ejemplos y lo que cambia en cada comunidad autónoma, y el manual de Cuaderno FP, que recorre cada página y cada pestaña.'})}</p>
-                  <p>{t('campos.inicio.guiaWebP2', {defaultValue: 'Úsala cuando no sepas qué escribir en un apartado, quieras entender de dónde sale una exigencia o necesites ver cómo se rellena algo con un ejemplo.'})}</p>
-                  <p>
-                    {t('campos.inicio.guiaWebP3', {defaultValue: '¿Dudas, ideas o errores?'})}{' '}
-                    <a href="https://t.me/cuadernofp" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold">
-                      {t('botones.inicio.unirseTelegram', {defaultValue: 'Cuéntalos en el grupo de Telegram'})}
-                    </a>
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <a
-                    href="https://www.rafaelsanzprades.es/programacion-didactica-fp/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full justify-center px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent/80 transition-colors flex items-center gap-2 text-body"
-                  >
-                    <BookOpen className="w-4 h-4" />
-                    {t('campos.inicio.guiaWebBoton', {defaultValue: 'Abrir la web'})}
-                  </a>
-                </div>
-              </div>
-            </div>
+            <TarjetasBienvenida />
 
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}
             <RecentModulesPanel />

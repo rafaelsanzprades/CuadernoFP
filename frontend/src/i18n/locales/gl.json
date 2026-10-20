@@ -851,9 +851,6 @@
       "suficienteTodoA3": "Suficiente (todo a 3)",
       "gestionarEnCurriculo": "Xestionar en Currículo",
       "configurarEnPlanFeoe": "Configurar horas e réxime da FEOE"
-    },
-    "inicio": {
-      "unirseTelegram": "Cóntaos no grupo de Telegram"
     }
   },
   "placeholders": {
@@ -2759,16 +2756,36 @@
       "bibliotecaSinConexion": "Non se puido cargar a biblioteca.",
       "bibliotecaVacia": "Aínda non hai programacións publicadas.",
       "bibliotecaAutoria": "Autoría",
-      "aplicacionEscritorioDesc": "Cuaderno FP como programa de Windows: instálalo, abre os teus ficheiros e traballa, tamén sen conexión. É gratuíto e de código aberto.",
-      "guiaWebTitulo": "Programación didáctica en FP",
-      "guiaWebBoton": "Abrir a web",
-      "escritorioTitulo": "Aplicación de escritorio",
-      "escritorioP1": "Cuaderno FP funciona no navegador e tamén como programa para Windows. Nas dúas versións o teu traballo queda no teu equipo: non hai conta nin servidor que garde os teus ficheiros.",
-      "escritorioP2": "A versión de escritorio abre e garda os teus ficheiros cos diálogos de Windows, lembra os recentes, xera os documentos no teu ordenador e actualízase desde a propia aplicación cando hai unha versión nova.",
-      "escritorioP3": "Se traballas no instituto con ordenadores que non son teus, o navegador abonda; para o teu portátil, o programa é máis cómodo.",
-      "guiaWebP1": "A web que acompaña a aplicación reúne un libro sobre programación didáctica en FP, coa norma explicada, exemplos e o que cambia en cada comunidade autónoma, e o manual de Cuaderno FP, que percorre cada páxina e cada lapela.",
-      "guiaWebP2": "Úsaa cando non saibas que escribir nun apartado, queiras entender de onde sae unha esixencia ou necesites ver como se enche algo cun exemplo.",
-      "guiaWebP3": "Dúbidas, ideas ou erros?"
+      "tarjetas": {
+        "escritorio": {
+          "titulo": "Aplicación de escritorio",
+          "intro": "Cuaderno FP tamén é un programa para Windows. Instálalo unha vez e tes a aplicación no teu propio ordenador, con todo o bo de traballar en local.",
+          "b1": "Os teus ficheiros ábrense e gárdanse cos diálogos de Windows, e os recentes seguen aí ao reiniciar.",
+          "b2": "Os documentos (PDF e Word) xéranse no teu equipo: nada do teu alumnado sae del.",
+          "b3": "Funciona sen conexión, sen conta e sen servidor que garde o teu traballo.",
+          "b4": "Actualízase desde a propia aplicación cando hai unha versión nova.",
+          "nota": "Se traballas con ordenadores que non son teus, o navegador chéga; para o teu portátil, o programa é máis cómodo."
+        },
+        "telegram": {
+          "titulo": "Comunidade en Telegram",
+          "intro": "Cuaderno FP faino unha docente ou un docente, pero mellora con todos. O grupo de Telegram é onde a aplicación e a súa web se corrixen, se completan e se deciden.",
+          "b1": "Suxire melloras ou avisa de erros: así decídese que se arranxa primeiro.",
+          "b2": "Achega o currículo oficial e o calendario escolar da túa comunidade: cada comunidade que se suma axuda a todo o profesorado.",
+          "b3": "Comparte as túas programacións como modelo (.fpp): publícanse co teu nome e a licenza CC BY-NC-SA 4.0.",
+          "b4": "Sinala as normas e as ligazóns que faltan na bibliografía.",
+          "importa": "Participar importa: o catálogo, os calendarios e os modelos son colaborativos e só medran con achegas de docentes doutras comunidades.",
+          "boton": "Unirme ao grupo de Telegram"
+        },
+        "web": {
+          "titulo": "Web con todos os contidos",
+          "intro": "En rafaelsanzprades.es está todo o que acompaña a aplicación, en aberto e sen rexistro. Úsaa cando non saibas que escribir nun apartado ou queiras entender de onde sae unha esixencia.",
+          "b1": "Programación didáctica: o libro, coa norma explicada e un exemplo en cada capítulo.",
+          "b2": "CCAA e Nova lei: o que cambia en cada comunidade autónoma e a lei de FP.",
+          "b3": "Orientación alumnado e Bibliografía: a guía para o alumnado e as leis e normas, con copia.",
+          "b4": "Manual Cuaderno FP, Calendarios e Recursos: cada páxina e pestana da aplicación, os calendarios oficiais e os modelos.",
+          "boton": "Abrir a web"
+        }
+      }
     },
     "legal": {
       "datosTitular": "Datos do titular",

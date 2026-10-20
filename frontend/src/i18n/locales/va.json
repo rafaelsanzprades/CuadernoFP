@@ -851,9 +851,6 @@
       "suficienteTodoA3": "Suficient (tot a 3)",
       "gestionarEnCurriculo": "Gestionar a Currículum",
       "configurarEnPlanFeoe": "Configurar hores i règim de la FEOE"
-    },
-    "inicio": {
-      "unirseTelegram": "Explica-ho al grup de Telegram"
     }
   },
   "placeholders": {
@@ -2759,16 +2756,36 @@
       "bibliotecaSinConexion": "No s'ha pogut carregar la biblioteca.",
       "bibliotecaVacia": "Encara no hi ha programacions publicades.",
       "bibliotecaAutoria": "Autoria",
-      "aplicacionEscritorioDesc": "Cuaderno FP com a programa de Windows: l'instal·les, obres els teus arxius i treballes, també sense connexió. És gratuït i de codi obert.",
-      "guiaWebTitulo": "Programació didàctica en FP",
-      "guiaWebBoton": "Obrir la web",
-      "escritorioTitulo": "Aplicació d'escriptori",
-      "escritorioP1": "Cuaderno FP funciona al navegador i també com a programa per a Windows. En les dues versions la teua feina es queda al teu equip: no hi ha compte ni servidor que guarde els teus fitxers.",
-      "escritorioP2": "La versió d'escriptori obre i guarda els teus fitxers amb els diàlegs de Windows, recorda els recents, genera els documents al teu ordinador i s'actualitza des de la mateixa aplicació quan hi ha una versió nova.",
-      "escritorioP3": "Si treballes a l'institut amb ordinadors que no són teus, el navegador et basta; per al teu portàtil, el programa és més còmode.",
-      "guiaWebP1": "El web que acompanya l'aplicació reuneix un llibre sobre programació didàctica en FP, amb la norma explicada, exemples i el que canvia a cada comunitat autònoma, i el manual de Cuaderno FP, que recorre cada pàgina i cada pestanya.",
-      "guiaWebP2": "Fes-la servir quan no sàpigues què escriure en un apartat, vulguis entendre d'on surt una exigència o necessitis veure com s'omple alguna cosa amb un exemple.",
-      "guiaWebP3": "Dubtes, idees o errors?"
+      "tarjetas": {
+        "escritorio": {
+          "titulo": "Aplicació d'escriptori",
+          "intro": "Cuaderno FP també és un programa per a Windows. L'instal·les una vegada i tens l'aplicació al teu propi ordinador, amb tot el bo de treballar en local.",
+          "b1": "Els teus fitxers s'obren i es guarden amb els diàlegs de Windows, i els recents continuen allà en reiniciar.",
+          "b2": "Els documents (PDF i Word) es generen al teu equip: res del teu alumnat en surt.",
+          "b3": "Funciona sense connexió, sense compte i sense servidor que guarde el teu treball.",
+          "b4": "S'actualitza des de la mateixa aplicació quan hi ha una versió nova.",
+          "nota": "Si treballes amb ordinadors que no són teus, el navegador et basta; per al teu portàtil, el programa és més còmode."
+        },
+        "telegram": {
+          "titulo": "Comunitat a Telegram",
+          "intro": "Cuaderno FP el fa un docent, però millora amb tots. El grup de Telegram és on l'aplicació i el seu web es corregeixen, es completen i es decideixen.",
+          "b1": "Suggereix millores o avisa d'errors: així es decideix què s'arregla primer.",
+          "b2": "Aporta el currículum oficial i el calendari escolar de la teua comunitat: cada comunitat que s'hi suma ajuda tot el professorat.",
+          "b3": "Comparteix les teues programacions com a plantilla (.fpp): es publiquen amb el teu nom i la llicència CC BY-NC-SA 4.0.",
+          "b4": "Assenyala les normes i els enllaços que falten a la bibliografia.",
+          "importa": "Participar importa: el catàleg, els calendaris i les plantilles són col·laboratius i només creixen amb aportacions de docents d'altres comunitats.",
+          "boton": "Unir-me al grup de Telegram"
+        },
+        "web": {
+          "titulo": "Web amb tots els continguts",
+          "intro": "A rafaelsanzprades.es hi ha tot el que acompanya l'aplicació, en obert i sense registre. Fes-la servir quan no sàpigues què escriure en un apartat o vulgues entendre d'on ve una exigència.",
+          "b1": "Programació didàctica: el llibre, amb la norma explicada i un exemple en cada capítol.",
+          "b2": "CCAA i Nova llei: què canvia en cada comunitat autònoma i la llei de FP.",
+          "b3": "Orientació alumnat i Bibliografia: la guia per a l'alumnat i les lleis i normes, amb còpia.",
+          "b4": "Manual Cuaderno FP, Calendaris i Recursos: cada pàgina i pestanya de l'aplicació, els calendaris oficials i les plantilles.",
+          "boton": "Obrir el web"
+        }
+      }
     },
     "legal": {
       "datosTitular": "Dades del titular",

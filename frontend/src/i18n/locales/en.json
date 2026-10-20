@@ -851,9 +851,6 @@
       "suficienteTodoA3": "Sufficient (all to 3)",
       "gestionarEnCurriculo": "Manage in Curriculum",
       "configurarEnPlanFeoe": "Configure FEOE hours and regime"
-    },
-    "inicio": {
-      "unirseTelegram": "Tell us in the Telegram group"
     }
   },
   "placeholders": {
@@ -2759,16 +2756,36 @@
       "bibliotecaSinConexion": "The library could not be loaded.",
       "bibliotecaVacia": "No programmes published yet.",
       "bibliotecaAutoria": "Author",
-      "aplicacionEscritorioDesc": "Cuaderno FP as a Windows program: install it, open your files and work, even offline. It is free and open source.",
-      "guiaWebTitulo": "Teaching plans in vocational education (FP)",
-      "guiaWebBoton": "Open the website",
-      "escritorioTitulo": "Desktop app",
-      "escritorioP1": "Cuaderno FP works in the browser and also as a Windows program. In both versions your work stays on your computer: there is no account or server that stores your files.",
-      "escritorioP2": "The desktop version opens and saves your files with the Windows dialogs, remembers recent ones, generates the documents on your computer and updates from within the app when a new version is out.",
-      "escritorioP3": "If you work at school on computers that are not yours, the browser is enough; for your own laptop, the program is more convenient.",
-      "guiaWebP1": "The website that goes with the app brings together a book on programming FP courses, with the regulations explained, examples and what changes in each autonomous community, and the Cuaderno FP manual, which walks through every page and tab.",
-      "guiaWebP2": "Use it when you don't know what to write in a section, want to understand where a requirement comes from or need to see how something is filled in with an example.",
-      "guiaWebP3": "Questions, ideas or bugs?"
+      "tarjetas": {
+        "escritorio": {
+          "titulo": "Desktop app",
+          "intro": "Cuaderno FP is also a Windows program. You install it once and have the app on your own computer, with everything good about working locally.",
+          "b1": "Your files open and save with the Windows dialogs, and recent files are still there after a restart.",
+          "b2": "Documents (PDF and Word) are generated on your computer: nothing about your students leaves it.",
+          "b3": "It works offline, with no account and no server keeping your work.",
+          "b4": "It updates itself from inside the app when there is a new version.",
+          "nota": "If you work on computers that are not yours, the browser is enough; for your own laptop, the program is more comfortable."
+        },
+        "telegram": {
+          "titulo": "Telegram community",
+          "intro": "Cuaderno FP is made by one teacher, but it gets better with everyone. The Telegram group is where the app and its website are corrected, completed and decided.",
+          "b1": "Suggest improvements or report bugs: that is how what gets fixed first is decided.",
+          "b2": "Contribute your region's official curriculum and school calendar: every region that joins helps all teachers.",
+          "b3": "Share your teaching plans as a template (.fpp): they are published under your name and the CC BY-NC-SA 4.0 licence.",
+          "b4": "Point out the rules and links missing from the bibliography.",
+          "importa": "Taking part matters: the catalogue, the calendars and the templates are collaborative and only grow with contributions from teachers in other regions.",
+          "boton": "Join the Telegram group"
+        },
+        "web": {
+          "titulo": "Website with all the content",
+          "intro": "rafaelsanzprades.es has everything that goes with the app, open and with no sign-up. Use it when you don't know what to write in a section or want to understand where a requirement comes from.",
+          "b1": "Teaching plans: the book, with the rules explained and an example in every chapter.",
+          "b2": "Regions and New law: what changes in each autonomous community and the vocational education law.",
+          "b3": "Student guidance and Bibliography: the guide for students and the laws and rules, with a copy.",
+          "b4": "Cuaderno FP manual, Calendars and Resources: every page and tab of the app, the official calendars and the templates.",
+          "boton": "Open the website"
+        }
+      }
     },
     "legal": {
       "datosTitular": "Owner details",

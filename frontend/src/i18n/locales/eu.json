@@ -851,9 +851,6 @@
       "suficienteTodoA3": "Nahikoa (dena 3ra)",
       "gestionarEnCurriculo": "Kudeatu Curriculumean",
       "configurarEnPlanFeoe": "Konfiguratu FEOEren orduak eta erregimena"
-    },
-    "inicio": {
-      "unirseTelegram": "Kontatu Telegram taldean"
     }
   },
   "placeholders": {
@@ -2759,16 +2756,36 @@
       "bibliotecaSinConexion": "Ezin izan da liburutegia kargatu.",
       "bibliotecaVacia": "Oraindik ez dago programaziorik argitaratuta.",
       "bibliotecaAutoria": "Egilea",
-      "aplicacionEscritorioDesc": "Cuaderno FP Windows programa gisa: instalatu, ireki zure fitxategiak eta lan egin, konexiorik gabe ere. Doakoa eta kode irekikoa da.",
-      "guiaWebTitulo": "Programazio didaktikoa LHn",
-      "guiaWebBoton": "Ireki webgunea",
-      "escritorioTitulo": "Mahaigaineko aplikazioa",
-      "escritorioP1": "Cuaderno FP nabigatzailean eta Windows-erako programa gisa ere funtzionatzen du. Bi bertsioetan zure lana zure ekipoan geratzen da: ez dago zure fitxategiak gordetzen dituen konturik edo zerbitzaririk.",
-      "escritorioP2": "Mahaigaineko bertsioak zure fitxategiak Windows-eko elkarrizketa-koadroekin irekitzen eta gordetzen ditu, azkenekoak gogoratzen ditu, dokumentuak zure ordenagailuan sortzen ditu eta aplikazioaren beraren bidez eguneratzen da bertsio berri bat dagoenean.",
-      "escritorioP3": "Zureak ez diren ordenagailuekin lan egiten baduzu institutuan, nabigatzailea nahikoa da; zure eramangarrirako, programa erosoagoa da.",
-      "guiaWebP1": "Aplikazioarekin doan webguneak FPko programazio didaktikoari buruzko liburu bat biltzen du, araua azalduta, adibideekin eta autonomia-erkidego bakoitzean zer aldatzen den azalduta, eta Cuaderno FPren eskuliburua, orri eta fitxa bakoitza ikuskatzen duena.",
-      "guiaWebP2": "Erabili ezazu atal batean zer idatzi ez dakizunean, eskakizun bat nondik datorren ulertu nahi duzunean edo zerbait adibide batekin nola betetzen den ikusi behar duzunean.",
-      "guiaWebP3": "Zalantzak, ideiak edo erroreak?"
+      "tarjetas": {
+        "escritorio": {
+          "titulo": "Mahaigaineko aplikazioa",
+          "intro": "Cuaderno FP Windows-erako programa ere bada. Behin instalatzen duzu eta aplikazioa zure ordenagailuan duzu, lokalean lan egitearen onura guztiekin.",
+          "b1": "Zure fitxategiak Windows-eko elkarrizketa-koadroekin irekitzen eta gordetzen dira, eta berrabiaraztean azkenekoak hor jarraitzen dute.",
+          "b2": "Dokumentuak (PDF eta Word) zure ekipoan sortzen dira: zure ikasleen ezer ez da hortik ateratzen.",
+          "b3": "Konexiorik gabe funtzionatzen du, konturik gabe eta zure lana gordetzen duen zerbitzaririk gabe.",
+          "b4": "Aplikazioan bertan eguneratzen da bertsio berria dagoenean.",
+          "nota": "Zureak ez diren ordenagailuekin lan egiten baduzu, nabigatzailea nahikoa da; zure eramangarrirako, programa erosoagoa da."
+        },
+        "telegram": {
+          "titulo": "Telegram komunitatea",
+          "intro": "Cuaderno FP irakasle batek egiten du, baina guztion artean hobetzen da. Telegram taldea aplikazioa eta bere webgunea zuzentzen, osatzen eta erabakitzen diren lekua da.",
+          "b1": "Iradoki hobekuntzak edo jakinarazi akatsak: horrela erabakitzen da zer konpontzen den lehenengo.",
+          "b2": "Eman zure autonomia-erkidegoko curriculum ofiziala eta eskola-egutegia: batzen den erkidego bakoitzak irakasle guztiei laguntzen die.",
+          "b3": "Partekatu zure programazioak txantiloi gisa (.fpp): zure izenarekin eta CC BY-NC-SA 4.0 lizentziarekin argitaratzen dira.",
+          "b4": "Adierazi bibliografian falta diren arauak eta estekak.",
+          "importa": "Parte hartzea garrantzitsua da: katalogoa, egutegiak eta txantiloiak kolaboratiboak dira eta beste erkidego batzuetako irakasleen ekarpenekin bakarrik hazten dira.",
+          "boton": "Sartu Telegram taldean"
+        },
+        "web": {
+          "titulo": "Eduki guztiak dituen webgunea",
+          "intro": "rafaelsanzprades.es-en aplikazioarekin doan guztia dago, irekian eta izenik eman gabe. Erabili atal batean zer idatzi ez dakizunean edo eskakizun bat nondik datorren ulertu nahi duzunean.",
+          "b1": "Programazio didaktikoa: liburua, araua azalduta eta kapitulu bakoitzean adibide batekin.",
+          "b2": "CCAA eta Lege berria: erkidego autonomo bakoitzean zer aldatzen den eta LHren legea.",
+          "b3": "Ikasleen orientazioa eta Bibliografia: ikasleentzako gida eta legeak eta arauak, kopiarekin.",
+          "b4": "Cuaderno FP eskuliburua, Egutegiak eta Baliabideak: aplikazioaren orrialde eta fitxa bakoitza, egutegi ofizialak eta txantiloiak.",
+          "boton": "Ireki webgunea"
+        }
+      }
     },
     "legal": {
       "datosTitular": "Titularraren datuak",
