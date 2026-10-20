@@ -329,7 +329,6 @@ export default function InicioPage() {
     bienvenida: [
       { id: "bienvenida-empieza", label: t('campos.inicio.empiezaAquiTitulo', {defaultValue: 'Empieza aquí'}) },
       { id: "bienvenida-mapa", label: t('campos.inicio.mapaWebTitulo', {defaultValue: 'Mapa del web'}) },
-      { id: "bienvenida-contrib-comunidades", label: t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por comunidad autónoma'}) },
     ],
     verificacion: [
       { id: "verificacion-grupo", label: t('campos.verificacion.grupoTitulo', {defaultValue: 'General'}) },
@@ -542,43 +541,6 @@ export default function InicioPage() {
                 })}
               </div>
             </div>
-
-                {/* Contribuidores por CCAA -- último bloque de Bienvenida
-                    (Grupo de Telegram se movió detrás de "Aplicación de
-                    escritorio", 2026-09-30). Se queda dentro del mismo
-                    contenedor `space-y-12` de arriba para heredar la
-                    separación vertical respecto al Mapa del web. */}
-                <div className="space-y-3">
-                  <SectionHeading id="bienvenida-contrib-comunidades" icon={Users} scrollMt="260px">
-                    {t('campos.inicio.contribuidoresCcaaTitulo', {defaultValue: 'Contribuidores por comunidad autónoma'})}
-                  </SectionHeading>
-                  <p className="text-muted">
-                    {t('campos.inicio.contribuidoresCcaaDesc', {defaultValue: 'Mención especial al profesorado que está ayudando a mejorar y a integrar los currículos de las Comunidades Autónomas'})}
-                  </p>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[
-                      "Andalucía", "Aragón", "Asturias", "Baleares", "Canarias",
-                      "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña", "Ceuta",
-                      "Comunidad Valenciana", "Extremadura", "Galicia", "La Rioja", "Madrid",
-                      "Melilla", "Murcia", "Navarra", "País Vasco"
-                    ].map((comunidad) => (
-                      <div key={comunidad} className="p-4 rounded-xl border border-[var(--glass-border)] bg-background/50 flex flex-col gap-2 transition-all hover:bg-background/80">
-                        <div className="flex items-center gap-2 border-b border-[var(--glass-border)] pb-2 mb-1">
-                          <Map className="w-5 h-5 text-accent" />
-                          <span className="font-bold text-foreground">{comunidad}</span>
-                        </div>
-                        <ul className="text-body text-muted space-y-1.5 pl-2">
-                          {comunidad === "Aragón" ? (
-                            <li className="flex items-center gap-2 text-foreground"><Users className="w-4 h-4 text-accent" /> Jose Javier García</li>
-                          ) : (
-                            <li className="flex items-center gap-2 italic opacity-60"><Users className="w-4 h-4 text-muted-foreground" /> {t('campos.inicio.animateAContribuir', {defaultValue: '¡Anímate a contribuir!'})}</li>
-                          )}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
           </div>
 

@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FileStack, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp } from "lucide-react";
+import { BarChart, Calculator, Calendar, CalendarDays, ChevronDown, Download, FileEdit, FileSpreadsheet, FileText, FolderOpen, GraduationCap, MapPin, Scale, Sparkles, User, Users, X, Grid, Grid3x3, BookOpen, Target, Award, ShieldCheck, Contact, TrendingUp } from "lucide-react";
 import * as XLSX from "xlsx";
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
@@ -20,8 +20,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TabSync } from "@/components/ui/TabSync";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { getAutoMilestones } from "@/utils/calendarMilestones";
-import { AnalisisPdxTab } from "@/components/features/magia/AnalisisPdxTab";
-import { ComparativaPdTab } from "@/components/features/magia/ComparativaPdTab";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { loadCatalogForModule, enrichInfoModulo } from "@/services/catalogCache";
@@ -330,7 +328,6 @@ export default function MagiaPage() {
   const TABS = [
     { id: "programacion", label: <span className="flex items-center gap-2"><FileText className="w-4 h-4 shrink-0" /> {t('tabs.magia.programacion.label', {defaultValue: 'Programación'})}</span>, cleanLabel: t('tabs.magia.programacion.label', {defaultValue: 'Programación'}) },
     { id: "curso", label: <span className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" /> {t('tabs.magia.curso.label', {defaultValue: 'Curso'})}</span>, cleanLabel: t('tabs.magia.curso.label', {defaultValue: 'Curso'}) },
-    { id: "analisis-pdx", label: <span className="flex items-center gap-2"><FileStack className="w-4 h-4 shrink-0" /> {t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'})}</span>, cleanLabel: t('tabs.magia.analisisPdx.label', {defaultValue: 'Análisis APP->PDx'}) },
   ];
 
   const TAB_DESCRIPTIONS: Record<string, string> = {
@@ -338,7 +335,6 @@ export default function MagiaPage() {
     curso: t('tabs.magia.curso.desc', {defaultValue: 'Calendario, seguimiento, plano de aula, boletines y actas de evaluación del curso.'}),
     // Comparativa PDx (antes pestaña propia) se fusionó aquí al final, como
     // un bloque más -- petición de Rafael, 2026-09-30.
-    'analisis-pdx': t('tabs.magia.analisisPdx.desc', {defaultValue: 'De la app a dónde aparece cada campo en cada modelo de Programación Didáctica (PD-, PD=, PD+), y comparativa completa de los 3 niveles.'}),
   };
 
   const activeTabCleanLabel = TABS.find(t => t.id === activeTab)?.cleanLabel || activeTab;
@@ -354,25 +350,6 @@ export default function MagiaPage() {
       { id: "magia-curso-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
       { id: "magia-curso-seguimiento", label: t('nav.sesiones', {defaultValue: 'Sesiones'}) },
       { id: "magia-curso-calificaciones", label: t('nav.cierre', {defaultValue: 'Cierre'}) },
-    ],
-    // Comparativa PDx, fusionada al final de Análisis APP->PDx (antes
-    // pestaña propia, 2026-09-30). ids fijados a mano en
-    // ComparativaPdTab.tsx (COMPARATIVA_SECTION_IDS), contra el texto
-    // exacto de cada "## " de Comparativa_PD.md. Los 3 acordeones propios
-    // de esta pestaña (APP->PD-/PD=/PD+) no llevan índice, mismo criterio
-    // que el resto de acordeones de la app.
-    'analisis-pdx': [
-      { id: "comparativa-contexto", label: t('nav.contexto', {defaultValue: 'Contexto'}) },
-      { id: "comparativa-metodologia", label: t('nav.metodologias', {defaultValue: 'Metodologías'}) },
-      { id: "comparativa-curriculo", label: t('nav.curriculo', {defaultValue: 'Currículo'}) },
-      { id: "comparativa-instrumento", label: t('nav.instrumentos', {defaultValue: 'Instrumentos'}) },
-      { id: "comparativa-magia-descargas", label: 'MagIA (Descargas)' },
-      { id: "comparativa-calendario", label: t('nav.calendario', {defaultValue: 'Calendario'}) },
-      { id: "comparativa-alumnado", label: t('nav.alumnado', {defaultValue: 'Alumnado'}) },
-      { id: "comparativa-seguimiento", label: `${t('nav.sesiones', {defaultValue: 'Sesiones'})} / ${t('nav.calificaciones', {defaultValue: 'Calificaciones'})}` },
-      { id: "comparativa-calificacion", label: t('nav.cierre', {defaultValue: 'Cierre'}) },
-      { id: "comparativa-resumen-cobertura", label: 'Resumen de cobertura por nivel' },
-      { id: "comparativa-notas", label: 'Notas' },
     ],
   };
 
@@ -442,16 +419,6 @@ export default function MagiaPage() {
               </StickyPageHeader>
 
               <MotionWrapper className="w-full space-y-3 px-8 pt-4 pb-[280px]">
-                {/* ══════════════════════════ ANÁLISIS APP->PDx ══════════════════════════ */}
-                {/* Comparativa PDx se fusiona al final, como un bloque más
-                    (antes pestaña propia, petición de Rafael, 2026-09-30). */}
-                {activeTab === "analisis-pdx" && (
-                  <>
-                    <AnalisisPdxTab />
-                    <ComparativaPdTab />
-                  </>
-                )}
-
                 {/* ══════════════════════════ PROGRAMACIÓN (documentos de apoyo) ══════════════════════════ */}
                 {/* 4 bloques, mismo orden y nombres que el grupo "Programación" del sidebar:
                     Contexto / Currículo / Metodología / Instrumentos. */}
