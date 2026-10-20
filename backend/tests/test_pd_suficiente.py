@@ -25,7 +25,7 @@ def _texto(contenido: bytes) -> str:
     return re.sub(r"<[^>]+>", "", xml.replace("</w:p>", "\n"))
 
 
-def _generar(cambios=None):
+def _generar(cambios=None, tipo="programacion_suficiente_tpl"):
     modulo = copy.deepcopy(_cargar("202526 P 0237-ICTVE.fpp"))
     curso = _cargar("202526 C 1A-GM 0237-ICTVE.fpc")
     for ruta, valor in (cambios or {}).items():
@@ -34,7 +34,7 @@ def _generar(cambios=None):
         for k in camino:
             obj = obj.setdefault(k, {})
         obj[ultimo] = valor
-    contenido, _, _ = generar_documento("programacion_suficiente_tpl", modulo, curso)
+    contenido, _, _ = generar_documento(tipo, modulo, curso)
     return _texto(contenido)
 
 
@@ -129,3 +129,56 @@ def test_pd_plus_cubre_los_ra_en_la_tabla_de_ud():
     contenido, _, _ = generar_documento("programacion_jeg", modulo, curso)
     t = _texto(contenido)
     assert "Introducción a las ICT y normativa\nRA1\n22" in t
+
+
+# ── Datos que antes no llegaban a ningún documento: se comprueban en los tres (PD-, PD=, PD+) ──
+TRES = ("programacion_minima_tpl", "programacion_suficiente_tpl", "programacion_jeg")
+
+
+def test_localidad_provincia_y_comunidad_salen_en_los_tres():
+    cambios = {"info_modulo.centro": "IES Prueba", "info_modulo.municipio": "ZZLocalidadZZ", "info_modulo.provincia": "ZZProvinciaZZ", "info_modulo.ccaa": "aragon"}
+    pm = _generar(cambios, TRES[0])
+    assert "ZZLocalidadZZ" in pm and "ZZProvinciaZZ" in pm and "Aragón" in pm
+    pe = _generar(cambios, TRES[1])
+    assert "Centro educativo. IES Prueba, ZZLocalidadZZ (ZZProvinciaZZ), Aragón." in pe
+    pp = _generar(cambios, TRES[2])
+    assert "ZZLocalidadZZ" in pp and "ZZProvinciaZZ" in pp and "Aragón" in pp
+
+
+def test_regimen_dual_sale_en_pd_igual_y_pd_mas():
+    pe = _generar({"dual_regimen": "intensivo"}, TRES[1])
+    assert "formación profesional dual intensivo" in pe
+    pp = _generar({"dual_regimen": "intensivo"}, TRES[2])
+    assert "régimen intensivo" in pp
+    assert "formación profesional dual" not in _generar({"dual_regimen": "ninguno"}, TRES[1])
+
+
+def test_contenidos_de_las_sesiones_salen_en_c1_y_en_2_6():
+    marca = "ZZContenidoSesionZZ."
+    mod = copy.deepcopy(_cargar("202526 P 0237-ICTVE.fpp"))
+    id_ud = mod["df_ud"][0]["id_ud"]
+    sesion = next(x for x in mod["df_sesiones"] if x["id_ud"] == id_ud)
+    cambio = {"df_sesiones": [dict(sesion, Contenidos=marca)] + [x for x in mod["df_sesiones"] if x is not sesion]}
+    for tipo in (TRES[1], TRES[2]):
+        assert "Contenidos: " + marca in _generar(cambio, tipo)
+
+
+def test_proyectos_y_retos_salen_en_pd_igual_y_pd_mas():
+    tarea = {"ID": "T9", "id_ud": "UD01", "Nombre_Tarea": "ZZProyectoZZ", "Reto": "ZZRetoZZ", "RA_Asociados": "RA1", "Instrumento": "Rúbrica", "desc_act": "ZZDescZZ"}
+    pe = _generar({"df_tareas": [tarea]}, TRES[1])
+    assert "ZZProyectoZZ: ZZRetoZZ" in pe
+    pp = _generar({"df_tareas": [tarea, dict(tarea, Nombre_Tarea="ZZSegundoZZ")]}, TRES[2])
+    assert "ZZProyectoZZ" in pp and "ZZSegundoZZ" in pp and "ZZRetoZZ" in pp
+
+
+def test_actividades_de_evaluacion_salen_en_pd_igual_y_pd_mas():
+    act = {"id_act": "A9", "tri_act": "2T", "Tipo": "Practica", "desc_act": "ZZActividadZZ", "peso_act": 33, "is_active": True}
+    for tipo in (TRES[1], TRES[2]):
+        t = _generar({"df_act": [act]}, tipo)
+        assert "Segundo trimestre: ZZActividadZZ (práctica, 33 %)." in t
+
+
+def test_caracteristicas_del_alumnado_de_entorno_salen_en_pd_igual_y_pd_mas():
+    cambios = {"config_contexto.caracteristicas_alumnado": "ZZCaractEntornoZZ"}
+    assert "Características del alumnado. ZZCaractEntornoZZ" in _generar(cambios, TRES[1])
+    assert "ZZCaractEntornoZZ" in _generar(cambios, TRES[2])

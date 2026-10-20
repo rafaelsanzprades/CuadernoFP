@@ -11,9 +11,19 @@ Uso:
 
 import os
 from docxtpl import DocxTemplate
+from helpers_pd_tablas import nombre_ccaa, ubicacion_centro
 from helpers_catalogo import build_ra_desc_map, build_ud_desc_map, resolve_ra_desc, resolve_ud_desc, resolve_feoe_dual, _norm_id
 
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates', 'modelo_pd_fp-.docx')
+
+
+def _centro_linea(data):
+    """«IES Andalán, Zaragoza (Zaragoza)» a partir de Contexto › Identificación; si no hay nada, una marca para completar a mano."""
+    info = data.get("info_modulo") or {}
+    partes = [x for x in (data.get("centro") or info.get("centro"),
+                          ubicacion_centro(data.get("municipio") or info.get("municipio"), data.get("provincia") or info.get("provincia")),
+                          nombre_ccaa(info.get("ccaa"))) if x]
+    return ", ".join(partes) or "[[ Indica tu centro ]]"
 
 
 def _build_context(data: dict) -> dict:
@@ -49,6 +59,7 @@ def _build_context(data: dict) -> dict:
         "ciclo": ciclo,
         "curso_academico": curso,
         "departamento_area": departamento_area,
+        "centro_linea": _centro_linea(data),
     }
 
     # ── H1 1: Perfil profesional ───────────────────────────────────────

@@ -201,3 +201,88 @@ def insertar_tabla_planificacion(doc, df_ud, info_fechas, horario, calendar_note
     for row in table.rows:
         for i, w in enumerate(col_widths):
             row.cells[i].width = w
+
+
+# ── Datos de la app que antes no llegaban a ningún documento (localidad, provincia, comunidad, sesiones, proyectos y
+#    retos, actividades de evaluación y régimen dual). Los tres generadores de PD los usan desde aquí.
+
+CCAA_NOMBRES = {
+    "andalucia": "Andalucía", "aragon": "Aragón", "asturias": "Principado de Asturias", "baleares": "Islas Baleares",
+    "canarias": "Canarias", "cantabria": "Cantabria", "cataluna": "Cataluña", "extremadura": "Extremadura", "galicia": "Galicia",
+    "madrid": "Comunidad de Madrid", "murcia": "Región de Murcia", "navarra": "Comunidad Foral de Navarra",
+    "valencia": "Comunidad Valenciana", "ceuta": "Ceuta", "melilla": "Melilla", "larioja": "La Rioja", "la-rioja": "La Rioja",
+    "castilla-la-mancha": "Castilla-La Mancha", "castilla-y-leon": "Castilla y León", "pais-vasco": "País Vasco",
+}
+
+
+def nombre_ccaa(valor):
+    """«aragon» -> «Aragón». Un valor que no esté en la lista se devuelve legible (o vacío si no hay)."""
+    v = (valor or "").strip()
+    if not v:
+        return ""
+    return CCAA_NOMBRES.get(v.lower(), v.replace("-", " ").replace("_", " ").capitalize())
+
+
+def ubicacion_centro(municipio, provincia):
+    """«Zaragoza (Zaragoza)», «Zaragoza», «provincia de Zaragoza» o vacío, según lo que haya escrito el docente."""
+    m, p = (municipio or "").strip(), (provincia or "").strip()
+    if m and p and m.lower() != p.lower():
+        return f"{m} ({p})"
+    return m or (f"provincia de {p}" if p else "")
+
+
+def contenidos_por_ud(df_sesiones):
+    """{id_ud: [contenido de cada sesión, en orden]} a partir de Currículo › Secuenciación de UD."""
+    res = {}
+    for s in sorted(df_sesiones or [], key=lambda x: (str(x.get("id_ud", "")), x.get("Num_Orden") or 0)):
+        texto = str(s.get("Contenidos") or "").strip()
+        if texto:
+            res.setdefault(str(s.get("id_ud", "")), []).append(texto if texto.endswith((".", ";", ":")) else texto + ".")
+    return res
+
+
+_TIPO_ACT = {"teoria": "teoría", "practica": "práctica", "informes": "informes", "tareas": "tareas"}
+
+
+def lineas_actividades_evaluacion(df_act):
+    """Una línea por trimestre con las actividades de evaluación activas (Instrumentos › Trimestres) y su peso."""
+    por_tri = {}
+    for a in df_act or []:
+        if a.get("is_active") is False:
+            continue
+        desc = str(a.get("desc_act") or "").strip()
+        if not desc:
+            continue
+        tipo = _TIPO_ACT.get(str(a.get("Tipo") or "").lower(), str(a.get("Tipo") or "").lower())
+        peso = a.get("peso_act")
+        detalle = ", ".join(x for x in (tipo, f"{peso} %" if peso not in (None, "") else "") if x)
+        por_tri.setdefault(str(a.get("tri_act") or ""), []).append(f"{desc} ({detalle})" if detalle else desc)
+    nombres = {"1T": "Primer trimestre", "2T": "Segundo trimestre", "3T": "Tercer trimestre"}
+    return [f"{nombres.get(t, t or 'Sin trimestre')}: " + "; ".join(v) + "." for t, v in sorted(por_tri.items())]
+
+
+def proyectos_retos(df_tareas):
+    """Proyectos y retos de Currículo › Proyectos y retos, como dicts con tipo, título, reto, RA, instrumento y descripción."""
+    res = []
+    for t in df_tareas or []:
+        titulo = str(t.get("Nombre_Tarea") or "").strip()
+        if not titulo:
+            continue
+        reto = str(t.get("Reto") or "").strip()
+        res.append({
+            "tipo": "Reto" if reto else "Proyecto",
+            "titulo": titulo,
+            "reto": reto,
+            "ra": str(t.get("RA_Asociados") or "").strip(),
+            "instrumento": str(t.get("Instrumento") or "").strip(),
+            "descripcion": str(t.get("desc_act") or "").strip(),
+        })
+    return res
+
+
+def regimen_dual_texto(dual_regimen, tipo_dual=""):
+    """«general» / «intensivo» si el módulo es dual (Identificación, o el tipo del Periodo FEOE si ahí se eligió intensiva); si no, ''."""
+    d = (dual_regimen or "").strip().lower()
+    if d in ("general", "intensivo"):
+        return d
+    return ""

@@ -349,6 +349,8 @@ def generar_documento(
             "df_ce": module_data.get("df_ce") or [],
             "df_sgmt": curso_data.get("df_sgmt") or [],
             "df_sesiones": module_data.get("df_sesiones") or [],
+            "df_tareas": module_data.get("df_tareas") or [],
+            "dual_regimen": module_data.get("dual_regimen") or "",
             "df_dua": module_data.get("df_dua") or [],
             "df_contingencia": module_data.get("df_contingencia") or [],
             "df_ace": module_data.get("df_ace") or [],

@@ -12,6 +12,9 @@ Uso:
 import os
 import re
 from docxtpl import DocxTemplate
+from helpers_pd_tablas import (
+    nombre_ccaa, contenidos_por_ud, lineas_actividades_evaluacion, proyectos_retos, regimen_dual_texto,
+)
 from helpers_catalogo import (
     build_ra_desc_map, build_ud_desc_map, build_ce_desc_map,
     resolve_ra_desc, resolve_ud_desc, resolve_ce_desc, resolve_recursos,
@@ -137,9 +140,10 @@ def _build_context(data: dict) -> dict:
     # --- Contextualizacion ---
     context.update({
         "nombre_centro": config.get("nombre_centro", data.get("centro", "")),
-        "municipio": data.get("municipio", ""),
-        "provincia": data.get("provincia", ""),
-        "comunidad_autonoma": config.get("comunidad_autonoma", "Aragon"),
+        # Identificación: localidad, provincia y comunidad (Contexto › Identificación); si faltan, marca [[ ... ]]
+        "municipio": data.get("municipio") or _marca("localidad"),
+        "provincia": data.get("provincia") or _marca("provincia"),
+        "comunidad_autonoma": nombre_ccaa((data.get("info_modulo") or {}).get("ccaa")) or config.get("comunidad_autonoma") or _marca("comunidad autónoma"),
         # Portada y «Características del alumnado»: datos reales de la app (Identificación y Contexto › Alumnado); si faltan, marca [[ ... ]]
         "tipo_centro": data.get("tipo_centro") or _marca("tipo de centro"),
         "procedencia_alumnado": config.get("procedencia_alumnado") or _marca("procedencia geográfica principal"),
@@ -157,7 +161,10 @@ def _build_context(data: dict) -> dict:
         "sectores_productivos": config.get("sectores_productivos",
             data.get("familia", "")),
         "perfiles_profesionales": config.get("perfiles_profesionales", ""),
-        "caracteristicas_alumnado_extra": data.get("textos_pd_caracteristicas_alumnado") or _marca("otros rasgos del grupo a destacar"),
+        # «Características del alumnado»: el campo de Contexto › Alumnado y el de Contexto › Entorno (los dos existen hoy, ver CFP-5)
+        "caracteristicas_alumnado_extra": " ".join(
+            x.strip() for x in (config.get("caracteristicas_alumnado"), data.get("textos_pd_caracteristicas_alumnado")) if x and x.strip()
+        ) or _marca("otros rasgos del grupo a destacar"),
     })
 
     # --- Espacios y equipamiento (contextualizacion) ---
@@ -250,9 +257,16 @@ def _build_context(data: dict) -> dict:
     # PD= en su seccion C1 (Contenidos): cada UD representa su propio bloque
     # de contenido, no hay ningun desglose "BC1/BC2..." mas fino en ningun
     # sitio de la app.
-    context["list_contenidos"] = [
-        f"UD {i}. {resolve_ud_desc(ud, ud_desc_map)}" for i, ud in enumerate(df_ud, 1)
-    ]
+    contenidos_ud = contenidos_por_ud(data.get("df_sesiones"))
+    list_contenidos = []
+    for i, ud in enumerate(df_ud, 1):
+        list_contenidos.append(f"UD {i}. {resolve_ud_desc(ud, ud_desc_map)}")
+        if contenidos_ud.get(str(ud.get("id_ud", ""))):
+            list_contenidos.append("Contenidos: " + " ".join(contenidos_ud[str(ud.get("id_ud", ""))]))
+    context["list_contenidos"] = list_contenidos
+    # Actividades de evaluación (Instrumentos › Trimestres), una línea por trimestre, para el apartado «Actividades, técnicas e instrumentos»
+    context["list_actividades_eval"] = lineas_actividades_evaluacion(data.get("df_act"))
+    context["proyectos_retos"] = proyectos_retos(data.get("df_tareas"))
 
     # --- Tabla "Organizacion y distribucion temporal" (N | Titulo | RA | CE |
     # C | CPE | OG | Duracion (horas) | Temporizacion) -- se reconstruye con
@@ -334,7 +348,9 @@ def _build_context(data: dict) -> dict:
     # dualizado desde Plan FEOE (textos_pd_feoe_organizacion, con
     # texto_feoe_trabajos_alternativos como respaldo si ese está vacío).
     feoe = resolve_feoe_dual(data)
-    context["regimen_feoe"] = fechas.get("tipo_dual") or config.get("regimen_feoe", "general")
+    context["regimen_feoe"] = (regimen_dual_texto(data.get("dual_regimen"))
+                               or {"intensiva": "intensivo"}.get(fechas.get("tipo_dual"), fechas.get("tipo_dual"))
+                               or config.get("regimen_feoe", "general"))
     context["fecha_inicio_feoe"] = fechas.get("ini_feoe", "")
     context["fecha_fin_feoe"] = fechas.get("fin_feoe", "")
     context["num_ra_feoe"] = str(len(feoe["ra_ids_dual"]))
@@ -530,6 +546,47 @@ def _build_context(data: dict) -> dict:
     return context
 
 
+def _rellenar_fichas_proyectos_retos(doc, proyectos: list, modulo: str):
+    """Rellena la ficha «Tipo / Título / Descripción…» del apartado «Aprendizaje colaborativo basado en proyectos y/o retos»
+    con los proyectos y retos de Currículo › Proyectos y retos: una ficha por proyecto (se copia la tabla de la plantilla).
+    Si no hay ninguno, la ficha se deja en blanco para completar a mano."""
+    import copy
+    if not proyectos:
+        return
+    modelo = None
+    for t in doc.tables:
+        if len(t.rows) > 3 and [r.cells[0].text.strip() for r in t.rows[:3]] == ["Tipo", "Título", "Módulos profesionales implicados"]:
+            modelo = t
+            break
+    if modelo is None:
+        return
+    from docx.table import Table
+
+    def poner(tabla, etiqueta, valor):
+        for fila in tabla.rows:
+            if fila.cells[0].text.strip() == etiqueta:
+                celda = fila.cells[1]
+                celda.text = valor
+                return
+
+    copias = [modelo] + [Table(copy.deepcopy(modelo._tbl), modelo._parent) for _ in proyectos[1:]]
+    for k, (tabla, pr) in enumerate(zip(copias, proyectos)):
+        if k > 0:
+            copias[k - 1]._tbl.addnext(tabla._tbl)
+            # un párrafo en blanco entre fichas para que no se fundan en una sola tabla
+            sep = copy.deepcopy(doc.paragraphs[0]._p)
+            for hijo in list(sep):
+                if not hijo.tag.endswith("}pPr"):
+                    sep.remove(hijo)
+            copias[k - 1]._tbl.addnext(sep)
+        descripcion = " ".join(x for x in (pr["reto"] and f"Reto: {pr['reto']}.", pr["descripcion"], pr["instrumento"] and f"Instrumento de evaluación: {pr['instrumento']}.") if x)
+        poner(tabla, "Tipo", pr["tipo"])
+        poner(tabla, "Título", pr["titulo"])
+        poner(tabla, "Módulos profesionales implicados", modulo)
+        poner(tabla, "Descripción", descripcion)
+        poner(tabla, "Resultados de aprendizaje y criterios de evaluación", pr["ra"])
+
+
 def _rellenar_tabla_organizacion_ud(doc, tabla_data: dict):
     """
     Ajusta a mano la tabla "N | Título | RA | CE | C | CPE | OG | Duración
@@ -688,6 +745,7 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
     tpl.render(context, autoescape=True)
 
     doc = tpl.docx
+    _rellenar_fichas_proyectos_retos(doc, context["proyectos_retos"], context.get("modulo", ""))
     _rellenar_tabla_organizacion_ud(doc, context["tabla_organizacion_ud"])
     _rellenar_tabla_relacion_curricular(doc, context["tabla_relacion_curricular"])
     _reconstruir_tabla_ponderacion_ce(doc, context["tabla_ponderacion_ce"])

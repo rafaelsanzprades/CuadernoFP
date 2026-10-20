@@ -16,7 +16,10 @@ from helpers_catalogo import (
     resolve_ra_desc, resolve_ud_desc, resolve_ce_desc, resolve_recursos,
     resolve_feoe_dual, _norm_id,
 )
-from helpers_pd_tablas import insertar_tabla_instrumentos, insertar_tabla_planificacion
+from helpers_pd_tablas import (
+    insertar_tabla_instrumentos, insertar_tabla_planificacion, nombre_ccaa, ubicacion_centro, contenidos_por_ud,
+    lineas_actividades_evaluacion, proyectos_retos, regimen_dual_texto,
+)
 
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates', 'modelo_pd_fp=.docx')
 
@@ -251,12 +254,22 @@ def _build_context(data: dict) -> dict:
     context["texto_introduccion"] = texto_intro
     # Letra a) del art. 100.2: la introducción incluye el marco normativo y su contextualización con el entorno del centro.
     # Un párrafo por elemento: la plantilla los recorre con un bucle ({%p for x in list_intro %}).
-    list_intro = [texto_intro, "Marco normativo. " + (config.get("marco_normativo") or _marco_normativo_aragon(nivel))]
+    list_intro = [texto_intro]
+    # Centro, localidad, provincia y comunidad (Contexto › Identificación): antes no se imprimían en ningún documento
+    ubicacion = ubicacion_centro(info_mod.get("municipio"), info_mod.get("provincia"))
+    centro_partes = [x for x in (info_mod.get("centro"), ubicacion, nombre_ccaa(info_mod.get("ccaa"))) if x]
+    if centro_partes:
+        list_intro.append("Centro educativo. " + ", ".join(centro_partes) + ".")
+    list_intro.append("Marco normativo. " + (config.get("marco_normativo") or _marco_normativo_aragon(nivel)))
     for etiqueta, clave in (("Entorno geográfico y sociocultural", "entorno_geografico"),
                             ("Entorno socioeconómico y productivo", "entorno_socioeconomico"),
                             ("Contexto escolar", "contexto_escolar")):
         if config.get(clave):
             list_intro.append(f"{etiqueta}. {config[clave]}")
+    # «Características del alumnado»: el campo de Contexto › Entorno y el de Contexto › Alumnado (los dos existen hoy, ver CFP-5)
+    caract = " ".join(x.strip() for x in (config.get("caracteristicas_alumnado"), data.get("textos_pd_caracteristicas_alumnado")) if x and x.strip())
+    if caract:
+        list_intro.append(f"Características del alumnado. {caract}")
     context["list_intro"] = list_intro
     context["p_ev"] = p_ev
 
@@ -323,6 +336,9 @@ def _build_context(data: dict) -> dict:
         justificacion = (config.get("texto_feoe_justificacion") or "").strip()
         texto_feoe += " Motivos por los que se dualizan: " + (
             justificacion or "[[ Indica aquí los motivos por los que se dualizan estos resultados de aprendizaje. ]]")
+    regimen_dual = regimen_dual_texto(data.get("dual_regimen"))
+    if regimen_dual:
+        texto_feoe = f"Este módulo se imparte en formación profesional dual {regimen_dual}. " + texto_feoe
     context["texto_feoe"] = texto_feoe
 
     # ── SECCIÓN C: SECUENCIACIÓN — Tabla RA×UD (construida con python-docx
@@ -368,7 +384,13 @@ def _build_context(data: dict) -> dict:
     # ── SECCIÓN C1: CONTENIDOS — reutiliza el mismo bucle dinámico
     # {%p for ud in list_uds %} que ya trae la plantilla, con el formato
     # "UD n. descripción" que espera esta sección ────────────────────────
-    context["list_uds"] = [f"UD {i}. {resolve_ud_desc(ud, ud_desc_map)}" for i, ud in enumerate(df_ud, 1)]
+    contenidos_ud = contenidos_por_ud(data.get("df_sesiones"))
+    list_uds = []
+    for i, ud in enumerate(df_ud, 1):
+        list_uds.append(f"UD {i}. {resolve_ud_desc(ud, ud_desc_map)}")
+        if contenidos_ud.get(str(ud.get("id_ud", ""))):
+            list_uds.append("Contenidos: " + " ".join(contenidos_ud[str(ud.get("id_ud", ""))]))
+    context["list_uds"] = list_uds
 
     # ── SECCIÓN C2: CRITERIOS DE EVALUACIÓN — RA + sus CE, número variable
     # de RA y de CE por RA. Se aplana en una única lista de líneas (cada una
@@ -454,6 +476,12 @@ def _build_context(data: dict) -> dict:
     colaborativo = config.get("aprendizaje_colaborativo", "")
     if colaborativo:
         list_d.append(colaborativo)
+    retos = proyectos_retos(data.get("df_tareas"))
+    if retos:
+        list_d.append("Proyectos y retos del módulo:")
+        for r in retos:
+            extra = "; ".join(x for x in (f"RA: {r['ra']}" if r["ra"] else "", f"instrumento: {r['instrumento']}" if r["instrumento"] else "") if x)
+            list_d.append(f"{r['titulo']}" + (f": {r['reto']}" if r["reto"] else "") + (f" ({extra})" if extra else "") + ".")
     texto_metodologia_libre = data.get("texto_metodologia_libre", "")
     if texto_metodologia_libre:
         list_d.append(texto_metodologia_libre)
@@ -499,11 +527,16 @@ def _build_context(data: dict) -> dict:
 
     # ── SECCIÓN F: PROCEDIMIENTOS E INSTRUMENTOS DE EVALUACIÓN ──────────
     texto_eval_info = data.get("textos_pd_eval_informacion", "")
-    context["texto_procedimientos_instrumentos"] = texto_eval_info or (
+    texto_f = texto_eval_info or (
         "Los procedimientos e instrumentos de evaluación se ajustan a los objetivos y "
         "competencias del módulo, garantizando una evaluación formativa y final que facilite "
         "el seguimiento y la mejora del proceso educativo."
     )
+    lineas_act = lineas_actividades_evaluacion(data.get("df_act"))
+    if lineas_act:
+        # un salto de línea por trimestre dentro del mismo párrafo (docxtpl convierte el salto de línea en <w:br/>)
+        texto_f = texto_f + "\nActividades de evaluación previstas:\n" + "\n".join(lineas_act)
+    context["texto_procedimientos_instrumentos"] = texto_f
 
     # ── SECCIÓN G: ACTIVIDADES DE RECUPERACIÓN Y REFUERZO — checklist de
     # convocatorias (R1/R2/R3/RF/EvFE) + textos libres, aplanado en list_g ─

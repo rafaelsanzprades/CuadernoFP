@@ -191,6 +191,14 @@ leaving them blank falls back to the auto-generated defaults (marco normativo: A
 (3–5, art. 99.4.g / 100.2.h): the grade engine applies it (TS `notaFinalPonderada` and Python `calcular_notas_jeg`,
 keep both in sync) and pd= prints it; if empty, pd= leaves a visible `[[ ]]` mark instead of omitting it.
 
+Data that used to reach no document is now wired into all three tiers through helpers in `helpers_pd_tablas.py`
+(`nombre_ccaa`, `ubicacion_centro`, `contenidos_por_ud`, `lineas_actividades_evaluacion`, `proyectos_retos`, `regimen_dual_texto`):
+centro/localidad/provincia/comunidad, dual regime, session contents (`df_sesiones.Contenidos`), projects and challenges
+(`df_tareas`), evaluation activities (`df_act`) and the Entorno «características del alumnado». pd- and pd+ got template edits
+(`backend/scripts/ampliar_plantilla_pd_minima_centro.py`, `ampliar_plantilla_jeg_campos.py`, both idempotent); pd= only needed Python
+because its sections are lists. A field is only really «in» a document if a generated-text diff proves it: see
+`APP-www_rsp_es/articulos/12-3-analisis-app-pdx.md` (the comparison table was rebuilt that way on 2026-10-20).
+
 To inspect what a `.docx` template actually expects: unzip it (`.docx` is a zip), read
 `word/document.xml`, **strip XML tags before regexing for `{{ }}`** — Word splits text across multiple
 `<w:t>` runs on formatting/autocorrect boundaries, so searching the raw tag-laden XML gives false
