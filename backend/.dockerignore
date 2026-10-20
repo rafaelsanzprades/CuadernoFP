@@ -1,0 +1,7 @@
+documentos/Normativa
+documentos/Currículos
+.venv
+.venv313
+__pycache__
+backups
+*.bak
