@@ -27,7 +27,7 @@ from slowapi.middleware import SlowAPIMiddleware
 
 from services.backup_service import backup_task, perform_backup
 
-from routers import modules, catalogs, pdf, documents, ai_assistant
+from routers import modules, catalogs, pdf, ai_assistant
 
 logging.basicConfig(
     level=logging.INFO,
@@ -90,7 +90,6 @@ app.include_router(catalogs.router)
 app.include_router(modules.router)
 
 app.include_router(pdf.router)
-app.include_router(documents.router)
 app.include_router(ai_assistant.router)
 
 
