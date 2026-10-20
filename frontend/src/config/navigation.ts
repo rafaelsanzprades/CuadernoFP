@@ -34,12 +34,12 @@ export const navGroups = [
   },
   {
     title: "Curso [Año]",
-    sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, califica, anota las sesiones y cierra el curso con el expediente y la mejora.",
+    sectionDescription: "Herramientas de seguimiento para el aula viva. Establece el calendario, administra el listado de alumnado, anota las sesiones, califica y cierra el curso con el expediente y la mejora.",
     items: [
       { href: "/calendario?tab=fechas", label: "Calendario", icon: Calendar, description: "Horario, trimestres, festivos, periodo FEOE, vista mensual y tus clases de hoy, la semana y la unidad en curso." },
-      { href: "/alumnado?tab=orientacion", label: "Alumnado", icon: Users, description: "Matrícula, orientación profesional, perfil del grupo y plano de aula." },
-      { href: "/calificaciones?tab=academicas", label: "Calificaciones", icon: CalendarDays, description: "Notas y valoración en la empresa (FEOE) por alumnado, trimestral y reclamaciones." },
-      { href: "/sesiones?tab=asistencia", label: "Sesiones", icon: TrendingUp, description: "Asistencia, abandono y diario de sesiones lectivas." },
+      { href: "/alumnado?tab=matricula", label: "Alumnado", icon: Users, description: "Matrícula, orientación profesional, perfil del grupo y plano de aula." },
+      { href: "/sesiones?tab=asistencia", label: "Sesiones", icon: CalendarDays, description: "Asistencia, abandono y diario de sesiones lectivas." },
+      { href: "/calificaciones?tab=academicas", label: "Calificaciones", icon: TrendingUp, description: "Notas y valoración en la empresa (FEOE) por alumnado, trimestral y reclamaciones." },
       { href: "/cierre?tab=expediente", label: "Cierre", icon: Award, description: "Expediente por alumnado (boletín, informe de evidencias e inserción laboral), avance de UD y progreso de RA, y mejora del módulo (EQAVET y PDCA)." },
     ]
   }
@@ -99,8 +99,8 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "agenda", label: "Agenda" },
   ],
   "/alumnado": [
-    { id: "orientacion", label: "Orientación" },
     { id: "matricula", label: "Matrícula" },
+    { id: "orientacion", label: "Orientación" },
     { id: "plano", label: "Plano de aula" },
     { id: "perfil", label: "Perfil" },
   ],

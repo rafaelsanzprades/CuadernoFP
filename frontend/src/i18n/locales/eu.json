@@ -405,7 +405,7 @@
     "programacion": "Programazioa",
     "curso": "Ikasturtea",
     "programacion_desc": "Diseinu eta konfigurazio didaktikoaren area. Konfiguratu moduloa, lotu ebaluazio-matrizeak, definitu tresnak eta sekuentziatu geletako zereginak.",
-    "curso_desc": "Gela biziaren jarraipenerako tresnak. Ezarri egutegia, kudeatu ikasleen zerrenda, kalifikatu, jaso saioak eta itxi ikastaroa espedientearekin eta hobekuntzarekin.",
+    "curso_desc": "Gela biziaren jarraipenerako tresnak. Ezarri egutegia, kudeatu ikasleen zerrenda, jaso saioak, kalifikatu eta itxi ikastaroa espedientearekin eta hobekuntzarekin.",
     "general_desc": "Nondik hasi: zure panela eta fitxategiak, laguntza, MagIAren dokumentuak eta informazio legala. MagIAk programazio eta ikastaro irekiak behar ditu."
   },
   "sidebar": {

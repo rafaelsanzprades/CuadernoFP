@@ -405,7 +405,7 @@
     "programacion": "Programming",
     "curso": "Course",
     "programacion_desc": "Design and didactic configuration area. Configure the module, link the assessment matrices, define the instruments and sequence the classroom tasks.",
-    "curso_desc": "Tracking tools for the living classroom. Set up the calendar, manage the student roster, grade, log the sessions and close the course with the records and the improvement plan.",
+    "curso_desc": "Tracking tools for the living classroom. Set up the calendar, manage the student roster, log the sessions, grade and close the course with the records and the improvement plan.",
     "general_desc": "Where to start: your dashboard and files, the help, the MagIA documents and the legal information. MagIA needs an open curriculum plan and course."
   },
   "sidebar": {
