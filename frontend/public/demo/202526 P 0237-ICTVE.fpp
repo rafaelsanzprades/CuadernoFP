@@ -1742,7 +1742,7 @@
     "CONT-AUT"
   ],
   "texto_contingencia_libre": "En caso de suspensión de las clases presenciales, la docencia continuará de forma telemática a través del entorno virtual de aprendizaje, con sesiones de resolución de dudas mediante videoconferencia y entrega de tareas asíncronas.",
-  "texto_contextualizacion_libre": "El Centro educativo en el que se va a impartir el módulo es el Instituto de Enseñanza Secundaria Ramón J. Sender, ubicado en Fraga (Huesca) donde se imparten enseñanzas de ESO, Bachillerato y Formación Profesional. El entorno socioeconómico de la comarca del Bajo Cinca se caracteriza por una importante actividad agrícola, ganadera e industrial, lo que ofrece diversas oportunidades de empleo para los futuros técnicos.",
+  "texto_contextualizacion_libre": "",
   "df_rubricas": [
     {
       "id_rubrica": "RUB-INFORME",

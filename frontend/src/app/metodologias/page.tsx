@@ -71,7 +71,7 @@ export default function MetodologiaConfigPage() {
 
   // Índice de bloques -- solo en las pestañas con 2+ bloques reales.
   const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
-    metodologias: [
+    estrategias: [
       { id: "metodologia-metodologia", label: t('campos.modulo.metodologiaTitulo', {defaultValue: 'Metodología'}) },
       { id: "metodologia-innovacion", label: t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e intermodularidad'}) },
     ],
