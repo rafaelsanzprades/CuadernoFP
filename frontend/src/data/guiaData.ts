@@ -2,8 +2,7 @@
 // public/Guia.md y renderizado con ReactMarkdown) -- pasado a código
 // estructurado, petición de Rafael, para poder dividirlo en bloques
 // navegables (SectionHeading + índice) igual que el resto de la app.
-// El fichero public/Guia.md se mantiene (fuente original / prompt de
-// referencia para el asistente IA), pero GuiaTab.tsx ya no lo lee.
+// (El antiguo public/Guia.md se borró el 2026-10-20: era una copia sin uso, ya desactualizada.)
 
 export interface GuiaNode {
   label?: string;
