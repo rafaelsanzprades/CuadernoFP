@@ -1740,7 +1740,8 @@
       "sinAlumnadoRegistradoAun": "Encara no hi ha alumnat registrat.",
       "menorEdadBadge": "Menor d'edat",
       "perfilGrupoLabel": "Perfil del grup",
-      "anosSeparador": "anys ·"
+      "anosSeparador": "anys ·",
+      "rasgosRapidosTitulo": "Trets ràpids i característiques de l'alumnat"
     },
     "evaluacion": {
       "informacionDesc": "Com es donen a conèixer els criteris d'avaluació i qualificació.",
@@ -1903,7 +1904,7 @@
       "estrategiasMetodologicasEspaciosTitulo": "Estratègies metodològiques. Espais",
       "estrategiasMetodologicasTitulo": "Estratègies metodològiques",
       "f1AtencionDiversidadDesc": "Estratègies per adaptar l'ensenyament a les característiques de l'alumnat.",
-      "f1AtencionDiversidadTitulo": "Atenció a la diversitat",
+      "f1AtencionDiversidadTitulo": "Atenció a la diversitat. Adaptacions no significatives",
       "familiaProfesional": "Família professional",
       "herramientasRecursosDesc": "Infraestructures, eines i materials tècnics necessaris per al desenvolupament curricular. Si no trobes alguna cosa, afegeix-la a sota com a text lliure.",
       "herramientasRecursosLabel": "Eines, recursos i espais",
@@ -1918,7 +1919,7 @@
       "ipeIntermodularDesc": "Vinculació amb l'Itinerari personal per a l'Ocupabilitat o participació en el projecte intermodular (D 91/2024).",
       "ipeIntermodularLabel": "IPE i projecte intermodular continu",
       "labelModuloDidactico": "Mòdul didàctic",
-      "marcoInclusionTitulo": "Marc d'inclusió (D 91/2024 Art. 29)",
+      "marcoInclusionTitulo": "Inclusió. Mesures i anotacions lliures (D 91/2024, art. 29)",
       "medidasContingenciaDesc": "Estratègies generals d'actuació davant la impossibilitat d'impartir docència presencial normal.",
       "medidasContingenciaLabel": "Mesures de contingència (selecció múltiple)",
       "medidasFlexibilizacionDesc": "Alternatives metodològiques en ensenyament i avaluació que no minoraran les qualificacions.",

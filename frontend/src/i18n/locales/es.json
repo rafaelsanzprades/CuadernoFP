@@ -513,6 +513,13 @@
     },
     "instrumentos": {
       "catalogoTitulo": "Catálogo de instrumentos de evaluación y de calificación"
+    },
+    "alumnado": {
+      "rasgosRapidosTitulo": "Rasgos rápidos y características del alumnado"
+    },
+    "modulo": {
+      "f1AtencionDiversidadTitulo": "Atención a la diversidad. Adaptaciones no significativas",
+      "marcoInclusionTitulo": "Inclusión. Medidas y anotaciones libres (D 91/2024, art. 29)"
     }
   },
   "archivos": {

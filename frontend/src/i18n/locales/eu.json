@@ -1738,7 +1738,8 @@
       "sinAlumnadoRegistradoAun": "Oraindik ez dago ikaslerik erregistratuta.",
       "menorEdadBadge": "Adingabea",
       "perfilGrupoLabel": "Taldearen profila",
-      "anosSeparador": "urte ·"
+      "anosSeparador": "urte ·",
+      "rasgosRapidosTitulo": "Ikasleen ezaugarri azkarrak eta ezaugarriak"
     },
     "evaluacion": {
       "informacionDesc": "Ebaluazio- eta kalifikazio-irizpideak nola ezagutarazten diren.",
@@ -1901,7 +1902,7 @@
       "estrategiasMetodologicasEspaciosTitulo": "Estrategia metodologikoak. Espazioak",
       "estrategiasMetodologicasTitulo": "Estrategia metodologikoak",
       "f1AtencionDiversidadDesc": "Irakaskuntza ikasleen ezaugarrietara egokitzeko estrategiak.",
-      "f1AtencionDiversidadTitulo": "Aniztasunari arreta",
+      "f1AtencionDiversidadTitulo": "Aniztasunari arreta. Egokitzapen ez-esanguratsuak",
       "familiaProfesional": "Familia profesionala",
       "herramientasRecursosDesc": "Curriculum-garapenerako beharrezkoak diren azpiegiturak, tresnak eta material teknikoak. Zerbait aurkitzen ez baduzu, gehitu behean testu librean.",
       "herramientasRecursosLabel": "Tresnak, baliabideak eta espazioak",
@@ -1916,7 +1917,7 @@
       "ipeIntermodularDesc": "Enplegagarritasunerako ibilbide pertsonalarekiko lotura edo modulu arteko proiektuan parte-hartzea (91/2024 Dekretua).",
       "ipeIntermodularLabel": "IPE eta etengabeko modulu arteko proiektua",
       "labelModuloDidactico": "Modulu didaktikoa",
-      "marcoInclusionTitulo": "Inklusio esparrua (91/2024 Dekretua, 29. art.)",
+      "marcoInclusionTitulo": "Inklusioa. Neurriak eta ohar libreak (D 91/2024, 29. art.)",
       "medidasContingenciaDesc": "Aurrez aurreko irakaskuntza arrunta ezin izateko kasuetarako jarduera-estrategia orokorrak.",
       "medidasContingenciaLabel": "Kontingentzia-neurriak (hautaketa anitza)",
       "medidasFlexibilizacionDesc": "Irakaskuntzan eta ebaluazioan kalifikazioak murriztuko ez dituzten alternatiba metodologikoak.",

@@ -76,8 +76,8 @@ export default function MetodologiaConfigPage() {
       { id: "metodologia-innovacion", label: t('campos.modulo.tituloInnovacionIntermodularidad', {defaultValue: 'Innovación e intermodularidad'}) },
     ],
     diversidad: [
-      { id: "metodologia-marco-inclusion", label: t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de inclusión (D 91/2024, art. 29)'}) },
-      { id: "metodologia-f1-diversidad", label: t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'Atención a la diversidad'}) },
+      { id: "metodologia-f1-diversidad", label: t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'Atención a la diversidad. Adaptaciones no significativas'}) },
+      { id: "metodologia-marco-inclusion", label: t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Inclusión. Medidas y anotaciones libres (D 91/2024, art. 29)'}) },
       { id: "metodologia-plan-dua", label: t('campos.modulo.planDuaTitulo', {defaultValue: 'Plan de atención a la diversidad (DUA)'}) },
       { id: "metodologia-acneae", label: t('campos.modulo.panelAcneaeTitulo', {defaultValue: 'Panel de ACNEAE'}) },
     ],

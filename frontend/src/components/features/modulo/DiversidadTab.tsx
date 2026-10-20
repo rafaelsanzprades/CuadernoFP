@@ -94,10 +94,57 @@ export function DiversidadTab() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
 
+      {/* F1. Atención a la diversidad */}
+      <div className="space-y-3">
+      <SectionHeading id="metodologia-f1-diversidad" icon={ShieldAlert} scrollMt="260px">
+        {t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'Atención a la diversidad. Adaptaciones no significativas'})}
+      </SectionHeading>
+      <div className="glass-card p-6 border-t-4 border-t-violet-500">
+        <div className="space-y-4">
+          <div>
+            <p className="text-caption text-muted mb-2">{t('campos.modulo.f1AtencionDiversidadDesc', {defaultValue: 'Estrategias para adaptar la enseñanza a las características del alumnado.'})}</p>
+            <textarea
+              value={config_contexto["F1_diversidad"] || ""}
+              onChange={e => handleChange("F1_diversidad", e.target.value)}
+              placeholder={t('placeholders.modulo.medidasInclusion', {defaultValue: 'Medidas de inclusión y atención a las diferencias individuales...'})}
+              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+          <div className="space-y-4">
+            <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
+              <input 
+              type="checkbox" 
+              className="mt-1"
+              checked={config_contexto.adaptaciones_no_significativas || false}
+              onChange={(e) => handleChange("adaptaciones_no_significativas", e.target.checked)}
+            />
+            <div>
+              <p className="font-semibold text-body">{t('campos.modulo.adaptacionesNoSignificativasTitulo', {defaultValue: 'Adaptaciones curriculares no significativas'})}</p>
+              <p className="text-caption text-muted">{t('campos.modulo.adaptacionesNoSignificativasDesc', {defaultValue: 'Ajustes metodológicos, organizativos o de acceso que no alteran los RA ni CE esenciales.'})}</p>
+            </div>
+          </label>
+
+          <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
+            <input
+              type="checkbox"
+              className="mt-1"
+              checked={config_contexto.medidas_flexibilizacion || false}
+              onChange={(e) => handleChange("medidas_flexibilizacion", e.target.checked)}
+            />
+            <div>
+              <p className="font-semibold text-body">{t('campos.modulo.medidasFlexibilizacionTitulo', {defaultValue: 'Medidas de flexibilización'})}</p>
+              <p className="text-caption text-muted">{t('campos.modulo.medidasFlexibilizacionDesc', {defaultValue: 'Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.'})}</p>
+            </div>
+          </label>
+          </div>
+        </div>
+      </div>
+      </div>
+
       {/* Marco de Inclusión */}
       <div className="space-y-3">
       <SectionHeading id="metodologia-marco-inclusion" icon={ShieldAlert} scrollMt="260px">
-        {t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Marco de inclusión (D 91/2024, art. 29)'})}
+        {t('campos.modulo.marcoInclusionTitulo', {defaultValue: 'Inclusión. Medidas y anotaciones libres (D 91/2024, art. 29)'})}
       </SectionHeading>
       <div className="glass-card p-6 border-t-4 border-t-purple-500">
         <div className="space-y-6">
@@ -130,70 +177,6 @@ export function DiversidadTab() {
               onChange={e => updateModuleData("texto_inclusion_libre", e.target.value)}
               placeholder={t('placeholders.modulo.medidasDiversidadExtra', {defaultValue: 'Añade aquí medidas específicas, adaptaciones de acceso al aula o justificaciones normativas extra...'})}
               className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-body text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
-
-          <div className="space-y-4">
-            <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-              <input 
-              type="checkbox" 
-              className="mt-1"
-              checked={config_contexto.adaptaciones_no_significativas || false}
-              onChange={(e) => handleChange("adaptaciones_no_significativas", e.target.checked)}
-            />
-            <div>
-              <p className="font-semibold text-body">{t('campos.modulo.adaptacionesNoSignificativasTitulo', {defaultValue: 'Adaptaciones curriculares no significativas'})}</p>
-              <p className="text-caption text-muted">{t('campos.modulo.adaptacionesNoSignificativasDesc', {defaultValue: 'Ajustes metodológicos, organizativos o de acceso que no alteran los RA ni CE esenciales.'})}</p>
-            </div>
-          </label>
-
-          <label className="flex items-start gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-            <input
-              type="checkbox"
-              className="mt-1"
-              checked={config_contexto.medidas_flexibilizacion || false}
-              onChange={(e) => handleChange("medidas_flexibilizacion", e.target.checked)}
-            />
-            <div>
-              <p className="font-semibold text-body">{t('campos.modulo.medidasFlexibilizacionTitulo', {defaultValue: 'Medidas de flexibilización'})}</p>
-              <p className="text-caption text-muted">{t('campos.modulo.medidasFlexibilizacionDesc', {defaultValue: 'Alternativas metodológicas en enseñanza y evaluación que no minorarán las calificaciones.'})}</p>
-            </div>
-          </label>
-          </div>
-        </div>
-      </div>
-      </div>
-
-      {/* F1. Atención a la diversidad */}
-      <div className="space-y-3">
-      <SectionHeading id="metodologia-f1-diversidad" icon={ShieldAlert} scrollMt="260px">
-        {t('campos.modulo.f1AtencionDiversidadTitulo', {defaultValue: 'Atención a la diversidad'})}
-      </SectionHeading>
-      <div className="glass-card p-6 border-t-4 border-t-violet-500">
-        <div className="space-y-4">
-          <div>
-            <p className="text-caption text-muted mb-2">{t('campos.modulo.f1AtencionDiversidadDesc', {defaultValue: 'Estrategias para adaptar la enseñanza a las características del alumnado.'})}</p>
-            <textarea
-              value={config_contexto["F1_diversidad"] || ""}
-              onChange={e => handleChange("F1_diversidad", e.target.value)}
-              placeholder={t('placeholders.modulo.medidasInclusion', {defaultValue: 'Medidas de inclusión y atención a las diferencias individuales...'})}
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
-          <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.inclusionResumenTitulo', {defaultValue: 'Inclusión — resumen general'})}</label>
-            <textarea
-              value={config_contexto.inclusion || ""}
-              onChange={e => handleChange("inclusion", e.target.value)}
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
-          <div>
-            <label className="text-body font-semibold text-foreground mb-1 block">{t('campos.modulo.atencionDiversidadAulaTitulo', {defaultValue: 'Atención a la diversidad (Adaptaciones no significativas)'})}</label>
-            <textarea
-              value={config_aula["Atención a la diversidad"] || ""}
-              onChange={e => handleAulaChange("Atención a la diversidad", e.target.value)}
-              className="w-full h-32 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
             />
           </div>
         </div>

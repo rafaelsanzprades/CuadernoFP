@@ -1738,7 +1738,8 @@
       "sinAlumnadoRegistradoAun": "No students registered yet.",
       "menorEdadBadge": "Minor",
       "perfilGrupoLabel": "Group profile",
-      "anosSeparador": "years old ·"
+      "anosSeparador": "years old ·",
+      "rasgosRapidosTitulo": "Quick traits and characteristics of the students"
     },
     "evaluacion": {
       "informacionDesc": "How assessment and grading criteria are communicated.",
@@ -1901,7 +1902,7 @@
       "estrategiasMetodologicasEspaciosTitulo": "Methodological strategies. Spaces",
       "estrategiasMetodologicasTitulo": "Methodological strategies",
       "f1AtencionDiversidadDesc": "Strategies for adapting teaching to student characteristics.",
-      "f1AtencionDiversidadTitulo": "Attention to diversity",
+      "f1AtencionDiversidadTitulo": "Attention to diversity. Non-significant adaptations",
       "familiaProfesional": "Professional family",
       "herramientasRecursosDesc": "Infrastructure, tools and technical materials needed for curriculum development. If you can't find something, add it below as free text.",
       "herramientasRecursosLabel": "Tools, resources and spaces",
@@ -1916,7 +1917,7 @@
       "ipeIntermodularDesc": "Link with the personal Pathway to employability or participation in the cross-Modular project (D 91/2024).",
       "ipeIntermodularLabel": "IPE and ongoing cross-modular project",
       "labelModuloDidactico": "Teaching module",
-      "marcoInclusionTitulo": "Inclusion framework (D 91/2024 Art. 29)",
+      "marcoInclusionTitulo": "Inclusion. Measures and free notes (D 91/2024, art. 29)",
       "medidasContingenciaDesc": "General action strategies for when normal in-person teaching cannot be delivered.",
       "medidasContingenciaLabel": "Contingency measures (multiple selection)",
       "medidasFlexibilizacionDesc": "Methodological alternatives in teaching and assessment that will not lower grades.",

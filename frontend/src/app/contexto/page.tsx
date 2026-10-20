@@ -85,6 +85,7 @@ export default function ContextoConfigPage() {
     ],
     alumnado: [
       { id: "contexto-alumnado-acneae", label: t('campos.contexto.tituloAlumnadoAcneae', {defaultValue: 'Alumnado (ACNEAE)'}) },
+      { id: "alumnado-rasgos-rapidos", label: t('campos.alumnado.rasgosRapidosTitulo', {defaultValue: 'Rasgos rápidos y características del alumnado'}) },
       { id: "alumnado-rasgos-grupo", label: t('campos.alumnado.rasgosGrupoTitulo', {defaultValue: 'Rasgos característicos del grupo'}) },
       { id: "alumnado-perfil-pd", label: t('campos.alumnado.perfilPdTitulo', {defaultValue: 'Procedencia, implicación y expectativas'}) },
     ],
@@ -182,7 +183,7 @@ export default function ContextoConfigPage() {
             {activeTab === "entorno" && <ContextoTab bloques={["contexto-escolar", "contexto-actividades", "planes-feoe"]} />}
             {activeTab === "alumnado" && (
               <div className="space-y-8">
-                <ContextoTab bloques={["contexto-alumnado-acneae", "alumnado-rasgos-grupo"]} />
+                <ContextoTab bloques={["contexto-alumnado-acneae", "alumnado-rasgos-rapidos", "alumnado-rasgos-grupo"]} />
               </div>
             )}
 

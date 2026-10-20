@@ -1,6 +1,6 @@
 "use client";
 import { ContextoGrupoTab, DatosGrupoAutomaticos } from "@/components/features/alumnado/ContextoGrupoTab";
-import { School, User, FileText, BookOpen, Sparkles } from "lucide-react";
+import { School, User, Users, FileText, BookOpen, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { NarrativeField } from "@/components/ui/NarrativeField";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -419,28 +419,6 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
             />
           </div>
           <RasgosRapidos
-            titulo={t('checks.contexto.tituloAlumnado', {defaultValue: 'Rasgos rápidos del alumnado'})}
-            grupos={RASGOS_ALUMNADO}
-            seleccionados={rasgos_alumnado}
-            onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
-            sugerencia={sugerenciaViaAcceso}
-          />
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.caracteristicasAlumnadoLabel', {defaultValue: 'Características del alumnado'})}</label>
-              <IaButton
-                loading={!!generandoIA.caracteristicas_alumnado}
-                onClick={() => handleGenerarIA("caracteristicas_alumnado", "Características del alumnado", RASGOS_ALUMNADO, rasgos_alumnado, datosAlumnadoExtra)}
-              />
-            </div>
-            <textarea
-              value={config_contexto.caracteristicas_alumnado || ""}
-              onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
-              placeholder={t('placeholders.contexto.caracteristicasAlumnado', {defaultValue: 'Ej: Grupo diverso en edades y perfiles de ingreso...'})}
-              className="w-full h-96 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
-            />
-          </div>
-          <RasgosRapidos
             titulo={t('checks.contexto.tituloInfraestructura', {defaultValue: 'Rasgos rápidos de infraestructura'})}
             grupos={RASGOS_INFRAESTRUCTURA}
             seleccionados={rasgos_infraestructura}
@@ -540,6 +518,40 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
 
       {/* Rasgos y datos del grupo -- traídos de Alumnado (pestaña Rasgos,
           eliminada el 2026-10-06), debajo de Alumnado (ACNEAE). */}
+      {show("alumnado-rasgos-rapidos") && (
+      <div className="space-y-3">
+      <SectionHeading id="alumnado-rasgos-rapidos" icon={Users} scrollMt="260px">
+        {t('campos.alumnado.rasgosRapidosTitulo', {defaultValue: 'Rasgos rápidos y características del alumnado'})}
+      </SectionHeading>
+      <div className="glass-card p-6 border-t-4 border-t-indigo-500">
+        <div className="space-y-6">
+          <RasgosRapidos
+            titulo={t('checks.contexto.tituloAlumnado', {defaultValue: 'Rasgos rápidos del alumnado'})}
+            grupos={RASGOS_ALUMNADO}
+            seleccionados={rasgos_alumnado}
+            onToggle={(id) => toggleRasgo("rasgos_alumnado", rasgos_alumnado, id)}
+            sugerencia={sugerenciaViaAcceso}
+          />
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-body font-semibold text-foreground block">{t('campos.contexto.caracteristicasAlumnadoLabel', {defaultValue: 'Características del alumnado'})}</label>
+              <IaButton
+                loading={!!generandoIA.caracteristicas_alumnado}
+                onClick={() => handleGenerarIA("caracteristicas_alumnado", "Características del alumnado", RASGOS_ALUMNADO, rasgos_alumnado, datosAlumnadoExtra)}
+              />
+            </div>
+            <textarea
+              value={config_contexto.caracteristicas_alumnado || ""}
+              onChange={e => handleContextoChange("caracteristicas_alumnado", e.target.value)}
+              placeholder={t('placeholders.contexto.caracteristicasAlumnado', {defaultValue: 'Ej: Grupo diverso en edades y perfiles de ingreso...'})}
+              className="w-full h-96 bg-foreground/15 border border-[var(--glass-border)] rounded-lg p-3 text-foreground focus:border-info focus:outline-none"
+            />
+          </div>
+        </div>
+      </div>
+      </div>
+      )}
+
       {show("alumnado-rasgos-grupo") && <ContextoGrupoTab />}
 
       {show("contexto-modelo-simplificado") && (
