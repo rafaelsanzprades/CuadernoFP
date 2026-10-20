@@ -165,7 +165,7 @@ export default function LegalPage() {
                   </p>
                   <div className="text-body text-muted space-y-1 mt-2">
                     <p><strong>Titular:</strong> Rafael Sanz Prades</p>
-                    <p><strong>Contacto:</strong> <a href="mailto:rafaelsanzprades@gmail.com" className="text-info hover:underline">rafaelsanzprades@gmail.com</a></p>
+                    <p><strong>Contacto:</strong> <a href="mailto:info@rafaelsanzprades.es" className="text-info hover:underline">info@rafaelsanzprades.es</a></p>
                     <p><strong>Comunidad:</strong> <a href="https://t.me/cuadernofp" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://t.me/cuadernofp</a></p>
                     <p><strong>Código fuente:</strong> <a href="https://github.com/rafaelsanzprades/CuadernoFP" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://github.com/rafaelsanzprades/CuadernoFP</a></p>
                     <p><strong>Sitio web:</strong> <a href="https://cuadernofp.web.app/" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">https://cuadernofp.web.app/</a></p>
@@ -601,7 +601,7 @@ export default function LegalPage() {
                     Si encuentras alguna barrera de accesibilidad o necesitas solicitar información en un formato alternativo, puedes contactar a través de:
                   </p>
                   <div className="text-body text-muted space-y-1 mt-2">
-                    <p><strong>Email:</strong> <a href="mailto:cuadernofp@gmail.com" className="text-info hover:underline">cuadernofp@gmail.com</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:info@rafaelsanzprades.es" className="text-info hover:underline">info@rafaelsanzprades.es</a></p>
                     <p><strong>GitHub:</strong>{" "}
                       <a href="https://github.com/rafaelsanzprades/CuadernoFP/issues" target="_blank" rel="noopener noreferrer" className="text-info hover:underline">
                         Abrir incidencia de accesibilidad

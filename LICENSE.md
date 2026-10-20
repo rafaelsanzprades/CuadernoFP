@@ -61,7 +61,6 @@ Este proyecto utiliza librerías y frameworks de terceros que están sujetos a s
 ### Obras de terceros y atribuciones
 
 * **Modelos de programación didáctica.** El modelo detallado (PD+) parte de la plantilla de programación didáctica de **Javier Edo Gual (CIFPA)**, a quien corresponde la autoría original del modelo. El modelo suficiente (PD=) sigue los apartados que fija el modelo oficial del Gobierno de Aragón.
-* **Guía de evaluación.** *Evaluación y calificación por competencias en Formación Profesional*, de Javier Edo Gual, se incluye con su licencia CC BY-NC-SA 4.0 y su atribución.
 * **Normativa e informes públicos** (BOE, boletines autonómicos, TodoFP): información del sector público reutilizada según la Ley 37/2007 y el Real Decreto 1495/2011, citando siempre la fuente.
 
 ---
