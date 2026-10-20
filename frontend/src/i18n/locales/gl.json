@@ -853,7 +853,7 @@
       "configurarEnPlanFeoe": "Configurar horas e réxime da FEOE"
     },
     "inicio": {
-      "unirseTelegram": "Unirme ao grupo en Telegram"
+      "unirseTelegram": "Cóntaos no grupo de Telegram"
     }
   },
   "placeholders": {
@@ -2664,9 +2664,9 @@
         "grupo1": {
           "titulo": "1. Conceptos previos",
           "q1": "Que é a arquitectura híbrida (Local-First + Cloud)?",
-          "a1": "Utilízase unha arquitectura moderna. Os teus datos de traballo (alumnado, notas) procésanse localmente no teu navegador, garantindo total privacidade e velocidade. As operacións pesadas (xeración de informes PDF ou conexión con intelixencia artificial) apóianse de forma segura nun servidor central.",
+          "a1": "Os teus datos de traballo (alumnado, notas) procésanse e gárdanse no teu equipo. Os documentos PDF e Word tamén se xeran no teu ordenador. Só o catálogo oficial de familias, títulos e currículos se consulta nun servidor, e ese servidor non recibe datos do teu alumnado.",
           "q2": "Onde se gardan os meus datos?",
-          "a2": "Os datos da túa programación e dos teus cursos residen no teu propio navegador (IndexedDB). Ti tes o control absoluto sobre eles. Por seguridade, recoméndase usar con frecuencia a exportación de ficheiros (BYOC) desde Inicio > Datos.",
+          "a2": "Os datos da túa programación e dos teus cursos residen no teu propio navegador (IndexedDB). Ti tes o control absoluto sobre eles. Por seguridade, recoméndase usar con frecuencia a exportación de ficheiros (BYOC) desde Ficheiros > Datos.",
           "q3": "Que diferenza hai entre 'Programación' e 'Curso'?",
           "a3": "É un concepto vital: a 'Programación' é o teu molde teórico; contén a lei pura (Resultados de aprendizaxe, Criterios de avaliación) e as túas unidades didácticas (reutilizable ano tras ano). O 'Curso' é a instancia real; representa a un grupo concreto de alumnado de carne e óso nun ano escolar específico, coas súas notas e faltas.",
           "q4": "Que pasa se borro os datos ou a caché do meu navegador?",
@@ -2759,13 +2759,16 @@
       "bibliotecaSinConexion": "Non se puido cargar a biblioteca.",
       "bibliotecaVacia": "Aínda non hai programacións publicadas.",
       "bibliotecaAutoria": "Autoría",
-      "empiezaAquiTitulo": "Comeza aquí",
-      "grupoTelegramTitulo": "Grupo oficial de Telegram",
-      "grupoTelegramDesc": "Grupo oficial de desenvolvemento e probas da app web gratuíta de Cuaderno FP. Envía as túas suxestións, informa de erros ou colabora achegando o currículo oficial da túa comunidade autónoma.",
       "aplicacionEscritorioDesc": "Cuaderno FP como programa de Windows: instálalo, abre os teus ficheiros e traballa, tamén sen conexión. É gratuíto e de código aberto.",
       "guiaWebTitulo": "Programación didáctica en FP",
-      "guiaWebDesc": "Para facer a túa programación e o teu curso de FP coa aplicación como fío condutor: contido teórico, marco legal e práctica, paso a paso.",
-      "guiaWebBoton": "Abrir a web"
+      "guiaWebBoton": "Abrir a web",
+      "escritorioTitulo": "Aplicación de escritorio",
+      "escritorioP1": "Cuaderno FP funciona no navegador e tamén como programa para Windows. Nas dúas versións o teu traballo queda no teu equipo: non hai conta nin servidor que garde os teus ficheiros.",
+      "escritorioP2": "A versión de escritorio abre e garda os teus ficheiros cos diálogos de Windows, lembra os recentes, xera os documentos no teu ordenador e actualízase desde a propia aplicación cando hai unha versión nova.",
+      "escritorioP3": "Se traballas no instituto con ordenadores que non son teus, o navegador abonda; para o teu portátil, o programa é máis cómodo.",
+      "guiaWebP1": "A web que acompaña a aplicación reúne un libro sobre programación didáctica en FP, coa norma explicada, exemplos e o que cambia en cada comunidade autónoma, e o manual de Cuaderno FP, que percorre cada páxina e cada lapela.",
+      "guiaWebP2": "Úsaa cando non saibas que escribir nun apartado, queiras entender de onde sae unha esixencia ou necesites ver como se enche algo cun exemplo.",
+      "guiaWebP3": "Dúbidas, ideas ou erros?"
     },
     "legal": {
       "datosTitular": "Datos do titular",

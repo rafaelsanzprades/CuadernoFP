@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import { RecentModulesPanel } from "@/components/features/dashboard/RecentModulesPanel";
 import { UpdateChecker } from "@/components/features/dashboard/UpdateChecker";
 import { VersionBar } from "@/components/features/dashboard/VersionBar";
@@ -56,6 +57,14 @@ export default function InicioPage() {
     privacidad: t('tabs.inicio.privacidad.desc', {defaultValue: 'Dónde van tus datos, el cifrado opcional y la seguridad de la aplicación.'}),
   };
 
+  // Índice de bloques de la pestaña activa (solo donde hay 2 o más).
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    bienvenida: [
+      { id: "bienvenida-escritorio", label: t('campos.inicio.escritorioTitulo', {defaultValue: 'Aplicación de escritorio'}) },
+      { id: "bienvenida-guia", label: t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'}) },
+    ],
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -86,6 +95,8 @@ export default function InicioPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
+
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
           </StickyPageHeader>
 
           <MotionWrapper className="space-y-4 px-8 pt-4 pb-[280px]">
@@ -94,60 +105,56 @@ export default function InicioPage() {
               <div className="animate-in fade-in duration-500 w-full">
                 <div className="w-full space-y-12 pb-12">
 
+            {/* Dos bloques con su explicación (y un índice arriba): la aplicación de escritorio y la guía en la web.
+                Dentro de Tauri, UpdateChecker (autoactualización) sustituye al botón de descarga. */}
             <div className="space-y-3">
-              <SectionHeading id="bienvenida-empieza" icon={Rocket} scrollMt="260px">
-                {t('campos.inicio.empiezaAquiTitulo', {defaultValue: 'Empieza aquí'})}
+              <SectionHeading id="bienvenida-escritorio" icon={Rocket} scrollMt="260px">
+                {t('campos.inicio.escritorioTitulo', {defaultValue: 'Aplicación de escritorio'})}
               </SectionHeading>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-              <div className="flex flex-col gap-3">
-                <VersionBar />
-                {isTauri() && (
-                  <div className="p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                    <UpdateChecker />
-                  </div>
-                )}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <div className="lg:col-span-2 space-y-3 text-body text-muted leading-relaxed">
+                  <p>{t('campos.inicio.escritorioP1', {defaultValue: 'Cuaderno FP funciona en el navegador y también como programa para Windows. En las dos versiones tu trabajo se queda en tu equipo: no hay cuenta ni servidor que guarde tus ficheros.'})}</p>
+                  <p>{t('campos.inicio.escritorioP2', {defaultValue: 'La versión de escritorio abre y guarda tus ficheros con los diálogos de Windows, recuerda los recientes, genera los documentos en tu ordenador y se actualiza desde la propia aplicación cuando hay una versión nueva.'})}</p>
+                  <p>{t('campos.inicio.escritorioP3', {defaultValue: 'Si trabajas en el instituto con ordenadores que no son tuyos, el navegador te basta; para tu portátil, el programa es más cómodo.'})}</p>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <VersionBar />
+                  {isTauri() && (
+                    <div className="p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
+                      <UpdateChecker />
+                    </div>
+                  )}
+                </div>
               </div>
+            </div>
 
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-1 flex-col items-center md:items-start gap-4 p-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                  <div className="flex items-center gap-3 w-full"><div className="w-12 h-12 shrink-0 rounded-full bg-accent/10 flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-accent" />
-                  </div><h3 className="text-subheading font-bold">{t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}</h3></div>
-                  <p className="text-body text-muted leading-tight">
-                    {t('campos.inicio.guiaWebDesc', {defaultValue: 'Para hacer tu programación y tu curso de FP con la aplicación como hilo conductor: contenido teórico, marco legal y práctica, paso a paso.'})}
+            <div className="space-y-3">
+              <SectionHeading id="bienvenida-guia" icon={BookOpen} scrollMt="260px">
+                {t('campos.inicio.guiaWebTitulo', {defaultValue: 'Programación didáctica en FP'})}
+              </SectionHeading>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <div className="lg:col-span-2 space-y-3 text-body text-muted leading-relaxed">
+                  <p>{t('campos.inicio.guiaWebP1', {defaultValue: 'La web que acompaña a la aplicación reúne un libro sobre programación didáctica en FP, con la norma explicada, ejemplos y lo que cambia en cada comunidad autónoma, y el manual de Cuaderno FP, que recorre cada página y cada pestaña.'})}</p>
+                  <p>{t('campos.inicio.guiaWebP2', {defaultValue: 'Úsala cuando no sepas qué escribir en un apartado, quieras entender de dónde sale una exigencia o necesites ver cómo se rellena algo con un ejemplo.'})}</p>
+                  <p>
+                    {t('campos.inicio.guiaWebP3', {defaultValue: '¿Dudas, ideas o errores?'})}{' '}
+                    <a href="https://t.me/cuadernofp" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold">
+                      {t('botones.inicio.unirseTelegram', {defaultValue: 'Cuéntalos en el grupo de Telegram'})}
+                    </a>
                   </p>
+                </div>
+                <div className="flex flex-col gap-3">
                   <a
                     href="https://www.rafaelsanzprades.es/programacion-didactica-fp/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-auto w-full justify-center px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent/80 transition-colors flex items-center gap-2 text-body"
+                    className="w-full justify-center px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent/80 transition-colors flex items-center gap-2 text-body"
                   >
                     <BookOpen className="w-4 h-4" />
                     {t('campos.inicio.guiaWebBoton', {defaultValue: 'Abrir la web'})}
                   </a>
                 </div>
               </div>
-
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-1 flex-col items-center md:items-start gap-4 p-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl shadow-sm">
-                  <div className="flex items-center gap-3 w-full"><div className="w-12 h-12 shrink-0 rounded-full bg-[#229ED9]/10 flex items-center justify-center">
-                    <MessageCircle className="w-6 h-6 text-[#229ED9]" />
-                  </div><h3 className="text-subheading font-bold">{t('campos.inicio.grupoTelegramTitulo', {defaultValue: 'Grupo oficial de Telegram'})}</h3></div>
-                  <p className="text-body text-muted leading-tight">
-                    {t('campos.inicio.grupoTelegramDesc', {defaultValue: 'Grupo oficial de desarrollo y testeo de la App web gratuita de Cuaderno FP. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu Comunidad autónoma.'})}
-                  </p>
-                  <a
-                    href="https://t.me/cuadernofp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-auto w-full justify-center px-5 py-2.5 rounded-lg bg-[#229ED9] text-white font-medium hover:bg-[#229ED9]/90 transition-colors flex items-center gap-2 text-body"
-                  >
-                    <Send className="w-4 h-4" />
-                    {t('botones.inicio.unirseTelegram', {defaultValue: 'Unirme al grupo en Telegram'})}
-                  </a>
-                </div>
-              </div>
-            </div>
             </div>
 
             {/* Módulos recientes (ítem 35) — reabrir con un clic, no se muestra si no hay ninguno */}

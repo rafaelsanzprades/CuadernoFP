@@ -853,7 +853,7 @@
       "configurarEnPlanFeoe": "Configure FEOE hours and regime"
     },
     "inicio": {
-      "unirseTelegram": "Join the Telegram group"
+      "unirseTelegram": "Tell us in the Telegram group"
     }
   },
   "placeholders": {
@@ -2664,9 +2664,9 @@
         "grupo1": {
           "titulo": "1. Prior concepts",
           "q1": "What is the hybrid architecture (Local-First + Cloud)?",
-          "a1": "A modern architecture is used. Your working data (students, grades) is processed locally in your browser, guaranteeing total privacy and speed. Heavy operations (PDF report generation or connection with artificial intelligence) rely securely on a central server.",
+          "a1": "Your working data (students, grades) is processed and stored on your computer. PDF and Word documents are also generated on your computer. Only the official catalogue of families, qualifications and curricula is queried on a server, and that server receives no data about your students.",
           "q2": "Where is my data stored?",
-          "a2": "The data from your Curriculum Plan and your courses resides in your own browser (IndexedDB). You have absolute control over it. For security, it's recommended to frequently use file export (BYOC) from Home > Data.",
+          "a2": "The data from your Curriculum Plan and your courses resides in your own browser (IndexedDB). You have absolute control over it. For security, it's recommended to frequently use file export (BYOC) from Files > Data.",
           "q3": "What's the difference between 'Curriculum Plan' and 'Course'?",
           "a3": "It's a vital concept: the 'Curriculum Plan' is your theoretical template; it contains the letter of the law (learning outcomes, assessment criteria) and your teaching units (reusable year after year). The 'Course' is the real instance; it represents an actual group of flesh-and-blood students in a specific school year, with their grades and absences.",
           "q4": "What happens if I delete my browser's data or cache?",
@@ -2759,13 +2759,16 @@
       "bibliotecaSinConexion": "The library could not be loaded.",
       "bibliotecaVacia": "No programmes published yet.",
       "bibliotecaAutoria": "Author",
-      "empiezaAquiTitulo": "Start here",
-      "grupoTelegramTitulo": "Official Telegram group",
-      "grupoTelegramDesc": "Official development and testing group for the free Cuaderno FP web app. Share your suggestions, report bugs, or contribute by providing the official curriculum for your autonomous Community.",
       "aplicacionEscritorioDesc": "Cuaderno FP as a Windows program: install it, open your files and work, even offline. It is free and open source.",
       "guiaWebTitulo": "Teaching plans in vocational education (FP)",
-      "guiaWebDesc": "To build your teaching plan and your FP course with the app as the common thread: theory, legal framework and practice, step by step.",
-      "guiaWebBoton": "Open the website"
+      "guiaWebBoton": "Open the website",
+      "escritorioTitulo": "Desktop app",
+      "escritorioP1": "Cuaderno FP works in the browser and also as a Windows program. In both versions your work stays on your computer: there is no account or server that stores your files.",
+      "escritorioP2": "The desktop version opens and saves your files with the Windows dialogs, remembers recent ones, generates the documents on your computer and updates from within the app when a new version is out.",
+      "escritorioP3": "If you work at school on computers that are not yours, the browser is enough; for your own laptop, the program is more convenient.",
+      "guiaWebP1": "The website that goes with the app brings together a book on programming FP courses, with the regulations explained, examples and what changes in each autonomous community, and the Cuaderno FP manual, which walks through every page and tab.",
+      "guiaWebP2": "Use it when you don't know what to write in a section, want to understand where a requirement comes from or need to see how something is filled in with an example.",
+      "guiaWebP3": "Questions, ideas or bugs?"
     },
     "legal": {
       "datosTitular": "Owner details",

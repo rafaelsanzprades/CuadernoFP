@@ -77,7 +77,7 @@ export const GUIA_PASOS: {
         nodes: [
           { label: "Programación didáctica", text: 'Es el "molde" teórico (.fpp). Contiene la normativa (resultados de aprendizaje y criterios de evaluación) y las unidades didácticas. Se diseña una vez y se puede reutilizar en cursos posteriores.' },
           { label: "Curso", text: 'Es la "instancia" real (.fpc). Representa al alumnado físico, sus calificaciones, faltas de asistencia y calendario en un año académico específico (ej. 2025-26).' },
-          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Ayuda, MagIA, Normativa, Legal), Programación (Catálogo, Contexto, Currículo, Metodologías, Instrumentos — el diseño teórico del módulo) y Curso (Calendario, Alumnado, Calificaciones, Sesiones, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ, Acrónimos y Contribuciones para consultas rápidas." },
+          { label: "Bloques", text: "3 grupos en el sidebar — General (Inicio, Archivos, Ayuda, MagIA, Legal), Programación (Catálogo, Contexto, Currículo, Metodologías, Instrumentos — el diseño teórico del módulo) y Curso (Calendario, Alumnado, Calificaciones, Sesiones, Cierre — el aula real). Esta misma guía vive dentro de Ayuda, pestaña Guía (no en Inicio ni en MagIA); esa misma página Ayuda tiene también FAQ y Acrónimos para consultas rápidas." },
         ],
       },
     ],
@@ -97,19 +97,6 @@ export const GUIA_PASOS: {
         intro: "Vamos a pedirle al sistema que nos cree el archivo base de la programación cargando automáticamente la ley.",
         nodes: [
           {
-            label: "Bloque", text: "General",
-            children: [
-              {
-                label: "Página", text: "Normativa",
-                children: [
-                  { label: "Pestaña", text: "Autonomías", children: [
-                    { label: "Acción", text: "Selecciona tu Comunidad autónoma en el mapa interactivo para cargar la normativa autonómica específica." },
-                  ] },
-                ],
-              },
-            ],
-          },
-          {
             label: "Bloque", text: "Programación",
             children: [
               {
@@ -119,6 +106,7 @@ export const GUIA_PASOS: {
                   { label: "Pestaña", text: "Títulos", children: [{ label: "Selector", text: "Familia profesional y título. Selecciona tu ciclo formativo." }] },
                   { label: "Pestaña", text: "Módulos", children: [{ label: "Botón", text: '"Nueva programación", en el módulo deseado dentro de su curso (1º/2º).' }] },
                   { label: "Pestaña", text: "RA → CE", children: [{ label: "Acción", text: "Consulta de solo lectura del currículo oficial ya cargado: resultados de aprendizaje y criterios de evaluación de tu módulo, tal como los fija la normativa." }] },
+                  { label: "Pestaña", text: "Autonomías", children: [{ label: "Acción", text: "Selecciona tu comunidad autónoma en el mapa para ver su boletín oficial y su portal de FP." }] },
                 ],
               },
             ],
@@ -260,7 +248,6 @@ export const GUIA_PASOS: {
             ],
           },
         ],
-        nota: "¿Quieres saber exactamente qué campo de la app rellena cada apartado del documento? Consulta MagIA → Pestaña Análisis APP->PDx.",
       },
     ],
   },
@@ -278,7 +265,7 @@ export const GUIA_PASOS: {
             label: "Bloque", text: "General",
             children: [
               {
-                label: "Página", text: "Inicio",
+                label: "Página", text: "Archivos",
                 children: [
                   { label: "Pestaña", text: "Datos", children: [
                     { label: "Botón", text: '"Iniciar curso (+ grupo)".' },
@@ -358,7 +345,7 @@ export const GUIA_PASOS: {
           {
             label: "Bloque", text: "General",
             children: [
-              { label: "Página", text: "Inicio", children: [
+              { label: "Página", text: "Archivos", children: [
                 { label: "Pestaña", text: "Datos", children: [
                   { label: "Acción", text: "Haz doble clic sobre tu grupo, tu programación o tu curso guardados." },
                 ] },

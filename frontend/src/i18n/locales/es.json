@@ -466,10 +466,24 @@
     },
     "archivos": {
       "nubeTitulo": "Nube y clave de IA"
+    },
+    "inicio": {
+      "escritorioTitulo": "Aplicación de escritorio",
+      "escritorioP1": "Cuaderno FP funciona en el navegador y también como programa para Windows. En las dos versiones tu trabajo se queda en tu equipo: no hay cuenta ni servidor que guarde tus ficheros.",
+      "escritorioP2": "La versión de escritorio abre y guarda tus ficheros con los diálogos de Windows, recuerda los recientes, genera los documentos en tu ordenador y se actualiza desde la propia aplicación cuando hay una versión nueva.",
+      "escritorioP3": "Si trabajas en el instituto con ordenadores que no son tuyos, el navegador te basta; para tu portátil, el programa es más cómodo.",
+      "guiaWebP1": "La web que acompaña a la aplicación reúne un libro sobre programación didáctica en FP, con la norma explicada, ejemplos y lo que cambia en cada comunidad autónoma, y el manual de Cuaderno FP, que recorre cada página y cada pestaña.",
+      "guiaWebP2": "Úsala cuando no sepas qué escribir en un apartado, quieras entender de dónde sale una exigencia o necesites ver cómo se rellena algo con un ejemplo.",
+      "guiaWebP3": "¿Dudas, ideas o errores?"
     }
   },
   "archivos": {
     "title": "Archivos",
     "subtitle": "Tus grupos, programaciones y cursos: dónde están, cuáles tienes abiertos y si están completos."
+  },
+  "botones": {
+    "inicio": {
+      "unirseTelegram": "Cuéntalos en el grupo de Telegram"
+    }
   }
 }

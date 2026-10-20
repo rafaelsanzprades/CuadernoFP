@@ -853,7 +853,7 @@
       "configurarEnPlanFeoe": "Configurar hores i règim de la FEOE"
     },
     "inicio": {
-      "unirseTelegram": "Unir-me al grup a Telegram"
+      "unirseTelegram": "Explica-ho al grup de Telegram"
     }
   },
   "placeholders": {
@@ -2664,9 +2664,9 @@
         "grupo1": {
           "titulo": "1. Conceptes previs",
           "q1": "Què és l'arquitectura híbrida (Local-First + Cloud)?",
-          "a1": "S'utilitza una arquitectura moderna. Les teves dades de treball (alumnat, notes) es processen localment al teu navegador, garantint total privacitat i velocitat. Les operacions pesades (generació d'informes PDF o connexió amb intel·ligència artificial) es recolzen de forma segura en un servidor central.",
+          "a1": "Les teves dades de treball (alumnat, notes) es processen i es guarden al teu equip. Els documents PDF i Word també es generen al teu ordinador. Només el catàleg oficial de famílies, títols i currículums es consulta en un servidor, i aquest servidor no rep dades del teu alumnat.",
           "q2": "On es guarden les meves dades?",
-          "a2": "Les dades de la teva programació i els teus cursos resideixen al teu propi navegador (IndexedDB). Tu tens el control absolut sobre elles. Per seguretat, es recomana utilitzar freqüentment l'exportació d'arxius (BYOC) des d'Inici > Dades.",
+          "a2": "Les dades de la teva programació i els teus cursos resideixen al teu propi navegador (IndexedDB). Tu tens el control absolut sobre elles. Per seguretat, es recomana utilitzar freqüentment l'exportació d'arxius (BYOC) des d'Arxius > Dades.",
           "q3": "Quina diferència hi ha entre 'Programació' i 'Curs'?",
           "a3": "És un concepte vital: la 'Programació' és el teu motlle teòric; conté la llei pura (Resultats d'aprenentatge, Criteris d'avaluació) i les teves unitats didàctiques (reutilitzable any rere any). El 'Curs' és la instància real; representa un grup concret d'alumnat de carn i ossos en un any escolar específic, amb les seves notes i absències.",
           "q4": "Què passa si esborro les dades o la memòria cau del meu navegador?",
@@ -2759,13 +2759,16 @@
       "bibliotecaSinConexion": "No s'ha pogut carregar la biblioteca.",
       "bibliotecaVacia": "Encara no hi ha programacions publicades.",
       "bibliotecaAutoria": "Autoria",
-      "empiezaAquiTitulo": "Comença ací",
-      "grupoTelegramTitulo": "Grup oficial de Telegram",
-      "grupoTelegramDesc": "Grup oficial de desenvolupament i proves de l'App web gratuïta de Cuaderno FP. Puja els teus suggeriments, reporta errors o col·labora aportant el currículum oficial de la teva comunitat autònoma.",
       "aplicacionEscritorioDesc": "Cuaderno FP com a programa de Windows: l'instal·les, obres els teus arxius i treballes, també sense connexió. És gratuït i de codi obert.",
       "guiaWebTitulo": "Programació didàctica en FP",
-      "guiaWebDesc": "Per fer la teva programació i el teu curs de FP amb l'aplicació com a fil conductor: contingut teòric, marc legal i pràctica, pas a pas.",
-      "guiaWebBoton": "Obrir la web"
+      "guiaWebBoton": "Obrir la web",
+      "escritorioTitulo": "Aplicació d'escriptori",
+      "escritorioP1": "Cuaderno FP funciona al navegador i també com a programa per a Windows. En les dues versions la teua feina es queda al teu equip: no hi ha compte ni servidor que guarde els teus fitxers.",
+      "escritorioP2": "La versió d'escriptori obre i guarda els teus fitxers amb els diàlegs de Windows, recorda els recents, genera els documents al teu ordinador i s'actualitza des de la mateixa aplicació quan hi ha una versió nova.",
+      "escritorioP3": "Si treballes a l'institut amb ordinadors que no són teus, el navegador et basta; per al teu portàtil, el programa és més còmode.",
+      "guiaWebP1": "El web que acompanya l'aplicació reuneix un llibre sobre programació didàctica en FP, amb la norma explicada, exemples i el que canvia a cada comunitat autònoma, i el manual de Cuaderno FP, que recorre cada pàgina i cada pestanya.",
+      "guiaWebP2": "Fes-la servir quan no sàpigues què escriure en un apartat, vulguis entendre d'on surt una exigència o necessitis veure com s'omple alguna cosa amb un exemple.",
+      "guiaWebP3": "Dubtes, idees o errors?"
     },
     "legal": {
       "datosTitular": "Dades del titular",

@@ -853,7 +853,7 @@
       "configurarEnPlanFeoe": "Konfiguratu FEOEren orduak eta erregimena"
     },
     "inicio": {
-      "unirseTelegram": "Elkartu Telegrameko taldera"
+      "unirseTelegram": "Kontatu Telegram taldean"
     }
   },
   "placeholders": {
@@ -2664,9 +2664,9 @@
         "grupo1": {
           "titulo": "1. Aurretiko kontzeptuak",
           "q1": "Zer da arkitektura hibridoa (Local-First + Cloud)?",
-          "a1": "Arkitektura moderno bat erabiltzen da. Zure laneko datuak (ikasleak, notak) zure nabigatzailean lokalki prozesatzen dira, pribatutasun eta abiadura osoa bermatuz. Eragiketa astunak (PDF txostenak sortzea edo adimen artifizialarekin konexioa) modu seguruan zerbitzari zentral batean oinarritzen dira.",
+          "a1": "Zure laneko datuak (ikasleak, notak) zure ekipoan prozesatzen eta gordetzen dira. PDF eta Word dokumentuak ere zure ordenagailuan sortzen dira. Familien, tituluen eta curriculumen katalogo ofiziala bakarrik kontsultatzen da zerbitzari batean, eta zerbitzari horrek ez du zure ikasleen daturik jasotzen.",
           "q2": "Non gordetzen dira nire datuak?",
-          "a2": "Zure programazioaren eta zure ikastaroen datuak zure nabigatzailean bertan daude (IndexedDB). Zuk kontrol osoa duzu haien gainean. Segurtasunagatik, gomendagarria da fitxategien esportazioa (BYOC) maiz erabiltzea Hasiera > Datuak atalatik.",
+          "a2": "Zure programazioaren eta zure ikastaroen datuak zure nabigatzailean bertan daude (IndexedDB). Zuk kontrol osoa duzu haien gainean. Segurtasunagatik, gomendagarria da fitxategien esportazioa (BYOC) maiz erabiltzea Fitxategiak > Datuak atalatik.",
           "q3": "Zein diferentzia dago 'Programazioa' eta 'Ikastaroa' artean?",
           "a3": "Kontzeptu funtsezkoa da: 'Programazioa' zure txantiloi teorikoa da; lege hutsa dauka (ikaskuntza-emaitzak, ebaluazio-irizpideak) eta zure didaktika-unitateak (urtez urte berrerabilgarria). 'Ikastaroa' benetako instantzia da; ikasle talde jakin bat adierazten du, haragizkoa, ikasturte zehatz batean, bere notekin eta hutsegiteekin.",
           "q4": "Zer gertatzen da nire nabigatzailearen datuak edo katxea ezabatzen baditut?",
@@ -2759,13 +2759,16 @@
       "bibliotecaSinConexion": "Ezin izan da liburutegia kargatu.",
       "bibliotecaVacia": "Oraindik ez dago programaziorik argitaratuta.",
       "bibliotecaAutoria": "Egilea",
-      "empiezaAquiTitulo": "Hasi hemen",
-      "grupoTelegramTitulo": "Telegrameko talde ofiziala",
-      "grupoTelegramDesc": "Cuaderno FP doako web-aplikazioaren garapen eta probaketarako talde ofiziala. Bidali zure iradokizunak, jakinarazi akatsak edo lagundu zure autonomia erkidegoko curriculum ofiziala emanez.",
       "aplicacionEscritorioDesc": "Cuaderno FP Windows programa gisa: instalatu, ireki zure fitxategiak eta lan egin, konexiorik gabe ere. Doakoa eta kode irekikoa da.",
       "guiaWebTitulo": "Programazio didaktikoa LHn",
-      "guiaWebDesc": "Zure programazioa eta LHko ikastaroa egiteko, aplikazioa hari gidari gisa: eduki teorikoa, lege-esparrua eta praktika, urratsez urrats.",
-      "guiaWebBoton": "Ireki webgunea"
+      "guiaWebBoton": "Ireki webgunea",
+      "escritorioTitulo": "Mahaigaineko aplikazioa",
+      "escritorioP1": "Cuaderno FP nabigatzailean eta Windows-erako programa gisa ere funtzionatzen du. Bi bertsioetan zure lana zure ekipoan geratzen da: ez dago zure fitxategiak gordetzen dituen konturik edo zerbitzaririk.",
+      "escritorioP2": "Mahaigaineko bertsioak zure fitxategiak Windows-eko elkarrizketa-koadroekin irekitzen eta gordetzen ditu, azkenekoak gogoratzen ditu, dokumentuak zure ordenagailuan sortzen ditu eta aplikazioaren beraren bidez eguneratzen da bertsio berri bat dagoenean.",
+      "escritorioP3": "Zureak ez diren ordenagailuekin lan egiten baduzu institutuan, nabigatzailea nahikoa da; zure eramangarrirako, programa erosoagoa da.",
+      "guiaWebP1": "Aplikazioarekin doan webguneak FPko programazio didaktikoari buruzko liburu bat biltzen du, araua azalduta, adibideekin eta autonomia-erkidego bakoitzean zer aldatzen den azalduta, eta Cuaderno FPren eskuliburua, orri eta fitxa bakoitza ikuskatzen duena.",
+      "guiaWebP2": "Erabili ezazu atal batean zer idatzi ez dakizunean, eskakizun bat nondik datorren ulertu nahi duzunean edo zerbait adibide batekin nola betetzen den ikusi behar duzunean.",
+      "guiaWebP3": "Zalantzak, ideiak edo erroreak?"
     },
     "legal": {
       "datosTitular": "Titularraren datuak",
