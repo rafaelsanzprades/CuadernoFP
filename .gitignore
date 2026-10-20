@@ -57,3 +57,8 @@ test_dockerfile
 
 # Configuración local de Claude Code (lanzador de vista previa, tareas programadas)
 .claude/
+frontend/playwright-report/
+frontend/test-results/
+frontend/public/sw.js
+frontend/public/sw.js.map
+frontend/public/workbox-*.js
