@@ -422,7 +422,7 @@
     "curso": "Curs",
     "programacion_desc": "Àrea de disseny i configuració didàctica. Configura el mòdul, enllaça les matrius d'avaluació, defineix els instruments i seqüencia les tasques d'aula.",
     "curso_desc": "Eines de seguiment per a l'aula viva. Estableix el calendari, administra el llistat d'alumnat, qualifica, anota les sessions i tanca el curs amb l'expedient i la millora.",
-    "general_desc": "Per on començar: el teu tauler i els teus fitxers, l'ajuda, la normativa, els documents de MagIA i la informació legal. MagIA necessita una programació i un curs oberts."
+    "general_desc": "Per on començar: el teu tauler i els teus fitxers, l'ajuda, els documents de MagIA i la informació legal. MagIA necessita una programació i un curs oberts."
   },
   "sidebar": {
     "en_obras": "En obres",

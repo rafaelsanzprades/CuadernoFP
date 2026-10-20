@@ -20,7 +20,6 @@ import {
 } from "@/types/curriculum";
 import { fileManager } from "@/services/fileManager";
 import toast from "react-hot-toast";
-import { TabNormativa } from "@/components/features/catalogo/TabNormativa";
 
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/store/useAppStore";
@@ -28,8 +27,9 @@ import { getAcronym } from "@/utils/catalogFormat";
 import { GENERACIONES_CURRICULO, getFuenteNormativa } from "@/utils/curriculumGeneraciones";
 import { ExternalLink } from "lucide-react";
 import { getApiBase } from "@/services/apiBase";
+import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
 
-type Tab = "familias" | "ecp-incual" | "titulos" | "modulos" | "ra-ce";
+type Tab = "familias" | "ecp-incual" | "titulos" | "modulos" | "ra-ce" | "autonomias";
 
 
 export default function CiclosPage() {
@@ -53,7 +53,7 @@ function CiclosContent() {
 
   const tabParam = searchParams.get("tab") as Tab | null;
   const [activeTab, setActiveTab] = useState<Tab>(
-    tabParam && ["familias", "ecp-incual", "titulos", "modulos", "ra-ce"].includes(tabParam) ? tabParam : "familias"
+    tabParam && ["familias", "ecp-incual", "titulos", "modulos", "ra-ce", "autonomias"].includes(tabParam) ? tabParam : "familias"
   );
 
   const [globalSelection, setGlobalSelection] = useState(() => {
@@ -112,7 +112,8 @@ function CiclosContent() {
     'ecp-incual': t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'}),
     titulos: t('tabs.titulos', {defaultValue: 'Títulos'}),
     modulos: t('tabs.modulos', {defaultValue: 'Módulos'}),
-    'ra-ce': t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'})
+    'ra-ce': t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'}),
+    autonomias: t('tabs.normativa.autonomias.label', {defaultValue: 'Autonomías'})
   };
 
   const activeTabCleanLabel = TAB_LABELS[activeTab];
@@ -122,7 +123,8 @@ function CiclosContent() {
     'ecp-incual': t('tabs.normativa.ecp-incual.desc', {defaultValue: 'Estándares de competencia profesional (ECP) del Catálogo Nacional (INCUAL).'}),
     titulos: t('tabs.catalogo.titulos.desc', {defaultValue: 'Normativa estatal básica y currículo autonómico para ciclos formativos.'}),
     modulos: t('tabs.catalogo.modulos.desc', {defaultValue: 'Módulos de cada título organizados por curso académico, con sus horas.'}),
-    'ra-ce': t('tabs.catalogo.ra-ce.desc', {defaultValue: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'})
+    'ra-ce': t('tabs.catalogo.ra-ce.desc', {defaultValue: 'Competencias específicas estructuradas en RA y CE (Art. 136, RD 659/2023).'}),
+    autonomias: t('tabs.catalogo.autonomias.desc', {defaultValue: 'Mapa y tabla de comunidades autónomas: dónde publica cada una su currículo de FP y su boletín oficial.'})
   };
 
   // Índice de bloques -- solo ECP INCUAL tiene 2+ bloques reales (el resto
@@ -131,6 +133,10 @@ function CiclosContent() {
     'ecp-incual': [
       { id: "incual-crn", label: t('campos.catalogo.tituloCrn', {defaultValue: 'Centros de referencia nacional (CRN)'}) },
       { id: "incual-ecp", label: t('campos.catalogo.tituloEcp', {defaultValue: 'Estándares de competencia profesional (ECP)'}) },
+    ],
+    autonomias: [
+      { id: "ccaa-mapa", label: t('campos.catalogo.tituloMapaCcaa', {defaultValue: 'Mapa de CCAA con currículo FP'}) },
+      { id: "ccaa-tabla", label: t('campos.catalogo.tituloTablaComunidades', {defaultValue: 'Tabla de comunidades autónomas'}) },
     ],
   };
 
@@ -155,7 +161,8 @@ function CiclosContent() {
                       { id: "ecp-incual" as Tab, label: <span className="flex items-center gap-2"><Award className="w-4 h-4 text-purple-500" /> {t('tabs.normativa.ecp-incual.label', {defaultValue: 'ECP INCUAL'})}</span> },
                       { id: "titulos" as Tab, label: <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {t('tabs.titulos', {defaultValue: 'Títulos'})}</span> },
                       { id: "modulos" as Tab, label: <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4" /> {t('tabs.modulos', {defaultValue: 'Módulos'})}</span> },
-                      { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> {t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'})}</span> }
+                      { id: "ra-ce" as Tab, label: <span className="flex items-center gap-2"><Layers className="w-4 h-4" /> {t('tabs.catalogo.ra-ce.label', {defaultValue: 'RA → CE'})}</span> },
+                      { id: "autonomias" as Tab, label: <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> {t('tabs.normativa.autonomias.label', {defaultValue: 'Autonomías'})}</span> }
                     ]
                   ).map((t) => (
                     <TabsTrigger key={t.id} value={t.id}>
@@ -184,6 +191,7 @@ function CiclosContent() {
             {activeTab === "titulos" && <TabTitulo onSelectTitulo={handleSelectTitulo} globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
             {activeTab === "modulos" && <TabCursos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} onSelectModulo={handleSelectModulo} />}
             {activeTab === "ra-ce" && <TabModulos globalSelection={globalSelection} updateGlobalSelection={updateGlobalSelection} />}
+            {activeTab === "autonomias" && <TabComunidades />}
           </MotionWrapper>
         </div>
       </main>

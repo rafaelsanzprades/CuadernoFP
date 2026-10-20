@@ -420,7 +420,7 @@
     "curso": "Curso",
     "programacion_desc": "Área de deseño e configuración didáctica. Configura o módulo, vincula as matrices de avaliación, define os instrumentos e secuencia as tarefas de aula.",
     "curso_desc": "Ferramentas de seguimento para a aula viva. Establece o calendario, administra o listado de alumnado, cualifica, anota as sesións e pecha o curso co expediente e a mellora.",
-    "general_desc": "Por onde empezar: o teu panel e os teus ficheiros, a axuda, a normativa, os documentos de MagIA e a información legal. MagIA necesita unha programación e un curso abertos."
+    "general_desc": "Por onde empezar: o teu panel e os teus ficheiros, a axuda, os documentos de MagIA e a información legal. MagIA necesita unha programación e un curso abertos."
   },
   "sidebar": {
     "en_obras": "En obras",

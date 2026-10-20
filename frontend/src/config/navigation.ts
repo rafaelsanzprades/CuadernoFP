@@ -1,4 +1,4 @@
-import { Activity, Award, Calendar, CalendarDays, Compass, FileText, GraduationCap, Grid, Info, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
+import { Activity, Award, Calendar, CalendarDays, Compass, GraduationCap, Grid, Info, Lightbulb, Scale, Sparkles, TrendingUp, Users, Wrench } from "lucide-react";
 
 // PRUEBA 2026-09-23 (a petición de Rafael, ver 00 IDEAS.md): reequilibrado
 // de 3+6+6 a 3 bloques de 5 páginas cada uno (15 en total) -- Normativa sale
@@ -12,12 +12,11 @@ import { Activity, Award, Calendar, CalendarDays, Compass, FileText, GraduationC
 export const navGroups = [
   {
     title: "General",
-    sectionDescription: "Por dónde empezar: tu panel y tus ficheros, la ayuda, la normativa, los documentos de MagIA y la información legal. MagIA necesita una programación y un curso abiertos.",
+    sectionDescription: "Por dónde empezar: tu panel y tus ficheros, la ayuda, los documentos de MagIA y la información legal. MagIA necesita una programación y un curso abiertos.",
     items: [
       { href: "/inicio?tab=bienvenida", label: "Inicio", icon: Activity, description: "Panel principal, gestión de archivos, IA y verificación de datos." },
       { href: "/ayuda?tab=guia", label: "Ayuda", icon: Info, description: "Guía de inicio, FAQ, acrónimos y contribuciones de la comunidad." },
       { href: "/magia?tab=programacion", label: "MagIA", icon: Sparkles, description: "Generación de programaciones PD-/PD=/PD+, correspondencia APP-PD y documentos de apoyo de la programación y del curso." },
-      { href: "/normativa?tab=autonomias", label: "Normativa", icon: FileText, description: "Normativa autonómica, legislación, bibliografía y estándares INCUAL." },
       { href: "/legal?tab=aviso", label: "Legal", icon: Scale, description: "Aviso legal, privacidad, cookies y accesibilidad." },
     ]
   },
@@ -115,22 +114,17 @@ export const PAGE_TABS: Record<string, { id: string; label: string }[]> = {
     { id: "progreso-ra-ud", label: "Progreso RA-UD" },
     { id: "mejora", label: "Mejora" },
   ],
-  "/normativa": [
-    { id: "autonomias", label: "Autonomías" },
-    { id: "bibliografia", label: "Bibliografía" },
-    { id: "legislacion", label: "Legislación" },
-  ],
   "/catalogo": [
     { id: "familias", label: "Familias" },
     { id: "ecp-incual", label: "ECP INCUAL" },
     { id: "titulos", label: "Títulos" },
     { id: "modulos", label: "Módulos" },
     { id: "ra-ce", label: "RA → CE" },
+    { id: "autonomias", label: "Autonomías" },
   ],
   "/magia": [
     { id: "programacion", label: "Programación" },
     { id: "curso", label: "Curso" },
-    { id: "analisis-pdx", label: "Análisis APP->PDx" },
   ],
   "/legal": [
     { id: "aviso", label: "Aviso legal" },
