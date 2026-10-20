@@ -13,7 +13,10 @@ test.describe('Biblioteca de programaciones', () => {
     await expect(page.getByText(/Programación importada/)).toBeVisible();
     // el contenido importado no trae ni centro ni profesorado
     const datos = await page.evaluate(async () => {
-      const t = await fetch('/biblioteca/0237-ICTVE-aragon-202526.fpp').then(r => r.text());
+      const d = await fetch('/biblioteca/0237-ICTVE-aragon-202526.fpp').then(r => r.json());
+      // la autoría y la licencia (H-28) sí van dentro del fichero, en su propio bloque; fuera de él no debe haber nombres
+      delete d.autoria;
+      const t = JSON.stringify(d);
       return ['Andalán', 'Zaragoza', 'Sanz'].filter(w => t.includes(w));
     });
     expect(datos).toEqual([]);

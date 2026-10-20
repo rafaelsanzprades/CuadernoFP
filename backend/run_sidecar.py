@@ -37,7 +37,7 @@ def run_server() -> None:
     if "CORS_ORIGINS" not in os.environ:
         # tauri://localhost es el origen del webview empaquetado;
         # http://localhost:1420 es el puerto por defecto de `tauri dev`.
-        os.environ["CORS_ORIGINS"] = "tauri://localhost,http://localhost:1420,http://127.0.0.1:1420"
+        os.environ["CORS_ORIGINS"] = "tauri://localhost,http://tauri.localhost,https://tauri.localhost,http://localhost:1420,http://127.0.0.1:1420"
 
     port = _find_free_port()
 

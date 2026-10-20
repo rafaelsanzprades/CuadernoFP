@@ -63,7 +63,8 @@ pub fn spawn_backend(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> 
         .env("DATABASE_URL", db_url)
         .env(
             "CORS_ORIGINS",
-            "tauri://localhost,http://localhost:3000,http://localhost:1420,http://127.0.0.1:1420",
+            // http(s)://tauri.localhost es el origen real del webview en Windows (WebView2); tauri://localhost el de macOS/Linux
+            "tauri://localhost,http://tauri.localhost,https://tauri.localhost,http://localhost:3000,http://localhost:1420,http://127.0.0.1:1420",
         );
 
     let (mut rx, child) = sidecar.spawn()?;
