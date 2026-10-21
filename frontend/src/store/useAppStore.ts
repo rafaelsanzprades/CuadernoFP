@@ -60,7 +60,8 @@ export const useAppStore = create<AppState>()(
           // IndexedDB. En el navegador (web app) este cache sigue existiendo
           // igual que siempre -- ahí SÍ es la única red de seguridad real.
           if (isTauri()) {
-            const { moduleData, cursoData, pdFileSource, cursoFileSource, groupFileSource, ...uiOnly } = rest;
+            // los identificadores activos tampoco: sin datos en memoria apuntarían a algo que no está (las páginas esperarían para siempre)
+            const { moduleData, cursoData, pdFileSource, cursoFileSource, groupFileSource, activeModuleId, activeCursoId, ...uiOnly } = rest;
             return uiOnly;
           }
           return rest;

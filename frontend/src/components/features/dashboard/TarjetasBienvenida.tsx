@@ -20,6 +20,8 @@ export function TarjetasBienvenida() {
   const { t } = useTranslation();
   const isMounted = useMounted();
   const rawVersion = process.env.NEXT_PUBLIC_APP_VERSION;
+  // lo propio de Tauri se decide después de montar: el HTML estático del servidor no sabe si es Tauri y, si se decidiera al pintar, no coincidiría al hidratar (React #418)
+  const enTauri = isMounted && isTauri();
   const versionLabel = !rawVersion || rawVersion === "unknown" ? "Desconocida" : rawVersion;
 
   const lista = (items: string[]) => (
@@ -68,7 +70,7 @@ export function TarjetasBienvenida() {
               <FolderGit2 className="w-4 h-4 shrink-0" /> {t("campos.descargaEscritorio.repo", { defaultValue: "Código fuente en GitHub" })}
             </a>
           </p>
-          {isTauri() ? (
+          {enTauri ? (
             <div className="p-4 bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl"><UpdateChecker /></div>
           ) : (
             <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer" className={BOTON}>

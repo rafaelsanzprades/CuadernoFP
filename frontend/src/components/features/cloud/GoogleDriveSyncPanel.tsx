@@ -8,10 +8,12 @@ import toast from "react-hot-toast";
 import { driveService } from "@/services/driveService";
 import { connectGoogleDrive, disconnectGoogleDrive } from "@/services/nativeOAuth";
 import { isTauri } from "@tauri-apps/api/core";
+import { useMounted } from "@/hooks/useMounted";
 import { Input } from "@/components/ui/Input";
 import { useTranslation } from "react-i18next";
 
 export function GoogleDriveSyncPanel() {
+  const montado = useMounted();
   const {
     isDriveConnected, driveUserEmail, autoSyncDrive, googleClientId, dataSource,
     setDriveConnected, setDriveUserEmail, setAutoSyncDrive, setGoogleClientId
@@ -169,7 +171,7 @@ export function GoogleDriveSyncPanel() {
               <p className="text-body text-muted">
                 {t('campos.cloud.introduceClientIdPre', {defaultValue: 'Introduce el'})} <strong>Client ID</strong> {t('campos.cloud.introduceClientIdPost', {defaultValue: 'de tu proyecto de Google Cloud para autorizar la aplicación. Este dato se guarda en tu navegador de forma segura.'})}
               </p>
-              {isTauri() && (
+              {montado && isTauri() && (
                 <p className="text-caption text-muted flex items-start gap-2 bg-background/50 rounded-lg p-3 border border-[var(--glass-border)]">
                   <Info className="w-4 h-4 shrink-0 mt-0.5" />
                   {t('campos.cloud.clientIdTauriHint', {defaultValue: 'En la app de escritorio (Tauri) necesitas un Client ID de tipo "Desktop app", distinto del que usas en el navegador — puedes registrarlo en el mismo proyecto de Google Cloud.'})}

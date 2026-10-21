@@ -24,6 +24,7 @@ import { GlobalErrorBoundary } from "@/components/GlobalErrorBoundary";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { PedirClaveModal } from "@/components/features/cifrado/PedirClaveModal";
 import { DataSourceTheme } from "@/components/layout/DataSourceTheme";
+import { CargaDemoAutomatica } from "@/components/layout/CargaDemoAutomatica";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { SkipToContentLink } from "@/components/layout/SkipToContentLink";
 
@@ -40,6 +41,7 @@ export default function RootLayout({
           <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
               <DataSourceTheme />
+              <CargaDemoAutomatica />
               <GlobalErrorBoundary>
                 <PageTransition>
                   {children}

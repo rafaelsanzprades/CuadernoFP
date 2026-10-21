@@ -75,6 +75,15 @@ await nav('Metodologías', 'Atención a la diversidad');
 const h2d = await textos('h2');
 ok('Metodologías › Diversidad en dos partes', /Adaptaciones no significativas/.test(h2d[0] || '') && /^Inclusión/.test(h2d[1] || ''), h2d.slice(0, 2).join(' | '));
 
+// CFP-12: recargar (F5) estando en una página interior no debe dejar «Cargando…» para siempre
+await nav('Instrumentos');
+await page.reload();
+await page.waitForLoadState('load');
+await page.waitForTimeout(9000);
+const tras = await page.evaluate(() => ({ url: location.pathname + location.search, texto: document.body.innerText }));
+ok('F5 en Instrumentos no se queda en «Cargando…»', !/^\s*Saltar al contenido principal\s*Cargando\.{3}\s*$/.test(tras.texto) && /Instrumentos|No hay programación cargada/.test(tras.texto), tras.url + ' · ' + tras.texto.slice(0, 80).split(String.fromCharCode(10)).join(' '));
+await ir('/inicio?tab=bienvenida');
+await page.waitForTimeout(3000);
 await nav('Ayuda');
 const cuerpo = await page.evaluate(() => document.body.innerText);
 ok('Ayuda › Guía carga', /Contexto|Instrumentos/.test(cuerpo));

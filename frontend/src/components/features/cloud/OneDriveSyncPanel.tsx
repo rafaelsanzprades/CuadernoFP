@@ -8,11 +8,13 @@ import toast from "react-hot-toast";
 import { signInOneDrive, signOutOneDrive } from "@/services/onedriveService";
 import { connectOneDrive, disconnectOneDrive } from "@/services/nativeOAuth";
 import { isTauri } from "@tauri-apps/api/core";
+import { useMounted } from "@/hooks/useMounted";
 import { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { useTranslation } from "react-i18next";
 
 export function OneDriveSyncPanel() {
+  const montado = useMounted();
   const {
     dataSource, autoSyncDrive,
     oneDriveClientId, setOneDriveClientId,
@@ -30,7 +32,7 @@ export function OneDriveSyncPanel() {
   // dejando el botón deshabilitado con un aviso en vez de un intento de
   // login que fallaría igualmente. La versión web sigue funcionando igual
   // que siempre -- esto NO la afecta.
-  const oneDriveDisabledInTauri = isTauri();
+  const oneDriveDisabledInTauri = montado && isTauri();
 
   const handleConnect = async () => {
     if (oneDriveDisabledInTauri) return;
