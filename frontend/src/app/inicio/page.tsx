@@ -7,6 +7,7 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { navGroups, PAGE_TABS } from "@/config/navigation";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionIndex } from "@/components/ui/SectionIndex";
 import Link from "next/link";
 import { TabSync } from "@/components/ui/TabSync";
 import { useEffect, useState } from "react";
@@ -48,6 +49,28 @@ export default function InicioPage() {
 
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
 
+  // Título traducido de cada grupo del Mapa (sin el «[Código del módulo]» del sidebar)
+  const tituloGrupo = (title: string) => {
+    const base = title.replace(/\s*\[.*\]$/, '');
+    return base === "General" ? t('navGroups.general', { defaultValue: 'General' })
+      : base === "Programación" ? t('navGroups.programacion', { defaultValue: 'Programación' })
+      : base === "Curso" ? t('navGroups.curso', { defaultValue: 'Curso' })
+      : base;
+  };
+
+  // Índice de bloques de cada pestaña (también donde solo hay uno)
+  const SECTION_INDEX_ITEMS: Record<string, { id: string; label: string }[]> = {
+    bienvenida: [
+      { id: "bienvenida-escritorio", label: t('campos.inicio.tarjetas.escritorio.titulo', {defaultValue: 'Aplicación de escritorio'}) },
+      { id: "bienvenida-telegram", label: t('campos.inicio.tarjetas.telegram.titulo', {defaultValue: 'Comunidad en Telegram'}) },
+      { id: "bienvenida-guia", label: t('campos.inicio.tarjetas.web.titulo', {defaultValue: 'Web con todos los contenidos'}) },
+    ],
+    mapa: navGroups.map((g, i) => ({ id: `mapa-grupo-${i}`, label: tituloGrupo(g.title) })),
+    privacidad: [
+      { id: "inicio-privacidad", label: t('campos.archivos.privacidadDisenoTitulo', {defaultValue: 'Tu privacidad por diseño'}) },
+    ],
+  };
+
   const TAB_DESCRIPTIONS: Record<string, string> = {
     bienvenida: t('tabs.inicio.bienvenida.desc', {defaultValue: 'Panel de control de acceso rápido a todas las herramientas.'}),
     mapa: t('tabs.inicio.mapa.desc', {defaultValue: 'Todas las páginas de la aplicación y las pestañas que contiene cada una.'}),
@@ -84,6 +107,8 @@ export default function InicioPage() {
             <p className="text-body text-muted mt-3">
               {TAB_DESCRIPTIONS[activeTab] || 'Gestión de ' + activeTab}
             </p>
+
+            <SectionIndex items={SECTION_INDEX_ITEMS[activeTab] || []} bare />
 
           </StickyPageHeader>
 
@@ -124,7 +149,7 @@ export default function InicioPage() {
                   return (
                   <MotionWrapper key={group.title} delay={groupIdx * 0.1}>
                     <div className="space-y-3">
-                      <h3 className="text-subheading font-bold text-foreground flex items-center gap-3">
+                      <h3 id={`mapa-grupo-${groupIdx}`} style={{ scrollMarginTop: "260px" }} className="text-subheading font-bold text-foreground flex items-center gap-3">
                         {translatedTitle}
                       </h3>
                       {group.sectionDescription && (
