@@ -62,3 +62,6 @@ frontend/test-results/
 frontend/public/sw.js
 frontend/public/sw.js.map
 frontend/public/workbox-*.js
+
+# trabajo temporal local (no se versiona)
+scratch/
