@@ -1,5 +1,4 @@
 import io
-import os
 import calendar
 from datetime import date
 from reportlab.lib import colors
@@ -8,25 +7,13 @@ from reportlab.platypus import BaseDocTemplate, Frame, PageTemplate, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas as pdfcanvas
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
 
 NOMBRE_MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-# Arial de verdad si el sistema la tiene (Windows), si no cae a Helvetica
-# (equivalente base14 de PDF, siempre disponible, incluido en Cloud Run).
-try:
-    _WIN_FONTS = "C:/Windows/Fonts"
-    pdfmetrics.registerFont(TTFont("Arial", os.path.join(_WIN_FONTS, "arial.ttf")))
-    pdfmetrics.registerFont(TTFont("Arial-Bold", os.path.join(_WIN_FONTS, "arialbd.ttf")))
-    pdfmetrics.registerFont(TTFont("Arial-Italic", os.path.join(_WIN_FONTS, "ariali.ttf")))
-    pdfmetrics.registerFont(TTFont("Arial-BoldItalic", os.path.join(_WIN_FONTS, "arialbi.ttf")))
-    pdfmetrics.registerFontFamily("Arial", normal="Arial", bold="Arial-Bold",
-                                   italic="Arial-Italic", boldItalic="Arial-BoldItalic")
-    FONT_R, FONT_B, FONT_I, FONT_BI = "Arial", "Arial-Bold", "Arial-Italic", "Arial-BoldItalic"
-except Exception:
-    FONT_R, FONT_B, FONT_I, FONT_BI = "Helvetica", "Helvetica-Bold", "Helvetica-Oblique", "Helvetica-BoldOblique"
+# Helvetica: la Arial de los PDF (mismas medidas; fuente base14, no hay que incrustarla ni buscarla en el sistema), igual en Windows,
+# en el navegador (Pyodide) y en el servidor.
+FONT_R, FONT_B, FONT_I, FONT_BI = "Helvetica", "Helvetica-Bold", "Helvetica-Oblique", "Helvetica-BoldOblique"
 
 # ------------------------------------------------------------------ #
 #  Función que se llama en CADA página para dibujar cabecera y pie   #
