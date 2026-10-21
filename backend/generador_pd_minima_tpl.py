@@ -36,7 +36,6 @@ def _build_context(data: dict) -> dict:
     nivel = data.get("nivel", "")
     codificado = " ".join(p for p in [curso_ciclo, nivel] if p)
     curso_academico = data.get("curso_academico", "")
-    curso = f"{codificado} - {curso_academico}" if (codificado and curso_academico) else (codificado or curso_academico)
     df_ra = data.get("df_ra", [])
     df_ud = data.get("df_ud", [])
     config = data.get("config_contexto", {})
@@ -57,7 +56,8 @@ def _build_context(data: dict) -> dict:
     context = {
         "modulo": modulo,
         "ciclo": ciclo,
-        "curso_academico": curso,
+        "grupo": codificado,
+        "curso_academico": curso_academico,
         "departamento_area": departamento_area,
         "centro_linea": _centro_linea(data),
     }
@@ -165,13 +165,8 @@ def _build_context(data: dict) -> dict:
     # ── H1 6: Recordad ─────────────────────────────────────────────────
     texto_recordatorio = config.get("minima_recordatorio", "")
     if not texto_recordatorio:
-        texto_recordatorio = "Más del 15% de faltas de asistencia a clase implica la Pérdida del derecho a evaluación continua."
+        texto_recordatorio = "Más del 15% de faltas de asistencia a clase implica la pérdida del derecho a la evaluación continua."
     context["texto_recordatorio"] = texto_recordatorio
-
-    texto_final = config.get("minima_texto_final", "")
-    if not texto_final:
-        texto_final = "Tu situación es similar a la del resto del alumnado que ha obtenido su titulación. ¡ÁNIMO!"
-    context["texto_final"] = texto_final
 
     return context
 
@@ -192,7 +187,25 @@ def _quitar_vinetas_listas(doc):
         if p.style is not None and p.style.name == 'List Bullet':
             p.style = doc.styles['Normal']
             es_relacion_ud = bool(patron_relacion_ud.match(p.text.strip()))
-            p.paragraph_format.left_indent = Cm(2.0) if es_relacion_ud else Cm(1.0)
+            p.paragraph_format.left_indent = Cm(1.0) if es_relacion_ud else Cm(0.5)
+            if not es_relacion_ud:
+                _etiqueta_en_negrita(p)
+
+
+def _etiqueta_en_negrita(p):
+    """«RA1. (60%)» / «UD01. (22h)» en negrita y el resto de la línea normal."""
+    import re
+    m = re.match(r"^((?:RA|UD)\d+\.(?: \([^)]*\))?)(.*)$", p.text, re.S)
+    if not m:
+        return
+    for r in list(p.runs)[1:]:
+        r._r.getparent().remove(r._r)
+    base = p.runs[0]
+    base.text = m.group(1)
+    base.bold = True
+    resto = p.add_run(m.group(2))
+    resto.bold = False
+    resto.font.name = 'Arial'
 
 
 def _cursivar_lineas_relacion_ud(doc):
@@ -265,6 +278,7 @@ def generate(data: dict, out_docx: str, out_pdf: str = None):
     insertar_tabla_planificacion(
         doc, data.get("df_ud", []),
         data.get("info_fechas", {}), data.get("horario", {}), data.get("calendar_notes", {}),
+        formato_alumnado=True,
     )
 
     _quitar_vinetas_listas(doc)

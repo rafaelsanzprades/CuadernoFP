@@ -103,7 +103,7 @@ def _shade_cell(cell, hex_color):
     cell._tc.get_or_add_tcPr().append(shd)
 
 
-def insertar_tabla_planificacion(doc, df_ud, info_fechas, horario, calendar_notes):
+def insertar_tabla_planificacion(doc, df_ud, info_fechas, horario, calendar_notes, formato_alumnado=False):
     """
     Añade al final de `doc`, en una nueva sección apaisada, la previsión de
     planificación mensual: Tri. | UD | Prev. total | Prev. por mes, con la
@@ -143,13 +143,19 @@ def insertar_tabla_planificacion(doc, df_ud, info_fechas, horario, calendar_note
     section.top_margin = Cm(1.5)
     section.bottom_margin = Cm(1.5)
 
-    doc.add_heading("Previsión de planificación mensual", level=1)
-
-    p_nota = doc.add_paragraph(TEXTO_ESTIMACION_PLANIFICACION)
-    for r in p_nota.runs:
-        r.italic = True
-        r.font.size = Pt(8)
-        r.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+    # formato_alumnado (PD-): títulos y cifras más grandes para leerse bien en el folio, sin la nota de estimación.
+    titulo = doc.add_heading("Previsión de planificación mensual", level=1)
+    if formato_alumnado:
+        for r in titulo.runs:
+            r.font.name = 'Arial'
+            r.font.size = Pt(12)
+    else:
+        p_nota = doc.add_paragraph(TEXTO_ESTIMACION_PLANIFICACION)
+        for r in p_nota.runs:
+            r.italic = True
+            r.font.size = Pt(8)
+            r.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+    tam_cab, tam_ud, tam_mes = (12, 10, 12) if formato_alumnado else (8, 8, 7)
 
     N_FIXED = 3  # Tri., UD, Prev.
     n_cols = N_FIXED + len(meses_display)
@@ -182,7 +188,7 @@ def insertar_tabla_planificacion(doc, df_ud, info_fechas, horario, calendar_note
     headers = ["Tri.", "UD. Unidad didáctica", "Prev."] + list(meses_display)
     for i, h in enumerate(headers):
         cell = table.rows[0].cells[i]
-        set_cell(cell, h, bold=True, size=8, align=(WD_ALIGN_PARAGRAPH.LEFT if i == 1 else WD_ALIGN_PARAGRAPH.CENTER))
+        set_cell(cell, h, bold=True, size=tam_cab, align=(WD_ALIGN_PARAGRAPH.LEFT if i == 1 else WD_ALIGN_PARAGRAPH.CENTER))
         _shade_cell(cell, HEADER_BG)
 
     for r_idx, fila in enumerate(filas):
@@ -190,14 +196,16 @@ def insertar_tabla_planificacion(doc, df_ud, info_fechas, horario, calendar_note
         ev = fila.get("ev")
         horas_ud = fila.get("horas_ud", 0) or 0
 
-        set_cell(table.rows[r].cells[0], f"{ev}ª" if ev else "", bold=True, size=8)
-        set_cell(table.rows[r].cells[1], _ud_label(fila), bold=True, size=8, align=WD_ALIGN_PARAGRAPH.LEFT)
-        set_cell(table.rows[r].cells[2], horas_ud if horas_ud else "", bold=True, size=8)
+        set_cell(table.rows[r].cells[0], f"{ev}ª" if ev else "", bold=True, size=tam_cab)
+        set_cell(table.rows[r].cells[1], _ud_label(fila), bold=True, size=tam_ud, align=WD_ALIGN_PARAGRAPH.LEFT)
+        set_cell(table.rows[r].cells[2], (int(horas_ud) if float(horas_ud).is_integer() else horas_ud) if horas_ud else "", bold=True, size=tam_cab)
         for mi, m in enumerate(meses_display):
             prv = int(fila.get(f"{m}_Prv", 0) or 0)
-            set_cell(table.rows[r].cells[N_FIXED + mi], prv if prv else "", size=7)
+            set_cell(table.rows[r].cells[N_FIXED + mi], prv if prv else "", size=tam_mes)
 
     col_widths = [Cm(1.2), Cm(8.5), Cm(1.5)] + [Cm(1.5)] * len(meses_display)
+    if formato_alumnado:
+        col_widths = [Cm(1.2), Cm(10.0), Cm(1.6)] + [Cm(1.2)] * len(meses_display)
     for row in table.rows:
         for i, w in enumerate(col_widths):
             row.cells[i].width = w
