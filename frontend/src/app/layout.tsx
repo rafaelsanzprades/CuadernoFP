@@ -1,12 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit } from "next/font/google";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-});
 
 export const viewport: Viewport = {
   themeColor: "#14a085",
@@ -39,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${outfit.variable} font-sans`} suppressHydrationWarning>
+    <html lang="es" className="font-sans" suppressHydrationWarning>
       <body className="antialiased bg-[var(--background)] text-[var(--foreground)] min-h-screen flex flex-col transition-colors duration-300" suppressHydrationWarning>
         <SkipToContentLink />
         <I18nProvider>

@@ -72,7 +72,12 @@
   --color-warning: var(--warning);
   --color-danger: var(--danger);
   --color-info: var(--info);
+  /* Tipografía única: Helvetica/Arial (la del equipo; sin descargar fuentes). Las cifras y códigos (font-mono) usan la misma, con cifras de ancho fijo. */
+  --font-sans: Helvetica, Arial, sans-serif;
+  --font-mono: Helvetica, Arial, sans-serif;
 }
+
+.font-mono { font-variant-numeric: tabular-nums; }
 
 /* =========================================================================
    TYPOGRAPHY SCALE — single source of truth, 4 tiers only.
@@ -90,7 +95,7 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 0.9375rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
