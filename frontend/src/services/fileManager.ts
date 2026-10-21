@@ -86,7 +86,9 @@ export const fileManager = {
     promise.catch(() => { demoPrefetchCache.delete(fpgName); });
   },
 
-  async loadDemoData(groupId?: string): Promise<void> {
+  /** `soloSiSigueDemo`: para las cargas automáticas (efectos al abrir una página). Si mientras se descargan los ficheros el usuario
+   * pasa a datos reales, no se vuelve a «demo» al terminar. Las cargas pedidas por el usuario («Recargar demo», elegir una demo) lo dejan en false. */
+  async loadDemoData(groupId?: string, soloSiSigueDemo = false): Promise<void> {
     const fpgName = resolveDemoGroupId(groupId);
     const moduleCode = fpgName.includes('0223') ? '0223' : '0237';
 
@@ -99,6 +101,7 @@ export const fileManager = {
       const bundlePromise = demoPrefetchCache.get(fpgName) || fetchDemoBundle(fpgName);
       demoPrefetchCache.delete(fpgName);
       const { groupData, pdData, cursoData } = await bundlePromise;
+      if (soloSiSigueDemo && useAppStore.getState().dataSource !== 'demo') return;
 
       // Extract IDs
       const pdId = pdData.id || `${moduleCode}-pd`;

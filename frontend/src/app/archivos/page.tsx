@@ -110,7 +110,7 @@ export default function ArchivosPage() {
   // Auto-load demo data on first visit
   useEffect(() => {
     if (dataSource === 'demo' && (!moduleData || !cursoData)) {
-      fileManager.loadDemoData();
+      fileManager.loadDemoData(undefined, true);
     }
   }, [dataSource, moduleData, cursoData]);
 
