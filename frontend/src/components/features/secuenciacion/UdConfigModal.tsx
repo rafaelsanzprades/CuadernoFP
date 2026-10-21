@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
 import { fetchDocumento } from "@/services/generarDocumento";
+import { descargarArchivo } from "@/services/descargarArchivo";
 
 interface UdConfigModalProps {
   ud: any;
@@ -48,14 +49,7 @@ export function UdConfigModal({ ud, onClose, onSave }: UdConfigModalProps) {
       if (!response.ok) throw new Error("Error generando documento");
 
       const blob = await response.blob();
-      const urlBlob = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = urlBlob;
-      a.download = `UD_${ud.id_ud}.zip`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(urlBlob);
+      await descargarArchivo(blob, `UD_${ud.id_ud}.zip`);
     } catch (err) {
       console.error(err);
       toast.error(t('toasts.udConfig.errorExportar', {defaultValue: "Error al exportar la unidad didáctica."}));

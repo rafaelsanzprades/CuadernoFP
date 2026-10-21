@@ -24,7 +24,7 @@ const pendientes = new Map<number, (r: Respuesta) => void>();
 
 function obtenerWorker(): Worker {
   if (!worker) {
-    worker = new Worker("/generadores-worker.js");
+    worker = new Worker("/generadores-worker.js", { type: "module" });
     worker.onmessage = (ev: MessageEvent) => {
       const r = ev.data as Respuesta;
       const resolver = pendientes.get(r.id);

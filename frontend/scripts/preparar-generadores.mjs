@@ -60,7 +60,7 @@ mkdirSync(outPyodide, { recursive: true });
 mkdirSync(path.join(outGen, "templates"), { recursive: true });
 
 // 1) Núcleo de Pyodide
-for (const f of ["pyodide.js", "pyodide.asm.mjs", "pyodide.asm.wasm", "python_stdlib.zip"]) {
+for (const f of ["pyodide.js", "pyodide.mjs", "pyodide.asm.mjs", "pyodide.asm.wasm", "python_stdlib.zip"]) {
   copyFileSync(path.join(pyodideDir, f), path.join(outPyodide, f));
 }
 

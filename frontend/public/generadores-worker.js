@@ -7,6 +7,9 @@
  * Mensajes:  { id, peticion: <string JSON> }  ->  { id, ok, mime, headers, data: ArrayBuffer }
  *                                                | { id, ok: false, status, detail }
  */
+import { loadPyodide } from "./pyodide/pyodide.mjs";
+
+// Worker de tipo módulo: el Pyodide actual no arranca en workers clásicos.
 let listo = null;
 let pyodide = null;
 
@@ -14,8 +17,7 @@ function iniciar() {
   if (listo) return listo;
   listo = (async () => {
     const base = new URL("./", self.location.href);
-    importScripts(new URL("pyodide/pyodide.js", base).href);
-    pyodide = await self.loadPyodide({
+    pyodide = await loadPyodide({
       indexURL: new URL("pyodide/", base).href,
       lockFileURL: new URL("pyodide/pyodide-lock.json", base).href,
     });

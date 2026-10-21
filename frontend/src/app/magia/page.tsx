@@ -25,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import { loadCatalogForModule, enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
 import { fetchDocumento, precalentarGeneradores } from "@/services/generarDocumento";
+import { descargarArchivo } from "@/services/descargarArchivo";
 
 type DownloadOpts = {
   al_id?: string;
@@ -195,13 +196,8 @@ export default function MagiaPage() {
         if (fileFormat === "pdf") {
           toast(t('toasts.magia.pdfFallback', {defaultValue: "No se pudo generar el PDF. Descargando DOCX como alternativa."}), { icon: '⚠️', duration: 5000 });
         }
-        const a = document.createElement('a');
-        a.href = urlBlob;
-        a.download = downloadName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
         window.URL.revokeObjectURL(urlBlob);
+        await descargarArchivo(blob, downloadName);
       }
     } catch (err) {
       console.error(err);

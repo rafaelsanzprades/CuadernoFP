@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { enrichInfoModulo } from "@/services/catalogCache";
 import { getApiBase } from "@/services/apiBase";
 import { fetchDocumento } from "@/services/generarDocumento";
+import { descargarArchivo } from "@/services/descargarArchivo";
 
 const REFERENCIAS_FIJAS = [
   { id: "Nota_Final_FO", label: "Nota final (evaluación ordinaria)" },
@@ -83,14 +84,7 @@ export function ReclamacionesTab() {
       });
       if (!response.ok) throw new Error("Error generando el justificante");
       const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = `Reclamacion_${reclamacion.alumno_id}_${reclamacion.id}.docx`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(blobUrl);
+      await descargarArchivo(blob, `Reclamacion_${reclamacion.alumno_id}_${reclamacion.id}.docx`);
     } catch (err) {
       console.error(err);
       toast.error(t('toasts.reclamaciones.errorJustificante', {defaultValue: "Error al generar el justificante."}));

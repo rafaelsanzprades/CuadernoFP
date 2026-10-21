@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
 import { fetchDocumento } from "@/services/generarDocumento";
+import { descargarArchivo } from "@/services/descargarArchivo";
 
 export function DetalleAlumnadoTab() {
   const { activeModuleId, moduleData, cursoData, updateCursoData, dataSource } = useAppStore();
@@ -180,14 +181,7 @@ export function DetalleAlumnadoTab() {
       });
       if (!response.ok) throw new Error("Error generando el informe");
       const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = `Refuerzo_${al_id}.docx`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(blobUrl);
+      await descargarArchivo(blob, `Refuerzo_${al_id}.docx`);
     } catch (err) {
       console.error(err);
       toast.error(t('toasts.detalleAlumnado.errorInformeRefuerzo', {defaultValue: "Error al generar el informe de refuerzo."}));
