@@ -412,6 +412,11 @@ def generar_documento(
             out_docx = os.path.join(tmpdir, fname + ".docx")
             out_pdf = os.path.join(tmpdir, fname + ".pdf")
 
+            # El resumen para el alumnado (PD-) también se ofrece en PDF, para verlo en la app sin Word.
+            if type == "programacion_minima_tpl" and file_format == "pdf":
+                from pdf_pd_minima import generar_pdf
+                return generar_pdf(data_pd), "application/pdf", {"Content-Disposition": f"inline; filename=\"{fname}.pdf\""}
+
             # Generate DOCX
             generador_pd.generate(data_pd, out_docx, out_pdf)
             # Siempre devolvemos DOCX para programación, independientemente del formato solicitado

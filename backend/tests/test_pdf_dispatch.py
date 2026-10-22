@@ -69,7 +69,7 @@ def test_docx_alternativo(tipo):
 @pytest.mark.parametrize("tipo", ["programacion_minima_tpl", "programacion_suficiente_tpl", "programacion_jeg"])
 def test_programaciones_sin_base_de_datos(tipo):
     modulo, curso = _cargar(FPP), _cargar(FPC)
-    contenido, mime, cab = generar_documento(tipo, modulo, curso)
+    contenido, mime, cab = generar_documento(tipo, modulo, curso, file_format="docx")
     assert zipfile.is_zipfile(io.BytesIO(contenido))
     with zipfile.ZipFile(io.BytesIO(contenido)) as z:
         texto = z.read("word/document.xml").decode("utf-8")
@@ -117,3 +117,9 @@ def test_endpoint_cerrado_fuera_del_servidor_interno(client, monkeypatch):
     r = client.post("/api/pdf?type=matrices", json={"module_data": modulo, "curso_data": curso})
     assert r.status_code == 410
     assert "%PDF" not in r.text
+
+
+def test_pd_minima_en_pdf():
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    contenido, mime, _ = generar_documento("programacion_minima_tpl", modulo, curso, file_format="pdf")
+    assert mime == "application/pdf" and contenido.startswith(b"%PDF")

@@ -468,11 +468,7 @@ export default function MagiaPage() {
                                             <h3 className="text-subheading font-bold mb-2"><span className="inline-flex"><FileText className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('campos.magia.pdMinimaTitulo', {defaultValue: 'PD-. Resumen para el alumnado'})}</h3>
                                             <p className="text-body text-muted mb-6">{t('campos.magia.pdMinimaDesc', {defaultValue: 'Documento de un folio para entregar al alumnado. Contiene información básica y criterios de calificación.'})}</p>
                                           </div>
-                                          <div className="mt-auto">
-                                            <Button onClick={() => handleDownloadPdf('programacion_minima_tpl', 'docx')} disabled={downloadingStr === 'programacion_minima_tpl_docx'} className="w-full">
-                                              {downloadingStr === 'programacion_minima_tpl_docx' ? t('botones.magia.generandoDocx', {defaultValue: '⏳ Generando DOCX...'}) : t('botones.magia.editableDocx', {defaultValue: 'Editable .docx'})}
-                                            </Button>
-                                          </div>
+                                          <DualDownloadButtons type="programacion_minima_tpl" downloadingStr={downloadingStr} onDownload={handleDownloadPdf} />
                                         </div>
 
                                         <div className="bg-foreground/10 border border-[var(--glass-border)] rounded-xl p-6 flex flex-col justify-between">
