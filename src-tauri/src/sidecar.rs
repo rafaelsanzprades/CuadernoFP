@@ -126,3 +126,10 @@ pub fn kill_backend(app: &AppHandle) {
         }
     }
 }
+
+/// Lo llama el actualizador antes de lanzar el instalador: en Windows la app se cierra de golpe y no pasa por
+/// `Destroyed`, y el servidor interno quedaría abierto bloqueando `cdd_pro.db` y su propio .exe.
+#[tauri::command]
+pub fn detener_backend(app: AppHandle) {
+    kill_backend(&app);
+}

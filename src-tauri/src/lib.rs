@@ -22,6 +22,7 @@ pub fn run() {
         .manage(sidecar::BackendProcess(Mutex::new(None)))
         .invoke_handler(tauri::generate_handler![
             sidecar::get_backend_port,
+            sidecar::detener_backend,
             credentials::store_credential,
             credentials::get_credential,
             credentials::delete_credential,

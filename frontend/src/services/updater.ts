@@ -38,7 +38,15 @@ export async function checkForUpdates(): Promise<UpdateInfo | null> {
 export async function downloadAndInstallUpdate(onProgress?: (event: DownloadEvent) => void): Promise<void> {
   const update = await checkForUpdate();
   if (!update) throw new Error("No hay ninguna actualización pendiente -- llama primero a checkForUpdates().");
-  await update.downloadAndInstall(onProgress);
+  // Primero se descarga; antes de instalar se cierra el servidor interno para que el instalador pueda sobrescribir sus ficheros.
+  await update.download(onProgress);
+  try {
+    const { invoke } = await import("@tauri-apps/api/core");
+    await invoke("detener_backend");
+  } catch {
+    // si no se pudo, el instalador (hook de NSIS) lo vuelve a intentar
+  }
+  await update.install();
   if (navigator.platform && !/win/i.test(navigator.platform)) {
     await relaunch();
   }

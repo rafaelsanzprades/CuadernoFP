@@ -39,6 +39,11 @@
     "resources": {
       "../backend/cdd_pro.db": "cdd_pro.db"
     },
+    "windows": {
+      "nsis": {
+        "installerHooks": "windows/hooks.nsh"
+      }
+    },
     "android": {
       "debugApplicationIdSuffix": ".debug"
     }
