@@ -34,7 +34,7 @@ def _generar(cambios=None, tipo="programacion_suficiente_tpl"):
         for k in camino:
             obj = obj.setdefault(k, {})
         obj[ultimo] = valor
-    contenido, _, _ = generar_documento(tipo, modulo, curso)
+    contenido, _, _ = generar_documento(tipo, modulo, curso, file_format="docx")
     return _texto(contenido)
 
 
@@ -126,7 +126,7 @@ def test_la_infraestructura_de_contexto_llega_a_herramientas():
 def test_pd_plus_cubre_los_ra_en_la_tabla_de_ud():
     modulo = _cargar("202526 P 0237-ICTVE.fpp")
     curso = _cargar("202526 C 1A-GM 0237-ICTVE.fpc")
-    contenido, _, _ = generar_documento("programacion_jeg", modulo, curso)
+    contenido, _, _ = generar_documento("programacion_jeg", modulo, curso, file_format="docx")
     t = _texto(contenido)
     assert "Introducción a las ICT y normativa\nRA1\n22" in t
 
