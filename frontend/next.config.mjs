@@ -34,10 +34,18 @@ const withPWA = withPWAInit({
 
 // Versión visible: la misma del instalador (src-tauri/tauri.conf.json, p. ej.
 // 26.10.11 -> 2026.10.11), para que coincida con el nombre del release en GitHub.
+// Varias versiones el mismo día: el parche es día*100 + n (26.10.2201 -> 2026.10.22b, 26.10.2202 -> 2026.10.22c...).
+// No se pueden usar letras en `version` (semver: un sufijo se compara como versión anterior y el actualizador no la ofrecería).
 let appVersion = "unknown";
 try {
   const v = JSON.parse(readFileSync(new URL("../src-tauri/tauri.conf.json", import.meta.url), "utf8")).version;
-  appVersion = /^\d{2}\./.test(v) ? "20" + v : v;
+  const m = /^(\d{2})\.(\d+)\.(\d+)$/.exec(v);
+  if (m) {
+    const parche = Number(m[3]);
+    const dia = parche >= 100 ? Math.floor(parche / 100) : parche;
+    const n = parche >= 100 ? parche % 100 : 0;
+    appVersion = `20${m[1]}.${m[2]}.${dia}${n ? String.fromCharCode(97 + n) : ""}`;
+  } else appVersion = v;
 } catch (e) {}
 
 /** @type {import('next').NextConfig} */
