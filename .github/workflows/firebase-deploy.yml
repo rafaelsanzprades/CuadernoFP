@@ -33,15 +33,20 @@ jobs:
       - name: Preparar generadores de documentos (se ejecutan en el navegador)
         run: node scripts/preparar-generadores.mjs
 
-      - name: Build Next.js App
+      # La web se publica como archivos estáticos (out/): la función de SSR de Firebase no arrancaba con Next 16.
+      # NextAuth (src/app/api/auth) necesita servidor y la web no lo usa, así que se quita antes de exportar.
+      - name: Quitar NextAuth (no cabe en una exportación estática)
+        run: rm -rf src/app/api/auth
+
+      - name: Build Next.js App (exportación estática)
         run: npx next build --webpack
         env:
+          WEB_ESTATICO: '1'
           NEXT_PUBLIC_API_URL: https://cdd-backend-215337606799.europe-west1.run.app
           NEXTAUTH_URL: https://cuadernofp.web.app
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
         
       - name: Deploy to Firebase
-        run: npx firebase-tools deploy --only hosting,functions --project cuadernofp
+        run: npx firebase-tools deploy --only hosting --project cuadernofp
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          FIREBASE_CLI_EXPERIMENTS: webframeworks

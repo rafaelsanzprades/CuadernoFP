@@ -49,12 +49,20 @@ try {
 } catch (e) {}
 
 /** @type {import('next').NextConfig} */
+// WEB_ESTATICO=1 (despliegue en Firebase Hosting, ver .github/workflows/firebase-deploy.yml): la web se publica como archivos
+// estáticos en `out/`, sin función de servidor. La función de SSR de Firebase no arrancaba con Next 16 (dejaba la web con un
+// /api/auth/session en 500 y los despliegues fallaban por «Container Healthcheck failed»). Los encabezados (CSP...) los pone
+// firebase.json y la API se llama con su dirección completa (getApiBase), así que no hacen falta rewrites ni headers aquí.
+// El workflow quita antes src/app/api/auth (NextAuth, que necesita servidor y que la web no usa: AuthProvider va sin sesión).
+const estatico = process.env.WEB_ESTATICO === "1";
+
 const nextConfig = {
   env: {
     NEXT_PUBLIC_APP_VERSION: appVersion,
   },
-  output: "standalone",
+  output: estatico ? "export" : "standalone",
   turbopack: {},
+  ...(estatico ? {} : {
   async rewrites() {
     // URL de la API según el entorno.
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://cdd-backend-215337606799.europe-west1.run.app";
@@ -83,6 +91,7 @@ const nextConfig = {
       }
     ];
   }
+  }),
 };
 
 export default withPWA(nextConfig);
