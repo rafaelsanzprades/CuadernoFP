@@ -107,7 +107,6 @@ def generar_pdf(data: dict) -> bytes:
            f"<b>Centro:</b> {escape(ctx['centro_linea'])}. <b>Departamento:</b> {escape(ctx['departamento_area'])}")
     s.append(Paragraph(cab, _CABECERA))
 
-    s += [_p("¿Cómo contribuirá este módulo en mi Perfil profesional?", _H1), _p(ctx["texto_perfil_profesional"], _TEXTO)]
     s += [_p("¿En qué seré competente?", _H1), _p(ctx["texto_competencia_general"], _TEXTO)]
     s.append(_p("¿Qué sabré hacer? Se le denomina: Resultados de Aprendizaje", _H1))
     for linea in ctx["list_ras"]:

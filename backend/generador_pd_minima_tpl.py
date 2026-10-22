@@ -62,16 +62,6 @@ def _build_context(data: dict) -> dict:
         "centro_linea": _centro_linea(data),
     }
 
-    # ── H1 1: Perfil profesional ───────────────────────────────────────
-    texto_perfil = config.get("minima_perfil_profesional", "")
-    if not texto_perfil:
-        texto_perfil = (
-            f"La formación de este módulo ({modulo}) contribuye a tu perfil profesional "
-            f"proporcionándote las competencias necesarias para desarrollar tu actividad "
-            f"en el ámbito del {ciclo}."
-        )
-    context["texto_perfil_profesional"] = texto_perfil
-
     # ── H1 2: Competencia general ──────────────────────────────────────
     texto_comp = config.get("minima_competencia_general", "")
     if not texto_comp:
