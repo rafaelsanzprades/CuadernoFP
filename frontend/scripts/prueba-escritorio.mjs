@@ -94,12 +94,12 @@ if (base) {
     const cargar = async (n) => { const r = await fetch('/demo/' + encodeURIComponent(n)); const j = await r.json(); return Array.isArray(j) ? j[0] : j; };
     const modulo = await cargar('202526 P 0237-ICTVE.fpp'); const curso = await cargar('202526 C 1A-GM 0237-ICTVE.fpc');
     const res = {};
-    for (const [tipo, fmt] of [['programacion_minima_tpl', 'docx'], ['programacion_suficiente_tpl', 'docx'], ['programacion_jeg', 'docx'], ['calendario', 'pdf'], ['grupal_final', 'pdf']]) {
+    for (const [tipo, fmt] of [['programacion_minima_tpl', 'docx'], ['programacion_minima_tpl', 'pdf'], ['programacion_suficiente_tpl', 'docx'], ['programacion_jeg', 'docx'], ['calendario', 'pdf'], ['grupal_final', 'pdf']]) {
       try {
         const r = await fetch(`${b}/api/pdf?type=${tipo}&file_format=${fmt}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ module_data: modulo, curso_data: curso }) });
         const buf = await r.arrayBuffer();
-        res[tipo] = r.status + ' ' + buf.byteLength;
-      } catch (e) { res[tipo] = 'ERR ' + e; }
+        res[tipo + '.' + fmt] = r.status + ' ' + buf.byteLength;
+      } catch (e) { res[tipo + '.' + fmt] = 'ERR ' + e; }
     }
     return res;
   }, base);
