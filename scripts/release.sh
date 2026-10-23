@@ -94,7 +94,7 @@ json.dump({"version": version, "notes": notas, "pub_date": datetime.datetime.now
 PY
 anteriores=$(gh release list -L 50 --json tagName -q '.[].tagName')
 gh release create "v$ETIQUETA" --title "Cuaderno FP $ETIQUETA" --latest --notes "$NOTAS" "$SAL/$ASSET" "$SAL/latest.json" >/dev/null
-LOCAL=$(sha256sum "$SAL/$ASSET" | cut -c1-64)
+LOCAL=$(sha256sum < "$SAL/$ASSET" | cut -d" " -f1)
 REMOTO=$(gh release view "v$ETIQUETA" --json assets -q '.assets[] | select(.name=="'"$ASSET"'") | .digest' | sed 's/sha256://')
 [ "$LOCAL" = "$REMOTO" ] || { echo "El hash subido NO coincide ($LOCAL / $REMOTO)"; exit 1; }
 curl -sL https://github.com/rafaelsanzprades/CuadernoFP/releases/latest/download/latest.json | grep -q "\"version\": \"$VERSION\"" || { echo "latest.json público no apunta a $VERSION"; exit 1; }
