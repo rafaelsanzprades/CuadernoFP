@@ -65,3 +65,6 @@ frontend/public/workbox-*.js
 
 # trabajo temporal local (no se versiona)
 scratch/
+
+# material retirado en la limpieza (solo local)
+/BASURA/
