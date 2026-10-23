@@ -20,8 +20,8 @@ service, not the source of truth for a session's working data.
 
 ### Dev environment (Windows, PM2-based)
 ```bash
-iniciar.bat     # starts backend (uvicorn --reload :8000) and frontend (next dev --turbo :3000) via PM2
-detener.bat     # stops both
+FPiniciar.bat     # starts backend (uvicorn --reload :8000) and frontend (next dev --turbo :3000) via PM2
+FPdetener.bat     # stops both
 npx pm2 logs    # tail logs from both processes
 ```
 Manual alternative (see `README.md`): `uvicorn main:app --reload --port 8000` in `backend/` (inside
