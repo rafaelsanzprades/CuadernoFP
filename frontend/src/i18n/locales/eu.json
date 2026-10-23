@@ -2777,13 +2777,13 @@
         "telegram": {
           "titulo": "Telegram komunitatea",
           "intro": "cuadernofp.web.app doako web aplikazioaren garapen eta proba talde ofiziala. Bidali iradokizunak, jakinarazi akatsak edo lagundu zure autonomia-erkidegoko curriculum ofiziala emanez.",
-          "b1": "Aplikaziorako ideiak eta funtzio berriak proposatu.",
-          "b2": "Beste autonomia-erkidego batzuetako curriculumak eta araudiak integratzen lagundu.",
-          "b3": "Akatsak edo tresnaren erabilerari buruzko zalantzak jakinarazi.",
-          "b4": "Metodologia arinak, ebaluazio-trikimailuak eta gelako esperientziak partekatu.",
+          "b1": "Ayuda y soporte: irakasleok elkarri lagun diezaiokegu.",
+          "b2": "Catálogos y CCAA: curriculumak lantzeko tailerra.",
+          "b3": "Sugerencias y mejoras: eguneraketak eta funtzio berriak daudenean argitalpenak.",
+          "b4": "Bugs y errores: aplikazioaren ospitalea.",
           "importa": "Parte hartzea garrantzitsua da: katalogoa, egutegiak eta txantiloiak kolaboratiboak dira eta erkidego bakoitzeko irakasleen ekarpenekin bakarrik hazten dira. Aurkez zaitez eta esan iezaguzu zein den zure lanbide-familia eta erkidegoa: sentitu zaitez irakasleen gelan bezala.",
           "boton": "Sartu Telegram taldean",
-          "queHacemos": "Zer egiten dugu hemen?"
+          "queHacemos": "Taldeko gaiak"
         },
         "web": {
           "titulo": "Eduki guztiak dituen webgunea",

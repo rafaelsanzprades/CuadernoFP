@@ -2779,13 +2779,13 @@
         "telegram": {
           "titulo": "Comunitat a Telegram",
           "intro": "Grup oficial de desenvolupament i prova de l'aplicació web gratuïta cuadernofp.web.app. Puja els teus suggeriments, informa d'errors o col·labora aportant el currículum oficial de la teua comunitat autònoma.",
-          "b1": "Proposar idees i noves funcions per a l'aplicació.",
-          "b2": "Ajudar a integrar els currículums i les normatives d'altres comunitats autònomes.",
-          "b3": "Informar d'errors o dubtes sobre l'ús de l'eina.",
-          "b4": "Compartir metodologies àgils, trucs d'avaluació i experiències de classe.",
+          "b1": "Ayuda y soporte: entre el professorat ens podem ajudar.",
+          "b2": "Catálogos y CCAA: el taller de treball per als currículums.",
+          "b3": "Sugerencias y mejoras: publicacions quan hi ha actualitzacions i noves funcions.",
+          "b4": "Bugs y errores: l'hospital de l'app.",
           "importa": "Participar importa: el catàleg, els calendaris i les plantilles són col·laboratius i només creixen amb aportacions del professorat de cada comunitat. Presenta't i digues-nos la teua família professional i la teua comunitat: sent-te com a la sala de professorat.",
           "boton": "Unir-me al grup de Telegram",
-          "queHacemos": "Què fem ací?"
+          "queHacemos": "Els temes del grup"
         },
         "web": {
           "titulo": "Web amb tots els continguts",

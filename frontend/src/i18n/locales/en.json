@@ -2777,13 +2777,13 @@
         "telegram": {
           "titulo": "Telegram community",
           "intro": "Official development and testing group for the free web app cuadernofp.web.app. Send your suggestions, report bugs or help by contributing the official curriculum of your autonomous community.",
-          "b1": "Propose ideas and new features for the app.",
-          "b2": "Help integrate the curricula and regulations of other autonomous communities.",
-          "b3": "Report bugs or questions about using the tool.",
-          "b4": "Share agile methodologies, assessment tricks and classroom experiences.",
+          "b1": "Ayuda y soporte: teachers helping each other.",
+          "b2": "Catálogos y CCAA: the workshop for working on curricula.",
+          "b3": "Sugerencias y mejoras: posts when there are updates and new features.",
+          "b4": "Bugs y errores: the app's hospital.",
           "importa": "Taking part matters: the catalogue, the calendars and the templates are collaborative and only grow with contributions from teachers in each community. Introduce yourself and tell us your professional family and community: feel at home in the staff room.",
           "boton": "Join the Telegram group",
-          "queHacemos": "What do we do here?"
+          "queHacemos": "The group's topics"
         },
         "web": {
           "titulo": "Website with all the content",

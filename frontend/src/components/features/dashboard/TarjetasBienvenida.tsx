@@ -87,12 +87,12 @@ export function TarjetasBienvenida() {
         k("telegram.titulo", "Comunidad en Telegram"),
         <>
           <p>{k("telegram.intro", "Grupo oficial de desarrollo y testeo de la aplicación web gratuita cuadernofp.web.app. Sube tus sugerencias, reporta bugs o colabora aportando el currículo oficial de tu comunidad autónoma.")}</p>
-          <p className="text-foreground font-semibold">{k("telegram.queHacemos", "¿Qué hacemos aquí?")}</p>
+          <p className="text-foreground font-semibold">{k("telegram.queHacemos", "Los temas del grupo")}</p>
           {lista([
-            k("telegram.b1", "Proponer ideas y nuevas funciones para la aplicación."),
-            k("telegram.b2", "Ayudar a integrar los currículos y normativas de otras comunidades autónomas."),
-            k("telegram.b3", "Reportar fallos o dudas sobre el uso de la herramienta."),
-            k("telegram.b4", "Compartir metodologías ágiles, trucos de evaluación y experiencias de clase."),
+            k("telegram.b1", "Ayuda y soporte: entre el profesorado nos podemos ayudar."),
+            k("telegram.b2", "Catálogos y CCAA: el taller de trabajo para los currículos."),
+            k("telegram.b3", "Sugerencias y mejoras: publicaciones cuando hay actualizaciones y nuevas funciones."),
+            k("telegram.b4", "Bugs y errores: el hospital de la app."),
           ])}
           <p>{k("telegram.importa", "Participar importa: el catálogo, los calendarios y las plantillas son colaborativos y solo crecen con aportaciones del profesorado de cada comunidad. Preséntate y dinos tu familia profesional y tu comunidad: siéntete como en la sala de profesorado.")}</p>
         </>,

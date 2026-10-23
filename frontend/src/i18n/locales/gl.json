@@ -2777,13 +2777,13 @@
         "telegram": {
           "titulo": "Comunidade en Telegram",
           "intro": "Grupo oficial de desenvolvemento e proba da aplicación web gratuíta cuadernofp.web.app. Sube as túas suxestións, informa de erros ou colabora achegando o currículo oficial da túa comunidade autónoma.",
-          "b1": "Propoñer ideas e novas funcións para a aplicación.",
-          "b2": "Axudar a integrar os currículos e as normativas doutras comunidades autónomas.",
-          "b3": "Informar de erros ou dúbidas sobre o uso da ferramenta.",
-          "b4": "Compartir metodoloxías áxiles, trucos de avaliación e experiencias de aula.",
+          "b1": "Ayuda y soporte: entre o profesorado podemos axudarnos.",
+          "b2": "Catálogos y CCAA: o taller de traballo para os currículos.",
+          "b3": "Sugerencias y mejoras: publicacións cando hai actualizacións e novas funcións.",
+          "b4": "Bugs y errores: o hospital da app.",
           "importa": "Participar importa: o catálogo, os calendarios e os modelos son colaborativos e só medran con achegas do profesorado de cada comunidade. Preséntate e dinos a túa familia profesional e a túa comunidade: séntete coma na sala do profesorado.",
           "boton": "Unirme ao grupo de Telegram",
-          "queHacemos": "Que facemos aquí?"
+          "queHacemos": "Os temas do grupo"
         },
         "web": {
           "titulo": "Web con todos os contidos",
