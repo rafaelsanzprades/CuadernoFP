@@ -27,6 +27,10 @@ done
 [ "$PUBLICAR" = 1 ] && [ -z "$NOTAS" ] && { echo "Con --publicar hace falta --notas \"…\""; exit 2; }
 [ -f "$CLAVE" ] || { echo "No encuentro la clave de firma: $CLAVE"; exit 2; }
 cd "$RAIZ"
+# El PDF del Manual (paso final de la web) necesita pymupdf en el `python` del PATH: comprobarlo antes de compilar 10 minutos.
+if [ "$PUBLICAR" = 1 ] && [ -d "$WEB" ]; then
+  python -c "import pymupdf" 2>/dev/null || { echo "Falta pymupdf en $(command -v python) ($(python --version 2>&1)). Instálalo con: python -m pip install pymupdf"; exit 2; }
+fi
 [ -z "$(git status --porcelain | grep -v '^??' || true)" ] || { echo "Hay cambios sin confirmar en el repositorio: confírmalos antes de compilar."; git status --short | head; exit 2; }
 
 # ── versión ────────────────────────────────────────────────────────────────
