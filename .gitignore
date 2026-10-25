@@ -68,3 +68,7 @@ scratch/
 
 # material retirado en la limpieza (solo local)
 /BASURA/
+
+# MiMo y revisiones de UX: material de trabajo
+.mimo-context.md
+ux-revision/
