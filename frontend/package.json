@@ -16,7 +16,7 @@
     "test:e2e:report": "npx playwright show-report"
   },
   "dependencies": {
-    "@azure/msal-browser": "^5.14.0",
+    "@azure/msal-browser": "^5.26.0",
     "@ducanh2912/next-pwa": "^10.2.9",
     "@fabianlars/tauri-plugin-oauth": "^2.1.0",
     "@fortawesome/fontawesome-free": "^7.3.0",
