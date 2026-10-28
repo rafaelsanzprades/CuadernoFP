@@ -542,6 +542,21 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
               </div>
 
               <div className="space-y-2">
+                <label className="text-body font-semibold text-foreground" htmlFor="max-convocatorias">{t('campos.modulo.maxConvocatorias', {defaultValue: 'Convocatorias máximas por módulo'})}</label>
+                <input
+                  id="max-convocatorias"
+                  type="number"
+                  min={1}
+                  step={1}
+                  value={config.max_convocatorias ?? ""}
+                  placeholder="4"
+                  onChange={(e) => cambia({ max_convocatorias: e.target.value === "" ? null : Math.max(1, parseInt(e.target.value) || 1) })}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                />
+                <p className="text-caption text-muted">{t('campos.modulo.maxConvocatoriasDesc', {defaultValue: 'En la ficha de acta de cada alumno/a se cuenta cuántas convocatorias lleva consumidas y se avisa al llegar a este número. Vacío = 4; comprueba el límite de tu comunidad.'})}</p>
+              </div>
+
+              <div className="space-y-2">
                 <Select
                   label={t('campos.modulo.reglaSuperacion', {defaultValue: 'Regla para superar el módulo'})}
                   value={config.regla_superacion || "media"}

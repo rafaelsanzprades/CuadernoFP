@@ -40,6 +40,8 @@ export interface ConfigRedondeo {
    *  RA evaluado; «imprescindibles» = hay que superar los RA marcados como imprescindibles (`imprescindible` en df_ra, Currículo). Un RA
    *  sin evaluar no bloquea (igual que nota_minima_ra). Mismo cálculo en backend/helpers_catalogo.py::calcular_notas_jeg. */
   regla_superacion?: "media" | "todos_ra" | "imprescindibles";
+  /** Convocatorias máximas por módulo antes de avisar al docente (utils/estadosActa.ts::convocatoriasUsadas). Vacío = 4. */
+  max_convocatorias?: number | null;
 }
 
 export const DEFAULT_CONFIG_REDONDEO: ConfigRedondeo = {

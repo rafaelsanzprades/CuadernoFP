@@ -1828,7 +1828,11 @@
       "estadoActa_NP": "Non presentado",
       "estadoActa_EX": "Exento",
       "estadoActa_CV": "Validado",
-      "estadoActa_FEP": "Formación en empresa pendente"
+      "estadoActa_FEP": "Formación en empresa pendente",
+      "estadoMotivoPlaceholder": "Resolución ou motivo (n.º, data)…",
+      "convocatoriasPreviasLabel": "Convocatorias de cursos anteriores",
+      "convocatoriasUsadas": "Convocatorias consumidas: {{usadas}} de {{max}}.",
+      "convocatoriasLimite": "É a última: comproba que ocorre despois na túa comunidade."
     },
     "modulo": {
       "bibliografiaDesc": "Bibliografía principal para o profesorado e o alumnado.",
@@ -2010,7 +2014,9 @@
       "reglaMedia": "Abonda coa nota ponderada (media dos RA)",
       "reglaTodosRa": "Hai que superar todos os RA",
       "reglaImprescindibles": "Hai que superar os RA imprescindibles",
-      "reglaSuperacionDesc": "Coas dúas últimas, un RA esixido por debaixo do aprobado deixa o módulo suspenso aínda que a media chegue. Os RA imprescindibles márcanse en Currículo › Relación RA ← CE. Un RA sen avaliar aínda non bloquea."
+      "reglaSuperacionDesc": "Coas dúas últimas, un RA esixido por debaixo do aprobado deixa o módulo suspenso aínda que a media chegue. Os RA imprescindibles márcanse en Currículo › Relación RA ← CE. Un RA sen avaliar aínda non bloquea.",
+      "maxConvocatorias": "Convocatorias máximas por módulo",
+      "maxConvocatoriasDesc": "Na ficha de acta de cada alumno/a contas cantas convocatorias leva consumidas e avísase ao chegar a este número. Baleiro = 4; comproba o límite da túa comunidade."
     },
     "normativa": {
       "legislacionAutonomica": "Lexislación autonómica ({{comunidad}})",

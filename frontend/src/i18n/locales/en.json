@@ -1828,7 +1828,11 @@
       "estadoActa_NP": "Did not sit",
       "estadoActa_EX": "Exempt",
       "estadoActa_CV": "Validated",
-      "estadoActa_FEP": "Work placement pending"
+      "estadoActa_FEP": "Work placement pending",
+      "estadoMotivoPlaceholder": "Resolution or reason (no., date)…",
+      "convocatoriasPreviasLabel": "Calls from previous years",
+      "convocatoriasUsadas": "Calls used: {{usadas}} of {{max}}.",
+      "convocatoriasLimite": "It is the last one: check what happens next in your region."
     },
     "modulo": {
       "bibliografiaDesc": "Main bibliography for teaching staff and students.",
@@ -2010,7 +2014,9 @@
       "reglaMedia": "The weighted grade is enough (average of the RA)",
       "reglaTodosRa": "All RA must be passed",
       "reglaImprescindibles": "The essential RA must be passed",
-      "reglaSuperacionDesc": "With the last two, a required RA below the pass mark fails the module even if the average reaches it. Essential RA are marked in Curriculum > RA-CE relation. An RA not yet assessed does not block."
+      "reglaSuperacionDesc": "With the last two, a required RA below the pass mark fails the module even if the average reaches it. Essential RA are marked in Curriculum > RA-CE relation. An RA not yet assessed does not block.",
+      "maxConvocatorias": "Maximum calls per module",
+      "maxConvocatoriasDesc": "In each student's report record the calls used so far are counted and you are warned when this number is reached. Empty = 4; check your region's limit."
     },
     "normativa": {
       "legislacionAutonomica": "Regional legislation ({{comunidad}})",

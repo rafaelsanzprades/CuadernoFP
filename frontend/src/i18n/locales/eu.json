@@ -1828,7 +1828,11 @@
       "estadoActa_NP": "Aurkeztu gabea",
       "estadoActa_EX": "Salbuetsia",
       "estadoActa_CV": "Balioetsia",
-      "estadoActa_FEP": "Enpresako prestakuntza zain"
+      "estadoActa_FEP": "Enpresako prestakuntza zain",
+      "estadoMotivoPlaceholder": "Ebazpena edo arrazoia (zk., data)…",
+      "convocatoriasPreviasLabel": "Aurreko ikasturteetako deialdiak",
+      "convocatoriasUsadas": "Erabilitako deialdiak: {{usadas}} / {{max}}.",
+      "convocatoriasLimite": "Azkena da: egiaztatu zer gertatzen den ondoren zure erkidegoan."
     },
     "modulo": {
       "bibliografiaDesc": "Irakasleentzako eta ikasleentzako bibliografia nagusia.",
@@ -2010,7 +2014,9 @@
       "reglaMedia": "Nota haztatua nahikoa da (ikaskuntza-emaitzen batez bestekoa)",
       "reglaTodosRa": "Ikaskuntza-emaitza guztiak gainditu behar dira",
       "reglaImprescindibles": "Ikaskuntza-emaitza ezinbestekoak gainditu behar dira",
-      "reglaSuperacionDesc": "Azken biekin, eskatutako ikaskuntza-emaitza bat gainditzeko notaren azpitik badago, modulua gainditu gabe geratzen da batez bestekoa iristen bada ere. Ezinbesteko emaitzak Kurrikuluma › RA ← CE erlazioan markatzen dira. Oraindik ebaluatu gabeko emaitzak ez du blokeatzen."
+      "reglaSuperacionDesc": "Azken biekin, eskatutako ikaskuntza-emaitza bat gainditzeko notaren azpitik badago, modulua gainditu gabe geratzen da batez bestekoa iristen bada ere. Ezinbesteko emaitzak Kurrikuluma › RA ← CE erlazioan markatzen dira. Oraindik ebaluatu gabeko emaitzak ez du blokeatzen.",
+      "maxConvocatorias": "Modulu bakoitzeko gehieneko deialdiak",
+      "maxConvocatoriasDesc": "Ikasle bakoitzaren akta-fitxan zenbat deialdi erabili dituen zenbatzen da, eta zenbaki horretara iristean ohartarazten da. Hutsik = 4; egiaztatu zure erkidegoko muga."
     },
     "normativa": {
       "legislacionAutonomica": "Erkidegoko legedia ({{comunidad}})",

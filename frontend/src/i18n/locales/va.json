@@ -1828,7 +1828,11 @@
       "estadoActa_NP": "No presentat",
       "estadoActa_EX": "Exempt",
       "estadoActa_CV": "Convalidat",
-      "estadoActa_FEP": "Formació en empresa pendent"
+      "estadoActa_FEP": "Formació en empresa pendent",
+      "estadoMotivoPlaceholder": "Resolució o motiu (núm., data)…",
+      "convocatoriasPreviasLabel": "Convocatòries de cursos anteriors",
+      "convocatoriasUsadas": "Convocatòries consumides: {{usadas}} de {{max}}.",
+      "convocatoriasLimite": "És l'última: comprova què passa després a la teua comunitat."
     },
     "modulo": {
       "bibliografiaDesc": "Bibliografia principal per al professorat i l'alumnat.",
@@ -2010,7 +2014,9 @@
       "reglaMedia": "Basta la nota ponderada (mitjana dels RA)",
       "reglaTodosRa": "Cal superar tots els RA",
       "reglaImprescindibles": "Cal superar els RA imprescindibles",
-      "reglaSuperacionDesc": "Amb les dues últimes, un RA exigit per sota de l'aprovat deixa el mòdul suspès encara que la mitjana hi arribe. Els RA imprescindibles es marquen a Currículum › Relació RA ← CE. Un RA sense avaluar encara no bloqueja."
+      "reglaSuperacionDesc": "Amb les dues últimes, un RA exigit per sota de l'aprovat deixa el mòdul suspès encara que la mitjana hi arribe. Els RA imprescindibles es marquen a Currículum › Relació RA ← CE. Un RA sense avaluar encara no bloqueja.",
+      "maxConvocatorias": "Convocatòries màximes per mòdul",
+      "maxConvocatoriasDesc": "A la fitxa d'acta de cada alumne es compta quantes convocatòries du consumides i s'avisa en arribar a este nombre. Buit = 4; comprova el límit de la teua comunitat."
     },
     "normativa": {
       "legislacionAutonomica": "Legislació autonòmica ({{comunidad}})",

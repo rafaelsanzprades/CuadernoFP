@@ -4,7 +4,7 @@ import { BarChart, Target, ClipboardList, FileDown, BookMarked, Building2 } from
 import { PanelPorAlumno, SeccionAcordeon } from "@/components/features/alumnado/PanelPorAlumno";
 import { FeoeEmpresaAlumno } from "./FeoeEmpresaTab";
 import { rasNoSuperadosTutor } from "@/utils/tutorEmpresa";
-import { ESTADOS_ACTA, NOMBRE_ESTADO_ACTA, SIGLA_ESTADO_ACTA, estadoActa } from "@/utils/estadosActa";
+import { ESTADOS_ACTA, MAX_CONVOCATORIAS_DEFECTO, NOMBRE_ESTADO_ACTA, SIGLA_ESTADO_ACTA, convocatoriasUsadas, estadoActa } from "@/utils/estadosActa";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -178,6 +178,21 @@ export function DetalleAlumnadoTab() {
     if (val === "") delete newEval[evRowIdx]["Estado_Acta"]; else newEval[evRowIdx]["Estado_Acta"] = val;
     updateCursoData("df_eval", newEval);
     pushHistorial(al_id, "Estado_Acta", valorAnterior, val === "" ? null : val);
+  };
+
+  // Datos libres del alumno/a en el acta: Convocatorias_Previas (número) y Estado_Motivo (resolución de exención o convalidación).
+  const handleCampoActa = (al_id: string, campo: "Convocatorias_Previas" | "Estado_Motivo", val: number | string | null) => {
+    const newEval = [...df_eval];
+    let evRowIdx = newEval.findIndex(e => e.ID === al_id);
+    if (evRowIdx === -1) {
+      newEval.push({ ID: al_id, Nota_Final_FO: 0 });
+      evRowIdx = newEval.length - 1;
+    }
+    const valorAnterior = newEval[evRowIdx][campo] ?? null;
+    newEval[evRowIdx] = { ...newEval[evRowIdx] };
+    if (val === null || val === "") delete newEval[evRowIdx][campo]; else newEval[evRowIdx][campo] = val;
+    updateCursoData("df_eval", newEval);
+    if (campo === "Convocatorias_Previas") pushHistorial(al_id, campo, valorAnterior, val === "" ? null : val);
   };
 
   // El Sigad se calcula solo a partir de la Nota_Final_FO (getSigadInfo), pero
@@ -417,10 +432,44 @@ export function DetalleAlumnadoTab() {
                                   <option key={e} value={e}>{SIGLA_ESTADO_ACTA[e]} — {t(`campos.evaluacion.estadoActa_${e}`, {defaultValue: NOMBRE_ESTADO_ACTA[e]})}</option>
                                 ))}
                               </select>
+                              {(estadoDelActa === "EX" || estadoDelActa === "CV") && (
+                                <input
+                                  type="text"
+                                  value={evRow.Estado_Motivo || ""}
+                                  onChange={(e) => handleCampoActa(al_id, "Estado_Motivo", e.target.value)}
+                                  onClick={(e) => e.stopPropagation()}
+                                  placeholder={t('campos.evaluacion.estadoMotivoPlaceholder', {defaultValue: 'Resolución o motivo (n.º, fecha)…'})}
+                                  aria-label={t('campos.evaluacion.estadoMotivoPlaceholder', {defaultValue: 'Resolución o motivo (n.º, fecha)…'})}
+                                  className="w-full mt-2 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-info focus:outline-none"
+                                />
+                              )}
                               {estadoDelActa && (
                                 <p className="text-caption text-muted mt-1">{t('campos.evaluacion.estadoActaAviso', {defaultValue: 'En el acta, el boletín grupal y MagIA se muestra la sigla en lugar de la nota.'})}</p>
                               )}
                             </div>
+                            {(() => {
+                              const usadas = convocatoriasUsadas(evRow);
+                              const maxConv = config_redondeo.max_convocatorias || MAX_CONVOCATORIAS_DEFECTO;
+                              return (
+                                <div className="mb-4">
+                                  <label htmlFor={`conv-previas-${al_id}`} className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.convocatoriasPreviasLabel', {defaultValue: 'Convocatorias de cursos anteriores'})}</label>
+                                  <input
+                                    id={`conv-previas-${al_id}`}
+                                    type="number"
+                                    min="0" step="1"
+                                    value={evRow.Convocatorias_Previas ?? ""}
+                                    placeholder="0"
+                                    onChange={(e) => handleCampoActa(al_id, "Convocatorias_Previas", e.target.value === "" ? null : Math.max(0, Math.floor(Number(e.target.value) || 0)))}
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-info focus:outline-none"
+                                  />
+                                  <p className={`text-caption mt-1 ${usadas >= maxConv ? "text-danger font-semibold" : "text-muted"}`} role={usadas >= maxConv ? "alert" : undefined}>
+                                    {t('campos.evaluacion.convocatoriasUsadas', {defaultValue: 'Convocatorias consumidas: {{usadas}} de {{max}}.', usadas, max: maxConv})}
+                                    {usadas >= maxConv && " " + t('campos.evaluacion.convocatoriasLimite', {defaultValue: 'Es la última: comprueba qué ocurre después en tu comunidad.'})}
+                                  </p>
+                                </div>
+                              );
+                            })()}
                             <div className="mb-4">
                               <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaFinalOrdinariaLabel', {defaultValue: 'Nota final ordinaria — FO (manual / calc)'})}</label>
                               <input
