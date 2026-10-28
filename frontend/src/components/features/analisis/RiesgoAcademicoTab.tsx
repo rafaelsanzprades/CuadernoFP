@@ -1,6 +1,7 @@
 import { AlertTriangle, PartyPopper } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { isAlumnoActivo } from "@/utils/alumnado";
+import { estadoActa, estadoSinRiesgo } from "@/utils/estadosActa";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "react-i18next";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -19,6 +20,7 @@ export const RiesgoAcademicoTab = () => {
 
   // Risks
   const risks = df_eval_activos
+    .filter((e: any) => !estadoSinRiesgo(estadoActa(e)))
     .filter((e: any) => (Number(e.Nota_Final_FO) || 0) < 5)
     .map((e: any) => {
       const al = activeAlumnado.find((a: any) => a.ID === e.ID);

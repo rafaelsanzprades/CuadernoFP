@@ -1820,7 +1820,15 @@
       "notaSigadLabel": "Sigad grade (1-10, manual / calc.)",
       "minAbrev": "Min",
       "maxAbrev": "Max",
-      "tutorNoSuperadoAviso": "The company tutor has not passed: {{ras}}. With that assessment the report grade should not be positive."
+      "tutorNoSuperadoAviso": "The company tutor has not passed: {{ras}}. With that assessment the report grade should not be positive.",
+      "estadoActaLabel": "Status in the report",
+      "estadoActaCalificado": "Graded (numeric grade)",
+      "estadoActaAviso": "The report, the group report card and MagIA show the abbreviation instead of the grade.",
+      "estadoActa_NE": "Not assessed",
+      "estadoActa_NP": "Did not sit",
+      "estadoActa_EX": "Exempt",
+      "estadoActa_CV": "Validated",
+      "estadoActa_FEP": "Work placement pending"
     },
     "modulo": {
       "bibliografiaDesc": "Main bibliography for teaching staff and students.",

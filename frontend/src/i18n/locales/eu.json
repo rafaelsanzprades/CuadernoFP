@@ -1820,7 +1820,15 @@
       "notaSigadLabel": "Sigad nota (1-10, eskuzkoa / kalk.)",
       "minAbrev": "Gutx",
       "maxAbrev": "Geh",
-      "tutorNoSuperadoAviso": "Enpresako tutoreak ez du gaindituta eman: {{ras}}. Balorazio horrekin aktako nota ez litzateke positiboa izan behar."
+      "tutorNoSuperadoAviso": "Enpresako tutoreak ez du gaindituta eman: {{ras}}. Balorazio horrekin aktako nota ez litzateke positiboa izan behar.",
+      "estadoActaLabel": "Egoera aktan",
+      "estadoActaCalificado": "Kalifikatua (zenbakizko nota)",
+      "estadoActaAviso": "Aktan, taldeko boletinean eta MagIAn sigla agertzen da notaren ordez.",
+      "estadoActa_NE": "Ebaluatu gabea",
+      "estadoActa_NP": "Aurkeztu gabea",
+      "estadoActa_EX": "Salbuetsia",
+      "estadoActa_CV": "Balioetsia",
+      "estadoActa_FEP": "Enpresako prestakuntza zain"
     },
     "modulo": {
       "bibliografiaDesc": "Irakasleentzako eta ikasleentzako bibliografia nagusia.",

@@ -19,6 +19,9 @@ from reportlab.lib.units import cm
 from helpers_catalogo import resolve_escala_cualitativa, nota_acta, formato_nota_acta
 from pdf_helpers import esc
 
+# Estado de la calificación en el acta (campo Estado_Acta de df_eval) -> sigla que sustituye a la nota. Mismas siglas que frontend/src/utils/estadosActa.ts
+ESTADOS_ACTA = {"NE": "NE", "NP": "NP", "EX": "EX", "CV": "CV", "FEP": "FE pend."}
+
 
 def _draw_page_decorations(canv, doc):
     """Cabecera y pie - idéntico al Calendario académico."""
@@ -121,7 +124,13 @@ def _compute_grupal_rows(trimestre: str, info_modulo: dict, df_al: pd.DataFrame,
         edad = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
         apells = str(al.get("Apellidos", ""))
         nombre = str(al.get("Nombre", ""))
+        estado = ""
+        if "Estado_Acta" in df_eval.columns:
+            raw_estado = df_eval.at[idx_ev, "Estado_Acta"]
+            if pd.notna(raw_estado) and str(raw_estado) in ESTADOS_ACTA:
+                estado = ESTADOS_ACTA[str(raw_estado)]
         filas.append({
+            "estado": estado,
             "idx": idx_lista,
             "alumnado": f"{apells}, {nombre}" if nombre else apells,
             "edad": edad,
@@ -480,8 +489,9 @@ def generar_pdf_boletin_grupal_final(
             Paragraph(f"{nt['1T']:.1f}", sml),
             Paragraph(f"{nt['2T']:.1f}", sml),
             Paragraph(f"{nt['3T']:.1f}", sml),
+            Paragraph(f"<b>{esc(f['estado'])}</b>", normB) if f.get("estado") else
             Paragraph(f"<b>{formato_nota_acta(f['nota_final_ord'], config_redondeo)}</b><br/><font size='6'>{esc(f['escala_final_ord'])}</font>", normB),
-            Paragraph(f"<b>{formato_nota_acta(f['nota_final_extra'], config_redondeo)}</b><br/><font size='6'>{esc(f['escala_final_extra'])}</font>" if f["nota_final_extra"] is not None else "", sml),
+            Paragraph(f"<b>{formato_nota_acta(f['nota_final_extra'], config_redondeo)}</b><br/><font size='6'>{esc(f['escala_final_extra'])}</font>" if f["nota_final_extra"] is not None and not f.get("estado") else "", sml),
         ]
         table_data.append(row)
 
@@ -560,9 +570,9 @@ def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha
     rows = []
     for f in filas:
         nt = f["notas_tri"]
-        nota_ord_str = f"{formato_nota_acta(f['nota_final_ord'], config_redondeo)} ({f['escala_final_ord']})" if f['escala_final_ord'] else formato_nota_acta(f['nota_final_ord'], config_redondeo)
+        nota_ord_str = f.get("estado") or (f"{formato_nota_acta(f['nota_final_ord'], config_redondeo)} ({f['escala_final_ord']})" if f['escala_final_ord'] else formato_nota_acta(f['nota_final_ord'], config_redondeo))
         nota_extra_str = ""
-        if f["nota_final_extra"] is not None:
+        if f["nota_final_extra"] is not None and not f.get("estado"):
             nota_extra_str = f"{formato_nota_acta(f['nota_final_extra'], config_redondeo)} ({f['escala_final_extra']})" if f['escala_final_extra'] else formato_nota_acta(f['nota_final_extra'], config_redondeo)
         rows.append([f["idx"], f["alumnado"], f["edad"], f["repite"],
                      f"{nt['1T']:.1f}", f"{nt['2T']:.1f}", f"{nt['3T']:.1f}",

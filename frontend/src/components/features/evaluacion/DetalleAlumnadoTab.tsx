@@ -4,6 +4,7 @@ import { BarChart, Target, ClipboardList, FileDown, BookMarked, Building2 } from
 import { PanelPorAlumno, SeccionAcordeon } from "@/components/features/alumnado/PanelPorAlumno";
 import { FeoeEmpresaAlumno } from "./FeoeEmpresaTab";
 import { rasNoSuperadosTutor } from "@/utils/tutorEmpresa";
+import { ESTADOS_ACTA, NOMBRE_ESTADO_ACTA, SIGLA_ESTADO_ACTA, estadoActa } from "@/utils/estadosActa";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -78,7 +79,7 @@ export function DetalleAlumnadoTab() {
   // Registro append-only de cada cambio de nota (ítem 33) -- respaldo ante una
   // reclamación futura (ítem 34), independiente del undo/redo de sesión
   // (zundo), que se pierde al recargar. Sin límite ni purga (monousuario).
-  const pushHistorial = (al_id: string, campo: string, valor_anterior: number | null, valor_nuevo: number | null) => {
+  const pushHistorial = (al_id: string, campo: string, valor_anterior: number | string | null, valor_nuevo: number | string | null) => {
     if (valor_anterior === valor_nuevo) return;
     const entry = {
       fecha: new Date().toISOString(),
@@ -162,6 +163,21 @@ export function DetalleAlumnadoTab() {
     newEval[evRowIdx]["Nota_Final_FE"] = val;
     updateCursoData("df_eval", newEval);
     pushHistorial(al_id, "Nota_Final_FE", valorAnterior, val);
+  };
+
+  // Estado del alumno/a en el acta (No evaluado, No presentado, Exento, Convalidado, FE pendiente); "" = calificado.
+  const handleEstadoActa = (al_id: string, val: string) => {
+    const newEval = [...df_eval];
+    let evRowIdx = newEval.findIndex(e => e.ID === al_id);
+    if (evRowIdx === -1) {
+      newEval.push({ ID: al_id, Nota_Final_FO: 0 });
+      evRowIdx = newEval.length - 1;
+    }
+    const valorAnterior = newEval[evRowIdx]["Estado_Acta"] ?? null;
+    newEval[evRowIdx] = { ...newEval[evRowIdx] };
+    if (val === "") delete newEval[evRowIdx]["Estado_Acta"]; else newEval[evRowIdx]["Estado_Acta"] = val;
+    updateCursoData("df_eval", newEval);
+    pushHistorial(al_id, "Estado_Acta", valorAnterior, val === "" ? null : val);
   };
 
   // El Sigad se calcula solo a partir de la Nota_Final_FO (getSigadInfo), pero
@@ -278,6 +294,7 @@ export function DetalleAlumnadoTab() {
           // así que reutilizamos la función también para el override manual.
           const sigadOverride = evRow.Sigad_Override;
           const sigad = sigadOverride != null ? getSigadInfo(Number(sigadOverride)) : getSigadInfo(nota_prev);
+          const estadoDelActa = estadoActa(evRow);
           const activeStudentTab = activeTabByStudent[al_id] || trimestreActual;
 
           // Motor JEG, modo automático (Indicador->CE->RA->Módulo, Ítem 42 punto 6, ver
@@ -387,6 +404,24 @@ export function DetalleAlumnadoTab() {
                             })()}
                             <h4 className="font-bold text-foreground mb-4">{t('campos.evaluacion.calificacionActaTitulo', {defaultValue: 'Calificación de acta'})}</h4>
                             <div className="mb-4">
+                              <label htmlFor={`estado-acta-${al_id}`} className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.estadoActaLabel', {defaultValue: 'Estado en el acta'})}</label>
+                              <select
+                                id={`estado-acta-${al_id}`}
+                                value={estadoDelActa || ""}
+                                onChange={(e) => handleEstadoActa(al_id, e.target.value)}
+                                onClick={(e) => e.stopPropagation()}
+                                className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-info focus:outline-none"
+                              >
+                                <option value="">{t('campos.evaluacion.estadoActaCalificado', {defaultValue: 'Calificado (nota numérica)'})}</option>
+                                {ESTADOS_ACTA.map((e) => (
+                                  <option key={e} value={e}>{SIGLA_ESTADO_ACTA[e]} — {t(`campos.evaluacion.estadoActa_${e}`, {defaultValue: NOMBRE_ESTADO_ACTA[e]})}</option>
+                                ))}
+                              </select>
+                              {estadoDelActa && (
+                                <p className="text-caption text-muted mt-1">{t('campos.evaluacion.estadoActaAviso', {defaultValue: 'En el acta, el boletín grupal y MagIA se muestra la sigla en lugar de la nota.'})}</p>
+                              )}
+                            </div>
+                            <div className="mb-4">
                               <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaFinalOrdinariaLabel', {defaultValue: 'Nota final ordinaria — FO (manual / calc)'})}</label>
                               <input
                                 type="number"
@@ -435,11 +470,18 @@ export function DetalleAlumnadoTab() {
                             </div>
                           </div>
 
+                          {estadoDelActa ? (
+                            <div className="rounded-xl flex flex-col items-center justify-center p-5 border-2 border-[var(--glass-border)] text-center">
+                              <div className="text-heading font-black mb-2 text-foreground" style={{ lineHeight: 1 }}>{SIGLA_ESTADO_ACTA[estadoDelActa]}</div>
+                              <div className="text-caption text-muted tracking-wider font-semibold">{t(`campos.evaluacion.estadoActa_${estadoDelActa}`, {defaultValue: NOMBRE_ESTADO_ACTA[estadoDelActa]})}</div>
+                            </div>
+                          ) : (
                           <div className="rounded-xl flex flex-col items-center justify-center p-5 border-2 text-center" style={{ borderColor: sigad.col, backgroundColor: `${sigad.col}11` }}>
                             <div className="text-heading font-black mb-2" style={{ color: sigad.col, lineHeight: 1 }}>{sigad.n}</div>
                             <div className="text-subheading font-bold" style={{ color: sigad.col }}>{sigad.cod}</div>
                             <div className="text-caption text-muted mt-1 tracking-wider font-semibold">{sigad.txt}</div>
                           </div>
+                          )}
                         </div>
                       </div>
 

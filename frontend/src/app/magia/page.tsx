@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { Alumnado } from "@/types";
 import { isAlumnoActivo } from "@/utils/alumnado";
+import { estadoActa, SIGLA_ESTADO_ACTA } from "@/utils/estadosActa";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, getSigadInfo, filtrarPorGev } from "@/utils/calificaciones";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -247,6 +248,7 @@ export default function MagiaPage() {
     const rowsTri = activeAl.map((al: any) => {
       const evRow = df_eval.find((e: any) => e.ID === al.ID) || {};
       const notaFinal = evRow.Nota_Final_FO ?? null;
+      const estadoDelActa = estadoActa(evRow);
       const sigadOverride = evRow.Sigad_Override;
       const sigad = sigadOverride != null ? getSigadInfo(Number(sigadOverride)) : getSigadInfo(notaFinal);
       return {
@@ -256,9 +258,9 @@ export default function MagiaPage() {
         "1er trimestre": evRow["1T_Nota"] ?? "",
         "2º trimestre": evRow["2T_Nota"] ?? "",
         "3er trimestre": evRow["3T_Nota"] ?? "",
-        "Final ordinaria": notaFinal ?? "",
+        "Final ordinaria": estadoDelActa ? SIGLA_ESTADO_ACTA[estadoDelActa] : (notaFinal ?? ""),
         "Final extraordinaria": evRow.Nota_Final_FE ?? "",
-        Sigad: sigad.sinEvaluar ? "" : sigad.cod,
+        Sigad: estadoDelActa || sigad.sinEvaluar ? "" : sigad.cod,
       };
     });
     const wsTri = XLSX.utils.json_to_sheet(rowsTri);

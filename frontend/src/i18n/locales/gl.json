@@ -1820,7 +1820,15 @@
       "notaSigadLabel": "Nota Sigad (1-10, manual / calc)",
       "minAbrev": "Mín",
       "maxAbrev": "Máx",
-      "tutorNoSuperadoAviso": "O titor da empresa non deu por superado: {{ras}}. Con esa valoración a nota da acta non debería ser positiva."
+      "tutorNoSuperadoAviso": "O titor da empresa non deu por superado: {{ras}}. Con esa valoración a nota da acta non debería ser positiva.",
+      "estadoActaLabel": "Estado na acta",
+      "estadoActaCalificado": "Cualificado (nota numérica)",
+      "estadoActaAviso": "Na acta, no boletín grupal e en MagIA móstrase a sigla en lugar da nota.",
+      "estadoActa_NE": "Non avaliado",
+      "estadoActa_NP": "Non presentado",
+      "estadoActa_EX": "Exento",
+      "estadoActa_CV": "Validado",
+      "estadoActa_FEP": "Formación en empresa pendente"
     },
     "modulo": {
       "bibliografiaDesc": "Bibliografía principal para o profesorado e o alumnado.",
