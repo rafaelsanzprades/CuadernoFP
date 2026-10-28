@@ -6,6 +6,10 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
+import {
+  ID_INSTRUMENTO_FEOE, idIndicadorFeoe, valorA10, valor10A1, modoTutor, filaFeoe, conValoracionRa, conInforme, mediaEscalaRa, resultadoRaTutor,
+} from "@/utils/tutorEmpresa";
 
 // ─── Ítem 12 (resto): evaluación del RA desarrollado en empresa (FEOE) ──────
 // El tutor de empresa valora, para los CE que el profesor designe, del 1 al 4
@@ -26,15 +30,10 @@ import Link from "next/link";
 // aprobado real) no empuja la nota del RA por encima de 5, coherente con la
 // propia regla del Anexo: "Superado" exige una media de las actividades
 // ESTRICTAMENTE superior a 2, no un 2 raso.
-
-const ID_INSTRUMENTO_FEOE = "FEOE-EMPRESA";
-const idIndicadorFeoe = (ce_id: string) => `FEOE-${ce_id}`;
-
-const valorA10 = (valor1a4: number) => Math.round((((valor1a4 - 1) / 3) * 10) * 10) / 10;
-const valor10A1 = (valor0a10: number | null | undefined): number | null => {
-  if (valor0a10 === null || valor0a10 === undefined) return null;
-  return Math.round((valor0a10 / 10) * 3) + 1;
-};
+//
+// Con el modo «superado» del perfil de comunidad (Datos > Reglas de redondeo), en cambio, el tutor da cada RA por «Superado» o «No
+// superado» con su motivación, sin escala por criterio (RD 659/2023, art. 18.7.a); ver utils/tutorEmpresa.ts. En los dos modos hay
+// además una valoración cualitativa del tutor.
 
 const getScoreOptions = (t: (key: string, opts?: any) => string) => [
   { value: 1, label: t('campos.feoe.score1', {defaultValue: '1 · Suspenso'}), color: "border-danger text-danger bg-danger/10" },
@@ -54,6 +53,9 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   const df_ce = moduleData?.df_ce || [];
   const df_calificaciones = cursoData?.df_calificaciones || [];
   const df_instr = moduleData?.df_instr || [];
+  const df_feoe = cursoData?.df_feoe || [];
+  const modo = modoTutor({ ...DEFAULT_CONFIG_REDONDEO, ...(moduleData?.config_redondeo || {}) });
+  const filaAlumno = filaFeoe(df_feoe, studentId);
 
   // La designación de qué CE evalúa el tutor de empresa es la misma que
   // is_dual (FEOE) en Currículo › Relación RA <- CE -- antes había aquí un checkbox
@@ -156,6 +158,16 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
     updateCursoData("df_calificaciones", next);
   };
 
+  const setResultado = (al_id: string, id_ra: string, resultado: "superado" | "no_superado") =>
+    updateCursoData("df_feoe", conValoracionRa(df_feoe, al_id, id_ra, { resultado }));
+  const setMotivacion = (al_id: string, id_ra: string, motivacion: string) =>
+    updateCursoData("df_feoe", conValoracionRa(df_feoe, al_id, id_ra, { motivacion }));
+  const todoSuperado = (al_id: string) => {
+    let next = df_feoe;
+    raConDesignados.forEach((ra: any) => { next = conValoracionRa(next, al_id, ra.id_ra, { resultado: "superado" }); });
+    updateCursoData("df_feoe", next);
+  };
+
   if (ceDesignados.length === 0) {
     return (
         <Card className="p-8 text-center border-l-4 border-l-amber-500">
@@ -180,8 +192,20 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-caption text-muted flex-1 min-w-[240px]">
-          {t('campos.feoe.rellenaConBotonDesc', {defaultValue: 'Rellena con un botón y corrige a mano lo que haga falta — es solo un punto de partida, no un valor definitivo.'})}
+          {modo === "superado"
+            ? t('campos.feoe.modoSuperadoDesc', {defaultValue: 'Anota para cada RA si el tutor de empresa lo da por «Superado» o «No superado». Si no lo supera, escribe el motivo.'})
+            : t('campos.feoe.rellenaConBotonDesc', {defaultValue: 'Rellena con un botón y corrige a mano lo que haga falta — es solo un punto de partida, no un valor definitivo.'})}
         </p>
+                  {modo === "superado" ? (
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => todoSuperado(studentId)}
+                        className="flex items-center gap-1.5 text-caption font-semibold px-3 py-1.5 rounded-full border border-success/30 text-success bg-success/10 hover:bg-success/20 transition-colors"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5" /> {t('botones.feoe.todoSuperado', {defaultValue: 'Todos los RA superados'})}
+                      </button>
+                    </div>
+                  ) : (
                   <div className="flex gap-2">
                     <button
                       onClick={() => rellenarTodo(studentId, 4)}
@@ -196,12 +220,14 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
                       <ThumbsUp className="w-3.5 h-3.5" /> {t('botones.feoe.suficienteTodoA3', {defaultValue: 'Suficiente (todo a 3)'})}
                     </button>
                   </div>
+                  )}
       </div>
                   {raConDesignados.map((ra: any) => {
                     const cesDeRa = ceDesignados.filter((ce: any) => ce.id_ra === ra.id_ra);
-                    const valores = cesDeRa.map((ce: any) => getValor(studentId, ce.id_ce)).filter((v: any) => v !== null) as number[];
-                    const media = valores.length > 0 ? valores.reduce((a, b) => a + b, 0) / valores.length : null;
-                    const superado = media !== null ? media > 2 : null;
+                    const media = mediaEscalaRa(df_calificaciones, cesDeRa, studentId);
+                    const resultado = resultadoRaTutor(modo, filaAlumno, ra.id_ra, media);
+                    const superado = resultado === null ? null : resultado === "superado";
+                    const motivacion = filaAlumno.ra?.[ra.id_ra]?.motivacion || "";
 
                     return (
                       <div key={ra.id_ra} className="bg-background/20 border border-white/5 rounded-xl p-5">
@@ -210,7 +236,28 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
                             <span className="font-bold text-foreground">{ra.id_ra}</span>
                             <span className="text-caption text-muted ml-2">{ra.desc_ra || ""}</span>
                           </div>
-                          {superado === null ? (
+                          {modo === "superado" ? (
+                            <div className="flex gap-1.5 shrink-0" role="group" aria-label={t('campos.feoe.resultadoDelRa', {defaultValue: 'Resultado del tutor de empresa para este RA'})}>
+                              <button
+                                onClick={() => setResultado(studentId, ra.id_ra, "superado")}
+                                aria-pressed={resultado === "superado"}
+                                className={`flex items-center gap-1.5 px-3 py-1 text-caption font-semibold rounded-full border transition-colors ${
+                                  resultado === "superado" ? "border-success text-success bg-success/10" : "bg-transparent border-white/10 text-muted hover:border-white/30"
+                                }`}
+                              >
+                                <CheckCircle2 className="w-4 h-4" /> {t('campos.feoe.superado', {defaultValue: 'Superado'})}
+                              </button>
+                              <button
+                                onClick={() => setResultado(studentId, ra.id_ra, "no_superado")}
+                                aria-pressed={resultado === "no_superado"}
+                                className={`flex items-center gap-1.5 px-3 py-1 text-caption font-semibold rounded-full border transition-colors ${
+                                  resultado === "no_superado" ? "border-danger text-danger bg-danger/10" : "bg-transparent border-white/10 text-muted hover:border-white/30"
+                                }`}
+                              >
+                                <XCircle className="w-4 h-4" /> {t('campos.feoe.noSuperado', {defaultValue: 'No superado'})}
+                              </button>
+                            </div>
+                          ) : superado === null ? (
                             <span className="flex items-center gap-1.5 text-caption text-muted"><HelpCircle className="w-4 h-4" /> {t('campos.feoe.sinEvaluar', {defaultValue: 'Sin evaluar'})}</span>
                           ) : superado ? (
                             <span className="flex items-center gap-1.5 text-caption font-semibold text-success" title={t('campos.feoe.mediaSuperiorA2', {defaultValue: 'Media de las actividades > 2, según el Anexo XI b)'})}>
@@ -223,9 +270,33 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
                           )}
                         </div>
 
+                        {resultado === "no_superado" && (
+                          <div className="mb-4">
+                            <input
+                              type="text"
+                              value={motivacion}
+                              onChange={(e) => setMotivacion(studentId, ra.id_ra, e.target.value)}
+                              placeholder={t('campos.feoe.motivacionPlaceholder', {defaultValue: 'Motivo por el que no se supera (obligatorio)…'})}
+                              aria-label={t('campos.feoe.motivacionPlaceholder', {defaultValue: 'Motivo por el que no se supera (obligatorio)…'})}
+                              aria-invalid={motivacion.trim() === ""}
+                              className={`w-full bg-transparent border-b text-body text-foreground placeholder:text-muted/50 py-1 focus:outline-none ${
+                                motivacion.trim() === "" ? "border-danger/60 focus:border-danger" : "border-[var(--glass-border)] focus:border-accent"
+                              }`}
+                            />
+                            {motivacion.trim() === "" && (
+                              <p className="text-caption text-danger mt-1">{t('campos.feoe.motivacionFalta', {defaultValue: 'Falta el motivo: la norma pide motivar cada «No superado».'})}</p>
+                            )}
+                          </div>
+                        )}
+
                         <div className="space-y-3">
                           {cesDeRa.map((ce: any) => {
                             const valorActual = getValor(studentId, ce.id_ce);
+                            if (modo === "superado") {
+                              return (
+                                <p key={ce.id_ce} className="text-body text-foreground/80 px-1">{ce.id_ce} — {ce.desc_ce || ""}</p>
+                              );
+                            }
                             return (
                               <div key={ce.id_ce} className="p-3 rounded-lg bg-foreground/5 border border-white/5">
                                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
@@ -258,6 +329,20 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
                       </div>
                     );
                   })}
+
+      <div className="bg-background/20 border border-white/5 rounded-xl p-5">
+        <label className="font-bold text-foreground block mb-1" htmlFor={`informe-tutor-${studentId}`}>
+          {t('campos.feoe.informeCualitativo', {defaultValue: 'Valoración cualitativa del tutor de empresa'})}
+        </label>
+        <p className="text-caption text-muted mb-2">{t('campos.feoe.informeCualitativoDesc', {defaultValue: 'Adaptación a la empresa, iniciativa, trabajo en equipo, comunicación… Es el informe cualitativo que acompaña a la valoración de los RA.'})}</p>
+        <textarea
+          id={`informe-tutor-${studentId}`}
+          value={filaAlumno.informe || ""}
+          onChange={(e) => updateCursoData("df_feoe", conInforme(df_feoe, studentId, e.target.value))}
+          rows={3}
+          className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-accent focus:outline-none"
+        />
+      </div>
     </div>
   );
 }

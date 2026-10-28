@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { BarChart, Target, ClipboardList, FileDown, BookMarked, Building2 } from "lucide-react";
 import { PanelPorAlumno, SeccionAcordeon } from "@/components/features/alumnado/PanelPorAlumno";
 import { FeoeEmpresaAlumno } from "./FeoeEmpresaTab";
+import { rasNoSuperadosTutor } from "@/utils/tutorEmpresa";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +12,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { resolveDescRa, enrichInfoModulo } from "@/services/catalogCache";
 import { useDynamicPlanning } from "@/hooks/useDynamicPlanning";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, getSigadInfo, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto, filtrarPorGev } from "@/utils/calificaciones";
+import { calcularNotasJEG, getSigadInfo, notaActa, DEFAULT_CONFIG_REDONDEO, setCalificacionAuto, filtrarPorGev } from "@/utils/calificaciones";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import toast from "react-hot-toast";
@@ -44,6 +45,7 @@ export function DetalleAlumnadoTab() {
   const df_instr = moduleData?.df_instr || [];
   const df_indicadores = moduleData?.df_indicadores || [];
   const df_calificaciones = cursoData?.df_calificaciones || [];
+  const df_feoe = cursoData?.df_feoe || [];
   const info_fechas = cursoData?.info_fechas || {};
   // Trimestre en curso (en DEMO, el de la fecha simulada): es el que se abre por
   // defecto en las notas de cada alumno/a. Si hoy cae entre trimestres, el
@@ -114,17 +116,28 @@ export function DetalleAlumnadoTab() {
     }
 
     const { nota_final } = calcularNotasJEG(al_id, filtrarPorGev(newCal, df_instr, df_al.find((a: any) => a.ID === al_id)?.gev), df_indicadores, df_instr, df_ce, df_ra, config_redondeo);
-    // Nota final oficial (FO) siempre con 1 decimal, como pide Rafael — el cálculo
-    // interno (calcularNotasJEG, notas_ra, notas_ce) conserva toda su precisión, esto
-    // solo redondea el valor que se guarda como nota de acta.
-    newEval[evRowIdx]["Nota_Final_FO"] = nota_final !== null ? Number(nota_final.toFixed(1)) : 0;
+    // Nota final oficial (FO): entera de 1 a 10 con la regla de redondeo elegida, o con 1 decimal si el centro lo admite
+    // (Datos > Reglas de redondeo). El cálculo interno (calcularNotasJEG, notas_ra, notas_ce) conserva toda su precisión;
+    // esto solo fija el valor que se guarda como nota de acta.
+    let nf = notaActa(nota_final, config_redondeo);
+    // Si el tutor de empresa no ha dado por superado algún RA, la nota de acta no puede ser positiva (RD 659/2023, art. 18.7.a;
+    // Asturias lo exige expresamente): se queda en el máximo suspenso, que el docente puede cambiar a mano.
+    if (nf !== null && nf >= config_redondeo.nota_aprobado && rasNoSuperadosTutor(config_redondeo, df_feoe, newCal, df_ce, al_id).length > 0) {
+      nf = config_redondeo.decimales_acta === 1 ? Number((config_redondeo.nota_aprobado - 0.1).toFixed(1)) : Math.ceil(config_redondeo.nota_aprobado) - 1;
+    }
+    newEval[evRowIdx]["Nota_Final_FO"] = nf !== null ? nf : 0;
 
     updateCursoData("df_eval", newEval);
     updateCursoData("df_calificaciones", newCal);
     pushHistorial(al_id, act_id, valorAnterior, val);
   };
 
-  const handleOverrideNotaFinalFO = (al_id: string, val: number) => {
+  // Una nota escrita a mano en el acta se ajusta a los decimales elegidos (entera, o 1 decimal)
+  const decimalesActa = config_redondeo.decimales_acta === 1 ? 1 : 0;
+  const ajustaActa = (v: number) => (v > 0 ? (decimalesActa === 1 ? Number(v.toFixed(1)) : Math.round(v)) : v);
+
+  const handleOverrideNotaFinalFO = (al_id: string, rawVal: number) => {
+    const val = ajustaActa(rawVal);
     const newEval = [...df_eval];
     let evRowIdx = newEval.findIndex(e => e.ID === al_id);
     if (evRowIdx === -1) {
@@ -137,7 +150,8 @@ export function DetalleAlumnadoTab() {
     pushHistorial(al_id, "Nota_Final_FO", valorAnterior, val);
   };
 
-  const handleOverrideNotaFinalFE = (al_id: string, val: number) => {
+  const handleOverrideNotaFinalFE = (al_id: string, rawVal: number) => {
+    const val = ajustaActa(rawVal);
     const newEval = [...df_eval];
     let evRowIdx = newEval.findIndex(e => e.ID === al_id);
     if (evRowIdx === -1) {
@@ -362,12 +376,21 @@ export function DetalleAlumnadoTab() {
                         {/* Right: Overrides & Official Badge */}
                         <div className="w-full lg:w-72 flex flex-col justify-between">
                           <div>
+                            {(() => {
+                              const noSuperados = rasNoSuperadosTutor(config_redondeo, df_feoe, df_calificaciones, df_ce, al_id);
+                              if (noSuperados.length === 0) return null;
+                              return (
+                                <div role="alert" className="mb-4 rounded-lg border border-danger/40 bg-danger/10 p-3 text-caption text-danger">
+                                  {t('campos.evaluacion.tutorNoSuperadoAviso', {defaultValue: 'El tutor de empresa no ha dado por superado: {{ras}}. Con esa valoración la nota de acta no debería ser positiva.', ras: noSuperados.join(", ")})}
+                                </div>
+                              );
+                            })()}
                             <h4 className="font-bold text-foreground mb-4">{t('campos.evaluacion.calificacionActaTitulo', {defaultValue: 'Calificación de acta'})}</h4>
                             <div className="mb-4">
                               <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaFinalOrdinariaLabel', {defaultValue: 'Nota final ordinaria — FO (manual / calc)'})}</label>
                               <input
                                 type="number"
-                                min="1" max="10" step="0.1"
+                                min="1" max="10" step={decimalesActa === 1 ? "0.1" : "1"}
                                 value={nota_prev || ""}
                                 onChange={(e) => handleOverrideNotaFinalFO(al_id, Number(e.target.value) || 0)}
                                 onClick={(e) => e.stopPropagation()}
@@ -378,7 +401,7 @@ export function DetalleAlumnadoTab() {
                               <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaFinalExtraordinariaLabel', {defaultValue: 'Nota final extraordinaria — FE (manual)'})}</label>
                               <input
                                 type="number"
-                                min="1" max="10" step="0.1"
+                                min="1" max="10" step={decimalesActa === 1 ? "0.1" : "1"}
                                 value={nota_prev_fe || ""}
                                 onChange={(e) => handleOverrideNotaFinalFE(al_id, Number(e.target.value) || 0)}
                                 onClick={(e) => e.stopPropagation()}

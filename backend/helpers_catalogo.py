@@ -269,7 +269,40 @@ DEFAULT_CONFIG_REDONDEO = {
     "nota_aprobado": 5.0,
     "umbral_redondeo": 5.0,
     "max_compensables": 0,
+    "decimales_acta": 0,
+    "redondeo_acta": "conservador",
 }
+
+
+def nota_acta(nota, config: dict = None):
+    """Nota que se traslada al acta a partir de la calculada. Puerto de notaActa() en utils/calificaciones.ts (mismo criterio):
+    con decimales_acta = 1, un decimal (la mitad exacta sube, como toFixed de JavaScript); si no, entera de 1 a 10 con la regla
+    de redondeo_acta (conservador, cercano, abajo, arriba). None = sin evaluar."""
+    import math
+    from decimal import Decimal, ROUND_HALF_UP
+    if nota is None or (isinstance(nota, float) and math.isnan(nota)):
+        return None
+    conf = {**DEFAULT_CONFIG_REDONDEO, **(config or {})}
+    if conf.get("decimales_acta") == 1:
+        return float(Decimal(float(nota)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+    modo = conf.get("redondeo_acta")
+    if modo == "cercano":
+        n = math.floor(nota + 0.5)
+    elif modo == "abajo":
+        n = math.floor(nota)
+    elif modo == "arriba":
+        n = math.ceil(nota)
+    else:  # conservador: por debajo de nota_aprobado se trunca; desde ahí, al entero más próximo
+        n = math.floor(nota) if nota < conf["nota_aprobado"] else math.floor(nota + 0.5)
+    return max(1, min(10, n))
+
+
+def formato_nota_acta(nota, config: dict = None) -> str:
+    """Texto de una nota de acta: sin decimales si el perfil es de nota entera, con uno si se guarda con decimal."""
+    if nota is None:
+        return ""
+    import math
+    return f"{float(nota):.1f}" if (config or {}).get("decimales_acta") == 1 else f"{math.floor(float(nota) + 0.5):d}"
 
 GEV_DEFECTO = "general"
 

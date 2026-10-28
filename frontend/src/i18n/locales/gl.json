@@ -858,7 +858,8 @@
       "excelenteTodoA4": "Excelente (todo a 4)",
       "suficienteTodoA3": "Suficiente (todo a 3)",
       "gestionarEnCurriculo": "Xestionar en Currículo",
-      "configurarEnPlanFeoe": "Configurar horas e réxime da FEOE"
+      "configurarEnPlanFeoe": "Configurar horas e réxime da FEOE",
+      "todoSuperado": "Todos os RA superados"
     }
   },
   "placeholders": {
@@ -1816,7 +1817,8 @@
       "notaCalculada": "Nota calculada",
       "notaSigadLabel": "Nota Sigad (1-10, manual / calc)",
       "minAbrev": "Mín",
-      "maxAbrev": "Máx"
+      "maxAbrev": "Máx",
+      "tutorNoSuperadoAviso": "O titor da empresa non deu por superado: {{ras}}. Con esa valoración a nota da acta non debería ser positiva."
     },
     "modulo": {
       "bibliografiaDesc": "Bibliografía principal para o profesorado e o alumnado.",
@@ -1977,7 +1979,23 @@
       "tituloReglasRedondeo": "Regras de arredondamento e compensación",
       "transversalesCompetenciasTitulo": "Transversais e competencias",
       "umbralRedondeoAlza": "Limiar de arredondamento ao alza",
-      "umbralRedondeoAlzaDesc": "Se o alumnado obtén esta nota ou superior (ex. 4.8), redondearase automaticamente á nota de aprobado."
+      "umbralRedondeoAlzaDesc": "Se o alumnado obtén esta nota ou superior (ex. 4.8), redondearase automaticamente á nota de aprobado.",
+      "perfilComunidad": "Perfil de comunidade (opcional)",
+      "perfilNinguno": "Sen perfil (configuración manual)",
+      "perfilDesc": "Enche as regras co que fixa a norma da túa comunidade. É só unha axuda: podes deixalo sen perfil e configuralo todo a man.",
+      "perfilFuente": "Nota do módulo: numérica, de 1 a 10, sen decimais, positiva desde 5. Fonte: {{fuente}}. Podes cambiar calquera valor.",
+      "redondeoActa": "Redondeo a nota enteira da acta",
+      "redondeoActaDesc": "Como se pasa a nota enteira, de 1 a 10, o resultado do cálculo ao trasladalo á acta. «Conservador» nunca aproba por redondeo.",
+      "redondeoConservador": "Conservador: por debaixo de 5 trúncase; desde 5, ao enteiro máis próximo",
+      "redondeoCercano": "Ao enteiro máis próximo (a metade sobe)",
+      "redondeoAbajo": "Sempre cara abaixo",
+      "redondeoArriba": "Sempre cara arriba",
+      "notaActaDecimales": "Gardar a nota da acta con 1 decimal",
+      "notaActaDecimalesDesc": "Por defecto a nota da acta é un número enteiro, como fixa a norma en case todas as comunidades. Marca a caixa só se o teu centro admite un decimal; o cálculo interno conserva sempre toda a súa precisión.",
+      "tutorModo": "Valoración do titor da empresa",
+      "tutorModoSuperado": "«Superado» / «Non superado» para cada RA",
+      "tutorModoEscala": "Escala de 1 a 4 por criterio (Aragón)",
+      "tutorModoDesc": "Como rexistras a valoración do titor da empresa. As normas estudadas piden «Superado» ou «Non superado» para cada RA, co motivo se non se supera."
     },
     "normativa": {
       "legislacionAutonomica": "Lexislación autonómica ({{comunidad}})",
@@ -2649,7 +2667,13 @@
       "superado": "Superado",
       "mediaInferiorIgualA2": "Media das actividades ≤ 2, segundo o Anexo XI b)",
       "noSuperado": "Non superado",
-      "observacionesTutorPlaceholder": "Observacións do titor de empresa (opcional)..."
+      "observacionesTutorPlaceholder": "Observacións do titor de empresa (opcional)...",
+      "modoSuperadoDesc": "Anota para cada RA se o titor da empresa o dá por «Superado» ou «Non superado». Se non o supera, escribe o motivo.",
+      "resultadoDelRa": "Resultado do titor da empresa para este RA",
+      "motivacionPlaceholder": "Motivo polo que non se supera (obrigatorio)…",
+      "motivacionFalta": "Falta o motivo: a norma pide motivar cada «Non superado».",
+      "informeCualitativo": "Valoración cualitativa do titor da empresa",
+      "informeCualitativoDesc": "Adaptación á empresa, iniciativa, traballo en equipo, comunicación… É o informe cualitativo que acompaña a valoración dos RA."
     },
     "onboarding": {
       "entendido": "Entendido!",

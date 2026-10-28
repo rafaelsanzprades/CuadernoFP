@@ -21,13 +21,71 @@ export interface ConfigRedondeo {
    *  proyecto curricular: art. 99.4.g y 100.2.h del Decreto 91/2024). Vacío = sin mínimo. Si algún RA queda por debajo, el módulo
    *  no puede superarse. Mismo cálculo en backend/helpers_catalogo.py::calcular_notas_jeg. */
   nota_minima_ra?: number | null;
+  /** Decimales de la nota que se guarda en el acta (Nota_Final_FO): 0 = entera, de 1 a 10 (lo que fija la norma en casi todas las
+   *  comunidades; RD 659/2023, art. 18.8); 1 = un decimal (el centro lo admite). El cálculo interno conserva toda su precisión.
+   *  Vacío = 0. Mismo criterio en backend/helpers_catalogo.py::nota_acta. */
+  decimales_acta?: 0 | 1;
+  /** Cómo se pasa a entera la nota del acta (solo con decimales_acta = 0): «conservador» trunca por debajo de nota_aprobado y,
+   *  desde ahí, redondea al entero más próximo (nunca aprueba por redondeo); «cercano» al entero más próximo, la mitad sube;
+   *  «abajo» y «arriba» son el suelo y el techo. Vacío = «conservador». */
+  redondeo_acta?: "conservador" | "cercano" | "abajo" | "arriba";
+  /** Perfil de comunidad elegido (ver PERFILES_COMUNIDAD); vacío = ninguno, configuración manual. Es solo una ayuda: rellena los valores
+   *  de esta configuración, que luego se pueden cambiar. */
+  perfil_comunidad?: string;
+  /** Cómo registra el profesor la valoración del tutor de empresa (utils/tutorEmpresa.ts): «escala_1_4» = el tutor valora de 1 a 4 cada
+   *  criterio designado y el resultado de cada RA («superado» con una media mayor que 2) se deduce; «superado» = se registra para cada RA
+   *  «Superado» o «No superado», con su motivación. Las normas estudiadas (RD 659/2023, art. 18.7.a) piden lo segundo. Vacío = «escala_1_4». */
+  tutor_empresa_modo?: "escala_1_4" | "superado";
 }
 
 export const DEFAULT_CONFIG_REDONDEO: ConfigRedondeo = {
   nota_aprobado: 5.0,
   umbral_redondeo: 5.0,
   max_compensables: 0,
+  decimales_acta: 0,
+  redondeo_acta: "conservador",
+  tutor_empresa_modo: "escala_1_4",
 };
+
+/**
+ * Nota que se traslada al acta a partir de la nota calculada (que conserva toda su precisión). null = sin evaluar.
+ * Con `decimales_acta` = 1, un decimal (como hasta ahora); si no, entera de 1 a 10 con la regla de `redondeo_acta`.
+ * Mismo cálculo en backend/helpers_catalogo.py::nota_acta.
+ */
+export function notaActa(nota: number | null, config: ConfigRedondeo = DEFAULT_CONFIG_REDONDEO): number | null {
+  if (nota === null || nota === undefined || Number.isNaN(nota)) return null;
+  if (config.decimales_acta === 1) return Number(nota.toFixed(1));
+  const aprobado = config.nota_aprobado ?? DEFAULT_CONFIG_REDONDEO.nota_aprobado;
+  let n: number;
+  switch (config.redondeo_acta) {
+    case "cercano": n = Math.floor(nota + 0.5); break;
+    case "abajo": n = Math.floor(nota); break;
+    case "arriba": n = Math.ceil(nota); break;
+    default: n = nota < aprobado ? Math.floor(nota) : Math.floor(nota + 0.5); // conservador
+  }
+  return Math.max(1, Math.min(10, n));
+}
+
+/** Perfiles de comunidad: ayudas opcionales que rellenan la configuración con lo que fija la norma. De momento recogen la nota del módulo
+ *  (numérica, de 1 a 10, sin decimales, positiva desde 5) y cómo se registra la valoración del tutor de empresa, en las tres comunidades con
+ *  la norma leída entera (estudio de la ley, contenidos/estudio-ley-fp/ccaa/). Ninguna fija el método de redondeo, así que todos usan
+ *  «conservador», que nunca aprueba por redondeo; el docente puede cambiarlo. Las tres piden que el tutor de empresa dé cada RA por
+ *  «Superado» o «No superado»; Aragón conserva además la escala de 1 a 4 por criterio que ya usaba la app. Los demás datos de cada comunidad
+ *  (horas de formación en empresa, asistencia…) se irán sumando aquí. */
+export interface PerfilComunidad {
+  id: string;
+  nombre: string;
+  fuente: string;
+  config: Partial<ConfigRedondeo>;
+}
+
+const CONFIG_NOTA_ENTERA: Partial<ConfigRedondeo> = { nota_aprobado: 5.0, decimales_acta: 0, redondeo_acta: "conservador" };
+
+export const PERFILES_COMUNIDAD: PerfilComunidad[] = [
+  { id: "aragon", nombre: "Aragón", fuente: "Decreto 91/2024 (consolidado con el Decreto 107/2025)", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "escala_1_4" } },
+  { id: "andalucia", nombre: "Andalucía", fuente: "Orden de evaluación de 18 de septiembre de 2025", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "superado" } },
+  { id: "asturias", nombre: "Asturias", fuente: "Decreto 103/2025, de 25 de agosto", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "superado" } },
+];
 
 export interface SigadInfo {
   n: number;

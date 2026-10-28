@@ -860,7 +860,8 @@
       "excelenteTodoA4": "Excel·lent (tot a 4)",
       "suficienteTodoA3": "Suficient (tot a 3)",
       "gestionarEnCurriculo": "Gestionar a Currículum",
-      "configurarEnPlanFeoe": "Configurar hores i règim de la FEOE"
+      "configurarEnPlanFeoe": "Configurar hores i règim de la FEOE",
+      "todoSuperado": "Tots els RA superats"
     }
   },
   "placeholders": {
@@ -1818,7 +1819,8 @@
       "notaCalculada": "Nota calculada",
       "notaSigadLabel": "Nota Sigad (1-10, manual / calc)",
       "minAbrev": "Mín",
-      "maxAbrev": "Màx"
+      "maxAbrev": "Màx",
+      "tutorNoSuperadoAviso": "El tutor d'empresa no ha donat per superat: {{ras}}. Amb aquesta valoració la nota de l'acta no hauria de ser positiva."
     },
     "modulo": {
       "bibliografiaDesc": "Bibliografia principal per al professorat i l'alumnat.",
@@ -1979,7 +1981,23 @@
       "tituloReglasRedondeo": "Regles d'arrodoniment i compensació",
       "transversalesCompetenciasTitulo": "Transversals i competències",
       "umbralRedondeoAlza": "Llindar d'arrodoniment a l'alça",
-      "umbralRedondeoAlzaDesc": "Si l'alumnat obté aquesta nota o superior (ex. 4.8), s'arrodonirà automàticament a la nota d'aprovat."
+      "umbralRedondeoAlzaDesc": "Si l'alumnat obté aquesta nota o superior (ex. 4.8), s'arrodonirà automàticament a la nota d'aprovat.",
+      "perfilComunidad": "Perfil de comunitat (opcional)",
+      "perfilNinguno": "Sense perfil (configuració manual)",
+      "perfilDesc": "Omple les regles amb el que fixa la norma de la teua comunitat. És només una ajuda: pots deixar-ho sense perfil i configurar-ho tot a mà.",
+      "perfilFuente": "Nota del mòdul: numèrica, d'1 a 10, sense decimals, positiva des de 5. Font: {{fuente}}. Pots canviar qualsevol valor.",
+      "redondeoActa": "Arrodoniment a nota entera de l'acta",
+      "redondeoActaDesc": "Com es passa a nota entera, d'1 a 10, el resultat del càlcul en traslladar-lo a l'acta. «Conservador» mai aprova per arrodoniment.",
+      "redondeoConservador": "Conservador: per sota de 5 es trunca; des de 5, a l'enter més proper",
+      "redondeoCercano": "A l'enter més proper (la meitat puja)",
+      "redondeoAbajo": "Sempre cap avall",
+      "redondeoArriba": "Sempre cap amunt",
+      "notaActaDecimales": "Guardar la nota de l'acta amb 1 decimal",
+      "notaActaDecimalesDesc": "Per defecte la nota de l'acta és un nombre enter, com fixa la norma en gairebé totes les comunitats. Marca la casella només si el teu centre admet un decimal; el càlcul intern sempre conserva tota la precisió.",
+      "tutorModo": "Valoració del tutor d'empresa",
+      "tutorModoSuperado": "«Superat» / «No superat» per a cada RA",
+      "tutorModoEscala": "Escala d'1 a 4 per criteri (Aragó)",
+      "tutorModoDesc": "Com registres la valoració del tutor d'empresa. Les normes estudiades demanen «Superat» o «No superat» per a cada RA, amb el motiu si no es supera."
     },
     "normativa": {
       "legislacionAutonomica": "Legislació autonòmica ({{comunidad}})",
@@ -2651,7 +2669,13 @@
       "superado": "Superat",
       "mediaInferiorIgualA2": "Mitjana de les activitats ≤ 2, segons l'Annex XI b)",
       "noSuperado": "No superat",
-      "observacionesTutorPlaceholder": "Observacions del tutor d'empresa (opcional)..."
+      "observacionesTutorPlaceholder": "Observacions del tutor d'empresa (opcional)...",
+      "modoSuperadoDesc": "Anota per a cada RA si el tutor d'empresa el dona per «Superat» o «No superat». Si no el supera, escriu el motiu.",
+      "resultadoDelRa": "Resultat del tutor d'empresa per a aquest RA",
+      "motivacionPlaceholder": "Motiu pel qual no se supera (obligatori)…",
+      "motivacionFalta": "Falta el motiu: la norma demana motivar cada «No superat».",
+      "informeCualitativo": "Valoració qualitativa del tutor d'empresa",
+      "informeCualitativoDesc": "Adaptació a l'empresa, iniciativa, treball en equip, comunicació… És l'informe qualitatiu que acompanya la valoració dels RA."
     },
     "onboarding": {
       "entendido": "Entès!",

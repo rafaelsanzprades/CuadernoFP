@@ -16,7 +16,7 @@ from reportlab.platypus import (
 )
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
-from helpers_catalogo import resolve_escala_cualitativa
+from helpers_catalogo import resolve_escala_cualitativa, nota_acta, formato_nota_acta
 from pdf_helpers import esc
 
 
@@ -141,7 +141,8 @@ def generar_pdf_boletin_grupal(
     df_eval: pd.DataFrame,
     df_act: pd.DataFrame,
     fecha_corte: str = None,
-    escalas_evaluacion: list = None
+    escalas_evaluacion: list = None,
+    config_redondeo: dict = None
 ):
     buffer = io.BytesIO()
     W, H = portrait(A4)
@@ -263,7 +264,8 @@ def generar_pdf_boletin_grupal(
     return buffer
 
 def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
-                                df_eval: pd.DataFrame, df_act: pd.DataFrame, escalas_evaluacion: list = None):
+                                df_eval: pd.DataFrame, df_act: pd.DataFrame, escalas_evaluacion: list = None,
+                                config_redondeo: dict = None):
     """Lógica pura compartida por el PDF y el DOCX del boletín final: nota
     media ponderada de cada trimestre + nota final ordinaria por alumno.
     Devuelve (pond_1t, pond_2t, pond_3t, filas), fila =
@@ -368,10 +370,12 @@ def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
                 except (ValueError, TypeError):
                     nota_final_ord = None
         if nota_final_ord is None:
-            nota_final_ord = (
+            # sin Nota_Final_FO guardada: media de los trimestres, pasada a nota de acta con la misma regla que el resto de la app
+            nota_final_ord = nota_acta(
                 notas_tri["1T"] * (pond_1t / total_pond) +
                 notas_tri["2T"] * (pond_2t / total_pond) +
-                notas_tri["3T"] * (pond_3t / total_pond)
+                notas_tri["3T"] * (pond_3t / total_pond),
+                config_redondeo,
             )
         nota_final_extra = None
         if "Nota_Final_FE" in df_eval.columns:
@@ -402,7 +406,8 @@ def generar_pdf_boletin_grupal_final(
     df_eval: pd.DataFrame,
     df_act: pd.DataFrame,
     fecha_corte: str = None,
-    escalas_evaluacion: list = None
+    escalas_evaluacion: list = None,
+    config_redondeo: dict = None
 ):
     buffer = io.BytesIO()
     W, H = portrait(A4)
@@ -437,7 +442,7 @@ def generar_pdf_boletin_grupal_final(
     smlB  = ParagraphStyle("SmB",  parent=styles["Normal"], fontSize=8, leading=10, fontName="Helvetica-Bold", alignment=TA_CENTER)
     smlB_left = ParagraphStyle("SmBL", parent=styles["Normal"], fontSize=8, leading=10, fontName="Helvetica-Bold", alignment=TA_LEFT)
 
-    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion)
+    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo)
 
     # ── Anchuras: tabla con anchos forzados a 18cm total ─────────────────────
     W_NUM    = 1.0 * cm
@@ -475,8 +480,8 @@ def generar_pdf_boletin_grupal_final(
             Paragraph(f"{nt['1T']:.1f}", sml),
             Paragraph(f"{nt['2T']:.1f}", sml),
             Paragraph(f"{nt['3T']:.1f}", sml),
-            Paragraph(f"<b>{f['nota_final_ord']:.1f}</b><br/><font size='6'>{esc(f['escala_final_ord'])}</font>", normB),
-            Paragraph(f"<b>{f['nota_final_extra']:.1f}</b><br/><font size='6'>{esc(f['escala_final_extra'])}</font>" if f["nota_final_extra"] is not None else "", sml),
+            Paragraph(f"<b>{formato_nota_acta(f['nota_final_ord'], config_redondeo)}</b><br/><font size='6'>{esc(f['escala_final_ord'])}</font>", normB),
+            Paragraph(f"<b>{formato_nota_acta(f['nota_final_extra'], config_redondeo)}</b><br/><font size='6'>{esc(f['escala_final_extra'])}</font>" if f["nota_final_extra"] is not None else "", sml),
         ]
         table_data.append(row)
 
@@ -537,10 +542,10 @@ def generar_docx_boletin_grupal(trimestre, info_modulo, df_al, df_eval, df_act, 
     return doc_to_bytes(doc)
 
 
-def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte=None, escalas_evaluacion=None):
+def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte=None, escalas_evaluacion=None, config_redondeo=None):
     from docx_helpers import new_document, add_title, add_meta_line, add_table, doc_to_bytes
 
-    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion)
+    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo)
 
     doc = new_document(landscape=False)
     add_title(doc, "Boletín grupal Final", info_modulo.get("modulo", "Módulo"))
@@ -555,10 +560,10 @@ def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha
     rows = []
     for f in filas:
         nt = f["notas_tri"]
-        nota_ord_str = f"{f['nota_final_ord']:.1f} ({f['escala_final_ord']})" if f['escala_final_ord'] else f"{f['nota_final_ord']:.1f}"
+        nota_ord_str = f"{formato_nota_acta(f['nota_final_ord'], config_redondeo)} ({f['escala_final_ord']})" if f['escala_final_ord'] else formato_nota_acta(f['nota_final_ord'], config_redondeo)
         nota_extra_str = ""
         if f["nota_final_extra"] is not None:
-            nota_extra_str = f"{f['nota_final_extra']:.1f} ({f['escala_final_extra']})" if f['escala_final_extra'] else f"{f['nota_final_extra']:.1f}"
+            nota_extra_str = f"{formato_nota_acta(f['nota_final_extra'], config_redondeo)} ({f['escala_final_extra']})" if f['escala_final_extra'] else formato_nota_acta(f['nota_final_extra'], config_redondeo)
         rows.append([f["idx"], f["alumnado"], f["edad"], f["repite"],
                      f"{nt['1T']:.1f}", f"{nt['2T']:.1f}", f"{nt['3T']:.1f}",
                      nota_ord_str, nota_extra_str])

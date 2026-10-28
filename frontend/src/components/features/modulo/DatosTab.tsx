@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InfoTip } from "@/components/ui/InfoTip";
 import { Family } from "@/types";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
+import { PERFILES_COMUNIDAD } from "@/utils/calificaciones";
 import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
 
@@ -426,7 +427,11 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             umbral_redondeo: 5.0,
             max_compensables: 0
           };
+          const cambia = (parcial: Record<string, unknown>) => updateModuleData("config_redondeo", { ...config, ...parcial });
+          const perfil = PERFILES_COMUNIDAD.find((p) => p.id === config.perfil_comunidad);
+          const decimalesActa = config.decimales_acta === 1 ? 1 : 0;
           return (
+            <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
               <div className="space-y-2">
                 <label className="text-body font-semibold text-foreground flex items-center gap-1.5">
@@ -486,6 +491,69 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                 />
               </div>
             </div>
+
+            {/* Nota del acta y perfil de comunidad */}
+            <div className="mt-6 pt-6 border-t border-[var(--glass-border)] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+              <div className="space-y-2">
+                <Select
+                  label={t('campos.modulo.perfilComunidad', {defaultValue: 'Perfil de comunidad (opcional)'})}
+                  value={config.perfil_comunidad || ""}
+                  onChange={(e) => {
+                    const sel = PERFILES_COMUNIDAD.find((p) => p.id === e.target.value);
+                    cambia({ ...(sel ? sel.config : {}), perfil_comunidad: e.target.value });
+                  }}
+                >
+                  <option value="">{t('campos.modulo.perfilNinguno', {defaultValue: 'Sin perfil (configuración manual)'})}</option>
+                  {PERFILES_COMUNIDAD.map((p) => <option key={p.id} value={p.id}>{p.nombre}</option>)}
+                </Select>
+                <p className="text-caption text-muted">
+                  {perfil
+                    ? t('campos.modulo.perfilFuente', {defaultValue: 'Nota del módulo: numérica, de 1 a 10, sin decimales, positiva desde 5. Fuente: {{fuente}}. Puedes cambiar cualquier valor.', fuente: perfil.fuente})
+                    : t('campos.modulo.perfilDesc', {defaultValue: 'Rellena las reglas con lo que fija la norma de tu comunidad. Es solo una ayuda: puedes dejarlo sin perfil y configurarlo todo a mano.'})}
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Select
+                  label={t('campos.modulo.redondeoActa', {defaultValue: 'Redondeo a nota entera del acta'})}
+                  value={config.redondeo_acta || "conservador"}
+                  disabled={decimalesActa === 1}
+                  onChange={(e) => cambia({ redondeo_acta: e.target.value })}
+                >
+                  <option value="conservador">{t('campos.modulo.redondeoConservador', {defaultValue: 'Conservador: por debajo de 5 se trunca; desde 5, al entero más próximo'})}</option>
+                  <option value="cercano">{t('campos.modulo.redondeoCercano', {defaultValue: 'Al entero más próximo (la mitad sube)'})}</option>
+                  <option value="abajo">{t('campos.modulo.redondeoAbajo', {defaultValue: 'Siempre hacia abajo'})}</option>
+                  <option value="arriba">{t('campos.modulo.redondeoArriba', {defaultValue: 'Siempre hacia arriba'})}</option>
+                </Select>
+                <p className="text-caption text-muted">{t('campos.modulo.redondeoActaDesc', {defaultValue: 'Cómo se pasa a nota entera, de 1 a 10, el resultado del cálculo al trasladarlo al acta. «Conservador» nunca aprueba por redondeo.'})}</p>
+              </div>
+
+              <div className="space-y-2">
+                <label className="flex items-start gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={decimalesActa === 1}
+                    onChange={(e) => cambia({ decimales_acta: e.target.checked ? 1 : 0 })}
+                    className="mt-1 rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
+                  />
+                  <span className="text-body font-semibold text-foreground">{t('campos.modulo.notaActaDecimales', {defaultValue: 'Guardar la nota del acta con 1 decimal'})}</span>
+                </label>
+                <p className="text-caption text-muted">{t('campos.modulo.notaActaDecimalesDesc', {defaultValue: 'Por defecto la nota del acta es un número entero, como fija la norma en casi todas las comunidades. Marca la casilla solo si tu centro admite un decimal; el cálculo interno conserva siempre toda su precisión.'})}</p>
+              </div>
+
+              <div className="space-y-2">
+                <Select
+                  label={t('campos.modulo.tutorModo', {defaultValue: 'Valoración del tutor de empresa'})}
+                  value={config.tutor_empresa_modo === "superado" ? "superado" : "escala_1_4"}
+                  onChange={(e) => cambia({ tutor_empresa_modo: e.target.value })}
+                >
+                  <option value="escala_1_4">{t('campos.modulo.tutorModoEscala', {defaultValue: 'Escala de 1 a 4 por criterio (Aragón)'})}</option>
+                  <option value="superado">{t('campos.modulo.tutorModoSuperado', {defaultValue: '«Superado» / «No superado» por RA'})}</option>
+                </Select>
+                <p className="text-caption text-muted">{t('campos.modulo.tutorModoDesc', {defaultValue: 'Cómo registras la valoración del tutor de empresa. Las normas estudiadas piden «Superado» o «No superado» por RA, con el motivo si no se supera.'})}</p>
+              </div>
+            </div>
+            </>
           );
         })()}
       </Card>

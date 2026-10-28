@@ -151,7 +151,7 @@ def generar_documento(
             docx_bytes = generar_docx_boletin_grupal(tri, info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
         elif type == "grupal_final":
             from pdf_boletin_grupal import generar_docx_boletin_grupal_final
-            docx_bytes = generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
+            docx_bytes = generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
         elif type == "individual":
             if not al_id: raise DocError(400, "al_id is required for individual document")
             from pdf_boletin_individual import generar_docx_boletin_individual
@@ -215,7 +215,7 @@ def generar_documento(
     elif type == "grupal_3t":
         buffer = generar_pdf_boletin_grupal("3T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
     elif type == "grupal_final":
-        buffer = generar_pdf_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
+        buffer = generar_pdf_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
     elif type == "individual":
         if not al_id: raise DocError(400, "al_id is required for individual PDF")
         buffer = generar_pdf_boletin_individual(

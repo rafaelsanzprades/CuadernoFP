@@ -858,7 +858,8 @@
       "excelenteTodoA4": "Bikaina (dena 4ra)",
       "suficienteTodoA3": "Nahikoa (dena 3ra)",
       "gestionarEnCurriculo": "Kudeatu Curriculumean",
-      "configurarEnPlanFeoe": "Konfiguratu FEOEren orduak eta erregimena"
+      "configurarEnPlanFeoe": "Konfiguratu FEOEren orduak eta erregimena",
+      "todoSuperado": "Ikaskuntza-emaitza guztiak gaindituta"
     }
   },
   "placeholders": {
@@ -1816,7 +1817,8 @@
       "notaCalculada": "Kalkulatutako nota",
       "notaSigadLabel": "Sigad nota (1-10, eskuzkoa / kalk.)",
       "minAbrev": "Gutx",
-      "maxAbrev": "Geh"
+      "maxAbrev": "Geh",
+      "tutorNoSuperadoAviso": "Enpresako tutoreak ez du gaindituta eman: {{ras}}. Balorazio horrekin aktako nota ez litzateke positiboa izan behar."
     },
     "modulo": {
       "bibliografiaDesc": "Irakasleentzako eta ikasleentzako bibliografia nagusia.",
@@ -1977,7 +1979,23 @@
       "tituloReglasRedondeo": "Biribiltze eta konpentsazio arauak",
       "transversalesCompetenciasTitulo": "Zeharkakoak eta konpetentziak",
       "umbralRedondeoAlza": "Gorantz biribiltzeko atalasea",
-      "umbralRedondeoAlzaDesc": "Ikasleak nota hori edo handiagoa lortzen badu (adib. 4,8), automatikoki gainditze-notara biribilduko da."
+      "umbralRedondeoAlzaDesc": "Ikasleak nota hori edo handiagoa lortzen badu (adib. 4,8), automatikoki gainditze-notara biribilduko da.",
+      "perfilComunidad": "Erkidegoaren profila (aukerakoa)",
+      "perfilNinguno": "Profilik gabe (eskuzko konfigurazioa)",
+      "perfilDesc": "Arauak zure erkidegoko araudiak ezartzen duenarekin betetzen ditu. Laguntza bat besterik ez da: profilik gabe utzi eta dena eskuz konfigura dezakezu.",
+      "perfilFuente": "Moduluaren nota: zenbakizkoa, 1etik 10era, hamartarrik gabe, 5etik aurrera positiboa. Iturria: {{fuente}}. Edozein balio alda dezakezu.",
+      "redondeoActa": "Aktako nota osora biribiltzea",
+      "redondeoActaDesc": "Kalkuluaren emaitza nota oso bihurtzeko modua (1etik 10era), aktara eramatean. «Kontserbadoreak» ez du inoiz biribiltzearen bidez gainditzen.",
+      "redondeoConservador": "Kontserbadorea: 5etik behera moztu egiten da; 5etik aurrera, hurbilen dagoen osora",
+      "redondeoCercano": "Hurbilen dagoen osora (erdia gora)",
+      "redondeoAbajo": "Beti behera",
+      "redondeoArriba": "Beti gora",
+      "notaActaDecimales": "Aktako nota hamartar batekin gorde",
+      "notaActaDecimalesDesc": "Lehenespenez aktako nota zenbaki osoa da, ia erkidego guztietan araudiak ezartzen duen bezala. Markatu laukia zure ikastetxeak hamartar bat onartzen badu soilik; barne-kalkuluak beti mantentzen du bere zehaztasun osoa.",
+      "tutorModo": "Enpresako tutorearen balorazioa",
+      "tutorModoSuperado": "«Gaindituta» / «Gainditu gabe» ikaskuntza-emaitza bakoitzeko",
+      "tutorModoEscala": "1etik 4rako eskala irizpide bakoitzeko (Aragoi)",
+      "tutorModoDesc": "Enpresako tutorearen balorazioa nola erregistratzen duzun. Aztertutako arauek «Gaindituta» edo «Gainditu gabe» eskatzen dute ikaskuntza-emaitza bakoitzeko, gainditzen ez bada arrazoiarekin."
     },
     "normativa": {
       "legislacionAutonomica": "Erkidegoko legedia ({{comunidad}})",
@@ -2649,7 +2667,13 @@
       "superado": "Gaindituta",
       "mediaInferiorIgualA2": "Jardueren batez bestekoa ≤ 2, XI b) Eranskinaren arabera",
       "noSuperado": "Gainditu gabe",
-      "observacionesTutorPlaceholder": "Enpresako tutorearen oharrak (aukerakoa)..."
+      "observacionesTutorPlaceholder": "Enpresako tutorearen oharrak (aukerakoa)...",
+      "modoSuperadoDesc": "Idatzi ikaskuntza-emaitza bakoitzerako enpresako tutoreak «Gaindituta» ala «Gainditu gabe» ematen duen. Gainditzen ez badu, idatzi arrazoia.",
+      "resultadoDelRa": "Enpresako tutorearen emaitza ikaskuntza-emaitza honetarako",
+      "motivacionPlaceholder": "Gainditzen ez den arrazoia (derrigorrezkoa)…",
+      "motivacionFalta": "Arrazoia falta da: arauak «Gainditu gabe» bakoitza arrazoitzea eskatzen du.",
+      "informeCualitativo": "Enpresako tutorearen balorazio kualitatiboa",
+      "informeCualitativoDesc": "Enpresara egokitzea, ekimena, talde-lana, komunikazioa… Ikaskuntza-emaitzen balorazioarekin batera doan txosten kualitatiboa da."
     },
     "onboarding": {
       "entendido": "Ulertuta!",

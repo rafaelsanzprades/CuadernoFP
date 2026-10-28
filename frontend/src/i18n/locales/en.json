@@ -858,7 +858,8 @@
       "excelenteTodoA4": "Excellent (all to 4)",
       "suficienteTodoA3": "Sufficient (all to 3)",
       "gestionarEnCurriculo": "Manage in Curriculum",
-      "configurarEnPlanFeoe": "Configure FEOE hours and regime"
+      "configurarEnPlanFeoe": "Configure FEOE hours and regime",
+      "todoSuperado": "All RA passed"
     }
   },
   "placeholders": {
@@ -1816,7 +1817,8 @@
       "notaCalculada": "Calculated grade",
       "notaSigadLabel": "Sigad grade (1-10, manual / calc.)",
       "minAbrev": "Min",
-      "maxAbrev": "Max"
+      "maxAbrev": "Max",
+      "tutorNoSuperadoAviso": "The company tutor has not passed: {{ras}}. With that assessment the report grade should not be positive."
     },
     "modulo": {
       "bibliografiaDesc": "Main bibliography for teaching staff and students.",
@@ -1977,7 +1979,23 @@
       "tituloReglasRedondeo": "Rounding and compensation rules",
       "transversalesCompetenciasTitulo": "Cross-curricular elements and competences",
       "umbralRedondeoAlza": "Rounding-up threshold",
-      "umbralRedondeoAlzaDesc": "If a student achieves this grade or higher (e.g. 4.8), it will be automatically rounded up to a passing grade."
+      "umbralRedondeoAlzaDesc": "If a student achieves this grade or higher (e.g. 4.8), it will be automatically rounded up to a passing grade.",
+      "perfilComunidad": "Region profile (optional)",
+      "perfilNinguno": "No profile (manual setup)",
+      "perfilDesc": "Fills in the rules with what your region's regulations set. It is only a help: you can leave it without a profile and set everything by hand.",
+      "perfilFuente": "Module grade: numeric, from 1 to 10, no decimals, passing from 5. Source: {{fuente}}. You can change any value.",
+      "redondeoActa": "Rounding to a whole grade for the report",
+      "redondeoActaDesc": "How the calculated result is turned into a whole grade, from 1 to 10, when it is carried to the report. \"Conservative\" never passes a student through rounding.",
+      "redondeoConservador": "Conservative: below 5 it is truncated; from 5, to the nearest whole number",
+      "redondeoCercano": "To the nearest whole number (half rounds up)",
+      "redondeoAbajo": "Always down",
+      "redondeoArriba": "Always up",
+      "notaActaDecimales": "Save the report grade with 1 decimal",
+      "notaActaDecimalesDesc": "By default the report grade is a whole number, as the regulations set in almost every region. Tick the box only if your school allows one decimal; the internal calculation always keeps its full precision.",
+      "tutorModo": "Company tutor assessment",
+      "tutorModoSuperado": "\"Passed\" / \"Not passed\" for each RA",
+      "tutorModoEscala": "1 to 4 scale per criterion (Aragón)",
+      "tutorModoDesc": "How you record the company tutor's assessment. The regulations studied ask for \"Passed\" or \"Not passed\" for each RA, with a reason when it is not passed."
     },
     "normativa": {
       "legislacionAutonomica": "Regional legislation ({{comunidad}})",
@@ -2649,7 +2667,13 @@
       "superado": "Passed",
       "mediaInferiorIgualA2": "Average of activities ≤ 2, according to Annex XI b)",
       "noSuperado": "Not passed",
-      "observacionesTutorPlaceholder": "Company tutor's observations (optional)..."
+      "observacionesTutorPlaceholder": "Company tutor's observations (optional)...",
+      "modoSuperadoDesc": "Note for each RA whether the company tutor passes it (\"Passed\") or not (\"Not passed\"). If not passed, write the reason.",
+      "resultadoDelRa": "Company tutor result for this RA",
+      "motivacionPlaceholder": "Reason why it is not passed (required)…",
+      "motivacionFalta": "The reason is missing: the regulations require every \"Not passed\" to be justified.",
+      "informeCualitativo": "Qualitative assessment by the company tutor",
+      "informeCualitativoDesc": "Adaptation to the company, initiative, teamwork, communication… It is the qualitative report that goes with the RA assessment."
     },
     "onboarding": {
       "entendido": "Got it!",
