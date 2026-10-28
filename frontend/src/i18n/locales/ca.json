@@ -1524,7 +1524,9 @@
       "unidadDidacticaTrabajo": "Unitat didàctica o de treball",
       "relevanciaCe": "Rellevància",
       "objAbrev": "Obj",
-      "evalAbrev": "AVAL."
+      "evalAbrev": "AVAL.",
+      "imprescindible": "Imprescindible",
+      "imprescindibleRa": "RA imprescindible: {{ra}}"
     },
     "dashboard": {
       "imp": "Imp",
@@ -1997,7 +1999,12 @@
       "tutorModo": "Valoració del tutor d'empresa",
       "tutorModoSuperado": "«Superat» / «No superat» per a cada RA",
       "tutorModoEscala": "Escala d'1 a 4 per criteri (Aragó)",
-      "tutorModoDesc": "Com registres la valoració del tutor d'empresa. Les normes estudiades demanen «Superat» o «No superat» per a cada RA, amb el motiu si no es supera."
+      "tutorModoDesc": "Com registres la valoració del tutor d'empresa. Les normes estudiades demanen «Superat» o «No superat» per a cada RA, amb el motiu si no es supera.",
+      "reglaSuperacion": "Regla per superar el mòdul",
+      "reglaMedia": "Basta la nota ponderada (mitjana dels RA)",
+      "reglaTodosRa": "Cal superar tots els RA",
+      "reglaImprescindibles": "Cal superar els RA imprescindibles",
+      "reglaSuperacionDesc": "Amb les dues últimes, un RA exigit per sota de l'aprovat deixa el mòdul suspès encara que la mitjana hi arribe. Els RA imprescindibles es marquen a Currículum › Relació RA ← CE. Un RA sense avaluar encara no bloqueja."
     },
     "normativa": {
       "legislacionAutonomica": "Legislació autonòmica ({{comunidad}})",

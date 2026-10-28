@@ -543,6 +543,19 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
 
               <div className="space-y-2">
                 <Select
+                  label={t('campos.modulo.reglaSuperacion', {defaultValue: 'Regla para superar el módulo'})}
+                  value={config.regla_superacion || "media"}
+                  onChange={(e) => cambia({ regla_superacion: e.target.value })}
+                >
+                  <option value="media">{t('campos.modulo.reglaMedia', {defaultValue: 'Basta la nota ponderada (media de los RA)'})}</option>
+                  <option value="todos_ra">{t('campos.modulo.reglaTodosRa', {defaultValue: 'Hay que superar todos los RA'})}</option>
+                  <option value="imprescindibles">{t('campos.modulo.reglaImprescindibles', {defaultValue: 'Hay que superar los RA imprescindibles'})}</option>
+                </Select>
+                <p className="text-caption text-muted">{t('campos.modulo.reglaSuperacionDesc', {defaultValue: 'Con las dos últimas, un RA exigido por debajo del aprobado deja el módulo suspenso aunque la media llegue. Los RA imprescindibles se marcan en Currículo › Relación RA ← CE. Un RA sin evaluar todavía no bloquea.'})}</p>
+              </div>
+
+              <div className="space-y-2">
+                <Select
                   label={t('campos.modulo.tutorModo', {defaultValue: 'Valoración del tutor de empresa'})}
                   value={config.tutor_empresa_modo === "superado" ? "superado" : "escala_1_4"}
                   onChange={(e) => cambia({ tutor_empresa_modo: e.target.value })}

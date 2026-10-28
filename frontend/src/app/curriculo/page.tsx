@@ -374,6 +374,7 @@ export default function MatricesPage() {
                           <th className="pb-2 w-24">RA</th>
                           <th className="pb-2 w-24">% RA</th>
                           <th className="pb-2 w-16 text-center">FEOE</th>
+                          <th className="pb-2 w-24 text-center">{t('tablas.curriculo.imprescindible', {defaultValue: 'Imprescindible'})}</th>
                           <th className="pb-2">{t('tablas.curriculo.resultadosAprendizaje', {defaultValue: 'Resultados de aprendizaje'})}</th>
                         </tr>
                       </thead>
@@ -415,6 +416,19 @@ export default function MatricesPage() {
                               >
                                 {ra.is_dual && <span className="text-caption font-medium"><span className="inline-flex"><Check className="w-[1.2em] h-[1.2em] mr-1" /></span></span>}
                               </button>
+                            </td>
+                            <td className="py-2 text-center">
+                              <input
+                                type="checkbox"
+                                checked={ra.imprescindible === true}
+                                aria-label={t('tablas.curriculo.imprescindibleRa', {defaultValue: 'RA imprescindible: {{ra}}', ra: ra.id_ra})}
+                                onChange={(e) => {
+                                  const newRa = [...df_ra];
+                                  newRa[idx] = { ...newRa[idx], imprescindible: e.target.checked };
+                                  updateDataFrame("df_ra", newRa);
+                                }}
+                                className="rounded border-white/20 bg-transparent text-indigo-500 focus:ring-indigo-500"
+                              />
                             </td>
                             <td className="py-2 pr-2">
                               <input

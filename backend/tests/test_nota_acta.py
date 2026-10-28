@@ -50,3 +50,29 @@ def test_formato():
     assert formato_nota_acta(7.0, {"decimales_acta": 1}) == "7.0"
     assert formato_nota_acta(6.5) == "7"   # una nota de acta antigua con decimal se muestra entera
     assert formato_nota_acta(None) == ""
+
+
+# ---- regla de superación (todos los RA / solo los imprescindibles); mismo cálculo que notaFinalPonderada en calificaciones.ts
+def _nota_regla(config, imprescindible_ra2=False):
+    from helpers_catalogo import calcular_notas_jeg
+    ras = [{"id_ra": "RA1", "peso_ra": 50}, {"id_ra": "RA2", "peso_ra": 50, "imprescindible": imprescindible_ra2}]
+    ces = [{"id_ce": f"CE{i}", "id_ra": f"RA{i}", "peso_ce": 100} for i in (1, 2)]
+    inds = [{"id_indicador": f"I{i}", "id_ce": f"CE{i}", "peso": 1} for i in (1, 2)]
+    instr = [{"id_instrumento": "X", "peso_global": 1, "procedimiento": "ordinario"}]
+    cals = [{"id_alumno": "A", "id_instrumento": "X", "id_indicador": "I1", "valor": 9},
+            {"id_alumno": "A", "id_instrumento": "X", "id_indicador": "I2", "valor": 3}]
+    return calcular_notas_jeg("A", cals, inds, instr, ces, ras, config)["nota_final"]
+
+
+def test_regla_media_compensa():
+    assert _nota_regla({}) == 6.0
+    assert _nota_regla({"regla_superacion": "media"}) == 6.0
+
+
+def test_regla_todos_ra_suspende_con_un_ra_suspenso():
+    assert _nota_regla({"regla_superacion": "todos_ra"}) < 5
+
+
+def test_regla_imprescindibles_solo_exige_los_marcados():
+    assert _nota_regla({"regla_superacion": "imprescindibles"}, imprescindible_ra2=False) == 6.0
+    assert _nota_regla({"regla_superacion": "imprescindibles"}, imprescindible_ra2=True) < 5

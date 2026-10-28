@@ -1522,7 +1522,9 @@
       "unidadDidacticaTrabajo": "Unidade didáctica ou de traballo",
       "relevanciaCe": "Relevancia",
       "objAbrev": "Obx",
-      "evalAbrev": "AVAL."
+      "evalAbrev": "AVAL.",
+      "imprescindible": "Imprescindible",
+      "imprescindibleRa": "RA imprescindible: {{ra}}"
     },
     "dashboard": {
       "imp": "Imp",
@@ -1995,7 +1997,12 @@
       "tutorModo": "Valoración do titor da empresa",
       "tutorModoSuperado": "«Superado» / «Non superado» para cada RA",
       "tutorModoEscala": "Escala de 1 a 4 por criterio (Aragón)",
-      "tutorModoDesc": "Como rexistras a valoración do titor da empresa. As normas estudadas piden «Superado» ou «Non superado» para cada RA, co motivo se non se supera."
+      "tutorModoDesc": "Como rexistras a valoración do titor da empresa. As normas estudadas piden «Superado» ou «Non superado» para cada RA, co motivo se non se supera.",
+      "reglaSuperacion": "Regra para superar o módulo",
+      "reglaMedia": "Abonda coa nota ponderada (media dos RA)",
+      "reglaTodosRa": "Hai que superar todos os RA",
+      "reglaImprescindibles": "Hai que superar os RA imprescindibles",
+      "reglaSuperacionDesc": "Coas dúas últimas, un RA esixido por debaixo do aprobado deixa o módulo suspenso aínda que a media chegue. Os RA imprescindibles márcanse en Currículo › Relación RA ← CE. Un RA sen avaliar aínda non bloquea."
     },
     "normativa": {
       "legislacionAutonomica": "Lexislación autonómica ({{comunidad}})",

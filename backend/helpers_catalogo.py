@@ -271,6 +271,7 @@ DEFAULT_CONFIG_REDONDEO = {
     "max_compensables": 0,
     "decimales_acta": 0,
     "redondeo_acta": "conservador",
+    "regla_superacion": "media",
 }
 
 
@@ -338,6 +339,8 @@ def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list
             return config["nota_aprobado"]
         return n_ra
 
+    imprescindibles = {ra["id_ra"] for ra in df_ra if ra.get("id_ra") and ra.get("imprescindible") is True}
+
     def nota_final_ponderada(notas_ra, peso_ra):
         suma, peso_usado = 0.0, 0.0
         for r_id, n_ra in notas_ra.items():
@@ -353,6 +356,12 @@ def calcular_notas_jeg(al_id: str, df_calificaciones: list, df_indicadores: list
         minimo = config.get("nota_minima_ra")
         if minimo is not None and any(n is not None and n < minimo for n in notas_ra.values()):
             return min(nota, config["nota_aprobado"] - 0.1)
+        # Regla de superación (igual que en el frontend): «todos_ra» o «imprescindibles»
+        regla = config.get("regla_superacion")
+        if regla in ("todos_ra", "imprescindibles"):
+            if any(n is not None and (regla == "todos_ra" or r_id in imprescindibles) and n < config["nota_aprobado"]
+                   for r_id, n in notas_ra.items()):
+                return min(nota, config["nota_aprobado"] - 0.1)
         return nota
 
     instr_by_id = {i["id_instrumento"]: i for i in df_instr if i.get("id_instrumento")}

@@ -72,6 +72,8 @@ export const ResultadoAprendizajeSchema = z.object({
   desc_ra: z.string().optional().nullable(),
   peso_ra: z.number().optional(),
   is_dual: z.boolean().optional().nullable(),
+  // RA imprescindible: con la regla de superación «imprescindibles» (config_redondeo.regla_superacion) hay que superarlo para aprobar el módulo.
+  imprescindible: z.boolean().optional().nullable(),
 });
 export type ResultadoAprendizaje = z.infer<typeof ResultadoAprendizajeSchema>;
 

@@ -1522,7 +1522,9 @@
       "unidadDidacticaTrabajo": "Unitate didaktikoa edo lan-unitatea",
       "relevanciaCe": "Garrantzia",
       "objAbrev": "Hel",
-      "evalAbrev": "EBAL."
+      "evalAbrev": "EBAL.",
+      "imprescindible": "Ezinbestekoa",
+      "imprescindibleRa": "Ikaskuntza-emaitza ezinbestekoa: {{ra}}"
     },
     "dashboard": {
       "imp": "Em.",
@@ -1995,7 +1997,12 @@
       "tutorModo": "Enpresako tutorearen balorazioa",
       "tutorModoSuperado": "«Gaindituta» / «Gainditu gabe» ikaskuntza-emaitza bakoitzeko",
       "tutorModoEscala": "1etik 4rako eskala irizpide bakoitzeko (Aragoi)",
-      "tutorModoDesc": "Enpresako tutorearen balorazioa nola erregistratzen duzun. Aztertutako arauek «Gaindituta» edo «Gainditu gabe» eskatzen dute ikaskuntza-emaitza bakoitzeko, gainditzen ez bada arrazoiarekin."
+      "tutorModoDesc": "Enpresako tutorearen balorazioa nola erregistratzen duzun. Aztertutako arauek «Gaindituta» edo «Gainditu gabe» eskatzen dute ikaskuntza-emaitza bakoitzeko, gainditzen ez bada arrazoiarekin.",
+      "reglaSuperacion": "Modulua gainditzeko araua",
+      "reglaMedia": "Nota haztatua nahikoa da (ikaskuntza-emaitzen batez bestekoa)",
+      "reglaTodosRa": "Ikaskuntza-emaitza guztiak gainditu behar dira",
+      "reglaImprescindibles": "Ikaskuntza-emaitza ezinbestekoak gainditu behar dira",
+      "reglaSuperacionDesc": "Azken biekin, eskatutako ikaskuntza-emaitza bat gainditzeko notaren azpitik badago, modulua gainditu gabe geratzen da batez bestekoa iristen bada ere. Ezinbesteko emaitzak Kurrikuluma › RA ← CE erlazioan markatzen dira. Oraindik ebaluatu gabeko emaitzak ez du blokeatzen."
     },
     "normativa": {
       "legislacionAutonomica": "Erkidegoko legedia ({{comunidad}})",

@@ -36,6 +36,10 @@ export interface ConfigRedondeo {
    *  criterio designado y el resultado de cada RA («superado» con una media mayor que 2) se deduce; «superado» = se registra para cada RA
    *  «Superado» o «No superado», con su motivación. Las normas estudiadas (RD 659/2023, art. 18.7.a) piden lo segundo. Vacío = «escala_1_4». */
   tutor_empresa_modo?: "escala_1_4" | "superado";
+  /** Regla para superar el módulo además de la media: «media» (por defecto) = basta la nota ponderada; «todos_ra» = hay que superar cada
+   *  RA evaluado; «imprescindibles» = hay que superar los RA marcados como imprescindibles (`imprescindible` en df_ra, Currículo). Un RA
+   *  sin evaluar no bloquea (igual que nota_minima_ra). Mismo cálculo en backend/helpers_catalogo.py::calcular_notas_jeg. */
+  regla_superacion?: "media" | "todos_ra" | "imprescindibles";
 }
 
 export const DEFAULT_CONFIG_REDONDEO: ConfigRedondeo = {
@@ -45,6 +49,7 @@ export const DEFAULT_CONFIG_REDONDEO: ConfigRedondeo = {
   decimales_acta: 0,
   redondeo_acta: "conservador",
   tutor_empresa_modo: "escala_1_4",
+  regla_superacion: "media",
 };
 
 /**
@@ -133,7 +138,7 @@ function redondear(n_ra: number, config: ConfigRedondeo): number {
   return n_ra;
 }
 
-function notaFinalPonderada(notas_ra: Record<string, number | null>, peso_ra: Record<string, number>, config: ConfigRedondeo): number | null {
+function notaFinalPonderada(notas_ra: Record<string, number | null>, peso_ra: Record<string, number>, config: ConfigRedondeo, imprescindibles: Set<string> = new Set()): number | null {
   let suma = 0, pesoUsado = 0;
   Object.entries(notas_ra).forEach(([r_id, n_ra]) => {
     if (n_ra === null) return;
@@ -145,6 +150,12 @@ function notaFinalPonderada(notas_ra: Record<string, number | null>, peso_ra: Re
   // Mínimo por RA para compensar: un RA por debajo no se compensa con los demás y el módulo queda suspenso
   const min = config.nota_minima_ra;
   if (min != null && Object.values(notas_ra).some((n) => n !== null && n < min)) return Math.min(nota, config.nota_aprobado - 0.1);
+  // Regla de superación: con «todos_ra» o «imprescindibles», un RA exigido por debajo del aprobado impide aprobar el módulo aunque la media llegue
+  const regla = config.regla_superacion;
+  if (regla === "todos_ra" || regla === "imprescindibles") {
+    const exigido = (r_id: string) => regla === "todos_ra" || imprescindibles.has(r_id);
+    if (Object.entries(notas_ra).some(([r_id, n]) => n !== null && exigido(r_id) && n < config.nota_aprobado)) return Math.min(nota, config.nota_aprobado - 0.1);
+  }
   return nota;
 }
 
@@ -188,6 +199,7 @@ export function calcularNotasJEG(
   const peso_ra: Record<string, number> = {};
   df_ra.forEach((ra: any) => { if (ra.id_ra) peso_ra[ra.id_ra] = Number(ra.peso_ra) || 0; });
   const all_ra_ids = new Set<string>([...Object.keys(peso_ra), ...Object.values(ra_of_ce)]);
+  const imprescindibles = new Set<string>(df_ra.filter((ra: any) => ra.id_ra && ra.imprescindible === true).map((ra: any) => ra.id_ra));
 
   // Indicador -> nota (media ponderada por peso_global del instrumento que originó cada Calificación)
   const notasIndicadorDe = (cals: any[]): Record<string, number | null> => {
@@ -290,14 +302,14 @@ export function calcularNotasJEG(
   all_ra_ids.forEach((r_id) => {
     notas_ra[r_id] = notas_ra_recuperacion[r_id] !== null ? notas_ra_recuperacion[r_id] : notas_ra_ordinario[r_id];
   });
-  const nota_final = notaFinalPonderada(notas_ra, peso_ra, config);
+  const nota_final = notaFinalPonderada(notas_ra, peso_ra, config, imprescindibles);
 
   const notas_ra_evfe = notasRaDirectas(porProcedimiento("extraordinaria"));
   const notas_ra_extraordinaria: Record<string, number | null> = {};
   all_ra_ids.forEach((r_id) => {
     notas_ra_extraordinaria[r_id] = notas_ra_evfe[r_id] !== null ? notas_ra_evfe[r_id] : notas_ra[r_id];
   });
-  const nota_final_extraordinaria = notaFinalPonderada(notas_ra_extraordinaria, peso_ra, config);
+  const nota_final_extraordinaria = notaFinalPonderada(notas_ra_extraordinaria, peso_ra, config, imprescindibles);
 
   return { notas_indicador, notas_ce, notas_ra_ordinario, notas_ra, nota_final, notas_ra_extraordinaria, nota_final_extraordinaria, ra_tope_activo };
 }
