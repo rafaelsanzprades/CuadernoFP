@@ -681,6 +681,9 @@
     "comun": {
       "errorGuardar": "Erro ao gardar",
       "guardadoCorrectamente": "Gardado correctamente"
+    },
+    "feoe": {
+      "errorPlanFormacion": "Erro ao xerar o plan de formación."
     }
   },
   "botones": {
@@ -859,7 +862,9 @@
       "suficienteTodoA3": "Suficiente (todo a 3)",
       "gestionarEnCurriculo": "Xestionar en Currículo",
       "configurarEnPlanFeoe": "Configurar horas e réxime da FEOE",
-      "todoSuperado": "Todos os RA superados"
+      "todoSuperado": "Todos os RA superados",
+      "planPdf": "Plan .pdf",
+      "planDocx": "Plan editable .docx"
     }
   },
   "placeholders": {
@@ -2694,7 +2699,16 @@
       "motivacionPlaceholder": "Motivo polo que non se supera (obrigatorio)…",
       "motivacionFalta": "Falta o motivo: a norma pide motivar cada «Non superado».",
       "informeCualitativo": "Valoración cualitativa do titor da empresa",
-      "informeCualitativoDesc": "Adaptación á empresa, iniciativa, traballo en equipo, comunicación… É o informe cualitativo que acompaña a valoración dos RA."
+      "informeCualitativoDesc": "Adaptación á empresa, iniciativa, traballo en equipo, comunicación… É o informe cualitativo que acompaña a valoración dos RA.",
+      "planTitulo": "Plan de formación individual",
+      "planDesc": "Datos da empresa e actividades previstas para cada RA. Con eles xérase o documento do plan, cos RA e criterios designados para a empresa (Currículo › Relación RA ← CE).",
+      "planEmpresa": "Empresa",
+      "planTutorEmpresa": "Titor/a da empresa",
+      "planTutorDocente": "Titor/a do centro",
+      "planHoras": "Horas",
+      "planInicio": "Inicio",
+      "planFin": "Fin",
+      "planActividades": "Actividades previstas na empresa — {{ra}}"
     },
     "onboarding": {
       "entendido": "Entendido!",

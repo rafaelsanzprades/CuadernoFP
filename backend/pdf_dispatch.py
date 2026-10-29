@@ -177,6 +177,11 @@ def generar_documento(
             evidencia = [h for h in (curso_data.get("historial_calificaciones") or [])
                          if h.get("alumno_id") == al_id and h.get("campo") == reclamacion.get("referencia")]
             docx_bytes = generar_docx_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia)
+        elif type == "plan_formacion":
+            if not al_id:
+                raise DocError(400, "al_id is required for plan_formacion")
+            from pdf_plan_formacion import generar_docx_plan_formacion
+            docx_bytes = generar_docx_plan_formacion(info_modulo, al_id, df_al, df_feoe, df_ra, df_ce)
         elif type == "refuerzo_alumno":
             if not al_id:
                 raise DocError(400, "al_id is required for refuerzo_alumno")
@@ -242,6 +247,11 @@ def generar_documento(
         evidencia = [h for h in (curso_data.get("historial_calificaciones") or [])
                      if h.get("alumno_id") == al_id and h.get("campo") == reclamacion.get("referencia")]
         buffer = generar_pdf_reclamacion(info_modulo, al_id, df_al, reclamacion, evidencia)
+    elif type == "plan_formacion":
+        if not al_id:
+            raise DocError(400, "al_id is required for plan_formacion")
+        from pdf_plan_formacion import generar_pdf_plan_formacion
+        buffer = generar_pdf_plan_formacion(info_modulo, al_id, df_al, df_feoe, df_ra, df_ce)
     elif type == "refuerzo_alumno":
         if not al_id:
             raise DocError(400, "al_id is required for refuerzo_alumno")

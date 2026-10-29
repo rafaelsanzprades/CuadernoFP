@@ -41,7 +41,7 @@ def _al_id(curso):
 
 TIPOS_PDF = ["calendario", "seguimiento", "clases_ud", "planificacion", "matrices", "cobertura_ce",
              "grupal_1t", "grupal_2t", "grupal_3t", "grupal_final", "alumnado_ubicacion"]
-TIPOS_ALUMNO = ["individual", "ficha_alumnado", "refuerzo_alumno"]
+TIPOS_ALUMNO = ["individual", "ficha_alumnado", "refuerzo_alumno", "plan_formacion"]
 
 
 @pytest.mark.parametrize("tipo", TIPOS_PDF)
@@ -123,3 +123,17 @@ def test_pd_minima_en_pdf():
     modulo, curso = _cargar(FPP), _cargar(FPC)
     contenido, mime, _ = generar_documento("programacion_minima_tpl", modulo, curso, file_format="pdf")
     assert mime == "application/pdf" and contenido.startswith(b"%PDF")
+
+
+def test_plan_formacion_recoge_los_datos_del_plan():
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    al = _al_id(curso)
+    for ce in modulo["df_ce"][:1]:
+        ce["is_dual"] = True
+    ra_id = modulo["df_ce"][0]["id_ra"]
+    curso["df_feoe"] = [{"ID": al, "plan": {"empresa": "Empresa Prueba SL", "tutor_empresa": "Ana Tutora", "horas": 360,
+                                              "actividades": {ra_id: "Montaje de equipos de red"}}}]
+    contenido, _, _ = generar_documento("plan_formacion", modulo, curso, al_id=al, file_format="docx")
+    with zipfile.ZipFile(io.BytesIO(contenido)) as z:
+        texto = z.read("word/document.xml").decode("utf-8")
+    assert "Empresa Prueba SL" in texto and "Ana Tutora" in texto and "Montaje de equipos de red" in texto

@@ -29,9 +29,21 @@ export interface ValoracionRaTutor {
   resultado?: ResultadoTutor;
   motivacion?: string;
 }
+/** Plan de formación individual en empresa de un alumno/a (se imprime con el documento «plan_formacion»; ver backend/pdf_plan_formacion.py). */
+export interface PlanFormacion {
+  empresa?: string;
+  tutor_empresa?: string;
+  tutor_docente?: string;
+  inicio?: string;
+  fin?: string;
+  horas?: string;
+  /** Actividades previstas en la empresa para cada RA, por id_ra. */
+  actividades?: Record<string, string>;
+}
 export interface FilaFeoe {
   ID: string;
   informe?: string;
+  plan?: PlanFormacion;
   ra?: Record<string, ValoracionRaTutor>;
   [clave: string]: any;
 }
@@ -54,6 +66,15 @@ function conFila(df_feoe: any[] | undefined, al_id: string, cambia: (f: FilaFeoe
 /** Fila de df_feoe con el resultado y/o la motivación de un RA cambiados (los campos no indicados se conservan). */
 export function conValoracionRa(df_feoe: any[] | undefined, al_id: string, id_ra: string, parcial: Partial<ValoracionRaTutor>): any[] {
   return conFila(df_feoe, al_id, (f) => ({ ...f, ra: { ...(f.ra || {}), [id_ra]: { ...(f.ra?.[id_ra] || {}), ...parcial } } }));
+}
+
+/** Fila de df_feoe con campos del plan de formación cambiados; `actividad` cambia solo el texto de un RA. */
+export function conPlan(df_feoe: any[] | undefined, al_id: string, parcial: Partial<PlanFormacion>, actividad?: { id_ra: string; texto: string }): any[] {
+  return conFila(df_feoe, al_id, (f) => {
+    const plan = { ...(f.plan || {}), ...parcial };
+    if (actividad) plan.actividades = { ...(f.plan?.actividades || {}), [actividad.id_ra]: actividad.texto };
+    return { ...f, plan };
+  });
 }
 
 export function conInforme(df_feoe: any[] | undefined, al_id: string, informe: string): any[] {

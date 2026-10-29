@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
-import { Building2, CheckCircle2, XCircle, HelpCircle, Sparkles, ThumbsUp, GraduationCap } from "lucide-react";
+import { Building2, CheckCircle2, XCircle, HelpCircle, Sparkles, ThumbsUp, GraduationCap, FileDown } from "lucide-react";
+import toast from "react-hot-toast";
+import { getApiBase } from "@/services/apiBase";
+import { fetchDocumento } from "@/services/generarDocumento";
+import { descargarArchivo } from "@/services/descargarArchivo";
+import { enrichInfoModulo } from "@/services/catalogCache";
 import { useAppStore } from "@/store/useAppStore";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -8,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
 import {
-  ID_INSTRUMENTO_FEOE, idIndicadorFeoe, valorA10, valor10A1, modoTutor, filaFeoe, conValoracionRa, conInforme, mediaEscalaRa, resultadoRaTutor,
+  ID_INSTRUMENTO_FEOE, idIndicadorFeoe, valorA10, valor10A1, modoTutor, filaFeoe, conValoracionRa, conInforme, conPlan, mediaEscalaRa, resultadoRaTutor,
 } from "@/utils/tutorEmpresa";
 
 // ─── Ítem 12 (resto): evaluación del RA desarrollado en empresa (FEOE) ──────
@@ -47,7 +52,8 @@ const getScoreOptions = (t: (key: string, opts?: any) => string) => [
 export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   const { t } = useTranslation();
   const SCORE_OPTIONS = React.useMemo(() => getScoreOptions(t), [t]);
-  const { moduleData, cursoData, updateModuleData, updateCursoData } = useAppStore();
+  const { activeModuleId, moduleData, cursoData, updateModuleData, updateCursoData } = useAppStore();
+  const [generandoPlan, setGenerandoPlan] = React.useState(false);
 
   const df_ra = moduleData?.df_ra || [];
   const df_ce = moduleData?.df_ce || [];
@@ -63,6 +69,27 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   // se unificaron el 2026-09-20 a petición de Rafael.
   const ceDesignados = df_ce.filter((ce: any) => ce.is_dual === true);
   const raConDesignados = df_ra.filter((ra: any) => ceDesignados.some((ce: any) => ce.id_ra === ra.id_ra));
+
+  const plan = filaAlumno.plan || {};
+
+  const descargarPlan = async (formato: "pdf" | "docx") => {
+    setGenerandoPlan(true);
+    try {
+      const url = `${getApiBase()}/api/pdf?type=plan_formacion&al_id=${studentId}&file_format=${formato}`;
+      const response = await fetchDocumento(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ curso_data: cursoData || {}, module_data: moduleData ? { ...moduleData, info_modulo: enrichInfoModulo(activeModuleId, moduleData.info_modulo) } : {} }),
+      });
+      if (!response.ok) throw new Error("Error generando el plan");
+      await descargarArchivo(await response.blob(), `Plan_formacion_${studentId}.${formato}`);
+    } catch (err) {
+      console.error(err);
+      toast.error(t('toasts.feoe.errorPlanFormacion', {defaultValue: "Error al generar el plan de formación."}));
+    } finally {
+      setGenerandoPlan(false);
+    }
+  };
 
   const ensureInstrumento = (currentInstr: any[]) => {
     if (currentInstr.some((i) => i.id_instrumento === ID_INSTRUMENTO_FEOE)) return currentInstr;
@@ -329,6 +356,50 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
                       </div>
                     );
                   })}
+
+      <div className="bg-background/20 border border-white/5 rounded-xl p-5 space-y-3">
+        <h4 className="font-bold text-foreground">{t('campos.feoe.planTitulo', {defaultValue: 'Plan de formación individual'})}</h4>
+        <p className="text-caption text-muted">{t('campos.feoe.planDesc', {defaultValue: 'Datos de la empresa y actividades previstas para cada RA. Con ellos se genera el documento del plan, con los RA y criterios designados para la empresa (Currículo › Relación RA ← CE).'})}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {([
+            ["empresa", t('campos.feoe.planEmpresa', {defaultValue: 'Empresa'}), "text"],
+            ["tutor_empresa", t('campos.feoe.planTutorEmpresa', {defaultValue: 'Tutor/a de la empresa'}), "text"],
+            ["tutor_docente", t('campos.feoe.planTutorDocente', {defaultValue: 'Tutor/a del centro'}), "text"],
+            ["horas", t('campos.feoe.planHoras', {defaultValue: 'Horas'}), "number"],
+            ["inicio", t('campos.feoe.planInicio', {defaultValue: 'Inicio'}), "date"],
+            ["fin", t('campos.feoe.planFin', {defaultValue: 'Fin'}), "date"],
+          ] as const).map(([campo, etiqueta, tipo]) => (
+            <label key={campo} className="text-caption text-muted font-bold block">
+              {etiqueta}
+              <input
+                type={tipo}
+                value={(plan as any)[campo] ?? ""}
+                onChange={(e) => updateCursoData("df_feoe", conPlan(df_feoe, studentId, { [campo]: e.target.value }))}
+                className="mt-1 w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground font-normal focus:border-accent focus:outline-none"
+              />
+            </label>
+          ))}
+        </div>
+        {raConDesignados.map((ra: any) => (
+          <label key={ra.id_ra} className="text-caption text-muted font-bold block">
+            {t('campos.feoe.planActividades', {defaultValue: 'Actividades previstas en la empresa — {{ra}}', ra: ra.id_ra})}
+            <textarea
+              rows={2}
+              value={plan.actividades?.[ra.id_ra] ?? ""}
+              onChange={(e) => updateCursoData("df_feoe", conPlan(df_feoe, studentId, {}, { id_ra: ra.id_ra, texto: e.target.value }))}
+              className="mt-1 w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground font-normal focus:border-accent focus:outline-none"
+            />
+          </label>
+        ))}
+        <div className="flex gap-2">
+          <Button onClick={() => descargarPlan("pdf")} disabled={generandoPlan} className="text-caption gap-2">
+            <FileDown className="w-3.5 h-3.5" /> {generandoPlan ? t('common.generando', {defaultValue: 'Generando...'}) : t('botones.feoe.planPdf', {defaultValue: 'Plan .pdf'})}
+          </Button>
+          <Button variant="secondary" onClick={() => descargarPlan("docx")} disabled={generandoPlan} className="text-caption gap-2">
+            <FileDown className="w-3.5 h-3.5" /> {t('botones.feoe.planDocx', {defaultValue: 'Plan editable .docx'})}
+          </Button>
+        </div>
+      </div>
 
       <div className="bg-background/20 border border-white/5 rounded-xl p-5">
         <label className="font-bold text-foreground block mb-1" htmlFor={`informe-tutor-${studentId}`}>

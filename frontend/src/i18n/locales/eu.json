@@ -681,6 +681,9 @@
     "comun": {
       "errorGuardar": "Errorea gordetzean",
       "guardadoCorrectamente": "Ondo gorde da"
+    },
+    "feoe": {
+      "errorPlanFormacion": "Errorea prestakuntza-plana sortzean."
     }
   },
   "botones": {
@@ -859,7 +862,9 @@
       "suficienteTodoA3": "Nahikoa (dena 3ra)",
       "gestionarEnCurriculo": "Kudeatu Curriculumean",
       "configurarEnPlanFeoe": "Konfiguratu FEOEren orduak eta erregimena",
-      "todoSuperado": "Ikaskuntza-emaitza guztiak gaindituta"
+      "todoSuperado": "Ikaskuntza-emaitza guztiak gaindituta",
+      "planPdf": "Plana .pdf",
+      "planDocx": "Plan editagarria .docx"
     }
   },
   "placeholders": {
@@ -2694,7 +2699,16 @@
       "motivacionPlaceholder": "Gainditzen ez den arrazoia (derrigorrezkoa)…",
       "motivacionFalta": "Arrazoia falta da: arauak «Gainditu gabe» bakoitza arrazoitzea eskatzen du.",
       "informeCualitativo": "Enpresako tutorearen balorazio kualitatiboa",
-      "informeCualitativoDesc": "Enpresara egokitzea, ekimena, talde-lana, komunikazioa… Ikaskuntza-emaitzen balorazioarekin batera doan txosten kualitatiboa da."
+      "informeCualitativoDesc": "Enpresara egokitzea, ekimena, talde-lana, komunikazioa… Ikaskuntza-emaitzen balorazioarekin batera doan txosten kualitatiboa da.",
+      "planTitulo": "Banakako prestakuntza-plana",
+      "planDesc": "Enpresaren datuak eta ikaskuntza-emaitza bakoitzerako aurreikusitako jarduerak. Haiekin sortzen da planaren dokumentua, enpresarako izendatutako emaitza eta irizpideekin (Kurrikuluma › RA ← CE).",
+      "planEmpresa": "Enpresa",
+      "planTutorEmpresa": "Enpresako tutorea",
+      "planTutorDocente": "Ikastetxeko tutorea",
+      "planHoras": "Orduak",
+      "planInicio": "Hasiera",
+      "planFin": "Amaiera",
+      "planActividades": "Enpresan aurreikusitako jarduerak — {{ra}}"
     },
     "onboarding": {
       "entendido": "Ulertuta!",

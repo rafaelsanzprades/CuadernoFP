@@ -681,6 +681,9 @@
     "comun": {
       "errorGuardar": "Error saving",
       "guardadoCorrectamente": "Saved successfully"
+    },
+    "feoe": {
+      "errorPlanFormacion": "Error generating the training plan."
     }
   },
   "botones": {
@@ -859,7 +862,9 @@
       "suficienteTodoA3": "Sufficient (all to 3)",
       "gestionarEnCurriculo": "Manage in Curriculum",
       "configurarEnPlanFeoe": "Configure FEOE hours and regime",
-      "todoSuperado": "All RA passed"
+      "todoSuperado": "All RA passed",
+      "planPdf": "Plan .pdf",
+      "planDocx": "Editable plan .docx"
     }
   },
   "placeholders": {
@@ -2694,7 +2699,16 @@
       "motivacionPlaceholder": "Reason why it is not passed (required)…",
       "motivacionFalta": "The reason is missing: the regulations require every \"Not passed\" to be justified.",
       "informeCualitativo": "Qualitative assessment by the company tutor",
-      "informeCualitativoDesc": "Adaptation to the company, initiative, teamwork, communication… It is the qualitative report that goes with the RA assessment."
+      "informeCualitativoDesc": "Adaptation to the company, initiative, teamwork, communication… It is the qualitative report that goes with the RA assessment.",
+      "planTitulo": "Individual training plan",
+      "planDesc": "Company details and planned activities for each RA. The plan document is generated from them, with the RA and criteria designated for the company (Curriculum > RA-CE relation).",
+      "planEmpresa": "Company",
+      "planTutorEmpresa": "Company tutor",
+      "planTutorDocente": "School tutor",
+      "planHoras": "Hours",
+      "planInicio": "Start",
+      "planFin": "End",
+      "planActividades": "Planned activities at the company — {{ra}}"
     },
     "onboarding": {
       "entendido": "Got it!",

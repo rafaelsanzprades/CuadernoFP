@@ -681,6 +681,9 @@
     "comun": {
       "errorGuardar": "Error en desar",
       "guardadoCorrectamente": "Desat correctament"
+    },
+    "feoe": {
+      "errorPlanFormacion": "Error en generar el pla de formació."
     }
   },
   "botones": {
@@ -859,7 +862,9 @@
       "suficienteTodoA3": "Suficient (tot a 3)",
       "gestionarEnCurriculo": "Gestionar a Currículum",
       "configurarEnPlanFeoe": "Configurar hores i règim de la FEOE",
-      "todoSuperado": "Tots els RA superats"
+      "todoSuperado": "Tots els RA superats",
+      "planPdf": "Pla .pdf",
+      "planDocx": "Pla editable .docx"
     }
   },
   "placeholders": {
@@ -2694,7 +2699,16 @@
       "motivacionPlaceholder": "Motiu pel qual no se supera (obligatori)…",
       "motivacionFalta": "Falta el motiu: la norma demana motivar cada «No superat».",
       "informeCualitativo": "Valoració qualitativa del tutor d'empresa",
-      "informeCualitativoDesc": "Adaptació a l'empresa, iniciativa, treball en equip, comunicació… És l'informe qualitatiu que acompanya la valoració dels RA."
+      "informeCualitativoDesc": "Adaptació a l'empresa, iniciativa, treball en equip, comunicació… És l'informe qualitatiu que acompanya la valoració dels RA.",
+      "planTitulo": "Pla de formació individual",
+      "planDesc": "Dades de l'empresa i activitats previstes per a cada RA. Amb elles es genera el document del pla, amb els RA i criteris designats per a l'empresa (Currículum › Relació RA ← CE).",
+      "planEmpresa": "Empresa",
+      "planTutorEmpresa": "Tutor/a de l'empresa",
+      "planTutorDocente": "Tutor/a del centre",
+      "planHoras": "Hores",
+      "planInicio": "Inici",
+      "planFin": "Fi",
+      "planActividades": "Activitats previstes a l'empresa — {{ra}}"
     },
     "onboarding": {
       "entendido": "Entès!",
