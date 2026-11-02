@@ -4,7 +4,7 @@ import { BarChart, Target, ClipboardList, FileDown, BookMarked, Building2 } from
 import { PanelPorAlumno, SeccionAcordeon } from "@/components/features/alumnado/PanelPorAlumno";
 import { FeoeEmpresaAlumno } from "./FeoeEmpresaTab";
 import { rasNoSuperadosTutor } from "@/utils/tutorEmpresa";
-import { ESTADOS_ACTA, MAX_CONVOCATORIAS_DEFECTO, NOMBRE_ESTADO_ACTA, SIGLA_ESTADO_ACTA, convocatoriasUsadas, estadoActa } from "@/utils/estadosActa";
+import { estadosDisponibles, maxConvocatorias, NOMBRE_ESTADO_ACTA, siglaEstado, convocatoriasUsadas, estadoActa } from "@/utils/estadosActa";
 import { getSimulatedToday } from "@/utils/planningGenerator";
 import { CalificarConRubricaModal } from "./CalificarConRubricaModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -428,8 +428,8 @@ export function DetalleAlumnadoTab() {
                                 className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-info focus:outline-none"
                               >
                                 <option value="">{t('campos.evaluacion.estadoActaCalificado', {defaultValue: 'Calificado (nota numérica)'})}</option>
-                                {ESTADOS_ACTA.map((e) => (
-                                  <option key={e} value={e}>{SIGLA_ESTADO_ACTA[e]} — {t(`campos.evaluacion.estadoActa_${e}`, {defaultValue: NOMBRE_ESTADO_ACTA[e]})}</option>
+                                {estadosDisponibles(config_redondeo.perfil_comunidad).map((e) => (
+                                  <option key={e} value={e}>{siglaEstado(e, config_redondeo.perfil_comunidad)} — {t(`campos.evaluacion.estadoActa_${e}`, {defaultValue: NOMBRE_ESTADO_ACTA[e]})}</option>
                                 ))}
                               </select>
                               {(estadoDelActa === "EX" || estadoDelActa === "CV") && (
@@ -448,8 +448,8 @@ export function DetalleAlumnadoTab() {
                               )}
                             </div>
                             {(() => {
-                              const usadas = convocatoriasUsadas(evRow);
-                              const maxConv = config_redondeo.max_convocatorias || MAX_CONVOCATORIAS_DEFECTO;
+                              const usadas = convocatoriasUsadas(evRow, config_redondeo.perfil_comunidad);
+                              const maxConv = maxConvocatorias(config_redondeo);
                               return (
                                 <div className="mb-4">
                                   <label htmlFor={`conv-previas-${al_id}`} className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.convocatoriasPreviasLabel', {defaultValue: 'Convocatorias de cursos anteriores'})}</label>
@@ -521,7 +521,7 @@ export function DetalleAlumnadoTab() {
 
                           {estadoDelActa ? (
                             <div className="rounded-xl flex flex-col items-center justify-center p-5 border-2 border-[var(--glass-border)] text-center">
-                              <div className="text-heading font-black mb-2 text-foreground" style={{ lineHeight: 1 }}>{SIGLA_ESTADO_ACTA[estadoDelActa]}</div>
+                              <div className="text-heading font-black mb-2 text-foreground" style={{ lineHeight: 1 }}>{siglaEstado(estadoDelActa, config_redondeo.perfil_comunidad)}</div>
                               <div className="text-caption text-muted tracking-wider font-semibold">{t(`campos.evaluacion.estadoActa_${estadoDelActa}`, {defaultValue: NOMBRE_ESTADO_ACTA[estadoDelActa]})}</div>
                             </div>
                           ) : (

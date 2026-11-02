@@ -1833,6 +1833,7 @@
       "estadoActa_NP": "Aurkeztu gabea",
       "estadoActa_EX": "Salbuetsia",
       "estadoActa_CV": "Balioetsia",
+      "estadoActa_RC": "Deialdiari uko egitea",
       "estadoActa_FEP": "Enpresako prestakuntza zain",
       "estadoMotivoPlaceholder": "Ebazpena edo arrazoia (zk., data)…",
       "convocatoriasPreviasLabel": "Aurreko ikasturteetako deialdiak",
@@ -2021,7 +2022,12 @@
       "reglaImprescindibles": "Ikaskuntza-emaitza ezinbestekoak gainditu behar dira",
       "reglaSuperacionDesc": "Azken biekin, eskatutako ikaskuntza-emaitza bat gainditzeko notaren azpitik badago, modulua gainditu gabe geratzen da batez bestekoa iristen bada ere. Ezinbesteko emaitzak Kurrikuluma › RA ← CE erlazioan markatzen dira. Oraindik ebaluatu gabeko emaitzak ez du blokeatzen.",
       "maxConvocatorias": "Modulu bakoitzeko gehieneko deialdiak",
-      "maxConvocatoriasDesc": "Ikasle bakoitzaren akta-fitxan zenbat deialdi erabili dituen zenbatzen da, eta zenbaki horretara iristean ohartarazten da. Hutsik = 4; egiaztatu zure erkidegoko muga."
+      "maxConvocatoriasDesc": "Ikasle bakoitzaren akta-fitxan zenbat deialdi erabili dituen zenbatzen da, eta zenbaki horretara iristean ohartarazten da. Hutsik = eskaintzaren mailakoa (D mailan 4, E mailan 2); egiaztatu zure erkidegoko muga.",
+      "gradoOferta": "Eskaintzaren maila",
+      "gradoD": "D maila (heziketa-zikloa): 4 deialdi arte",
+      "gradoE": "E maila (espezializazio-ikastaroa): 2 deialdi",
+      "reglaAvisoAndalucia": "Andaluzian ikaskuntza-emaitza guztiak edo programazioak finkatzen dituenak gainditu behar dira (Ebaluazio Agindua, 18.1 art.): «batez bestekoa aski da» aukerarekin arauak onartzen ez duena gainditzera utz zenezake.",
+      "reglaAvisoAsturias": "Asturiasen, enpresako prestakuntza duten moduluetan, harekin lotutako ikaskuntza-emaitza guztiak gainditzen badira bakarrik gainditzen da (zirkularra, 1.12.4 eta 2.4.2 atalak). Berrikusi arau hau eta tutorearen balorazioa."
     },
     "normativa": {
       "legislacionAutonomica": "Erkidegoko legedia ({{comunidad}})",

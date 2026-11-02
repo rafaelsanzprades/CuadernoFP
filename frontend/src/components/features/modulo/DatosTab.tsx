@@ -10,6 +10,7 @@ import { InfoTip } from "@/components/ui/InfoTip";
 import { Family } from "@/types";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
 import { PERFILES_COMUNIDAD } from "@/utils/calificaciones";
+import { maxConvocatorias } from "@/utils/estadosActa";
 import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
 
@@ -549,11 +550,19 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                   min={1}
                   step={1}
                   value={config.max_convocatorias ?? ""}
-                  placeholder="4"
+                  placeholder={String(maxConvocatorias(config))}
                   onChange={(e) => cambia({ max_convocatorias: e.target.value === "" ? null : Math.max(1, parseInt(e.target.value) || 1) })}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
-                <p className="text-caption text-muted">{t('campos.modulo.maxConvocatoriasDesc', {defaultValue: 'En la ficha de acta de cada alumno/a se cuenta cuántas convocatorias lleva consumidas y se avisa al llegar a este número. Vacío = 4; comprueba el límite de tu comunidad.'})}</p>
+                <p className="text-caption text-muted">{t('campos.modulo.maxConvocatoriasDesc', {defaultValue: 'En la ficha de acta de cada alumno/a se cuenta cuántas convocatorias lleva consumidas y se avisa al llegar a este número. Vacío = el del grado de la oferta (4 en el Grado D, 2 en el E); comprueba el límite de tu comunidad.'})}</p>
+                <Select
+                  label={t('campos.modulo.gradoOferta', {defaultValue: 'Grado de la oferta'})}
+                  value={config.grado_oferta === "E" ? "E" : "D"}
+                  onChange={(e) => cambia({ grado_oferta: e.target.value })}
+                >
+                  <option value="D">{t('campos.modulo.gradoD', {defaultValue: 'Grado D (ciclo formativo): hasta 4 convocatorias'})}</option>
+                  <option value="E">{t('campos.modulo.gradoE', {defaultValue: 'Grado E (curso de especialización): 2 convocatorias'})}</option>
+                </Select>
               </div>
 
               <div className="space-y-2">
@@ -567,6 +576,13 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                   <option value="imprescindibles">{t('campos.modulo.reglaImprescindibles', {defaultValue: 'Hay que superar los RA imprescindibles'})}</option>
                 </Select>
                 <p className="text-caption text-muted">{t('campos.modulo.reglaSuperacionDesc', {defaultValue: 'Con las dos últimas, un RA exigido por debajo del aprobado deja el módulo suspenso aunque la media llegue. Los RA imprescindibles se marcan en Currículo › Relación RA ← CE. Un RA sin evaluar todavía no bloquea.'})}</p>
+                {(config.perfil_comunidad === "andalucia" || config.perfil_comunidad === "asturias") && (config.regla_superacion || "media") === "media" && (
+                  <p className="text-caption text-danger" role="alert">
+                    {config.perfil_comunidad === "andalucia"
+                      ? t('campos.modulo.reglaAvisoAndalucia', {defaultValue: 'En Andalucía hay que superar todos los resultados de aprendizaje o los que fije la programación (Orden de evaluación, art. 18.1): con «basta la media» podrías estar aprobando a quien la norma no deja aprobar.'})
+                      : t('campos.modulo.reglaAvisoAsturias', {defaultValue: 'En Asturias, en los módulos con formación en empresa solo se aprueba si se superan todos los resultados de aprendizaje vinculados a ella (circular, apartados 1.12.4 y 2.4.2). Revisa esta regla y la valoración del tutor.'})}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">

@@ -137,3 +137,13 @@ def test_plan_formacion_recoge_los_datos_del_plan():
     with zipfile.ZipFile(io.BytesIO(contenido)) as z:
         texto = z.read("word/document.xml").decode("utf-8")
     assert "Empresa Prueba SL" in texto and "Ana Tutora" in texto and "Montaje de equipos de red" in texto
+
+
+def test_sigla_estado_segun_perfil():
+    from pdf_boletin_grupal import sigla_estado
+    assert sigla_estado("NP", None) == "NP"
+    assert sigla_estado("NP", {"perfil_comunidad": "aragon"}) == "NE"
+    assert sigla_estado("FEP", {"perfil_comunidad": "andalucia"}) == "PFEOE"
+    assert sigla_estado("FEP", {"perfil_comunidad": "asturias"}) == "PFE"
+    assert sigla_estado("RC", {"perfil_comunidad": "aragon"}) == "RC"
+    assert sigla_estado("FEP", {}) == "FE pend."

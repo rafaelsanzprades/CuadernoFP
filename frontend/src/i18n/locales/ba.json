@@ -1833,6 +1833,7 @@
       "estadoActa_NP": "No presentat",
       "estadoActa_EX": "Exempt",
       "estadoActa_CV": "Convalidat",
+      "estadoActa_RC": "Renúncia a la convocatòria",
       "estadoActa_FEP": "Formació en empresa pendent",
       "estadoMotivoPlaceholder": "Resolució o motiu (núm., data)…",
       "convocatoriasPreviasLabel": "Convocatòries de cursos anteriors",
@@ -2021,7 +2022,12 @@
       "reglaImprescindibles": "Cal superar els RA imprescindibles",
       "reglaSuperacionDesc": "Amb les dues darreres, un RA exigit per davall de l'aprovat deixa el mòdul suspès encara que la mitjana hi arribi. Els RA imprescindibles es marquen a Currículum › Relació RA ← CE. Un RA sense avaluar encara no bloqueja.",
       "maxConvocatorias": "Convocatòries màximes per mòdul",
-      "maxConvocatoriasDesc": "A la fitxa d'acta de cada alumne es compta quantes convocatòries du consumides i s'avisa en arribar a aquest nombre. Buit = 4; comprova el límit de la teua comunitat."
+      "maxConvocatoriasDesc": "A la fitxa d'acta de cada alumne es compta quantes convocatòries du consumides i s'avisa en arribar a este nombre. Buit = el del grau de l'oferta (4 al grau D, 2 al E); comprova el límit de la teua comunitat.",
+      "gradoOferta": "Grau de l'oferta",
+      "gradoD": "Grau D (cicle formatiu): fins a 4 convocatòries",
+      "gradoE": "Grau E (curs d'especialització): 2 convocatòries",
+      "reglaAvisoAndalucia": "A Andalusia cal superar tots els resultats d'aprenentatge o els que fixe la programació (Ordre d'avaluació, art. 18.1): amb «basta la mitjana» podries aprovar qui la norma no deixa aprovar.",
+      "reglaAvisoAsturias": "A Astúries, en els mòduls amb formació en empresa només s'aprova si se superen tots els resultats d'aprenentatge vinculats (circular, apartats 1.12.4 i 2.4.2). Revisa esta regla i la valoració del tutor."
     },
     "normativa": {
       "legislacionAutonomica": "Legislació autonòmica ({{comunidad}})",

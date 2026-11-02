@@ -20,7 +20,18 @@ from helpers_catalogo import resolve_escala_cualitativa, nota_acta, formato_nota
 from pdf_helpers import esc
 
 # Estado de la calificación en el acta (campo Estado_Acta de df_eval) -> sigla que sustituye a la nota. Mismas siglas que frontend/src/utils/estadosActa.ts
-ESTADOS_ACTA = {"NE": "NE", "NP": "NP", "EX": "EX", "CV": "CV", "FEP": "FE pend."}
+ESTADOS_ACTA = {"NE": "NE", "NP": "NP", "EX": "EX", "CV": "CV", "RC": "RC", "FEP": "FE pend."}
+# Siglas que cambian según el perfil de comunidad (config_redondeo.perfil_comunidad); mismas que SIGLAS_PERFIL en estadosActa.ts
+SIGLAS_PERFIL = {
+    "aragon": {"NP": "NE"},
+    "andalucia": {"NP": "NE", "FEP": "PFEOE"},
+    "asturias": {"FEP": "PFE"},
+}
+
+
+def sigla_estado(estado: str, config_redondeo: dict = None) -> str:
+    perfil = (config_redondeo or {}).get("perfil_comunidad") or ""
+    return SIGLAS_PERFIL.get(perfil, {}).get(estado) or ESTADOS_ACTA[estado]
 
 
 def _draw_page_decorations(canv, doc):
@@ -36,7 +47,8 @@ def _draw_page_decorations(canv, doc):
 
 
 def _compute_grupal_rows(trimestre: str, info_modulo: dict, df_al: pd.DataFrame,
-                          df_eval: pd.DataFrame, df_act: pd.DataFrame, escalas_evaluacion: list = None):
+                          df_eval: pd.DataFrame, df_act: pd.DataFrame, escalas_evaluacion: list = None,
+                          config_redondeo: dict = None):
     """Lógica pura (sin ReportLab) compartida por el PDF y el DOCX: pesos de
     instrumentos, actividades del trimestre y nota media ponderada por
     alumno. Devuelve (TIPO_MAP, TIPOS_ORDEN, filas) donde cada fila es
@@ -128,7 +140,7 @@ def _compute_grupal_rows(trimestre: str, info_modulo: dict, df_al: pd.DataFrame,
         if "Estado_Acta" in df_eval.columns:
             raw_estado = df_eval.at[idx_ev, "Estado_Acta"]
             if pd.notna(raw_estado) and str(raw_estado) in ESTADOS_ACTA:
-                estado = ESTADOS_ACTA[str(raw_estado)]
+                estado = sigla_estado(str(raw_estado), config_redondeo)
         filas.append({
             "estado": estado,
             "idx": idx_lista,
@@ -196,7 +208,7 @@ def generar_pdf_boletin_grupal(
     smlB_left = ParagraphStyle("SmBL", parent=styles["Normal"], fontSize=8, leading=10,
                                fontName="Helvetica-Bold", alignment=TA_LEFT)
 
-    TIPO_MAP, TIPOS_ORDEN, filas = _compute_grupal_rows(trimestre, info_modulo, df_al, df_eval, df_act, escalas_evaluacion)
+    TIPO_MAP, TIPOS_ORDEN, filas = _compute_grupal_rows(trimestre, info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo)
 
     # ── Anchuras: tabla con anchos forzados a 18cm total ─────────────────────
     W_NUM    = 1.0 * cm               # Número de lista
@@ -526,10 +538,10 @@ def generar_pdf_boletin_grupal_final(
     return buffer
 
 
-def generar_docx_boletin_grupal(trimestre, info_modulo, df_al, df_eval, df_act, fecha_corte=None, escalas_evaluacion=None):
+def generar_docx_boletin_grupal(trimestre, info_modulo, df_al, df_eval, df_act, fecha_corte=None, escalas_evaluacion=None, config_redondeo=None):
     from docx_helpers import new_document, add_title, add_meta_line, add_table, doc_to_bytes
 
-    TIPO_MAP, TIPOS_ORDEN, filas = _compute_grupal_rows(trimestre, info_modulo, df_al, df_eval, df_act, escalas_evaluacion)
+    TIPO_MAP, TIPOS_ORDEN, filas = _compute_grupal_rows(trimestre, info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo)
 
     doc = new_document(landscape=False)
     add_title(doc, f"Boletín grupal {trimestre}", info_modulo.get("modulo", "Módulo"))

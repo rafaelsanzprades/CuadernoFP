@@ -1833,6 +1833,7 @@
       "estadoActa_NP": "Non presentado",
       "estadoActa_EX": "Exento",
       "estadoActa_CV": "Validado",
+      "estadoActa_RC": "Renuncia á convocatoria",
       "estadoActa_FEP": "Formación en empresa pendente",
       "estadoMotivoPlaceholder": "Resolución ou motivo (n.º, data)…",
       "convocatoriasPreviasLabel": "Convocatorias de cursos anteriores",
@@ -2021,7 +2022,12 @@
       "reglaImprescindibles": "Hai que superar os RA imprescindibles",
       "reglaSuperacionDesc": "Coas dúas últimas, un RA esixido por debaixo do aprobado deixa o módulo suspenso aínda que a media chegue. Os RA imprescindibles márcanse en Currículo › Relación RA ← CE. Un RA sen avaliar aínda non bloquea.",
       "maxConvocatorias": "Convocatorias máximas por módulo",
-      "maxConvocatoriasDesc": "Na ficha de acta de cada alumno/a contas cantas convocatorias leva consumidas e avísase ao chegar a este número. Baleiro = 4; comproba o límite da túa comunidade."
+      "maxConvocatoriasDesc": "Na ficha de acta de cada alumno/a contas cantas convocatorias leva consumidas e avísase ao chegar a este número. Baleiro = o do grao da oferta (4 no grao D, 2 no E); comproba o límite da túa comunidade.",
+      "gradoOferta": "Grao da oferta",
+      "gradoD": "Grao D (ciclo formativo): ata 4 convocatorias",
+      "gradoE": "Grao E (curso de especialización): 2 convocatorias",
+      "reglaAvisoAndalucia": "En Andalucía hai que superar todos os resultados de aprendizaxe ou os que fixe a programación (Orde de avaliación, art. 18.1): con «abonda a media» poderías aprobar a quen a norma non deixa aprobar.",
+      "reglaAvisoAsturias": "En Asturias, nos módulos con formación en empresa só se aproba se se superan todos os resultados de aprendizaxe vinculados (circular, apartados 1.12.4 e 2.4.2). Revisa esta regra e a valoración do titor."
     },
     "normativa": {
       "legislacionAutonomica": "Lexislación autonómica ({{comunidad}})",

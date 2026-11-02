@@ -42,6 +42,8 @@ export interface ConfigRedondeo {
   regla_superacion?: "media" | "todos_ra" | "imprescindibles";
   /** Convocatorias máximas por módulo antes de avisar al docente (utils/estadosActa.ts::convocatoriasUsadas). Vacío = 4. */
   max_convocatorias?: number | null;
+  /** Grado de la oferta: «D» (4 convocatorias como máximo) o «E» (2). Solo se usa si `max_convocatorias` está vacío. Vacío = «D». */
+  grado_oferta?: "D" | "E";
 }
 
 export const DEFAULT_CONFIG_REDONDEO: ConfigRedondeo = {

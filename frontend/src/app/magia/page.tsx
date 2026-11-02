@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { useAppStore } from "@/store/useAppStore";
 import { Alumnado } from "@/types";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { estadoActa, SIGLA_ESTADO_ACTA } from "@/utils/estadosActa";
+import { estadoActa, siglaEstado } from "@/utils/estadosActa";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, getSigadInfo, filtrarPorGev } from "@/utils/calificaciones";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -258,7 +258,7 @@ export default function MagiaPage() {
         "1er trimestre": evRow["1T_Nota"] ?? "",
         "2º trimestre": evRow["2T_Nota"] ?? "",
         "3er trimestre": evRow["3T_Nota"] ?? "",
-        "Final ordinaria": estadoDelActa ? SIGLA_ESTADO_ACTA[estadoDelActa] : (notaFinal ?? ""),
+        "Final ordinaria": estadoDelActa ? siglaEstado(estadoDelActa, moduleData?.config_redondeo?.perfil_comunidad) : (notaFinal ?? ""),
         "Final extraordinaria": evRow.Nota_Final_FE ?? "",
         Sigad: estadoDelActa || sigad.sinEvaluar ? "" : sigad.cod,
       };

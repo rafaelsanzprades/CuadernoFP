@@ -148,7 +148,7 @@ def generar_documento(
         elif type in ("grupal_1t", "grupal_2t", "grupal_3t"):
             from pdf_boletin_grupal import generar_docx_boletin_grupal
             tri = type.split("_")[1].upper()
-            docx_bytes = generar_docx_boletin_grupal(tri, info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
+            docx_bytes = generar_docx_boletin_grupal(tri, info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
         elif type == "grupal_final":
             from pdf_boletin_grupal import generar_docx_boletin_grupal_final
             docx_bytes = generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
@@ -214,11 +214,11 @@ def generar_documento(
     elif type == "cobertura_ce":
         buffer = generar_pdf_cobertura_ce(info_modulo, df_ce, df_indicadores, df_instr)
     elif type == "grupal_1t":
-        buffer = generar_pdf_boletin_grupal("1T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
+        buffer = generar_pdf_boletin_grupal("1T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
     elif type == "grupal_2t":
-        buffer = generar_pdf_boletin_grupal("2T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
+        buffer = generar_pdf_boletin_grupal("2T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
     elif type == "grupal_3t":
-        buffer = generar_pdf_boletin_grupal("3T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion)
+        buffer = generar_pdf_boletin_grupal("3T", info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
     elif type == "grupal_final":
         buffer = generar_pdf_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte, escalas_evaluacion, config_redondeo)
     elif type == "individual":
