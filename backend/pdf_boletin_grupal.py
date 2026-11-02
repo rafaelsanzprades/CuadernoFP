@@ -34,6 +34,15 @@ def sigla_estado(estado: str, config_redondeo: dict = None) -> str:
     return SIGLAS_PERFIL.get(perfil, {}).get(estado) or ESTADOS_ACTA[estado]
 
 
+def _estado_acta(df_eval: pd.DataFrame, idx_ev, config_redondeo: dict = None) -> str:
+    """Sigla del estado en el acta del alumno/a (vacía si está calificado)."""
+    if "Estado_Acta" in df_eval.columns:
+        raw_estado = df_eval.at[idx_ev, "Estado_Acta"]
+        if pd.notna(raw_estado) and str(raw_estado) in ESTADOS_ACTA:
+            return sigla_estado(str(raw_estado), config_redondeo)
+    return ""
+
+
 def _draw_page_decorations(canv, doc):
     """Cabecera y pie - idéntico al Calendario académico."""
     canv.saveState()
@@ -136,11 +145,7 @@ def _compute_grupal_rows(trimestre: str, info_modulo: dict, df_al: pd.DataFrame,
         edad = str(int(_edad)) if pd.notna(_edad) and str(_edad) not in ("", "nan") else ""
         apells = str(al.get("Apellidos", ""))
         nombre = str(al.get("Nombre", ""))
-        estado = ""
-        if "Estado_Acta" in df_eval.columns:
-            raw_estado = df_eval.at[idx_ev, "Estado_Acta"]
-            if pd.notna(raw_estado) and str(raw_estado) in ESTADOS_ACTA:
-                estado = sigla_estado(str(raw_estado), config_redondeo)
+        estado = _estado_acta(df_eval, idx_ev, config_redondeo)
         filas.append({
             "estado": estado,
             "idx": idx_lista,
@@ -407,6 +412,7 @@ def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
                 except (ValueError, TypeError):
                     nota_final_extra = None
         filas.append({
+            "estado": _estado_acta(df_eval, idx_ev, config_redondeo),
             "idx": idx_lista,
             "alumnado": f"{apells}, {nombre}" if nombre else apells,
             "edad": edad,

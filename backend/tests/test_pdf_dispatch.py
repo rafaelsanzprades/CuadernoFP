@@ -147,3 +147,18 @@ def test_sigla_estado_segun_perfil():
     assert sigla_estado("FEP", {"perfil_comunidad": "asturias"}) == "PFE"
     assert sigla_estado("RC", {"perfil_comunidad": "aragon"}) == "RC"
     assert sigla_estado("FEP", {}) == "FE pend."
+
+
+@pytest.mark.parametrize("perfil,estado,sigla", [("andalucia", "FEP", "PFEOE"), ("asturias", "FEP", "PFE"), ("aragon", "NP", "NE"), ("", "FEP", "FE pend.")])
+def test_boletin_grupal_final_usa_la_sigla_del_perfil(perfil, estado, sigla):
+    import re
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    modulo.setdefault("config_redondeo", {})["perfil_comunidad"] = perfil
+    ev = curso["df_eval"]
+    al = _al_id(curso)
+    fila = next(r for r in ev if r.get("ID") == al)
+    fila["Estado_Acta"] = estado
+    contenido, _, _ = generar_documento("grupal_final", modulo, curso, fecha_corte="2026-01-31", file_format="docx")
+    xml = zipfile.ZipFile(io.BytesIO(contenido)).read("word/document.xml").decode("utf-8")
+    texto = re.sub(r"<[^>]+>", "|", xml)
+    assert f"|{sigla}|" in texto
