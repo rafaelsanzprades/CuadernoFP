@@ -600,6 +600,7 @@
       "textoGenerado": "Text generat. Revisa'l i edita'l abans de desar."
     },
     "curriculo": {
+      "importadoPdf": "S'han afegit {{ra}} RA, {{ce}} criteris i {{ud}} unitats didàctiques ({{omitidos}} omesos perquè ja existien o estaven incomplets). Revisa els pesos.",
       "errorGuardar": "Error en desar les dades.",
       "planAutocompletado": "Pla de sessions autocompletat.",
       "programacionGuardada": "Programació desada correctament.",
@@ -749,6 +750,7 @@
       "anadirCeA": "Afegir CE a {{id}}",
       "anadirNuevaUd": "Afegir nova UD",
       "anadirNuevoRa": "Afegir nou RA",
+      "importarPdfIa": "Importa des de PDF amb IA",
       "aplicarACeldas": "Aplicar a {{count}} cel·les",
       "autocompletarPlan": "Autocompletar pla",
       "descargarPdfMagia": "Descarregar PDF/DOCX a MagIA",
@@ -871,7 +873,7 @@
   },
   "placeholders": {
     "ai": {
-      "pegaClaveSecreta": "Enganxa aquí la teva clau secreta de {{proveedor}}..."
+      "pegaClaveSecreta": "Apega ací la teua clau secreta de Google AI Studio..."
     },
     "alumnado": {
       "acuerdosTutoria": "A quins acords s'ha arribat? Quines tasques pendents queden?",
@@ -1067,10 +1069,6 @@
     }
   },
   "checks": {
-    "ai": {
-      "proveedorGemini": "Google Gemini (recomanat - gratuït per a desenvolupadors)",
-      "proveedorOpenai": "OpenAI ChatGPT (requereix saldo al compte)"
-    },
     "alumnado": {
       "implicacionAlto": "Alt",
       "implicacionMedio": "Mitjà",
@@ -2076,7 +2074,10 @@
       "iaLeyendoDescripcion": "La IA està llegint i estructurant la informació. Això pot trigar uns 20-30 segons. Si us plau, no tanquis la finestra.",
       "importaDesdeC": "Importa programacions des de PDF automàticament",
       "motorIA": "Motor d'Intel·ligència artificial",
-      "noHayApiKey": "No hi ha API key. Configura-la primer a la pestanya 'Còpia de seguretat i sincronització' dels arxius.",
+      "noHayApiKey": "No hi ha clau d'IA. Apega-la primer a Arxius › Núvol i clau d'IA.",
+      "avisoClavePropia": "Utilitza la teua pròpia clau de Gemini (gratuïta, de Google AI Studio). El PDF passa pel servidor només per llegir-lo i s'envia a Gemini amb la teua clau; no es guarda res. Puja només currículums oficials, mai documents amb dades de l'alumnat.",
+      "motorGemini": "Google Gemini (gratuït per a docents).",
+      "conseguirClave": "Aconsegueix la teua clau a Google AI Studio",
       "soloArchivosPdf": "Només s'admeten arxius PDF de moment.",
       "subeCurriculoDescripcion": "Puja el teu currículum en PDF per extreure la programació",
       "sueltaPdfAqui": "Deixa anar el PDF aquí"

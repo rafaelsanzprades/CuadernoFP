@@ -26,6 +26,8 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { getOgList, loadCatalogForModule, resolveDescRa, resolveDescCe } from "@/services/catalogCache";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useTranslation } from "react-i18next";
+import { AIWizardModal } from "@/components/features/ai/AIWizardModal";
+import { mezclarCurriculo } from "@/utils/importarCurriculo";
 
 export default function MatricesPage() {
   const { activeModuleId, moduleData, setModuleData, updateDataFrame, updateModuleData, saveModuleData, cursoData, updateCursoData, updateInfoModulo } = useAppStore();
@@ -43,6 +45,7 @@ export default function MatricesPage() {
   const [activeTabRaw, setActiveTab] = useState("relacion-ra-ce");
   const activeTab = activeTabRaw === "contribucion-ra-og" ? "contribucion-og-ra" : activeTabRaw;
   const [catalogLoaded, setCatalogLoaded] = useState(0);
+  const [importarPdfAbierto, setImportarPdfAbierto] = useState(false);
 
   const [isDragging, setIsDragging] = useState(false);
   const [selectedCells, setSelectedCells] = useState<Set<string>>(new Set());
@@ -327,6 +330,17 @@ export default function MatricesPage() {
     <div className="flex min-h-screen bg-background">
       <TabSync activeTab={activeTab} setActiveTab={setActiveTab} />
       <Sidebar />
+      <AIWizardModal
+        isOpen={importarPdfAbierto}
+        onClose={() => setImportarPdfAbierto(false)}
+        onSuccess={(data) => {
+          const { df_ra: ra, df_ce: ce, df_ud: ud, resumen } = mezclarCurriculo(data, df_ra, df_ce, df_ud);
+          updateDataFrame("df_ra", ra);
+          updateDataFrame("df_ce", ce);
+          updateDataFrame("df_ud", ud);
+          toast.success(t('toasts.curriculo.importadoPdf', {defaultValue: 'Añadidos {{ra}} RA, {{ce}} criterios y {{ud}} unidades didácticas ({{omitidos}} omitidos por existir ya o estar incompletos). Revisa los pesos.', ...resumen}), { duration: 8000 });
+        }}
+      />
       <div className="flex-1 flex flex-col relative z-10 min-w-0">
         <Header />
 
@@ -449,6 +463,7 @@ export default function MatricesPage() {
                     </table>
                   </div>
                   <div className="mt-4 flex justify-between items-center text-body">
+                    <div className="flex flex-wrap gap-2">
                     <Button
                       variant="ghost"
                       onClick={() => {
@@ -461,6 +476,10 @@ export default function MatricesPage() {
                     >
                       <span>+</span> {t('botones.curriculo.anadirNuevoRa', {defaultValue: 'Añadir nuevo RA'})}
                     </Button>
+                    <Button variant="ghost" onClick={() => setImportarPdfAbierto(true)} className="text-accent hover:text-[#1abc9c]">
+                      <span className="inline-flex"><Wand2 className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('botones.curriculo.importarPdfIa', {defaultValue: 'Importar desde PDF con IA'})}
+                    </Button>
+                    </div>
 
                     <Card className="px-4 py-2 inline-flex items-center gap-2 border-l-4 border-l-blue-500">
                       <span className="text-muted">{t('campos.curriculo.totalSumaPctRa', {defaultValue: 'Total suma % RA:'})}</span>

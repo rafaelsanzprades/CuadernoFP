@@ -33,7 +33,9 @@ def parse_curriculum_with_gemini(text: str, api_key: str) -> dict:
         f"{prompt}\n\nTEXTO DEL DOCUMENTO:\n{text[:100000]}", # limitamos por seguridad aunque Gemini soporta mucho más
         generation_config=genai.GenerationConfig(
             response_mime_type="application/json",
-        )
+        ),
+        # Sin reintentos y con límite de tiempo: si Gemini está saturado, falla pronto en vez de dejar la petición colgada
+        request_options={"timeout": 120, "retry": None},
     )
     
     try:
@@ -42,16 +44,5 @@ def parse_curriculum_with_gemini(text: str, api_key: str) -> dict:
     except Exception as e:
         raise ValueError(f"Error parseando la respuesta de Gemini: {str(e)}\nRespuesta: {response.text}")
 
-def parse_curriculum_with_openai(text: str, api_key: str) -> dict:
-    """
-    Utiliza OpenAI (ChatGPT) para extraer la estructura. (Pendiente de implementar).
-    """
-    raise NotImplementedError("OpenAI parser no implementado todavía.")
-
-def parse_curriculum(text: str, api_key: str, provider: str = "gemini") -> dict:
-    if provider.lower() == "gemini":
-        return parse_curriculum_with_gemini(text, api_key)
-    elif provider.lower() == "openai":
-        return parse_curriculum_with_openai(text, api_key)
-    else:
-        raise ValueError(f"Proveedor de IA no soportado: {provider}")
+def parse_curriculum(text: str, api_key: str) -> dict:
+    return parse_curriculum_with_gemini(text, api_key)

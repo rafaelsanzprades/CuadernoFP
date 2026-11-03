@@ -598,6 +598,7 @@
       "textoGenerado": "Texto xerado. Revísao e edítao antes de gardar."
     },
     "curriculo": {
+      "importadoPdf": "Engadíronse {{ra}} RA, {{ce}} criterios e {{ud}} unidades didácticas ({{omitidos}} omitidos por existir xa ou estar incompletos). Revisa os pesos.",
       "errorGuardar": "Erro ao gardar os datos.",
       "planAutocompletado": "Plan de sesións autocompletado.",
       "programacionGuardada": "Programación gardada correctamente.",
@@ -747,6 +748,7 @@
       "anadirCeA": "Engadir CE a {{id}}",
       "anadirNuevaUd": "Engadir nova UD",
       "anadirNuevoRa": "Engadir novo RA",
+      "importarPdfIa": "Importar desde PDF con IA",
       "aplicarACeldas": "Aplicar a {{count}} celas",
       "autocompletarPlan": "Autocompletar plan",
       "descargarPdfMagia": "Descargar PDF/DOCX en MagIA",
@@ -869,7 +871,7 @@
   },
   "placeholders": {
     "ai": {
-      "pegaClaveSecreta": "Pega aquí a túa clave secreta de {{proveedor}}..."
+      "pegaClaveSecreta": "Pega aquí a túa chave secreta de Google AI Studio..."
     },
     "alumnado": {
       "acuerdosTutoria": "A que acordos se chegou? Que tarefas pendentes quedan?",
@@ -1065,10 +1067,6 @@
     }
   },
   "checks": {
-    "ai": {
-      "proveedorGemini": "Google Gemini (recomendado - gratuíto para desenvolvedores)",
-      "proveedorOpenai": "OpenAI ChatGPT (require saldo na conta)"
-    },
     "alumnado": {
       "implicacionAlto": "Alto",
       "implicacionMedio": "Medio",
@@ -2074,7 +2072,10 @@
       "iaLeyendoDescripcion": "A IA está lendo e estruturando a información. Isto pode tardar uns 20-30 segundos. Por favor, non peches a xanela.",
       "importaDesdeC": "Importa programacións desde PDF automaticamente",
       "motorIA": "Motor de intelixencia artificial",
-      "noHayApiKey": "Non hai API key. Configúraa primeiro na pestana 'Respaldo e sincronización' do ficheiros.",
+      "noHayApiKey": "Non hai chave de IA. Pégaa primeiro en Arquivos › Nube e chave de IA.",
+      "avisoClavePropia": "Usa a túa propia chave de Gemini (gratuíta, de Google AI Studio). O PDF pasa polo servidor só para lelo e envíase a Gemini coa túa chave; non se garda nada. Sube só currículos oficiais, nunca documentos con datos do alumnado.",
+      "motorGemini": "Google Gemini (gratuíto para docentes).",
+      "conseguirClave": "Consigue a túa chave en Google AI Studio",
       "soloArchivosPdf": "Só se admiten ficheiros PDF polo momento.",
       "subeCurriculoDescripcion": "Sube o teu currículo en PDF para extraer a programación",
       "sueltaPdfAqui": "Solta o PDF aquí"

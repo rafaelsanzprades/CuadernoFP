@@ -24,7 +24,6 @@ async def parse_curriculum_endpoint(
     request: Request,
     file: UploadFile,
     api_key: str = Form(...),
-    provider: str = Form("gemini")
 ):
     if not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="El archivo debe ser un PDF")
@@ -40,7 +39,7 @@ async def parse_curriculum_endpoint(
             raise HTTPException(status_code=400, detail="No se pudo extraer suficiente texto del PDF. ¿Es un documento escaneado sin OCR?")
             
         # 2. Parsear con IA
-        structured_data = parse_curriculum(text, api_key, provider)
+        structured_data = parse_curriculum(text, api_key)
         
         return {
             "status": "success",

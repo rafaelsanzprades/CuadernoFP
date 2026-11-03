@@ -598,6 +598,7 @@
       "textoGenerado": "Testua sortuta. Berrikusi eta editatu gorde aurretik."
     },
     "curriculo": {
+      "importadoPdf": "{{ra}} RA, {{ce}} irizpide eta {{ud}} unitate didaktiko gehitu dira ({{omitidos}} baztertu dira, lehendik bazeudelako edo osatu gabe zeudelako). Berrikusi pisuak.",
       "errorGuardar": "Errorea datuak gordetzean.",
       "planAutocompletado": "Saio-plana automatikoki osatuta.",
       "programacionGuardada": "Programazioa ondo gorde da.",
@@ -747,6 +748,7 @@
       "anadirCeA": "CE gehitu {{id}}(e)ra",
       "anadirNuevaUd": "UD berria gehitu",
       "anadirNuevoRa": "RA berria gehitu",
+      "importarPdfIa": "Inportatu PDFtik IArekin",
       "aplicarACeldas": "{{count}} gelaxkari aplikatu",
       "autocompletarPlan": "Plana automatikoki osatu",
       "descargarPdfMagia": "Deskargatu PDF/DOCX MagIA-n",
@@ -869,7 +871,7 @@
   },
   "placeholders": {
     "ai": {
-      "pegaClaveSecreta": "Itsatsi hemen zure {{proveedor}} gako sekretua..."
+      "pegaClaveSecreta": "Itsatsi hemen zure Google AI Studio gako sekretua..."
     },
     "alumnado": {
       "acuerdosTutoria": "Zein akordiotara iritsi zarete? Zein zeregin daude zain?",
@@ -1065,10 +1067,6 @@
     }
   },
   "checks": {
-    "ai": {
-      "proveedorGemini": "Google Gemini (gomendatua - doakoa garatzaileentzat)",
-      "proveedorOpenai": "OpenAI ChatGPT (kontuan saldoa behar du)"
-    },
     "alumnado": {
       "implicacionAlto": "Altua",
       "implicacionMedio": "Ertaina",
@@ -2074,7 +2072,10 @@
       "iaLeyendoDescripcion": "AA informazioa irakurtzen eta egituratzen ari da. Honek 20-30 segundo inguru iraun dezake. Mesedez, ez itxi leihoa.",
       "importaDesdeC": "Inportatu programazioak PDFtik automatikoki",
       "motorIA": "Adimen artifizialaren motorra",
-      "noHayApiKey": "Ez dago API key-rik. Konfiguratu lehenik fitxategien 'Babeskopia eta sinkronizazioa' fitxan.",
+      "noHayApiKey": "Ez dago IA gakorik. Itsatsi lehenik Fitxategiak › Hodeia eta IA gakoa atalean.",
+      "avisoClavePropia": "Zure Gemini gakoa erabiltzen du (doakoa, Google AI Studiokoa). PDFa zerbitzaritik igarotzen da irakurtzeko soilik, eta zure gakoarekin bidaltzen zaio Gemini-ri; ez da ezer gordetzen. Igo curriculum ofizialak soilik, inoiz ez ikasleen datuak dituzten dokumentuak.",
+      "motorGemini": "Google Gemini (doakoa irakasleentzat).",
+      "conseguirClave": "Lortu zure gakoa Google AI Studion",
       "soloArchivosPdf": "Oraingoz PDF fitxategiak bakarrik onartzen dira.",
       "subeCurriculoDescripcion": "Igo zure curriculuma PDFan programazioa ateratzeko",
       "sueltaPdfAqui": "Utzi PDFa hemen"

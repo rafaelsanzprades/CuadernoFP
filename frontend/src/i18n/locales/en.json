@@ -598,6 +598,7 @@
       "textoGenerado": "Text generated. Review and edit it before saving."
     },
     "curriculo": {
+      "importadoPdf": "Added {{ra}} RA, {{ce}} criteria and {{ud}} teaching units ({{omitidos}} skipped because they already existed or were incomplete). Check the weights.",
       "errorGuardar": "Error saving the data.",
       "planAutocompletado": "Session plan auto-completed.",
       "programacionGuardada": "Programming saved successfully.",
@@ -747,6 +748,7 @@
       "anadirCeA": "Add CE to {{id}}",
       "anadirNuevaUd": "Add new UD",
       "anadirNuevoRa": "Add new RA",
+      "importarPdfIa": "Import from PDF with AI",
       "aplicarACeldas": "Apply to {{count}} cells",
       "autocompletarPlan": "Auto-complete plan",
       "descargarPdfMagia": "Download PDF/DOCX in MagIA",
@@ -869,7 +871,7 @@
   },
   "placeholders": {
     "ai": {
-      "pegaClaveSecreta": "Paste your {{proveedor}} secret key here..."
+      "pegaClaveSecreta": "Paste your Google AI Studio secret key here..."
     },
     "alumnado": {
       "acuerdosTutoria": "What agreements were reached? What tasks are pending?",
@@ -1065,10 +1067,6 @@
     }
   },
   "checks": {
-    "ai": {
-      "proveedorGemini": "Google Gemini (recommended - free for developers)",
-      "proveedorOpenai": "OpenAI ChatGPT (requires account balance)"
-    },
     "alumnado": {
       "implicacionAlto": "High",
       "implicacionMedio": "Medium",
@@ -2074,7 +2072,10 @@
       "iaLeyendoDescripcion": "The AI is reading and structuring the information. This may take about 20-30 seconds. Please don't close the window.",
       "importaDesdeC": "Import curriculum plans from PDF automatically",
       "motorIA": "AI engine",
-      "noHayApiKey": "No API key. Set it up first in the 'Backup and sync' tab in files.",
+      "noHayApiKey": "No AI key. Paste it first in Files › Cloud and AI key.",
+      "avisoClavePropia": "Uses your own Gemini key (free, from Google AI Studio). The PDF goes through the server only to be read and is sent to Gemini with your key; nothing is stored. Upload official curricula only, never documents with student data.",
+      "motorGemini": "Google Gemini (free for teachers).",
+      "conseguirClave": "Get your key in Google AI Studio",
       "soloArchivosPdf": "Only PDF files are supported for now.",
       "subeCurriculoDescripcion": "Upload your curriculum in PDF to extract the curriculum plan",
       "sueltaPdfAqui": "Drop the PDF here"

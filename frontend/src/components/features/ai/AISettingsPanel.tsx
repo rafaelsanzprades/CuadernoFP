@@ -8,19 +8,16 @@ import { useTranslation } from "react-i18next";
 export function AISettingsPanel() {
   const { t } = useTranslation();
   const [apiKey, setApiKey] = useState("");
-  const [provider, setProvider] = useState("gemini");
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     const savedKey = localStorage.getItem("cdd_ai_api_key");
-    const savedProvider = localStorage.getItem("cdd_ai_provider");
     if (savedKey) setApiKey(savedKey);
-    if (savedProvider) setProvider(savedProvider);
   }, []);
 
   const handleSave = () => {
     localStorage.setItem("cdd_ai_api_key", apiKey.trim());
-    localStorage.setItem("cdd_ai_provider", provider);
+    localStorage.removeItem("cdd_ai_provider");
     setSaved(true);
     toast.success(t('toasts.aiSettings.guardadaLocal', {defaultValue: "Configuración de IA guardada localmente."}));
     setTimeout(() => setSaved(false), 2000);
@@ -41,14 +38,12 @@ export function AISettingsPanel() {
           <label className="text-body font-semibold text-foreground flex items-center gap-2">
             <Bot className="w-4 h-4 text-info" /> {t('campos.ai.motorIA', {defaultValue: 'Motor de inteligencia artificial'})}
           </label>
-          <select
-            value={provider}
-            onChange={(e) => setProvider(e.target.value)}
-            className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-          >
-            <option value="gemini">{t('checks.ai.proveedorGemini', {defaultValue: 'Google Gemini (recomendado - gratis para desarrolladores)'})}</option>
-            <option value="openai">{t('checks.ai.proveedorOpenai', {defaultValue: 'OpenAI ChatGPT (requiere saldo en la cuenta)'})}</option>
-          </select>
+          <p className="text-body text-foreground">
+            {t('campos.ai.motorGemini', {defaultValue: 'Google Gemini (gratis para docentes).'})}{" "}
+            <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" className="text-accent underline">
+              {t('campos.ai.conseguirClave', {defaultValue: 'Consigue tu clave en Google AI Studio'})}
+            </a>
+          </p>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -57,7 +52,7 @@ export function AISettingsPanel() {
           </label>
           <input
             type="password"
-            placeholder={t('placeholders.ai.pegaClaveSecreta', {proveedor: provider === 'gemini' ? 'Google AI Studio' : 'OpenAI', defaultValue: `Pega aquí tu clave secreta de ${provider === 'gemini' ? 'Google AI Studio' : 'OpenAI'}...`})}
+            placeholder={t('placeholders.ai.pegaClaveSecreta', {defaultValue: 'Pega aquí tu clave secreta de Google AI Studio'})}
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             className="w-full bg-background border border-[var(--glass-border)] rounded-xl px-4 py-3 text-body text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-accent transition-all"
