@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { countField, countBoolean } from "@/components/features/alumnado/TendenciasProfesionalTab";
 import { loadCatalogForModule, resolveModuloNivel } from "@/services/catalogCache";
-import { getApiBase } from "@/services/apiBase";
+import { getApiBaseIA } from "@/services/apiBase";
 import { RASGOS_ALUMNADO } from "@/data/rasgosAlumnado";
 import { PlanesTab } from "@/components/features/modulo/PlanesTab";
 import { ActividadesComplementariasTab } from "@/components/features/modulo/ActividadesComplementariasTab";
@@ -258,10 +258,10 @@ export function ContextoTab({ bloques }: { bloques?: string[] } = {}) {
         AVISO_SIN_ESTEREOTIPOS,
       ].join("\n");
 
-      const res = await fetch(`${getApiBase()}/api/ai/chat`, {
+      const res = await fetch(`${getApiBaseIA()}/api/ai/generar-texto`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [{ role: "user", parts: prompt }] }),
+        body: JSON.stringify({ prompt }),
       });
       const data = await res.json();
       if (!res.ok || data.status !== "success") {

@@ -50,10 +50,10 @@
   - Response: `{"status": "success", "data": {...}}`
 
 ### Asistente IA
-- **POST** `/api/ai/chat`
-  - Envía mensaje al asistente IA
-  - Body: `{"message": "texto"}`
-  - Response: `{"status": "success", "data": {...}}`
+- **POST** `/api/ai/generar-texto`
+  - Redacta un párrafo para los botones «generar texto» con la clave gratuita del servidor (límite de 10 por minuto por IP y tope diario)
+  - Body: `{"prompt": "texto"}` (hasta 6.000 caracteres)
+  - Response: `{"status": "success", "reply": "párrafo"}`; 429 si se alcanza el tope diario, 503 si el servidor no tiene clave
 
 ## Endpoints de Administración
 

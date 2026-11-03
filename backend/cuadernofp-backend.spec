@@ -14,7 +14,6 @@ a = Analysis(
     binaries=[],
     datas=[
         ('templates', 'templates'),
-        ('documentos', 'documentos'),
     ],
     hiddenimports=[
         # uvicorn resuelve estos en tiempo de ejecución vía su propio

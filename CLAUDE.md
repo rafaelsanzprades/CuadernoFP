@@ -110,7 +110,7 @@ URL (via `history.replaceState`, no navigation) on every tab change — this is 
 lives in `services/` (`module_service.py` is the read/write layer for module & curso documents,
 `backup_service.py` runs a periodic backup task from `lifespan`). PDF generation is a family of
 top-level `pdf_*.py` / `generador_pd_*.py` scripts using ReportLab and docx templates
-(`templates/`, `documentos/`; only `documentos/TodoFP` remains, read by the chatbot — the normativa and curriculum copies live in rsp_es under `www/doc/`). Rate limiting via `slowapi` (100/min default, per-route overrides).
+(`templates/`; the normativa and curriculum copies live in rsp_es under `www/doc/`). Rate limiting via `slowapi` (100/min default, per-route overrides).
 
 `Repite`/`Edad` (student), `is_dual` (RA), and `peso_ra`/`peso_ce` (RA/CE weights) are real
 `bool`/`int`/`bool`/`int` end-to-end — SQLAlchemy column, Pydantic schema, TS type, and demo
@@ -136,9 +136,11 @@ copies the backend generator files into `public/pyodide` and `public/generadores
 excluded from the PWA precache and cached on first use). **Adding a generator module to `backend/`
 means checking the `FICHERO_BACKEND` regex in that script**, and `backend/tests/test_pdf_dispatch.py`
 covers every document type. Don't add a new `fetch` of `curso_data`/`module_data` to the API. The floating AI chat was removed on
-purpose (free text can carry student names; teachers should use their own AI tool). `/api/ai/chat` remains
-only for the "generate text" buttons (Contexto, Alumnado > rasgos del grupo), which send checked traits
-and aggregate statistics, never names; PDF curriculum import uses the teacher's own API key. Keep it that way.
+purpose (free text can carry student names; teachers should use their own AI tool), and so was the open `/api/ai/chat`.
+`POST /api/ai/generar-texto` (`services/redactor.py`) serves only the "generate text" buttons (Contexto, Alumnado >
+rasgos del grupo), which send checked traits and aggregate statistics, never names. It uses the app's free Gemini key
+(`GEMINI_API_KEY`, a Cloud Run secret from Secret Manager), with 10/min per IP and a daily cap (`AI_TOPE_DIARIO`, default 100 per
+instance); the desktop app calls Cloud Run for it (`getApiBaseIA`). Anything else that needs AI uses the teacher's own key.
 
 ### Desktop (Tauri) security
 `src-tauri/tauri.conf.json` has a real CSP (it was `null`); keep `connect-src` limited to the sidecar

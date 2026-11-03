@@ -4,13 +4,13 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from services.pdf_extractor import extract_text_from_pdf
 from services.llm_parser import parse_curriculum
-from services.chatbot import get_chatbot_response
-from schemas import ChatRequest
+from services import redactor
+from schemas import GenerarTextoRequest
 
 logger = logging.getLogger("cdd-pro.ai_assistant")
 
-# El chat usa la clave de Gemini del servidor: límite estricto por IP para que no se
-# pueda gastar la cuota desde fuera (el límite general es de 100 por minuto).
+# «Generar texto» usa la clave de Gemini del servidor: límite estricto por IP (el general es de 100 por minuto) y, además, un tope diario
+# en services/redactor.py, para que no se pueda gastar la cuota desde fuera.
 limiter = Limiter(key_func=get_remote_address)
 
 router = APIRouter(
@@ -56,17 +56,15 @@ async def parse_curriculum_endpoint(
         logger.exception("Error en la petición")
         raise HTTPException(status_code=500, detail="Error interno del servidor")
 
-@router.post("/chat")
+@router.post("/generar-texto")
 @limiter.limit("10/minute")
-async def chat_endpoint(request: Request, chat: ChatRequest = Body(...)):
+async def generar_texto_endpoint(request: Request, datos: GenerarTextoRequest = Body(...)):
     try:
-        messages = [msg.model_dump() for msg in chat.messages]
-        reply = get_chatbot_response(messages)
-        return {
-            "status": "success",
-            "reply": reply
-        }
+        return {"status": "success", "reply": redactor.generar_texto(datos.prompt)}
+    except redactor.SinClave:
+        raise HTTPException(status_code=503, detail="La generación de texto no está disponible en este momento.")
+    except redactor.TopeDiario:
+        raise HTTPException(status_code=429, detail="Se ha alcanzado el límite diario de textos generados. Inténtalo mañana o escríbelo a mano.")
     except Exception as e:
-        logger.error(f"Error en endpoint chat: {str(e)}")
-        logger.exception("Error en la petición")
-        raise HTTPException(status_code=500, detail="Error interno del servidor")
+        logger.error(f"Error al generar texto: {str(e)}")
+        raise HTTPException(status_code=502, detail="No se ha podido generar el texto. Inténtalo de nuevo.")

@@ -58,13 +58,13 @@ for tipo in ["programacion_minima_tpl", "programacion_suficiente_tpl", "programa
         print("PDF", tipo, e.code, e.read()[:200]); ok = False
     except Exception as e:
         print("PDF", tipo, "ERR", e); ok = False
-# el chatbot y el extractor importan google.generativeai / pypdf: se comprueba que el modulo carga dentro del exe
-req = urllib.request.Request(base + "/api/ai/chat", data=json.dumps({"message": "hola", "api_key": "x"}).encode(), headers={"Content-Type": "application/json"})
+# el redactor y el extractor importan google.generativeai / pypdf: se comprueba que el modulo carga dentro del exe (sin clave responde 503)
+req = urllib.request.Request(base + "/api/ai/generar-texto", data=json.dumps({"prompt": "hola"}).encode(), headers={"Content-Type": "application/json"})
 try:
     urllib.request.urlopen(req, timeout=60)
 except urllib.error.HTTPError as e:
-    print("AI chat", e.code, e.read()[:150])
+    print("AI generar-texto", e.code, e.read()[:150])
 except Exception as e:
-    print("AI chat ERR", e)
+    print("AI generar-texto ERR", e)
 p.terminate()
 print("OK" if ok else "FALLO")

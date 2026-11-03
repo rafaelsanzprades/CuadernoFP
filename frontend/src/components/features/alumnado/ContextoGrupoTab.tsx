@@ -9,7 +9,7 @@ import { Users, Activity, BarChart2, Sparkles } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { getApiBase } from "@/services/apiBase";
+import { getApiBaseIA } from "@/services/apiBase";
 import { RASGOS_ALUMNADO } from "@/data/rasgosAlumnado";
 
 const RASGOS_GRUPO = [
@@ -141,10 +141,10 @@ export function ContextoGrupoTab() {
           : "Sin rasgos rápidos del alumnado marcados por el profesor.",
       ].join("\n");
 
-      const res = await fetch(`${getApiBase()}/api/ai/chat`, {
+      const res = await fetch(`${getApiBaseIA()}/api/ai/generar-texto`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [{ role: "user", parts: prompt }] }),
+        body: JSON.stringify({ prompt }),
       });
       const data = await res.json();
       if (!res.ok || data.status !== "success") {

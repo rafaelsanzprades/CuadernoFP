@@ -57,6 +57,13 @@ export function initApiBase(): Promise<void> {
   return initPromise;
 }
 
+/** Servidor de «generar texto»: la clave gratuita de Gemini vive en Cloud Run, no en el sidecar local de la app de escritorio. Solo recibe
+ *  los rasgos marcados y estadísticas agregadas del grupo, nunca nombres (mismo servidor que el catálogo, ya permitido en la CSP de Tauri). */
+const URL_NUBE = "https://cdd-backend-215337606799.europe-west1.run.app";
+export function getApiBaseIA(): string {
+  return isTauri() ? URL_NUBE : cachedBase;
+}
+
 /** Lectura síncrona del valor ya resuelto (o del NEXT_PUBLIC_API_URL de compilación como arranque). */
 export function getApiBase(): string {
   return cachedBase;
