@@ -60,7 +60,7 @@ def test_redactor_respeta_el_tope_diario(monkeypatch):
 
     class Falso:
         def __init__(self, **k): pass
-        def generate_content(self, p):
+        def generate_content(self, p, **k):
             class R: text = "texto"
             return R()
     monkeypatch.setattr(redactor.genai, "GenerativeModel", Falso)
