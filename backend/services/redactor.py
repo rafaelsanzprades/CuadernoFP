@@ -6,7 +6,8 @@ import google.generativeai as genai
 
 # Redacta un único párrafo para los botones «generar texto» (Contexto y Alumnado > rasgos del grupo) con la clave gratuita del servidor.
 # No es un chat: sin historial, sin imágenes y con la instrucción de sistema fija; la respuesta se corta en un párrafo.
-MODELO = "gemini-flash-latest"
+# «lite»: de sobra para un párrafo y con cuota en el nivel gratuito (gemini-flash-latest ya no la tiene para claves nuevas)
+MODELO = "gemini-flash-lite-latest"
 MAX_TOKENS_RESPUESTA = 700
 TIEMPO_MAXIMO = 25  # segundos
 INSTRUCCION = (
