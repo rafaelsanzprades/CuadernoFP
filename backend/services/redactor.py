@@ -8,6 +8,7 @@ import google.generativeai as genai
 # No es un chat: sin historial, sin imágenes y con la instrucción de sistema fija; la respuesta se corta en un párrafo.
 MODELO = "gemini-flash-latest"
 MAX_TOKENS_RESPUESTA = 700
+TIEMPO_MAXIMO = 25  # segundos
 INSTRUCCION = (
     "Eres un redactor de programaciones didácticas de Formación Profesional en España. Recibes datos agregados del grupo y rasgos marcados "
     "por el profesor, y devuelves un único párrafo en español, de tono técnico-docente, sin listas ni encabezados. No inventes datos que no "
@@ -52,4 +53,5 @@ def generar_texto(prompt: str) -> str:
         system_instruction=INSTRUCCION,
         generation_config=genai.GenerationConfig(max_output_tokens=MAX_TOKENS_RESPUESTA, temperature=0.4),
     )
-    return modelo.generate_content(prompt).text
+    # Sin reintentos y con límite de tiempo: si Gemini está saturado, el botón falla pronto en vez de dejar la petición colgada.
+    return modelo.generate_content(prompt, request_options={"timeout": TIEMPO_MAXIMO, "retry": None}).text
