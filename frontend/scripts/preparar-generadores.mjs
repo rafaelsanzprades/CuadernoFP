@@ -30,11 +30,10 @@ const pyodideVersion = JSON.parse(readFileSync(path.join(pyodideDir, "package.js
 const CDN = `https://cdn.jsdelivr.net/pyodide/v${pyodideVersion}/full/`;
 
 // Paquetes que se cargan desde el lock de Pyodide (con sus dependencias)
-const DE_PYODIDE = ["pandas", "lxml", "jinja2", "pillow", "typing-extensions"];
+const DE_PYODIDE = ["pandas", "lxml", "jinja2", "pillow", "typing-extensions", "charset-normalizer"];
 // Paquetes puros (py3-none-any) de PyPI, con versión fija. `depends` son nombres del lock.
 const DE_PYPI = [
-  { name: "chardet", version: "5.2.0", imports: ["chardet"], depends: [] },
-  { name: "reportlab", version: "4.4.0", imports: ["reportlab"], depends: ["pillow", "chardet"] },
+  { name: "reportlab", version: "5.1.0", imports: ["reportlab"], depends: ["pillow", "charset-normalizer"] },
   { name: "python-docx", version: "1.2.0", imports: ["docx"], depends: ["lxml", "typing-extensions"] },
   { name: "docxtpl", version: "0.20.2", imports: ["docxtpl"], depends: ["python-docx", "jinja2", "lxml"] },
 ];
