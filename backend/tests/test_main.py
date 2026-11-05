@@ -69,3 +69,10 @@ def test_redactor_respeta_el_tope_diario(monkeypatch):
     assert redactor.generar_texto("b") == "texto"
     with pytest.raises(redactor.TopeDiario):
         redactor.generar_texto("c")
+
+
+def test_cors_permite_la_app_de_escritorio_y_la_web(client: TestClient):
+    for origen in ("http://tauri.localhost", "https://cuadernofp.web.app"):
+        r = client.get("/", headers={"Origin": origen})
+        assert r.headers.get("access-control-allow-origin") == origen
+    assert "access-control-allow-origin" not in client.get("/", headers={"Origin": "https://otra-web.example"}).headers
