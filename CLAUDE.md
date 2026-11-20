@@ -210,6 +210,7 @@ negatives (this bit twice in the same investigation session before the tag-strip
 
 - **Spanish UI text is Sentence case, never Title Case**: "Configuración de instrumentos" not
   "Configuración De Instrumentos" (repo-wide rule, `.agents/AGENTS.md`).
+- **Chapter numbers in `APP-www_rsp_es` collections are automatic.** `generar-claves-fp.py` numbers the chapters 1..N per section when publishing; the epígrafes of each Markdown (`# 21.` / `## 21.1`) keep their own number and are shown with the visible one (`renumerar_epigrafes`, also in the index and in «apartado 3.5» references). The `id`s do not change (they come from the source text), so reordering, adding or deleting chapters never breaks links, index themes (`contenidos/temas/*.json`) or books. Do not edit epígrafe numbers by hand to match.
 - **Typography is 4 tiers only**, aliased in `frontend/src/app/globals.css`: `.text-heading` (2xl),
   `.text-subheading` (lg), `.text-body` (sm), `.text-caption` (xs). Use these classes, not raw
   `text-xs/sm/lg/2xl` Tailwind utilities — they're pure `@apply` aliases kept as the single place to
