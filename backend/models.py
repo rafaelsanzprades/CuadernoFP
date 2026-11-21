@@ -122,7 +122,31 @@ class ModuleCCAA(Base):
     curso = Column(String, nullable=True)       # "1º", "2º", "Ambos"
     fuente = Column(String, nullable=True)      # orden autonómica de la que sale
     verificado_el = Column(String, nullable=True)
+    estado = Column(String, nullable=False, default="a_completar")  # verificado | heredado | no_ofertado | no_disponible | a_completar
+    nota = Column(String, nullable=True)
     module = relationship("Module", back_populates="ccaa")
+
+
+class DegreeCCAA(Base):
+    """Currículo autonómico de un título: boletín, norma, enlaces oficiales y estado del dato.
+    estado: verificado | enlaces_oficiales | no_ofertado (la comunidad no ofrece el título) | no_disponible (no se pudo obtener) | a_completar (a mano).
+    Una familia se ofrece en la comunidad si algún título suyo no está en no_ofertado."""
+    __tablename__ = "degree_ccaa"
+    __table_args__ = (UniqueConstraint("degree_id", "region_id", name="uq_degree_ccaa"),)
+    id = Column(Integer, primary_key=True)
+    degree_id = Column(Integer, ForeignKey("degrees.id"), nullable=False, index=True)
+    region_id = Column(Integer, ForeignKey("regions.id"), nullable=False)
+    boletin = Column(String, nullable=True)            # BOA, DOGC…
+    norma = Column(String, nullable=True)
+    url_curriculo = Column(String, nullable=True)
+    url_horario = Column(String, nullable=True)
+    url_horario_ley_fp = Column(String, nullable=True)
+    url_titulo_estatal = Column(String, nullable=True)
+    url_modificaciones = Column(JSON, nullable=True)   # [[texto, url], …]
+    fuente = Column(String, nullable=True)             # página oficial de la que salen los enlaces
+    estado = Column(String, nullable=False, default="a_completar")
+    nota = Column(String, nullable=True)
+    verificado_el = Column(String, nullable=True)
 
 class LearningOutcome(Base):
     __tablename__ = "learning_outcomes"
