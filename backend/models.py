@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, JSON, DateTime, Enum, Table
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, JSON, DateTime, Enum, Table, UniqueConstraint
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 import enum
@@ -107,6 +107,22 @@ class Module(Base):
     
     degree = relationship("Degree", back_populates="modules")
     learning_outcomes = relationship("LearningOutcome", back_populates="module", cascade="all, delete-orphan")
+    ccaa = relationship("ModuleCCAA", back_populates="module", cascade="all, delete-orphan")
+
+
+class ModuleCCAA(Base):
+    """Horas y curso de un módulo en una comunidad autónoma (el Estado solo fija las horas totales del título).
+    modules.hours y modules.curso son los valores de Aragón."""
+    __tablename__ = "module_ccaa"
+    __table_args__ = (UniqueConstraint("module_id", "region_id", name="uq_module_ccaa"),)
+    id = Column(Integer, primary_key=True)
+    module_id = Column(Integer, ForeignKey("modules.id"), nullable=False, index=True)
+    region_id = Column(Integer, ForeignKey("regions.id"), nullable=False)
+    hours = Column(Integer, nullable=True)
+    curso = Column(String, nullable=True)       # "1º", "2º", "Ambos"
+    fuente = Column(String, nullable=True)      # orden autonómica de la que sale
+    verificado_el = Column(String, nullable=True)
+    module = relationship("Module", back_populates="ccaa")
 
 class LearningOutcome(Base):
     __tablename__ = "learning_outcomes"
