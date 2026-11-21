@@ -86,7 +86,11 @@ class Degree(Base):
     hours = Column(Integer)
     code = Column(String, index=True)  # código del currículo, ej: ELE203
     boa_articles = Column(JSON, default={})
-    
+    fuente_norma = Column(String, nullable=True)   # real decreto del título, ej: "Real Decreto 1584/2011"
+    fuente_url = Column(String, nullable=True)     # enlace al BOE de esa norma
+    verificado_el = Column(String, nullable=True)  # fecha (AAAA-MM-DD) del último cotejo con el BOE
+    verificacion = Column(String, nullable=True)   # resumen del cotejo y de lo corregido
+
     family = relationship("ProfessionalFamily", back_populates="degrees")
     region = relationship("Region", back_populates="degrees")
     modules = relationship("Module", back_populates="degree")
@@ -111,6 +115,7 @@ class LearningOutcome(Base):
     ra_number = Column(Integer) # e.g., 9 for "RA9"
     description = Column(String, nullable=False) # e.g., "Desarrolla..."
     ecp_code = Column(String, nullable=True) # e.g., "UC1077_2" vinculado al INCUAL
+    cotejo_boe = Column(String, nullable=True) # igual | difiere | sin_cotejo (frente al real decreto del título)
     
     module = relationship("Module", back_populates="learning_outcomes")
     evaluation_criteria = relationship("EvaluationCriterion", back_populates="learning_outcome", cascade="all, delete-orphan")
@@ -121,7 +126,8 @@ class EvaluationCriterion(Base):
     learning_outcome_id = Column(Integer, ForeignKey("learning_outcomes.id"))
     ce_code = Column(String, nullable=False) # e.g., "CE1.1" or "a)"
     description = Column(String, nullable=False)
-    
+    cotejo_boe = Column(String, nullable=True) # igual | difiere | sin_cotejo
+
     learning_outcome = relationship("LearningOutcome", back_populates="evaluation_criteria")
 
 # ==========================================
