@@ -27,6 +27,7 @@ class Region(Base):
     __tablename__ = "regions"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False) # ej: Aragón
+    boletin = Column(String, nullable=True) # BOA, BOJA, DOGC… (Ceuta y Melilla: BOE, currículo del Ministerio)
     provinces = relationship("Province", back_populates="region")
     degrees = relationship("Degree", back_populates="region")
 
