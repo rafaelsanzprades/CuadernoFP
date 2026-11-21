@@ -110,6 +110,8 @@ class Module(Base):
     hours = Column(Integer)
     curso = Column(String, nullable=True) # ej: "1º", "2º", "Ambos"
     convalidation_competences = Column(String, nullable=True) # JSON con datos de Catedu
+    ambito = Column(String, nullable=False, default="estatal")  # estatal (BOE) | autonomico (propio de una comunidad: tutorías, PRL, AOP…, OPT)
+    region_id = Column(Integer, ForeignKey("regions.id"), nullable=True)  # comunidad, si ambito = autonomico
     
     degree = relationship("Degree", back_populates="modules")
     learning_outcomes = relationship("LearningOutcome", back_populates="module", cascade="all, delete-orphan")
