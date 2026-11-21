@@ -28,6 +28,11 @@ class Region(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False) # ej: Aragón
     boletin = Column(String, nullable=True) # BOA, BOJA, DOGC… (Ceuta y Melilla: BOE, currículo del Ministerio)
+    url_normativa_fp = Column(String, nullable=True)      # página oficial de normativa de FP de la comunidad (según TodoFP)
+    url_indice_curriculos = Column(String, nullable=True) # página con el listado de currículos por título, si existe
+    indice_curriculos = Column(String, nullable=True)     # si | no | por_revisar
+    fuente_url = Column(String, nullable=True)
+    nota = Column(String, nullable=True)
     provinces = relationship("Province", back_populates="region")
     degrees = relationship("Degree", back_populates="region")
 
