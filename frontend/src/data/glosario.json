@@ -85,13 +85,7 @@
   {
    "sigla": "",
    "termino": "Legislación",
-   "descripcion": "Marco normativo que regula el sistema educativo",
-   "categoria": "normas"
-  },
-  {
-   "sigla": "",
-   "termino": "Legislación Básica",
-   "descripcion": "Normativa fundamental de referencia para la educación",
+   "descripcion": "Normas que regulan el sistema educativo; en FP, la LO 3/2022, el RD 659/2023 y la normativa de cada comunidad.",
    "categoria": "normas"
   },
   {
@@ -227,7 +221,7 @@
   {
    "sigla": "REBT",
    "termino": "Reglamento Electrotécnico de Baja Tensión",
-   "descripcion": "Normativa técnica para instalaciones eléctricas ≤1000V CA",
+   "descripcion": "Reglamento Electrotécnico para Baja Tensión (Real Decreto 842/2002): condiciones técnicas de las instalaciones eléctricas de baja tensión (hasta 1000 V en corriente alterna).",
    "categoria": "normas"
   },
   {
@@ -245,7 +239,7 @@
   {
    "sigla": "ANPROFOL",
    "termino": "Asociación Nacional de Profesorado de Formación y Orientación Laboral",
-   "descripcion": "Asociación profesional del colectivo docente de FOL en Formación Profesional",
+   "descripcion": "Asociación profesional del profesorado de Formación y Orientación Laboral: defiende sus intereses profesionales y es interlocutora de la administración educativa.",
    "categoria": "organismos"
   },
   {
@@ -879,7 +873,7 @@
   {
    "sigla": "CNCP",
    "termino": "Catálogo Nacional de Cualificaciones Profesionales",
-   "descripcion": "Instrumento que ordena las cualificaciones profesionales, base de los títulos de FP",
+   "descripcion": "Catálogo Nacional de Cualificaciones Profesionales (LO 5/2002). La LO 3/2022 lo transforma en el Catálogo Nacional de Estándares de Competencias Profesionales; el estándar de competencia equivale a la antigua unidad de competencia.",
    "categoria": "sistema"
   },
   {
@@ -1149,7 +1143,7 @@
   {
    "sigla": "PEAC",
    "termino": "Procedimiento de Evaluación y Acreditación de Competencias",
-   "descripcion": "Proceso oficial para reconocer y acreditar la experiencia laboral de los trabajadores",
+   "descripcion": "Procedimiento de evaluación y acreditación de competencias profesionales adquiridas por la experiencia laboral o por vías no formales; la LO 3/2022 lo integra en la acreditación de competencias del Sistema de FP.",
    "categoria": "sistema"
   },
   {
@@ -1197,13 +1191,13 @@
   {
    "sigla": "UC",
    "termino": "Unidad de Competencia",
-   "descripcion": "Agregado mínimo de competencias profesionales, susceptible de reconocimiento y acreditación parcial",
+   "descripcion": "Unidad de competencia: agrupación mínima de competencias profesionales del antiguo Catálogo Nacional de Cualificaciones, reconocible y acreditable; hoy, estándar de competencia.",
    "categoria": "sistema"
   },
   {
    "sigla": "UT",
    "termino": "Unidad de trabajo",
-   "descripcion": "Conjunto de actividades para desarrollar competencias en FP",
+   "descripcion": "Unidad de trabajo: forma de organizar la programación de un módulo en FP; equivale a la unidad didáctica.",
    "categoria": "sistema"
   },
   {
@@ -1228,6 +1222,12 @@
    "sigla": "ARG",
    "termino": "Artes Gráficas",
    "descripcion": "Familia profesional de Artes Gráficas",
+   "categoria": "familias"
+  },
+  {
+   "sigla": "ART",
+   "termino": "Artes y Artesanías",
+   "descripcion": "Familia profesional de Artes y Artesanías",
    "categoria": "familias"
   },
   {
@@ -1309,6 +1309,12 @@
    "categoria": "familias"
   },
   {
+   "sigla": "MAP",
+   "termino": "Marítimo-Pesquera",
+   "descripcion": "Familia profesional Marítimo-Pesquera",
+   "categoria": "familias"
+  },
+  {
    "sigla": "QUI",
    "termino": "Química",
    "descripcion": "Familia profesional de Química",
@@ -1342,6 +1348,12 @@
    "sigla": "TMV",
    "termino": "Transporte y Mantenimiento de Vehículos",
    "descripcion": "Familia profesional de Transporte y Mantenimiento de Vehículos",
+   "categoria": "familias"
+  },
+  {
+   "sigla": "VIC",
+   "termino": "Vidrio y Cerámica",
+   "descripcion": "Familia profesional de Vidrio y Cerámica",
    "categoria": "familias"
   },
   {
@@ -1383,13 +1395,13 @@
   {
    "sigla": "",
    "termino": "Contenidos complementarios",
-   "descripcion": "Contenidos adicionales que amplían el currículo básico",
+   "descripcion": "Contenidos que amplían el currículo básico y que cada centro o docente puede añadir.",
    "categoria": "programacion"
   },
   {
    "sigla": "",
    "termino": "Contenidos transversales",
-   "descripcion": "Contenidos que atraviesan varias materias y áreas del currículo",
+   "descripcion": "Contenidos que atraviesan varias materias o módulos, como la educación en valores o la prevención de riesgos.",
    "categoria": "programacion"
   },
   {
@@ -1406,32 +1418,32 @@
   },
   {
    "sigla": "",
-   "termino": "Currículum",
-   "descripcion": "Planificación oficial de contenidos, objetivos y actividades educativas",
+   "termino": "Currículo",
+   "descripcion": "Currículo: conjunto de objetivos, competencias, contenidos, métodos pedagógicos y criterios de evaluación de cada enseñanza (LOE, art. 6).",
    "categoria": "programacion"
   },
   {
    "sigla": "EC",
    "termino": "Evaluación Continua",
-   "descripcion": "Seguimiento del progreso del alumnado a lo largo del tiempo",
+   "descripcion": "Evaluación continua: seguimiento del progreso del alumnado a lo largo del curso; exige asistencia regular (ver pérdida del derecho a la evaluación continua).",
    "categoria": "programacion"
   },
   {
    "sigla": "EDI",
    "termino": "Evaluación Diagnóstica – Inicial",
-   "descripcion": "Evaluación al inicio para conocer nivel de partida del alumnado",
+   "descripcion": "Evaluación diagnóstica o inicial: la que se hace al empezar para conocer el punto de partida del alumnado.",
    "categoria": "programacion"
   },
   {
    "sigla": "ES",
    "termino": "Evaluación Sumativa",
-   "descripcion": "Evaluación al final del período para medir logros alcanzados",
+   "descripcion": "Evaluación sumativa: la que se hace al final de un periodo para valorar lo aprendido y calificarlo.",
    "categoria": "programacion"
   },
   {
    "sigla": "EV",
    "termino": "Evaluación",
-   "descripcion": "Medición y valoración del proceso de aprendizaje",
+   "descripcion": "Evaluación: valoración del proceso de aprendizaje del alumnado y de los resultados que alcanza.",
    "categoria": "programacion"
   },
   {
@@ -1455,13 +1467,7 @@
   {
    "sigla": "",
    "termino": "Guía de Aprendizaje",
-   "descripcion": "Documento que orienta al alumnado en el proceso formativo",
-   "categoria": "programacion"
-  },
-  {
-   "sigla": "",
-   "termino": "Guía de Mapeo",
-   "descripcion": "Herramienta para visualizar relaciones entre contenidos y competencias",
+   "descripcion": "Documento que explica al alumnado qué va a aprender, cómo y cómo se evaluará.",
    "categoria": "programacion"
   },
   {
@@ -1473,7 +1479,7 @@
   {
    "sigla": "IEV",
    "termino": "Instrumentos de evaluación",
-   "descripcion": "Herramientas para medir el aprendizaje y progreso del alumnado",
+   "descripcion": "Instrumentos de evaluación: pruebas, rúbricas, listas de cotejo, trabajos y observación con los que se recoge evidencia del aprendizaje.",
    "categoria": "programacion"
   },
   {
@@ -1683,7 +1689,7 @@
   {
    "sigla": "CEC",
    "termino": "Consejo Escolar del Centro",
-   "descripcion": "Órgano colegiado de gestión con representación de toda la comunidad",
+   "descripcion": "Consejo Escolar del Centro: órgano colegiado de participación de la comunidad educativa (profesorado, familias, alumnado y personal del centro) en el gobierno del centro.",
    "categoria": "centro"
   },
   {
@@ -1899,7 +1905,7 @@
   {
    "sigla": "",
    "termino": "Documentación",
-   "descripcion": "Conjunto de documentos necesarios para la gestión educativa",
+   "descripcion": "Documentos del centro necesarios para su gestión: proyecto educativo, programación general anual, reglamento de régimen interior y programaciones didácticas.",
    "categoria": "centro"
   },
   {
@@ -2115,7 +2121,7 @@
   {
    "sigla": "ACI / ACIS",
    "termino": "Adaptación Curricular Individualizada",
-   "descripcion": "Modificación de los elementos prescriptivos del currículo para alumnado con necesidades específicas",
+   "descripcion": "Adaptación curricular individualizada; la significativa (ACIS) modifica objetivos, contenidos y criterios de evaluación respecto a los de su grupo, para alumnado con necesidades específicas de apoyo educativo.",
    "categoria": "alumnado"
   },
   {
@@ -2163,13 +2169,13 @@
   {
    "sigla": "AL",
    "termino": "Audición y Lenguaje",
-   "descripcion": "Especialista en las alteraciones del lenguaje y la comunicación",
+   "descripcion": "Maestro o maestra especialista en Audición y Lenguaje: atiende al alumnado con dificultades de comunicación y de lenguaje.",
    "categoria": "alumnado"
   },
   {
    "sigla": "",
    "termino": "Bullying",
-   "descripcion": "Acoso escolar sistemático entre estudiantes",
+   "descripcion": "Acoso escolar: violencia repetida y mantenida en el tiempo de unos compañeros contra otro.",
    "categoria": "alumnado"
   },
   {
@@ -2187,7 +2193,7 @@
   {
    "sigla": "",
    "termino": "Competencias emocionales",
-   "descripcion": "Competencias relacionadas con la gestión y comprensión de emociones",
+   "descripcion": "Capacidades para reconocer, comprender y regular las propias emociones y las de los demás.",
    "categoria": "alumnado"
   },
   {
@@ -2241,13 +2247,13 @@
   {
    "sigla": "",
    "termino": "Educación no sexista",
-   "descripcion": "Enfoque educativo que elimina estereotipos de género",
+   "descripcion": "Enfoque educativo que revisa y elimina los estereotipos de género.",
    "categoria": "alumnado"
   },
   {
    "sigla": "",
    "termino": "Enriquecimiento",
-   "descripcion": "Estrategias de ampliación para alumnado con altas capacidades",
+   "descripcion": "Medida para el alumnado con altas capacidades que amplía o profundiza los contenidos sin adelantar de curso.",
    "categoria": "alumnado"
   },
   {
@@ -2271,25 +2277,13 @@
   {
    "sigla": "",
    "termino": "Género",
-   "descripcion": "Perspectiva de igualdad y coeducación en el aula",
+   "descripcion": "Perspectiva de género en el aula: coeducación e igualdad entre alumnas y alumnos.",
    "categoria": "alumnado"
   },
   {
    "sigla": "IEM",
    "termino": "Inteligencia Emocional",
-   "descripcion": "Habilidad para reconocer, comprender y gestionar emociones",
-   "categoria": "alumnado"
-  },
-  {
-   "sigla": "",
-   "termino": "Intolerancia",
-   "descripcion": "Rechazo hacia la diversidad; prevención y sensibilización",
-   "categoria": "alumnado"
-  },
-  {
-   "sigla": "",
-   "termino": "Maltrato Intrafamiliar",
-   "descripcion": "Violencia en el entorno familiar con impacto en el rendimiento escolar",
+   "descripcion": "Inteligencia emocional: capacidad de percibir, comprender y regular las emociones propias y ajenas.",
    "categoria": "alumnado"
   },
   {
@@ -2307,13 +2301,13 @@
   {
    "sigla": "",
    "termino": "Mediación Escolar",
-   "descripcion": "Resolución de conflictos en el centro mediante diálogo y negociación",
+   "descripcion": "Resolución de conflictos con ayuda de una tercera persona neutral que facilita el diálogo entre las partes.",
    "categoria": "alumnado"
   },
   {
    "sigla": "",
    "termino": "Medidas de Atención a la Diversidad del Alumnado",
-   "descripcion": "Estrategias y adaptaciones para atender las necesidades individuales",
+   "descripcion": "Medidas generales y específicas con las que el centro responde a las necesidades individuales del alumnado.",
    "categoria": "alumnado"
   },
   {
@@ -2343,19 +2337,13 @@
   {
    "sigla": "PAD",
    "termino": "Plan de Atención a la Diversidad",
-   "descripcion": "Documento para atender necesidades específicas del alumnado diverso",
+   "descripcion": "Plan de Atención a la Diversidad: documento del centro que recoge las medidas para atender las necesidades del alumnado.",
    "categoria": "alumnado"
   },
   {
    "sigla": "PDC",
    "termino": "Programa de diversificación curricular",
    "descripcion": "Medida de la ESO, a partir de 3.º, que organiza el currículo en ámbitos para quien tiene dificultades relevantes de aprendizaje (RD 217/2022, art. 24).",
-   "categoria": "alumnado"
-  },
-  {
-   "sigla": "",
-   "termino": "Personalidad",
-   "descripcion": "Desarrollo de la identidad, valores y rasgos personales",
    "categoria": "alumnado"
   },
   {
@@ -2379,7 +2367,7 @@
   {
    "sigla": "",
    "termino": "Resiliencia",
-   "descripcion": "Capacidad de adaptarse y recuperarse ante situaciones adversas",
+   "descripcion": "Capacidad de recuperarse y adaptarse ante situaciones adversas.",
    "categoria": "alumnado"
   },
   {
@@ -2405,12 +2393,6 @@
      "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-2-tea-en-el-aula-de-un-ciclo.html"
     }
    ]
-  },
-  {
-   "sigla": "",
-   "termino": "Violencia",
-   "descripcion": "Comportamientos agresivos con impacto en el entorno educativo",
-   "categoria": "alumnado"
   },
   {
    "sigla": "ABP",
@@ -2439,13 +2421,13 @@
   {
    "sigla": "ACbR",
    "termino": "Aprendizaje colaborativo basado en retos",
-   "descripcion": "Nombre genérico del enfoque metodológico que aplica el modelo Ethazi",
+   "descripcion": "Aprendizaje colaborativo basado en retos: enfoque metodológico del modelo Ethazi.",
    "categoria": "docencia"
   },
   {
    "sigla": "AGIL",
    "termino": "Metodologías Ágiles",
-   "descripcion": "Enfoques como Design Thinking (empatizar, definir, idear, prototipar, testear), Lean Startup (PMV) y Scrum/Kanban aplicados al aula",
+   "descripcion": "Metodologías ágiles: enfoques como el Design Thinking, Lean Startup o Scrum y Kanban, aplicados al aula.",
    "categoria": "docencia"
   },
   {
@@ -2517,13 +2499,7 @@
   {
    "sigla": "",
    "termino": "Artículo Científico",
-   "descripcion": "Publicación de investigación con revisión por pares",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
-   "termino": "Auditoría Creativa",
-   "descripcion": "Evaluación sistemática de la creatividad en procesos educativos",
+   "descripcion": "Publicación que presenta una investigación y que revisan otras personas expertas antes de aceptarla (revisión por pares).",
    "categoria": "docencia"
   },
   {
@@ -2553,25 +2529,25 @@
   {
    "sigla": "CA",
    "termino": "Comunidades de Aprendizaje",
-   "descripcion": "Enfoque educativo colaborativo e inclusivo con participación de toda la comunidad",
+   "descripcion": "Comunidades de Aprendizaje: proyecto de transformación educativa basado en actuaciones de éxito (grupos interactivos, tertulias dialógicas) y en la participación de las familias y de la comunidad.",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Carta Tierra",
-   "descripcion": "Documento internacional de principios éticos para la sostenibilidad",
+   "descripcion": "Declaración internacional de principios éticos para una sociedad global justa, sostenible y pacífica (2000).",
    "categoria": "docencia"
   },
   {
    "sigla": "CDI",
    "termino": "Competencia digital Individual",
-   "descripcion": "Capacidad para usar eficazmente las TIC en diferentes contextos",
+   "descripcion": "Competencia digital individual: capacidad de usar con criterio y de forma segura las tecnologías digitales.",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Coaching Educativo",
-   "descripcion": "Proceso de acompañamiento para potenciar el desarrollo del alumnado",
+   "descripcion": "Acompañamiento individual o en grupo para que el alumnado fije metas y desarrolle su autonomía.",
    "categoria": "docencia"
   },
   {
@@ -2601,55 +2577,55 @@
   {
    "sigla": "CONTR",
    "termino": "Contrato de aprendizaje (Learning contract)",
-   "descripcion": "Acuerdo individual entre docente y estudiante que fija objetivos, estrategias/recursos, evidencias y criterios de evaluación",
+   "descripcion": "Contrato de aprendizaje (learning contract): acuerdo individual entre docente y estudiante que fija objetivos, recursos, evidencias y criterios de evaluación.",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Creatividad",
-   "descripcion": "Capacidad de generar ideas originales y soluciones novedosas",
+   "descripcion": "Capacidad de generar ideas originales y soluciones nuevas a un problema.",
    "categoria": "docencia"
   },
   {
    "sigla": "DEBATE",
    "termino": "Debates y Diálogo Educativo",
-   "descripcion": "Técnica didáctica basada en la confrontación argumentada de ideas para fomentar el pensamiento crítico y la comunicación",
+   "descripcion": "Técnica didáctica basada en confrontar ideas con argumentos, para fomentar el pensamiento crítico y la comunicación.",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Desarrollo Sostenible",
-   "descripcion": "Progreso que satisface necesidades presentes sin comprometer el futuro *(ver ODS)*",
+   "descripcion": "Desarrollo que satisface las necesidades del presente sin comprometer las de las generaciones futuras (ver ODS).",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Dilemas éticos",
-   "descripcion": "Situaciones problemáticas que requieren reflexión ética y toma de decisiones",
+   "descripcion": "Situaciones sin una respuesta evidente que el alumnado analiza para razonar y decidir con criterios éticos.",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Educación Sostenible",
-   "descripcion": "Formación orientada a la conciencia ambiental y la sostenibilidad",
+   "descripcion": "Educación para el desarrollo sostenible: formación orientada a la conciencia ambiental y a los Objetivos de Desarrollo Sostenible.",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Enfoque plurilingüe",
-   "descripcion": "Enfoque educativo que promueve el uso de varias lenguas",
+   "descripcion": "Enfoque que promueve el uso de varias lenguas en la enseñanza.",
    "categoria": "docencia"
   },
   {
    "sigla": "ESTAC",
    "termino": "Estaciones de aprendizaje",
-   "descripcion": "Organización del aula en rincones o estaciones con actividades distintas y simultáneas por las que rota el alumnado",
+   "descripcion": "Estaciones de aprendizaje: organización del aula en rincones con actividades distintas y simultáneas por los que rota el alumnado.",
    "categoria": "docencia"
   },
   {
    "sigla": "ETHAZI",
    "termino": "Modelo de Aprendizaje colaborativo basado en retos del País Vasco",
-   "descripcion": "Metodología de Tknika (red de innovación de la FP vasca) estructurada en 11 pasos: plantear el reto, conectar, establecer parámetros, obtener información, generar alternativas, presentar propuestas, seleccionar, planificar, ejecutar, presentar resultados y reflexionar",
+   "descripcion": "Modelo de aprendizaje de la FP vasca, de Tknika: retos intermodulares, equipos docentes autogestionados, flexibilidad organizativa y evaluación por competencias. Su aprendizaje colaborativo basado en retos sigue una propuesta de 11 pasos.",
    "categoria": "docencia"
   },
   {
@@ -2667,7 +2643,7 @@
   {
    "sigla": "FC",
    "termino": "Flipped Classroom",
-   "descripcion": "Metodología de aula invertida: teoría en casa, práctica en clase",
+   "descripcion": "Aula invertida (flipped classroom): el alumnado trabaja el contenido en casa y la clase se dedica a la práctica y a resolver dudas.",
    "categoria": "docencia"
   },
   {
@@ -2697,19 +2673,19 @@
   {
    "sigla": "ID",
    "termino": "Innovación Docente",
-   "descripcion": "Incorporación de nuevas ideas y enfoques en la enseñanza",
+   "descripcion": "Innovación docente: cambios que introduce el profesorado en su forma de enseñar para mejorar el aprendizaje.",
    "categoria": "docencia"
   },
   {
    "sigla": "IED",
    "termino": "Innovación Educativa",
-   "descripcion": "Introducción de nuevos métodos, herramientas y tecnologías educativas",
+   "descripcion": "Innovación educativa: cambios en métodos, recursos o tecnologías para mejorar la educación, a escala de aula o de centro.",
    "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Investigación",
-   "descripcion": "Proceso sistemático de búsqueda de conocimiento nuevo",
+   "descripcion": "Proceso sistemático de búsqueda de conocimiento nuevo con un método explícito.",
    "categoria": "docencia"
   },
   {
@@ -2727,19 +2703,19 @@
   {
    "sigla": "",
    "termino": "Juegos educativos",
-   "descripcion": "Recursos lúdicos como herramienta de aprendizaje",
+   "descripcion": "Juegos usados con una intención de aprendizaje; la gamificación aplica sus mecánicas a otros contextos.",
    "categoria": "docencia"
   },
   {
    "sigla": "MA",
    "termino": "Metodologías Activas",
-   "descripcion": "Enfoques pedagógicos centrados en la participación activa del alumnado",
+   "descripcion": "Metodologías activas: enfoques en los que el alumnado participa y construye su aprendizaje (retos, proyectos, aprendizaje cooperativo).",
    "categoria": "docencia"
   },
   {
    "sigla": "MC",
    "termino": "Mapas Conceptuales",
-   "descripcion": "Herramientas visuales para organizar y representar relaciones entre conceptos",
+   "descripcion": "Mapa conceptual: esquema visual que relaciona conceptos mediante líneas y palabras de enlace.",
    "categoria": "docencia"
   },
   {
@@ -2775,7 +2751,7 @@
   {
    "sigla": "PARES",
    "termino": "Aprendizaje entre pares (Peer teaching)",
-   "descripcion": "Metodología en la que el alumnado enseña y aprende de sus propios compañeros",
+   "descripcion": "Aprendizaje entre pares (peer teaching): el alumnado enseña y aprende de sus propios compañeros.",
    "categoria": "docencia"
   },
   {
@@ -2799,7 +2775,7 @@
   {
    "sigla": "REA",
    "termino": "Recursos Educativos Abiertos",
-   "descripcion": "Materiales de enseñanza, aprendizaje e investigación de libre acceso y reutilización, área complementaria del marco DigCompEdu",
+   "descripcion": "Recursos educativos abiertos: materiales de enseñanza, aprendizaje e investigación de libre acceso, que se pueden reutilizar.",
    "categoria": "docencia"
   },
   {
@@ -2817,7 +2793,7 @@
   {
    "sigla": "",
    "termino": "Robótica",
-   "descripcion": "Uso de robots como herramienta educativa STEM",
+   "descripcion": "Robótica educativa: uso de robots y de su programación para aprender ciencia, tecnología, ingeniería y matemáticas.",
    "categoria": "docencia"
   },
   {
@@ -2997,7 +2973,7 @@
   {
    "sigla": "",
    "termino": "FP Dual intensiva",
-   "descripcion": "Modalidad de FP dual con contrato de formación en la que la formación en la empresa supera el 35 % de la duración del ciclo.",
+   "descripcion": "Modalidad de FP dual con contrato (de formación en alternancia o beca) en la que la formación en la empresa supera el 35 % de la duración del ciclo (hasta el 50 %).",
    "categoria": "empresa"
   },
   {
@@ -3069,7 +3045,7 @@
   {
    "sigla": "",
    "termino": "Actitud Emprendedora",
-   "descripcion": "Capacidad de innovar, asumir riesgos y crear iniciativas",
+   "descripcion": "Capacidad de tomar la iniciativa, asumir riesgos y convertir ideas en proyectos; una de las competencias que trabaja el módulo de emprendimiento.",
    "categoria": "orientacion"
   },
   {
@@ -3147,7 +3123,7 @@
   {
    "sigla": "",
    "termino": "Iniciativa",
-   "descripcion": "Capacidad de proponer y emprender acciones de forma autónoma",
+   "descripcion": "Capacidad de proponer y emprender acciones por cuenta propia.",
    "categoria": "orientacion"
   },
   {
@@ -3193,7 +3169,7 @@
   {
    "sigla": "CINE",
    "termino": "Clasificación Internacional Normalizada de la Educación",
-   "descripcion": "Sistema UNESCO para comparar sistemas educativos mundiales",
+   "descripcion": "Clasificación Internacional Normalizada de la Educación de la UNESCO: permite comparar los niveles educativos de distintos países.",
    "categoria": "europa"
   },
   {
@@ -3253,7 +3229,7 @@
   {
    "sigla": "",
    "termino": "Erasmus+",
-   "descripcion": "Programa europeo de educación, formación, juventud y deporte para la movilidad y cooperación",
+   "descripcion": "Programa de la Unión Europea para la educación, la formación, la juventud y el deporte; incluye la movilidad del alumnado y del profesorado de FP.",
    "categoria": "europa"
   },
   {
