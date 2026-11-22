@@ -304,8 +304,8 @@
         "desc": "Respostes a les preguntes més freqüents del professorat."
       },
       "acronimos": {
-        "label": "Acrònims",
-        "desc": "Glossari de sigles, acrònims i conceptes de formació professional."
+        "label": "Glossari",
+        "desc": "Glossari de sigles, acrònims i termes de formació professional i docència; el mateix que el de rafaelsanzprades.es."
       },
       "mapa": {
         "label": "Mapa",
@@ -2263,7 +2263,24 @@
       "catalogoTitulo": "Catàleg d'instruments d'avaluació i de qualificació"
     },
     "catalogo": {
-      "tituloAcronimosGlosario": "Acrònims i glossari",
+      "tituloAcronimosGlosario": "Glossari",
+      "glosarioMismoQueWeb": "És el mateix glossari que el de rafaelsanzprades.es: sigles i termes, per categories i en ordre alfabètic.",
+      "glosarioCategoria": {
+        "normas": "Lleis i normes",
+        "organismos": "Organismes i entitats",
+        "sistema": "Sistema de FP i títols",
+        "familias": "Famílies professionals (codis)",
+        "programacion": "Programació i avaluació",
+        "cuaderno": "Termes de Cuaderno FP",
+        "centro": "El centre, els seus òrgans i documents",
+        "alumnado": "Alumnat i suport educatiu",
+        "docencia": "Aprenentatge i docència",
+        "empresa": "Empresa i formació dual",
+        "orientacion": "Orientació, emprenedoria i ocupació",
+        "europa": "Europa i altres països",
+        "historia": "Història de la FP",
+        "comunidades": "Mateixes coses, sigles diferents per comunitat"
+      },
       "sinResultadosParaBusqueda": "No s'han trobat resultats per a \"{{termino}}\"",
       "tituloMapaCcaa": "Mapa de CCAA amb currículum FP",
       "instruccionMapaCcaa": "Fes clic en una comunitat per veure'n el detall. Font: ",

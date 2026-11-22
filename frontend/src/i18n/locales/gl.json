@@ -302,8 +302,8 @@
         "desc": "Respostas ás preguntas máis frecuentes do profesorado."
       },
       "acronimos": {
-        "label": "Acrónimos",
-        "desc": "Glosario de siglas, acrónimos e conceptos de formación profesional."
+        "label": "Glosario",
+        "desc": "Glosario de siglas, acrónimos e termos de formación profesional e docencia; o mesmo que o de rafaelsanzprades.es."
       },
       "mapa": {
         "label": "Mapa",
@@ -2261,7 +2261,24 @@
       "catalogoTitulo": "Catálogo de instrumentos de avaliación e de cualificación"
     },
     "catalogo": {
-      "tituloAcronimosGlosario": "Acrónimos e glosario",
+      "tituloAcronimosGlosario": "Glosario",
+      "glosarioMismoQueWeb": "É o mesmo glosario que o de rafaelsanzprades.es: siglas e termos, por categorías e en orde alfabética.",
+      "glosarioCategoria": {
+        "normas": "Leis e normas",
+        "organismos": "Organismos e entidades",
+        "sistema": "Sistema de FP e títulos",
+        "familias": "Familias profesionais (códigos)",
+        "programacion": "Programación e avaliación",
+        "cuaderno": "Termos de Cuaderno FP",
+        "centro": "O centro, os seus órganos e documentos",
+        "alumnado": "Alumnado e apoio educativo",
+        "docencia": "Aprendizaxe e docencia",
+        "empresa": "Empresa e formación dual",
+        "orientacion": "Orientación, emprendemento e emprego",
+        "europa": "Europa e outros países",
+        "historia": "Historia da FP",
+        "comunidades": "As mesmas cousas, siglas distintas por comunidade"
+      },
       "sinResultadosParaBusqueda": "Non se atoparon resultados para \"{{termino}}\"",
       "tituloMapaCcaa": "Mapa de CCAA con currículo FP",
       "instruccionMapaCcaa": "Fai clic nunha comunidade para ver o seu detalle. Fonte: ",

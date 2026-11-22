@@ -302,8 +302,8 @@
         "desc": "Irakasleen galderarik ohikoenen erantzunak."
       },
       "acronimos": {
-        "label": "Akronimoak",
-        "desc": "Lanbide heziketako sigla, akronimo eta kontzeptuen glosarioa."
+        "label": "Glosarioa",
+        "desc": "Lanbide heziketako eta irakaskuntzako sigla, akronimo eta terminoen glosarioa; rafaelsanzprades.es-ekoaren berbera."
       },
       "mapa": {
         "label": "Mapa",
@@ -2261,7 +2261,24 @@
       "catalogoTitulo": "Ebaluazio- eta kalifikazio-tresnen katalogoa"
     },
     "catalogo": {
-      "tituloAcronimosGlosario": "Akronimoak eta glosarioa",
+      "tituloAcronimosGlosario": "Glosarioa",
+      "glosarioMismoQueWeb": "rafaelsanzprades.es-eko glosario bera da: siglak eta terminoak, kategoriaka eta alfabetikoki ordenatuta.",
+      "glosarioCategoria": {
+        "normas": "Legeak eta arauak",
+        "organismos": "Organismoak eta erakundeak",
+        "sistema": "LH sistema eta tituluak",
+        "familias": "Lanbide-familiak (kodeak)",
+        "programacion": "Programazioa eta ebaluazioa",
+        "cuaderno": "Cuaderno FP-ko terminoak",
+        "centro": "Ikastetxea, bere organoak eta dokumentuak",
+        "alumnado": "Ikasleria eta hezkuntza-laguntza",
+        "docencia": "Ikaskuntza eta irakaskuntza",
+        "empresa": "Enpresa eta formakuntza duala",
+        "orientacion": "Orientazioa, ekintzailetza eta enplegua",
+        "europa": "Europa eta beste herrialde batzuk",
+        "historia": "LHren historia",
+        "comunidades": "Gauza berak, siglak desberdinak erkidegoka"
+      },
       "sinResultadosParaBusqueda": "\"{{termino}}\" bilaketarako ez da emaitzarik aurkitu",
       "tituloMapaCcaa": "LHko curriculuma duten autonomia erkidegoen mapa",
       "instruccionMapaCcaa": "Egin klik erkidego batean bere xehetasunak ikusteko. Iturria: ",

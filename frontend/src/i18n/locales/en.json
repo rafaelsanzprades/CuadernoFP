@@ -302,8 +302,8 @@
         "desc": "Answers to the most frequently asked questions from teachers."
       },
       "acronimos": {
-        "label": "Acronyms",
-        "desc": "Glossary of abbreviations, acronyms and VET concepts."
+        "label": "Glossary",
+        "desc": "Glossary of abbreviations, acronyms and terms of vocational training and teaching; the same one as on rafaelsanzprades.es."
       },
       "mapa": {
         "label": "Map",
@@ -2261,7 +2261,24 @@
       "catalogoTitulo": "Catalogue of assessment and grading instruments"
     },
     "catalogo": {
-      "tituloAcronimosGlosario": "Acronyms and glossary",
+      "tituloAcronimosGlosario": "Glossary",
+      "glosarioMismoQueWeb": "This is the same glossary as on rafaelsanzprades.es: abbreviations and terms, by category and in alphabetical order.",
+      "glosarioCategoria": {
+        "normas": "Laws and regulations",
+        "organismos": "Bodies and organisations",
+        "sistema": "VET system and qualifications",
+        "familias": "Occupational families (codes)",
+        "programacion": "Programming and assessment",
+        "cuaderno": "Cuaderno FP terms",
+        "centro": "The school, its bodies and documents",
+        "alumnado": "Students and educational support",
+        "docencia": "Learning and teaching",
+        "empresa": "Business and dual training",
+        "orientacion": "Guidance, entrepreneurship and employment",
+        "europa": "Europe and other countries",
+        "historia": "History of VET",
+        "comunidades": "Same things, different acronyms by region"
+      },
       "sinResultadosParaBusqueda": "No results found for \"{{termino}}\"",
       "tituloMapaCcaa": "Map of autonomous communities with VET curriculum",
       "instruccionMapaCcaa": "Click a community to see its detail. Source: ",

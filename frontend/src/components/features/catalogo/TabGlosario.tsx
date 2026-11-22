@@ -1,54 +1,22 @@
 import React, { useState } from "react";
 import { Card } from "@/components/ui/Card";
-import { BookOpen, GraduationCap, HeartHandshake, Layers, Scale, Newspaper, Code2, School, Search, type LucideIcon } from "lucide-react";
+import { BookOpen, Code2, Search } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { acronymsData, CATEGORY_LABELS, CATEGORY_ORDER, AcronymCategory } from "@/data/acronymsData";
+import { glosarioData, GLOSARIO_CATEGORIAS } from "@/data/glosarioData";
 import { GUIA_CATALOGO } from "@/data/guiaData";
 import { useTranslation } from "react-i18next";
 
-const CATEGORY_ICONS: Record<AcronymCategory, LucideIcon> = {
-  metodologia: GraduationCap,
-  inclusion: HeartHandshake,
-  estructura_fp: Layers,
-  normativa: Scale,
-  boletines: Newspaper,
-  codificacion: Code2,
-  otros: School,
-};
-
-// El campo `name` de acronymsData sigue la convención "SIGLA. Término
-// completo" cuando existe una sigla real (p.ej. "ABP. Aprendizaje Basado en
-// Proyectos"). Cuando no hay sigla (p.ej. "Bullying"), `name` es solo el
-// término y no se inventa ninguna sigla.
-function parseAcronym(name: string): { acronym: string; term: string } {
-  const match = name.match(/^([^\s.][^.]{0,19}?)\.\s+(.+)$/);
-  if (match) {
-    return { acronym: match[1], term: match[2] };
-  }
-  return { acronym: "", term: name };
-}
-
-const CATEGORY_LABEL_KEYS: Record<AcronymCategory, string> = {
-  metodologia: 'campos.catalogo.categoriaMetodologia',
-  inclusion: 'campos.catalogo.categoriaInclusion',
-  estructura_fp: 'campos.catalogo.categoriaEstructuraFp',
-  normativa: 'campos.catalogo.categoriaNormativa',
-  boletines: 'campos.catalogo.categoriaBoletines',
-  codificacion: 'campos.catalogo.categoriaCodificacion',
-  otros: 'campos.catalogo.categoriaOtros',
-};
-
-export function TabAcronimos() {
+// Mismo glosario que rafaelsanzprades.es/glosario-fp/ (ver src/data/glosarioData.ts). Las siglas y los términos sin sigla
+// van juntos y por orden alfabético dentro de cada categoría; si el término no tiene sigla, esa celda queda vacía.
+export function TabGlosario() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const orderedCategories = CATEGORY_ORDER;
-
-  const filteredData = acronymsData.filter(item => {
-    const q = searchTerm.toLowerCase();
-    return item.name.toLowerCase().includes(q) || item.description.toLowerCase().includes(q);
-  });
+  const q = searchTerm.toLowerCase();
+  const filteredData = glosarioData.filter(item =>
+    item.sigla.toLowerCase().includes(q) || item.termino.toLowerCase().includes(q) || item.descripcion.toLowerCase().includes(q)
+  );
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
@@ -56,7 +24,7 @@ export function TabAcronimos() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <BookOpen className="w-6 h-6 text-accent" />
-            <h2 className="text-subheading font-bold text-foreground">{t('campos.catalogo.tituloAcronimosGlosario', {defaultValue: 'Acrónimos y glosario'})}</h2>
+            <h2 className="text-subheading font-bold text-foreground">{t('campos.catalogo.tituloAcronimosGlosario', {defaultValue: 'Glosario'})}</h2>
           </div>
           <div className="w-full md:w-72 relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted z-10 pointer-events-none">
@@ -70,16 +38,19 @@ export function TabAcronimos() {
             />
           </div>
         </div>
+        <p className="text-caption text-muted mt-3">
+          {t('campos.catalogo.glosarioMismoQueWeb', {defaultValue: 'Es el mismo glosario que el de rafaelsanzprades.es: siglas y términos, por categorías y en orden alfabético.'})}
+        </p>
       </Card>
 
-      {orderedCategories.map(category => {
-        const items = filteredData.filter(item => item.category === category);
+      {GLOSARIO_CATEGORIAS.map(categoria => {
+        const items = filteredData.filter(item => item.categoria === categoria.id);
         if (items.length === 0) return null;
 
         return (
-          <div key={category} className="animate-in fade-in duration-300 space-y-3">
-            <SectionHeading id={`acronimos-${category}`} icon={CATEGORY_ICONS[category]} scrollMt="260px">
-              {t(CATEGORY_LABEL_KEYS[category], {defaultValue: CATEGORY_LABELS[category]})}
+          <div key={categoria.id} className="animate-in fade-in duration-300 space-y-3">
+            <SectionHeading id={`glosario-${categoria.id}`} icon={BookOpen} scrollMt="260px">
+              {t(`campos.catalogo.glosarioCategoria.${categoria.id}`, {defaultValue: categoria.nombre})}
             </SectionHeading>
 
             <div className="prose prose-sm dark:prose-invert max-w-none
@@ -96,16 +67,24 @@ export function TabAcronimos() {
                   </tr>
                 </thead>
                 <tbody>
-                  {items.map(item => {
-                    const { acronym, term } = parseAcronym(item.name);
-                    return (
-                      <tr key={item.id} className="hover:bg-foreground/[0.02] transition-colors">
-                        <td className="font-bold text-accent whitespace-nowrap">{acronym}</td>
-                        <td className="font-medium text-foreground">{term}</td>
-                        <td>{item.description}</td>
-                      </tr>
-                    );
-                  })}
+                  {items.map(item => (
+                    <tr key={`${item.categoria}-${item.sigla}-${item.termino}`} className="hover:bg-foreground/[0.02] transition-colors">
+                      <td className="font-bold text-accent whitespace-nowrap">{item.sigla}</td>
+                      <td className="font-medium text-foreground">{item.termino}</td>
+                      <td>
+                        {item.descripcion}
+                        {item.enlaces && item.enlaces.length > 0 && (
+                          <span className="block mt-1">
+                            {item.enlaces.map((e, i) => (
+                              <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                                {i > 0 ? " · " : ""}{e.texto}
+                              </a>
+                            ))}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -124,7 +103,7 @@ export function TabAcronimos() {
           junto al resto de glosarios/catálogos que dentro de la guía de
           pasos. */}
       <div className="space-y-3">
-        <SectionHeading id="acronimos-anexo-catalogo" icon={Code2} scrollMt="260px">
+        <SectionHeading id="glosario-anexo-catalogo" icon={Code2} scrollMt="260px">
           Acrónimos codificados
         </SectionHeading>
         <Card className="p-6 space-y-6">

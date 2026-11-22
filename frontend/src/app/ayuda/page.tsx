@@ -11,10 +11,10 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { StickyPageHeader } from "@/components/ui/StickyPageHeader";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { TabAcronimos } from "@/components/features/catalogo/TabAcronimos";
+import { TabGlosario } from "@/components/features/catalogo/TabGlosario";
 import { GuiaTab } from "@/components/features/ayuda/GuiaTab";
 import { useOnboardingTour } from "@/components/features/onboarding/TourGuide";
-import { CATEGORY_LABELS, CATEGORY_ORDER } from "@/data/acronymsData";
+import { GLOSARIO_CATEGORIAS } from "@/data/glosarioData";
 import { GUIA_PASOS } from "@/data/guiaData";
 
 // Un icono por grupo de FAQ, en el mismo orden que getFaqs() -- el grupo ya
@@ -110,7 +110,7 @@ export default function AyudaPage() {
   const TABS = [
     { id: "guia", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.magia.guia.label', {defaultValue: 'Guía'})}</>, cleanLabel: t('tabs.magia.guia.label', {defaultValue: 'Guía'}) },
     { id: "faq", label: <><span className="inline-flex"><Info className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'})}</>, cleanLabel: t('tabs.ayuda.faq.label', {defaultValue: 'FAQ'}) },
-    { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'})}</>, cleanLabel: t('tabs.ayuda.acronimos.label', {defaultValue: 'Acrónimos'}) },
+    { id: "acronimos", label: <><span className="inline-flex"><BookOpen className="w-[1.2em] h-[1.2em] mr-1" /></span> {t('tabs.ayuda.acronimos.label', {defaultValue: 'Glosario'})}</>, cleanLabel: t('tabs.ayuda.acronimos.label', {defaultValue: 'Glosario'}) },
   ];
 
   const activeTabCleanLabel = TABS.find(tab => tab.id === activeTab)?.cleanLabel;
@@ -118,7 +118,7 @@ export default function AyudaPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
     faq: t('tabs.ayuda.faq.desc', {defaultValue: 'Respuestas a las preguntas más frecuentes del profesorado.'}),
-    acronimos: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y conceptos de formación profesional.'}),
+    acronimos: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y términos de formación profesional y docencia, el mismo que el de rafaelsanzprades.es.'}),
   };
 
   // Índice de bloques por pestaña -- Contribuciones se fusionó al final de
@@ -128,8 +128,8 @@ export default function AyudaPage() {
     guia: GUIA_PASOS.map(p => ({ id: p.id, label: `${p.numero}. ${p.titulo}` })),
     faq: FAQS.map((g, idx) => ({ id: `faq-grupo-${idx}`, label: g.group })),
     acronimos: [
-      ...CATEGORY_ORDER.map(cat => ({ id: `acronimos-${cat}`, label: CATEGORY_LABELS[cat] })),
-      { id: "acronimos-anexo-catalogo", label: "Acrónimos codificados" },
+      ...GLOSARIO_CATEGORIAS.map(cat => ({ id: `glosario-${cat.id}`, label: t(`campos.catalogo.glosarioCategoria.${cat.id}`, {defaultValue: cat.nombre}) })),
+      { id: "glosario-anexo-catalogo", label: "Acrónimos codificados" },
     ],
   };
 
@@ -199,7 +199,7 @@ export default function AyudaPage() {
             {/* ── CONTENIDO: ACRONIMOS ──────────────────────────────────────── */}
             {activeTab === "acronimos" && (
               <div className="animate-in fade-in duration-500 w-full">
-                <TabAcronimos />
+                <TabGlosario />
               </div>
             )}
 
