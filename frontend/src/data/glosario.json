@@ -429,7 +429,7 @@
   {
    "sigla": "CdE",
    "termino": "Centros de Excelencia",
-   "descripcion": "Red de centros de FP que destacan por la innovación, investigación aplicada y el emprendimiento",
+   "descripcion": "Red Estatal de Centros de Excelencia de FP: centros públicos seleccionados por el Ministerio de Educación (convocatoria de 2022, con fondos del Plan de Recuperación) para innovar y colaborar con las empresas.",
    "categoria": "organismos"
   },
   {
@@ -811,12 +811,6 @@
    ]
   },
   {
-   "sigla": "AC",
-   "termino": "Ámbito Común",
-   "descripcion": "Competencias básicas en FPGB: Lengua, Matemáticas, Ciencias",
-   "categoria": "sistema"
-  },
-  {
    "sigla": "",
    "termino": "Acreditación de competencias",
    "descripcion": "Procedimiento para reconocer las competencias profesionales adquiridas por experiencia laboral o por vías no formales.",
@@ -827,12 +821,6 @@
      "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-3-formacion-en-centro-en-empresa-y-acreditacion-de-competencias.html"
     }
    ]
-  },
-  {
-   "sigla": "AT",
-   "termino": "Ámbito Técnico",
-   "descripcion": "Competencias técnicas específicas del área profesional en FPGB",
-   "categoria": "sistema"
   },
   {
    "sigla": "",
@@ -855,7 +843,7 @@
   {
    "sigla": "CEFP",
    "termino": "Centro Específico de Formación Profesional",
-   "descripcion": "Centro especializado en formación técnica y práctica",
+   "descripcion": "Centro docente dedicado a la formación profesional.",
    "categoria": "sistema"
   },
   {
@@ -885,13 +873,7 @@
   {
    "sigla": "CG",
    "termino": "Competencia General",
-   "descripcion": "Habilidades, conocimientos y actitudes para el éxito en diversos contextos",
-   "categoria": "sistema"
-  },
-  {
-   "sigla": "CMA",
-   "termino": "Calidad y Medio Ambiente",
-   "descripcion": "Formación en gestión de calidad y medio ambiente empresarial",
+   "descripcion": "Competencia general del título: describe el perfil profesional de quien lo supera; es un apartado del real decreto de cada título.",
    "categoria": "sistema"
   },
   {
@@ -921,7 +903,7 @@
   {
    "sigla": "CPPS",
    "termino": "Competencias Profesionales, Personales y Sociales",
-   "descripcion": "Conjunto de conocimientos, habilidades y actitudes para la vida",
+   "descripcion": "Competencias profesionales, personales y sociales del título: las capacidades que acompañan a la competencia general en el real decreto de cada título.",
    "categoria": "sistema"
   },
   {
@@ -1041,25 +1023,25 @@
   {
    "sigla": "FPE",
    "termino": "Formación Profesional para el Empleo",
-   "descripcion": "Oferta formativa dirigida a personas trabajadoras (ocupadas y desempleadas), integrada en el nuevo Sistema Nacional de FP junto al Catálogo Nacional de Estándares de Competencias Profesionales",
+   "descripcion": "Formación dirigida a personas trabajadoras, ocupadas y desempleadas; hoy forma parte del Sistema de Formación Profesional (Ley Orgánica 3/2022).",
    "categoria": "sistema"
   },
   {
    "sigla": "FPGB",
    "termino": "Formación Profesional de Grado Básico",
-   "descripcion": "Modalidad de FP de 2 años para acceso al mercado laboral básico",
+   "descripcion": "Sigla habitual del ciclo formativo de grado básico (ver FPB).",
    "categoria": "sistema"
   },
   {
    "sigla": "FPGM",
    "termino": "Formación Profesional de Grado Medio",
-   "descripcion": "FP intermedia (2-3 años) entre secundaria y grado superior",
+   "descripcion": "Sigla habitual del ciclo formativo de grado medio (ver CFGM).",
    "categoria": "sistema"
   },
   {
    "sigla": "FPGS",
    "termino": "Formación Profesional de Grado Superior",
-   "descripcion": "FP avanzada (2 años) con acceso a educación universitaria",
+   "descripcion": "Sigla habitual del ciclo formativo de grado superior (ver CFGS).",
    "categoria": "sistema"
   },
   {
@@ -1097,18 +1079,6 @@
      "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
     }
    ]
-  },
-  {
-   "sigla": "",
-   "termino": "Grados A, B, C, D, E",
-   "descripcion": "Niveles del nuevo sistema de FP (Acreditación parcial, Certificado competencia, Certificado profesional, Ciclo Formativo, Curso de Especialización)",
-   "categoria": "sistema"
-  },
-  {
-   "sigla": "H",
-   "termino": "Horas",
-   "descripcion": "Unidad de medida del tiempo formativo",
-   "categoria": "sistema"
   },
   {
    "sigla": "IPE",
@@ -1389,7 +1359,7 @@
   {
    "sigla": "CC",
    "termino": "Criterios de Calificación",
-   "descripcion": "Estándares y pautas para evaluar y asignar calificaciones",
+   "descripcion": "Criterios de calificación: reglas con las que se traduce la evaluación del alumnado en una nota.",
    "categoria": "programacion"
   },
   {
@@ -1411,6 +1381,18 @@
    "categoria": "programacion"
   },
   {
+   "sigla": "",
+   "termino": "Contenidos complementarios",
+   "descripcion": "Contenidos adicionales que amplían el currículo básico",
+   "categoria": "programacion"
+  },
+  {
+   "sigla": "",
+   "termino": "Contenidos transversales",
+   "descripcion": "Contenidos que atraviesan varias materias y áreas del currículo",
+   "categoria": "programacion"
+  },
+  {
    "sigla": "CP",
    "termino": "Contenido Práctico",
    "descripcion": "Actividades para aplicar conocimientos en situaciones reales",
@@ -1420,6 +1402,12 @@
    "sigla": "CT",
    "termino": "Contenido Teórico",
    "descripcion": "Transmisión de conceptos abstractos, teorías y principios",
+   "categoria": "programacion"
+  },
+  {
+   "sigla": "",
+   "termino": "Currículum",
+   "descripcion": "Planificación oficial de contenidos, objetivos y actividades educativas",
    "categoria": "programacion"
   },
   {
@@ -1549,21 +1537,9 @@
    ]
   },
   {
-   "sigla": "",
-   "termino": "Resumen",
-   "descripcion": "Síntesis de contenidos clave como recurso de estudio",
-   "categoria": "programacion"
-  },
-  {
    "sigla": "SA",
    "termino": "Situaciones de Aprendizaje",
-   "descripcion": "Escenarios que el alumnado debe resolver aplicando conocimientos, clave en el nuevo currículo metodológico",
-   "categoria": "programacion"
-  },
-  {
-   "sigla": "",
-   "termino": "Transversal",
-   "descripcion": "Contenidos que atraviesan varias materias y áreas del currículo",
+   "descripcion": "Situaciones de aprendizaje: escenarios en los que el alumnado aplica saberes y competencias para resolver algo; término de la LOMLOE.",
    "categoria": "programacion"
   },
   {
@@ -1769,12 +1745,6 @@
      "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
     }
    ]
-  },
-  {
-   "sigla": "",
-   "termino": "Complementos",
-   "descripcion": "Contenidos adicionales que amplían el currículo básico",
-   "categoria": "centro"
   },
   {
    "sigla": "",
@@ -2175,7 +2145,7 @@
   {
    "sigla": "",
    "termino": "Adicciones",
-   "descripcion": "Patologías por consumo de sustancias con impacto en el rendimiento",
+   "descripcion": "Dependencia de sustancias u otras conductas, con efectos en el rendimiento y la convivencia; el centro actúa con prevención y orientación.",
    "categoria": "alumnado"
   },
   {
@@ -2204,18 +2174,6 @@
   },
   {
    "sigla": "",
-   "termino": "Cannabis",
-   "descripcion": "Sustancia psicoactiva con impacto educativo y de salud",
-   "categoria": "alumnado"
-  },
-  {
-   "sigla": "",
-   "termino": "Carta Tierra",
-   "descripcion": "Documento internacional de principios éticos para la sostenibilidad",
-   "categoria": "alumnado"
-  },
-  {
-   "sigla": "",
    "termino": "Ciberacoso",
    "descripcion": "Acoso repetido a una persona mediante mensajes, redes o imágenes; requiere el protocolo del centro.",
    "categoria": "alumnado",
@@ -2227,15 +2185,15 @@
    ]
   },
   {
-   "sigla": "DEA",
-   "termino": "Dificultades específicas de aprendizaje",
-   "descripcion": "Dificultades persistentes en la lectura, la escritura o el cálculo (como la dislexia) que no se explican por una discapacidad intelectual.",
+   "sigla": "",
+   "termino": "Competencias emocionales",
+   "descripcion": "Competencias relacionadas con la gestión y comprensión de emociones",
    "categoria": "alumnado"
   },
   {
-   "sigla": "",
-   "termino": "Desarrollo",
-   "descripcion": "Proceso de crecimiento y maduración personal a lo largo de la vida",
+   "sigla": "DEA",
+   "termino": "Dificultades específicas de aprendizaje",
+   "descripcion": "Dificultades persistentes en la lectura, la escritura o el cálculo (como la dislexia) que no se explican por una discapacidad intelectual.",
    "categoria": "alumnado"
   },
   {
@@ -2263,12 +2221,6 @@
    ]
   },
   {
-   "sigla": "",
-   "termino": "Drogas",
-   "descripcion": "Sustancias psicoactivas con impacto en la salud y el rendimiento",
-   "categoria": "alumnado"
-  },
-  {
    "sigla": "DSM",
    "termino": "Manual diagnóstico y estadístico de los trastornos mentales",
    "descripcion": "Manual de la Asociación Estadounidense de Psiquiatría con los criterios para describir trastornos como el TDAH o el TEA.",
@@ -2288,8 +2240,8 @@
   },
   {
    "sigla": "",
-   "termino": "Emocionales",
-   "descripcion": "Competencias relacionadas con la gestión y comprensión de emociones",
+   "termino": "Educación no sexista",
+   "descripcion": "Enfoque educativo que elimina estereotipos de género",
    "categoria": "alumnado"
   },
   {
@@ -2313,7 +2265,7 @@
   {
    "sigla": "",
    "termino": "Familia",
-   "descripcion": "Contexto primario de aprendizaje y desarrollo del estudiante",
+   "descripcion": "Primer contexto de aprendizaje del alumnado; en el centro participa a través del consejo escolar y la asociación de madres y padres (AMPA).",
    "categoria": "alumnado"
   },
   {
@@ -2389,12 +2341,6 @@
    ]
   },
   {
-   "sigla": "",
-   "termino": "No Sexista",
-   "descripcion": "Enfoque educativo que elimina estereotipos de género",
-   "categoria": "alumnado"
-  },
-  {
    "sigla": "PAD",
    "termino": "Plan de Atención a la Diversidad",
    "descripcion": "Documento para atender necesidades específicas del alumnado diverso",
@@ -2437,12 +2383,6 @@
    "categoria": "alumnado"
   },
   {
-   "sigla": "",
-   "termino": "Sociedad",
-   "descripcion": "Contexto social que influye en valores y aprendizaje del alumnado",
-   "categoria": "alumnado"
-  },
-  {
    "sigla": "TDAH",
    "termino": "Trastorno por déficit de atención e hiperactividad",
    "descripcion": "Dificultad persistente para sostener la atención, regular los impulsos y, en parte de los casos, la actividad. Es un trastorno del neurodesarrollo. La variante sin hiperactividad se abrevia TDA.",
@@ -2465,18 +2405,6 @@
      "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-2-tea-en-el-aula-de-un-ciclo.html"
     }
    ]
-  },
-  {
-   "sigla": "",
-   "termino": "Valores",
-   "descripcion": "Principios éticos y morales que guían la conducta personal y social",
-   "categoria": "alumnado"
-  },
-  {
-   "sigla": "",
-   "termino": "Vida",
-   "descripcion": "Concepto transversal de educación para la vida y el bienestar",
-   "categoria": "alumnado"
   },
   {
    "sigla": "",
@@ -2570,12 +2498,6 @@
   },
   {
    "sigla": "",
-   "termino": "Aprendizaje",
-   "descripcion": "Proceso de adquisición de conocimientos, habilidades y valores",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
    "termino": "Aprendizaje cooperativo",
    "descripcion": "Equipos con roles y responsabilidad individual: cada persona es necesaria y se evalúa su aportación.",
    "categoria": "docencia",
@@ -2635,6 +2557,12 @@
    "categoria": "docencia"
   },
   {
+   "sigla": "",
+   "termino": "Carta Tierra",
+   "descripcion": "Documento internacional de principios éticos para la sostenibilidad",
+   "categoria": "docencia"
+  },
+  {
    "sigla": "CDI",
    "termino": "Competencia digital Individual",
    "descripcion": "Capacidad para usar eficazmente las TIC en diferentes contextos",
@@ -2671,12 +2599,6 @@
    ]
   },
   {
-   "sigla": "",
-   "termino": "Comunicación",
-   "descripcion": "Habilidad de transmitir y recibir información de forma efectiva",
-   "categoria": "docencia"
-  },
-  {
    "sigla": "CONTR",
    "termino": "Contrato de aprendizaje (Learning contract)",
    "descripcion": "Acuerdo individual entre docente y estudiante que fija objetivos, estrategias/recursos, evidencias y criterios de evaluación",
@@ -2702,14 +2624,8 @@
   },
   {
    "sigla": "",
-   "termino": "Dilemas",
+   "termino": "Dilemas éticos",
    "descripcion": "Situaciones problemáticas que requieren reflexión ética y toma de decisiones",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
-   "termino": "Educación",
-   "descripcion": "Proceso de enseñanza-aprendizaje para el desarrollo integral",
    "categoria": "docencia"
   },
   {
@@ -2720,20 +2636,14 @@
   },
   {
    "sigla": "",
-   "termino": "Enseñanza",
-   "descripcion": "Proceso de transmisión de conocimientos y habilidades",
+   "termino": "Enfoque plurilingüe",
+   "descripcion": "Enfoque educativo que promueve el uso de varias lenguas",
    "categoria": "docencia"
   },
   {
    "sigla": "ESTAC",
    "termino": "Estaciones de aprendizaje",
    "descripcion": "Organización del aula en rincones o estaciones con actividades distintas y simultáneas por las que rota el alumnado",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
-   "termino": "Estrategias",
-   "descripcion": "Métodos y técnicas para optimizar el proceso de enseñanza-aprendizaje",
    "categoria": "docencia"
   },
   {
@@ -2773,12 +2683,6 @@
    ]
   },
   {
-   "sigla": "",
-   "termino": "Habilidades",
-   "descripcion": "Capacidades adquiridas mediante práctica y experiencia",
-   "categoria": "docencia"
-  },
-  {
    "sigla": "IA",
    "termino": "Inteligencia artificial",
    "descripcion": "Sistemas capaces de generar texto, imágenes u otros contenidos. La LO 3/2022 prevé un plan de competencias en digitalización e inteligencia artificial para la FP (disposición adicional novena).",
@@ -2804,18 +2708,6 @@
   },
   {
    "sigla": "",
-   "termino": "Implementación",
-   "descripcion": "Puesta en marcha de programas, metodologías o recursos educativos",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
-   "termino": "Internet",
-   "descripcion": "Red global de comunicación como recurso educativo",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
    "termino": "Investigación",
    "descripcion": "Proceso sistemático de búsqueda de conocimiento nuevo",
    "categoria": "docencia"
@@ -2834,14 +2726,8 @@
   },
   {
    "sigla": "",
-   "termino": "Juegos",
+   "termino": "Juegos educativos",
    "descripcion": "Recursos lúdicos como herramienta de aprendizaje",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
-   "termino": "Lenguaje",
-   "descripcion": "Sistema de comunicación verbal y no verbal",
    "categoria": "docencia"
   },
   {
@@ -2900,24 +2786,6 @@
   },
   {
    "sigla": "",
-   "termino": "Plurilingüe",
-   "descripcion": "Enfoque educativo que promueve el uso de varias lenguas",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
-   "termino": "Prevención",
-   "descripcion": "Estrategias para anticipar y evitar riesgos y problemas",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
-   "termino": "Procesos",
-   "descripcion": "Actividades y experiencias del entorno educativo para el aprendizaje",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
    "termino": "Prototipo",
    "descripcion": "Versión rápida y barata de una solución, hecha para probar una idea.",
    "categoria": "docencia",
@@ -2948,12 +2816,6 @@
   },
   {
    "sigla": "",
-   "termino": "Riesgos",
-   "descripcion": "Factores de peligro identificados y evaluados en el entorno educativo",
-   "categoria": "docencia"
-  },
-  {
-   "sigla": "",
    "termino": "Robótica",
    "descripcion": "Uso de robots como herramienta educativa STEM",
    "categoria": "docencia"
@@ -2981,12 +2843,6 @@
      "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-6-competencia-digital-del-profesorado.html"
     }
    ]
-  },
-  {
-   "sigla": "",
-   "termino": "Tecnología",
-   "descripcion": "Aplicación de conocimientos científicos con fines prácticos",
-   "categoria": "docencia"
   },
   {
    "sigla": "TFG",
@@ -3081,7 +2937,7 @@
   {
    "sigla": "EPI",
    "termino": "Equipos de Protección Individual",
-   "descripcion": "Elementos de seguridad para prevenir lesiones en el trabajo",
+   "descripcion": "Equipos de protección individual: los elementos que lleva la persona para protegerse de riesgos laborales.",
    "categoria": "empresa"
   },
   {
@@ -3135,13 +2991,13 @@
   {
    "sigla": "",
    "termino": "FP Dual general",
-   "descripcion": "Modalidad de formación en régimen general (25% al 35% de duración en la empresa)",
+   "descripcion": "Modalidad de FP dual en la que la formación en la empresa ocupa entre el 25 % y el 35 % de la duración del ciclo.",
    "categoria": "empresa"
   },
   {
    "sigla": "",
    "termino": "FP Dual intensiva",
-   "descripcion": "Modalidad de formación en régimen intensivo con contrato de formación (al menos un 35% en la empresa)",
+   "descripcion": "Modalidad de FP dual con contrato de formación en la que la formación en la empresa supera el 35 % de la duración del ciclo.",
    "categoria": "empresa"
   },
   {
@@ -3231,12 +3087,6 @@
      "url": "https://paeelectronico.es/es-es/Paginas/Home.aspx"
     }
    ]
-  },
-  {
-   "sigla": "",
-   "termino": "Currículum",
-   "descripcion": "Planificación oficial de contenidos, objetivos y actividades educativas",
-   "categoria": "orientacion"
   },
   {
    "sigla": "DUE",
@@ -3361,7 +3211,7 @@
   {
    "sigla": "DigComp",
    "termino": "Marco Europeo de Competencias Digitales para la Ciudadanía",
-   "descripcion": "Marco de la Comisión Europea con 21 competencias digitales en 5 áreas (información y datos, comunicación, creación de contenidos, seguridad, resolución de problemas), con niveles A1 a C2",
+   "descripcion": "Marco de la Comisión Europea con 21 competencias digitales de la ciudadanía en 5 áreas: información y datos, comunicación, creación de contenidos, seguridad y resolución de problemas.",
    "categoria": "europa"
   },
   {
