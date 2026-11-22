@@ -62,25 +62,13 @@
    "sigla": "CCAA",
    "termino": "Comunidades autónomas",
    "descripcion": "Las comunidades y las ciudades autónomas. En FP, cada una concreta la ordenación, el currículo y la evaluación dentro del marco estatal.",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/ccaa-comunidades-autonomas-fp/index.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "ET",
    "termino": "Estatuto de los Trabajadores",
    "descripcion": "Norma laboral básica. Su artículo 11 regula el contrato formativo, que tiene dos modalidades: en alternancia y para la obtención de la práctica profesional.",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-11-de-las-practicas-voluntarias-al-contrato-de-alternancia.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "",
@@ -92,25 +80,13 @@
    "sigla": "LGE",
    "termino": "Ley General de Educación",
    "descripcion": "Ley 14/1970: la de la FP1 y la FP2, antecesoras de los ciclos",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-9-el-siglo-xx-de-la-ley-general-de-educacion-a-la-logse.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "LO 3/2022",
    "termino": "Ley de ordenación e integración de la FP",
    "descripcion": "Ley Orgánica 3/2022, de 31 de marzo, de ordenación e integración de la Formación Profesional. Crea el Sistema de FP con los cinco grados A a E y hace dual toda la FP. La desarrolla el Real Decreto 659/2023.",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "LOCE",
@@ -122,49 +98,25 @@
    "sigla": "LOE",
    "termino": "Ley Orgánica de Educación (LO 2/2006)",
    "descripcion": "Ley Orgánica 2/2006, de 3 de mayo, de Educación: la ley general del sistema educativo. Sus arts. 71 a 79 regulan el alumnado con necesidad específica de apoyo y los arts. 118 a 132, la participación y el gobierno de los centros.",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-13-el-siglo-xxi-de-la-loe-a-la-lo-3-2022.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "LOGSE",
    "termino": "Ley Orgánica de Ordenación General del Sistema Educativo",
    "descripcion": "LO 1/1990: creó los ciclos formativos de grado medio y superior",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-9-el-siglo-xx-de-la-ley-general-de-educacion-a-la-logse.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "LOMCE",
    "termino": "Ley Orgánica para la mejora de la calidad educativa",
    "descripcion": "LO 8/2013: modificó la LOE e introdujo la FP Básica",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-13-el-siglo-xxi-de-la-loe-a-la-lo-3-2022.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "LOMLOE",
    "termino": "Ley Orgánica 3/2020, que modifica la LOE",
    "descripcion": "Ley Orgánica 3/2020, de 29 de diciembre, que modifica la LOE. Hoy se cita la LOE en su versión consolidada, que ya la incorpora.",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-13-el-siglo-xxi-de-la-loe-a-la-lo-3-2022.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "LOOIFP",
@@ -191,10 +143,6 @@
    "categoria": "normas",
    "enlaces": [
     {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    },
-    {
      "texto": "BOE, texto consolidado",
      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-16889"
     }
@@ -210,13 +158,7 @@
    "sigla": "RDL 32/2021",
    "termino": "Real Decreto-ley de la reforma laboral que crea el contrato formativo en alternancia",
    "descripcion": "Real Decreto-ley 32/2021, de 28 de diciembre, de reforma laboral: crea el contrato formativo en alternancia.",
-   "categoria": "normas",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-11-de-las-practicas-voluntarias-al-contrato-de-alternancia.html"
-    }
-   ]
+   "categoria": "normas"
   },
   {
    "sigla": "REBT",
@@ -248,10 +190,6 @@
    "descripcion": "Instituto Federal de Formación Profesional de Alemania. Investiga y asesora sobre la FP y es una referencia del sistema dual alemán.",
    "categoria": "organismos",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-4-otros-modelos-alemania-suiza-y-estados-unidos.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://www.bibb.de/"
@@ -548,13 +486,7 @@
    "sigla": "DOUE",
    "termino": "Diario Oficial de la Unión Europea",
    "descripcion": "Diario oficial en el que se publican los reglamentos, las directivas y las recomendaciones de la Unión Europea.",
-   "categoria": "organismos",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-1-como-se-organiza-la-fp-en-europa.html"
-    }
-   ]
+   "categoria": "organismos"
   },
   {
    "sigla": "EISMEA",
@@ -562,10 +494,6 @@
    "descripcion": "Agencia ejecutiva de la Comisión Europea que gestiona programas de innovación y de apoyo a las pymes, entre ellos Erasmus para Jóvenes Emprendedores.",
    "categoria": "organismos",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/5-2-programas-y-recursos-para-emprender.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://eismea.ec.europa.eu/"
@@ -654,13 +582,7 @@
    "sigla": "OCTAE",
    "termino": "Oficina de Educación Técnica, Profesional y de Adultos (EE. UU.)",
    "descripcion": "Oficina del Departamento de Educación de Estados Unidos dedicada a la educación técnica y profesional y a la de personas adultas.",
-   "categoria": "organismos",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-4-otros-modelos-alemania-suiza-y-estados-unidos.html"
-    }
-   ]
+   "categoria": "organismos"
   },
   {
    "sigla": "OIT / Cinterfor",
@@ -723,10 +645,6 @@
    "categoria": "organismos",
    "enlaces": [
     {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/6-3-empleabilidad-bolsa-de-empleo-y-emprendimiento.html"
-    },
-    {
      "texto": "Web oficial",
      "url": "https://www.sepe.es/"
     }
@@ -738,10 +656,6 @@
    "descripcion": "Servicio Español para la Internacionalización de la Educación: gestiona Erasmus+ en educación y formación.",
    "categoria": "organismos",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-2-erasmus-para-la-fp-movilidad-de-alumnado-y-profesorado.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://www.sepie.es/"
@@ -755,10 +669,6 @@
    "categoria": "organismos",
    "enlaces": [
     {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-4-otros-modelos-alemania-suiza-y-estados-unidos.html"
-    },
-    {
      "texto": "Web oficial",
      "url": "https://www.sbfi.admin.ch/en"
     }
@@ -770,10 +680,6 @@
    "descripcion": "Portal del Ministerio de Educación, Formación Profesional y Deportes con la oferta de ciclos, las pruebas de acceso, la acreditación de competencias y la orientación.",
    "categoria": "organismos",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/7-6-acceso-y-plazos-que-fechas-mirar.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://www.todofp.es/"
@@ -808,13 +714,7 @@
    "sigla": "",
    "termino": "Acreditación de competencias",
    "descripcion": "Procedimiento para reconocer las competencias profesionales adquiridas por experiencia laboral o por vías no formales.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-3-formacion-en-centro-en-empresa-y-acreditacion-de-competencias.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "",
@@ -826,13 +726,7 @@
    "sigla": "Catálogo Modular",
    "termino": "Catálogo que ordena los módulos profesionales de cada estándar",
    "descripcion": "Catálogo que agrupa los módulos profesionales asociados a los estándares de competencia. La LO 3/2022 lo crea de forma independiente para dar agilidad a los cambios y adaptaciones de la formación.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-2-familias-profesionales-titulos-y-cualificaciones.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "CEFP",
@@ -844,13 +738,7 @@
    "sigla": "CF",
    "termino": "Ciclo formativo",
    "descripcion": "Un título de FP (por ejemplo, Sistemas microinformáticos y redes), dividido en módulos",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "CFGM",
@@ -886,13 +774,7 @@
    "sigla": "",
    "termino": "Convalidación",
    "descripcion": "Reconocimiento de que un módulo ya superado o una acreditación equivale a otro. La resuelve el centro a instancia de la persona interesada (RD 659/2023, art. 127).",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/ingles-profesional-fp/index.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "CPPS",
@@ -904,49 +786,25 @@
    "sigla": "curso preparatorio",
    "termino": "Curso de formación específico preparatorio para el acceso",
    "descripcion": "Curso con el que se puede acceder a un ciclo de grado medio o superior sin cumplir los requisitos de acceso directo.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/7-2-como-se-entra-en-un-ciclo-requisitos-pruebas-y-admision.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "",
    "termino": "Cursos de especialización",
    "descripcion": "Ofertas del Grado E de la LO 3/2022, pensadas para especializar la formación.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "DASP",
    "termino": "Digitalización aplicada a los sectores productivos",
    "descripcion": "Módulo común a todos los ciclos de grado medio (1664, anexo VI) y superior (1665, anexo VII): 30 horas cada uno (RD 659/2023, art. 99). El de grado medio tiene 5 resultados de aprendizaje y el de grado superior, 6. Es un módulo transversal.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/digitalizacion-fp/index.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "ECP",
    "termino": "Estándar de competencia profesional",
    "descripcion": "Describe lo que sabe hacer una persona competente en una actividad profesional y con qué calidad. Se reúnen en el Catálogo Nacional de Estándares de Competencias Profesionales, en niveles 1, 2 y 3.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-2-familias-profesionales-titulos-y-cualificaciones.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "EIE",
@@ -964,37 +822,19 @@
    "sigla": "",
    "termino": "Estándar de competencia",
    "descripcion": "Describe una competencia profesional y su nivel de calidad. Los módulos profesionales son la unidad de formación asociada a cada estándar.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-2-familias-profesionales-titulos-y-cualificaciones.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "",
    "termino": "Exención",
    "descripcion": "Dispensa de cursar una parte de la formación. La formación en empresa solo puede ser objeto de exención total o parcial, no de convalidación (RD 659/2023, art. 126.4.a).",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/programacion-didactica-fp/12-la-formacion-en-empresa-y-la-fp-dual.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "",
    "termino": "Familia profesional",
    "descripcion": "Agrupación de títulos y cualificaciones por sector de actividad, como Informática y Comunicaciones o Sanidad.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-2-familias-profesionales-titulos-y-cualificaciones.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "FOL",
@@ -1042,49 +882,25 @@
    "sigla": "GM / GS",
    "termino": "Grado medio / grado superior",
    "descripcion": "Ciclos formativos de grado medio, que dan el título de Técnico, y de grado superior, que dan el de Técnico Superior.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "",
    "termino": "Grado básico",
    "descripcion": "Ciclos de dos cursos de la FP del sistema educativo, con ámbitos y un proyecto (LO 3/2022; RD 659/2023, arts. 93 y 94).",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "Grados A a E",
    "termino": "Cinco tipos de oferta: acreditación parcial, certificado de competencia, certificado profesional, ciclo formativo y curso de especialización",
    "descripcion": "Cinco tipos de oferta de la LO 3/2022: A, acreditación parcial de competencia; B, certificado de competencia; C, certificado profesional; D, ciclo formativo; E, curso de especialización. Cada grado tiene ofertas ligadas a los niveles 1, 2 y 3 del Catálogo Nacional de Estándares.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "IPE",
    "termino": "Itinerario personal para la empleabilidad",
    "descripcion": "Itinerario personal para la empleabilidad I y II (códigos 1709 y 1710): módulos comunes a todos los ciclos de grado medio y superior, de 50 horas cada uno en el currículo básico. El resultado de aprendizaje 2 de IPE I es la formación de nivel básico en prevención de riesgos laborales.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/itinerario-empleabilidad-fp/index.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "MECU",
@@ -1096,37 +912,19 @@
    "sigla": "Módulo profesional",
    "termino": "Unidad de formación asociada a un estándar de competencia",
    "descripcion": "Unidad de formación de un ciclo asociada a un estándar de competencia; en lenguaje cotidiano, la asignatura. Se evalúa por resultados de aprendizaje.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-2-familias-profesionales-titulos-y-cualificaciones.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "módulo transversal",
    "termino": "Módulo profesional transversal",
    "descripcion": "Módulo común a todos los ciclos de grado medio y superior dentro del currículo básico: Itinerario personal para la empleabilidad I y II, Digitalización, Sostenibilidad e Inglés profesional (RD 659/2023, arts. 96.1 y 98 a 101). No está asociado a un estándar de competencia concreto.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-11-formacion-en-empresa-exenciones-y-convalidaciones-vocabulario-preciso.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "Niveles 1, 2 y 3",
    "termino": "Niveles de competencia profesional de los estándares",
    "descripcion": "Niveles de los estándares de competencia del Catálogo Nacional. Los cinco grados de oferta tienen ofertas vinculadas a ellos (LO 3/2022).",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/1-1-el-sistema-de-fp-en-espana-cinco-grados.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "PAU",
@@ -1150,13 +948,7 @@
    "sigla": "PI",
    "termino": "Proyecto intermodular",
    "descripcion": "Módulo de proyecto que integra los aprendizajes de varios módulos del ciclo y suele acabar con una defensa pública. Su regulación cambia según la comunidad.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/5-3-del-aula-a-la-empresa-proyectos-y-retos.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "PNRR",
@@ -1168,25 +960,13 @@
    "sigla": "",
    "termino": "Prueba de acceso",
    "descripcion": "Prueba que permite acceder a un ciclo a quien no cumple los requisitos académicos. La regula cada comunidad.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/7-2-como-se-entra-en-un-ciclo-requisitos-pruebas-y-admision.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "SASP",
    "termino": "Sostenibilidad aplicada al sistema productivo",
    "descripcion": "Módulo 1708, común a todos los ciclos de grado medio y superior: 30 horas y 6 resultados de aprendizaje en el currículo básico (RD 659/2023, art. 100 y anexo VIII). Es un módulo transversal.",
-   "categoria": "sistema",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/sostenibilidad-fp/index.html"
-    }
-   ]
+   "categoria": "sistema"
   },
   {
    "sigla": "UC",
@@ -1360,13 +1140,7 @@
    "sigla": "",
    "termino": "Calificación",
    "descripcion": "Nota numérica, entre uno y diez y sin decimales, de cada módulo en los Grados B, C, D y E (RD 659/2023, art. 18.8). Una nota de 5 o más es positiva (art. 18.9).",
-   "categoria": "programacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/programacion-didactica-fp/10-calificar.html"
-    }
-   ]
+   "categoria": "programacion"
   },
   {
    "sigla": "CC",
@@ -1378,13 +1152,7 @@
    "sigla": "CE",
    "termino": "Criterio de evaluación",
    "descripcion": "Lo que se comprueba para saber si se ha alcanzado un resultado de aprendizaje. Cada RA tiene varios CE, y la evaluación se hace de acuerdo con los criterios de cada módulo (RD 659/2023, art. 18.1). Es currículo básico estatal: igual en todas las comunidades (art. 12.3).",
-   "categoria": "programacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-3-evaluacion-formativa-y-retroalimentacion.html"
-    }
-   ]
+   "categoria": "programacion"
   },
   {
    "sigla": "CM",
@@ -1450,13 +1218,7 @@
    "sigla": "",
    "termino": "Evaluación inicial",
    "descripcion": "Valoración al comienzo del curso de lo que el alumnado ya sabe.",
-   "categoria": "programacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/programacion-didactica-fp/04-conocer-el-punto-de-partida.html"
-    }
-   ]
+   "categoria": "programacion"
   },
   {
    "sigla": "EvFE",
@@ -1504,25 +1266,13 @@
    "sigla": "",
    "termino": "Programación didáctica",
    "descripcion": "Instrumento con el que el profesorado planifica un módulo: resultados de aprendizaje, unidades, metodología y evaluación.",
-   "categoria": "programacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/programacion-didactica-fp/03-que-es-una-programacion-didactica-y-para-que-sirve.html"
-    }
-   ]
+   "categoria": "programacion"
   },
   {
    "sigla": "",
    "termino": "Proyecto intermodular",
    "descripcion": "Módulo integrador que hay uno por ciclo y se desarrolla a la vez que los demás, con seguimiento y tutorización individual y colectiva. Nace en la LO 3/2022 (art. 41) y lo desarrolla el RD 659/2023.",
-   "categoria": "programacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/programacion-didactica-fp/13-el-proyecto-intermodular.html"
-    }
-   ]
+   "categoria": "programacion"
   },
   {
    "sigla": "R1, R2, R3, RF",
@@ -1534,13 +1284,7 @@
    "sigla": "RA",
    "termino": "Resultado de aprendizaje",
    "descripcion": "Lo que el alumnado debe saber hacer al terminar un módulo. Se comprueba con los criterios de evaluación y es la base de la nota (RD 659/2023, arts. 18.1 y 18.8). Es currículo básico estatal: igual en todas las comunidades (art. 12.3).",
-   "categoria": "programacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-3-evaluacion-formativa-y-retroalimentacion.html"
-    }
-   ]
+   "categoria": "programacion"
   },
   {
    "sigla": "SA",
@@ -1594,13 +1338,7 @@
    "sigla": "MagIA",
    "termino": "Generador de documentos de Cuaderno FP",
    "descripcion": "Parte de la aplicación Cuaderno FP que genera tus documentos (la programación didáctica en tres niveles, PD-, PD= y PD+, y los documentos del curso) a partir de los datos que has introducido. Es un nombre de la aplicación, no de la norma.",
-   "categoria": "cuaderno",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aplicacion-cuaderno-fp/12-1-programacion-didactica.html"
-    }
-   ]
+   "categoria": "cuaderno"
   },
   {
    "sigla": "PD+",
@@ -1648,37 +1386,19 @@
    "sigla": "",
    "termino": "Administrador (de instituto)",
    "descripcion": "Cargo que existe solo en los institutos que determine el Ministerio, bajo la dirección del centro: gestiona los medios materiales y el personal no docente. En esos institutos no hay secretaría (RD 83/1996, arts. 37 y 38).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "AMPA",
    "termino": "Asociación de madres y padres de alumnos",
    "descripcion": "Asociación de madres y padres del alumnado de un centro: la forma en que las familias se organizan y participan. Uno de los representantes de las familias en el consejo escolar lo designa la asociación más representativa (LOE, art. 126.3).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Asesoría de formación (Aragón)",
    "descripcion": "Puesto docente de un Centro de Profesorado que atiende la formación de los centros de su zona; trabaja con el coordinador de formación de cada centro (Decreto 166/2018, art. 19).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "CCP / ETCP",
@@ -1702,25 +1422,13 @@
    "sigla": "",
    "termino": "Centro de Profesorado (Aragón)",
    "descripcion": "En Aragón, centro de la red de formación del profesorado (antes CIFE). Hay territoriales y específicos: CAREI, CATEDU, CIFPA y CARLEE (Decreto 166/2018, art. 20).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "Centro integrado",
    "termino": "Centro que imparte todas las ofertas formativas del sistema (LO 5/2002, art. 11.4)",
    "descripcion": "Centro de FP que imparte ofertas formativas de todos los grados del sistema y se relaciona de forma estrecha con las empresas. En muchas comunidades se llaman CIFP o CPIFP.",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-4-entidades-empresariales-y-centros-de-referencia.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "CIFP / CPIFP",
@@ -1732,109 +1440,55 @@
    "sigla": "Claustro",
    "termino": "Claustro de profesorado",
    "descripcion": "Órgano en el que participa todo el profesorado del centro; aprueba la concreción del currículo y fija criterios de orientación, tutoría y evaluación (LOE, arts. 128 y 129).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Comisión de coordinación formativa y de inserción laboral",
    "descripcion": "En los centros integrados de FP de Aragón, órgano de coordinación del equipo directivo y las jefaturas de departamento. Vela por la coherencia de las programaciones y hace el seguimiento de la inserción laboral (Decreto 80/2016, arts. 34 a 36).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Consejo Escolar",
    "descripcion": "Órgano de participación del centro público: profesorado, familias, alumnado, personal de administración y servicios y ayuntamiento. Aprueba los proyectos, las normas y la programación general anual (LOE, arts. 126 y 127).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Consejo Social",
    "descripcion": "Órgano de participación de la sociedad en un centro integrado de FP: hasta 12 miembros, presidido por la dirección, con representantes de la Administración, del centro y, a partes iguales, de organizaciones empresariales y sindicales. Aprueba el proyecto funcional y el presupuesto (RD 1558/2005, art. 14).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Coordinador de formación (Aragón)",
    "descripcion": "En Aragón, docente que impulsa la formación del profesorado de su centro y el plan de formación; recoge necesidades, las traslada al Centro de Profesorado y coordina las prácticas externas de estudiantes universitarios. En los institutos dirige el Departamento de Innovación y Formación Educativa (Decreto 166/2018, arts. 21 a 23).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Coordinador de formación para el uso de las tecnologías en los aprendizajes (Aragón)",
    "descripcion": "En Aragón, docente que detecta las necesidades de formación en tecnologías aplicadas al aprendizaje y colabora con el coordinador de formación; existe en todos los centros sostenidos con fondos públicos (Decreto 166/2018, arts. 24 a 26).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Coordinador del programa de bilingüismo (Aragón)",
    "descripcion": "En los institutos con programa de bilingüismo autorizado, docente designado por la dirección entre el profesorado implicado, con hasta tres períodos lectivos (Orden de 18 de mayo de 2015, instrucciones de organización de los institutos de Aragón).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Coordinador o coordinadora de ciclo",
    "descripcion": "En infantil y primaria, maestro que dirige el equipo de ciclo, coordina la tutoría y la enseñanza del ciclo; lo designa la dirección por un curso (RD 82/1996, arts. 40 y 41). En FP, la figura y su nombre dependen de cada comunidad.",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "CRN",
    "termino": "Centro de referencia nacional",
    "descripcion": "Centro de FP especializado en una familia o sector, dedicado a la innovación y a la formación del profesorado. En Aragón lo es el CIFPA, en Logística Comercial y Gestión del Transporte.",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-4-entidades-empresariales-y-centros-de-referencia.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "DAFO",
@@ -1846,61 +1500,31 @@
    "sigla": "",
    "termino": "Departamento de actividades complementarias y extraescolares",
    "descripcion": "Departamento cuya jefatura elabora el programa anual de actividades complementarias y extraescolares y coordina viajes e intercambios (RD 83/1996, arts. 45 a 47).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Departamento de Innovación y Formación Educativa (Aragón)",
    "descripcion": "En los institutos del Gobierno de Aragón, departamento que elabora el plan de innovación y formación del centro; lo componen el coordinador de formación, el de tecnologías, una persona de orientación y un miembro del equipo directivo (Decreto 166/2018, arts. 27 a 29).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Departamento de orientación",
    "descripcion": "Departamento que propone la organización de la orientación educativa, psicopedagógica y profesional y del plan de acción tutorial, y los criterios de adaptación curricular (RD 83/1996, arts. 41 y 42).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Departamentos estratégicos (centros integrados, Aragón)",
    "descripcion": "En los centros integrados de FP de Aragón, cuatro departamentos: información, orientación profesional y empleo; calidad y mejora continua; innovación y transferencia de conocimiento; y evaluación y acreditación de competencias (Decreto 80/2016, art. 32).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Dirección del centro",
    "descripcion": "Máxima responsable del centro: lo representa, dirige y coordina sus actividades, ejerce la dirección pedagógica y la jefatura del personal, y favorece la convivencia (LOE, art. 132).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
@@ -1912,25 +1536,13 @@
    "sigla": "",
    "termino": "Equipo directivo",
    "descripcion": "Órgano ejecutivo del centro público: dirección, jefatura de estudios, secretaría y los cargos que determine cada administración (LOE, art. 131).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Equipo docente",
    "descripcion": "Conjunto del profesorado que imparte clase a un mismo grupo. La LOE pide potenciar su colaboración y su trabajo en equipo (art. 130.1).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-3-trabajo-en-equipo-coordinacion-y-familias.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "IES",
@@ -1942,85 +1554,43 @@
    "sigla": "",
    "termino": "Intermediador laboral",
    "descripcion": "En los centros integrados de FP de Aragón, persona designada por el Instituto Aragonés de Empleo que trabaja en el centro en información y orientación laboral, empleo y emprendimiento. No es cargo del centro (Decreto 80/2016, art. 68).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Jefatura de departamento",
    "descripcion": "Persona que coordina un departamento didáctico: la programación de sus materias o módulos, las reuniones, las pruebas pendientes o extraordinarias y el material (RD 83/1996, art. 51). El departamento de familia profesional suma la coordinación de los ciclos y la relación con las empresas.",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Jefatura de estudios",
    "descripcion": "Cargo del equipo directivo que coordina la actividad académica: horarios, tutorías, jefes de departamento y convivencia; sustituye al director en su ausencia (RD 83/1996, art. 33).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Jefatura de estudios adjunta",
    "descripcion": "Cargo del equipo directivo que asume las funciones que le delegue la jefatura de estudios, en institutos donde la Administración lo establece (RD 83/1996, art. 39).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Jefatura de residencia",
    "descripcion": "Cargo de institutos con residencia: organiza la vida residencial bajo la dirección del centro y favorece la convivencia en ella (RD 83/1996, arts. 60 y 61).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "PAT",
    "termino": "Plan de acción tutorial",
    "descripcion": "Plan de acción tutorial: el documento del centro que organiza la tutoría. Forma parte del proyecto educativo (LOE, art. 121.2).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-2-tutoria-y-plan-de-accion-tutorial-en-ciclos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "PCC",
    "termino": "Proyecto curricular del centro",
    "descripcion": "Documento que concreta el currículo en cada centro. En el marco actual, esa concreción forma parte del proyecto educativo (LOE, art. 121.1).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "PDCA",
@@ -2044,13 +1614,7 @@
    "sigla": "",
    "termino": "Plan de convivencia",
    "descripcion": "Documento del proyecto educativo de cada centro sobre la convivencia (LOE, art. 121.2).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/11-5-emociones-y-convivencia-conflicto-y-acoso.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "ROF / RRI",
@@ -2062,61 +1626,31 @@
    "sigla": "",
    "termino": "Secretaría",
    "descripcion": "Cargo del equipo directivo que ordena el régimen administrativo y económico, levanta actas de los órganos colegiados, custodia archivos e inventario y lleva la jefatura del personal de administración y servicios por delegación (RD 83/1996, art. 34).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Tutoría",
    "descripcion": "Acompañamiento personal y de grupo del alumnado. En FP, el real decreto exige que la orientación y la tutoría acompañen el proceso formativo (art. 14).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-2-tutoria-y-plan-de-accion-tutorial-en-ciclos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Tutor o tutora de grupo",
    "descripcion": "Profesor del grupo designado por la dirección a propuesta de jefatura de estudios. Coordina la evaluación, orienta al alumnado y se relaciona con las familias; en ciclos formativos asume también el seguimiento de la formación en centros de trabajo (RD 83/1996, arts. 55 y 56).",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-2-tutoria-y-plan-de-accion-tutorial-en-ciclos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "",
    "termino": "Vicedirección / subdirección",
    "descripcion": "Cargo del equipo directivo que no fija la LOE: la ley deja a cada administración decidir qué otros cargos lo integran (art. 131.2). Existe, por ejemplo, en los institutos valencianos (Decreto 252/2019, art. 11), en los andaluces de 16 o más unidades con FP inicial y en los gallegos con dos etapas completas; en Aragón no aparece en la orden de institutos.",
-   "categoria": "centro",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-1-el-centro-por-dentro-documentos-y-organos.html"
-    }
-   ]
+   "categoria": "centro"
   },
   {
    "sigla": "AACC",
    "termino": "Altas capacidades",
    "descripcion": "Alumnado con altas capacidades intelectuales: la administración debe identificarlo y atender sus necesidades (LOE, arts. 76 y 77).",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-4-altas-capacidades.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "ACI / ACIS",
@@ -2128,25 +1662,13 @@
    "sigla": "ACNEAE",
    "termino": "Alumnado con necesidades específicas de apoyo educativo",
    "descripcion": "Las personas que tienen esas necesidades; es la sigla habitual en los documentos de los centros.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-1-necesidades-de-apoyo-neae-acneae-y-nee.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "ACNS",
    "termino": "Adaptación curricular no significativa",
    "descripcion": "Ajuste del currículo para el alumnado que lo necesita: cambia la metodología, los tiempos o los apoyos, pero no los resultados de aprendizaje ni los criterios de evaluación esenciales. Su nombre y su regulación concretos dependen de cada comunidad.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-6-diseno-universal-para-el-aprendizaje-y-adaptaciones.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "",
@@ -2158,13 +1680,7 @@
    "sigla": "",
    "termino": "Ajustes razonables",
    "descripcion": "Cambios concretos y viables en el espacio, el material, el tiempo o el método para que una persona con discapacidad pueda hacer lo mismo que el resto.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-5-discapacidad-ajustes-razonables-en-talleres-y-laboratorios.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "AL",
@@ -2182,13 +1698,7 @@
    "sigla": "",
    "termino": "Ciberacoso",
    "descripcion": "Acoso repetido a una persona mediante mensajes, redes o imágenes; requiere el protocolo del centro.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/11-5-emociones-y-convivencia-conflicto-y-acoso.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "",
@@ -2206,25 +1716,13 @@
    "sigla": "",
    "termino": "Discalculia",
    "descripcion": "Dificultad persistente con los números y el cálculo.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-3-tdah-dislexia-y-dificultades-de-aprendizaje.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "",
    "termino": "Dislexia",
    "descripcion": "Dificultad persistente para aprender a leer y escribir con fluidez, sin causa sensorial ni neurológica que la explique.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-3-tdah-dislexia-y-dificultades-de-aprendizaje.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "DSM",
@@ -2236,13 +1734,7 @@
    "sigla": "DUA",
    "termino": "Diseño universal para el aprendizaje",
    "descripcion": "Modelo para diseñar la enseñanza de forma que sea accesible a todo el grupo, con un currículo flexible (LO 3/2022, art. 2.24).",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-6-diseno-universal-para-el-aprendizaje-y-adaptaciones.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "",
@@ -2260,13 +1752,7 @@
    "sigla": "EOEP",
    "termino": "Equipo de orientación educativa y psicopedagógica",
    "descripcion": "Equipo que asesora a los centros en orientación y atención a la diversidad. El nombre cambia según la comunidad.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-1-necesidades-de-apoyo-neae-acneae-y-nee.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "",
@@ -2290,13 +1776,7 @@
    "sigla": "",
    "termino": "Matrícula parcial",
    "descripcion": "Con autorización de la administración, permite matricularse de una parte de cada curso y disponer de un curso adicional a quien tiene necesidades específicas de apoyo o compagina estudio y trabajo (LO 3/2022, art. 40.5).",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-3-tdah-dislexia-y-dificultades-de-aprendizaje.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "",
@@ -2314,25 +1794,13 @@
    "sigla": "NEAE",
    "termino": "Necesidades específicas de apoyo educativo",
    "descripcion": "El conjunto de necesidades de quienes requieren una atención diferente de la ordinaria (LOE, art. 71.2).",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-1-necesidades-de-apoyo-neae-acneae-y-nee.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "NEE",
    "termino": "Necesidades educativas especiales",
    "descripcion": "Subconjunto de las anteriores: las derivadas de discapacidad o de trastornos graves de conducta (LOE, art. 73).",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-1-necesidades-de-apoyo-neae-acneae-y-nee.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "PAD",
@@ -2356,13 +1824,7 @@
    "sigla": "PT",
    "termino": "Pedagogía terapéutica",
    "descripcion": "Especialidad docente de apoyo al alumnado con necesidades educativas especiales. El nombre designa también al profesorado y al aula de apoyo.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-1-necesidades-de-apoyo-neae-acneae-y-nee.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "",
@@ -2374,49 +1836,25 @@
    "sigla": "TDAH",
    "termino": "Trastorno por déficit de atención e hiperactividad",
    "descripcion": "Dificultad persistente para sostener la atención, regular los impulsos y, en parte de los casos, la actividad. Es un trastorno del neurodesarrollo. La variante sin hiperactividad se abrevia TDA.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-3-tdah-dislexia-y-dificultades-de-aprendizaje.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "TEA",
    "termino": "Trastorno del espectro del autismo",
    "descripcion": "Condición del neurodesarrollo que afecta a la comunicación, la interacción social y la flexibilidad. Es un espectro: cada persona necesita apoyos distintos.",
-   "categoria": "alumnado",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/12-2-tea-en-el-aula-de-un-ciclo.html"
-    }
-   ]
+   "categoria": "alumnado"
   },
   {
    "sigla": "ABP",
    "termino": "Aprendizaje basado en proyectos",
    "descripcion": "Metodología activa en la que el alumnado resuelve un problema complejo a lo largo de varias semanas y entrega un producto. Se evalúa por los resultados de aprendizaje que trabaja.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-1-metodologias-activas-retos-proyectos-y-aprendizaje-cooperativo.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "ABR",
    "termino": "Aprendizaje basado en retos",
    "descripcion": "Metodología activa que parte de una situación real y abierta, a menudo planteada por una empresa. La solución no está cerrada de antemano y el alumnado la construye en equipo.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-1-metodologias-activas-retos-proyectos-y-aprendizaje-cooperativo.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "ACbR",
@@ -2434,37 +1872,19 @@
    "sigla": "AICLE",
    "termino": "Aprendizaje integrado de contenidos y lengua extranjera (CLIL, en inglés)",
    "descripcion": "Enseñar un contenido a través de otra lengua, normalmente el inglés, para aprender las dos cosas a la vez.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-4-ingles-en-el-modulo-clil-y-aicle-en-fp.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Andamiaje",
    "descripcion": "Ayuda que se da al principio de un aprendizaje y se retira poco a poco.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-1-teorias-del-aprendizaje-en-lenguaje-de-aula.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Andragogía",
    "descripcion": "Teoría del aprendizaje de personas adultas: necesitan saber para qué aprenden y parten de su experiencia.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/11-2-como-se-desarrolla-una-persona-de-16-a-50-anos.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "APA",
@@ -2482,13 +1902,7 @@
    "sigla": "",
    "termino": "Aprendizaje cooperativo",
    "descripcion": "Equipos con roles y responsabilidad individual: cada persona es necesaria y se evalúa su aportación.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-1-metodologias-activas-retos-proyectos-y-aprendizaje-cooperativo.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "APS",
@@ -2506,25 +1920,13 @@
    "sigla": "",
    "termino": "Aula invertida",
    "descripcion": "La explicación se accede antes de clase y el tiempo en el centro se dedica a practicar y resolver dudas.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-2-aula-invertida-y-clase-magistral-que-funciona.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Autoevaluación",
    "descripcion": "El alumnado valora su propio trabajo con los mismos criterios que usará el profesorado.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-2-aprender-a-aprender-metacognicion-y-estrategias.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "CA",
@@ -2554,25 +1956,13 @@
    "sigla": "",
    "termino": "Competencia digital docente",
    "descripcion": "Lo que debe saber hacer quien enseña con tecnología, según el Marco de Referencia de la Competencia Digital Docente.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-6-competencia-digital-del-profesorado.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Competencias emocionales",
    "descripcion": "Capacidad de reconocer lo que se siente, nombrarlo, regularlo y entender lo que sienten los demás.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/11-5-emociones-y-convivencia-conflicto-y-acoso.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "CONTR",
@@ -2632,13 +2022,7 @@
    "sigla": "",
    "termino": "Evaluación formativa",
    "descripcion": "La que se hace durante el aprendizaje para ayudar a mejorar, a diferencia de la sumativa, que califica al final.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-3-evaluacion-formativa-y-retroalimentacion.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "FC",
@@ -2650,25 +2034,13 @@
    "sigla": "",
    "termino": "Gamificación",
    "descripcion": "Usar elementos de juego (retos, niveles, puntos, equipos) en actividades que no son un juego.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-3-gamificacion-y-juego-en-el-aula.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "IA",
    "termino": "Inteligencia artificial",
    "descripcion": "Sistemas capaces de generar texto, imágenes u otros contenidos. La LO 3/2022 prevé un plan de competencias en digitalización e inteligencia artificial para la FP (disposición adicional novena).",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-6-competencia-digital-del-profesorado.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "ID",
@@ -2692,13 +2064,7 @@
    "sigla": "",
    "termino": "Investigación-acción",
    "descripcion": "El docente investiga su propia práctica para mejorarla: detecta un problema, actúa, recoge datos y decide.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/investigar-fp/15-4-investigar-e-innovar-en-tu-aula.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
@@ -2722,13 +2088,7 @@
    "sigla": "",
    "termino": "Metacognición",
    "descripcion": "Pensar sobre el propio aprendizaje: saber cómo aprendo, planificar y supervisar lo que hago.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-2-aprender-a-aprender-metacognicion-y-estrategias.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "MOOC",
@@ -2740,13 +2100,7 @@
    "sigla": "MUFP",
    "termino": "Máster universitario de formación del profesorado",
    "descripcion": "Máster que habilita para dar clase en secundaria, bachillerato, formación profesional y enseñanzas de idiomas. También se abrevia MUPF.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-6-las-practicas-del-master-que-pedir-y-como-aprovecharlas.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "PARES",
@@ -2764,13 +2118,7 @@
    "sigla": "",
    "termino": "Prototipo",
    "descripcion": "Versión rápida y barata de una solución, hecha para probar una idea.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-5-creatividad-maker-y-prototipado.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "REA",
@@ -2782,13 +2130,7 @@
    "sigla": "",
    "termino": "Retroalimentación",
    "descripcion": "Información que recibe el alumnado sobre su trabajo para saber qué hacer para mejorar.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-3-evaluacion-formativa-y-retroalimentacion.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
@@ -2800,25 +2142,13 @@
    "sigla": "",
    "termino": "Rúbrica",
    "descripcion": "Tabla que describe niveles de logro para cada criterio. Da transparencia y sirve de guía antes de hacer la tarea.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/13-3-evaluacion-formativa-y-retroalimentacion.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "TAC",
    "termino": "Tecnologías del aprendizaje y el conocimiento",
    "descripcion": "El uso de las TIC con una finalidad educativa, no solo como herramienta técnica.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-6-competencia-digital-del-profesorado.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "TFG",
@@ -2830,85 +2160,43 @@
    "sigla": "TFM",
    "termino": "Trabajo fin de máster",
    "descripcion": "Trabajo con el que suele cerrarse el máster de profesorado: una programación, una unidad, un proyecto de innovación o una investigación.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-7-el-trabajo-fin-de-master-tema-y-estructura.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "TIC",
    "termino": "Tecnologías de la información y la comunicación",
    "descripcion": "Los recursos digitales que se usan para comunicarse, buscar información y enseñar.",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/14-6-competencia-digital-del-profesorado.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Tutor o tutora de la fase de prácticas",
    "descripcion": "Profesor experimentado, preferentemente catedrático, que tutoriza al funcionario en prácticas tras aprobar la oposición. Comparte con él la responsabilidad de programar las enseñanzas (RD 276/2007, arts. 30 y 31).",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-5-como-se-accede-a-ser-docente.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "",
    "termino": "Tutor o tutora de prácticas del máster",
    "descripcion": "Docente de un centro reconocido como centro de prácticas que tutoriza al estudiante del máster de profesorado durante el practicum; los centros y los tutores deben estar reconocidos (Orden ECI/3858/2007).",
-   "categoria": "docencia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/aprender-a-ensenar-fp/15-6-las-practicas-del-master-que-pedir-y-como-aprovecharlas.html"
-    }
-   ]
+   "categoria": "docencia"
   },
   {
    "sigla": "Alianza para la FP Dual",
    "termino": "Red de empresas y centros impulsada por la Fundación Bertelsmann (2015-2025)",
    "descripcion": "Red de empresas y centros impulsada por la Fundación Bertelsmann entre 2015 y 2025 para extender la FP dual en España.",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-14-la-fp-dual-en-espana-2012-2025.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "alternancia",
    "termino": "Formación en alternancia",
    "descripcion": "Formación que combina periodos en el centro y en la empresa.",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-2-formacion-en-alternancia-y-fp-dual.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "",
    "termino": "Contrato de formación",
    "descripcion": "Contrato con la empresa propio del régimen intensivo, que combina actividad productiva retribuida y formación (LO 3/2022, art. 67).",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-7-el-contrato-formativo-y-la-beca.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "EPI",
@@ -2920,49 +2208,25 @@
    "sigla": "FCT",
    "termino": "Formación en centros de trabajo",
    "descripcion": "Denominación antigua (LOE) de lo que hoy se llama FEOE: la formación en la empresa. Sigue usándose en varias comunidades.",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-11-de-las-practicas-voluntarias-al-contrato-de-alternancia.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "FEOE",
    "termino": "Formación en empresa u organismo equiparado",
    "descripcion": "Fase en la que el alumnado aprende en una empresa u organismo equiparado. La LO 3/2022 la regula en régimen general (entre el 25 % y el 35 % de la formación) o intensivo (más del 35 %, con contrato de formación).",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-3-practicas-feoe-y-tutoria-de-empresa.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "",
    "termino": "Formación en empresa",
    "descripcion": "Parte del currículo que se realiza en una empresa u organismo equiparado y que comparte resultados de aprendizaje con los módulos del ciclo (ver FEOE).",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/programacion-didactica-fp/12-la-formacion-en-empresa-y-la-fp-dual.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "FP dual",
    "termino": "FP con formación repartida entre centro y empresa",
    "descripcion": "FP con formación repartida entre el centro y la empresa. Desde la LO 3/2022 toda la FP es dual: en régimen general, entre el 25 % y el 35 % en empresa y sin contrato; en régimen intensivo, más del 35 % y con contrato de formación.",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-2-formacion-en-alternancia-y-fp-dual.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "",
@@ -2986,61 +2250,31 @@
    "sigla": "Plan de Formación",
    "termino": "Plan individual de cada persona en formación",
    "descripcion": "Documento individual, diseñado conjuntamente por el centro y la empresa, que fija cómo se reparten la formación en el centro y en la empresa para cada persona (LO 3/2022, arts. 58 y 67.5).",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-2-formacion-en-alternancia-y-fp-dual.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "PRL",
    "termino": "Prevención de riesgos laborales",
    "descripcion": "Prevención de riesgos laborales. La formación de nivel básico es el resultado de aprendizaje 2 de IPE I y debe darse antes de la formación en empresa.",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-3-practicas-feoe-y-tutoria-de-empresa.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "Régimen general",
    "termino": "Dual con 25-35 % en empresa y sin contrato de formación",
    "descripcion": "Dual con la formación en empresa entre el 25 % y el 35 % de la formación total, con la empresa participando hasta en un 20 % de los resultados de aprendizaje y sin contrato de formación (LO 3/2022, art. 66).",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-2-formacion-en-alternancia-y-fp-dual.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "Régimen intensivo",
    "termino": "Dual con más del 35 % en empresa y contrato de formación",
    "descripcion": "Dual con más del 35 % de la formación en empresa, la empresa participando en más de un 30 % de los resultados de aprendizaje o módulos y con contrato de formación (LO 3/2022, art. 67).",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-2-formacion-en-alternancia-y-fp-dual.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "Tutor dual",
    "termino": "Tutor del centro y tutor de la empresa de cada persona en formación",
    "descripcion": "Cada persona en formación tiene un tutor o tutora del centro y otro de la empresa. El de la empresa informa y valora los resultados de aprendizaje (RD 659/2023, art. 18.7).",
-   "categoria": "empresa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/3-3-practicas-feoe-y-tutoria-de-empresa.html"
-    }
-   ]
+   "categoria": "empresa"
   },
   {
    "sigla": "",
@@ -3055,10 +2289,6 @@
    "categoria": "orientacion",
    "enlaces": [
     {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/5-2-programas-y-recursos-para-emprender.html"
-    },
-    {
      "texto": "Web oficial",
      "url": "https://paeelectronico.es/es-es/Paginas/Home.aspx"
     }
@@ -3068,25 +2298,13 @@
    "sigla": "DUE",
    "termino": "Documento Único Electrónico para crear una empresa",
    "descripcion": "Formulario telemático con el que se tramita la constitución de una empresa a través de la red CIRCE y de los Puntos de Atención al Emprendedor.",
-   "categoria": "orientacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/5-2-programas-y-recursos-para-emprender.html"
-    }
-   ]
+   "categoria": "orientacion"
   },
   {
    "sigla": "",
    "termino": "Empleabilidad",
    "descripcion": "Conjunto de competencias que mejoran las posibilidades de encontrar y mantener un empleo.",
-   "categoria": "orientacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/6-3-empleabilidad-bolsa-de-empleo-y-emprendimiento.html"
-    }
-   ]
+   "categoria": "orientacion"
   },
   {
    "sigla": "Empléate",
@@ -3094,10 +2312,6 @@
    "descripcion": "Portal del SEPE para buscar empleo y formación y para el autoempleo.",
    "categoria": "orientacion",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/6-3-empleabilidad-bolsa-de-empleo-y-emprendimiento.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://empleate.gob.es/"
@@ -3110,10 +2324,6 @@
    "descripcion": "Programa de intercambio en el que quien quiere emprender trabaja un tiempo con un emprendedor experimentado de otro país europeo.",
    "categoria": "orientacion",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/5-2-programas-y-recursos-para-emprender.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://www.erasmus-entrepreneurs.eu/"
@@ -3130,25 +2340,13 @@
    "sigla": "PAE",
    "termino": "Punto de Atención al Emprendedor",
    "descripcion": "Oficina pública o privada que ayuda a crear una empresa y tramita el Documento Único Electrónico (DUE).",
-   "categoria": "orientacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/5-2-programas-y-recursos-para-emprender.html"
-    }
-   ]
+   "categoria": "orientacion"
   },
   {
    "sigla": "STEM",
    "termino": "Ciencia, tecnología, ingeniería y matemáticas",
    "descripcion": "Ciencia, tecnología, ingeniería y matemáticas: las familias y estudios de esta área, en los que la orientación busca ampliar las expectativas de las chicas.",
-   "categoria": "orientacion",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/orientacion-fp/6-1-orientacion-en-la-fp-que-es-y-quien-la-hace.html"
-    }
-   ]
+   "categoria": "orientacion"
   },
   {
    "sigla": "Cedefop",
@@ -3156,10 +2354,6 @@
    "descripcion": "Agencia de la Unión Europea que analiza y compara la formación profesional de los Estados miembros. Sus informes por país («VET in Europe») se usan en esta web para comparar sistemas.",
    "categoria": "europa",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-1-como-se-organiza-la-fp-en-europa.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://www.cedefop.europa.eu/"
@@ -3176,13 +2370,7 @@
    "sigla": "CTE",
    "termino": "Educación técnica y profesional (EE. UU.)",
    "descripcion": "Career and Technical Education: la formación profesional de Estados Unidos, que se imparte en institutos y colegios universitarios con apoyo federal.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-4-otros-modelos-alemania-suiza-y-estados-unidos.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "DigComp",
@@ -3200,13 +2388,7 @@
    "sigla": "ECTS",
    "termino": "Sistema Europeo de Transferencia y Acumulación de Créditos",
    "descripcion": "Créditos europeos: 60 ECTS equivalen a un curso completo. En FP, algunos módulos de grado superior indican su equivalencia; por ejemplo, Inglés profesional tiene 5 ECTS.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-3-reconocimiento-europeo-eqf-europass-y-eqavet.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "EEES",
@@ -3218,13 +2400,7 @@
    "sigla": "EQAVET",
    "termino": "Marco de Referencia Europeo de Garantía de la Calidad en FP",
    "descripcion": "Marco europeo de indicadores y de ciclo de calidad para la FP. La LO 3/2022 (art. 110.1) dice que la calidad del Sistema de FP se evalúa con sus indicadores.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-3-reconocimiento-europeo-eqf-europass-y-eqavet.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "",
@@ -3236,25 +2412,13 @@
    "sigla": "ErasmusPro",
    "termino": "Movilidad de larga duración de alumnado de FP (90 a 365 días)",
    "descripcion": "Movilidad de larga duración, de 90 a 365 días, del alumnado de FP en una empresa o centro de otro país, dentro de Erasmus+.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-2-erasmus-para-la-fp-movilidad-de-alumnado-y-profesorado.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "ESCO",
    "termino": "Clasificación europea de capacidades, competencias, cualificaciones y ocupaciones",
    "descripcion": "Clasificación europea que describe capacidades, competencias, cualificaciones y ocupaciones con las mismas palabras en toda la UE: un lenguaje común entre educación y empleo.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-3-reconocimiento-europeo-eqf-europass-y-eqavet.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "Europass",
@@ -3262,10 +2426,6 @@
    "descripcion": "Conjunto de herramientas europeas para presentar de forma clara la experiencia, las capacidades y las cualificaciones: perfil en línea, currículum y documentos de movilidad.",
    "categoria": "europa",
    "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-3-reconocimiento-europeo-eqf-europass-y-eqavet.html"
-    },
     {
      "texto": "Web oficial",
      "url": "https://europass.europa.eu/es"
@@ -3276,25 +2436,13 @@
    "sigla": "FTP",
    "termino": "Formación técnica y profesional",
    "descripcion": "Forma de llamar a la formación profesional fuera de España y en los organismos internacionales (en inglés, TVET). En esta web, «FTP (≈ FP)» indica que es lo mismo que la FP.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/fp-en-el-mundo/index.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "MEC / EQF",
    "termino": "Marco Europeo de Cualificaciones",
    "descripcion": "Marco Europeo de Cualificaciones, con ocho niveles que permiten comparar cualificaciones entre países. Su correspondencia con los niveles españoles es el MECU.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-3-reconocimiento-europeo-eqf-europass-y-eqavet.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "OCDE",
@@ -3318,25 +2466,13 @@
    "sigla": "TVET",
    "termino": "Technical and vocational education and training",
    "descripcion": "Nombre en inglés de la formación técnica y profesional (FTP), que es el término que usan la UNESCO-UNEVOC y los organismos internacionales. En España se dice formación profesional.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/fp-en-el-mundo/index.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "UE",
    "termino": "Unión Europea",
    "descripcion": "Organización de 27 Estados miembros que fija marcos comunes de FP y financia programas como Erasmus+.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-1-como-se-organiza-la-fp-en-europa.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "VET",
@@ -3348,133 +2484,67 @@
    "sigla": "VPET",
    "termino": "Educación y formación profesionales en Suiza",
    "descripcion": "Vocational Education and Training: la formación profesional de Suiza, conocida por su sistema dual con aprendizaje en la empresa.",
-   "categoria": "europa",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/4-4-otros-modelos-alemania-suiza-y-estados-unidos.html"
-    }
-   ]
+   "categoria": "europa"
   },
   {
    "sigla": "BUP y COU",
    "termino": "Bachillerato Unificado Polivalente y Curso de Orientación Universitaria (vía a la universidad en la LGE)",
    "descripcion": "Bachillerato de tres años y curso de orientación universitaria de la Ley General de Educación de 1970, la vía hacia la universidad. La vía profesional era la FP1 y la FP2.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-10-los-pasos-entre-etapas-de-la-escuela-a-la-fp-y-de-la-fp-a-la-universidad.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "EGB",
    "termino": "Educación General Básica (LGE 1970): daba el Graduado Escolar o el Certificado de Escolaridad",
    "descripcion": "Etapa de ocho cursos de la Ley General de Educación de 1970 que daba el Graduado Escolar o el Certificado de Escolaridad. Terminada la EGB se elegía entre el BUP y la FP1.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-10-los-pasos-entre-etapas-de-la-escuela-a-la-fp-y-de-la-fp-a-la-universidad.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "ENCASO",
    "termino": "Empresa Nacional Calvo Sotelo",
    "descripcion": "Empresa constituida en 1942 por iniciativa del INI, con sedes en Puertollano y Escatrón. Es un ejemplo de las escuelas de aprendices de empresa.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-7-escuelas-de-aprendices-de-empresa.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "FIP",
    "termino": "Plan Nacional de Formación e Inserción Profesional",
    "descripcion": "Plan de 1985 para la formación de personas desempleadas, cuyas bases aprobó el Consejo de Ministros el 30 de abril de 1985.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-12-la-fp-para-el-empleo.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "FP1, FP2 y FP3",
    "termino": "Primer, segundo y tercer grado de FP de la LGE; el FP3 no llegó a desarrollarse",
    "descripcion": "Los tres grados de la FP de la Ley General de Educación de 1970; el tercero no llegó a desarrollarse. La FP1 y la FP2 son los antecesores de los ciclos formativos.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-10-los-pasos-entre-etapas-de-la-escuela-a-la-fp-y-de-la-fp-a-la-universidad.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "FP Acelerada y PPO",
    "termino": "Formación rápida de adultos y Programa de Promoción Profesional Obrera",
    "descripcion": "Dos programas de formación rápida de personas adultas del siglo XX en España: la FP Acelerada y el Programa de Promoción Profesional Obrera.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-8-de-la-fp-acelerada-al-ppo.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "INEM",
    "termino": "Instituto Nacional de Empleo",
    "descripcion": "Organismo estatal de empleo ya desaparecido; su sucesor es el actual SEPE.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-12-la-fp-para-el-empleo.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "INI y SEPI",
    "termino": "Instituto Nacional de Industria y Sociedad Estatal de Participaciones Industriales (hoy conserva su archivo)",
    "descripcion": "El INI fue el holding público creado tras la guerra civil que tuvo escuelas de aprendices en sus empresas; la SEPI es la sociedad que gestiona hoy sus participaciones y conserva su archivo.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-7-escuelas-de-aprendices-de-empresa.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "Maestría Industrial",
    "termino": "Último nivel de la enseñanza industrial elemental, tras Preparatorio y Oficialía",
    "descripcion": "Último de los tres niveles de la enseñanza industrial de la época: Preparatorio, Oficialía y Maestría.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-10-los-pasos-entre-etapas-de-la-escuela-a-la-fp-y-de-la-fp-a-la-universidad.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "Perito / Ingeniero Técnico",
    "termino": "Titulado de grado medio de las Escuelas Técnicas; desde 1968, Ingeniero Técnico",
    "descripcion": "Titulado de grado medio de las escuelas técnicas; desde 1968, Ingeniero Técnico.",
-   "categoria": "historia",
-   "enlaces": [
-    {
-     "texto": "Dónde se explica",
-     "url": "https://www.rafaelsanzprades.es/entender-fp-dual/2-10-los-pasos-entre-etapas-de-la-escuela-a-la-fp-y-de-la-fp-a-la-universidad.html"
-    }
-   ]
+   "categoria": "historia"
   },
   {
    "sigla": "Boletines autonómicos",
