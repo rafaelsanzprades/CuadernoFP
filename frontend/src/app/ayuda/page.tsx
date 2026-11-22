@@ -120,7 +120,7 @@ export default function AyudaPage() {
   const TAB_DESCRIPTIONS: Record<string, string> = {
     guia: t('tabs.magia.guia.desc', {defaultValue: 'Guía de inicio y prompt para IA: qué datos pedir al docente y dónde colocarlos en la app.'}),
     faq: t('tabs.ayuda.faq.desc', {defaultValue: 'Respuestas a las preguntas más frecuentes del profesorado.'}),
-    glosario: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y términos de formación profesional y docencia, el mismo que el de rafaelsanzprades.es.'}),
+    glosario: t('tabs.ayuda.acronimos.desc', {defaultValue: 'Glosario de siglas, acrónimos y términos de formación profesional y docencia.'}),
   };
 
   // Índice de bloques por pestaña -- Contribuciones se fusionó al final de

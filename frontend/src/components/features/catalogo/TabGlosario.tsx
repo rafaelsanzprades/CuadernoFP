@@ -7,7 +7,7 @@ import { glosarioData, GLOSARIO_CATEGORIAS } from "@/data/glosarioData";
 import { GUIA_CATALOGO } from "@/data/guiaData";
 import { useTranslation } from "react-i18next";
 
-// Mismo glosario que rafaelsanzprades.es/glosario-fp/ (ver src/data/glosarioData.ts). Las siglas y los términos sin sigla
+// Mismo glosario que el de la web de Rafael (ver src/data/glosarioData.ts). Las siglas y los términos sin sigla
 // van juntos y por orden alfabético dentro de cada categoría; si el término no tiene sigla, esa celda queda vacía.
 export function TabGlosario() {
   const { t } = useTranslation();
@@ -39,7 +39,7 @@ export function TabGlosario() {
           </div>
         </div>
         <p className="text-caption text-muted mt-3">
-          {t('campos.catalogo.glosarioMismoQueWeb', {defaultValue: 'Es el mismo glosario que el de rafaelsanzprades.es: siglas y términos, por categorías y en orden alfabético.'})}
+          {t('campos.catalogo.glosarioMismoQueWeb', {defaultValue: 'Siglas y términos, por categorías y en orden alfabético.'})}
         </p>
       </Card>
 

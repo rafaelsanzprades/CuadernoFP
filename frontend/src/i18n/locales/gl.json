@@ -303,7 +303,7 @@
       },
       "acronimos": {
         "label": "Glosario",
-        "desc": "Glosario de siglas, acrónimos e termos de formación profesional e docencia; o mesmo que o de rafaelsanzprades.es."
+        "desc": "Glosario de siglas, acrónimos e termos de formación profesional e docencia."
       },
       "mapa": {
         "label": "Mapa",
@@ -2262,7 +2262,7 @@
     },
     "catalogo": {
       "tituloAcronimosGlosario": "Glosario",
-      "glosarioMismoQueWeb": "É o mesmo glosario que o de rafaelsanzprades.es: siglas e termos, por categorías e en orde alfabética.",
+      "glosarioMismoQueWeb": "Siglas e termos, por categorías e en orde alfabética.",
       "glosarioCategoria": {
         "normas": "Leis e normas",
         "organismos": "Organismos e entidades",

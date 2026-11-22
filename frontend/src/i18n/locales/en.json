@@ -303,7 +303,7 @@
       },
       "acronimos": {
         "label": "Glossary",
-        "desc": "Glossary of abbreviations, acronyms and terms of vocational training and teaching; the same one as on rafaelsanzprades.es."
+        "desc": "Glossary of abbreviations, acronyms and terms of vocational training and teaching."
       },
       "mapa": {
         "label": "Map",
@@ -2262,7 +2262,7 @@
     },
     "catalogo": {
       "tituloAcronimosGlosario": "Glossary",
-      "glosarioMismoQueWeb": "This is the same glossary as on rafaelsanzprades.es: abbreviations and terms, by category and in alphabetical order.",
+      "glosarioMismoQueWeb": "Abbreviations and terms, by category and in alphabetical order.",
       "glosarioCategoria": {
         "normas": "Laws and regulations",
         "organismos": "Bodies and organisations",

@@ -303,7 +303,7 @@
       },
       "acronimos": {
         "label": "Glosarioa",
-        "desc": "Lanbide heziketako eta irakaskuntzako sigla, akronimo eta terminoen glosarioa; rafaelsanzprades.es-ekoaren berbera."
+        "desc": "Lanbide heziketako eta irakaskuntzako sigla, akronimo eta terminoen glosarioa."
       },
       "mapa": {
         "label": "Mapa",
@@ -2262,7 +2262,7 @@
     },
     "catalogo": {
       "tituloAcronimosGlosario": "Glosarioa",
-      "glosarioMismoQueWeb": "rafaelsanzprades.es-eko glosario bera da: siglak eta terminoak, kategoriaka eta alfabetikoki ordenatuta.",
+      "glosarioMismoQueWeb": "Siglak eta terminoak, kategoriaka eta alfabetikoki ordenatuta.",
       "glosarioCategoria": {
         "normas": "Legeak eta arauak",
         "organismos": "Organismoak eta erakundeak",

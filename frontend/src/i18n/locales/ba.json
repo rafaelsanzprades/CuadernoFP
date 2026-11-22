@@ -303,7 +303,7 @@
       },
       "acronimos": {
         "label": "Glossari",
-        "desc": "Glossari de sigles, acrònims i termes de formació professional i docència; el mateix que el de rafaelsanzprades.es."
+        "desc": "Glossari de sigles, acrònims i termes de formació professional i docència."
       },
       "mapa": {
         "label": "Mapa",
@@ -2262,7 +2262,7 @@
     },
     "catalogo": {
       "tituloAcronimosGlosario": "Glossari",
-      "glosarioMismoQueWeb": "És el mateix glossari que el de rafaelsanzprades.es: sigles i termes, per categories i en ordre alfabètic.",
+      "glosarioMismoQueWeb": "Sigles i termes, per categories i en ordre alfabètic.",
       "glosarioCategoria": {
         "normas": "Lleis i normes",
         "organismos": "Organismes i entitats",
