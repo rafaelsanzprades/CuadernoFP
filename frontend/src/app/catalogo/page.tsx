@@ -28,6 +28,7 @@ import { GENERACIONES_CURRICULO, getFuenteNormativa } from "@/utils/curriculumGe
 import { ExternalLink } from "lucide-react";
 import { getApiBase } from "@/services/apiBase";
 import { TabComunidades } from "@/components/features/catalogo/TabComunidades";
+import { ProcedenciaDatos, CotejoBadge } from "@/components/features/catalogo/ProcedenciaDatos";
 
 type Tab = "familias" | "ecp-incual" | "titulos" | "modulos" | "ra-ce" | "autonomias";
 
@@ -737,9 +738,9 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
                     </span>
                     <div className="min-w-0">
                       <h3 className="text-body font-semibold text-foreground">{mod.nombre}</h3>
-                      <span className="flex items-center gap-1 text-caption text-muted mt-1">
-                        <Clock className="w-3 h-3" />
-                        {mod.horas}h
+                      <span className="flex items-center gap-2 flex-wrap text-caption text-muted mt-1">
+                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{mod.horas}h</span>
+                        <CotejoBadge cotejo={(mod as any).cotejo} ambito={(mod as any).ambito} />
                       </span>
                     </div>
                   </div>
@@ -853,6 +854,7 @@ function TabCursos({ globalSelection, updateGlobalSelection, onSelectModulo }: {
 
       {selectedTitulo && titulo && !tituloLoading && (
         <div className="space-y-10">
+          <ProcedenciaDatos procedencia={titulo.procedencia} modulos={titulo.modulos} />
           {renderCursoBlock(modulosPrimero, "1º")}
           {renderCursoBlock(modulosSegundo, "2º")}
           {modulosPrimero.length === 0 && modulosSegundo.length === 0 && (

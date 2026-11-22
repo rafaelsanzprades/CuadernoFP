@@ -13,6 +13,8 @@ import { PERFILES_COMUNIDAD } from "@/utils/calificaciones";
 import { maxConvocatorias } from "@/utils/estadosActa";
 import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
+import { ProcedenciaDatos } from "@/components/features/catalogo/ProcedenciaDatos";
+import type { ProcedenciaTitulo } from "@/types/procedencia";
 
 // Semilla por defecto de "% Instrumentos de evaluación" por trimestre — se
 // usa solo mientras el módulo no tenga ninguna fila guardada todavía.
@@ -52,6 +54,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
   const [viewDegreeId, setViewDegreeId] = useState("");
   const [selectedModuleCode, setSelectedModuleCode] = useState("");
   const [degreeModules, setDegreeModules] = useState<any[]>([]);
+  const [procedencia, setProcedencia] = useState<ProcedenciaTitulo | null>(null);
 
   useEffect(() => {
     setViewFamilyId("");
@@ -102,12 +105,16 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
   useEffect(() => {
     if (!viewDegree?.code) {
       setDegreeModules([]);
+      setProcedencia(null);
       return;
     }
     fetch(`${getApiBase()}/api/catalog/curriculum/${viewDegree.code}`)
       .then(r => r.json())
-      .then(json => { setDegreeModules(json.status === "success" ? json.data.modulos : []); })
-      .catch(() => setDegreeModules([]));
+      .then(json => {
+        setDegreeModules(json.status === "success" ? json.data.modulos : []);
+        setProcedencia(json.status === "success" ? json.data.procedencia ?? null : null);
+      })
+      .catch(() => { setDegreeModules([]); setProcedencia(null); });
   }, [viewDegree?.code]);
 
   const handleSelectModule = (code: string) => {
@@ -314,6 +321,12 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             ))}
           </Select>
         </div>
+
+        {procedencia && viewDegreeId && (
+          <div className="mb-5">
+            <ProcedenciaDatos procedencia={procedencia} modulos={selectedModuleCode ? degreeModules.filter(m => m.codigo === selectedModuleCode) : degreeModules} />
+          </div>
+        )}
 
         <div className="grid grid-cols-6 gap-4 mb-5">
           <div className="col-span-3">

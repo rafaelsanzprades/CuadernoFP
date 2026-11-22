@@ -165,7 +165,66 @@ def list_learning_outcomes(db: Session = Depends(get_db)):
         logger.exception("Error en la petición")
         raise HTTPException(status_code=500, detail="Error interno del servidor")
 
-from models import EvaluationCriterion
+from models import EvaluationCriterion, DegreeCCAA, ModuleCCAA, Region
+
+
+# Orden oficial de las comunidades (el del INE, el de las webs institucionales)
+ORDEN_CCAA = ["Andalucía", "Aragón", "Asturias", "Illes Balears", "Canarias", "Cantabria", "Castilla y León", "Castilla-La Mancha", "Cataluña",
+              "Comunitat Valenciana", "Extremadura", "Galicia", "Comunidad de Madrid", "Región de Murcia", "Navarra", "País Vasco", "La Rioja", "Ceuta (Ministerio)", "Melilla (Ministerio)"]
+
+
+def resumen_cotejo(valores):
+    """Estado de cotejo de los RA y CE de un módulo con el BOE, a partir de los `cotejo_boe` de sus RA.
+    igual | corregido_boe | rd659_2023 (módulo transversal, texto del RD 659/2023) | autonomico | sin_cotejo | difiere | sin_ra"""
+    v = {x or "sin_cotejo" for x in valores}
+    if not v:
+        return "sin_ra"
+    if "difiere" in v:
+        return "difiere"
+    if "sin_cotejo" in v:
+        return "sin_cotejo"
+    if v == {"autonomico"}:
+        return "autonomico"
+    if "corregido_boe" in v:
+        return "corregido_boe"
+    if "rd659_2023" in v:
+        return "rd659_2023"
+    return "igual"
+
+
+def procedencia_titulo(db, degree):
+    """Procedencia de los datos de un título: norma estatal (BOE), cotejo y currículo autonómico por comunidad."""
+    regiones = sorted(db.query(Region).all(), key=lambda r: ORDEN_CCAA.index(r.name) if r.name in ORDEN_CCAA else 99)
+    por_region = {d.region_id: d for d in db.query(DegreeCCAA).filter(DegreeCCAA.degree_id == degree.id).all()}
+    ccaa = []
+    for r in regiones:
+        d = por_region.get(r.id)
+        ccaa.append({
+            "comunidad": r.name,
+            "boletin": (d.boletin if d and d.boletin else r.boletin),
+            # Sin fila propia: la comunidad todavía no se ha consultado para este título
+            "estado": d.estado if d else "sin_cargar",
+            "norma": d.norma if d else None,
+            "url_curriculo": d.url_curriculo if d else None,
+            "url_horario": d.url_horario if d else None,
+            "url_horario_ley_fp": d.url_horario_ley_fp if d else None,
+            "url_modificaciones": d.url_modificaciones if d else None,
+            "url_portal": r.url_normativa_fp,
+            "nota": d.nota if d else None,
+            "verificado_el": d.verificado_el if d else None,
+        })
+    return {
+        "norma_estatal": degree.fuente_norma,
+        "url_norma_estatal": degree.fuente_url,
+        "verificado_el": degree.verificado_el,
+        "verificacion": degree.verificacion,
+        "comunidades": ccaa,
+    }
+
+
+def ccaa_de_modulo(db, module):
+    filas = db.query(ModuleCCAA, Region).join(Region, Region.id == ModuleCCAA.region_id).filter(ModuleCCAA.module_id == module.id).all()
+    return [{"comunidad": r.name, "horas": m.hours, "curso": m.curso, "estado": m.estado, "fuente": m.fuente, "nota": m.nota} for m, r in filas]
 
 import logging as _logging
 logger = _logging.getLogger(__name__)
@@ -220,7 +279,10 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
                 "horas": m.hours,
                 "curso": curso_str, 
                 "ra": ra_data,
-                "competencias": comp_data
+                "competencias": comp_data,
+                "ambito": m.ambito or "estatal",
+                "cotejo": resumen_cotejo([ra.cotejo_boe for ra in ras]),
+                "ccaa": ccaa_de_modulo(db, m),
             })
             
         return {
@@ -230,7 +292,8 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
                 "titulo_fp": degree.name,
                 "nivel": degree.level,
                 "modulos": modulos_data,
-                "boa_articles": degree.boa_articles
+                "boa_articles": degree.boa_articles,
+                "procedencia": procedencia_titulo(db, degree),
             }
         }
     except HTTPException:
@@ -322,7 +385,10 @@ def get_module_curriculum(module_code: str, degree_code: str | None = Query(None
                 "curso": curso_str,
                 "ra": ra_data,
                 "competencias": comp_data,
-                "degree_code": degree_code
+                "degree_code": degree_code,
+                "ambito": module.ambito or "estatal",
+                "cotejo": resumen_cotejo([ra.cotejo_boe for ra in ras]),
+                "ccaa": ccaa_de_modulo(db, module),
             }
         }
     except HTTPException:
