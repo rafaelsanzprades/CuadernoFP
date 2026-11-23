@@ -112,6 +112,9 @@ class Module(Base):
     convalidation_competences = Column(String, nullable=True) # JSON con datos de Catedu
     ambito = Column(String, nullable=False, default="estatal")  # estatal (BOE) | autonomico (propio de una comunidad: tutorías, PRL, AOP…, OPT)
     region_id = Column(Integer, ForeignKey("regions.id"), nullable=True)  # comunidad, si ambito = autonomico
+    fuente_url = Column(String, nullable=True)     # enlace al BOE de donde salen sus RA y CE (real decreto, su modificación u orden)
+    verificado_el = Column(String, nullable=True)  # fecha (AAAA-MM-DD) del último cotejo de sus RA y CE con el BOE
+    nota_cotejo = Column(String, nullable=True)    # dificultades y particularidades de ese cotejo (erratas del BOE, texto escaneado…)
     
     degree = relationship("Degree", back_populates="modules")
     learning_outcomes = relationship("LearningOutcome", back_populates="module", cascade="all, delete-orphan")
@@ -164,6 +167,7 @@ class LearningOutcome(Base):
     description = Column(String, nullable=False) # e.g., "Desarrolla..."
     ecp_code = Column(String, nullable=True) # e.g., "UC1077_2" vinculado al INCUAL
     cotejo_boe = Column(String, nullable=True) # igual | difiere | sin_cotejo (frente al real decreto del título)
+    nota_cotejo = Column(String, nullable=True) # duda concreta o errata del propio BOE
     
     module = relationship("Module", back_populates="learning_outcomes")
     evaluation_criteria = relationship("EvaluationCriterion", back_populates="learning_outcome", cascade="all, delete-orphan")
@@ -175,6 +179,7 @@ class EvaluationCriterion(Base):
     ce_code = Column(String, nullable=False) # e.g., "CE1.1" or "a)"
     description = Column(String, nullable=False)
     cotejo_boe = Column(String, nullable=True) # igual | difiere | sin_cotejo
+    nota_cotejo = Column(String, nullable=True) # duda concreta o errata del propio BOE
 
     learning_outcome = relationship("LearningOutcome", back_populates="evaluation_criteria")
 
