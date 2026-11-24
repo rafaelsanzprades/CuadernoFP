@@ -172,7 +172,7 @@ export function ProcedenciaDatos({ procedencia, modulos = [] }: Props) {
       {heredadas && (
         <p className="text-caption text-muted">
           {t("campos.catalogo.procedencia.notaHoras", {
-            defaultValue: "Las horas y el curso de cada módulo son los de Aragón, heredados de la base y pendientes de contrastar con su orden. Tu comunidad puede repartirlos de otra forma: cámbialos en tu programación.",
+            defaultValue: "Las horas y el curso de cada módulo son los de Aragón (distribución de la Ley de FP, contrastada con la orden de cada título). Tu comunidad puede repartirlos de otra forma: cámbialos en tu programación.",
           })}
         </p>
       )}
