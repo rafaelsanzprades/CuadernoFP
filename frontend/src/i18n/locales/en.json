@@ -2298,6 +2298,8 @@
         "portal": "Regulations portal",
         "notaHoras": "Hours and year of each module are Aragon's, inherited from the database and still to be checked against its order. Your community may distribute them differently: change them in your programme.",
         "ayudaCotejo": "Origin of the text of the learning outcomes and criteria",
+        "fuenteModulo": "Text of the learning outcomes and criteria taken from the BOE",
+        "verEnBoe": "see in the BOE",
         "cotejo": {
           "igual": "Same as the BOE",
           "corregido_boe": "Corrected from the BOE",

@@ -249,7 +249,7 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
             ra_data = []
             for ra in ras:
                 ces = db.query(EvaluationCriterion).filter(EvaluationCriterion.learning_outcome_id == ra.id).all()
-                ce_data = [{"id": ce.ce_code, "descripcion": ce.description} for ce in ces]
+                ce_data = [{"id": ce.ce_code, "descripcion": ce.description, **({"nota": ce.nota_cotejo} if ce.nota_cotejo else {})} for ce in ces]
                 ra_data.append({
                     "id": f"RA{ra.ra_number}.",
                     "descripcion": ra.description,
@@ -346,10 +346,11 @@ def get_module_curriculum(module_code: str, degree_code: str | None = Query(None
         ra_data = []
         for ra in ras:
             ces = db.query(EvaluationCriterion).filter(EvaluationCriterion.learning_outcome_id == ra.id).all()
-            ce_data = [{"id": ce.ce_code, "descripcion": ce.description} for ce in ces]
+            ce_data = [{"id": ce.ce_code, "descripcion": ce.description, **({"nota": ce.nota_cotejo} if ce.nota_cotejo else {})} for ce in ces]
             ra_data.append({
                 "id": f"RA{ra.ra_number}.",
                 "descripcion": ra.description,
+                **({"nota": ra.nota_cotejo} if ra.nota_cotejo else {}),
                 "ce": ce_data
             })
             
@@ -388,6 +389,9 @@ def get_module_curriculum(module_code: str, degree_code: str | None = Query(None
                 "degree_code": degree_code,
                 "ambito": module.ambito or "estatal",
                 "cotejo": resumen_cotejo([ra.cotejo_boe for ra in ras]),
+                "fuente_url": module.fuente_url,
+                "verificado_el": module.verificado_el,
+                "nota_cotejo": module.nota_cotejo,
                 "ccaa": ccaa_de_modulo(db, module),
             }
         }

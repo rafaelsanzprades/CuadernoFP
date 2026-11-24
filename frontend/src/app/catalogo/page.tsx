@@ -1070,6 +1070,21 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
             </div>
           </div>
 
+          {(modulo.fuente_url || modulo.nota_cotejo) && (
+            <div className="mt-3 rounded-lg border border-[var(--glass-border)] bg-foreground/5 p-3 space-y-1 text-caption text-muted">
+              {modulo.fuente_url && (
+                <p>
+                  {t('campos.catalogo.procedencia.fuenteModulo', {defaultValue: 'Texto de los RA y CE tomado del BOE'})}:{' '}
+                  <a href={modulo.fuente_url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline inline-flex items-center gap-1">
+                    {t('campos.catalogo.procedencia.verEnBoe', {defaultValue: 'ver en el BOE'})} <ExternalLink className="w-3 h-3" />
+                  </a>
+                  {modulo.verificado_el && <> · {t('campos.catalogo.procedencia.cotejado', {fecha: modulo.verificado_el, defaultValue: 'Cotejado con el BOE el {{fecha}}.'})}</>}
+                </p>
+              )}
+              {modulo.nota_cotejo && <p>{modulo.nota_cotejo}</p>}
+            </div>
+          )}
+
           <Tabs defaultValue="curriculo" className="w-full mt-4">
             <TabsList className="mb-4">
               <TabsTrigger value="curriculo">{t('campos.catalogo.tabResultadosAprendizaje', {defaultValue: 'Resultados de aprendizaje'})}</TabsTrigger>
@@ -1091,6 +1106,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                             {raItem.id}
                           </span>
                           <p className="text-body text-foreground leading-snug">{raItem.descripcion}</p>
+                          {raItem.nota && <span title={raItem.nota} className="shrink-0 text-warning"><AlertTriangle className="w-4 h-4" /></span>}
                         </div>
                         <div className="flex items-center gap-3 shrink-0">
                           <span className="text-caption text-muted">{raItem.ce?.length || 0} CE</span>
@@ -1108,7 +1124,7 @@ function TabModulos({ globalSelection, updateGlobalSelection }: { globalSelectio
                           {raItem.ce?.map((ceItem: any) => (
                             <div key={ceItem.id} className="flex items-start gap-2 text-body bg-foreground/5 rounded-lg p-3 border border-[var(--glass-border)]">
                               <span className="text-caption font-medium text-accent shrink-0 mt-0.5">{ceItem.id}</span>
-                              <span className="text-foreground/80">{ceItem.descripcion}</span>
+                              <span className="text-foreground/80">{ceItem.descripcion}{ceItem.nota && <span className="block text-caption text-muted mt-1">{ceItem.nota}</span>}</span>
                             </div>
                           ))}
                         </div>

@@ -2298,6 +2298,8 @@
         "portal": "Araudi-ataria",
         "notaHoras": "Modulu bakoitzaren orduak eta maila Aragoikoak dira, oinarritik heredatuak eta bere aginduarekin kontrastatzeko daude. Zure erkidegoak beste modu batean bana ditzake: aldatu itzazu zure programazioan.",
         "ayudaCotejo": "IE eta EKren testuaren jatorria",
+        "fuenteModulo": "IE eta EKren testua BOEtik hartua",
+        "verEnBoe": "ikusi BOEn",
         "cotejo": {
           "igual": "BOEren berdina",
           "corregido_boe": "BOEtik zuzendua",

@@ -2298,6 +2298,8 @@
         "portal": "Portal de normativa",
         "notaHoras": "As horas e o curso de cada módulo son os de Aragón, herdados da base e pendentes de contrastar coa súa orde. A túa comunidade pode repartilos doutra forma: cámbiaos na túa programación.",
         "ayudaCotejo": "Procedencia do texto dos RA e CE",
+        "fuenteModulo": "Texto dos RA e CE tomado do BOE",
+        "verEnBoe": "ver no BOE",
         "cotejo": {
           "igual": "Igual que o BOE",
           "corregido_boe": "Corrixido desde o BOE",
