@@ -253,7 +253,8 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
                 ra_data.append({
                     "id": f"RA{ra.ra_number}.",
                     "descripcion": ra.description,
-                    "ce": ce_data
+                    "ce": ce_data,
+                    **({"nota": ra.nota_cotejo} if ra.nota_cotejo else {}),
                 })
             
             # We now have 'curso' in the DB. Format as "1º", "2º", or "Ambos".
@@ -283,6 +284,9 @@ def get_curriculum(degree_code: str, region_id: int = Query(1), db: Session = De
                 "ambito": m.ambito or "estatal",
                 "cotejo": resumen_cotejo([ra.cotejo_boe for ra in ras]),
                 "ccaa": ccaa_de_modulo(db, m),
+                "fuente_url": m.fuente_url,
+                "verificado_el": m.verificado_el,
+                "nota_cotejo": m.nota_cotejo,
             })
             
         return {
