@@ -44,6 +44,11 @@ export interface ConfigRedondeo {
   max_convocatorias?: number | null;
   /** Grado de la oferta: «D» (4 convocatorias como máximo) o «E» (2). Solo se usa si `max_convocatorias` está vacío. Vacío = «D». */
   grado_oferta?: "D" | "E";
+  /** Porcentaje de faltas de asistencia a partir del cual el alumnado pierde la evaluación continua en un módulo (lo fija la norma de
+   *  la comunidad; ver PerfilComunidad.asistencia). Vacío = sin umbral normativo (la alerta de abandono usa sus umbrales generales). */
+  asistencia_perdida_pct?: number | null;
+  /** Porcentaje de faltas en el que el profesorado debe avisar al tutor (solo algunas comunidades). Vacío = sin aviso previo. */
+  asistencia_aviso_pct?: number | null;
 }
 
 export const DEFAULT_CONFIG_REDONDEO: ConfigRedondeo = {
@@ -86,14 +91,73 @@ export interface PerfilComunidad {
   nombre: string;
   fuente: string;
   config: Partial<ConfigRedondeo>;
+  /** Horas de formación en empresa (FEOE) del régimen general que la norma reparte por curso en grados medio y superior. Solo se
+   *  rellena cuando la norma fija las cifras (no rangos). Sirve de valor por defecto en Módulo › Datos. */
+  feoe?: { horas_1?: number; horas_2?: number; fuente: string; texto: string;
+    /** Grado básico (ciclos de 2.000 h): horas por curso y texto propio. Sin él se usa el valor general (400 h, el 20 %, todas en 2.º). */
+    basico?: { horas_1?: number; horas_2?: number; texto: string } };
+  /** Pérdida de la evaluación continua por asistencia, en grados medio y superior presencial: porcentajes de faltas y fuente. */
+  asistencia?: { perdida_pct: number; aviso_pct?: number; fuente: string; nota?: string };
+}
+
+/** Grado básico sin cifras propias del perfil: el 20 % de 2.000 h (400 h), todas en 2.º (lo habitual; Asturias las reparte 200 + 200). */
+export const FEOE_BASICO_GENERAL = { horas_1: 0, horas_2: 400, texto: "Valor orientativo: el 20 % de la duración del ciclo (400 h), todas en 2.º. Algunas comunidades las reparten entre los dos cursos." };
+
+/** Horas FEOE por defecto de 1.º y 2.º: las del perfil si la norma las fija; si no, las de Aragón que usaba la app (140 y 360). */
+export function horasFeoePorDefecto(perfilId: string | undefined, curso: string | undefined, nivel?: string): number {
+  const f = PERFILES_COMUNIDAD.find((p) => p.id === perfilId)?.feoe;
+  if (nivel === "Grado Básico") {
+    const b = f?.basico ?? FEOE_BASICO_GENERAL;
+    return curso === "2º" ? (b.horas_2 ?? FEOE_BASICO_GENERAL.horas_2) : (b.horas_1 ?? FEOE_BASICO_GENERAL.horas_1);
+  }
+  const base = PERFILES_COMUNIDAD[0].feoe!;
+  return curso === "2º" ? (f?.horas_2 ?? base.horas_2!) : (f?.horas_1 ?? base.horas_1!);
+}
+
+/** Aviso por faltas según la norma elegida: «perdida» al superar el umbral, «aviso» al alcanzar el de aviso; null si no hay umbral o no se llega. */
+export function nivelAsistenciaNormativo(pctFaltas: number, config: Pick<ConfigRedondeo, "asistencia_perdida_pct" | "asistencia_aviso_pct">): "perdida" | "aviso" | null {
+  const { asistencia_perdida_pct: perdida, asistencia_aviso_pct: aviso } = config;
+  if (perdida != null && pctFaltas > perdida) return "perdida";
+  if (aviso != null && pctFaltas >= aviso) return "aviso";
+  return null;
 }
 
 const CONFIG_NOTA_ENTERA: Partial<ConfigRedondeo> = { nota_aprobado: 5.0, decimales_acta: 0, redondeo_acta: "conservador" };
 
 export const PERFILES_COMUNIDAD: PerfilComunidad[] = [
-  { id: "aragon", nombre: "Aragón", fuente: "Decreto 91/2024 (consolidado con el Decreto 107/2025)", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "escala_1_4" } },
-  { id: "andalucia", nombre: "Andalucía", fuente: "Orden de evaluación de 18 de septiembre de 2025", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "superado" } },
-  { id: "asturias", nombre: "Asturias", fuente: "Decreto 103/2025, de 25 de agosto", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "superado" } },
+  { id: "aragon", nombre: "Aragón", fuente: "Decreto 91/2024 (consolidado con el Decreto 107/2025)", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "escala_1_4" },
+    feoe: { horas_1: 140, horas_2: 360, fuente: "Decreto 91/2024, art. 56",
+      texto: "Dato exacto de la norma: 500 horas en régimen general, en dos periodos (140 h en 1.º y 360 h en 2.º). Si no hay plazas en empresas, previo informe de Inspección y con autorización, se pueden acumular en 2.º (500 h, desde marzo). Turno nocturno o ciclos de tres cursos: 100 h + 100 h + 300 h.",
+      basico: { horas_1: 0, horas_2: 400, texto: "Dato exacto de la norma: 400 h, todas en 2.º (entre marzo y mayo), sin repartir con 1.º." } } },
+  { id: "andalucia", nombre: "Andalucía", fuente: "Orden de evaluación de 18 de septiembre de 2025", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "superado" },
+    feoe: { fuente: "Decreto 147/2025, art. 12",
+      texto: "Es un intervalo, no una cifra: la norma fija entre el 25 y el 35 % de la duración de la oferta en régimen general (entre el 35 y el 50 % en intensivo), con el 10-20 % de los RA, y no reparte las horas por curso. Escribe en la casilla las horas que decida tu centro." } },
+  { id: "asturias", nombre: "Asturias", fuente: "Decreto 103/2025, de 25 de agosto", config: { ...CONFIG_NOTA_ENTERA, tutor_empresa_modo: "superado" },
+    feoe: { horas_1: 120, horas_2: 380, fuente: "Decreto 103/2025, art. 12",
+      texto: "Dato exacto de la norma: 500 horas en régimen general, en dos periodos (120 h en 1.º y 380 h en 2.º). En régimen intensivo son 700 (250 h + 450 h).",
+      basico: { horas_1: 200, horas_2: 200, texto: "Dato exacto de la norma: 400 h (el 20 %), en dos periodos de 200 h, uno en 1.º y otro en 2.º (no todo en 2.º)." } } },
+  { id: "canarias", nombre: "Canarias", fuente: "Resolución de 5 de noviembre de 2024 (BOC n.º 230, 18-11-2024), apartado 4", config: {},
+    feoe: { fuente: "Resolución de 5-11-2024 (BOC 230), apartado 4.3",
+      texto: "Es un intervalo, no una cifra: en grados medio y superior entre el 25 y el 35 % de la duración (500 a 700 h), con el 10-20 % de los RA, repartidas en dos cursos; en 1.º entre 100 y 200 h (mínimo 20 jornadas) y el resto en 2.º. Escribe en la casilla las horas que decida tu centro.",
+      basico: { horas_1: 0, horas_2: 400, texto: "Dato exacto de la norma: el 20 % de la duración (400 h), acumuladas en 2.º." } } },
+  { id: "galicia", nombre: "Galicia", fuente: "Decreto 20/2026, de 9 de marzo (art. 7)", config: {},
+    feoe: { fuente: "Decreto 20/2026, art. 7.4",
+      texto: "Es un intervalo, no una cifra: en grados medio y superior entre el 25 y el 35 % de la duración (en intensivo, del 35 al 50 %), con el 10-20 % de los RA, y sin reparto por curso. Escribe en la casilla las horas que decida tu centro.",
+      basico: { texto: "Es un intervalo: entre el 20 y el 35 % de la duración del ciclo, sin reparto por curso en el decreto. Valor orientativo: 400 h (el 20 %), en 2.º." } } },
+  { id: "ceuta-melilla", nombre: "Ceuta y Melilla (gestión del Ministerio)", fuente: "Órdenes EFD/657/2024 y EFD/659/2024 (art. 13)", config: {},
+    feoe: { horas_1: 120, horas_2: 380, fuente: "Órdenes EFD/657/2024 (grado medio) y EFD/659/2024 (superior), art. 13.5 y 13.6",
+      texto: "El total es exacto (500 h en régimen general; 700 h en intensivo, con 335 h en 1.º y 365 h en 2.º), pero el reparto es un intervalo: en general, de 120 a 240 h en 1.º y de 260 a 380 h en 2.º. La casilla propone el mínimo de 1.º y el máximo de 2.º (120 + 380); escribe las horas de tu centro." } },
+  // Perfiles solo de asistencia (sin nota ni tutor: su norma de evaluación no se ha leído entera para la app). Faltas contadas sobre las sesiones registradas.
+  { id: "valencia", nombre: "Comunitat Valenciana", fuente: "Orden 8/2025, de 22 de abril (art. 7)", config: { asistencia_perdida_pct: 15, asistencia_aviso_pct: 10 },
+    asistencia: { perdida_pct: 15, aviso_pct: 10, fuente: "Orden 8/2025, art. 7.3 y 7.4", nota: "Se pierde la evaluación continua al superar el 15 % de inasistencia; al 10 % el profesorado avisa al tutor." } },
+  { id: "castilla-la-mancha", nombre: "Castilla-La Mancha", fuente: "Orden 201/2024, de 28 de noviembre (art. 3)", config: { asistencia_perdida_pct: 25 },
+    asistencia: { perdida_pct: 25, fuente: "Orden 201/2024, art. 3.3 y 3.5", nota: "Exige asistir al menos al 75 % de las horas del módulo (presencial); las faltas justificadas no cuentan y la app no las distingue." } },
+  { id: "baleares", nombre: "Illes Balears", fuente: "Orden 19/2026, de 3 de julio (art. 25)", config: { asistencia_perdida_pct: 25 },
+    feoe: { fuente: "Decreto 39/2025, arts. 12 y 13",
+      texto: "Es un intervalo, no una cifra: entre el 25 y el 35 % de la duración total en régimen general (entre el 35 y el 50 % en intensivo), con el 10-20 % de los RA, y sin reparto por curso. Escribe en la casilla las horas que decida tu centro." },
+    asistencia: { perdida_pct: 25, fuente: "Orden 19/2026, art. 25.2 y 25.3", nota: "Asistencia mínima del 75 % de las horas de cada módulo (grados C, D y E presencial), condición de la evaluación continua." } },
+  { id: "murcia", nombre: "Región de Murcia", fuente: "Orden de 28 de julio de 2026 (art. 4.3)", config: { asistencia_perdida_pct: 30 },
+    asistencia: { perdida_pct: 30, fuente: "Orden de 28-07-2026, art. 4.3", nota: "Se pierde con más del 30 % de faltas, justificadas o no, sobre las horas de la fase de centro del módulo." } },
 ];
 
 export interface SigadInfo {

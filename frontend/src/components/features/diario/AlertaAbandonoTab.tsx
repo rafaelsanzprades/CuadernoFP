@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Card } from "@/components/ui/Card";
 import { useAppStore } from "@/store/useAppStore";
 import { isAlumnoActivo } from "@/utils/alumnado";
-import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev } from "@/utils/calificaciones";
+import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, filtrarPorGev, nivelAsistenciaNormativo } from "@/utils/calificaciones";
 import { flattenAttendanceLedger } from "@/utils/attendance";
 import { useTranslation } from "react-i18next";
 
@@ -72,6 +72,12 @@ export function AlertaAbandonoTab() {
         if (totalSesiones <= 10 && faltas >= 7) {
           riesgo = "alto";
           motivo = `${faltas} faltas en las primeras ${totalSesiones} sesiones (posible abandono temprano)`;
+        } else if (nivelAsistenciaNormativo(100 - pctAsistencia, config_redondeo) === "perdida") {
+          riesgo = "alto";
+          motivo = `${(100 - pctAsistencia).toFixed(0)}% de faltas: supera el ${config_redondeo.asistencia_perdida_pct}% que fija la norma (pérdida de la evaluación continua)`;
+        } else if (nivelAsistenciaNormativo(100 - pctAsistencia, config_redondeo) === "aviso") {
+          riesgo = "medio";
+          motivo = `${(100 - pctAsistencia).toFixed(0)}% de faltas: la norma pide avisar al tutor al llegar al ${config_redondeo.asistencia_aviso_pct}%`;
         } else if (pctAsistencia < 70) {
           riesgo = "alto";
           motivo = `Solo ${pctAsistencia.toFixed(0)}% de asistencia (${faltas} faltas de ${totalSesiones})`;

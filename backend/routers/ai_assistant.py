@@ -64,6 +64,10 @@ async def generar_texto_endpoint(request: Request, datos: GenerarTextoRequest = 
         raise HTTPException(status_code=503, detail="La generación de texto no está disponible en este momento.")
     except redactor.TopeDiario:
         raise HTTPException(status_code=429, detail="Se ha alcanzado el límite diario de textos generados. Inténtalo mañana o escríbelo a mano.")
+    except redactor.LimiteGemini:
+        raise HTTPException(status_code=429, detail="Se ha alcanzado el límite gratuito de la IA por hoy. Inténtalo más tarde o escríbelo a mano.")
+    except redactor.Saturado:
+        raise HTTPException(status_code=503, detail="La IA está saturada. Prueba de nuevo en unos minutos.")
     except Exception as e:
         logger.error(f"Error al generar texto: {str(e)}")
         raise HTTPException(status_code=502, detail="No se ha podido generar el texto. Inténtalo de nuevo.")

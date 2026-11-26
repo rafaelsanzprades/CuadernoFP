@@ -9,7 +9,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InfoTip } from "@/components/ui/InfoTip";
 import { Family } from "@/types";
 import { DEFAULT_INSTRUMENTOS_PCT } from "@/data/defaultInstrumentosPct";
-import { PERFILES_COMUNIDAD } from "@/utils/calificaciones";
+import { PERFILES_COMUNIDAD, horasFeoePorDefecto, FEOE_BASICO_GENERAL } from "@/utils/calificaciones";
+import { resolveModuloNivel } from "@/services/catalogCache";
 import { maxConvocatorias } from "@/utils/estadosActa";
 import { useTranslation } from "react-i18next";
 import { getApiBase } from "@/services/apiBase";
@@ -169,13 +170,15 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
     const siguePorDefecto = !moduleData?.info_modulo?.h_feoe || hFeoeActual === 140 || hFeoeActual === 360;
     updateInfoModulo('curso', nuevoCurso);
     if (siguePorDefecto) {
-      updateInfoModulo('h_feoe', nuevoCurso === '2º' ? 360 : 140);
+      updateInfoModulo('h_feoe', horasFeoePorDefecto(moduleData?.config_redondeo?.perfil_comunidad, nuevoCurso, resolveModuloNivel(activeModuleId, moduleData?.info_modulo?.nivel)));
     }
   };
 
   // --- Data Extraction ---
   const data = moduleData?.info_modulo || {};
-  const hFeoePorDefecto = data.curso === '2º' ? 360 : 140;
+  const nivelModulo = resolveModuloNivel(activeModuleId, data.nivel);
+  const esBasico = nivelModulo === 'Grado Básico';
+  const hFeoePorDefecto = horasFeoePorDefecto(moduleData?.config_redondeo?.perfil_comunidad, data.curso, nivelModulo);
 
   const h_sem = Number(data.h_sem) || 0;
   const h_boa = Number(data.h_boa) || 0;
@@ -368,7 +371,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
           <Input
             label={t('campos.modulo.horasFeoeCursoLabel', {defaultValue: 'Horas FEOE del curso'})}
             type="number"
@@ -389,6 +392,23 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             value={`${(((Number(data.h_feoe ?? hFeoePorDefecto)) / (Number(data.carga_lectiva_anual) || 1000)) * 100).toFixed(0)}%`}
           />
         </div>
+        {(() => {
+          const pf = PERFILES_COMUNIDAD.find((p) => p.id === moduleData?.config_redondeo?.perfil_comunidad);
+          return (
+            <div className="mb-5 space-y-1">
+              <p className="text-caption text-muted">
+                {pf?.feoe
+                  ? t('campos.modulo.feoeExplica', {defaultValue: '{{texto}} Fuente: {{fuente}}. La casilla guarda siempre un número exacto: es el que se usa en los cálculos y lo puedes cambiar.', texto: esBasico ? (pf.feoe.basico?.texto ?? FEOE_BASICO_GENERAL.texto) : pf.feoe.texto, fuente: pf.feoe.fuente})
+                  : t('campos.modulo.feoeSinPerfil', {defaultValue: 'Valor orientativo de Aragón (140 h en 1.º y 360 h en 2.º). Si tu comunidad no fija las horas por curso (suele dar un intervalo de porcentajes), elige un perfil de comunidad más abajo para ver qué dice su norma, o escribe aquí las horas de tu centro.'})}
+              </p>
+              <p className="text-caption text-muted">
+                {esBasico
+                  ? t('campos.modulo.feoeHabitualBasico', {defaultValue: 'Módulo de grado básico: lo habitual es hacerlas en 2.º (400 h en Aragón), pero no en todas las comunidades (Asturias las reparte en dos periodos de 200 h).'})
+                  : t('campos.modulo.feoeHabitual', {defaultValue: 'Lo habitual: el valor menor en 1.º (140 h) y 360 h en 2.º. A veces se agrupan en 2.º (500 h), más en grado medio y menos en grado superior.'})}
+              </p>
+            </div>
+          );
+        })()}
 
         <div className="grid grid-cols-5 gap-4">
           <Input
@@ -514,7 +534,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                   value={config.perfil_comunidad || ""}
                   onChange={(e) => {
                     const sel = PERFILES_COMUNIDAD.find((p) => p.id === e.target.value);
-                    cambia({ ...(sel ? sel.config : {}), perfil_comunidad: e.target.value });
+                    cambia({ asistencia_perdida_pct: null, asistencia_aviso_pct: null, ...(sel ? sel.config : {}), perfil_comunidad: e.target.value });
                   }}
                 >
                   <option value="">{t('campos.modulo.perfilNinguno', {defaultValue: 'Sin perfil (configuración manual)'})}</option>
@@ -522,8 +542,39 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                 </Select>
                 <p className="text-caption text-muted">
                   {perfil
-                    ? t('campos.modulo.perfilFuente', {defaultValue: 'Nota del módulo: numérica, de 1 a 10, sin decimales, positiva desde 5. Fuente: {{fuente}}. Puedes cambiar cualquier valor.', fuente: perfil.fuente})
+                    ? (perfil.config.nota_aprobado != null
+                        ? t('campos.modulo.perfilFuente', {defaultValue: 'Nota del módulo: numérica, de 1 a 10, sin decimales, positiva desde 5. Fuente: {{fuente}}. Puedes cambiar cualquier valor.', fuente: perfil.fuente})
+                        : t('campos.modulo.perfilFuenteAsistencia', {defaultValue: 'Este perfil solo recoge las horas de formación en empresa y la asistencia (si su norma las fija); la nota y el tutor de empresa los configuras tú. Fuente: {{fuente}}.', fuente: perfil.fuente}))
                     : t('campos.modulo.perfilDesc', {defaultValue: 'Rellena las reglas con lo que fija la norma de tu comunidad. Es solo una ayuda: puedes dejarlo sin perfil y configurarlo todo a mano.'})}
+                </p>
+                {perfil?.asistencia && (
+                  <p className="text-caption text-muted">
+                    {t('campos.modulo.perfilAsistencia', {defaultValue: 'Asistencia: {{nota}} ({{fuente}}). Es un dato exacto de la norma, no un intervalo. La alerta de abandono (Sesiones) usa estos porcentajes y cuenta todas las faltas registradas.', nota: perfil.asistencia.nota || '', fuente: perfil.asistencia.fuente})}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-body font-semibold text-foreground block">{t('campos.modulo.asistenciaPerdida', {defaultValue: 'Faltas que hacen perder la evaluación continua (%)'})}</label>
+                <input
+                  type="number" min={0} max={100} step="1"
+                  value={config.asistencia_perdida_pct ?? ""}
+                  placeholder="—"
+                  onChange={(e) => cambia({ asistencia_perdida_pct: e.target.value === "" ? null : Number(e.target.value) })}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                />
+                <label className="text-body font-semibold text-foreground block">{t('campos.modulo.asistenciaAviso', {defaultValue: 'Aviso al tutor desde (%)'})}</label>
+                <input
+                  type="number" min={0} max={100} step="1"
+                  value={config.asistencia_aviso_pct ?? ""}
+                  placeholder="—"
+                  onChange={(e) => cambia({ asistencia_aviso_pct: e.target.value === "" ? null : Number(e.target.value) })}
+                  className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
+                />
+                <p className="text-caption text-muted">
+                  {perfil?.asistencia
+                    ? t('campos.modulo.asistenciaExplicaPerfil', {defaultValue: 'Dato exacto de la norma ({{fuente}}), no un intervalo.', fuente: perfil.asistencia.fuente})
+                    : t('campos.modulo.asistenciaExplica', {defaultValue: 'Vacío = sin umbral normativo. Cargado desde un perfil de comunidad con un porcentaje exacto; si tu comunidad no lo fija en porcentaje (cuenta días o no da cifra), déjalo vacío o pon el de tu centro.'})}
                 </p>
               </div>
 

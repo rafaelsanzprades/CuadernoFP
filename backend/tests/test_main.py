@@ -76,3 +76,57 @@ def test_cors_permite_la_app_de_escritorio_y_la_web(client: TestClient):
         r = client.get("/", headers={"Origin": origen})
         assert r.headers.get("access-control-allow-origin") == origen
     assert "access-control-allow-origin" not in client.get("/", headers={"Origin": "https://otra-web.example"}).headers
+
+
+def test_generar_texto_pasa_al_siguiente_modelo_si_hay_429(monkeypatch):
+    from google.api_core import exceptions as gexc
+    from services import redactor
+    monkeypatch.setenv("GEMINI_API_KEY", "x")
+    monkeypatch.setattr(redactor, "_usados", 0)
+    monkeypatch.setattr(redactor, "MODELOS", ["a", "b"])
+    monkeypatch.setattr(redactor.genai, "configure", lambda **k: None)
+    llamados = []
+
+    def falso(nombre, prompt):
+        llamados.append(nombre)
+        if nombre == "a":
+            raise gexc.ResourceExhausted("cuota")
+        return "texto"
+
+    monkeypatch.setattr(redactor, "_llamar", falso)
+    assert redactor.generar_texto("hola") == "texto"
+    assert llamados == ["a", "b"]
+
+
+def test_generar_texto_reintenta_503_y_luego_avisa(monkeypatch):
+    from google.api_core import exceptions as gexc
+    from services import redactor
+    monkeypatch.setenv("GEMINI_API_KEY", "x")
+    monkeypatch.setattr(redactor, "_usados", 0)
+    monkeypatch.setattr(redactor, "MODELOS", ["a"])
+    monkeypatch.setattr(redactor, "REINTENTOS_503", (0.01, 0.01))
+    monkeypatch.setattr(redactor.genai, "configure", lambda **k: None)
+    intentos = []
+
+    def falso(nombre, prompt):
+        intentos.append(1)
+        raise gexc.ServiceUnavailable("saturado")
+
+    monkeypatch.setattr(redactor, "_llamar", falso)
+    import pytest
+    with pytest.raises(redactor.Saturado):
+        redactor.generar_texto("hola")
+    assert len(intentos) == 3
+
+
+def test_generar_texto_todos_429_da_limite(monkeypatch):
+    from google.api_core import exceptions as gexc
+    from services import redactor
+    monkeypatch.setenv("GEMINI_API_KEY", "x")
+    monkeypatch.setattr(redactor, "_usados", 0)
+    monkeypatch.setattr(redactor, "MODELOS", ["a", "b"])
+    monkeypatch.setattr(redactor.genai, "configure", lambda **k: None)
+    monkeypatch.setattr(redactor, "_llamar", lambda n, p: (_ for _ in ()).throw(gexc.ResourceExhausted("c")))
+    import pytest
+    with pytest.raises(redactor.LimiteGemini):
+        redactor.generar_texto("hola")
