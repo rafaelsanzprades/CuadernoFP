@@ -535,6 +535,8 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                   onChange={(e) => {
                     const sel = PERFILES_COMUNIDAD.find((p) => p.id === e.target.value);
                     cambia({ asistencia_perdida_pct: null, asistencia_aviso_pct: null, ...(sel ? sel.config : {}), perfil_comunidad: e.target.value });
+                    // el umbral de la norma también manda en «Horas P.Ev.», en el semáforo de Sesiones y en PD= (una sola cifra para la pérdida de evaluación continua)
+                    if (sel?.asistencia) updateInfoModulo('p_ev', sel.asistencia.perdida_pct);
                   }}
                 >
                   <option value="">{t('campos.modulo.perfilNinguno', {defaultValue: 'Sin perfil (configuración manual)'})}</option>
@@ -560,7 +562,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
                   type="number" min={0} max={100} step="1"
                   value={config.asistencia_perdida_pct ?? ""}
                   placeholder="—"
-                  onChange={(e) => cambia({ asistencia_perdida_pct: e.target.value === "" ? null : Number(e.target.value) })}
+                  onChange={(e) => { cambia({ asistencia_perdida_pct: e.target.value === "" ? null : Number(e.target.value) }); if (e.target.value !== "") updateInfoModulo('p_ev', Number(e.target.value)); }}
                   className="w-full bg-background border border-[var(--glass-border)] rounded px-3 py-2 text-foreground text-center"
                 />
                 <label className="text-body font-semibold text-foreground block">{t('campos.modulo.asistenciaAviso', {defaultValue: 'Aviso al tutor desde (%)'})}</label>
