@@ -684,6 +684,7 @@
       "guardadoCorrectamente": "Desat correctament"
     },
     "feoe": {
+      "requisitosIncompletos": "Atenció: falten requisits d'accés a la formació en empresa ({{lista}}). El pla es genera igualment.",
       "errorPlanFormacion": "Error en generar el pla de formació."
     }
   },
@@ -2773,6 +2774,18 @@
       "motivacionFalta": "Falta el motiu: la norma demana motivar cada «No superat».",
       "informeCualitativo": "Valoració qualitativa del tutor d'empresa",
       "informeCualitativoDesc": "Adaptació a l'empresa, iniciativa, feina en equip, comunicació… És l'informe qualitatiu que acompanya la valoració dels RA.",
+      "requisitosTitulo": "Requisits per començar la formació en empresa",
+      "requisitosDesc": "L'aplicació avisa si en falta algun, però no bloqueja res. La prevenció de riscos laborals és un requisit estatal (RD 659/2023, art. 9.6.e); la vostra comunitat en pot afegir d'altres.",
+      "requisitoEdadSin": "Edat sense registrar a la fitxa de l'alumnat (es demana tenir {{min}} anys, l'edat mínima per treballar).",
+      "requisitoEdadMenor": "Té {{edad}} anys: l'edat mínima per treballar és {{min}}.",
+      "requisitoEdadOk": "Edat: {{edad}} anys (compleix el mínim de {{min}}).",
+      "requisitoPrl": "Ha superat la formació en prevenció de riscos laborals",
+      "requisitoPrlFecha": "Data",
+      "requisitoOtras": "Altres condicions de la vostra comunitat (opcional)",
+      "requisitosFalta": "Falta: {{lista}}.",
+      "requisitosCompletos": "Requisits registrats complits.",
+      "requisitoEdadNombre": "edat mínima",
+      "requisitoPrlNombre": "prevenció de riscos laborals",
       "planTitulo": "Pla de formació individual",
       "planDesc": "Dades de l'empresa i activitats previstes per a cada RA. Amb elles es genera el document del pla, amb els RA i criteris designats per a l'empresa (Currículum › Relació RA ← CE).",
       "planEmpresa": "Empresa",

@@ -684,6 +684,7 @@
       "guardadoCorrectamente": "Ondo gorde da"
     },
     "feoe": {
+      "requisitosIncompletos": "Kontuz: enpresako prestakuntzara sartzeko baldintzak falta dira ({{lista}}). Plana sortzen da hala ere.",
       "errorPlanFormacion": "Errorea prestakuntza-plana sortzean."
     }
   },
@@ -2773,6 +2774,18 @@
       "motivacionFalta": "Arrazoia falta da: arauak «Gainditu gabe» bakoitza arrazoitzea eskatzen du.",
       "informeCualitativo": "Enpresako tutorearen balorazio kualitatiboa",
       "informeCualitativoDesc": "Enpresara egokitzea, ekimena, talde-lana, komunikazioa… Ikaskuntza-emaitzen balorazioarekin batera doan txosten kualitatiboa da.",
+      "requisitosTitulo": "Enpresako prestakuntza hasteko baldintzak",
+      "requisitosDesc": "Aplikazioak abisatzen du baldintzaren bat falta bada, baina ez du ezer blokeatzen. Lan-arriskuen prebentzioa estatuko baldintza da (659/2023 EE, 9.6.e art.); zure erkidegoak beste batzuk gehi ditzake.",
+      "requisitoEdadSin": "Adina ez dago ikaslearen fitxan (gutxieneko adina {{min}} urte da, lan egiteko gutxienekoa).",
+      "requisitoEdadMenor": "{{edad}} urte ditu: lan egiteko gutxieneko adina {{min}} urte da.",
+      "requisitoEdadOk": "Adina: {{edad}} urte (gutxienekoa betetzen du: {{min}}).",
+      "requisitoPrl": "Lan-arriskuen prebentzioko prestakuntza gainditu du",
+      "requisitoPrlFecha": "Data",
+      "requisitoOtras": "Zure erkidegoko beste baldintza batzuk (aukerakoa)",
+      "requisitosFalta": "Falta da: {{lista}}.",
+      "requisitosCompletos": "Erregistratutako baldintzak beteta daude.",
+      "requisitoEdadNombre": "gutxieneko adina",
+      "requisitoPrlNombre": "lan-arriskuen prebentzioa",
       "planTitulo": "Banakako prestakuntza-plana",
       "planDesc": "Enpresaren datuak eta ikaskuntza-emaitza bakoitzerako aurreikusitako jarduerak. Haiekin sortzen da planaren dokumentua, enpresarako izendatutako emaitza eta irizpideekin (Kurrikuluma › RA ← CE).",
       "planEmpresa": "Enpresa",

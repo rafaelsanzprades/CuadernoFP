@@ -684,6 +684,7 @@
       "guardadoCorrectamente": "Gardado correctamente"
     },
     "feoe": {
+      "requisitosIncompletos": "Atención: faltan requisitos de acceso á formación en empresa ({{lista}}). O plan xérase igualmente.",
       "errorPlanFormacion": "Erro ao xerar o plan de formación."
     }
   },
@@ -2773,6 +2774,18 @@
       "motivacionFalta": "Falta o motivo: a norma pide motivar cada «Non superado».",
       "informeCualitativo": "Valoración cualitativa do titor da empresa",
       "informeCualitativoDesc": "Adaptación á empresa, iniciativa, traballo en equipo, comunicación… É o informe cualitativo que acompaña a valoración dos RA.",
+      "requisitosTitulo": "Requisitos para comezar a formación en empresa",
+      "requisitosDesc": "A aplicación avisa se falta algún, pero non bloquea nada. A prevención de riscos laborais é un requisito estatal (RD 659/2023, art. 9.6.e); a túa comunidade pode engadir outros.",
+      "requisitoEdadSin": "Idade sen rexistrar na ficha do alumnado (pídese ter {{min}} anos, a idade mínima para traballar).",
+      "requisitoEdadMenor": "Ten {{edad}} anos: a idade mínima para traballar é {{min}}.",
+      "requisitoEdadOk": "Idade: {{edad}} anos (cumpre o mínimo de {{min}}).",
+      "requisitoPrl": "Superou a formación en prevención de riscos laborais",
+      "requisitoPrlFecha": "Data",
+      "requisitoOtras": "Outras condicións da túa comunidade (opcional)",
+      "requisitosFalta": "Falta: {{lista}}.",
+      "requisitosCompletos": "Requisitos rexistrados cumpridos.",
+      "requisitoEdadNombre": "idade mínima",
+      "requisitoPrlNombre": "prevención de riscos laborais",
       "planTitulo": "Plan de formación individual",
       "planDesc": "Datos da empresa e actividades previstas para cada RA. Con eles xérase o documento do plan, cos RA e criterios designados para a empresa (Currículo › Relación RA ← CE).",
       "planEmpresa": "Empresa",

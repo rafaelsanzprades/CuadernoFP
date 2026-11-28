@@ -40,10 +40,28 @@ export interface PlanFormacion {
   /** Actividades previstas en la empresa para cada RA, por id_ra. */
   actividades?: Record<string, string>;
 }
+/** Requisitos para empezar la formación en empresa u organismo equiparado (el alumno/a los cumple o no; la app solo avisa). La edad no se guarda: sale de la ficha del alumnado.
+ *  La prevención de riesgos laborales es un requisito estatal (RD 659/2023, art. 9.6.e). */
+export interface RequisitosAcceso {
+  prl?: boolean;
+  prl_fecha?: string;
+  otras?: string;
+}
+export const EDAD_MINIMA_EMPRESA = 16;
+
+/** Requisitos que faltan según los datos registrados: lista de claves («edad», «prl»); vacía si no falta ninguno. La edad sin registrar no cuenta como falta. */
+export function requisitosQueFaltan(fila: { requisitos?: RequisitosAcceso } | undefined, edad: number | null): Array<"edad" | "prl"> {
+  const falta: Array<"edad" | "prl"> = [];
+  if (edad !== null && edad < EDAD_MINIMA_EMPRESA) falta.push("edad");
+  if (!fila?.requisitos?.prl) falta.push("prl");
+  return falta;
+}
+
 export interface FilaFeoe {
   ID: string;
   informe?: string;
   plan?: PlanFormacion;
+  requisitos?: RequisitosAcceso;
   ra?: Record<string, ValoracionRaTutor>;
   [clave: string]: any;
 }
@@ -75,6 +93,10 @@ export function conPlan(df_feoe: any[] | undefined, al_id: string, parcial: Part
     if (actividad) plan.actividades = { ...(f.plan?.actividades || {}), [actividad.id_ra]: actividad.texto };
     return { ...f, plan };
   });
+}
+
+export function conRequisitos(df_feoe: any[] | undefined, al_id: string, parcial: Partial<RequisitosAcceso>): any[] {
+  return conFila(df_feoe, al_id, (f) => ({ ...f, requisitos: { ...(f.requisitos || {}), ...parcial } }));
 }
 
 export function conInforme(df_feoe: any[] | undefined, al_id: string, informe: string): any[] {

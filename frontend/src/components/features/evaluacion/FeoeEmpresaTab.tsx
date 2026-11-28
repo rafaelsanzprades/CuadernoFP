@@ -14,6 +14,7 @@ import Link from "next/link";
 import { DEFAULT_CONFIG_REDONDEO } from "@/utils/calificaciones";
 import {
   ID_INSTRUMENTO_FEOE, idIndicadorFeoe, valorA10, valor10A1, modoTutor, filaFeoe, conValoracionRa, conInforme, conPlan, mediaEscalaRa, resultadoRaTutor,
+  conRequisitos, requisitosQueFaltan, EDAD_MINIMA_EMPRESA,
 } from "@/utils/tutorEmpresa";
 
 // ─── Ítem 12 (resto): evaluación del RA desarrollado en empresa (FEOE) ──────
@@ -71,8 +72,15 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
   const raConDesignados = df_ra.filter((ra: any) => ceDesignados.some((ce: any) => ce.id_ra === ra.id_ra));
 
   const plan = filaAlumno.plan || {};
+  const requisitos = filaAlumno.requisitos || {};
+  const edadAlumno = (() => { const a = (cursoData?.df_al || []).find((x: any) => x.ID === studentId); const n = Number(a?.Edad); return a && a.Edad !== undefined && a.Edad !== null && String(a.Edad) !== "" && !Number.isNaN(n) ? n : null; })();
+  const faltan = requisitosQueFaltan(filaAlumno, edadAlumno);
+  const nombreRequisito = (k: "edad" | "prl") => k === "edad"
+    ? t('campos.feoe.requisitoEdadNombre', {defaultValue: 'edad mínima'})
+    : t('campos.feoe.requisitoPrlNombre', {defaultValue: 'prevención de riesgos laborales'});
 
   const descargarPlan = async (formato: "pdf" | "docx") => {
+    if (faltan.length > 0) toast(t('toasts.feoe.requisitosIncompletos', {defaultValue: 'Atención: faltan requisitos de acceso a la formación en empresa ({{lista}}). El plan se genera igualmente.', lista: faltan.map(nombreRequisito).join(', ')}), { icon: '⚠️' });
     setGenerandoPlan(true);
     try {
       const url = `${getApiBase()}/api/pdf?type=plan_formacion&al_id=${studentId}&file_format=${formato}`;
@@ -356,6 +364,51 @@ export function FeoeEmpresaAlumno({ studentId }: { studentId: string }) {
                       </div>
                     );
                   })}
+
+      <div className="bg-background/20 border border-white/5 rounded-xl p-5 space-y-3">
+        <h4 className="font-bold text-foreground">{t('campos.feoe.requisitosTitulo', {defaultValue: 'Requisitos para empezar la formación en empresa'})}</h4>
+        <p className="text-caption text-muted">{t('campos.feoe.requisitosDesc', {defaultValue: 'La app avisa si falta alguno, pero no bloquea nada. La prevención de riesgos laborales es un requisito estatal (RD 659/2023, art. 9.6.e); tu comunidad puede añadir otros.'})}</p>
+        <p className={`text-body ${edadAlumno !== null && edadAlumno < EDAD_MINIMA_EMPRESA ? "text-danger" : "text-foreground/90"}`}>
+          {edadAlumno === null
+            ? t('campos.feoe.requisitoEdadSin', {defaultValue: 'Edad sin registrar en la ficha del alumnado (se pide tener {{min}} años, la edad mínima para trabajar).', min: EDAD_MINIMA_EMPRESA})
+            : edadAlumno < EDAD_MINIMA_EMPRESA
+              ? t('campos.feoe.requisitoEdadMenor', {defaultValue: 'Tiene {{edad}} años: la edad mínima para trabajar es {{min}}.', edad: edadAlumno, min: EDAD_MINIMA_EMPRESA})
+              : t('campos.feoe.requisitoEdadOk', {defaultValue: 'Edad: {{edad}} años (cumple el mínimo de {{min}}).', edad: edadAlumno, min: EDAD_MINIMA_EMPRESA})}
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-end">
+          <label className="flex items-center gap-2 text-body text-foreground">
+            <input
+              type="checkbox"
+              checked={!!requisitos.prl}
+              onChange={(e) => updateCursoData("df_feoe", conRequisitos(df_feoe, studentId, { prl: e.target.checked }))}
+            />
+            {t('campos.feoe.requisitoPrl', {defaultValue: 'Ha superado la formación en prevención de riesgos laborales'})}
+          </label>
+          <label className="text-caption text-muted font-bold block">
+            {t('campos.feoe.requisitoPrlFecha', {defaultValue: 'Fecha'})}
+            <input
+              type="date"
+              value={requisitos.prl_fecha || ""}
+              onChange={(e) => updateCursoData("df_feoe", conRequisitos(df_feoe, studentId, { prl_fecha: e.target.value }))}
+              className="w-full mt-1 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-accent focus:outline-none"
+            />
+          </label>
+        </div>
+        <label className="text-caption text-muted font-bold block">
+          {t('campos.feoe.requisitoOtras', {defaultValue: 'Otras condiciones de tu comunidad (opcional)'})}
+          <input
+            type="text"
+            value={requisitos.otras || ""}
+            onChange={(e) => updateCursoData("df_feoe", conRequisitos(df_feoe, studentId, { otras: e.target.value }))}
+            className="w-full mt-1 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-accent focus:outline-none"
+          />
+        </label>
+        <p role={faltan.length > 0 ? "alert" : undefined} className={`text-caption ${faltan.length > 0 ? "text-danger font-semibold" : "text-muted"}`}>
+          {faltan.length > 0
+            ? t('campos.feoe.requisitosFalta', {defaultValue: 'Falta: {{lista}}.', lista: faltan.map(nombreRequisito).join(', ')})
+            : t('campos.feoe.requisitosCompletos', {defaultValue: 'Requisitos registrados cumplidos.'})}
+        </p>
+      </div>
 
       <div className="bg-background/20 border border-white/5 rounded-xl p-5 space-y-3">
         <h4 className="font-bold text-foreground">{t('campos.feoe.planTitulo', {defaultValue: 'Plan de formación individual'})}</h4>

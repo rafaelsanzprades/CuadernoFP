@@ -684,6 +684,7 @@
       "guardadoCorrectamente": "Saved successfully"
     },
     "feoe": {
+      "requisitosIncompletos": "Warning: requirements for starting the work placement are missing ({{lista}}). The plan is generated anyway.",
       "errorPlanFormacion": "Error generating the training plan."
     }
   },
@@ -2773,6 +2774,18 @@
       "motivacionFalta": "The reason is missing: the regulations require every \"Not passed\" to be justified.",
       "informeCualitativo": "Qualitative assessment by the company tutor",
       "informeCualitativoDesc": "Adaptation to the company, initiative, teamwork, communication… It is the qualitative report that goes with the RA assessment.",
+      "requisitosTitulo": "Requirements to start the work placement",
+      "requisitosDesc": "The app warns if one is missing but blocks nothing. Occupational risk prevention is a state requirement (RD 659/2023, art. 9.6.e); your region may add others.",
+      "requisitoEdadSin": "Age not recorded in the student record (the minimum is {{min}}, the minimum working age).",
+      "requisitoEdadMenor": "Aged {{edad}}: the minimum working age is {{min}}.",
+      "requisitoEdadOk": "Age: {{edad}} (meets the minimum of {{min}}).",
+      "requisitoPrl": "Has completed occupational risk prevention training",
+      "requisitoPrlFecha": "Date",
+      "requisitoOtras": "Other conditions in your region (optional)",
+      "requisitosFalta": "Missing: {{lista}}.",
+      "requisitosCompletos": "Recorded requirements met.",
+      "requisitoEdadNombre": "minimum age",
+      "requisitoPrlNombre": "occupational risk prevention",
       "planTitulo": "Individual training plan",
       "planDesc": "Company details and planned activities for each RA. The plan document is generated from them, with the RA and criteria designated for the company (Curriculum > RA-CE relation).",
       "planEmpresa": "Company",
