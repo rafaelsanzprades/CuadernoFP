@@ -1836,6 +1836,10 @@
       "estadoActa_FEP": "Formación en empresa pendente",
       "estadoMotivoPlaceholder": "Resolución ou motivo (n.º, data)…",
       "convocatoriasPreviasLabel": "Convocatorias de cursos anteriores",
+      "recuperacionPendienteLabel": "Programa de recuperación (módulo pendente dun curso anterior)",
+      "recuperacionPendientePlaceholder": "Actividades de recuperación, seguimento e criterios de avaliación…",
+      "recuperacionFechaLabel": "Data da avaliación de recuperación",
+      "recuperacionPendienteAviso": "Se o enches, aparece no informe individual do alumno/a.",
       "convocatoriasUsadas": "Convocatorias consumidas: {{usadas}} de {{max}}.",
       "convocatoriasLimite": "É a última: comproba que ocorre despois na túa comunidade."
     },

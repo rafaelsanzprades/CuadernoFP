@@ -209,7 +209,7 @@ def test_convocatorias_no_cuentan_si_esta_exento():
     df = pd.DataFrame([{"ID": "1", "Estado_Acta": "EX", "Convocatorias_Previas": 3}])
     assert situacion_acta(df, 0, {})["usadas"] == 0
     df2 = pd.DataFrame([{"ID": "1", "Convocatorias_Previas": 1, "Nota_Final_FE": 4}])
-    assert situacion_acta(df2, 0, {"grado_oferta": "E"}) == {"sigla": "", "nombre": "", "usadas": 3, "maximo": 2}
+    assert situacion_acta(df2, 0, {"grado_oferta": "E"}) == {"sigla": "", "nombre": "", "usadas": 3, "maximo": 2, "plan_recuperacion": "", "fecha_recuperacion": ""}
 
 
 def test_boletin_individual_avisa_si_la_nota_es_positiva_con_un_ra_no_superado_por_el_tutor():
@@ -247,3 +247,18 @@ def test_boletin_grupal_final_marca_con_cruz_la_nota_positiva_con_ra_no_superado
     fila["Nota_Final_FO"] = 3
     contenido, _, _ = generar_documento("grupal_final", modulo, curso, fecha_corte="2026-01-31", file_format="docx")
     assert "†" not in zipfile.ZipFile(io.BytesIO(contenido)).read("word/document.xml").decode("utf-8")
+
+
+def test_boletin_individual_imprime_el_programa_de_recuperacion_de_pendientes():
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    al = _al_id(curso)
+    fila = next(r for r in curso["df_eval"] if r.get("ID") == al)
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    assert "Programa de recuperación del módulo pendiente" not in _texto_docx(contenido)
+    fila["Plan_Recuperacion"] = "Entrega de tres prácticas y una prueba escrita"
+    fila["Fecha_Recuperacion"] = "2026-05-20"
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    texto = _texto_docx(contenido)
+    assert "Programa de recuperación del módulo pendiente" in texto and "Entrega de tres prácticas y una prueba escrita" in texto and "2026-05-20" in texto
+    pdf, mime, _ = generar_documento("individual", modulo, curso, al_id=al)
+    assert mime == "application/pdf" and pdf.startswith(b"%PDF")

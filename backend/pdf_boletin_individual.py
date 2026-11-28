@@ -58,11 +58,19 @@ def situacion_acta(df_eval: pd.DataFrame, idx_ev, config_redondeo: dict = None) 
         maximo = 0
     if not maximo:
         maximo = 2 if config.get("grado_oferta") == "E" else 4
+    plan = fecha = ""
+    if idx_ev is not None and not df_eval.empty:
+        if "Plan_Recuperacion" in df_eval.columns:
+            plan = _texto(df_eval.at[idx_ev, "Plan_Recuperacion"])
+        if "Fecha_Recuperacion" in df_eval.columns:
+            fecha = _texto(df_eval.at[idx_ev, "Fecha_Recuperacion"])
     return {
         "sigla": sigla_estado(estado, config) if estado else "",
         "nombre": NOMBRE_ESTADO_ACTA.get(estado, ""),
         "usadas": usadas,
         "maximo": maximo,
+        "plan_recuperacion": plan,
+        "fecha_recuperacion": fecha,
     }
 
 
@@ -553,6 +561,13 @@ def generar_pdf_boletin_individual(
         estado_txt = "Calificado (nota numérica)"
     elements.append(Paragraph(f"<b>Estado en el acta:</b> {estado_txt}", norm))
     elements.append(Paragraph(f"<b>Convocatorias consumidas en este módulo:</b> {sit['usadas']} de {sit['maximo']}", norm))
+    if sit["plan_recuperacion"] or sit["fecha_recuperacion"]:
+        elements.append(Spacer(1, 4))
+        elements.append(Paragraph("Programa de recuperación del módulo pendiente", h3))
+        if sit["plan_recuperacion"]:
+            elements.append(Paragraph(esc(sit["plan_recuperacion"]), norm))
+        if sit["fecha_recuperacion"]:
+            elements.append(Paragraph(f"<b>Fecha de la evaluación de recuperación:</b> {esc(sit['fecha_recuperacion'])}", norm))
     elements.append(Spacer(1, 6))
     if tutor["filas"]:
         elements.append(Paragraph("Valoración del tutor de empresa por resultado de aprendizaje", h3))
@@ -777,6 +792,10 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
     add_section_heading(doc, "3. Situación en el acta y formación en empresa")
     doc.add_paragraph(f"Estado en el acta: {sit['sigla'] + ' (' + sit['nombre'] + ')' if sit['sigla'] else 'Calificado (nota numérica)'}")
     doc.add_paragraph(f"Convocatorias consumidas en este módulo: {sit['usadas']} de {sit['maximo']}")
+    if sit["plan_recuperacion"] or sit["fecha_recuperacion"]:
+        doc.add_paragraph("Programa de recuperación del módulo pendiente: " + sit["plan_recuperacion"])
+        if sit["fecha_recuperacion"]:
+            doc.add_paragraph("Fecha de la evaluación de recuperación: " + sit["fecha_recuperacion"])
     if tutor["filas"]:
         add_table(doc, ["RA", "Resultado del tutor", "Motivo"],
                   [[f["id_ra"] + (" · " + f["desc"] if f["desc"] else ""), f["resultado"], f["motivo"] or "-"] for f in tutor["filas"]],

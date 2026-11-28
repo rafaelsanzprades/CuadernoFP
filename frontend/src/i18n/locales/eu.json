@@ -1836,6 +1836,10 @@
       "estadoActa_FEP": "Enpresako prestakuntza zain",
       "estadoMotivoPlaceholder": "Ebazpena edo arrazoia (zk., data)…",
       "convocatoriasPreviasLabel": "Aurreko ikasturteetako deialdiak",
+      "recuperacionPendienteLabel": "Berreskuratze programa (aurreko ikasturteko modulu zain bat)",
+      "recuperacionPendientePlaceholder": "Berreskuratze jarduerak, jarraipena eta ebaluazio irizpideak…",
+      "recuperacionFechaLabel": "Berreskuratze ebaluazioaren data",
+      "recuperacionPendienteAviso": "Betetzen baduzu, ikaslearen txosten indibidualean agertzen da.",
       "convocatoriasUsadas": "Erabilitako deialdiak: {{usadas}} / {{max}}.",
       "convocatoriasLimite": "Azkena da: egiaztatu zer gertatzen den ondoren zure erkidegoan."
     },

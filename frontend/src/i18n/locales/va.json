@@ -1836,6 +1836,10 @@
       "estadoActa_FEP": "Formació en empresa pendent",
       "estadoMotivoPlaceholder": "Resolució o motiu (núm., data)…",
       "convocatoriasPreviasLabel": "Convocatòries de cursos anteriors",
+      "recuperacionPendienteLabel": "Programa de recuperació (mòdul pendent d'un curs anterior)",
+      "recuperacionPendientePlaceholder": "Activitats de recuperació, seguiment i criteris d'avaluació…",
+      "recuperacionFechaLabel": "Data de l'avaluació de recuperació",
+      "recuperacionPendienteAviso": "Si ho ompli, apareix a l'informe individual de l'alumne/a.",
       "convocatoriasUsadas": "Convocatòries consumides: {{usadas}} de {{max}}.",
       "convocatoriasLimite": "És l'última: comprova què passa després a la teua comunitat."
     },

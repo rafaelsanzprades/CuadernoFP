@@ -180,8 +180,9 @@ export function DetalleAlumnadoTab() {
     pushHistorial(al_id, "Estado_Acta", valorAnterior, val === "" ? null : val);
   };
 
-  // Datos libres del alumno/a en el acta: Convocatorias_Previas (número) y Estado_Motivo (resolución de exención o convalidación).
-  const handleCampoActa = (al_id: string, campo: "Convocatorias_Previas" | "Estado_Motivo", val: number | string | null) => {
+  // Datos libres del alumno/a en el acta: Convocatorias_Previas (número), Estado_Motivo (resolución de exención o convalidación) y, para un módulo pendiente de un
+  // curso anterior, Plan_Recuperacion (actividades) y Fecha_Recuperacion (evaluación de recuperación); los imprime el boletín individual.
+  const handleCampoActa = (al_id: string, campo: "Convocatorias_Previas" | "Estado_Motivo" | "Plan_Recuperacion" | "Fecha_Recuperacion", val: number | string | null) => {
     const newEval = [...df_eval];
     let evRowIdx = newEval.findIndex(e => e.ID === al_id);
     if (evRowIdx === -1) {
@@ -470,6 +471,28 @@ export function DetalleAlumnadoTab() {
                                 </div>
                               );
                             })()}
+                            <div className="mb-4">
+                              <label htmlFor={`plan-recup-${al_id}`} className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.recuperacionPendienteLabel', {defaultValue: 'Programa de recuperación (módulo pendiente de un curso anterior)'})}</label>
+                              <textarea
+                                id={`plan-recup-${al_id}`}
+                                rows={3}
+                                value={evRow.Plan_Recuperacion ?? ""}
+                                placeholder={t('campos.evaluacion.recuperacionPendientePlaceholder', {defaultValue: 'Actividades de recuperación, seguimiento y criterios de evaluación…'})}
+                                onChange={(e) => handleCampoActa(al_id, "Plan_Recuperacion", e.target.value)}
+                                onClick={(e) => e.stopPropagation()}
+                                className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-info focus:outline-none"
+                              />
+                              <label htmlFor={`fecha-recup-${al_id}`} className="text-caption text-muted tracking-wider mt-2 mb-1.5 block font-bold">{t('campos.evaluacion.recuperacionFechaLabel', {defaultValue: 'Fecha de la evaluación de recuperación'})}</label>
+                              <input
+                                id={`fecha-recup-${al_id}`}
+                                type="date"
+                                value={evRow.Fecha_Recuperacion ?? ""}
+                                onChange={(e) => handleCampoActa(al_id, "Fecha_Recuperacion", e.target.value)}
+                                onClick={(e) => e.stopPropagation()}
+                                className="w-full bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-info focus:outline-none"
+                              />
+                              <p className="text-caption text-muted mt-1">{t('campos.evaluacion.recuperacionPendienteAviso', {defaultValue: 'Si lo rellenas, sale en el informe individual del alumno/a.'})}</p>
+                            </div>
                             <div className="mb-4">
                               <label className="text-caption text-muted tracking-wider mb-1.5 block font-bold">{t('campos.evaluacion.notaFinalOrdinariaLabel', {defaultValue: 'Nota final ordinaria — FO (manual / calc)'})}</label>
                               <input

@@ -1836,6 +1836,10 @@
       "estadoActa_FEP": "Work placement pending",
       "estadoMotivoPlaceholder": "Resolution or reason (no., date)…",
       "convocatoriasPreviasLabel": "Calls from previous years",
+      "recuperacionPendienteLabel": "Recovery programme (module pending from a previous year)",
+      "recuperacionPendientePlaceholder": "Recovery activities, follow-up and assessment criteria…",
+      "recuperacionFechaLabel": "Date of the recovery assessment",
+      "recuperacionPendienteAviso": "If filled in, it appears in the student's individual report.",
       "convocatoriasUsadas": "Calls used: {{usadas}} of {{max}}.",
       "convocatoriasLimite": "It is the last one: check what happens next in your region."
     },
