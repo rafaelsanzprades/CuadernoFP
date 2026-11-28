@@ -182,3 +182,9 @@ def test_caracteristicas_del_alumnado_salen_en_pd_igual_y_pd_mas():
     cambios = {"textos_pd_caracteristicas_alumnado": "ZZCaractAlumnadoZZ"}
     assert "Características del alumnado. ZZCaractAlumnadoZZ" in _generar(cambios, TRES[1])
     assert "ZZCaractAlumnadoZZ" in _generar(cambios, TRES[2])
+
+
+def test_el_apunte_sobre_el_proyecto_intermodular_llega_a_los_criterios_de_calificacion():
+    t = _generar({"config_contexto.proyecto_defensa": "Defensa oral individual ante tres docentes, con rúbrica."})
+    assert "Evaluación y defensa del proyecto intermodular: Defensa oral individual ante tres docentes, con rúbrica." in t
+    assert "Evaluación y defensa del proyecto intermodular" not in _generar()

@@ -434,6 +434,10 @@ def _build_context(data: dict) -> dict:
     texto_calif = config.get("texto_criterios_calificacion", "")
     if not texto_calif:
         texto_calif = "30%. Conceptuales. 30%. Procedimentales. 40%. Actitudinales."
+    # Apunte del docente sobre cómo se evalúa y se defiende el proyecto intermodular (Metodologías > Estrategias): solo si lo ha escrito
+    proyecto_defensa = (config.get("proyecto_defensa") or "").strip()
+    if proyecto_defensa:
+        texto_calif = texto_calif.rstrip() + " Evaluación y defensa del proyecto intermodular: " + proyecto_defensa
     context["texto_criterios_calificacion"] = texto_calif
 
     # Misma tabla "Instrumento | 1er/2º/3er Tri." que PD- (helpers_pd_tablas)
