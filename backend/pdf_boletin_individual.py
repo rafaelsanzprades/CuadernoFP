@@ -9,6 +9,106 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from helpers_catalogo import resolve_escala_cualitativa
 from pdf_helpers import esc
+from pdf_boletin_grupal import ESTADOS_ACTA, sigla_estado
+
+NOMBRE_ESTADO_ACTA = {
+    "NE": "No evaluado", "NP": "No presentado", "EX": "Exento", "CV": "Convalidado",
+    "RC": "Renuncia a la convocatoria", "FEP": "Formación en empresa pendiente",
+}
+
+
+def _texto(valor) -> str:
+    """Texto limpio de una celda (vacío si es nulo o «nan»)."""
+    if valor is None or (isinstance(valor, float) and pd.isna(valor)):
+        return ""
+    t = str(valor).strip()
+    return "" if t.lower() == "nan" else t
+
+
+def situacion_acta(df_eval: pd.DataFrame, idx_ev, config_redondeo: dict = None) -> dict:
+    """Estado del alumno/a en el acta y convocatorias consumidas. Misma regla que frontend/src/utils/estadosActa.ts
+    (convocatoriasUsadas y maxConvocatorias): exento, convalidado y renuncia no consumen; en Andalucía tampoco la formación en empresa
+    pendiente; el «no evaluado» sí consume."""
+    config = config_redondeo or {}
+    perfil = config.get("perfil_comunidad") or ""
+    estado = ""
+    previas = 0
+    nota_fe = 0.0
+    if idx_ev is not None and not df_eval.empty:
+        if "Estado_Acta" in df_eval.columns:
+            e = _texto(df_eval.at[idx_ev, "Estado_Acta"])
+            estado = e if e in ESTADOS_ACTA else ""
+        if "Convocatorias_Previas" in df_eval.columns:
+            try:
+                previas = max(0, int(float(df_eval.at[idx_ev, "Convocatorias_Previas"])))
+            except (TypeError, ValueError):
+                previas = 0
+        if "Nota_Final_FE" in df_eval.columns:
+            try:
+                nota_fe = float(df_eval.at[idx_ev, "Nota_Final_FE"])
+            except (TypeError, ValueError):
+                nota_fe = 0.0
+    if estado in ("EX", "CV", "RC") or (estado == "FEP" and perfil == "andalucia"):
+        usadas = 0
+    else:
+        usadas = previas + 1 + (1 if nota_fe > 0 else 0)
+    try:
+        maximo = int(config.get("max_convocatorias") or 0)
+    except (TypeError, ValueError):
+        maximo = 0
+    if not maximo:
+        maximo = 2 if config.get("grado_oferta") == "E" else 4
+    return {
+        "sigla": sigla_estado(estado, config) if estado else "",
+        "nombre": NOMBRE_ESTADO_ACTA.get(estado, ""),
+        "usadas": usadas,
+        "maximo": maximo,
+    }
+
+
+def valoracion_tutor(al_id: str, df_feoe: pd.DataFrame, df_ce: pd.DataFrame, df_ra: pd.DataFrame,
+                     df_calificaciones: pd.DataFrame, config_redondeo: dict = None) -> dict:
+    """Valoración del tutor de empresa: resultado por RA con su motivo e informe cualitativo. Misma regla que
+    frontend/src/utils/tutorEmpresa.ts: en modo «superado» se lee lo registrado en df_feoe; en modo «escala_1_4» el resultado se deduce de la
+    media de los criterios valorados (mayor que 2 = superado)."""
+    config = config_redondeo or {}
+    modo = "superado" if config.get("tutor_empresa_modo") == "superado" else "escala_1_4"
+    fila = {}
+    if df_feoe is not None and not df_feoe.empty and "ID" in df_feoe.columns:
+        sel = df_feoe[df_feoe["ID"] == al_id]
+        if not sel.empty:
+            fila = sel.iloc[0].to_dict()
+    ra_fila = fila.get("ra") if isinstance(fila.get("ra"), dict) else {}
+    informe = _texto(fila.get("informe"))
+    filas = []
+    if df_ce is not None and not df_ce.empty and "is_dual" in df_ce.columns and "id_ra" in df_ce.columns:
+        duales = df_ce[df_ce["is_dual"] == True]  # noqa: E712 (la columna puede traer nulos)
+        desc_ra = {}
+        if df_ra is not None and not df_ra.empty and "id_ra" in df_ra.columns:
+            col = "desc_ra" if "desc_ra" in df_ra.columns else None
+            desc_ra = {r["id_ra"]: (_texto(r[col]) if col else "") for _, r in df_ra.iterrows()}
+        for id_ra in list(dict.fromkeys(duales["id_ra"].tolist())):
+            valores = []
+            if df_calificaciones is not None and not df_calificaciones.empty and "id_instrumento" in df_calificaciones.columns:
+                for id_ce in duales[duales["id_ra"] == id_ra]["id_ce"].tolist():
+                    c = df_calificaciones[(df_calificaciones["id_alumno"] == al_id)
+                                          & (df_calificaciones["id_instrumento"] == "FEOE-EMPRESA")
+                                          & (df_calificaciones["id_indicador"] == f"FEOE-{id_ce}")]
+                    if not c.empty and pd.notna(c.iloc[0]["valor"]):
+                        valores.append(round(float(c.iloc[0]["valor"]) / 10 * 3) + 1)
+            media = sum(valores) / len(valores) if valores else None
+            if modo == "superado":
+                resultado = (ra_fila.get(id_ra) or {}).get("resultado")
+            else:
+                resultado = None if media is None else ("superado" if media > 2 else "no_superado")
+            filas.append({
+                "id_ra": id_ra,
+                "desc": desc_ra.get(id_ra, ""),
+                "resultado": {"superado": "Superado", "no_superado": "No superado"}.get(resultado, "Sin valorar"),
+                "motivo": _texto((ra_fila.get(id_ra) or {}).get("motivacion")),
+            })
+    return {"modo": modo, "filas": filas, "informe": informe}
+
 
 def _draw_page_decorations(canv, doc):
     """Cabecera y pie - idéntico al Calendario académico."""
@@ -423,6 +523,38 @@ def generar_pdf_boletin_individual(
     elements.append(t_unified)
     elements.append(Spacer(1, 10))
 
+    # --- 4. SITUACIÓN EN EL ACTA Y FORMACIÓN EN EMPRESA ---
+    sit = situacion_acta(df_eval, idx_ev, config_redondeo)
+    tutor = valoracion_tutor(al_id, df_feoe, df_ce, df_ra, df_calificaciones, config_redondeo)
+    elements.append(Paragraph("3. Situación en el acta y formación en empresa", h2))
+    if sit["sigla"]:
+        estado_txt = f"<b>{esc(sit['sigla'])}</b> ({esc(sit['nombre'])})"
+    else:
+        estado_txt = "Calificado (nota numérica)"
+    elements.append(Paragraph(f"<b>Estado en el acta:</b> {estado_txt}", norm))
+    elements.append(Paragraph(f"<b>Convocatorias consumidas en este módulo:</b> {sit['usadas']} de {sit['maximo']}", norm))
+    elements.append(Spacer(1, 6))
+    if tutor["filas"]:
+        elements.append(Paragraph("Valoración del tutor de empresa por resultado de aprendizaje", h3))
+        cab = [Paragraph("<b>RA</b>", sml), Paragraph("<b>Resultado</b>", sml), Paragraph("<b>Motivo</b>", sml)]
+        filas_t = [cab] + [[Paragraph(esc(f["id_ra"] + (" · " + f["desc"] if f["desc"] else "")), sml), Paragraph(esc(f["resultado"]), sml),
+                            Paragraph(esc(f["motivo"] or "-"), sml)] for f in tutor["filas"]]
+        t_tutor = Table(filas_t, colWidths=[7.0*cm, 3.0*cm, 7.0*cm], hAlign="LEFT", repeatRows=1)
+        t_tutor.setStyle(TableStyle([
+            ("BOX", (0, 0), (-1, -1), 1.5, colors.HexColor("#222222")),
+            ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#bbbbbb")),
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#eeeeee")),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("TOPPADDING", (0, 0), (-1, -1), 2), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+        ]))
+        elements.append(t_tutor)
+        elements.append(Spacer(1, 6))
+    if tutor["informe"]:
+        elements.append(Paragraph("Valoración cualitativa del tutor de empresa", h3))
+        elements.append(Paragraph(esc(tutor["informe"]), norm))
+    elif not tutor["filas"]:
+        elements.append(Paragraph("<i>Sin valoración del tutor de empresa registrada.</i>", sml))
+    elements.append(Spacer(1, 10))
 
     doc.build(elements)
     buffer.seek(0)
@@ -615,6 +747,20 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
 
     add_table(doc, ["Instrumentos de evaluación", "%", f"1T ({pond_1t}%)", f"2T ({pond_2t}%)", f"3T ({pond_3t}%)", "Final (100%)"],
                rows, col_widths_cm=[5, 1.5, 2.5, 2.5, 2.5, 2.5], total_row_bg="E8E8E8")
+
+    sit = situacion_acta(df_eval, idx_ev, config_redondeo)
+    tutor = valoracion_tutor(al_id, df_feoe, df_ce, df_ra, df_calificaciones, config_redondeo)
+    add_section_heading(doc, "3. Situación en el acta y formación en empresa")
+    doc.add_paragraph(f"Estado en el acta: {sit['sigla'] + ' (' + sit['nombre'] + ')' if sit['sigla'] else 'Calificado (nota numérica)'}")
+    doc.add_paragraph(f"Convocatorias consumidas en este módulo: {sit['usadas']} de {sit['maximo']}")
+    if tutor["filas"]:
+        add_table(doc, ["RA", "Resultado del tutor", "Motivo"],
+                  [[f["id_ra"] + (" · " + f["desc"] if f["desc"] else ""), f["resultado"], f["motivo"] or "-"] for f in tutor["filas"]],
+                  col_widths_cm=[7, 3, 7])
+    if tutor["informe"]:
+        doc.add_paragraph("Valoración cualitativa del tutor de empresa: " + tutor["informe"])
+    elif not tutor["filas"]:
+        doc.add_paragraph("Sin valoración del tutor de empresa registrada.")
 
     return doc_to_bytes(doc)
 

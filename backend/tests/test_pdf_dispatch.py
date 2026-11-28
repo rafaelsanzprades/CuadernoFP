@@ -162,3 +162,51 @@ def test_boletin_grupal_final_usa_la_sigla_del_perfil(perfil, estado, sigla):
     xml = zipfile.ZipFile(io.BytesIO(contenido)).read("word/document.xml").decode("utf-8")
     texto = re.sub(r"<[^>]+>", "|", xml)
     assert f"|{sigla}|" in texto
+
+
+def _texto_docx(contenido):
+    import re
+    xml = zipfile.ZipFile(io.BytesIO(contenido)).read("word/document.xml").decode("utf-8")
+    return re.sub(r"<[^>]+>", "|", xml)
+
+
+def test_boletin_individual_muestra_estado_convocatorias_e_informe_del_tutor():
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    al = _al_id(curso)
+    modulo.setdefault("config_redondeo", {}).update({"perfil_comunidad": "andalucia", "tutor_empresa_modo": "superado"})
+    for ce in modulo["df_ce"][:1]:
+        ce["is_dual"] = True
+    ra_id = modulo["df_ce"][0]["id_ra"]
+    fila = next(r for r in curso["df_eval"] if r.get("ID") == al)
+    fila["Estado_Acta"] = "NP"
+    fila["Convocatorias_Previas"] = 2
+    curso["df_feoe"] = [{"ID": al, "informe": "Muy buena adaptación a la empresa",
+                         "ra": {ra_id: {"resultado": "no_superado", "motivacion": "No llegó a las prácticas de red"}}}]
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    texto = _texto_docx(contenido)
+    assert "NE (No presentado)" in texto            # Andalucía llama NE al no presentado
+    assert "3 de 4" in texto                        # 2 previas + la de este curso, máximo del grado D
+    assert "No superado" in texto and "No llegó a las prácticas de red" in texto
+    assert "Muy buena adaptación a la empresa" in texto
+    pdf, mime, _ = generar_documento("individual", modulo, curso, al_id=al)
+    assert mime == "application/pdf" and pdf.startswith(b"%PDF")
+
+
+def test_boletin_individual_deduce_el_resultado_del_tutor_de_la_escala():
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    al = _al_id(curso)
+    modulo.setdefault("config_redondeo", {}).update({"tutor_empresa_modo": "escala_1_4"})
+    ce = modulo["df_ce"][0]
+    ce["is_dual"] = True
+    curso["df_calificaciones"] = [{"id_alumno": al, "id_instrumento": "FEOE-EMPRESA", "id_indicador": f"FEOE-{ce['id_ce']}", "valor": 10.0}]
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    assert "Superado" in _texto_docx(contenido)
+
+
+def test_convocatorias_no_cuentan_si_esta_exento():
+    import pandas as pd
+    from pdf_boletin_individual import situacion_acta
+    df = pd.DataFrame([{"ID": "1", "Estado_Acta": "EX", "Convocatorias_Previas": 3}])
+    assert situacion_acta(df, 0, {})["usadas"] == 0
+    df2 = pd.DataFrame([{"ID": "1", "Convocatorias_Previas": 1, "Nota_Final_FE": 4}])
+    assert situacion_acta(df2, 0, {"grado_oferta": "E"}) == {"sigla": "", "nombre": "", "usadas": 3, "maximo": 2}
