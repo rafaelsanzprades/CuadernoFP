@@ -17,6 +17,36 @@ NOMBRE_ESTADO_ACTA = {
 }
 
 
+NOMBRE_ADAPTACION = {
+    "TIEMPO_EXTRA": "Tiempo extra en pruebas", "COMUNICACION": "Sistemas de comunicación alternativos",
+    "MEDIOS": "Medios apropiados y apoyos técnicos", "FORMATO_EXAMEN": "Adaptación de formato de examen",
+    "UBICACION": "Ubicación preferente en el aula",
+}
+
+
+def adaptaciones_alumno(df_eval: pd.DataFrame, idx_ev, config_redondeo: dict = None) -> list:
+    """Líneas de texto con las adaptaciones aplicadas al alumno/a (campos Adaptaciones, Adaptacion_No_Altera y Adaptacion_Nota de su fila de
+    df_eval); vacía si no hay ninguna. Con el perfil de Andalucía añade que no minoran la calificación (Orden de evaluación de 18-09-2025, arts. 3 y 4.2)."""
+    if idx_ev is None or df_eval.empty:
+        return []
+    ids = df_eval.at[idx_ev, "Adaptaciones"] if "Adaptaciones" in df_eval.columns else None
+    ids = list(ids) if isinstance(ids, (list, tuple)) else []
+    nota = _texto(df_eval.at[idx_ev, "Adaptacion_Nota"]) if "Adaptacion_Nota" in df_eval.columns else ""
+    if not ids and not nota:
+        return []
+    no_altera = bool(df_eval.at[idx_ev, "Adaptacion_No_Altera"]) if "Adaptacion_No_Altera" in df_eval.columns and pd.notna(df_eval.at[idx_ev, "Adaptacion_No_Altera"]) else False
+    lineas = []
+    if ids:
+        lineas.append("Adaptaciones aplicadas: " + ", ".join(NOMBRE_ADAPTACION.get(i, str(i)) for i in ids) + ".")
+    if nota:
+        lineas.append("Otras adaptaciones o aclaraciones: " + nota)
+    if no_altera:
+        lineas.append("No alteran los resultados de aprendizaje ni los criterios de evaluación esenciales.")
+    if (config_redondeo or {}).get("perfil_comunidad") == "andalucia":
+        lineas.append("Las adaptaciones no minoran la calificación (Orden de evaluación de 18-09-2025, arts. 3 y 4.2).")
+    return lineas
+
+
 def _texto(valor) -> str:
     """Texto limpio de una celda (vacío si es nulo o «nan»)."""
     if valor is None or (isinstance(valor, float) and pd.isna(valor)):
@@ -561,6 +591,12 @@ def generar_pdf_boletin_individual(
         estado_txt = "Calificado (nota numérica)"
     elements.append(Paragraph(f"<b>Estado en el acta:</b> {estado_txt}", norm))
     elements.append(Paragraph(f"<b>Convocatorias consumidas en este módulo:</b> {sit['usadas']} de {sit['maximo']}", norm))
+    lineas_adapt = adaptaciones_alumno(df_eval, idx_ev, config_redondeo)
+    if lineas_adapt:
+        elements.append(Spacer(1, 4))
+        elements.append(Paragraph("Adaptaciones", h3))
+        for linea in lineas_adapt:
+            elements.append(Paragraph(esc(linea), norm))
     if sit["plan_recuperacion"] or sit["fecha_recuperacion"]:
         elements.append(Spacer(1, 4))
         elements.append(Paragraph("Programa de recuperación del módulo pendiente", h3))
@@ -792,6 +828,11 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
     add_section_heading(doc, "3. Situación en el acta y formación en empresa")
     doc.add_paragraph(f"Estado en el acta: {sit['sigla'] + ' (' + sit['nombre'] + ')' if sit['sigla'] else 'Calificado (nota numérica)'}")
     doc.add_paragraph(f"Convocatorias consumidas en este módulo: {sit['usadas']} de {sit['maximo']}")
+    lineas_adapt = adaptaciones_alumno(df_eval, idx_ev, config_redondeo)
+    if lineas_adapt:
+        doc.add_paragraph("Adaptaciones")
+        for linea in lineas_adapt:
+            doc.add_paragraph(linea)
     if sit["plan_recuperacion"] or sit["fecha_recuperacion"]:
         doc.add_paragraph("Programa de recuperación del módulo pendiente: " + sit["plan_recuperacion"])
         if sit["fecha_recuperacion"]:

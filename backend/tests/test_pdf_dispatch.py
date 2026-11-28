@@ -262,3 +262,23 @@ def test_boletin_individual_imprime_el_programa_de_recuperacion_de_pendientes():
     assert "Programa de recuperación del módulo pendiente" in texto and "Entrega de tres prácticas y una prueba escrita" in texto and "2026-05-20" in texto
     pdf, mime, _ = generar_documento("individual", modulo, curso, al_id=al)
     assert mime == "application/pdf" and pdf.startswith(b"%PDF")
+
+
+def test_boletin_individual_imprime_las_adaptaciones_y_el_aviso_de_andalucia():
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    al = _al_id(curso)
+    fila = next(r for r in curso["df_eval"] if r.get("ID") == al)
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    assert "Adaptaciones aplicadas" not in _texto_docx(contenido)
+    fila["Adaptaciones"] = ["TIEMPO_EXTRA", "FORMATO_EXAMEN"]
+    fila["Adaptacion_No_Altera"] = True
+    fila["Adaptacion_Nota"] = "Examen en letra grande"
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    texto = _texto_docx(contenido)
+    assert "Tiempo extra en pruebas, Adaptación de formato de examen" in texto and "Examen en letra grande" in texto
+    assert "No alteran los resultados de aprendizaje" in texto and "no minoran la calificación" not in texto
+    modulo.setdefault("config_redondeo", {})["perfil_comunidad"] = "andalucia"
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    assert "Las adaptaciones no minoran la calificación" in _texto_docx(contenido)
+    pdf, mime, _ = generar_documento("individual", modulo, curso, al_id=al)
+    assert mime == "application/pdf" and pdf.startswith(b"%PDF")

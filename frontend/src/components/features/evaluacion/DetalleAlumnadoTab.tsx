@@ -180,6 +180,21 @@ export function DetalleAlumnadoTab() {
     pushHistorial(al_id, "Estado_Acta", valorAnterior, val === "" ? null : val);
   };
 
+  // Adaptaciones aplicadas al alumno/a (se guardan en su fila de df_eval, es decir, en el curso y no en la programación): lista de ids, «no alteran los RA ni CE
+  // esenciales» y una nota libre. Los imprime el boletín individual.
+  const handleAdaptacion = (al_id: string, campo: "Adaptaciones" | "Adaptacion_No_Altera" | "Adaptacion_Nota", val: string[] | boolean | string) => {
+    const newEval = [...df_eval];
+    let evRowIdx = newEval.findIndex(e => e.ID === al_id);
+    if (evRowIdx === -1) {
+      newEval.push({ ID: al_id, Nota_Final_FO: 0 });
+      evRowIdx = newEval.length - 1;
+    }
+    newEval[evRowIdx] = { ...newEval[evRowIdx] };
+    const vacio = val === "" || val === false || (Array.isArray(val) && val.length === 0);
+    if (vacio) delete newEval[evRowIdx][campo]; else newEval[evRowIdx][campo] = val;
+    updateCursoData("df_eval", newEval);
+  };
+
   // Datos libres del alumno/a en el acta: Convocatorias_Previas (número), Estado_Motivo (resolución de exención o convalidación) y, para un módulo pendiente de un
   // curso anterior, Plan_Recuperacion (actividades) y Fecha_Recuperacion (evaluación de recuperación); los imprime el boletín individual.
   const handleCampoActa = (al_id: string, campo: "Convocatorias_Previas" | "Estado_Motivo" | "Plan_Recuperacion" | "Fecha_Recuperacion", val: number | string | null) => {
@@ -468,6 +483,55 @@ export function DetalleAlumnadoTab() {
                                     {t('campos.evaluacion.convocatoriasUsadas', {defaultValue: 'Convocatorias consumidas: {{usadas}} de {{max}}.', usadas, max: maxConv})}
                                     {usadas >= maxConv && " " + t('campos.evaluacion.convocatoriasLimite', {defaultValue: 'Es la última: comprueba qué ocurre después en tu comunidad.'})}
                                   </p>
+                                </div>
+                              );
+                            })()}
+                            {(() => {
+                              const opciones = [
+                                { id: "TIEMPO_EXTRA", label: t('checks.modulo.adaptTiempoExtra', {defaultValue: 'Tiempo extra en pruebas'}) },
+                                { id: "COMUNICACION", label: t('checks.modulo.adaptComunicacion', {defaultValue: 'Sistemas de comunicación alternativos'}) },
+                                { id: "MEDIOS", label: t('checks.modulo.adaptMedios', {defaultValue: 'Medios apropiados y apoyos técnicos'}) },
+                                { id: "FORMATO_EXAMEN", label: t('checks.modulo.adaptFormatoExamen', {defaultValue: 'Adaptación de formato de examen'}) },
+                                { id: "UBICACION", label: t('checks.modulo.adaptUbicacion', {defaultValue: 'Ubicación preferente en el aula'}) },
+                              ];
+                              const marcadas: string[] = Array.isArray(evRow.Adaptaciones) ? evRow.Adaptaciones : [];
+                              return (
+                                <div className="mb-4">
+                                  <p className="text-caption text-muted tracking-wider mb-1.5 font-bold">{t('campos.evaluacion.adaptacionesLabel', {defaultValue: 'Adaptaciones aplicadas a este alumno/a'})}</p>
+                                  <div className="space-y-1">
+                                    {opciones.map((o) => (
+                                      <label key={o.id} className="flex items-center gap-2 text-body text-foreground" onClick={(e) => e.stopPropagation()}>
+                                        <input
+                                          type="checkbox"
+                                          checked={marcadas.includes(o.id)}
+                                          onChange={(e) => handleAdaptacion(al_id, "Adaptaciones", e.target.checked ? [...marcadas, o.id] : marcadas.filter((x) => x !== o.id))}
+                                        />
+                                        {o.label}
+                                      </label>
+                                    ))}
+                                    <label className="flex items-center gap-2 text-body text-foreground" onClick={(e) => e.stopPropagation()}>
+                                      <input
+                                        type="checkbox"
+                                        checked={!!evRow.Adaptacion_No_Altera}
+                                        onChange={(e) => handleAdaptacion(al_id, "Adaptacion_No_Altera", e.target.checked)}
+                                      />
+                                      {t('campos.evaluacion.adaptacionNoAltera', {defaultValue: 'No alteran los RA ni los CE esenciales'})}
+                                    </label>
+                                  </div>
+                                  <input
+                                    type="text"
+                                    value={evRow.Adaptacion_Nota ?? ""}
+                                    placeholder={t('campos.evaluacion.adaptacionNotaPlaceholder', {defaultValue: 'Otras adaptaciones o aclaraciones (opcional)'})}
+                                    onChange={(e) => handleAdaptacion(al_id, "Adaptacion_Nota", e.target.value)}
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="w-full mt-2 bg-background/50 border border-[var(--glass-border)] rounded px-3 py-2 text-body text-foreground focus:border-info focus:outline-none"
+                                  />
+                                  {config_redondeo.perfil_comunidad === "andalucia" && (
+                                    <p className="text-caption text-muted mt-1">{t('campos.evaluacion.adaptacionNoMinoraAndalucia', {defaultValue: 'Las adaptaciones no pueden minorar las calificaciones (Orden de evaluación de 18-09-2025, arts. 3 y 4.2). Si las usas, anótalo aquí: sale en el informe individual.'})}</p>
+                                  )}
+                                  {config_redondeo.perfil_comunidad !== "andalucia" && (
+                                    <p className="text-caption text-muted mt-1">{t('campos.evaluacion.adaptacionAviso', {defaultValue: 'Se guardan en el curso del alumno/a y salen en el informe individual.'})}</p>
+                                  )}
                                 </div>
                               );
                             })()}

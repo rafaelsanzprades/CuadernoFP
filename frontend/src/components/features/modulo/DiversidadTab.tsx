@@ -250,6 +250,10 @@ export function DiversidadTab() {
           {t('campos.modulo.panelAcneaeDesc', {defaultValue: 'Registro de alumnado con necesidad específica de apoyo educativo y sus adaptaciones asociadas.'})}
         </p>
 
+        <p className="text-caption text-muted mb-4">
+          {t('campos.modulo.panelAcneaeAviso', {defaultValue: 'Este panel se guarda en la programación, que puedes compartir: evita escribir nombres. Las adaptaciones de cada alumno/a van en Calificaciones › Notas y se guardan en el curso.'})}
+        </p>
+
         {acneae.length === 0 ? (
           <div className="text-center py-8 bg-white/5 rounded-lg border border-white/10">
             <p className="text-muted text-body">{t('campos.modulo.acneaeVacio', {defaultValue: 'No hay alumnos ACNEAE registrados en este módulo.'})}</p>
