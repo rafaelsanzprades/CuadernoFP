@@ -398,7 +398,7 @@ export function DatosTab({ bloques }: { bloques?: string[] } = {}) {
             <div className="mb-5 space-y-1">
               <p className="text-caption text-muted">
                 {pf?.feoe
-                  ? t('campos.modulo.feoeExplica', {defaultValue: '{{texto}} Fuente: {{fuente}}. La casilla guarda siempre un número exacto: es el que se usa en los cálculos y lo puedes cambiar.', texto: esBasico ? (pf.feoe.basico?.texto ?? FEOE_BASICO_GENERAL.texto) : pf.feoe.texto, fuente: pf.feoe.fuente})
+                  ? t('campos.modulo.feoeExplica', {defaultValue: '{{texto}} Fuente: {{fuente}}. La casilla guarda siempre un número exacto: es el que se usa en los cálculos y lo puedes cambiar.', texto: esBasico ? (pf.feoe.basico?.texto ?? FEOE_BASICO_GENERAL.texto) : (nivelModulo === 'Grado Superior' && pf.feoe.superior ? pf.feoe.superior.texto : pf.feoe.texto), fuente: pf.feoe.fuente})
                   : t('campos.modulo.feoeSinPerfil', {defaultValue: 'Valor orientativo de Aragón (140 h en 1.º y 360 h en 2.º). Si tu comunidad no fija las horas por curso (suele dar un intervalo de porcentajes), elige un perfil de comunidad más abajo para ver qué dice su norma, o escribe aquí las horas de tu centro.'})}
               </p>
               <p className="text-caption text-muted">

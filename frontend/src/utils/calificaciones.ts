@@ -95,7 +95,9 @@ export interface PerfilComunidad {
    *  rellena cuando la norma fija las cifras (no rangos). Sirve de valor por defecto en Módulo › Datos. */
   feoe?: { horas_1?: number; horas_2?: number; fuente: string; texto: string;
     /** Grado básico (ciclos de 2.000 h): horas por curso y texto propio. Sin él se usa el valor general (400 h, el 20 %, todas en 2.º). */
-    basico?: { horas_1?: number; horas_2?: number; texto: string } };
+    basico?: { horas_1?: number; horas_2?: number; texto: string };
+    /** Grado superior, solo si la comunidad fija cifras distintas de las de grado medio (Castilla y León: 90 h en 1.º en medio y 180 h en superior). */
+    superior?: { horas_1?: number; horas_2?: number; texto: string } };
   /** Pérdida de la evaluación continua por asistencia, en grados medio y superior presencial: porcentajes de faltas y fuente. */
   asistencia?: { perdida_pct: number; aviso_pct?: number; fuente: string; nota?: string };
 }
@@ -111,7 +113,10 @@ export function horasFeoePorDefecto(perfilId: string | undefined, curso: string 
     return curso === "2º" ? (b.horas_2 ?? FEOE_BASICO_GENERAL.horas_2) : (b.horas_1 ?? FEOE_BASICO_GENERAL.horas_1);
   }
   const base = PERFILES_COMUNIDAD[0].feoe!;
-  return curso === "2º" ? (f?.horas_2 ?? base.horas_2!) : (f?.horas_1 ?? base.horas_1!);
+  const sup = nivel === "Grado Superior" ? f?.superior : undefined;
+  const h1 = sup?.horas_1 ?? f?.horas_1 ?? base.horas_1!;
+  const h2 = sup?.horas_2 ?? f?.horas_2 ?? base.horas_2!;
+  return curso === "2º" ? h2 : h1;
 }
 
 /** Aviso por faltas según la norma elegida: «perdida» al superar el umbral, «aviso» al alcanzar el de aviso; null si no hay umbral o no se llega. */
@@ -151,6 +156,11 @@ export const PERFILES_COMUNIDAD: PerfilComunidad[] = [
     feoe: { horas_1: 100, horas_2: 400, fuente: "Resolución 25/2026, instrucción tercera.1.a (BOR 137, 21-07-2026)",
       texto: "El total es un mínimo exacto (500 h, el 25 % de 2.000 h, en régimen general), pero el reparto es un intervalo: en 1.º entre el 20 y el 35 % del total de la formación en empresa (de 100 a 175 h) y en 2.º el resto. La casilla propone el mínimo de 1.º y el resto hasta 500 h en 2.º (100 + 400); si tu centro prevé más del 25 %, hay que comunicarlo a la Dirección General. Escribe las horas de tu centro.",
       basico: { horas_1: 0, horas_2: 400, texto: "Dato exacto de la norma: el 20 % de la duración (400 h), íntegramente en 2.º (en el Centro de Educación para Personas Adultas se hace en dos periodos)." } } },
+  { id: "castilla-y-leon", nombre: "Castilla y León", fuente: "Decretos 24/2024 y 25/2024 (art. 7) y Orden EDU/173/2025", config: {},
+    feoe: { horas_1: 90, horas_2: 415, fuente: "Decreto 25/2024, art. 7.2 (grado medio) y Decreto 24/2024, art. 7.2 (grado superior)",
+      texto: "Grado medio: el total es un intervalo (de 505 a 645 h en régimen general), pero 1.º está fijado en 90 h y 2.º va de 415 a 555 h; la casilla propone el mínimo (90 + 415). Si el ciclo se organiza en dos cursos y no hay empresas suficientes en la zona, la norma exceptúa este reparto. Escribe las horas de tu centro.",
+      superior: { horas_1: 180, horas_2: 385,
+        texto: "Grado superior: el total es un intervalo (de 565 a 695 h en régimen general), pero 1.º está fijado en 180 h y 2.º va de 385 a 515 h; la casilla propone el mínimo (180 + 385). En ciclos de tres cursos se añaden 150 h en 3.º (de 715 a 845 h en total). Escribe las horas de tu centro." } } },
   // Perfiles solo de asistencia (sin nota ni tutor: su norma de evaluación no se ha leído entera para la app). Faltas contadas sobre las sesiones registradas.
   { id: "valencia", nombre: "Comunitat Valenciana", fuente: "Orden 8/2025, de 22 de abril (art. 7)", config: { asistencia_perdida_pct: 15, asistencia_aviso_pct: 10 },
     asistencia: { perdida_pct: 15, aviso_pct: 10, fuente: "Orden 8/2025, art. 7.3 y 7.4", nota: "Se pierde la evaluación continua al superar el 15 % de inasistencia; al 10 % el profesorado avisa al tutor." } },
