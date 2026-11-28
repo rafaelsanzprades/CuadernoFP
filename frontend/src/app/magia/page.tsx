@@ -11,6 +11,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { Alumnado } from "@/types";
 import { isAlumnoActivo } from "@/utils/alumnado";
 import { estadoActa, siglaEstado } from "@/utils/estadosActa";
+import { rasNoSuperadosTutor } from "@/utils/tutorEmpresa";
 import { calcularNotasJEG, DEFAULT_CONFIG_REDONDEO, getSigadInfo, filtrarPorGev } from "@/utils/calificaciones";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -223,6 +224,7 @@ export default function MagiaPage() {
     const df_instr = moduleData?.df_instr || [];
     const df_indicadores = moduleData?.df_indicadores || [];
     const df_calificaciones = cursoData?.df_calificaciones || [];
+    const df_feoe = cursoData?.df_feoe || [];
 
     const activeAl = df_al.filter(isAlumnoActivo);
     activeAl.sort((a: Alumnado, b: Alumnado) => String(a.Apellidos || "").localeCompare(String(b.Apellidos || "")));
@@ -261,10 +263,11 @@ export default function MagiaPage() {
         "Final ordinaria": estadoDelActa ? siglaEstado(estadoDelActa, moduleData?.config_redondeo?.perfil_comunidad) : (notaFinal ?? ""),
         "Final extraordinaria": evRow.Nota_Final_FE ?? "",
         Sigad: estadoDelActa || sigad.sinEvaluar ? "" : sigad.cod,
+        "RA no superados por el tutor": rasNoSuperadosTutor(moduleData?.config_redondeo, df_feoe, df_calificaciones, df_ce, al.ID).join(", "),
       };
     });
     const wsTri = XLSX.utils.json_to_sheet(rowsTri);
-    wsTri["!cols"] = [{ wch: 10 }, { wch: 22 }, { wch: 18 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 16 }, { wch: 18 }, { wch: 8 }];
+    wsTri["!cols"] = [{ wch: 10 }, { wch: 22 }, { wch: 18 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 16 }, { wch: 18 }, { wch: 8 }, { wch: 26 }];
     XLSX.utils.book_append_sheet(wb, wsTri, "Notas por trimestre");
 
     // Hoja 3: Consecución de RA (%), con leyenda de descripciones al principio

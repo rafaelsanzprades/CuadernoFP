@@ -110,6 +110,26 @@ def valoracion_tutor(al_id: str, df_feoe: pd.DataFrame, df_ce: pd.DataFrame, df_
     return {"modo": modo, "filas": filas, "informe": informe}
 
 
+def aviso_tutor_no_superado(df_eval: pd.DataFrame, idx_ev, tutor: dict, config_redondeo: dict = None) -> str:
+    """Aviso si la nota de acta guardada es positiva y el tutor de empresa no ha dado por superado algún RA (RD 659/2023, art. 18.7.a).
+    No cambia ninguna nota: el docente puede haberla fijado a mano. Vacío si no procede."""
+    no_superados = [f["id_ra"] for f in tutor["filas"] if f["resultado"] == "No superado"]
+    if not no_superados or idx_ev is None or df_eval.empty or "Nota_Final_FO" not in df_eval.columns:
+        return ""
+    try:
+        nota = float(df_eval.at[idx_ev, "Nota_Final_FO"])
+    except (TypeError, ValueError):
+        return ""
+    try:
+        aprobado = float((config_redondeo or {}).get("nota_aprobado") or 5.0)
+    except (TypeError, ValueError):
+        aprobado = 5.0
+    if nota < aprobado:
+        return ""
+    return ("El tutor de empresa no ha dado por superado: " + ", ".join(no_superados)
+            + ". Con esa valoración la nota de acta no debería ser positiva.")
+
+
 def _draw_page_decorations(canv, doc):
     """Cabecera y pie - idéntico al Calendario académico."""
     canv.saveState()
@@ -549,6 +569,10 @@ def generar_pdf_boletin_individual(
         ]))
         elements.append(t_tutor)
         elements.append(Spacer(1, 6))
+    aviso = aviso_tutor_no_superado(df_eval, idx_ev, tutor, config_redondeo)
+    if aviso:
+        elements.append(Paragraph(f"<font color='#b00020'><b>Aviso:</b> {esc(aviso)}</font>", norm))
+        elements.append(Spacer(1, 6))
     if tutor["informe"]:
         elements.append(Paragraph("Valoración cualitativa del tutor de empresa", h3))
         elements.append(Paragraph(esc(tutor["informe"]), norm))
@@ -757,6 +781,9 @@ def generar_docx_boletin_individual(info_modulo, al_id, df_al, df_eval, df_act, 
         add_table(doc, ["RA", "Resultado del tutor", "Motivo"],
                   [[f["id_ra"] + (" · " + f["desc"] if f["desc"] else ""), f["resultado"], f["motivo"] or "-"] for f in tutor["filas"]],
                   col_widths_cm=[7, 3, 7])
+    aviso = aviso_tutor_no_superado(df_eval, idx_ev, tutor, config_redondeo)
+    if aviso:
+        doc.add_paragraph("Aviso: " + aviso)
     if tutor["informe"]:
         doc.add_paragraph("Valoración cualitativa del tutor de empresa: " + tutor["informe"])
     elif not tutor["filas"]:

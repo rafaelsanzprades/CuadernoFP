@@ -210,3 +210,19 @@ def test_convocatorias_no_cuentan_si_esta_exento():
     assert situacion_acta(df, 0, {})["usadas"] == 0
     df2 = pd.DataFrame([{"ID": "1", "Convocatorias_Previas": 1, "Nota_Final_FE": 4}])
     assert situacion_acta(df2, 0, {"grado_oferta": "E"}) == {"sigla": "", "nombre": "", "usadas": 3, "maximo": 2}
+
+
+def test_boletin_individual_avisa_si_la_nota_es_positiva_con_un_ra_no_superado_por_el_tutor():
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    al = _al_id(curso)
+    modulo.setdefault("config_redondeo", {}).update({"tutor_empresa_modo": "superado", "nota_aprobado": 5.0})
+    modulo["df_ce"][0]["is_dual"] = True
+    ra_id = modulo["df_ce"][0]["id_ra"]
+    fila = next(r for r in curso["df_eval"] if r.get("ID") == al)
+    fila["Nota_Final_FO"] = 7
+    curso["df_feoe"] = [{"ID": al, "ra": {ra_id: {"resultado": "no_superado", "motivacion": "x"}}}]
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    assert "la nota de acta no debería ser positiva" in _texto_docx(contenido)
+    fila["Nota_Final_FO"] = 4
+    contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
+    assert "la nota de acta no debería ser positiva" not in _texto_docx(contenido)
