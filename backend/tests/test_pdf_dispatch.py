@@ -226,3 +226,24 @@ def test_boletin_individual_avisa_si_la_nota_es_positiva_con_un_ra_no_superado_p
     fila["Nota_Final_FO"] = 4
     contenido, _, _ = generar_documento("individual", modulo, curso, al_id=al, file_format="docx")
     assert "la nota de acta no debería ser positiva" not in _texto_docx(contenido)
+
+
+def test_boletin_grupal_final_marca_con_cruz_la_nota_positiva_con_ra_no_superado_por_el_tutor():
+    import re
+    modulo, curso = _cargar(FPP), _cargar(FPC)
+    al = _al_id(curso)
+    modulo.setdefault("config_redondeo", {}).update({"tutor_empresa_modo": "superado", "nota_aprobado": 5.0})
+    modulo["df_ce"][0]["is_dual"] = True
+    ra_id = modulo["df_ce"][0]["id_ra"]
+    fila = next(r for r in curso["df_eval"] if r.get("ID") == al)
+    fila["Nota_Final_FO"] = 7
+    fila.pop("Estado_Acta", None)
+    curso["df_feoe"] = [{"ID": al, "ra": {ra_id: {"resultado": "no_superado", "motivacion": "x"}}}]
+    contenido, _, _ = generar_documento("grupal_final", modulo, curso, fecha_corte="2026-01-31", file_format="docx")
+    texto = re.sub(r"<[^>]+>", "|", zipfile.ZipFile(io.BytesIO(contenido)).read("word/document.xml").decode("utf-8"))
+    assert "†" in texto and f"({ra_id})" in texto
+    pdf, mime, _ = generar_documento("grupal_final", modulo, curso, fecha_corte="2026-01-31")
+    assert mime == "application/pdf" and pdf.startswith(b"%PDF")
+    fila["Nota_Final_FO"] = 3
+    contenido, _, _ = generar_documento("grupal_final", modulo, curso, fecha_corte="2026-01-31", file_format="docx")
+    assert "†" not in zipfile.ZipFile(io.BytesIO(contenido)).read("word/document.xml").decode("utf-8")

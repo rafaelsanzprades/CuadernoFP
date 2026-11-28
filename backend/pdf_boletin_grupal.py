@@ -11,6 +11,7 @@ import pandas as pd
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4, portrait
 from reportlab.platypus import (
+    Spacer,
     BaseDocTemplate, Frame, PageTemplate,
     Table, TableStyle, Paragraph,
 )
@@ -41,6 +42,24 @@ def _estado_acta(df_eval: pd.DataFrame, idx_ev, config_redondeo: dict = None) ->
         if pd.notna(raw_estado) and str(raw_estado) in ESTADOS_ACTA:
             return sigla_estado(str(raw_estado), config_redondeo)
     return ""
+
+
+def _ras_no_superados_con_nota_positiva(al_id, nota_final_ord, df_feoe, df_ce, df_ra, df_calificaciones, config_redondeo) -> list:
+    """RA que el tutor de empresa no ha dado por superados cuando la nota de acta guardada es positiva (RD 659/2023, art. 18.7.a); si no
+    hay datos de formación en empresa o la nota no es positiva, lista vacía. Solo avisa: no cambia ninguna nota."""
+    if df_ce is None or df_ce.empty or nota_final_ord is None:
+        return []
+    try:
+        aprobado = float((config_redondeo or {}).get("nota_aprobado") or 5.0)
+    except (TypeError, ValueError):
+        aprobado = 5.0
+    if float(nota_final_ord) < aprobado:
+        return []
+    from pdf_boletin_individual import valoracion_tutor  # aquí y no arriba: el boletín individual importa este módulo
+    tutor = valoracion_tutor(al_id, df_feoe if df_feoe is not None else pd.DataFrame(), df_ce,
+                             df_ra if df_ra is not None else pd.DataFrame(),
+                             df_calificaciones if df_calificaciones is not None else pd.DataFrame(), config_redondeo)
+    return [f["id_ra"] for f in tutor["filas"] if f["resultado"] == "No superado"]
 
 
 def _draw_page_decorations(canv, doc):
@@ -291,7 +310,8 @@ def generar_pdf_boletin_grupal(
 
 def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
                                 df_eval: pd.DataFrame, df_act: pd.DataFrame, escalas_evaluacion: list = None,
-                                config_redondeo: dict = None):
+                                config_redondeo: dict = None, df_feoe: pd.DataFrame = None, df_ce: pd.DataFrame = None,
+                                df_ra: pd.DataFrame = None, df_calificaciones: pd.DataFrame = None):
     """Lógica pura compartida por el PDF y el DOCX del boletín final: nota
     media ponderada de cada trimestre + nota final ordinaria por alumno.
     Devuelve (pond_1t, pond_2t, pond_3t, filas), fila =
@@ -422,6 +442,7 @@ def _compute_grupal_final_rows(info_modulo: dict, df_al: pd.DataFrame,
             "escala_final_ord": resolve_escala_cualitativa(nota_final_ord, escalas_evaluacion),
             "nota_final_extra": nota_final_extra,
             "escala_final_extra": resolve_escala_cualitativa(nota_final_extra, escalas_evaluacion) if nota_final_extra is not None else "",
+            "tutor_no_superado": _ras_no_superados_con_nota_positiva(al_id, nota_final_ord, df_feoe, df_ce, df_ra, df_calificaciones, config_redondeo),
         })
 
     return pond_1t, pond_2t, pond_3t, filas
@@ -434,7 +455,11 @@ def generar_pdf_boletin_grupal_final(
     df_act: pd.DataFrame,
     fecha_corte: str = None,
     escalas_evaluacion: list = None,
-    config_redondeo: dict = None
+    config_redondeo: dict = None,
+    df_feoe: pd.DataFrame = None,
+    df_ce: pd.DataFrame = None,
+    df_ra: pd.DataFrame = None,
+    df_calificaciones: pd.DataFrame = None,
 ):
     buffer = io.BytesIO()
     W, H = portrait(A4)
@@ -468,8 +493,10 @@ def generar_pdf_boletin_grupal_final(
     sml   = ParagraphStyle("Sm",   parent=styles["Normal"], fontSize=8, leading=10, alignment=TA_CENTER)
     smlB  = ParagraphStyle("SmB",  parent=styles["Normal"], fontSize=8, leading=10, fontName="Helvetica-Bold", alignment=TA_CENTER)
     smlB_left = ParagraphStyle("SmBL", parent=styles["Normal"], fontSize=8, leading=10, fontName="Helvetica-Bold", alignment=TA_LEFT)
+    sml_left  = ParagraphStyle("SmL",  parent=styles["Normal"], fontSize=8, leading=10, alignment=TA_LEFT)
 
-    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo)
+    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo,
+                                                                  df_feoe, df_ce, df_ra, df_calificaciones)
 
     # ── Anchuras: tabla con anchos forzados a 18cm total ─────────────────────
     W_NUM    = 1.0 * cm
@@ -508,7 +535,7 @@ def generar_pdf_boletin_grupal_final(
             Paragraph(f"{nt['2T']:.1f}", sml),
             Paragraph(f"{nt['3T']:.1f}", sml),
             Paragraph(f"<b>{esc(f['estado'])}</b>", normB) if f.get("estado") else
-            Paragraph(f"<b>{formato_nota_acta(f['nota_final_ord'], config_redondeo)}</b><br/><font size='6'>{esc(f['escala_final_ord'])}</font>", normB),
+            Paragraph(f"<b>{formato_nota_acta(f['nota_final_ord'], config_redondeo)}</b>{'<font color=#b00020><b> †</b></font>' if f.get('tutor_no_superado') else ''}<br/><font size='6'>{esc(f['escala_final_ord'])}</font>", normB),
             Paragraph(f"<b>{formato_nota_acta(f['nota_final_extra'], config_redondeo)}</b><br/><font size='6'>{esc(f['escala_final_extra'])}</font>" if f["nota_final_extra"] is not None and not f.get("estado") else "", sml),
         ]
         table_data.append(row)
@@ -539,7 +566,15 @@ def generar_pdf_boletin_grupal_final(
 
     tabla = Table(table_data, colWidths=col_widths, repeatRows=1)
     tabla.setStyle(ts)
-    doc.build([tabla])
+    elementos = [tabla]
+    con_aviso = [f for f in filas if f.get("tutor_no_superado")]
+    if con_aviso:
+        elementos.append(Spacer(1, 6))
+        detalle = "; ".join(f"{esc(f['alumnado'])} ({esc(', '.join(f['tutor_no_superado']))})" for f in con_aviso)
+        elementos.append(Paragraph(
+            "<font color='#b00020'><b>†</b></font> El tutor de empresa no ha dado por superado algún RA y la nota de acta es positiva "
+            "(RD 659/2023, art. 18.7.a): " + detalle + ".", sml_left))
+    doc.build(elementos)
     buffer.seek(0)
     return buffer
 
@@ -570,10 +605,12 @@ def generar_docx_boletin_grupal(trimestre, info_modulo, df_al, df_eval, df_act, 
     return doc_to_bytes(doc)
 
 
-def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte=None, escalas_evaluacion=None, config_redondeo=None):
+def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha_corte=None, escalas_evaluacion=None, config_redondeo=None,
+                                      df_feoe=None, df_ce=None, df_ra=None, df_calificaciones=None):
     from docx_helpers import new_document, add_title, add_meta_line, add_table, doc_to_bytes
 
-    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo)
+    pond_1t, pond_2t, pond_3t, filas = _compute_grupal_final_rows(info_modulo, df_al, df_eval, df_act, escalas_evaluacion, config_redondeo,
+                                                                  df_feoe, df_ce, df_ra, df_calificaciones)
 
     doc = new_document(landscape=False)
     add_title(doc, "Boletín grupal Final", info_modulo.get("modulo", "Módulo"))
@@ -592,12 +629,18 @@ def generar_docx_boletin_grupal_final(info_modulo, df_al, df_eval, df_act, fecha
         nota_extra_str = ""
         if f["nota_final_extra"] is not None and not f.get("estado"):
             nota_extra_str = f"{formato_nota_acta(f['nota_final_extra'], config_redondeo)} ({f['escala_final_extra']})" if f['escala_final_extra'] else formato_nota_acta(f['nota_final_extra'], config_redondeo)
+        if f.get("tutor_no_superado") and not f.get("estado"):
+            nota_ord_str += " †"
         rows.append([f["idx"], f["alumnado"], f["edad"], f["repite"],
                      f"{nt['1T']:.1f}", f"{nt['2T']:.1f}", f"{nt['3T']:.1f}",
                      nota_ord_str, nota_extra_str])
     if not rows:
         rows.append(["Sin datos para el boletín final."] + [""] * (len(headers) - 1))
     add_table(doc, headers, rows, col_widths_cm=[1, 5] + [1.6] * (len(headers) - 2))
+    con_aviso = [f for f in filas if f.get("tutor_no_superado")]
+    if con_aviso:
+        doc.add_paragraph("† El tutor de empresa no ha dado por superado algún RA y la nota de acta es positiva (RD 659/2023, art. 18.7.a): "
+                          + "; ".join(f"{f['alumnado']} ({', '.join(f['tutor_no_superado'])})" for f in con_aviso) + ".")
 
     return doc_to_bytes(doc)
 
