@@ -147,6 +147,10 @@ export const PERFILES_COMUNIDAD: PerfilComunidad[] = [
   { id: "ceuta-melilla", nombre: "Ceuta y Melilla (gestión del Ministerio)", fuente: "Órdenes EFD/657/2024 y EFD/659/2024 (art. 13)", config: {},
     feoe: { horas_1: 120, horas_2: 380, fuente: "Órdenes EFD/657/2024 (grado medio) y EFD/659/2024 (superior), art. 13.5 y 13.6",
       texto: "El total es exacto (500 h en régimen general; 700 h en intensivo, con 335 h en 1.º y 365 h en 2.º), pero el reparto es un intervalo: en general, de 120 a 240 h en 1.º y de 260 a 380 h en 2.º. La casilla propone el mínimo de 1.º y el máximo de 2.º (120 + 380); escribe las horas de tu centro." } },
+  { id: "la-rioja", nombre: "La Rioja", fuente: "Resolución 25/2026, de 16 de julio (BOR 137, 21-07-2026)", config: {},
+    feoe: { horas_1: 100, horas_2: 400, fuente: "Resolución 25/2026, instrucción tercera.1.a (BOR 137, 21-07-2026)",
+      texto: "El total es un mínimo exacto (500 h, el 25 % de 2.000 h, en régimen general), pero el reparto es un intervalo: en 1.º entre el 20 y el 35 % del total de la formación en empresa (de 100 a 175 h) y en 2.º el resto. La casilla propone el mínimo de 1.º y el resto hasta 500 h en 2.º (100 + 400); si tu centro prevé más del 25 %, hay que comunicarlo a la Dirección General. Escribe las horas de tu centro.",
+      basico: { horas_1: 0, horas_2: 400, texto: "Dato exacto de la norma: el 20 % de la duración (400 h), íntegramente en 2.º (en el Centro de Educación para Personas Adultas se hace en dos periodos)." } } },
   // Perfiles solo de asistencia (sin nota ni tutor: su norma de evaluación no se ha leído entera para la app). Faltas contadas sobre las sesiones registradas.
   { id: "valencia", nombre: "Comunitat Valenciana", fuente: "Orden 8/2025, de 22 de abril (art. 7)", config: { asistencia_perdida_pct: 15, asistencia_aviso_pct: 10 },
     asistencia: { perdida_pct: 15, aviso_pct: 10, fuente: "Orden 8/2025, art. 7.3 y 7.4", nota: "Se pierde la evaluación continua al superar el 15 % de inasistencia; al 10 % el profesorado avisa al tutor." } },
