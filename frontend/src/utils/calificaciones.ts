@@ -182,6 +182,21 @@ export const PERFILES_COMUNIDAD: PerfilComunidad[] = [
     asistencia: { perdida_pct: 30, fuente: "Orden de 28-07-2026, art. 4.3", nota: "Se pierde con más del 30 % de faltas, justificadas o no, sobre las horas de la fase de centro del módulo." } },
 ];
 
+/** Qué fija la norma de cada comunidad sobre el proyecto intermodular (solo las comunidades con la norma leída y no anual). Es una ayuda para la
+ *  programación: no cambia ningún cálculo. Fuentes en el estudio de la ley de FP (rafaelsanzprades.es, apartado de comunidades). */
+export const PROYECTO_POR_PERFIL: Record<string, { texto: string; fuente: string }> = {
+  aragon: { fuente: "Decreto 91/2024, arts. 10 y 30",
+    texto: "Proyecto en el último curso. Evaluación individual, con presentación y defensa pública ante un tribunal de al menos tres docentes, sin el profesor del módulo." },
+  andalucia: { fuente: "Orden de evaluación de 18-09-2025, art. 15",
+    texto: "Un proyecto integrador durante el ciclo, con seguimiento individual y colectivo; en grado medio y superior, defensa ante una representación del equipo docente y su valoración integrada en la calificación." },
+  canarias: { fuente: "Resolución de 18-07-2025 (BOC 148), anexo I, instrucciones segunda a cuarta",
+    texto: "Módulo integrador del segundo curso (64 h en grado medio y superior; 66 h en grado básico). Grupal salvo excepciones, con evaluación y calificación individuales y presentación oral ante el equipo docente (puede sumarse el tutor de empresa); se imparte por retos que el equipo fija al empezar el curso." },
+  murcia: { fuente: "Orden de 28-07-2026, art. 27",
+    texto: "Evaluación continua y formativa, individual aunque el desarrollo sea grupal; en grado medio y superior se presenta oralmente ante el equipo docente, al menos ante dos personas que impartan docencia en el título." },
+  "ceuta-melilla": { fuente: "Órdenes EFD/657/2024 y EFD/659/2024, art. 9",
+    texto: "Grupal por defecto; una hora lectiva semanal; retos fijados por el equipo docente cada curso; evaluación continua y formativa, con calificación individual y defensa oral ante el equipo docente (con el tutor de empresa si procede)." },
+};
+
 export interface SigadInfo {
   n: number;
   cod: string;

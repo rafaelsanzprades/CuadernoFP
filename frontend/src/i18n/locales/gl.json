@@ -957,6 +957,7 @@
       "protocolosContingencia": "Engade aquí protocolos específicos ou aclaracións sobre o uso de recursos para docencia a distancia...",
       "proyectosInnovacion": "Describe os proxectos de innovación do módulo...",
       "proyectosIntermodulares": "Detalla a participación en proxectos intermodulares...",
+      "proyectoDefensa": "Ex.: defensa oral individual ante tres docentes do equipo, con rúbrica e entregas parciais cada mes...",
       "textoFormacionEmpresa": "Texto sobre a formación na empresa...",
       "voluntariasDetalle": "Anota lugares, datas aproximadas ou temáticas concretas das actividades voluntarias...",
       "ecpEjemplo": "Ex: UC0001_3: Xestionar..."
@@ -1934,6 +1935,10 @@
       "instrumentosEvaluacionDesc": "A actividade que xera a evidencia: que fai o alumnado.",
       "instrumentosEvaluacionLabel": "Instrumentos de avaliación",
       "ipeIntermodularDesc": "Vinculación co itinerario persoal para a empregabilidade ou participación no proxecto intermodular (D 91/2024).",
+      "proyectoDefensaLabel": "Avaliación e defensa do proxecto intermodular",
+      "proyectoComunidadTitulo": "Que fixa a norma de {{comunidad}}:",
+      "proyectoComunidadFuente": "{{texto}} Fonte: {{fuente}}.",
+      "proyectoDefensaDesc": "Como se avalía e se defende o proxecto no teu centro: quen forma o tribunal ou o equipo docente, a rúbrica e o calendario de entregas. É unha nota para a túa programación; para ver o que fixa a túa norma, elixe un perfil de comunidade en Módulo › Datos.",
       "ipeIntermodularLabel": "IPE e proxecto intermodular continuo",
       "labelModuloDidactico": "Módulo didáctico",
       "marcoInclusionTitulo": "Inclusión. Medidas e anotacións libres (D 91/2024, art. 29)",

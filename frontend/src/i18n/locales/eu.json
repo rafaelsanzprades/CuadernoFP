@@ -957,6 +957,7 @@
       "protocolosContingencia": "Gehitu hemen protokolo espezifikoak edo urruneko irakaskuntzarako baliabideen erabilerari buruzko argibideak...",
       "proyectosInnovacion": "Deskribatu moduluaren berrikuntza-proiektuak...",
       "proyectosIntermodulares": "Zehaztu modulu arteko proiektuetan parte-hartzea...",
+      "proyectoDefensa": "Adib.: defentsa orala bakarka hiru irakasleren aurrean, errubrikarekin eta hilero zati-entregekin...",
       "textoFormacionEmpresa": "Enpresako prestakuntzari buruzko testua...",
       "voluntariasDetalle": "Idatzi borondatezko jardueren lekuak, gutxi gorabeherako datak edo gai zehatzak...",
       "ecpEjemplo": "Adib: UC0001_3: Kudeatu..."
@@ -1934,6 +1935,10 @@
       "instrumentosEvaluacionDesc": "Ebidentzia sortzen duen jarduera: ikasleak zer egiten duen.",
       "instrumentosEvaluacionLabel": "Ebaluazio-tresnak",
       "ipeIntermodularDesc": "Enplegagarritasunerako ibilbide pertsonalarekiko lotura edo modulu arteko proiektuan parte-hartzea (91/2024 Dekretua).",
+      "proyectoDefensaLabel": "Modulu arteko proiektuaren ebaluazioa eta defentsa",
+      "proyectoComunidadTitulo": "{{comunidad}} erkidegoko arauak ezartzen duena:",
+      "proyectoComunidadFuente": "{{texto}} Iturria: {{fuente}}.",
+      "proyectoDefensaDesc": "Proiektua zure ikastetxean nola ebaluatzen eta defendatzen den: nork osatzen duen epaimahaia edo irakasle taldea, errubrika eta entregen egutegia. Zure programaziorako oharra da; zure arauak zer dioen ikusteko, aukeratu erkidego-profil bat Modulua › Datuak atalean.",
       "ipeIntermodularLabel": "IPE eta etengabeko modulu arteko proiektua",
       "labelModuloDidactico": "Modulu didaktikoa",
       "marcoInclusionTitulo": "Inklusioa. Neurriak eta ohar libreak (D 91/2024, 29. art.)",

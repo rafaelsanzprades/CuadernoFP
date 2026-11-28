@@ -957,6 +957,7 @@
       "protocolosContingencia": "Add specific protocols or clarifications about the use of resources for remote teaching...",
       "proyectosInnovacion": "Describe the module's innovation projects...",
       "proyectosIntermodulares": "Detail participation in cross-module projects...",
+      "proyectoDefensa": "E.g.: individual oral defence before three teachers, with a rubric and monthly partial deliveries...",
       "textoFormacionEmpresa": "Text about workplace training...",
       "voluntariasDetalle": "Note places, approximate dates or specific topics of the voluntary activities...",
       "ecpEjemplo": "E.g.: UC0001_3: Manage..."
@@ -1934,6 +1935,10 @@
       "instrumentosEvaluacionDesc": "The activity that generates the evidence: what the students do.",
       "instrumentosEvaluacionLabel": "Assessment instruments",
       "ipeIntermodularDesc": "Link with the personal Pathway to employability or participation in the cross-Modular project (D 91/2024).",
+      "proyectoDefensaLabel": "Assessment and defence of the cross-modular project",
+      "proyectoComunidadTitulo": "What the rules of {{comunidad}} say:",
+      "proyectoComunidadFuente": "{{texto}} Source: {{fuente}}.",
+      "proyectoDefensaDesc": "How the project is assessed and defended in your school: who sits on the panel or teaching team, the rubric and the delivery calendar. It is a note for your teaching plan; to see what your regulation says, choose a regional profile in Module › Data.",
       "ipeIntermodularLabel": "IPE and ongoing cross-modular project",
       "labelModuloDidactico": "Teaching module",
       "marcoInclusionTitulo": "Inclusion. Measures and free notes (D 91/2024, art. 29)",

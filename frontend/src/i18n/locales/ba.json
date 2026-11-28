@@ -957,6 +957,7 @@
       "protocolosContingencia": "Afegeix aquí protocols específics o aclariments sobre l'ús de recursos per a docència a distància...",
       "proyectosInnovacion": "Descriu els projectes d'innovació del mòdul...",
       "proyectosIntermodulares": "Detalla la participació en projectes intermodulars...",
+      "proyectoDefensa": "Ex.: defensa oral individual davant tres docents de l'equip, amb rúbrica i lliuraments parcials cada mes...",
       "textoFormacionEmpresa": "Text sobre la formació a l'empresa...",
       "voluntariasDetalle": "Anota llocs, dates aproximades o temàtiques concretes de les activitats voluntàries...",
       "ecpEjemplo": "Ex: UC0001_3: Gestionar..."
@@ -1934,6 +1935,10 @@
       "instrumentosEvaluacionDesc": "L'activitat que genera l'evidència: què fa l'alumnat.",
       "instrumentosEvaluacionLabel": "Instruments d'avaluació",
       "ipeIntermodularDesc": "Vinculació amb l'Itinerari personal per a l'Ocupabilitat o participació en el projecte intermodular (D 91/2024).",
+      "proyectoDefensaLabel": "Avaluació i defensa del projecte intermodular",
+      "proyectoComunidadTitulo": "Què fixa la norma de {{comunidad}}:",
+      "proyectoComunidadFuente": "{{texto}} Font: {{fuente}}.",
+      "proyectoDefensaDesc": "Com s'avalua i es defensa el projecte al vostre centre: qui forma el tribunal o l'equip docent, la rúbrica i el calendari de lliuraments. És una nota per a la vostra programació; per veure què fixa la vostra norma, trieu un perfil de comunitat a Mòdul › Dades.",
       "ipeIntermodularLabel": "IPE i projecte intermodular continu",
       "labelModuloDidactico": "Mòdul didàctic",
       "marcoInclusionTitulo": "Inclusió. Mesures i anotacions lliures (D 91/2024, art. 29)",
