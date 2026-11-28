@@ -39,7 +39,7 @@ a = Analysis(
     optimize=0,
 )
 # googleapiclient trae 95 MB de documentos de descubrimiento (discovery_cache/documents) que solo usaría un cliente
-# de las APIs de Google; el backend no lo usa (google-generativeai solo necesita el paquete, no esos JSON).
+# de las APIs de Google; el backend no lo usa (google-genai solo necesita el paquete, no esos JSON).
 a.datas = [d for d in a.datas if 'discovery_cache' + os.sep + 'documents' not in d[0] and 'discovery_cache/documents' not in d[0]]
 
 pyz = PYZ(a.pure)

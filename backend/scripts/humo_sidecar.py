@@ -58,7 +58,7 @@ for tipo in ["programacion_minima_tpl", "programacion_suficiente_tpl", "programa
         print("PDF", tipo, e.code, e.read()[:200]); ok = False
     except Exception as e:
         print("PDF", tipo, "ERR", e); ok = False
-# el redactor y el extractor importan google.generativeai / pypdf: se comprueba que el modulo carga dentro del exe (sin clave responde 503)
+# el redactor y el extractor importan google.genai / pypdf: se comprueba que el modulo carga dentro del exe (sin clave responde 503)
 req = urllib.request.Request(base + "/api/ai/generar-texto", data=json.dumps({"prompt": "hola"}).encode(), headers={"Content-Type": "application/json"})
 try:
     urllib.request.urlopen(req, timeout=60)

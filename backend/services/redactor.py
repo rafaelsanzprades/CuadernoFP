@@ -4,8 +4,9 @@ import threading
 import time
 from datetime import date
 
-import google.generativeai as genai
-from google.api_core import exceptions as gexc
+from google import genai
+from google.genai import errors as gerr
+from google.genai import types
 
 logger = logging.getLogger("cdd-pro.redactor")
 
@@ -61,13 +62,14 @@ def _consumir() -> None:
 
 
 def _llamar(modelo_nombre: str, prompt: str) -> str:
-    modelo = genai.GenerativeModel(
-        model_name=modelo_nombre,
-        system_instruction=INSTRUCCION,
-        generation_config=genai.GenerationConfig(max_output_tokens=MAX_TOKENS_RESPUESTA, temperature=0.4),
+    # Límite de tiempo (en milisegundos) y sin reintentos propios de la biblioteca: los reintentos ante 503 se hacen aquí, con esperas cortas.
+    cliente = genai.Client(api_key=os.environ["GEMINI_API_KEY"], http_options=types.HttpOptions(timeout=TIEMPO_MAXIMO * 1000))
+    respuesta = cliente.models.generate_content(
+        model=modelo_nombre,
+        contents=prompt,
+        config=types.GenerateContentConfig(system_instruction=INSTRUCCION, max_output_tokens=MAX_TOKENS_RESPUESTA, temperature=0.4),
     )
-    # Límite de tiempo y sin reintentos propios de la biblioteca: los reintentos ante 503 se hacen aquí, con esperas cortas.
-    return modelo.generate_content(prompt, request_options={"timeout": TIEMPO_MAXIMO, "retry": None}).text
+    return respuesta.text
 
 
 def generar_texto(prompt: str) -> str:
@@ -75,7 +77,6 @@ def generar_texto(prompt: str) -> str:
     if not api_key:
         raise SinClave()
     _consumir()
-    genai.configure(api_key=api_key)
     hubo_429 = hubo_503 = False
     for nombre in MODELOS:
         for espera in (0, *REINTENTOS_503):
@@ -83,16 +84,20 @@ def generar_texto(prompt: str) -> str:
                 time.sleep(espera)
             try:
                 return _llamar(nombre, prompt)
-            except gexc.ResourceExhausted:
+            except gerr.ClientError as e:
+                if e.code == 404:
+                    logger.warning("Modelo %s no disponible para esta clave", nombre)
+                    break
+                if e.code != 429:
+                    raise
                 logger.warning("Gemini 429 (cuota agotada) con el modelo %s", nombre)
                 hubo_429 = True
                 break  # el 429 no se reintenta: se pasa al siguiente modelo
-            except gexc.ServiceUnavailable:
+            except gerr.ServerError as e:
+                if e.code != 503:
+                    raise
                 logger.warning("Gemini 503 (saturado) con el modelo %s", nombre)
                 hubo_503 = True
-            except gexc.NotFound:
-                logger.warning("Modelo %s no disponible para esta clave", nombre)
-                break
     if hubo_503:
         raise Saturado()
     if hubo_429:

@@ -1,6 +1,6 @@
 import json
-import typing_extensions as typing
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from pydantic import BaseModel, Field
 
 class ParseResult(BaseModel):
@@ -13,11 +13,12 @@ def parse_curriculum_with_gemini(text: str, api_key: str) -> dict:
     Utiliza Google Gemini para extraer RAs, CEs y UDs del texto del currículo.
     Devuelve un diccionario con el formato esperado.
     """
-    genai.configure(api_key=api_key)
-    
-    # Configuramos el modelo Gemini Flash por su rapidez y bajo coste/capacidad
-    model = genai.GenerativeModel('gemini-flash-latest')
-    
+    # Sin reintentos y con límite de tiempo (120 s, en milisegundos): si Gemini está saturado, falla pronto en vez de dejar la petición colgada
+    client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=120_000))
+
+    # Modelo Gemini Flash por su rapidez y bajo coste/capacidad
+    modelo = 'gemini-flash-latest'
+
     prompt = """
     Eres un experto en educación y Formación Profesional en España.
     Tu tarea es leer el siguiente documento de currículo o programación didáctica y extraer la estructura principal del módulo:
@@ -29,15 +30,12 @@ def parse_curriculum_with_gemini(text: str, api_key: str) -> dict:
     """
     
     # En Gemini podemos usar response_mime_type para asegurar un JSON
-    response = model.generate_content(
-        f"{prompt}\n\nTEXTO DEL DOCUMENTO:\n{text[:100000]}", # limitamos por seguridad aunque Gemini soporta mucho más
-        generation_config=genai.GenerationConfig(
-            response_mime_type="application/json",
-        ),
-        # Sin reintentos y con límite de tiempo: si Gemini está saturado, falla pronto en vez de dejar la petición colgada
-        request_options={"timeout": 120, "retry": None},
+    response = client.models.generate_content(
+        model=modelo,
+        contents=f"{prompt}\n\nTEXTO DEL DOCUMENTO:\n{text[:100000]}",  # limitamos por seguridad aunque Gemini soporta mucho más
+        config=types.GenerateContentConfig(response_mime_type="application/json"),
     )
-    
+
     try:
         data = json.loads(response.text)
         return data
